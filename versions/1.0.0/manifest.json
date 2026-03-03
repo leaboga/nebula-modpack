@@ -6,4 +6,11 @@
   "serverIP": "200.117.208.146",
   "serverPort": 25565,
   "mods": []
+    {
+      "name": "JEI",
+      "filename": "jei-1.21.1-forge-19.21.0.247.jar",
+      "url": "https://github.com/TU-USUARIO/nebula-modpack/releases/download/modpack-1.0.0/jei-1.21.1-forge-19.21.0.247.jar",
+      "md5": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+    }
+  ]
 }
