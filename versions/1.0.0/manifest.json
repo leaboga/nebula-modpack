@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "minecraftVersion": "1.21.1",
   "modloader": "neoforge",
-  "modloaderVersion": "21.1.219",
-  "serverIP": "200.117.208.146",
+  "modloaderVersion": "21.1.2192",
+  "serverIP": "200.117.208.14",
   "serverPort": 25565,
-  "mods": []
+  "mods": [
     {
       "name": "JEI",
       "filename": "jei-1.21.1-forge-19.21.0.247.jar",
