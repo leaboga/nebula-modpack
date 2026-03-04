@@ -543,6 +543,12 @@
                      "filename":  "MoogsVoyagerStructures-1.21-5.0.5.jar"
                  },
                  {
+                     "md5":  "6867bf5ba45c9eef1f06a29cf20e5690",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/moogs_structures-1.1.0-1.21-1.21.1-neoforge.jar",
+                     "name":  "moogs_structures-1.1.0-1.21-1.21.1-neoforge",
+                     "filename":  "moogs_structures-1.1.0-1.21-1.21.1-neoforge.jar"
+                 },
+                 {
                      "md5":  "1b8789dd093709c27c64911631a31cfe",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/mowziesmobs-1.21.1-1.7.5.jar",
                      "name":  "mowziesmobs-1.21.1-1.7.5",
