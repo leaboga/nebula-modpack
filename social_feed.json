@@ -1,14 +1,14 @@
 ﻿{
-    "server_cpu":  11,
-    "last_heartbeat":  639082356594952770,
+    "server_cpu":  8,
+    "last_heartbeat":  639082356824951517,
     "feed":  [
                  {
                      "type":  "ADV",
                      "player":  "Pepitaaf",
                      "action":  "¡Ha conseguido un logro!",
-                     "date":  "15:34",
+                     "date":  "15:41",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082352732265400
+                     "ticks":  639082356750542591
                  },
                  {
                      "type":  "ADV",
