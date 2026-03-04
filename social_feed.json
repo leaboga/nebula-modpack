@@ -1,14 +1,18 @@
-﻿[
-    {
-        "player":  "Pepitaaf",
-        "action":  "Logro: magenta floating carpet",
-        "date":  "14:53",
-        "timestamp":  639082328357476710
-    },
-    {
-        "player":  "Chenchitoo",
-        "action":  "Logro: tungsten pickaxe",
-        "date":  "02:24",
-        "timestamp":  639081878730705387
-    }
-]
+﻿{
+    "server_cpu":  0,
+    "server_ram":  10.4,
+    "feed":  [
+                 {
+                     "player":  "Pepitaaf",
+                     "action":  "MAGENTA FLOATING CARPET",
+                     "date":  "14:53",
+                     "head":  "https://minotar.net/avatar/Pepitaaf/32"
+                 },
+                 {
+                     "player":  "Chenchitoo",
+                     "action":  "TUNGSTEN PICKAXE",
+                     "date":  "02:24",
+                     "head":  "https://minotar.net/avatar/Chenchitoo/32"
+                 }
+             ]
+}
