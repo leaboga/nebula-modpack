@@ -1,1 +1,11 @@
 
+{
+  "version": "1.1",
+  "minecraftVersion": "1.21.1",
+  "modloader": "neoforge",
+  "modloaderVersion": "21.1.219",
+  "serverIP": "200.117.208.146",
+  "serverPort": 25565,
+  "forceConfigUpdate": false,
+  "mods": []
+}
