@@ -1,6 +1,6 @@
 ﻿{
-    "server_cpu":  7,
-    "last_heartbeat":  639082359897586361,
+    "server_cpu":  9,
+    "last_heartbeat":  639082360128005390,
     "feed":  [
                  {
                      "type":  "ADV",
@@ -8,7 +8,7 @@
                      "text":  "ganó el logro: wooden_pickaxe",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
+                     "ticks":  639082360115249551,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden pickaxe.png"
                  },
                  {
@@ -17,17 +17,17 @@
                      "text":  "ganó el logro: wooden_sword",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
+                     "ticks":  639082360115249551,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden sword.png"
                  },
                  {
                      "type":  "ADV",
                      "player":  "Chenchitoo",
-                     "text":  "ganó el logro: campfire",
+                     "text":  "ganó el logro: wooden_hoe",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_campfire.png"
+                     "ticks":  639082360115249551,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden hoe.png"
                  },
                  {
                      "type":  "ADV",
@@ -35,7 +35,7 @@
                      "text":  "ganó el logro: Prosperidad",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
+                     "ticks":  639082360115249551,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_root.png"
                  },
                  {
@@ -44,17 +44,8 @@
                      "text":  "ganó el logro: wooden_shovel",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
+                     "ticks":  639082360115249551,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden shovel.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Chenchitoo",
-                     "text":  "ganó el logro: wooden_hoe",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884705238,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden hoe.png"
                  },
                  {
                      "type":  "ADV",
@@ -62,7 +53,7 @@
                      "text":  "ganó el logro: Aventura",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884695122,
+                     "ticks":  639082360115239592,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_root.png"
                  },
                  {
@@ -71,17 +62,8 @@
                      "text":  "ganó el logro: crafting_table",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884695122,
+                     "ticks":  639082360115239592,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_crafting table.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Chenchitoo",
-                     "text":  "ganó el logro: wooden_axe",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884695122,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden axe.png"
                  },
                  {
                      "type":  "ADV",
@@ -89,17 +71,26 @@
                      "text":  "ganó el logro: ladder",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
-                     "ticks":  639082359884695122,
+                     "ticks":  639082360115239592,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_ladder.png"
                  },
                  {
                      "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: Mente frÃ­a",
+                     "player":  "Chenchitoo",
+                     "text":  "ganó el logro: campfire",
                      "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_form obsidian.png"
+                     "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
+                     "ticks":  639082360115239592,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_campfire.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Chenchitoo",
+                     "text":  "ganó el logro: wooden_axe",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Chenchitoo/32",
+                     "ticks":  639082360115239592,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_wooden axe.png"
                  },
                  {
                      "type":  "ADV",
@@ -107,26 +98,8 @@
                      "text":  "ganó el logro: crossbow",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_crossbow.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: bone_meal",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_bone meal.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: flint_and_steel",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_flint and steel.png"
                  },
                  {
                      "type":  "ADV",
@@ -134,8 +107,26 @@
                      "text":  "ganó el logro: fishing_rod",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_fishing rod.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: flint_and_steel",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115038296,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_flint and steel.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: Mente frÃ­a",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115038296,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_form obsidian.png"
                  },
                  {
                      "type":  "ADV",
@@ -143,7 +134,7 @@
                      "text":  "ganó el logro: loom",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_loom.png"
                  },
                  {
@@ -152,7 +143,7 @@
                      "text":  "ganó el logro: Hasta el infinito... Â¡y mÃ¡s allÃ¡!",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_elytra.png"
                  },
                  {
@@ -161,7 +152,7 @@
                      "text":  "ganó el logro: white_wool_from_string",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_white wool from string.png"
                  },
                  {
@@ -170,17 +161,8 @@
                      "text":  "ganó el logro: enchanting_table",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884505544,
+                     "ticks":  639082360115038296,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_enchanting table.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: diamond_helmet",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond helmet.png"
                  },
                  {
                      "type":  "ADV",
@@ -188,62 +170,8 @@
                      "text":  "ganó el logro: Â¡Diamantes!",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
+                     "ticks":  639082360115028301,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_mine diamond.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: diamond_shovel",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond shovel.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: diamond_boots",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond boots.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: diamond_chestplate",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond chestplate.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: candle",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_candle.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: bow",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_bow.png"
-                 },
-                 {
-                     "type":  "ADV",
-                     "player":  "Pepitaaf",
-                     "text":  "ganó el logro: tripwire_hook",
-                     "date":  "15:46",
-                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
-                     "icon":  "https://minecraft.wiki/images/Item_Sprite_tripwire hook.png"
                  },
                  {
                      "type":  "ADV",
@@ -251,8 +179,62 @@
                      "text":  "ganó el logro: diamond_leggings",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
+                     "ticks":  639082360115028301,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond leggings.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: diamond_helmet",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond helmet.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: diamond_chestplate",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond chestplate.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: diamond_shovel",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond shovel.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: bow",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_bow.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: bone_meal",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_bone meal.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: candle",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_candle.png"
                  },
                  {
                      "type":  "ADV",
@@ -260,8 +242,26 @@
                      "text":  "ganó el logro: diamond_axe",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884495220,
+                     "ticks":  639082360115028301,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond axe.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: tripwire_hook",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115028301,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_tripwire hook.png"
+                 },
+                 {
+                     "type":  "ADV",
+                     "player":  "Pepitaaf",
+                     "text":  "ganó el logro: diamond_boots",
+                     "date":  "15:46",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "ticks":  639082360115018328,
+                     "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond boots.png"
                  },
                  {
                      "type":  "ADV",
@@ -269,9 +269,9 @@
                      "text":  "ganó el logro: diamond_block",
                      "date":  "15:46",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "ticks":  639082359884483679,
+                     "ticks":  639082360115018328,
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_diamond block.png"
                  }
              ],
-    "server_ram":  15.3
+    "server_ram":  15.6
 }
