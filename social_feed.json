@@ -1,5 +1,5 @@
 ﻿{
-    "server_cpu":  53,
+    "server_cpu":  29,
     "feed":  [
                  {
                      "player":  "Pepitaaf",
@@ -227,5 +227,5 @@
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_root.png"
                  }
              ],
-    "server_ram":  10.4
+    "server_ram":  14.8
 }
