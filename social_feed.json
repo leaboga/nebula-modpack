@@ -1,6 +1,6 @@
 ﻿{
-    "server_cpu":  6,
-    "last_heartbeat":  639082348516363421,
+    "server_cpu":  8,
+    "last_heartbeat":  639082348846501763,
     "feed":  [
                  {
                      "player":  "Pepitaaf",
@@ -228,5 +228,5 @@
                      "icon":  "https://minecraft.wiki/images/Item_Sprite_root.png"
                  }
              ],
-    "server_ram":  14.7
+    "server_ram":  14.8
 }
