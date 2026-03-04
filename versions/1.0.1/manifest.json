@@ -201,6 +201,12 @@
                      "filename":  "connector-2.0.0-beta.13+1.21.1-full.jar"
                  },
                  {
+                     "md5":  "939fc51820a34f347149b8c726cf78b7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/Corgilib-NeoForge-1.21.1-5.0.0.7.jar",
+                     "name":  "Corgilib-NeoForge-1.21.1-5.0.0.7",
+                     "filename":  "Corgilib-NeoForge-1.21.1-5.0.0.7.jar"
+                 },
+                 {
                      "md5":  "ec29a125a0298eb44f75847e8f59c7f4",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/create-1.21.1-6.0.9.jar",
                      "name":  "create-1.21.1-6.0.9",
@@ -217,6 +223,12 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/CreeperOverhaul-neoforge-1.21.1-4.0.6.jar",
                      "name":  "CreeperOverhaul-neoforge-1.21.1-4.0.6",
                      "filename":  "CreeperOverhaul-neoforge-1.21.1-4.0.6.jar"
+                 },
+                 {
+                     "md5":  "2a542779bc634e89c2383da587f2f4bd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/cristellib-neoforge-1.21.1-3.0.3.jar",
+                     "name":  "cristellib-neoforge-1.21.1-3.0.3",
+                     "filename":  "cristellib-neoforge-1.21.1-3.0.3.jar"
                  },
                  {
                      "md5":  "d43ddb1b038a75d940f1a35156eb02f1",
@@ -531,6 +543,12 @@
                      "filename":  "MoogsNetherStructures-1.21-2.0.31.jar"
                  },
                  {
+                     "md5":  "12ac559170d35c57542998a4f2ccb194",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/MoogsVoyagerStructures-1.21-5.0.5.jar",
+                     "name":  "MoogsVoyagerStructures-1.21-5.0.5",
+                     "filename":  "MoogsVoyagerStructures-1.21-5.0.5.jar"
+                 },
+                 {
                      "md5":  "1b8789dd093709c27c64911631a31cfe",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/mowziesmobs-1.21.1-1.7.5.jar",
                      "name":  "mowziesmobs-1.21.1-1.7.5",
@@ -565,6 +583,12 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/Oh-The-Biomes-Weve-Gone-NeoForge-2.5.4.jar",
                      "name":  "Oh-The-Biomes-Weve-Gone-NeoForge-2.5.4",
                      "filename":  "Oh-The-Biomes-Weve-Gone-NeoForge-2.5.4.jar"
+                 },
+                 {
+                     "md5":  "2110be7f2ffacf4c6093504d67a7cb00",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar",
+                     "name":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0",
+                     "filename":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar"
                  },
                  {
                      "md5":  "40ae12e5ea2554ae97ea38e133558e86",
@@ -625,6 +649,12 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/refurbished_furniture-neoforge-1.21.1-1.0.22.jar",
                      "name":  "refurbished_furniture-neoforge-1.21.1-1.0.22",
                      "filename":  "refurbished_furniture-neoforge-1.21.1-1.0.22.jar"
+                 },
+                 {
+                     "md5":  "bc14882fddebc0b6361886a68cf0daf2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.0.1/regions_unexplored-neoforge-1.21.1-0.5.9.jar",
+                     "name":  "regions_unexplored-neoforge-1.21.1-0.5.9",
+                     "filename":  "regions_unexplored-neoforge-1.21.1-0.5.9.jar"
                  },
                  {
                      "md5":  "84ff2805a591b10d22b7e0c69b44246c",
