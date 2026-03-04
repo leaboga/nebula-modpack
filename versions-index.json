@@ -1,10 +1,10 @@
-﻿{
-    "latestVersion":  "1.1",
-    "availableVersions":  [
-                              {
-                                  "version":  "1.1",
-                                  "label":  "1.1",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1/manifest.json"
-                              }
-                          ]
+{
+  "latestVersion": "1.1",
+  "availableVersions": [
+    {
+      "version": "1.1",
+      "label": "1.1",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1/manifest.json"
+    }
+  ]
 }
