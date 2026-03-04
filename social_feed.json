@@ -1,6 +1,6 @@
 ﻿{
-    "server_cpu":  11,
-    "last_heartbeat":  639082353828295918,
+    "server_cpu":  8,
+    "last_heartbeat":  639082354059103880,
     "feed":  [
                  {
                      "type":  "ADV",
@@ -19,5 +19,5 @@
                      "ticks":  639081878730705387
                  }
              ],
-    "server_ram":  14.7
+    "server_ram":  15
 }
