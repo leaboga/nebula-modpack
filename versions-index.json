@@ -1,7 +1,7 @@
 ﻿{
     "availableVersions":  [
                               {
-                                  "label":  "v1.2.0 (Reset Definitivo)",
+                                  "label":  "v1.2.0 (Sincronización Total)",
                                   "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.0/manifest.json",
                                   "version":  "1.2.0"
                               }
