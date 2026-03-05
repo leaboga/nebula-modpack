@@ -1,15 +1,15 @@
 ﻿{
     "server_cpu":  0,
-    "last_heartbeat":  639083401858134941,
+    "last_heartbeat":  639083406331790325,
     "feed":  [
                  {
                      "text":  "Nebula V27.9 Filter Active",
-                     "ticks":  639083401858064897,
+                     "ticks":  639083406331728716,
                      "player":  "Sistema",
                      "type":  "JOIN",
-                     "date":  "20:43",
+                     "date":  "20:50",
                      "head":  "https://mc-heads.net/avatar/MHF_Exclamation/32"
                  }
              ],
-    "server_ram":  6.2
+    "server_ram":  6.9
 }
