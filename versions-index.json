@@ -1,35 +1,10 @@
 ﻿{
-    "latestVersion":  "1.0.1",
     "availableVersions":  [
                               {
-                                  "label":  "v1.0.1 (04/03 22:31)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
-                              },
-                              {
-                                  "label":  "v1.0.1 (04/03 22:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
-                              },
-                              {
-                                  "label":  "v1.0.1 (04/03 21:56)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
-                              },
-                              {
-                                  "label":  "v1.0.1 (04/03 21:54)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
-                              },
-                              {
-                                  "label":  "1.0.1",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
-                              },
-                              {
-                                  "label":  "1.0.1",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json",
-                                  "version":  "1.0.1"
+                                  "label":  "v1.1.0 (Reset)",
+                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.0/manifest.json",
+                                  "version":  "1.1.0"
                               }
-                          ]
+                          ],
+    "latestVersion":  "1.1.0"
 }
