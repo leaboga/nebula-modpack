@@ -1,9 +1,9 @@
 ﻿{
     "modloader":  "neoforge",
     "forceConfigUpdate":  true,
-    "configHash":  "639083401940338756",
+    "configHash":  "639083406430805740",
     "version":  "1.1.7",
-    "label":  "v1.1.7 (05/03 20:43)",
+    "label":  "v1.1.7 (05/03 20:50)",
     "minecraftVersion":  "1.21.1",
     "mods":  [
                  {
