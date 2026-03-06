@@ -1,15 +1,15 @@
 ﻿{
-    "server_cpu":  22,
-    "last_heartbeat":  639083556612973868,
+    "server_cpu":  5,
+    "last_heartbeat":  639083556743522842,
     "feed":  [
                  {
-                     "id":  "dc34fba266e8f02ca7dd35f7890d4354",
-                     "type":  "JOIN",
+                     "id":  "8fb4d96f78d849573db62338374eb07f",
+                     "type":  "LEAVE",
                      "player":  "Pepitaaf",
-                     "text":  "se ha unido",
+                     "text":  "ha salido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
                      "date":  "01:01",
-                     "ticks":  639083556601494489
+                     "ticks":  639083556731783412
                  },
                  {
                      "id":  "41cd33ab20d252d2c30d9a4ae7eaadf9",
@@ -17,8 +17,17 @@
                      "player":  "Pepitaaf",
                      "text":  "ha salido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "date":  "01:01",
-                     "ticks":  639083556601494489
+                     "date":  "01:00",
+                     "ticks":  639083556549169843
+                 },
+                 {
+                     "id":  "dc34fba266e8f02ca7dd35f7890d4354",
+                     "type":  "JOIN",
+                     "player":  "Pepitaaf",
+                     "text":  "se ha unido",
+                     "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
+                     "date":  "01:00",
+                     "ticks":  639083556549169843
                  },
                  {
                      "id":  "79eae171a5ddfb59ac66c024ec899665",
@@ -27,7 +36,7 @@
                      "text":  "se ha unido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
                      "date":  "00:56",
-                     "ticks":  639083554163850466
+                     "ticks":  639083554100178288
                  },
                  {
                      "text":  "Nebula Omnisciente Online",
@@ -38,5 +47,5 @@
                      "head":  "https://mc-heads.net/avatar/MHF_Exclamation/32"
                  }
              ],
-    "server_ram":  35.7
+    "server_ram":  35.8
 }
