@@ -1,6 +1,6 @@
 ﻿{
     "server_cpu":  23,
-    "last_heartbeat":  639083556783902621,
+    "last_heartbeat":  639083556787761772,
     "feed":  [
                  {
                      "id":  "8fb4d96f78d849573db62338374eb07f",
@@ -9,7 +9,7 @@
                      "text":  "ha salido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
                      "date":  "01:01",
-                     "ticks":  639083556772259260
+                     "ticks":  639083556776129026
                  },
                  {
                      "id":  "41cd33ab20d252d2c30d9a4ae7eaadf9",
@@ -17,8 +17,8 @@
                      "player":  "Pepitaaf",
                      "text":  "ha salido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "date":  "01:00",
-                     "ticks":  639083556593020784
+                     "date":  "01:01",
+                     "ticks":  639083556601494489
                  },
                  {
                      "id":  "dc34fba266e8f02ca7dd35f7890d4354",
@@ -26,8 +26,8 @@
                      "player":  "Pepitaaf",
                      "text":  "se ha unido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
-                     "date":  "01:00",
-                     "ticks":  639083556593020784
+                     "date":  "01:01",
+                     "ticks":  639083556601494489
                  },
                  {
                      "id":  "79eae171a5ddfb59ac66c024ec899665",
@@ -36,7 +36,7 @@
                      "text":  "se ha unido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
                      "date":  "00:56",
-                     "ticks":  639083554150797757
+                     "ticks":  639083554163850466
                  },
                  {
                      "text":  "Nebula Omnisciente Online",
