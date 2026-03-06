@@ -1,6 +1,6 @@
 ﻿{
-    "server_cpu":  59,
-    "last_heartbeat":  639083554121673268,
+    "server_cpu":  17,
+    "last_heartbeat":  639083554165715613,
     "feed":  [
                  {
                      "id":  "79eae171a5ddfb59ac66c024ec899665",
@@ -9,7 +9,7 @@
                      "text":  "se ha unido",
                      "head":  "https://mc-heads.net/avatar/Pepitaaf/32",
                      "date":  "00:56",
-                     "ticks":  639083554100178288
+                     "ticks":  639083554150797757
                  },
                  {
                      "text":  "Nebula Omnisciente Online",
