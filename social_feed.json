@@ -1,15 +1,15 @@
 ﻿{
     "server_cpu":  0,
-    "last_heartbeat":  639083438325713600,
+    "last_heartbeat":  639083442235932186,
     "feed":  [
                  {
                      "text":  "Nebula Omnisciente Online",
-                     "ticks":  639083438325653564,
+                     "ticks":  639083442235872152,
                      "player":  "Sistema",
                      "type":  "JOIN",
-                     "date":  "21:43",
+                     "date":  "21:50",
                      "head":  "https://mc-heads.net/avatar/MHF_Exclamation/32"
                  }
              ],
-    "server_ram":  6.4
+    "server_ram":  5.9
 }
