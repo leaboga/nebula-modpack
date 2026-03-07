@@ -1,1096 +1,1096 @@
 ﻿{
     "modloader":  "neoforge",
     "forceConfigUpdate":  true,
-    "configHash":  "639085039160592396",
+    "configHash":  "639085048755384949",
     "version":  "1.2.2",
-    "label":  "v1.2.2 (07/03 18:05)",
+    "label":  "v1.2.2 (07/03 18:22)",
     "minecraftVersion":  "1.21.1",
     "mods":  [
                  {
                      "md5":  "a51dacb919ef4c94cb105de0f7d563c0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/AchievementOptimizer-neoforge-1.21.1-2.1.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/AchievementOptimizer-neoforge-1.21.1-2.1.0.jar",
                      "name":  "AchievementOptimizer-neoforge-1.21.1-2.1.0",
                      "filename":  "AchievementOptimizer-neoforge-1.21.1-2.1.0.jar"
                  },
                  {
                      "md5":  "2e381342ef87a759d7fb8b6fc225bdbb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/AdditionalStructures-1.21-_v.6.3.2-NEO_.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/AdditionalStructures-1.21-_v.6.3.2-NEO_.jar",
                      "name":  "AdditionalStructures-1.21-(v.6.3.2-NEO)",
                      "filename":  "AdditionalStructures-1.21-_v.6.3.2-NEO_.jar"
                  },
                  {
                      "md5":  "ad1ff51f9ae302227b95d8d70be6a748",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/advancednetherite-neoforge-2.3.1-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/advancednetherite-neoforge-2.3.1-1.21.1.jar",
                      "name":  "advancednetherite-neoforge-2.3.1-1.21.1",
                      "filename":  "advancednetherite-neoforge-2.3.1-1.21.1.jar"
                  },
                  {
                      "md5":  "6b2b4969ba5d428046d52993a991a6b5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/airraid-1.0.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/airraid-1.0.0.jar",
                      "name":  "airraid-1.0.0",
                      "filename":  "airraid-1.0.0.jar"
                  },
                  {
                      "md5":  "3897a2cd3ff63948b56c27b42ba06825",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/alexscaves-2.0.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/alexscaves-2.0.9.jar",
                      "name":  "alexscaves-2.0.9",
                      "filename":  "alexscaves-2.0.9.jar"
                  },
                  {
                      "md5":  "87970b4846bffc20123ecd267d888ee8",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/alexsmobs-1.22.17.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/alexsmobs-1.22.17.jar",
                      "name":  "alexsmobs-1.22.17",
                      "filename":  "alexsmobs-1.22.17.jar"
                  },
                  {
                      "md5":  "49d03c4b56618fda3c7e01af2fc73e7d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Almanac-1.21.1-2-neoforge-1.5.2.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Almanac-1.21.1-2-neoforge-1.5.2.jar",
                      "name":  "Almanac-1.21.1-2-neoforge-1.5.2",
                      "filename":  "Almanac-1.21.1-2-neoforge-1.5.2.jar"
                  },
                  {
                      "md5":  "27530bb4fcd327476406d6e3caf94523",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/alternate_current-mc1.21-1.9.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/alternate_current-mc1.21-1.9.0.jar",
                      "name":  "alternate_current-mc1.21-1.9.0",
                      "filename":  "alternate_current-mc1.21-1.9.0.jar"
                  },
                  {
                      "md5":  "938236fe501ffbda43b7f5751a2e9c86",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Apotheosis-1.21.1-8.5.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Apotheosis-1.21.1-8.5.1.jar",
                      "name":  "Apotheosis-1.21.1-8.5.1",
                      "filename":  "Apotheosis-1.21.1-8.5.1.jar"
                  },
                  {
                      "md5":  "a3eeb5df11aaf5d5a661c498f76b8133",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ApothicAttributes-1.21.1-2.9.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ApothicAttributes-1.21.1-2.9.1.jar",
                      "name":  "ApothicAttributes-1.21.1-2.9.1",
                      "filename":  "ApothicAttributes-1.21.1-2.9.1.jar"
                  },
                  {
                      "md5":  "c10d97b4d96ad417490d45eeb70180a8",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ApothicEnchanting-1.21.1-1.5.2.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ApothicEnchanting-1.21.1-1.5.2.jar",
                      "name":  "ApothicEnchanting-1.21.1-1.5.2",
                      "filename":  "ApothicEnchanting-1.21.1-1.5.2.jar"
                  },
                  {
                      "md5":  "2a02c6572244c815de42d8b9e35aef31",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ApothicSpawners-1.21.1-1.3.4.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ApothicSpawners-1.21.1-1.3.4.jar",
                      "name":  "ApothicSpawners-1.21.1-1.3.4",
                      "filename":  "ApothicSpawners-1.21.1-1.3.4.jar"
                  },
                  {
                      "md5":  "7a45a948b525c031ca85d221dfdbed85",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/architectury-13.0.8-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/architectury-13.0.8-neoforge.jar",
                      "name":  "architectury-13.0.8-neoforge",
                      "filename":  "architectury-13.0.8-neoforge.jar"
                  },
                  {
                      "md5":  "499aba921ddc647cbcf0a5f4db4c4db9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Arda_s_Sculks_1.4.3.5_NEOFORGE_1.21.1_.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Arda_s_Sculks_1.4.3.5_NEOFORGE_1.21.1_.jar",
                      "name":  "Arda_s Sculks 1.4.3.5 [NEOFORGE] [1.21.1]",
                      "filename":  "Arda_s_Sculks_1.4.3.5_NEOFORGE_1.21.1_.jar"
                  },
                  {
                      "md5":  "4b505b34372f6d9f3b39a5e091097ab8",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Atlas-Lib-1.21.0-1.1.14.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Atlas-Lib-1.21.0-1.1.14.jar",
                      "name":  "Atlas-Lib-1.21.0-1.1.14",
                      "filename":  "Atlas-Lib-1.21.0-1.1.14.jar"
                  },
                  {
                      "md5":  "1552cea16a40215f9773e609114ccce1",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/attributefix-neoforge-1.21.1-21.1.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/attributefix-neoforge-1.21.1-21.1.3.jar",
                      "name":  "attributefix-neoforge-1.21.1-21.1.3",
                      "filename":  "attributefix-neoforge-1.21.1-21.1.3.jar"
                  },
                  {
                      "md5":  "dea2b315841d5a8167980f39ff3ba526",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/bclib-21.0.13.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/bclib-21.0.13.jar",
                      "name":  "bclib-21.0.13",
                      "filename":  "bclib-21.0.13.jar"
                  },
                  {
                      "md5":  "b75818ce6fdcbca3cde72cb1a31fbbf8",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/better-end-21.0.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/better-end-21.0.8.jar",
                      "name":  "better-end-21.0.8",
                      "filename":  "better-end-21.0.8.jar"
                  },
                  {
                      "md5":  "bda45864e3f5e71478192066846f1ca0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/better-nether-21.0.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/better-nether-21.0.11.jar",
                      "name":  "better-nether-21.0.11",
                      "filename":  "better-nether-21.0.11.jar"
                  },
                  {
                      "md5":  "426439919e24518107fa72df4465a6f2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/bettercombat-neoforge-2.3.1_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/bettercombat-neoforge-2.3.1_1.21.1.jar",
                      "name":  "bettercombat-neoforge-2.3.1+1.21.1",
                      "filename":  "bettercombat-neoforge-2.3.1_1.21.1.jar"
                  },
                  {
                      "md5":  "3e9bd3af94cb9e31824df829fb482dbb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/blockui-1.0.210-1.21.1-snapshot.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/blockui-1.0.210-1.21.1-snapshot.jar",
                      "name":  "blockui-1.0.210-1.21.1-snapshot",
                      "filename":  "blockui-1.0.210-1.21.1-snapshot.jar"
                  },
                  {
                      "md5":  "e07ba48e00e97411f841905d96ce37ee",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/block_factorys_bosses-2.0.6-neo-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/block_factorys_bosses-2.0.6-neo-1.21.1.jar",
                      "name":  "block_factorys_bosses-2.0.6-neo-1.21.1",
                      "filename":  "block_factorys_bosses-2.0.6-neo-1.21.1.jar"
                  },
                  {
                      "md5":  "9f627fe031221159d74a491e279f773a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/bookshelf-neoforge-1.21.1-21.1.81.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/bookshelf-neoforge-1.21.1-21.1.81.jar",
                      "name":  "bookshelf-neoforge-1.21.1-21.1.81",
                      "filename":  "bookshelf-neoforge-1.21.1-21.1.81.jar"
                  },
                  {
                      "md5":  "64858cb1bef28edc2b4c10231fc88652",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/boss_checklist-neoforge-4.0.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/boss_checklist-neoforge-4.0.1.jar",
                      "name":  "boss_checklist-neoforge-4.0.1",
                      "filename":  "boss_checklist-neoforge-4.0.1.jar"
                  },
                  {
                      "md5":  "979dc8f107a40b0baad2100b0e7b4990",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/chest_item-1.21.1-1.1.3.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/chest_item-1.21.1-1.1.3.8.jar",
                      "name":  "chest_item-1.21.1-1.1.3.8",
                      "filename":  "chest_item-1.21.1-1.1.3.8.jar"
                  },
                  {
                      "md5":  "19ca2330c30674b01cf8ff75cee2c3a5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/chunkactivitytracker-neoforge-1.0.1-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/chunkactivitytracker-neoforge-1.0.1-1.21.1.jar",
                      "name":  "chunkactivitytracker-neoforge-1.0.1-1.21.1",
                      "filename":  "chunkactivitytracker-neoforge-1.0.1-1.21.1.jar"
                  },
                  {
                      "md5":  "c461f3132c48d7bc71a9f2b307273a88",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Chunky-NeoForge-1.4.23.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Chunky-NeoForge-1.4.23.jar",
                      "name":  "Chunky-NeoForge-1.4.23",
                      "filename":  "Chunky-NeoForge-1.4.23.jar"
                  },
                  {
                      "md5":  "5b81c237af085baad2635a65e01a1f86",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/citadel-1.21.1-2.7.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/citadel-1.21.1-2.7.5.jar",
                      "name":  "citadel-1.21.1-2.7.5",
                      "filename":  "citadel-1.21.1-2.7.5.jar"
                  },
                  {
                      "md5":  "4c3757160403fcccb8ad468c2ea22862",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/cloth-config-15.0.140-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/cloth-config-15.0.140-neoforge.jar",
                      "name":  "cloth-config-15.0.140-neoforge",
                      "filename":  "cloth-config-15.0.140-neoforge.jar"
                  },
                  {
                      "md5":  "8b42a9d7a72bde90fa061d17e2859e7b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Clumps-neoforge-1.21.1-19.0.0.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Clumps-neoforge-1.21.1-19.0.0.1.jar",
                      "name":  "Clumps-neoforge-1.21.1-19.0.0.1",
                      "filename":  "Clumps-neoforge-1.21.1-19.0.0.1.jar"
                  },
                  {
                      "md5":  "ba7a318dcf4190a27e017eacac47427e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/comforts-neoforge-9.0.5_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/comforts-neoforge-9.0.5_1.21.1.jar",
                      "name":  "comforts-neoforge-9.0.5+1.21.1",
                      "filename":  "comforts-neoforge-9.0.5_1.21.1.jar"
                  },
                  {
                      "md5":  "f2d38f850688eefa338b807801df2b4b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/connectivity-1.21.1-7.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/connectivity-1.21.1-7.6.jar",
                      "name":  "connectivity-1.21.1-7.6",
                      "filename":  "connectivity-1.21.1-7.6.jar"
                  },
                  {
                      "md5":  "35dd11376206a6d6e6666ece79fe24fd",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/connector-2.0.0-beta.13_1.21.1-full.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/connector-2.0.0-beta.13_1.21.1-full.jar",
                      "name":  "connector-2.0.0-beta.13+1.21.1-full",
                      "filename":  "connector-2.0.0-beta.13_1.21.1-full.jar"
                  },
                  {
                      "md5":  "939fc51820a34f347149b8c726cf78b7",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Corgilib-NeoForge-1.21.1-5.0.0.7.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Corgilib-NeoForge-1.21.1-5.0.0.7.jar",
                      "name":  "Corgilib-NeoForge-1.21.1-5.0.0.7",
                      "filename":  "Corgilib-NeoForge-1.21.1-5.0.0.7.jar"
                  },
                  {
                      "md5":  "9d410a84fe0216ce18568993afb4f8e5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/coroutil-neoforge-1.21.0-1.3.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/coroutil-neoforge-1.21.0-1.3.8.jar",
                      "name":  "coroutil-neoforge-1.21.0-1.3.8",
                      "filename":  "coroutil-neoforge-1.21.0-1.3.8.jar"
                  },
                  {
                      "md5":  "ec29a125a0298eb44f75847e8f59c7f4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/create-1.21.1-6.0.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/create-1.21.1-6.0.9.jar",
                      "name":  "create-1.21.1-6.0.9",
                      "filename":  "create-1.21.1-6.0.9.jar"
                  },
                  {
                      "md5":  "a2c8736ce8c584e62e002955bdb442ad",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/CreativeCore_NEOFORGE_v2.13.34_mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/CreativeCore_NEOFORGE_v2.13.34_mc1.21.1.jar",
                      "name":  "CreativeCore_NEOFORGE_v2.13.34_mc1.21.1",
                      "filename":  "CreativeCore_NEOFORGE_v2.13.34_mc1.21.1.jar"
                  },
                  {
                      "md5":  "fba4de114511671aa0c4a10f34268faa",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/CreeperOverhaul-neoforge-1.21.1-4.0.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/CreeperOverhaul-neoforge-1.21.1-4.0.6.jar",
                      "name":  "CreeperOverhaul-neoforge-1.21.1-4.0.6",
                      "filename":  "CreeperOverhaul-neoforge-1.21.1-4.0.6.jar"
                  },
                  {
                      "md5":  "2a542779bc634e89c2383da587f2f4bd",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/cristellib-neoforge-1.21.1-3.0.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/cristellib-neoforge-1.21.1-3.0.3.jar",
                      "name":  "cristellib-neoforge-1.21.1-3.0.3",
                      "filename":  "cristellib-neoforge-1.21.1-3.0.3.jar"
                  },
                  {
                      "md5":  "d43ddb1b038a75d940f1a35156eb02f1",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/crittersandcompanions-neoforge-1.21.1-2.3.4.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/crittersandcompanions-neoforge-1.21.1-2.3.4.jar",
                      "name":  "crittersandcompanions-neoforge-1.21.1-2.3.4",
                      "filename":  "crittersandcompanions-neoforge-1.21.1-2.3.4.jar"
                  },
                  {
                      "md5":  "9cc5caf701898ba7236ca1e841d9049b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/cupboard-1.21-2.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/cupboard-1.21-2.9.jar",
                      "name":  "cupboard-1.21-2.9",
                      "filename":  "cupboard-1.21-2.9.jar"
                  },
                  {
                      "md5":  "e8f0a3574264bb202c153b90293dc84c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/curios-neoforge-9.5.1_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/curios-neoforge-9.5.1_1.21.1.jar",
                      "name":  "curios-neoforge-9.5.1+1.21.1",
                      "filename":  "curios-neoforge-9.5.1_1.21.1.jar"
                  },
                  {
                      "md5":  "a37a85fb334f30da25d4b675e5e70297",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/domum-ornamentum-1.0.228-main.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/domum-ornamentum-1.0.228-main.jar",
                      "name":  "domum-ornamentum-1.0.228-main",
                      "filename":  "domum-ornamentum-1.0.228-main.jar"
                  },
                  {
                      "md5":  "ac6021fa4a475ce61d4bfa397987a624",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/dungeons_1.19_mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/dungeons_1.19_mc1.21.1.jar",
                      "name":  "dungeons_1.19_mc1.21.1",
                      "filename":  "dungeons_1.19_mc1.21.1.jar"
                  },
                  {
                      "md5":  "1493bb80f1de3ceaec90e62e765aa557",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/earth-and-water-1.0.3-1.21-hotfix.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/earth-and-water-1.0.3-1.21-hotfix.jar",
                      "name":  "earth-and-water-1.0.3-1.21-hotfix",
                      "filename":  "earth-and-water-1.0.3-1.21-hotfix.jar"
                  },
                  {
                      "md5":  "3bd6937afff04a4f22dba7d281bb8000",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/echoes_of_the_end_structures_-11.00.12_Release-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/echoes_of_the_end_structures_-11.00.12_Release-neoforge-1.21.1.jar",
                      "name":  "echoes_of_the_end__structures_-11.00.12 Release-neoforge-1.21.1",
                      "filename":  "echoes_of_the_end_structures_-11.00.12_Release-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "ca9775a6f300989cb4d2063e1833579b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/emi-1.1.22_1.21.1_neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/emi-1.1.22_1.21.1_neoforge.jar",
                      "name":  "emi-1.1.22+1.21.1+neoforge",
                      "filename":  "emi-1.1.22_1.21.1_neoforge.jar"
                  },
                  {
                      "md5":  "03e87f38be1a7218c55f35676f6248ac",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/endermanoverhaul-neoforge-1.21.1-2.0.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/endermanoverhaul-neoforge-1.21.1-2.0.3.jar",
                      "name":  "endermanoverhaul-neoforge-1.21.1-2.0.3",
                      "filename":  "endermanoverhaul-neoforge-1.21.1-2.0.3.jar"
                  },
                  {
                      "md5":  "1db12521d9dc64f8134b7ceb12f5aedf",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/enhancedai-4.0.1.0-beta.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/enhancedai-4.0.1.0-beta.jar",
                      "name":  "enhancedai-4.0.1.0-beta",
                      "filename":  "enhancedai-4.0.1.0-beta.jar"
                  },
                  {
                      "md5":  "01f261a2304303324b5a66d5570a9e8d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/EternalNether-v21.1.3-1.21.1-NeoForge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/EternalNether-v21.1.3-1.21.1-NeoForge.jar",
                      "name":  "EternalNether-v21.1.3-1.21.1-NeoForge",
                      "filename":  "EternalNether-v21.1.3-1.21.1-NeoForge.jar"
                  },
                  {
                      "md5":  "161bdf0526ed22d6a4764aa10a1060d9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/evenbetternether-1.3.0-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/evenbetternether-1.3.0-neoforge-1.21.1.jar",
                      "name":  "evenbetternether-1.3.0-neoforge-1.21.1",
                      "filename":  "evenbetternether-1.3.0-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "b1971a08ee136896c419d94c89702341",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/FarmersDelight-1.21.1-1.2.10.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/FarmersDelight-1.21.1-1.2.10.jar",
                      "name":  "FarmersDelight-1.21.1-1.2.10",
                      "filename":  "FarmersDelight-1.21.1-1.2.10.jar"
                  },
                  {
                      "md5":  "bf9f69eb70e4a85bac05687797139af9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/fdlib-1.0.8-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/fdlib-1.0.8-1.21.1.jar",
                      "name":  "fdlib-1.0.8-1.21.1",
                      "filename":  "fdlib-1.0.8-1.21.1.jar"
                  },
                  {
                      "md5":  "e0374dac41d6c641903f9e241911e1d3",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ferritecore-7.0.3-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ferritecore-7.0.3-neoforge.jar",
                      "name":  "ferritecore-7.0.3-neoforge",
                      "filename":  "ferritecore-7.0.3-neoforge.jar"
                  },
                  {
                      "md5":  "d0fee8a0321c9d8978943c72cf1cfb93",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/forgified-fabric-api-0.116.7_2.2.4_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/forgified-fabric-api-0.116.7_2.2.4_1.21.1.jar",
                      "name":  "forgified-fabric-api-0.116.7+2.2.4+1.21.1",
                      "filename":  "forgified-fabric-api-0.116.7_2.2.4_1.21.1.jar"
                  },
                  {
                      "md5":  "06f94f31d9e0b59c8b42a5b0df7013d6",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/framework-neoforge-1.21.1-0.13.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/framework-neoforge-1.21.1-0.13.11.jar",
                      "name":  "framework-neoforge-1.21.1-0.13.11",
                      "filename":  "framework-neoforge-1.21.1-0.13.11.jar"
                  },
                  {
                      "md5":  "f6554f4d7f3bd02d9a5ce71334b444d5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/fwa_1.21.1-neoforge-1.1.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/fwa_1.21.1-neoforge-1.1.1.jar",
                      "name":  "fwa+1.21.1-neoforge-1.1.1",
                      "filename":  "fwa_1.21.1-neoforge-1.1.1.jar"
                  },
                  {
                      "md5":  "cd0823556e6d24046bd0f4ba74cd4981",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/fzzy_config-0.7.6_1.21_neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/fzzy_config-0.7.6_1.21_neoforge.jar",
                      "name":  "fzzy_config-0.7.6+1.21+neoforge",
                      "filename":  "fzzy_config-0.7.6_1.21_neoforge.jar"
                  },
                  {
                      "md5":  "097799f159db31dd123eb47e31eacb01",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/geckolib-neoforge-1.21.1-4.8.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/geckolib-neoforge-1.21.1-4.8.3.jar",
                      "name":  "geckolib-neoforge-1.21.1-4.8.3",
                      "filename":  "geckolib-neoforge-1.21.1-4.8.3.jar"
                  },
                  {
                      "md5":  "c0259885d0d200894ce449fc95a1b63b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/getittogetherdrops-neoforge-1.21.5-1.4.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/getittogetherdrops-neoforge-1.21.5-1.4.jar",
                      "name":  "getittogetherdrops-neoforge-1.21.5-1.4",
                      "filename":  "getittogetherdrops-neoforge-1.21.5-1.4.jar"
                  },
                  {
                      "md5":  "67962a0ca8219359700f02d76cbaf34b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Gobber-NeoForge-1.21.1-2.10.15.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Gobber-NeoForge-1.21.1-2.10.15.jar",
                      "name":  "Gobber-NeoForge-1.21.1-2.10.15",
                      "filename":  "Gobber-NeoForge-1.21.1-2.10.15.jar"
                  },
                  {
                      "md5":  "3826175240618a43c2a2d661232235a9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/golemoverhaul-neoforge-1.21.1-1.1.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/golemoverhaul-neoforge-1.21.1-1.1.0.jar",
                      "name":  "golemoverhaul-neoforge-1.21.1-1.1.0",
                      "filename":  "golemoverhaul-neoforge-1.21.1-1.1.0.jar"
                  },
                  {
                      "md5":  "871dd941714b18ab932a538975dc2368",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/guardvillagers-2.4.7-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/guardvillagers-2.4.7-1.21.1.jar",
                      "name":  "guardvillagers-2.4.7-1.21.1",
                      "filename":  "guardvillagers-2.4.7-1.21.1.jar"
                  },
                  {
                      "md5":  "5f26d65a582ebe10a7224b9f68f85425",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/hominid-1.3.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/hominid-1.3.1.jar",
                      "name":  "hominid-1.3.1",
                      "filename":  "hominid-1.3.1.jar"
                  },
                  {
                      "md5":  "927651e5e8146d8951ef473e7ea50498",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/IceAndFireCE-2.0-beta.13-1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/IceAndFireCE-2.0-beta.13-1.21.1-neoforge.jar",
                      "name":  "IceAndFireCE-2.0-beta.13-1.21.1-neoforge",
                      "filename":  "IceAndFireCE-2.0-beta.13-1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "d9f1ab469ff92e45becf11b021338348",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/immersive_aircraft-1.4.2_1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/immersive_aircraft-1.4.2_1.21.1-neoforge.jar",
                      "name":  "immersive_aircraft-1.4.2+1.21.1-neoforge",
                      "filename":  "immersive_aircraft-1.4.2_1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "30c504230b33f393f2126940fd6fbaec",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/immersive_machinery-0.2.0_1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/immersive_machinery-0.2.0_1.21.1-neoforge.jar",
                      "name":  "immersive_machinery-0.2.0+1.21.1-neoforge",
                      "filename":  "immersive_machinery-0.2.0_1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "e02478dbec844c8d2a43be3a99324361",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/immersive_optimization-neoforge-1.21-0.1.4.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/immersive_optimization-neoforge-1.21-0.1.4.jar",
                      "name":  "immersive_optimization-neoforge-1.21-0.1.4",
                      "filename":  "immersive_optimization-neoforge-1.21-0.1.4.jar"
                  },
                  {
                      "md5":  "30de366b6e52542b8fc8399134a1179b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/improvedmobs-1.21.1-1.15.2-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/improvedmobs-1.21.1-1.15.2-neoforge.jar",
                      "name":  "improvedmobs-1.21.1-1.15.2-neoforge",
                      "filename":  "improvedmobs-1.21.1-1.15.2-neoforge.jar"
                  },
                  {
                      "md5":  "37793d374c89e38074bde664fe36df59",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Incendium_1.21.x_v5.4.4.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Incendium_1.21.x_v5.4.4.jar",
                      "name":  "Incendium_1.21.x_v5.4.4",
                      "filename":  "Incendium_1.21.x_v5.4.4.jar"
                  },
                  {
                      "md5":  "e9d5d464046ae2e4bacc2e0ddbdc1f76",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/insanelib-2.4.7.1-beta.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/insanelib-2.4.7.1-beta.jar",
                      "name":  "insanelib-2.4.7.1-beta",
                      "filename":  "insanelib-2.4.7.1-beta.jar"
                  },
                  {
                      "md5":  "ec722b68291c3f06f305ca2d25fa12a1",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/inventoryhud.neoforged.1.21.1-3.4.28.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/inventoryhud.neoforged.1.21.1-3.4.28.jar",
                      "name":  "inventoryhud.neoforged.1.21.1-3.4.28",
                      "filename":  "inventoryhud.neoforged.1.21.1-3.4.28.jar"
                  },
                  {
                      "md5":  "79d7b3cd44902c395ba23d464f9b6ed4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/irons_spellbooks-1.21.1-3.15.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/irons_spellbooks-1.21.1-3.15.3.jar",
                      "name":  "irons_spellbooks-1.21.1-3.15.3",
                      "filename":  "irons_spellbooks-1.21.1-3.15.3.jar"
                  },
                  {
                      "md5":  "80f9186d25b02ebbfa5773416f5da410",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Jade-1.21.1-NeoForge-15.10.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Jade-1.21.1-NeoForge-15.10.5.jar",
                      "name":  "Jade-1.21.1-NeoForge-15.10.5",
                      "filename":  "Jade-1.21.1-NeoForge-15.10.5.jar"
                  },
                  {
                      "md5":  "990c5aec07a45e8336f16bdd13d48cc0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/jungle_treehouse_village-1.0.0-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/jungle_treehouse_village-1.0.0-neoforge-1.21.1.jar",
                      "name":  "jungle_treehouse_village-1.0.0-neoforge-1.21.1",
                      "filename":  "jungle_treehouse_village-1.0.0-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "b947d4e0742a7e80b9b4d649a8ef9ac7",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/jupiter-2.3.5-1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/jupiter-2.3.5-1.21.1-neoforge.jar",
                      "name":  "jupiter-2.3.5-1.21.1-neoforge",
                      "filename":  "jupiter-2.3.5-1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "6e77d08299ea1ec7756a299263bc469b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/konkrete_neoforge_1.9.9_MC_1.21.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/konkrete_neoforge_1.9.9_MC_1.21.jar",
                      "name":  "konkrete_neoforge_1.9.9_MC_1.21",
                      "filename":  "konkrete_neoforge_1.9.9_MC_1.21.jar"
                  },
                  {
                      "md5":  "046def10d62e5fbeb0ff5bb95828355a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/kotlinforforge-5.8.0-all.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/kotlinforforge-5.8.0-all.jar",
                      "name":  "kotlinforforge-5.8.0-all",
                      "filename":  "kotlinforforge-5.8.0-all.jar"
                  },
                  {
                      "md5":  "f7544ec5d55b4f01f76837826ebfb1b7",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/LazyDFU-_UNOFFICIAL_1.21.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/LazyDFU-_UNOFFICIAL_1.21.jar",
                      "name":  "LazyDFU-[UNOFFICIAL]+1.21",
                      "filename":  "LazyDFU-_UNOFFICIAL_1.21.jar"
                  },
                  {
                      "md5":  "2d913f07606373a7f94b0f8cc8b16499",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/letmedespawn-1.21.x-neoforge-1.5.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/letmedespawn-1.21.x-neoforge-1.5.0.jar",
                      "name":  "letmedespawn-1.21.x-neoforge-1.5.0",
                      "filename":  "letmedespawn-1.21.x-neoforge-1.5.0.jar"
                  },
                  {
                      "md5":  "f27209702fbb13f1dccb98e77931b5ae",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/lionfishapi-2.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/lionfishapi-2.6.jar",
                      "name":  "lionfishapi-2.6",
                      "filename":  "lionfishapi-2.6.jar"
                  },
                  {
                      "md5":  "50ac38e16b77f00ad9611a1d2049eef5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/lithostitched-1.6.0-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/lithostitched-1.6.0-neoforge-1.21.1.jar",
                      "name":  "lithostitched-1.6.0-neoforge-1.21.1",
                      "filename":  "lithostitched-1.6.0-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "963e5674ea13b79564ce21985300b17b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/loadsupport-neoforge-1.21.1-1.2.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/loadsupport-neoforge-1.21.1-1.2.1.jar",
                      "name":  "loadsupport-neoforge-1.21.1-1.2.1",
                      "filename":  "loadsupport-neoforge-1.21.1-1.2.1.jar"
                  },
                  {
                      "md5":  "7ab148b1441805382e140c8eded8e4a6",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Luminous_Nether_V1.3.2_-_NeoForge_1.3.2.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Luminous_Nether_V1.3.2_-_NeoForge_1.3.2.jar",
                      "name":  "Luminous Nether V1.3.2 - NeoForge 1.3.2",
                      "filename":  "Luminous_Nether_V1.3.2_-_NeoForge_1.3.2.jar"
                  },
                  {
                      "md5":  "c6ea639af210c38cce3130ce4a053fa1",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Luminous_Overworld_V1.5.4_-_NeoForge_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Luminous_Overworld_V1.5.4_-_NeoForge_1.21.1.jar",
                      "name":  "Luminous Overworld V1.5.4 - NeoForge 1.21.1",
                      "filename":  "Luminous_Overworld_V1.5.4_-_NeoForge_1.21.1.jar"
                  },
                  {
                      "md5":  "fddf4bf59c1afdca5976ab96b735285b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/L_Ender_s_Cataclysm_1.21.1-3.23.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/L_Ender_s_Cataclysm_1.21.1-3.23.jar",
                      "name":  "L_Ender_s Cataclysm 1.21.1-3.23",
                      "filename":  "L_Ender_s_Cataclysm_1.21.1-3.23.jar"
                  },
                  {
                      "md5":  "dc2d5057c84b1a20e72bdc742598b37c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/man_of_many_planes-0.2.1_1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/man_of_many_planes-0.2.1_1.21.1-neoforge.jar",
                      "name":  "man_of_many_planes-0.2.1+1.21.1-neoforge",
                      "filename":  "man_of_many_planes-0.2.1_1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "875f4a68f2cd7ee2cc135904653c93d4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/melody_neoforge_1.0.10_MC_1.21.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/melody_neoforge_1.0.10_MC_1.21.jar",
                      "name":  "melody_neoforge_1.0.10_MC_1.21",
                      "filename":  "melody_neoforge_1.0.10_MC_1.21.jar"
                  },
                  {
                      "md5":  "2ed25f310dc20c6aef4ad032c806d4b7",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/midnightlib-neoforge-1.9.2_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/midnightlib-neoforge-1.9.2_1.21.1.jar",
                      "name":  "midnightlib-neoforge-1.9.2+1.21.1",
                      "filename":  "midnightlib-neoforge-1.9.2_1.21.1.jar"
                  },
                  {
                      "md5":  "573e180dbae93cdb8bfe0179f260b6aa",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/modernfix-neoforge-5.26.1_mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/modernfix-neoforge-5.26.1_mc1.21.1.jar",
                      "name":  "modernfix-neoforge-5.26.1+mc1.21.1",
                      "filename":  "modernfix-neoforge-5.26.1_mc1.21.1.jar"
                  },
                  {
                      "md5":  "6867bf5ba45c9eef1f06a29cf20e5690",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/moogs_structures-1.1.0-1.21-1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/moogs_structures-1.1.0-1.21-1.21.1-neoforge.jar",
                      "name":  "moogs_structures-1.1.0-1.21-1.21.1-neoforge",
                      "filename":  "moogs_structures-1.1.0-1.21-1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "1b8789dd093709c27c64911631a31cfe",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/mowziesmobs-1.21.1-1.7.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/mowziesmobs-1.21.1-1.7.5.jar",
                      "name":  "mowziesmobs-1.21.1-1.7.5",
                      "filename":  "mowziesmobs-1.21.1-1.7.5.jar"
                  },
                  {
                      "md5":  "7c503285a54808a9ae80b2364156bd20",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/MutantMonsters-v21.1.1-1.21.1-NeoForge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/MutantMonsters-v21.1.1-1.21.1-NeoForge.jar",
                      "name":  "MutantMonsters-v21.1.1-1.21.1-NeoForge",
                      "filename":  "MutantMonsters-v21.1.1-1.21.1-NeoForge.jar"
                  },
                  {
                      "md5":  "3b8eced0e31182b29bc5a60d68fe9f04",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/MutantsZombies-1.3.1-NeoForge-mc1.21.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/MutantsZombies-1.3.1-NeoForge-mc1.21.jar",
                      "name":  "MutantsZombies-1.3.1-NeoForge-mc1.21",
                      "filename":  "MutantsZombies-1.3.1-NeoForge-mc1.21.jar"
                  },
                  {
                      "md5":  "b1feb41cb3a0cc7459919cd7afdd191f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/mythsandlegends-0.0.8.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/mythsandlegends-0.0.8.5.jar",
                      "name":  "mythsandlegends-0.0.8.5",
                      "filename":  "mythsandlegends-0.0.8.5.jar"
                  },
                  {
                      "md5":  "2c7cf8892e4a59130b479ccfcac4ff0e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/noisium-neoforge-2.7.0_mc1.21-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/noisium-neoforge-2.7.0_mc1.21-1.21.1.jar",
                      "name":  "noisium-neoforge-2.7.0+mc1.21-1.21.1",
                      "filename":  "noisium-neoforge-2.7.0_mc1.21-1.21.1.jar"
                  },
                  {
                      "md5":  "98c12db8c9263bc427d0e06b3228610a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/nordic_structures-1.7.2-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/nordic_structures-1.7.2-neoforge-1.21.1.jar",
                      "name":  "nordic_structures-1.7.2-neoforge-1.21.1",
                      "filename":  "nordic_structures-1.7.2-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "2110be7f2ffacf4c6093504d67a7cb00",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar",
                      "name":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0",
                      "filename":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar"
                  },
                  {
                      "md5":  "8f22fb065079340a72ae5ce0da12efcb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
                      "name":  "packetfixer-3.3.1-1.20.5-1.21.X-merged",
                      "filename":  "packetfixer-3.3.1-1.20.5-1.21.X-merged.jar"
                  },
                  {
                      "md5":  "40ae12e5ea2554ae97ea38e133558e86",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Patchouli-1.21.1-92-NEOFORGE.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Patchouli-1.21.1-92-NEOFORGE.jar",
                      "name":  "Patchouli-1.21.1-92-NEOFORGE",
                      "filename":  "Patchouli-1.21.1-92-NEOFORGE.jar"
                  },
                  {
                      "md5":  "1ed84c147a983ec0bd03bcf74aae948f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/piglinproliferation-1.21.1-2.0.12.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/piglinproliferation-1.21.1-2.0.12.jar",
                      "name":  "piglinproliferation-1.21.1-2.0.12",
                      "filename":  "piglinproliferation-1.21.1-2.0.12.jar"
                  },
                  {
                      "md5":  "cc725fc5406d3af893484cfbba06f6ed",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Placebo-1.21.1-9.9.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Placebo-1.21.1-9.9.1.jar",
                      "name":  "Placebo-1.21.1-9.9.1",
                      "filename":  "Placebo-1.21.1-9.9.1.jar"
                  },
                  {
                      "md5":  "ecb81c9479605db12a77bea774b88406",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/player-animation-lib-forge-2.0.4_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/player-animation-lib-forge-2.0.4_1.21.1.jar",
                      "name":  "player-animation-lib-forge-2.0.4+1.21.1",
                      "filename":  "player-animation-lib-forge-2.0.4_1.21.1.jar"
                  },
                  {
                      "md5":  "533c154fb306cd8043564ee1533873ce",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/prickle-neoforge-1.21.1-21.1.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/prickle-neoforge-1.21.1-21.1.11.jar",
                      "name":  "prickle-neoforge-1.21.1-21.1.11",
                      "filename":  "prickle-neoforge-1.21.1-21.1.11.jar"
                  },
                  {
                      "md5":  "ccf523ffc1c317a005408d11009350a4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/PuzzlesLib-v21.1.39-1.21.1-NeoForge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/PuzzlesLib-v21.1.39-1.21.1-NeoForge.jar",
                      "name":  "PuzzlesLib-v21.1.39-1.21.1-NeoForge",
                      "filename":  "PuzzlesLib-v21.1.39-1.21.1-NeoForge.jar"
                  },
                  {
                      "md5":  "581a8a1aa99037ae09ef4e6f8536c344",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/qraftyfied-9.1.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/qraftyfied-9.1.1.jar",
                      "name":  "qraftyfied-9.1.1",
                      "filename":  "qraftyfied-9.1.1.jar"
                  },
                  {
                      "md5":  "0da81fbac386d4f6b3b558316cd129f3",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Raided-1.21.1-0.1.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Raided-1.21.1-0.1.6.jar",
                      "name":  "Raided-1.21.1-0.1.6",
                      "filename":  "Raided-1.21.1-0.1.6.jar"
                  },
                  {
                      "md5":  "80daf98b7faab91e6d0ec2b2e7abb1a9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/raidsenhanced-1.0.2-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/raidsenhanced-1.0.2-1.21.1.jar",
                      "name":  "raidsenhanced-1.0.2-1.21.1",
                      "filename":  "raidsenhanced-1.0.2-1.21.1.jar"
                  },
                  {
                      "md5":  "7379bc72b92f838949c073961dc72351",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/refurbished_furniture-neoforge-1.21.1-1.0.22.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/refurbished_furniture-neoforge-1.21.1-1.0.22.jar",
                      "name":  "refurbished_furniture-neoforge-1.21.1-1.0.22",
                      "filename":  "refurbished_furniture-neoforge-1.21.1-1.0.22.jar"
                  },
                  {
                      "md5":  "bc14882fddebc0b6361886a68cf0daf2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/regions_unexplored-neoforge-1.21.1-0.5.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/regions_unexplored-neoforge-1.21.1-0.5.9.jar",
                      "name":  "regions_unexplored-neoforge-1.21.1-0.5.9",
                      "filename":  "regions_unexplored-neoforge-1.21.1-0.5.9.jar"
                  },
                  {
                      "md5":  "84ff2805a591b10d22b7e0c69b44246c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/resourcefulconfig-neoforge-1.21-3.0.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/resourcefulconfig-neoforge-1.21-3.0.11.jar",
                      "name":  "resourcefulconfig-neoforge-1.21-3.0.11",
                      "filename":  "resourcefulconfig-neoforge-1.21-3.0.11.jar"
                  },
                  {
                      "md5":  "32da88903167d24bb20febeeb2c79225",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/resourcefullib-neoforge-1.21-3.0.12.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/resourcefullib-neoforge-1.21-3.0.12.jar",
                      "name":  "resourcefullib-neoforge-1.21-3.0.12",
                      "filename":  "resourcefullib-neoforge-1.21-3.0.12.jar"
                  },
                  {
                      "md5":  "d5a51e3ca44b07172c95e140c2e7688b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/RUExpansion-1.0.1_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/RUExpansion-1.0.1_1.21.1.jar",
                      "name":  "RUExpansion-1.0.1+1.21.1",
                      "filename":  "RUExpansion-1.0.1_1.21.1.jar"
                  },
                  {
                      "md5":  "f05622f75f99d76cab97388c57d7f22e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/saturn-mc1.21.1-0.1.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/saturn-mc1.21.1-0.1.5.jar",
                      "name":  "saturn-mc1.21.1-0.1.5",
                      "filename":  "saturn-mc1.21.1-0.1.5.jar"
                  },
                  {
                      "md5":  "a3cb9782cbc870798458a6623fec52b3",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sawmillhouse-2.0.1-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sawmillhouse-2.0.1-neoforge-1.21.1.jar",
                      "name":  "sawmillhouse-2.0.1-neoforge-1.21.1",
                      "filename":  "sawmillhouse-2.0.1-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "8b0ac6168c1d02c1ea9e7e7b2811a511",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sengokuFabric-2.0.73_1.21.1-Fabric.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sengokuFabric-2.0.73_1.21.1-Fabric.jar",
                      "name":  "sengokuFabric-2.0.73+1.21.1-Fabric",
                      "filename":  "sengokuFabric-2.0.73_1.21.1-Fabric.jar"
                  },
                  {
                      "md5":  "85f4af6acf495708fbe635455145495d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/shellbound_for_airship-1.0.0-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/shellbound_for_airship-1.0.0-neoforge.jar",
                      "name":  "shellbound_for_airship-1.0.0-neoforge",
                      "filename":  "shellbound_for_airship-1.0.0-neoforge.jar"
                  },
                  {
                      "md5":  "62fe4a42e66313d20699532d1cfde04b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/skinrestorer-2.6.0_1.21-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/skinrestorer-2.6.0_1.21-neoforge.jar",
                      "name":  "skinrestorer-2.6.0+1.21-neoforge",
                      "filename":  "skinrestorer-2.6.0_1.21-neoforge.jar"
                  },
                  {
                      "md5":  "476897de8dfce7473eb324866ea9cc65",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sky_whale_ship-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sky_whale_ship-neoforge-1.21.1.jar",
                      "name":  "sky_whale_ship-neoforge-1.21.1",
                      "filename":  "sky_whale_ship-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "682f71c574ad03c28989a7707b15b5cd",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sophisticatedbackpacks-1.21.1-3.25.30.1547.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sophisticatedbackpacks-1.21.1-3.25.30.1547.jar",
                      "name":  "sophisticatedbackpacks-1.21.1-3.25.30.1547",
                      "filename":  "sophisticatedbackpacks-1.21.1-3.25.30.1547.jar"
                  },
                  {
                      "md5":  "d09acfc518f27765bc50a07fe4bdee4f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sophisticatedcore-1.21.1-1.4.6.1506.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sophisticatedcore-1.21.1-1.4.6.1506.jar",
                      "name":  "sophisticatedcore-1.21.1-1.4.6.1506",
                      "filename":  "sophisticatedcore-1.21.1-1.4.6.1506.jar"
                  },
                  {
                      "md5":  "a61dd250e618f8fd62fc6b0943831c50",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/spark-1.10.124-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/spark-1.10.124-neoforge.jar",
                      "name":  "spark-1.10.124-neoforge",
                      "filename":  "spark-1.10.124-neoforge.jar"
                  },
                  {
                      "md5":  "bf63762f628e45a76cb2b379fa255d0e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Stellarity-3.0.6.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Stellarity-3.0.6.1.jar",
                      "name":  "Stellarity-3.0.6.1",
                      "filename":  "Stellarity-3.0.6.1.jar"
                  },
                  {
                      "md5":  "214db224d3b0e568ea77ff89afb74a90",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Structory_1.21.x_v1.3.14.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Structory_1.21.x_v1.3.14.jar",
                      "name":  "Structory_1.21.x_v1.3.14",
                      "filename":  "Structory_1.21.x_v1.3.14.jar"
                  },
                  {
                      "md5":  "65337a0c62807bb7a00f6143fd85faac",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Structory_Towers_1.21.x_v1.0.15.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Structory_Towers_1.21.x_v1.0.15.jar",
                      "name":  "Structory_Towers_1.21.x_v1.0.15",
                      "filename":  "Structory_Towers_1.21.x_v1.0.15.jar"
                  },
                  {
                      "md5":  "9f5f1da6399a3912a658abc13a8d36f3",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/structureessentials-1.21.1-4.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/structureessentials-1.21.1-4.8.jar",
                      "name":  "structureessentials-1.21.1-4.8",
                      "filename":  "structureessentials-1.21.1-4.8.jar"
                  },
                  {
                      "md5":  "9b8f9adc57754fc6d0f153e919d217f6",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/structurize-1.0.816-1.21.1-snapshot.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/structurize-1.0.816-1.21.1-snapshot.jar",
                      "name":  "structurize-1.0.816-1.21.1-snapshot",
                      "filename":  "structurize-1.0.816-1.21.1-snapshot.jar"
                  },
                  {
                      "md5":  "dcc965059b7480f44573596cf45d5fe2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/tectonic-3.0.19-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/tectonic-3.0.19-neoforge-1.21.1.jar",
                      "name":  "tectonic-3.0.19-neoforge-1.21.1",
                      "filename":  "tectonic-3.0.19-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "d5d749576257ffddb96f067849eaf703",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/tenshilib-1.21.1-2.2.5-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/tenshilib-1.21.1-2.2.5-neoforge.jar",
                      "name":  "tenshilib-1.21.1-2.2.5-neoforge",
                      "filename":  "tenshilib-1.21.1-2.2.5-neoforge.jar"
                  },
                  {
                      "md5":  "66fc7a85676199608348681d006d8c2e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
                      "name":  "TerraBlender-neoforge-1.21.1-4.1.0.8",
                      "filename":  "TerraBlender-neoforge-1.21.1-4.1.0.8.jar"
                  },
                  {
                      "md5":  "7dc2730017f106f5b1730daa346b89c0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/The-Hordes-1.21-1.6.1b.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/The-Hordes-1.21-1.6.1b.jar",
                      "name":  "The-Hordes-1.21-1.6.1b",
                      "filename":  "The-Hordes-1.21-1.6.1b.jar"
                  },
                  {
                      "md5":  "178719e549834cf9e530565810f61577",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/tombstone-neoforge-1.21.1-9.4.7.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/tombstone-neoforge-1.21.1-9.4.7.jar",
                      "name":  "tombstone-neoforge-1.21.1-9.4.7",
                      "filename":  "tombstone-neoforge-1.21.1-9.4.7.jar"
                  },
                  {
                      "md5":  "6c925612c3d596131483219116fc9ae9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/tpa-1.7.5.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/tpa-1.7.5.jar",
                      "name":  "tpa-1.7.5",
                      "filename":  "tpa-1.7.5.jar"
                  },
                  {
                      "md5":  "c87da07af73f649d1fe4ec6ca6d5a3ea",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/TreeChop-1.21.1-neoforge-0.19.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/TreeChop-1.21.1-neoforge-0.19.3.jar",
                      "name":  "TreeChop-1.21.1-neoforge-0.19.3",
                      "filename":  "TreeChop-1.21.1-neoforge-0.19.3.jar"
                  },
                  {
                      "md5":  "e5ba8ad4e5a721b5cb350f57c5c712d9",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/trek-B0.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/trek-B0.6.jar",
                      "name":  "trek-B0.6",
                      "filename":  "trek-B0.6.jar"
                  },
                  {
                      "md5":  "3d8c3e550637d4daba2d290647fc8db5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/twilightforest-1.21.1-4.8.3287-universal.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/twilightforest-1.21.1-4.8.3287-universal.jar",
                      "name":  "twilightforest-1.21.1-4.8.3287-universal",
                      "filename":  "twilightforest-1.21.1-4.8.3287-universal.jar"
                  },
                  {
                      "md5":  "69cd87744e40cc444b4176022ec6d17a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/txnilib-neoforge-1.0.24-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/txnilib-neoforge-1.0.24-1.21.1.jar",
                      "name":  "txnilib-neoforge-1.0.24-1.21.1",
                      "filename":  "txnilib-neoforge-1.0.24-1.21.1.jar"
                  },
                  {
                      "md5":  "6c1d9eed93d997b734174a42949c9aaf",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/t_and_t-neoforge-fabric-1.13.7_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/t_and_t-neoforge-fabric-1.13.7_1.21.1.jar",
                      "name":  "t_and_t-neoforge-fabric-1.13.7+1.21.1",
                      "filename":  "t_and_t-neoforge-fabric-1.13.7_1.21.1.jar"
                  },
                  {
                      "md5":  "ae4bd50b20f0ed672987a0da54fe10e2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/uranus-2.4-1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/uranus-2.4-1.21.1-neoforge.jar",
                      "name":  "uranus-2.4-1.21.1-neoforge",
                      "filename":  "uranus-2.4-1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "a70eb576b761883bb0acf2532c1f929c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/u_desert-2.0.3_mc1.21-1.21.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/u_desert-2.0.3_mc1.21-1.21.11.jar",
                      "name":  "u_desert-2.0.3+mc1.21-1.21.11",
                      "filename":  "u_desert-2.0.3_mc1.21-1.21.11.jar"
                  },
                  {
                      "md5":  "dd11233e55cd61f5bf789f2deeae0bf8",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/u_sea-1.2.5_mc1.19-1.21.11.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/u_sea-1.2.5_mc1.19-1.21.11.jar",
                      "name":  "u_sea-1.2.5+mc1.19-1.21.11",
                      "filename":  "u_sea-1.2.5_mc1.19-1.21.11.jar"
                  },
                  {
                      "md5":  "8baebdd1f10920df0850206c13ed6b7b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar",
                      "name":  "VisualWorkbench-v21.1.1-1.21.1-NeoForge",
                      "filename":  "VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar"
                  },
                  {
                      "md5":  "f2186e75bdb5a19231e7fafdd27dc6e2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/vmp-fabric-mc1.21.1-0.2.0_beta.7.172-all.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/vmp-fabric-mc1.21.1-0.2.0_beta.7.172-all.jar",
                      "name":  "vmp-fabric-mc1.21.1-0.2.0+beta.7.172-all",
                      "filename":  "vmp-fabric-mc1.21.1-0.2.0_beta.7.172-all.jar"
                  },
                  {
                      "md5":  "44da229fb354f6ff8a7a4cb5deec3bfa",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/waifucraft_1.21.1_2.2.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/waifucraft_1.21.1_2.2.jar",
                      "name":  "waifucraft_1.21.1_2.2",
                      "filename":  "waifucraft_1.21.1_2.2.jar"
                  },
                  {
                      "md5":  "f34264bf802a2c0050fcea56a204b25a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/waterframes-NEOFORGE-mc1.21.1-v2.1.22.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/waterframes-NEOFORGE-mc1.21.1-v2.1.22.jar",
                      "name":  "waterframes-NEOFORGE-mc1.21.1-v2.1.22",
                      "filename":  "waterframes-NEOFORGE-mc1.21.1-v2.1.22.jar"
                  },
                  {
                      "md5":  "e108d2e935ddfcb97e6674ad6225129d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Waves-1.21.x-1.6.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Waves-1.21.x-1.6.jar",
                      "name":  "Waves-1.21.x-1.6",
                      "filename":  "Waves-1.21.x-1.6.jar"
                  },
                  {
                      "md5":  "6b2ca5e70ba245a74a7cbe71dd0a41bb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/worldweaver-21.0.13.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/worldweaver-21.0.13.jar",
                      "name":  "worldweaver-21.0.13",
                      "filename":  "worldweaver-21.0.13.jar"
                  },
                  {
                      "md5":  "4fcfb12f3e187f788b3ab9aaa22eab33",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/wunderlib-21.0.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/wunderlib-21.0.8.jar",
                      "name":  "wunderlib-21.0.8",
                      "filename":  "wunderlib-21.0.8.jar"
                  },
                  {
-                     "md5":  "bb44c90c8bc60cac6caa07f504f5cf9f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/xaerominimap-neoforge-1.21.1-25.3.10.jar",
-                     "name":  "xaerominimap-neoforge-1.21.1-25.3.10",
-                     "filename":  "xaerominimap-neoforge-1.21.1-25.3.10.jar"
-                 },
-                 {
-                     "md5":  "e99d61c568fd117c23bd919afab39791",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/xaeroworldmap-neoforge-1.21.1-1.40.11.jar",
-                     "name":  "xaeroworldmap-neoforge-1.21.1-1.40.11",
-                     "filename":  "xaeroworldmap-neoforge-1.21.1-1.40.11.jar"
-                 },
-                 {
                      "md5":  "387b5dd0044a0d8869150d26bc45062d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/zombieawareness-neoforge-1.21.0-1.13.2.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/zombieawareness-neoforge-1.21.0-1.13.2.jar",
                      "name":  "zombieawareness-neoforge-1.21.0-1.13.2",
                      "filename":  "zombieawareness-neoforge-1.21.0-1.13.2.jar"
                  },
                  {
                      "md5":  "5bd972062fc471f5718aa8e3f54d9597",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Neoforge_imst-2.2.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Neoforge_imst-2.2.1.jar",
                      "name":  "[Neoforge]imst-2.2.1",
                      "filename":  "Neoforge_imst-2.2.1.jar"
                  },
                  {
                      "md5":  "bb631bd2ab3911745e21dd7ebb4d1296",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/autohud-8.11_1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/autohud-8.11_1.21.1-neoforge.jar",
                      "name":  "autohud-8.11+1.21.1-neoforge",
                      "filename":  "autohud-8.11_1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "59ee243a5ccd09fff1dd2879b3cad72a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/BadOptimizations-2.4.1-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/BadOptimizations-2.4.1-1.21.1.jar",
                      "name":  "BadOptimizations-2.4.1-1.21.1",
                      "filename":  "BadOptimizations-2.4.1-1.21.1.jar"
                  },
                  {
                      "md5":  "081882282efe6239ac294b2d1fe2cd22",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/betterfpsdist-1.21-6.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/betterfpsdist-1.21-6.0.jar",
                      "name":  "betterfpsdist-1.21-6.0",
                      "filename":  "betterfpsdist-1.21-6.0.jar"
                  },
                  {
                      "md5":  "5c9a90850267015ab7ff8d24a76f4d4a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/betterworldloadingnf21-1.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/betterworldloadingnf21-1.0.jar",
                      "name":  "betterworldloadingnf21-1.0",
                      "filename":  "betterworldloadingnf21-1.0.jar"
                  },
                  {
                      "md5":  "4fc3116b28fd099066b8c5e97edfedeb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/cinematiczoom-1.0.0-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/cinematiczoom-1.0.0-1.21.1.jar",
                      "name":  "cinematiczoom-1.0.0-1.21.1",
                      "filename":  "cinematiczoom-1.0.0-1.21.1.jar"
                  },
                  {
                      "md5":  "d223fde0ed1e216ce4f4379181d29faf",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/CleanF3-mc1.21.1-0.4.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/CleanF3-mc1.21.1-0.4.9.jar",
                      "name":  "CleanF3-mc1.21.1-0.4.9",
                      "filename":  "CleanF3-mc1.21.1-0.4.9.jar"
                  },
                  {
                      "md5":  "13e44da0d39e459e34c3ef6019ceb37a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/clientsort-neoforge-2.2.1_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/clientsort-neoforge-2.2.1_1.21.1.jar",
                      "name":  "clientsort-neoforge-2.2.1+1.21.1",
                      "filename":  "clientsort-neoforge-2.2.1_1.21.1.jar"
                  },
                  {
                      "md5":  "b0f9d9bd40b48aedf92c4d7f2aaf60bb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/drippyloadingscreen_neoforge_3.1.0_MC_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/drippyloadingscreen_neoforge_3.1.0_MC_1.21.1.jar",
                      "name":  "drippyloadingscreen_neoforge_3.1.0_MC_1.21.1",
                      "filename":  "drippyloadingscreen_neoforge_3.1.0_MC_1.21.1.jar"
                  },
                  {
                      "md5":  "e5ef3e5d37eedad79cf44897229fd8f2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/dynamic-fps-3.11.4_minecraft-1.21.0-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/dynamic-fps-3.11.4_minecraft-1.21.0-neoforge.jar",
                      "name":  "dynamic-fps-3.11.4+minecraft-1.21.0-neoforge",
                      "filename":  "dynamic-fps-3.11.4_minecraft-1.21.0-neoforge.jar"
                  },
                  {
                      "md5":  "1836ceb368199b0e1c777a44e0b68d9b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/enhanced-f3-1.0.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/enhanced-f3-1.0.1.jar",
                      "name":  "enhanced-f3-1.0.1",
                      "filename":  "enhanced-f3-1.0.1.jar"
                  },
                  {
                      "md5":  "ef1da268d5562d65d85da5af3c290a03",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/entityculling-neoforge-1.9.5-mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/entityculling-neoforge-1.9.5-mc1.21.1.jar",
                      "name":  "entityculling-neoforge-1.9.5-mc1.21.1",
                      "filename":  "entityculling-neoforge-1.9.5-mc1.21.1.jar"
                  },
                  {
                      "md5":  "e657e6b037a82733207f9a0664741011",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/entity_model_features_1.21-neoforge-3.0.12.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/entity_model_features_1.21-neoforge-3.0.12.jar",
                      "name":  "entity_model_features_1.21-neoforge-3.0.12",
                      "filename":  "entity_model_features_1.21-neoforge-3.0.12.jar"
                  },
                  {
                      "md5":  "488a07b9b5e7c367147507d044c69eab",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/entity_texture_features_1.21-neoforge-7.0.9.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/entity_texture_features_1.21-neoforge-7.0.9.jar",
                      "name":  "entity_texture_features_1.21-neoforge-7.0.9",
                      "filename":  "entity_texture_features_1.21-neoforge-7.0.9.jar"
                  },
                  {
                      "md5":  "32ef6216a5ae56a2016c8dc046c7fa76",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/fancymenu_neoforge_3.8.1_MC_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/fancymenu_neoforge_3.8.1_MC_1.21.1.jar",
                      "name":  "fancymenu_neoforge_3.8.1_MC_1.21.1",
                      "filename":  "fancymenu_neoforge_3.8.1_MC_1.21.1.jar"
                  },
                  {
                      "md5":  "dc4db71864c44bbece1d66c95c56ad95",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/fast-ip-ping-v1.0.8-mc1.21.1-neoforge.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/fast-ip-ping-v1.0.8-mc1.21.1-neoforge.jar",
                      "name":  "fast-ip-ping-v1.0.8-mc1.21.1-neoforge",
                      "filename":  "fast-ip-ping-v1.0.8-mc1.21.1-neoforge.jar"
                  },
                  {
                      "md5":  "96a47a7cff915294a949f73a5f2a8816",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/gpumemleakfix-1.21-1.8.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/gpumemleakfix-1.21-1.8.jar",
                      "name":  "gpumemleakfix-1.21-1.8",
                      "filename":  "gpumemleakfix-1.21-1.8.jar"
                  },
                  {
                      "md5":  "d6efbc897f7634bd121f51eee26041e4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/GPUTape-1.20.6-1.21x-1.0.3.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/GPUTape-1.20.6-1.21x-1.0.3.jar",
                      "name":  "GPUTape-1.20.6-1.21x-1.0.3",
                      "filename":  "GPUTape-1.20.6-1.21x-1.0.3.jar"
                  },
                  {
                      "md5":  "567bb6d9155070ad858740af12450c63",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ImmediatelyFast-NeoForge-1.6.10_1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ImmediatelyFast-NeoForge-1.6.10_1.21.1.jar",
                      "name":  "ImmediatelyFast-NeoForge-1.6.10+1.21.1",
                      "filename":  "ImmediatelyFast-NeoForge-1.6.10_1.21.1.jar"
                  },
                  {
                      "md5":  "d9cd9b91b9eb9508dc361316778c5d98",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/immersive_portals-6.0.7-all_1_.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/immersive_portals-6.0.7-all_1_.jar",
                      "name":  "immersive_portals-6.0.7-all (1)",
                      "filename":  "immersive_portals-6.0.7-all_1_.jar"
                  },
                  {
                      "md5":  "6c1122aa7c2b1a4f24831e394c5b513f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/iris-neoforge-1.8.12_mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/iris-neoforge-1.8.12_mc1.21.1.jar",
                      "name":  "iris-neoforge-1.8.12+mc1.21.1",
                      "filename":  "iris-neoforge-1.8.12_mc1.21.1.jar"
                  },
                  {
                      "md5":  "0a5d1ff16496d2bc72305053af3e3077",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Ping-Wheel-1.12.1-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Ping-Wheel-1.12.1-neoforge-1.21.1.jar",
                      "name":  "Ping-Wheel-1.12.1-neoforge-1.21.1",
                      "filename":  "Ping-Wheel-1.12.1-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "1434047357307adf16e8bbe8e9f9796c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/punchy-2.3-neoforge-1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/punchy-2.3-neoforge-1.21.1.jar",
                      "name":  "punchy-2.3-neoforge-1.21.1",
                      "filename":  "punchy-2.3-neoforge-1.21.1.jar"
                  },
                  {
                      "md5":  "029066a0d7b4b77d84ed4337015139f2",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/reimagined-intro-1.0.0_2_.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/reimagined-intro-1.0.0_2_.jar",
                      "name":  "reimagined-intro-1.0.0 (2)",
                      "filename":  "reimagined-intro-1.0.0_2_.jar"
                  },
                  {
                      "md5":  "ad268857a7089870b6794ac4a834760a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Resourcify_1.21.1-neoforge_-1.8.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Resourcify_1.21.1-neoforge_-1.8.0.jar",
                      "name":  "Resourcify (1.21.1-neoforge)-1.8.0",
                      "filename":  "Resourcify_1.21.1-neoforge_-1.8.0.jar"
                  },
                  {
                      "md5":  "f48ff42396d4c59ee205b8127d1fe540",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/ShoulderSurfing-NeoForge-1.21.1-4.21.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/ShoulderSurfing-NeoForge-1.21.1-4.21.0.jar",
                      "name":  "ShoulderSurfing-NeoForge-1.21.1-4.21.0",
                      "filename":  "ShoulderSurfing-NeoForge-1.21.1-4.21.0.jar"
                  },
                  {
                      "md5":  "e5018c782d851fea76be0205b7616e5d",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/sodium-neoforge-0.6.13_mc1.21.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/sodium-neoforge-0.6.13_mc1.21.1.jar",
                      "name":  "sodium-neoforge-0.6.13+mc1.21.1",
                      "filename":  "sodium-neoforge-0.6.13_mc1.21.1.jar"
                  },
                  {
                      "md5":  "4ca5e7c3b8bca1416e1e12c050038cee",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/SubtleEffects-neoforge-1.21.1-1.13.2-hotfix.1.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/SubtleEffects-neoforge-1.21.1-1.13.2-hotfix.1.jar",
                      "name":  "SubtleEffects-neoforge-1.21.1-1.13.2-hotfix.1",
                      "filename":  "SubtleEffects-neoforge-1.21.1-1.13.2-hotfix.1.jar"
                  },
                  {
                      "md5":  "9bdb93be88fe495613e3ece5585498a1",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/Too_Many_Entities_1.21.1_NeoForge_v1.2.0.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/Too_Many_Entities_1.21.1_NeoForge_v1.2.0.jar",
                      "name":  "Too Many Entities 1.21.1 NeoForge v1.2.0",
                      "filename":  "Too_Many_Entities_1.21.1_NeoForge_v1.2.0.jar"
                  },
                  {
                      "md5":  "4a09ad3ea22ad258802605b8aa929bbd",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1805/watermedia-2.1.37.jar",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/watermedia-2.1.37.jar",
                      "name":  "watermedia-2.1.37",
                      "filename":  "watermedia-2.1.37.jar"
+                 },
+                 {
+                     "md5":  "bb44c90c8bc60cac6caa07f504f5cf9f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/xaerominimap-neoforge-1.21.1-25.3.10.jar",
+                     "name":  "xaerominimap-neoforge-1.21.1-25.3.10",
+                     "filename":  "xaerominimap-neoforge-1.21.1-25.3.10.jar"
+                 },
+                 {
+                     "md5":  "e99d61c568fd117c23bd919afab39791",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.2.2-1822/xaeroworldmap-neoforge-1.21.1-1.40.11.jar",
+                     "name":  "xaeroworldmap-neoforge-1.21.1-1.40.11",
+                     "filename":  "xaeroworldmap-neoforge-1.21.1-1.40.11.jar"
                  }
              ],
     "serverIP":  "200.117.208.146",
