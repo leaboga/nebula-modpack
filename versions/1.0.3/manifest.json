@@ -1,6 +1,6 @@
 ﻿{
     "version":  "1.0.3",
-    "label":  "v1.0.3 (10/03 00:54)",
+    "label":  "v1.0.3 (10/03 00:57)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1112,16 +1112,10 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/xaeroworldmap-neoforge-1.21.1-1.40.11.jar"
                  },
                  {
-                     "name":  "bygone-neoforge-1.21.1-2.1",
-                     "filename":  "bygone-neoforge-1.21.1-2.1.jar",
-                     "md5":  "ac4570dfd7ae13d9e327cb64b9258a8c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.3-0054/bygone-neoforge-1.21.1-2.1.jar"
-                 },
-                 {
                      "name":  "dynamiclights-v1.9.1-mc1.17-1.21.11-mod",
                      "filename":  "dynamiclights-v1.9.1-mc1.17-1.21.11-mod.jar",
                      "md5":  "0682f55a19380eef6bc85cfec486d38e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.3-0054/dynamiclights-v1.9.1-mc1.17-1.21.11-mod.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.3-0057/dynamiclights-v1.9.1-mc1.17-1.21.11-mod.jar"
                  }
              ]
 }
