@@ -1,6 +1,6 @@
 ﻿{
     "version":  "1.0.6",
-    "label":  "v1.0.6 (13/03 15:13)",
+    "label":  "v1.0.6 (13/03 15:14)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1187,25 +1187,31 @@
                      "name":  "aether-1.21.1-1.5.10-neoforge",
                      "filename":  "aether-1.21.1-1.5.10-neoforge.jar",
                      "md5":  "457006464bfb2c19d5323e2d97407b17",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1513/aether-1.21.1-1.5.10-neoforge.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1514/aether-1.21.1-1.5.10-neoforge.jar"
+                 },
+                 {
+                     "name":  "owo-lib-neoforge-0.12.15.5-beta.1+1.21",
+                     "filename":  "owo-lib-neoforge-0.12.15.5-beta.1_1.21.jar",
+                     "md5":  "4c8323c3d0493f7e82a2287e5ca9df7f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1514/owo-lib-neoforge-0.12.15.5-beta.1_1.21.jar"
                  },
                  {
                      "name":  "potentials-neoforge-1.21-0.7.1",
                      "filename":  "potentials-neoforge-1.21-0.7.1.jar",
                      "md5":  "9073f8120305fc24e4cbeeffb86b4349",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1513/potentials-neoforge-1.21-0.7.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1514/potentials-neoforge-1.21-0.7.1.jar"
                  },
                  {
                      "name":  "sky_aesthetics-neoforge-2.0.12-beta",
                      "filename":  "sky_aesthetics-neoforge-2.0.12-beta.jar",
                      "md5":  "827f7ed9f7b632acbaacd226ff099cfa",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1513/sky_aesthetics-neoforge-2.0.12-beta.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1514/sky_aesthetics-neoforge-2.0.12-beta.jar"
                  },
                  {
                      "name":  "stellaris-1.21-neoforge-1.4.21",
                      "filename":  "stellaris-1.21-neoforge-1.4.21.jar",
                      "md5":  "5436e8ff2a1354ce757b276c9e609d2e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1513/stellaris-1.21-neoforge-1.4.21.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.6-1514/stellaris-1.21-neoforge-1.4.21.jar"
                  }
              ]
 }
