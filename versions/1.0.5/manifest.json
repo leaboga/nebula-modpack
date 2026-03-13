@@ -1,6 +1,6 @@
 ﻿{
     "version":  "1.0.5",
-    "label":  "v1.0.5 (13/03 13:52)",
+    "label":  "v1.0.5 (13/03 13:57)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1133,55 +1133,55 @@
                      "name":  "c2me-fabric-mc1.21.1-0.3.0+alpha.0.362",
                      "filename":  "c2me-fabric-mc1.21.1-0.3.0_alpha.0.362.jar",
                      "md5":  "5c6dddda91faaf504f9cd96407f8855b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/c2me-fabric-mc1.21.1-0.3.0_alpha.0.362.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/c2me-fabric-mc1.21.1-0.3.0_alpha.0.362.jar"
                  },
                  {
                      "name":  "cave_dweller-1.1b-hotfix-1",
                      "filename":  "cave_dweller-1.1b-hotfix-1.jar",
                      "md5":  "2c9bebbadb1655dce210f4a15c32e8ef",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/cave_dweller-1.1b-hotfix-1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/cave_dweller-1.1b-hotfix-1.jar"
                  },
                  {
                      "name":  "chunksending-1.21-2.8",
                      "filename":  "chunksending-1.21-2.8.jar",
                      "md5":  "26ab7a25a7796c562b743cd19ad12ad0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/chunksending-1.21-2.8.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/chunksending-1.21-2.8.jar"
                  },
                  {
                      "name":  "clientcrafting-1.21-1.9",
                      "filename":  "clientcrafting-1.21-1.9.jar",
                      "md5":  "96fb17a147d2d8e21fbb0bf3f511afcb",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/clientcrafting-1.21-1.9.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/clientcrafting-1.21-1.9.jar"
                  },
                  {
                      "name":  "CMESuckMyDuck-1.1.1",
                      "filename":  "CMESuckMyDuck-1.1.1.jar",
                      "md5":  "63de96957a472b9a23000c5106382274",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/CMESuckMyDuck-1.1.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/CMESuckMyDuck-1.1.1.jar"
                  },
                  {
                      "name":  "leaky-1.21-2.4",
                      "filename":  "leaky-1.21-2.4.jar",
                      "md5":  "ae878840fd20ad1add5f781736d2ed97",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/leaky-1.21-2.4.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/leaky-1.21-2.4.jar"
                  },
                  {
                      "name":  "limitedchunks-1.21-4.1",
                      "filename":  "limitedchunks-1.21-4.1.jar",
                      "md5":  "ab430864559bd8b7a3c7ccf8e024ef19",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/limitedchunks-1.21-4.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/limitedchunks-1.21-4.1.jar"
                  },
                  {
                      "name":  "OpenLoader-neoforge-1.21.1-21.1.5",
                      "filename":  "OpenLoader-neoforge-1.21.1-21.1.5.jar",
                      "md5":  "1606e20d17ec0fa117cd6cabfea2c532",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/OpenLoader-neoforge-1.21.1-21.1.5.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/OpenLoader-neoforge-1.21.1-21.1.5.jar"
                  },
                  {
                      "name":  "smoothmovement-1.21.1-2.7",
                      "filename":  "smoothmovement-1.21.1-2.7.jar",
                      "md5":  "0f682ecbea91b87745d6d6158379982c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1352/smoothmovement-1.21.1-2.7.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.5-1357/smoothmovement-1.21.1-2.7.jar"
                  }
              ]
 }
