@@ -59,7 +59,7 @@
 
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Mod Hub" Foreground="White" FontSize="26" FontWeight="Black"/>
-                <TextBlock Text="BUSCAR CONTENIDO EN MODRINTH" Foreground="#6B5E8A" FontSize="10" FontWeight="Bold" Margin="2,2,0,0" CharacterSpacing="100"/>
+                <TextBlock Text="BUSCAR CONTENIDO EN MODRINTH" Foreground="#6B5E8A" FontSize="10" FontWeight="Bold" Margin="2,2,0,0"/>
                 
                 <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
                     <RadioButton x:Name="FilterMods" Content="📦 Mods" IsChecked="True" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,12,0" Padding="12,6"/>
