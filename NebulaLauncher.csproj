@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>nebula.ico</ApplicationIcon>
+		<Version>1.5.1</Version>
+		<Authors>Leandro (Nebula Team)</Authors>
+		<Company>Nebula Launcher Project</Company>
+		<Product>Nebula Launcher</Product>
+		<Description>High Performance Modern Minecraft Launcher</Description>
+		<Copyright>Copyright © 2026 Nebula Project</Copyright>
+		
+		<AssemblyVersion>1.5.1.0</AssemblyVersion>
+		<FileVersion>1.5.1.0</FileVersion>
+		
+		<!-- Visuals for EXE -->
+		<ApplicationIcon>nebula.ico</ApplicationIcon>
+		
+		<!-- Publication Settings -->
+		<SelfContained>true</SelfContained>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishReadyToRun>true</PublishReadyToRun>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Resource Include="nebula.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CmlLib.Core" Version="4.0.6" />
+		<PackageReference Include="CmlLib.Core.Auth.Microsoft" Version="3.3.1" />
+		<PackageReference Include="CmlLib.Core.Installer.Forge" Version="1.1.1" />
+		<PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
+		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3800.47" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Tomlyn" Version="0.20.0" />
+	</ItemGroup>
+
+</Project>

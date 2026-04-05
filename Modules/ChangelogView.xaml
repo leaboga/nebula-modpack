@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="NebulaLauncher.Modules.ChangelogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0A0714" Offset="0"/>
+            <GradientStop Color="#0F0B1A" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+
+    <Grid Margin="40,36,40,28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,28">
+            <TextBlock Text="Novedades"
+                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="HISTORIAL DE CAMBIOS"
+                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Loading indicator -->
+        <TextBlock x:Name="LoadingText" Grid.Row="1"
+                   Text="â³ Cargando novedades..."
+                   Foreground="#4A4266" FontSize="13"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <!-- Changelog list -->
+        <ScrollViewer Grid.Row="1" x:Name="ChangelogScroll"
+                      VerticalScrollBarVisibility="Auto"
+                      Visibility="Collapsed">
+            <StackPanel x:Name="ChangelogPanel" Margin="0,0,8,0"/>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
