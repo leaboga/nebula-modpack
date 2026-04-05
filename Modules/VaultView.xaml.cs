@@ -47,15 +47,22 @@ namespace NebulaLauncher.Modules
 
         public VaultView(string gameFolder, MinecraftProfile? profile = null)
         {
-            InitializeComponent();
-            _gameFolder = gameFolder;
-            _profile = profile;
-            ResultsList.ItemsSource = _results;
+            try
+            {
+                InitializeComponent();
+                _gameFolder = gameFolder;
+                _profile = profile;
+                ResultsList.ItemsSource = _results;
 
-            if (!_http.DefaultRequestHeaders.Contains("User-Agent"))
-                _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher-Stable-v2");
+                if (!_http.DefaultRequestHeaders.Contains("User-Agent"))
+                    _http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NebulaLauncher/1.5");
 
-            _ = SearchModrinth("");
+                _ = SearchModrinth("");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al inicializar Mod Hub: " + ex.Message);
+            }
         }
 
         private void FilterType_Changed(object sender, RoutedEventArgs e)
@@ -122,6 +129,17 @@ namespace NebulaLauncher.Modules
 
                 var json = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<dynamic>(json);
+                
+                // Fallback: Si no hay hits, reintentar sin filtros de versión/categoría
+                if (data == null || data.hits == null || data.hits.Count == 0)
+                {
+                    Debug.WriteLine("[ModHub] No results with filters, retrying without filters...");
+                    string simpleFacets = $"[[\"project_type:{_currentType}\"]]";
+                    string simpleUrl = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(simpleFacets)}&limit=40";
+                    json = await _http.GetStringAsync(simpleUrl);
+                    data = JsonConvert.DeserializeObject<dynamic>(json);
+                }
+
                 if (data == null || data.hits == null) return;
 
                 var installDir = GetInstallDir();
