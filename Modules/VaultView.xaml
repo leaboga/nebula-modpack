@@ -4,29 +4,7 @@
              Background="Transparent">
 
     <UserControl.Resources>
-        <!-- Animaciones -->
-        <Storyboard x:Key="FadeInSlideUp">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.4"/>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="20" To="0" Duration="0:0:0.4">
-                <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-
-        <Storyboard x:Key="FlyoutOpen">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.4">
-                <DoubleAnimation.EasingFunction><ExponentialEase EasingMode="EaseOut" Exponent="5"/></DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Key="FlyoutClose">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="500" Duration="0:0:0.3">
-                <DoubleAnimation.EasingFunction><ExponentialEase EasingMode="EaseIn" Exponent="5"/></DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-
-        <Storyboard x:Key="SkeletonAnimation" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.3" To="1.0" Duration="0:1.0" AutoReverse="True"/>
-        </Storyboard>
-        
+        <!-- Inyectamos BoolToVis localmente para máxima seguridad -->
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
         <Style x:Key="GlassCard" TargetType="Border">
@@ -42,29 +20,30 @@
         </Style>
     </UserControl.Resources>
 
-    <!-- CUADRÍCULA MAESTRA -->
-    <Grid>
-        <Grid x:Name="VaultRoot" Margin="24,18">
+    <Grid x:Name="VaultRoot">
+        <Grid Margin="24,18">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- FILA 0: CABECERA -->
+            <!-- HEADER -->
             <Grid Grid.Row="0" Margin="0,0,0,24">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="🌌 HUB NEBULAR" Foreground="White" FontSize="26" FontWeight="Black"/>
                     <Border Background="#207C3AED" CornerRadius="8" Padding="12,4" Margin="20,0,0,0">
-                        <TextBlock x:Name="TxtInfo" Text="MODS &amp; SHADERS" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold"/>
+                        <TextBlock Text="MODS &amp; SHADERS" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold"/>
                     </Border>
-                    <Button Content="🔄 Actualizar" Margin="20,0,0,0" Style="{StaticResource SecondaryButton}" Height="32" Click="BtnRefresh_Click"/>
+                    <Button Content="🔄 Actualizar" Margin="20,0,0,0" Style="{DynamicResource SecondaryButton}" Height="32" Click="BtnRefresh_Click"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <RadioButton x:Name="FilterMods" Content="Mods" IsChecked="True" Style="{StaticResource ModernToggle}" Margin="0,0,8,0" Click="FilterType_Changed"/>
-                    <RadioButton x:Name="FilterShaders" Content="Shaders" Style="{StaticResource ModernToggle}" Margin="0,0,8,0" Click="FilterType_Changed"/>
-                    <RadioButton x:Name="FilterResourcePacks" Content="Packs" Style="{StaticResource ModernToggle}" Margin="0,0,16,0" Click="FilterType_Changed"/>
-                    <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{StaticResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,0" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
+                    <!-- Cambiado de ModernToggle a ToggleTab -->
+                    <RadioButton x:Name="FilterMods" Content="Mods" IsChecked="True" Style="{DynamicResource ToggleTab}" Margin="0,0,8,0" Click="FilterType_Changed"/>
+                    <RadioButton x:Name="FilterShaders" Content="Shaders" Style="{DynamicResource ToggleTab}" Margin="0,0,8,0" Click="FilterType_Changed"/>
+                    <RadioButton x:Name="FilterResourcePacks" Content="Packs" Style="{DynamicResource ToggleTab}" Margin="0,0,16,0" Click="FilterType_Changed"/>
+                    
+                    <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,0" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
                     
                     <Border Background="#1A1528" CornerRadius="12" Width="200" BorderBrush="#2E2648" BorderThickness="1" Margin="12,0,0,0">
                         <Grid>
@@ -73,7 +52,7 @@
                         </Grid>
                     </Border>
                     
-                    <ComboBox x:Name="SortCombo" Width="140" Style="{StaticResource ModernComboBox}" Margin="12,0,0,0" SelectionChanged="SortCombo_SelectionChanged">
+                    <ComboBox x:Name="SortCombo" Width="140" Style="{DynamicResource ModernComboBox}" Margin="12,0,0,0" SelectionChanged="SortCombo_SelectionChanged">
                         <ComboBoxItem Content="Relevancia" Tag="relevance" IsSelected="True"/>
                         <ComboBoxItem Content="Descargas" Tag="downloads"/>
                         <ComboBoxItem Content="Recientes" Tag="newest"/>
@@ -81,7 +60,7 @@
                 </StackPanel>
             </Grid>
 
-            <!-- FILA 1: CUERPO (SIDEBAR + RESULTADOS) -->
+            <!-- CUERPO -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="220"/>
@@ -115,7 +94,7 @@
                                     <TextBlock Text="Local" Foreground="#7B6FA0" FontSize="11"/>
                                     <TextBlock x:Name="TxtTotalWeight" Text="0 MB" Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right"/>
                                 </Grid>
-                                <ProgressBar x:Name="WeightProgress" Height="4" Value="0" Maximum="1000" Foreground="#7C3AED" Background="#1A1528" BorderThickness="0" Margin="0,4"/>
+                                <ProgressBar x:Name="WeightProgress" Height="4" Value="0" Maximum="1000" Style="{DynamicResource AppleProgress}" Margin="0,4"/>
                                 <TextBlock x:Name="TxtWeightStatus" Text="Carga Óptima" Foreground="#10B981" FontSize="9" Margin="0,6,0,0"/>
                             </StackPanel>
                         </Border>
@@ -125,58 +104,55 @@
                 <!-- RESULTADOS -->
                 <Border Grid.Column="1" Background="#0A0815" CornerRadius="22" BorderBrush="#1E1A2E" BorderThickness="1" ClipToBounds="True">
                     <Grid>
-                        <!-- Skeleton -->
                         <ScrollViewer x:Name="SkeletonPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Hidden" Padding="14">
                             <WrapPanel HorizontalAlignment="Center">
-                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
-                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12"/>
+                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12"/>
                             </WrapPanel>
                         </ScrollViewer>
 
-                        <!-- Mods -->
                         <ScrollViewer x:Name="ResultsScroll" VerticalScrollBarVisibility="Auto" Padding="14">
                             <StackPanel>
                                 <ItemsControl x:Name="ResultsList">
                                     <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel HorizontalAlignment="Center"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Style="{StaticResource GlassCard}" MouseLeftButtonUp="Card_MouseLeftButtonUp" Loaded="Card_Loaded">
+                                            <Border Style="{StaticResource GlassCard}" MouseLeftButtonUp="Card_MouseLeftButtonUp">
                                                 <Grid Margin="18">
                                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                                     <Border Width="90" Height="90" CornerRadius="24" Background="#161125">
                                                         <Image Source="{Binding IconUrl}" Stretch="UniformToFill"/>
                                                     </Border>
                                                     <StackPanel Grid.Row="1" Margin="0,12,0,0">
-                                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextWrapping="Wrap" MaxHeight="50"/>
+                                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="50"/>
                                                         <TextBlock Text="{Binding Author}" Foreground="#A78BFA" FontSize="11" HorizontalAlignment="Center" Margin="0,4"/>
                                                         <TextBlock Text="{Binding DownloadsText}" Foreground="#C4B5FD" FontSize="12" HorizontalAlignment="Center" FontWeight="Bold"/>
                                                     </StackPanel>
-                                                    <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{StaticResource PlayButton}" Background="{Binding ButtonBrush}" Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="40" Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
+                                                    <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{DynamicResource PlayButton}" Background="{Binding ButtonBrush}" Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="40" Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                                 <StackPanel x:Name="PaginationPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20" Visibility="Collapsed">
-                                    <Button Content="«" Style="{StaticResource SecondaryButton}" Width="40" Click="BtnPrevPage_Click"/>
+                                    <Button Content="«" Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnPrevPage_Click"/>
                                     <TextBlock x:Name="TxtPage" Text="1" VerticalAlignment="Center" Margin="15,0" Foreground="White" FontWeight="Bold"/>
-                                    <Button Content="»" Style="{StaticResource SecondaryButton}" Width="40" Click="BtnNextPage_Click"/>
+                                    <Button Content="»" Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnNextPage_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </ScrollViewer>
 
-                        <!-- Locales -->
                         <ScrollViewer x:Name="LocalScroll" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" Padding="20">
                             <ItemsControl x:Name="LocalList">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Background="#161125" CornerRadius="12" Margin="0,0,0,10" Padding="16" BorderBrush="#2E2648" BorderThickness="1">
                                             <Grid>
-                                                <StackPanel>
+                                                <StackPanel VerticalAlignment="Center">
                                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                                     <TextBlock Text="{Binding SizeText}" Foreground="#7B6FA0" FontSize="11"/>
                                                 </StackPanel>
-                                                <Button HorizontalAlignment="Right" Content="🗑️" Style="{StaticResource SecondaryButton}" Tag="{Binding FilePath}" Click="DeleteFileBtn_Click"/>
+                                                <Button HorizontalAlignment="Right" Content="🗑️" Style="{DynamicResource SecondaryButton}" Tag="{Binding FilePath}" Click="DeleteFileBtn_Click"/>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>
@@ -184,7 +160,6 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <!-- Vacío -->
                         <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
                             <TextBlock Text="🌌" FontSize="48" HorizontalAlignment="Center" Opacity="0.5"/>
                             <TextBlock Text="Vacío Cósmico" Foreground="#C4B5FD" FontSize="18" HorizontalAlignment="Center"/>
@@ -194,12 +169,12 @@
             </Grid>
         </Grid>
 
-        <!-- FLYOUT (FUERA DEL GRID DE CONTENIDO) -->
+        <!-- FLYOUT -->
         <Border x:Name="DetailFlyout" Background="#0A0815" BorderBrush="#2E2648" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Width="480" Visibility="Collapsed">
             <Border.RenderTransform><TranslateTransform X="480"/></Border.RenderTransform>
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-                <Button Margin="20" Content="✕" Style="{StaticResource TitleBarButton}" Width="32" Click="CloseFlyout_Click" HorizontalAlignment="Left"/>
+                <Button Margin="20" Content="✕" Style="{DynamicResource TitleBarButton}" Width="32" Click="CloseFlyout_Click" HorizontalAlignment="Left"/>
                 <ScrollViewer Grid.Row="1" Padding="24">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
