@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "1.5.2";
+        private const string CurrentLauncherVersion = "1.5.3";
         private const string UpdateCheckUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/version.json";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -872,6 +872,11 @@ namespace NebulaLauncher
                 if (RamLabel != null) RamLabel.Text = $"{RamSlider.Value} GB";
                 RamSlider.ValueChanged += RamSlider_ValueChanged;
             }
+
+            // Reload active module to apply new GameFolder
+            if (ModulesContainer?.Content is ModManagerView) SwitchToModule(new ModManagerView(GameFolder));
+            else if (ModulesContainer?.Content is VaultView) SwitchToModule(new VaultView(GameFolder, CurrentProfile));
+            else if (ModulesContainer?.Content is ScreenshotsView) SwitchToModule(new ScreenshotsView(GameFolder));
         }
 
         private void InitializeProfileServices()
@@ -942,6 +947,7 @@ namespace NebulaLauncher
 
                 Dispatcher.Invoke(() =>
                 {
+                    VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
                     VersionComboBox.Items.Clear();
                     foreach (var v in _versionsIndex.AvailableVersions) VersionComboBox.Items.Add(v.Label);
                     int savedIdx = _versionsIndex.AvailableVersions.FindIndex(v => v.Version == (CurrentProfile?.LastVersion ?? ""));
@@ -949,7 +955,7 @@ namespace NebulaLauncher
                     VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
                 });
 
-                await CargarManifest(0);
+                await CargarManifest(VersionComboBox.SelectedIndex >= 0 ? VersionComboBox.SelectedIndex : 0);
             }
             catch (Exception ex) { AgregarLog($"⚠ Error cargando versiones: {ex.Message}"); }
         }

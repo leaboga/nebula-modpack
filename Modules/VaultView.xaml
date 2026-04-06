@@ -4,194 +4,376 @@
              Background="Transparent">
 
     <UserControl.Resources>
-        <Storyboard x:Key="FadeIn">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6"/>
+        <!-- Animations -->
+        <Storyboard x:Key="FadeInSlideUp">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="20" To="0" Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
 
-        <!-- Premium Content Card -->
-        <Style x:Key="ContentCard" TargetType="Border">
-            <Setter Property="Background" Value="#110F1A"/>
-            <Setter Property="CornerRadius" Value="20"/>
-            <Setter Property="BorderBrush" Value="#1E1A2E"/>
+        <Storyboard x:Key="FlyoutOpen">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut" Exponent="5"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="FlyoutClose">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="500" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseIn" Exponent="5"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Skeleton Brush -->
+        <LinearGradientBrush x:Key="SkeletonBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1A1528" Offset="0.0" />
+            <GradientStop Color="#2E2648" Offset="0.5" x:Name="SkeletonGradientMid" />
+            <GradientStop Color="#1A1528" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <Storyboard x:Key="SkeletonAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="SkeletonGradientMid" Storyboard.TargetProperty="Offset" From="-0.5" To="1.5" Duration="0:0:1.5"/>
+        </Storyboard>
+        
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+        <Style x:Key="GlassCard" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#1A1528" Offset="0"/>
+                        <GradientStop Color="#0A0815" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="BorderBrush" Value="#2E2648"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Width" Value="230"/>
-            <Setter Property="Height" Value="340"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="360"/>
             <Setter Property="Margin" Value="12"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform Y="0"/>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#7C3AED88"/>
-                    <Setter Property="Background" Value="#151121"/>
-                    <Setter Property="RenderTransform">
+                    <Setter Property="BorderBrush" Value="#7C3AED"/>
+                    <Setter Property="Background">
                         <Setter.Value>
-                            <TranslateTransform Y="-4"/>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#231D35" Offset="0"/>
+                                <GradientStop Color="#0F0B1A" Offset="1"/>
+                            </LinearGradientBrush>
                         </Setter.Value>
                     </Setter>
                 </Trigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="-6" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="0" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
             </Style.Triggers>
-        </Style>
-
-        <Style x:Key="PremiumBtn" TargetType="Button">
-            <Setter Property="Background" Value="#7C3AED"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="12">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Opacity" Value="0.9"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="bd" Property="Background" Value="#1A1528"/>
-                                <Setter Property="Foreground" Value="#4A4266"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="24,18">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid Margin="24,18" x:Name="MainContentGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Modern Hub Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Mod Hub" Foreground="White" FontSize="28" FontWeight="Black" LetterSpacing="1"/>
-                <TextBlock Text="RED GALÁCTICA DE CONTENIDO" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,2,0,0" CharacterSpacing="120"/>
+            <!-- Header Premium -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 
-                <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                    <RadioButton x:Name="FilterMods" Content="📦 Mods" IsChecked="True" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
-                    <RadioButton x:Name="FilterShaders" Content="✨ Shaders" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
-                    <RadioButton x:Name="FilterResourcePacks" Content="🎨 Packs" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="Nexus Hub" Foreground="White" FontSize="34" FontWeight="Black">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#7C3AED" BlurRadius="20" Opacity="0.5" ShadowDepth="0"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="EXPERIENCIA PREMIUM DE CONTENIDO" Foreground="#7B6FA0" FontSize="10" FontWeight="Bold" Margin="2,2,0,0"/>
                     
-                    <Border Width="1" Height="16" Background="#1E1A2E" Margin="10,0"/>
-                    
-                    <ToggleButton x:Name="FilterInstalled" Content="📂 Local" Style="{StaticResource ToggleTabButton}" 
-                                  Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed" Margin="10,0,0,0"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Border Background="#100D1A" CornerRadius="12" BorderBrush="#1E1A2E" BorderThickness="1" Height="40" Width="260">
-                    <Grid>
-                        <TextBox x:Name="SearchBox" Background="Transparent" BorderThickness="0" Foreground="White" VerticalAlignment="Center" Margin="14,0" 
-                                 KeyDown="SearchBox_KeyDown" FontSize="13" Tag="Buscar..."/>
-                        <Button HorizontalAlignment="Right" Content="🔍" Background="Transparent" BorderThickness="0" Foreground="#4A4266" Width="36" Cursor="Hand" Click="BtnSearch_Click"/>
-                    </Grid>
-                </Border>
-            </StackPanel>
-        </Grid>
-
-        <!-- Main Display -->
-        <Border Grid.Row="1" Background="#0A0815" CornerRadius="20" BorderBrush="#1E1A2E" BorderThickness="1" ClipToBounds="True">
-            <Grid>
-                <!-- Loading -->
-                <StackPanel x:Name="LoadingPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-                    <ProgressBar IsIndeterminate="True" Width="100" Height="2" Style="{StaticResource AppleProgress}" Margin="0,0,0,12"/>
-                    <TextBlock x:Name="LoadingLabel" Text="Iniciando enlace con Modrinth..." Foreground="#4A4266" FontSize="12" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                        <RadioButton x:Name="FilterMods" Content="📦 Mods" IsChecked="True" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
+                        <RadioButton x:Name="FilterShaders" Content="✨ Shaders" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
+                        <RadioButton x:Name="FilterResourcePacks" Content="🎨 Packs" Checked="FilterType_Changed" Style="{StaticResource ToggleTab}" Margin="0,0,10,0"/>
+                        
+                        <Border Width="1" Height="16" Background="#2E2648" Margin="10,0"/>
+                        
+                        <ToggleButton x:Name="FilterInstalled" Content="📂 Locales" Style="{StaticResource ToggleTabButton}" 
+                                      Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed" Margin="10,0,0,0"/>
+                    </StackPanel>
                 </StackPanel>
 
-                <!-- Results -->
-                <ScrollViewer x:Name="ResultsScroll" VerticalScrollBarVisibility="Auto" Padding="14">
-                    <ItemsControl x:Name="ResultsList">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel HorizontalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Style="{StaticResource ContentCard}">
-                                    <Grid Margin="14">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                <StackPanel Grid.Column="2" VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <ComboBox x:Name="SortCombo" Width="140" Margin="0,0,12,0" SelectionChanged="SortCombo_SelectionChanged" Style="{StaticResource ModernComboBox}">
+                        <ComboBoxItem Content="Relevancia" Tag="relevance" IsSelected="True"/>
+                        <ComboBoxItem Content="Descargas" Tag="downloads"/>
+                        <ComboBoxItem Content="Novedades" Tag="newest"/>
+                        <ComboBoxItem Content="Actualizados" Tag="updated"/>
+                    </ComboBox>
 
-                                        <Border Width="80" Height="80" CornerRadius="18" Background="#0C0A15" Margin="0,0,0,14" BorderBrush="#1E1A2E" BorderThickness="1">
-                                            <Grid>
-                                                <Image Source="{Binding IconUrl}" Stretch="UniformToFill">
-                                                    <Image.OpacityMask>
-                                                        <VisualBrush>
-                                                            <VisualBrush.Visual>
-                                                                <Border Background="Black" CornerRadius="18" Width="80" Height="80"/>
-                                                            </VisualBrush.Visual>
-                                                        </VisualBrush>
-                                                    </Image.OpacityMask>
-                                                </Image>
-                                                <Border Background="#10B981" CornerRadius="10" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-6,-6" 
-                                                        Visibility="{Binding IsInstalledVisibility}">
-                                                    <TextBlock Text="✓" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
+                    <ComboBox x:Name="CategoryCombo" Width="140" Margin="0,0,12,0" SelectionChanged="CategoryCombo_SelectionChanged" Style="{StaticResource ModernComboBox}">
+                        <ComboBoxItem Content="Todas las Categorías" Tag="" IsSelected="True"/>
+                        <ComboBoxItem Content="Optimización" Tag="optimization"/>
+                        <ComboBoxItem Content="Tecnología" Tag="technology"/>
+                        <ComboBoxItem Content="Magia" Tag="magic"/>
+                        <ComboBoxItem Content="Aventura" Tag="adventure"/>
+                        <ComboBoxItem Content="Utilidad" Tag="utility"/>
+                    </ComboBox>
+
+                    <Border Background="#1A1528" CornerRadius="12" BorderBrush="#2E2648" BorderThickness="1" Height="42" Width="260">
+                        <Grid>
+                            <TextBox x:Name="SearchBox" Background="Transparent" BorderThickness="0" Foreground="White" VerticalAlignment="Center" Margin="14,0,40,0" 
+                                     KeyDown="SearchBox_KeyDown" FontSize="13" Tag="Buscar en el cosmos..."/>
+                            <Button HorizontalAlignment="Right" Content="🔍" Background="Transparent" BorderThickness="0" Foreground="#7B6FA0" Width="40" Cursor="Hand" Click="BtnSearch_Click"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <!-- Área de Resultados -->
+            <Border Grid.Row="1" Background="#0A0815" CornerRadius="22" BorderBrush="#1E1A2E" BorderThickness="1" ClipToBounds="True">
+                <Grid>
+                    <!-- Skeleton View (Animado en código) -->
+                    <ScrollViewer x:Name="SkeletonPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Hidden" Padding="14">
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                        </WrapPanel>
+                    </ScrollViewer>
+
+                    <!-- Lista de Modrinth -->
+                    <ScrollViewer x:Name="ResultsScroll" VerticalScrollBarVisibility="Auto" Padding="14">
+                        <StackPanel>
+                            <ItemsControl x:Name="ResultsList">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Center"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource GlassCard}" MouseLeftButtonUp="Card_MouseLeftButtonUp" Loaded="Card_Loaded">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#000000" Opacity="0.5" BlurRadius="25" ShadowDepth="8"/>
+                                            </Border.Effect>
+                                            <Grid Margin="18">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!-- Ícono Premium y Badge -->
+                                                <Grid Height="90" Margin="0,0,0,16">
+                                                    <Border Width="90" Height="90" CornerRadius="24" Background="#161125" BorderBrush="#2E2648" BorderThickness="1">
+                                                        <Image Source="{Binding IconUrl}" Stretch="UniformToFill">
+                                                            <Image.OpacityMask>
+                                                                <VisualBrush>
+                                                                    <VisualBrush.Visual>
+                                                                        <Border Background="Black" CornerRadius="24" Width="90" Height="90"/>
+                                                                    </VisualBrush.Visual>
+                                                                </VisualBrush>
+                                                            </Image.OpacityMask>
+                                                        </Image>
+                                                    </Border>
+                                                    
+                                                    <Border Background="#10B981" CornerRadius="12" Width="26" Height="26" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-8,-8" 
+                                                            Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect Color="#10B981" Opacity="0.6" BlurRadius="12" ShadowDepth="0"/>
+                                                        </Border.Effect>
+                                                        <TextBlock Text="✓" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </Grid>
+
+                                                <!-- Info Textual -->
+                                                <StackPanel Grid.Row="1">
+                                                    <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="50" TextTrimming="CharacterEllipsis"/>
+                                                    <TextBlock Text="{Binding Author}" Foreground="#A78BFA" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,4,0,12"/>
+                                                    <TextBlock Text="{Binding Description}" Foreground="#7B6FA0" FontSize="12" TextWrapping="Wrap" MaxHeight="60" TextTrimming="CharacterEllipsis" TextAlignment="Center" LineHeight="16"/>
+                                                    
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0" Opacity="0.8">
+                                                        <TextBlock Text="📥 " FontSize="12" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding DownloadsText}" Foreground="#C4B5FD" FontSize="12" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+
+                                                <!-- Botón y Barra de Progreso -->
+                                                <Grid Grid.Row="2" Margin="0,16,0,0">
+                                                    <Button Content="{Binding ButtonLabel}" Style="{StaticResource PlayButton}" Background="{Binding ButtonBrush}" 
+                                                            Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="44" 
+                                                            Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
+                                                    
+                                                    <Border Background="#161125" CornerRadius="14" Height="44" Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}">
+                                                        <Grid Margin="14,0">
+                                                            <ProgressBar Value="{Binding DownloadProgress}" Maximum="100" Height="4" VerticalAlignment="Bottom" Margin="0,0,0,10" 
+                                                                         Foreground="#7C3AED" Background="#2E2648" BorderThickness="0">
+                                                                <ProgressBar.Effect>
+                                                                    <DropShadowEffect Color="#7C3AED" BlurRadius="8" Opacity="0.6" ShadowDepth="0"/>
+                                                                </ProgressBar.Effect>
+                                                            </ProgressBar>
+                                                            <TextBlock Text="{Binding ProgressText}" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
                                             </Grid>
                                         </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            
+                            <!-- Paginación -->
+                            <StackPanel x:Name="PaginationPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,20" Visibility="Collapsed">
+                                <Button Content="« Página Anterior" Style="{StaticResource SecondaryButton}" Width="140" Height="40" Margin="0,0,15,0" Click="BtnPrevPage_Click"/>
+                                <TextBlock x:Name="TxtPage" Text="Página 1" Foreground="#7B6FA0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
+                                <Button Content="Página Siguiente »" Style="{StaticResource SecondaryButton}" Width="140" Height="40" Margin="15,0,0,0" Click="BtnNextPage_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
 
-                                        <StackPanel Grid.Row="1">
-                                            <TextBlock Text="{Binding Title}" Foreground="White" FontSize="15" FontWeight="ExtraBold" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="45" TextTrimming="CharacterEllipsis"/>
-                                            <TextBlock Text="{Binding Author}" Foreground="#7C3AED" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,2,0,8"/>
-                                            <TextBlock Text="{Binding Description}" Foreground="#6B5E8A" FontSize="11" TextWrapping="Wrap" MaxHeight="60" TextTrimming="CharacterEllipsis" TextAlignment="Center" LineHeight="14"/>
-                                            
-                                            <Grid Margin="0,12,0,0" Opacity="0.5">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="📥 " FontSize="10" VerticalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding DownloadsText}" Foreground="#C4B5FD" FontSize="10" FontWeight="Bold"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </StackPanel>
+                    <!-- Archivos Locales -->
+                    <ScrollViewer x:Name="LocalScroll" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" Padding="20">
+                        <ItemsControl x:Name="LocalList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#161125" CornerRadius="14" Margin="0,0,0,10" Padding="20,16" BorderBrush="#2E2648" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="15" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding SizeText}" Foreground="#7B6FA0" FontSize="12" Margin="0,4,0,0"/>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="🗑️ Eliminar" Style="{StaticResource SecondaryButton}" Height="38" Padding="16,0" Tag="{Binding FilePath}" Click="DeleteFileBtn_Click"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
 
-                                        <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{StaticResource PremiumBtn}" Background="{Binding ButtonColor}" 
-                                                Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="38" Margin="0,12,0,0"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <!-- Estado Vacío -->
+                    <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+                        <TextBlock Text="🌌" FontSize="56" HorizontalAlignment="Center" Opacity="0.5" Margin="0,0,0,20"/>
+                        <TextBlock Text="Vacío Cósmico" Foreground="#C4B5FD" FontSize="20" FontWeight="Black" HorizontalAlignment="Center"/>
+                        <TextBlock Text="No se encontraron artefactos con esos parámetros." Foreground="#7B6FA0" FontSize="14" Margin="0,6,0,0" HorizontalAlignment="Center"/>
+                        <Button Content="Limpiar Filtros" Margin="0,24,0,0" Style="{StaticResource SecondaryButton}" Width="160" Height="42" Click="BtnRefresh_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Panel Lateral (Flyout) para Detalles -->
+        <Border x:Name="DetailFlyout" Background="#0A0815" BorderBrush="#2E2648" BorderThickness="1,0,0,0" 
+                HorizontalAlignment="Right" Width="500" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+            <Border.RenderTransform>
+                <TranslateTransform X="500"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.7" BlurRadius="40" ShadowDepth="-15"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Margin="24">
+                    <Button Content="✕" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleBarButton}" Width="32" Height="32" Click="CloseFlyout_Click"/>
+                </Grid>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="30,0,30,30">
+                    <StackPanel x:Name="DetailContent">
+                        
+                        <!-- Cabecera del Mod -->
+                        <Grid Margin="0,10,0,30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Width="100" Height="100" CornerRadius="24" Background="#161125" BorderBrush="#2E2648" BorderThickness="1">
+                                <Image x:Name="DetailIcon" Stretch="UniformToFill">
+                                    <Image.OpacityMask>
+                                        <VisualBrush>
+                                            <VisualBrush.Visual>
+                                                <Border Background="Black" CornerRadius="24" Width="100" Height="100"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Image.OpacityMask>
+                                </Image>
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="20,0,0,0" VerticalAlignment="Center">
+                                <TextBlock x:Name="DetailTitle" Foreground="White" FontSize="26" FontWeight="Black" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="DetailAuthor" Foreground="#A78BFA" FontSize="14" FontWeight="Bold" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Galería de Imágenes -->
+                        <ItemsControl x:Name="DetailGallery" Margin="0,0,0,30">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="12" Margin="0,0,12,12" Width="200" Height="110" BorderBrush="#2E2648" BorderThickness="1">
+                                        <Image Source="{Binding}" Stretch="UniformToFill">
+                                            <Image.OpacityMask>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <Border Background="Black" CornerRadius="12" Width="200" Height="110"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Image.OpacityMask>
+                                        </Image>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Descripción Parseada -->
+                        <TextBlock Text="Descripción" Foreground="White" FontSize="18" FontWeight="Black" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="DetailDescription" Foreground="#D1D5DB" FontSize="14" TextWrapping="Wrap" LineHeight="22" Margin="0,0,0,30"/>
+                        
+                    </StackPanel>
                 </ScrollViewer>
-
-                <!-- Local Mode -->
-                <ScrollViewer x:Name="LocalScroll" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" Padding="20">
-                    <ItemsControl x:Name="LocalList">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="#0C0A15" CornerRadius="12" Margin="0,0,0,8" Padding="14,10" BorderBrush="#1E1A2E" BorderThickness="1">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="13" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding SizeText}" Foreground="#4A4266" FontSize="10" Margin="0,1,0,0"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                            <Button Content="🗑️" Style="{StaticResource SecondaryButton}" Height="30" Width="38" Padding="0" Tag="{Binding FilePath}" Click="DeleteFileBtn_Click"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-
-                <!-- Feedback States -->
-                <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-                    <TextBlock Text="🛸" FontSize="36" HorizontalAlignment="Center" Opacity="0.5" Margin="0,0,0,12"/>
-                    <TextBlock Text="Vacío Galáctico" Foreground="#4A4266" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <Button Content="Reintentar sin filtros" Margin="0,12,0,0" Style="{StaticResource SecondaryButton}" Click="BtnRefresh_Click"/>
-                </StackPanel>
             </Grid>
         </Border>
     </Grid>
 </UserControl>
-
