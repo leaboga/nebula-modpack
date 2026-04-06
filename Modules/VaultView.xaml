@@ -33,15 +33,9 @@
             </DoubleAnimation>
         </Storyboard>
 
-        <!-- Skeleton Brush -->
-        <LinearGradientBrush x:Key="SkeletonBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#1A1528" Offset="0.0" />
-            <GradientStop Color="#2E2648" Offset="0.5" x:Name="SkeletonGradientMid" />
-            <GradientStop Color="#1A1528" Offset="1.0" />
-        </LinearGradientBrush>
-
+        <!-- Skeleton Animation Fix (Pulsar) -->
         <Storyboard x:Key="SkeletonAnimation" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetName="SkeletonGradientMid" Storyboard.TargetProperty="Offset" From="-0.5" To="1.5" Duration="0:0:1.5"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.3" To="1.0" Duration="0:1.0" AutoReverse="True"/>
         </Storyboard>
         
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -165,12 +159,12 @@
                     <!-- Skeleton View (Animado en código) -->
                     <ScrollViewer x:Name="SkeletonPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Hidden" Padding="14">
                         <WrapPanel HorizontalAlignment="Center">
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
-                            <Border Width="250" Height="360" Background="{StaticResource SkeletonBrush}" CornerRadius="18" Margin="12"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
+                            <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12" Loaded="Skeleton_Loaded"/>
                         </WrapPanel>
                     </ScrollViewer>
 

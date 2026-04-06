@@ -7,15 +7,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>nebula.ico</ApplicationIcon>
-		<Version>1.6.0</Version>
+		<Version>1.6.5</Version>
 		<Authors>Leandro (Nebula Team)</Authors>
 		<Company>Nebula Launcher Project</Company>
 		<Product>Nebula Launcher</Product>
-		<Description>High Performance Modern Minecraft Launcher</Description>
+		<Description>High Performance Modern Minecraft Nexus Hub</Description>
 		<Copyright>Copyright © 2026 Nebula Project</Copyright>
 		
-		<AssemblyVersion>1.6.0.0</AssemblyVersion>
-		<FileVersion>1.6.0.0</FileVersion>
+		<AssemblyVersion>1.6.5.0</AssemblyVersion>
+		<FileVersion>1.6.5.0</FileVersion>
 		
 		<!-- Visuals for EXE -->
 		<ApplicationIcon>nebula.ico</ApplicationIcon>

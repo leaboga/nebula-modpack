@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "1.5.3";
+        private const string CurrentLauncherVersion = "1.6.5";
         private const string UpdateCheckUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/version.json";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -1036,7 +1036,10 @@ namespace NebulaLauncher
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed) 
+            {
+                try { DragMove(); } catch { }
+            }
         }
 
         private async void RepararModpack_Click(object sender, RoutedEventArgs e)

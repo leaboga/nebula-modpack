@@ -210,7 +210,7 @@ namespace NebulaLauncher.Modules
                     facetGroups.Add($"[\"categories:{loader}\"]");
                 }
 
-                if (!string.IsNullOrEmpty(cat))
+                if (!string.IsNullOrEmpty(cat) && cat != "all")
                 {
                     facetGroups.Add($"[\"categories:{cat}\"]");
                 }
@@ -501,8 +501,15 @@ namespace NebulaLauncher.Modules
 
         private void Skeleton_Loaded(object sender, RoutedEventArgs e)
         {
-            var sb = (Storyboard)this.Resources["SkeletonAnimation"];
-            sb.Begin((FrameworkElement)sender);
+            try
+            {
+                if (sender is FrameworkElement el)
+                {
+                    var sb = (Storyboard)this.Resources["SkeletonAnimation"];
+                    if (sb != null) sb.Begin(el);
+                }
+            }
+            catch { }
         }
 
         private void ShowLocalFiles()
