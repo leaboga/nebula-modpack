@@ -1071,7 +1071,14 @@ namespace NebulaLauncher
                 Dispatcher.Invoke(() =>
                 {
                     _manifestActual          = manifest;
-                    if (CurrentProfile != null) CurrentProfile.LastVersion = entry.Version;
+                    if (CurrentProfile != null) {
+                        CurrentProfile.LastVersion = entry.Version;
+                        if (manifest != null) {
+                            CurrentProfile.Version       = manifest.MinecraftVersion;
+                            CurrentProfile.LoaderType    = manifest.Modloader;
+                            CurrentProfile.LoaderVersion = manifest.ModloaderVersion;
+                        }
+                    }
                     GuardarSesion();
                     InstalledVersionText.Text = manifest?.Version ?? "Sin datos";
                     PlayButton.IsEnabled      = manifest != null;

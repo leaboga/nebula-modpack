@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.8.8",
+    "date": "06 de Abril, 2026",
+    "title": "Corrección de Motor y Versiones",
+    "type": "fix",
+    "changes": [
+      "Motor: Sincronización forzada de la versión de Minecraft y Modloader desde el manifiesto del servidor.",
+      "Fix: Resuelto el problema donde el juego iniciaba en una versión 'preset' incorrecta en lugar de la del Modpack.",
+      "Estabilidad: Guardado automático de la versión del perfil tras cargar el manifiesto."
+    ]
+  },
+  {
     "version": "1.8.7",
     "date": "06 de Abril, 2026",
     "title": "Sincronización de Servidor Corregida",
