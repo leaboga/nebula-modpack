@@ -36,7 +36,7 @@ namespace NebulaLauncher
 
     public class ModSyncer
     {
-        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/modpack-1.4.0/versions-index.json";
+        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions-index.json";
         private const string AssetsUrl        = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
         private readonly HttpClient _http = new HttpClient();
         private readonly string _modsFolder;
@@ -65,12 +65,15 @@ namespace NebulaLauncher
                         ? VersionsIndexUrl.Split("/modpack-")[1].Split('/')[0] 
                         : "main";
 
-                    foreach(var v in index.AvailableVersions) {
-                        if (v.ManifestUrl.Contains("/main/")) 
-                            v.ManifestUrl = v.ManifestUrl.Replace("/main/", "/modpack-" + currentTag + "/");
-                        
-                        if (v.ManifestUrl.Contains("/client-assets-1.0/")) 
-                            v.ManifestUrl = v.ManifestUrl.Replace("/client-assets-1.0/", "/modpack-" + currentTag + "/");
+                    if (currentTag != "main")
+                    {
+                        foreach(var v in index.AvailableVersions) {
+                            if (v.ManifestUrl.Contains("/main/")) 
+                                v.ManifestUrl = v.ManifestUrl.Replace("/main/", "/modpack-" + currentTag + "/");
+                            
+                            if (v.ManifestUrl.Contains("/client-assets-1.0/")) 
+                                v.ManifestUrl = v.ManifestUrl.Replace("/client-assets-1.0/", "/modpack-" + currentTag + "/");
+                        }
                     }
                 }
                 return index;
