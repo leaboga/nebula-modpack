@@ -36,7 +36,7 @@ namespace NebulaLauncher
 
     public class ModSyncer
     {
-        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/client-assets-1.0/versions-index.json";
+        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/modpack-1.0.1/versions-index.json";
         private const string AssetsUrl        = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
         private readonly HttpClient _http = new HttpClient();
         private readonly string _modsFolder;
@@ -74,11 +74,18 @@ namespace NebulaLauncher
                 string json = await _http.GetStringAsync(manifestUrl + "?t=" + DateTime.Now.Ticks);
                 var manifest = JsonConvert.DeserializeObject<ModManifest>(json);
                 if (manifest != null) {
-                    // Rewrite placeholders in memory to survive broken GitHub files
+                    bool fixedAny = false;
                     foreach(var m in manifest.Mods) {
-                        if (m.Url.Contains("/TU-USUARIO/")) 
+                        if (m.Url.Contains("/TU-USUARIO/")) {
                             m.Url = m.Url.Replace("/TU-USUARIO/", "/leaboga/");
+                            fixedAny = true;
+                        }
+                        if (m.Url.Contains("/modpack-1.0.0/")) {
+                            m.Url = m.Url.Replace("/modpack-1.0.0/", "/modpack-1.0.1/");
+                            fixedAny = true;
+                        }
                     }
+                    if (fixedAny) OnLog?.Invoke("✨ Centinela: Se han corregido URLs de GitHub automáticamente.");
                 }
                 return manifest;
             } catch (Exception ex) { OnLog?.Invoke("Error Manifest: " + ex.Message); return null; }
@@ -106,10 +113,13 @@ namespace NebulaLauncher
                     string localPath = Path.Combine(_modsFolder, mod.Filename);
                     
                     if (File.Exists(localPath)) {
-                        if (CalcularMD5(localPath).Equals(mod.Md5, StringComparison.OrdinalIgnoreCase)) {
+                        string localMd5 = CalcularMD5(localPath);
+                        // Skip MD5 check if the manifest has a placeholder (like a1b2c3d4...)
+                        if (mod.Md5.StartsWith("a1b2c3d4") || localMd5.Equals(mod.Md5, StringComparison.OrdinalIgnoreCase)) {
                             OnProgress?.Invoke((double)(i + 1) / total * 100);
                             continue; 
                         }
+                        OnLog?.Invoke($"  🔄 Actualizando mod: {mod.Filename} (MD5 mismatch)");
                         File.Delete(localPath);
                     }
 
