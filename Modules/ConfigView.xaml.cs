@@ -273,6 +273,19 @@ namespace NebulaLauncher.Modules
             MessageBox.Show("Las instancias ahora se gestionan desde la pantalla de Inicio mediante Perfiles.", "Informaci\u00F3n", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        private void BtnDeleteInstance_Click(object sender, RoutedEventArgs e)
+        {
+            if (_mainWindow.CurrentProfile == null) return;
+            
+            var result = MessageBox.Show($"\u00BFEst\u00E1s seguro de eliminar el perfil '{_mainWindow.CurrentProfile.Name}'?\nEsta acci\u00F3n no se puede deshacer.", 
+                                         "Eliminar Perfil", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (result == MessageBoxResult.Yes)
+            {
+                _mainWindow.DeleteCurrentProfile();
+            }
+        }
+
         private void BtnViewCrashes_Click(object sender, RoutedEventArgs e)
         {
             try

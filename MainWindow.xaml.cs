@@ -884,6 +884,38 @@ namespace NebulaLauncher
             _syncer.OnProgressLabel += lbl => Dispatcher.Invoke(() => ProgressLabel.Text = lbl);
         }
 
+        public void DeleteCurrentProfile()
+        {
+            if (CurrentProfile == null) return;
+            
+            var profileToDelete = CurrentProfile;
+            _session.Profiles.Remove(profileToDelete);
+            
+            if (_session.Profiles.Count == 0)
+            {
+                // Create a default profile if none left
+                var p = new MinecraftProfile { Name = "Default", Version = "1.20.1", LoaderType = "fabric" };
+                _session.Profiles.Add(p);
+                _session.CurrentProfileId = p.Id;
+            }
+            else
+            {
+                _session.CurrentProfileId = _session.Profiles[0].Id;
+            }
+            
+            GuardarSesion();
+            InitializeProfileServices();
+            ActualizarComboPerfiles();
+            ActualizarSidebar();
+            
+            // Switch back to home
+            Dispatcher.Invoke(() => {
+                CambiarVista("home");
+            });
+            
+            AgregarLog($"🗑️ Perfil '{profileToDelete.Name}' eliminado.");
+        }
+
         private void NewProfile_Click(object sender, RoutedEventArgs e)
         {
             // Simple logic for PoC: add a new 1.20.1 Fabric instance
