@@ -112,6 +112,7 @@ namespace NebulaLauncher.Modules
                     _http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NebulaLauncher/2.0");
 
                 LoadManifest();
+                UpdateLocalWeight();
             }
             catch (Exception ex)
             {
@@ -160,7 +161,7 @@ namespace NebulaLauncher.Modules
             if (this.IsLoaded && !_isSearching) _ = SearchModrinth(SearchBox?.Text ?? "", true);
         }
 
-        private void CategoryCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.IsLoaded && !_isSearching) _ = SearchModrinth(SearchBox?.Text ?? "", true);
         }
@@ -194,7 +195,6 @@ namespace NebulaLauncher.Modules
 
                 int offset = (_currentPage - 1) * _pageSize;
                 string sort = (SortCombo.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "relevance";
-                string cat = (CategoryCombo.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "";
 
                 var facetGroups = new List<string> { $"[\"project_type:{_currentType}\"]" };
                 
@@ -207,12 +207,12 @@ namespace NebulaLauncher.Modules
                 string loader = GetCleanLoaderType();
                 if (_currentType == "mod" && !string.IsNullOrEmpty(loader))
                 {
+                    string cat = (CategoryList.SelectedItem as ListBoxItem)?.Tag?.ToString() ?? "all";
+                    if (cat != "all")
+                    {
+                        facetGroups.Add($"[\"categories:{cat}\"]");
+                    }
                     facetGroups.Add($"[\"categories:{loader}\"]");
-                }
-
-                if (!string.IsNullOrEmpty(cat) && cat != "all")
-                {
-                    facetGroups.Add($"[\"categories:{cat}\"]");
                 }
                 
                 string facets = $"[{string.Join(",", facetGroups)}]";
@@ -323,6 +323,7 @@ namespace NebulaLauncher.Modules
                 downloadedProjects.Add(kvp.Key);
 
             await ResolveAndDownloadAsync(projectId, uiItem, downloadedProjects);
+            UpdateLocalWeight();
             
             if (uiItem != null)
             {
@@ -445,18 +446,16 @@ namespace NebulaLauncher.Modules
 
         private async void Card_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border b && b.DataContext is ModrinthItem item)
+            if (sender is FrameworkElement b && b.DataContext is ModrinthItem item)
             {
+                // Detail Flyout (v1.7.0 simplificado)
                 DetailTitle.Text = item.Title;
                 DetailAuthor.Text = "por " + item.Author;
                 DetailIcon.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(item.IconUrl));
                 DetailDescription.Text = "Descifrando información...";
-                DetailGallery.ItemsSource = null;
 
                 DetailFlyout.Visibility = Visibility.Visible;
-                var sb = (Storyboard)this.Resources["FlyoutOpen"];
-                sb.Begin(DetailFlyout);
-
+                
                 try
                 {
                     string url = $"https://api.modrinth.com/v2/project/{item.ProjectId}";
@@ -471,23 +470,56 @@ namespace NebulaLauncher.Modules
                     
                     DetailDescription.Text = data["description"]?.ToString() + "\n\n" + body;
 
-                    var gallery = data["gallery"] as JArray;
-                    if (gallery != null && gallery.Count > 0)
-                    {
-                        var imgs = new List<string>();
-                        foreach(var g in gallery) imgs.Add(g["url"]?.ToString() ?? "");
-                        DetailGallery.ItemsSource = imgs;
-                    }
+                    EstimateImpact(item, data);
                 }
                 catch { }
             }
         }
 
+        private void EstimateImpact(ModrinthItem item, JObject data)
+        {
+            string type = data["project_type"]?.ToString() ?? "mod";
+            long downloads = data["downloads"]?.ToObject<long>() ?? 0;
+            
+            // Lógica Heurística de Impacto
+            if (type == "shader") { 
+                TxtModImpact.Text = "Impacto Galáctico: ALTO"; 
+                TxtModImpact.Foreground = new SolidColorBrush(Color.FromRgb(239, 68, 68));
+                TxtImpactIcon.Text = "🔴";
+                TxtModWeightEstimate.Text = "Estimación: Shaders de alta carga (~20MB)";
+            }
+            else {
+                TxtModImpact.Text = "Impacto Galáctico: BAJO";
+                TxtModImpact.Foreground = new SolidColorBrush(Color.FromRgb(16, 185, 129));
+                TxtImpactIcon.Text = "🟢";
+                TxtModWeightEstimate.Text = "Estimación: Mod Ligero (< 5MB)";
+            }
+        }
+
+        private void UpdateLocalWeight()
+        {
+            try
+            {
+                string dir = GetInstallDir();
+                if (!Directory.Exists(dir)) { TxtTotalWeight.Text = "0 MB"; return; }
+                
+                long totalBytes = Directory.GetFiles(dir, "*", SearchOption.AllDirectories)
+                                           .Sum(f => new FileInfo(f).Length);
+                
+                double mb = totalBytes / 1024.0 / 1024.0;
+                TxtTotalWeight.Text = mb > 1000 ? $"{mb/1024.0:F2} GB" : $"{mb:F1} MB";
+                
+                WeightProgress.Value = Math.Min(mb, 1000);
+                if (mb > 800) { TxtWeightStatus.Text = "Carga Crítica"; TxtWeightStatus.Foreground = Brushes.Red; }
+                else if (mb > 400) { TxtWeightStatus.Text = "Carga Media"; TxtWeightStatus.Foreground = Brushes.Orange; }
+                else { TxtWeightStatus.Text = "Carga Óptima"; TxtWeightStatus.Foreground = Brushes.Green; }
+            }
+            catch { }
+        }
+
         private void CloseFlyout_Click(object sender, RoutedEventArgs e)
         {
-            var sb = (Storyboard)this.Resources["FlyoutClose"];
-            sb.Completed += (s, ev) => DetailFlyout.Visibility = Visibility.Collapsed;
-            sb.Begin(DetailFlyout);
+            DetailFlyout.Visibility = Visibility.Collapsed;
         }
 
         private void Card_Loaded(object sender, RoutedEventArgs e)
@@ -542,13 +574,13 @@ namespace NebulaLauncher.Modules
         {
             if (sender is not Button btn || btn.Tag is not string path) return;
             if (MessageBox.Show($"¿Desintegrar '{Path.GetFileName(path)}' de este universo?", "Nebula Hub", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
-            try { if (File.Exists(path)) File.Delete(path); ShowLocalFiles(); } catch { }
+            try { if (File.Exists(path)) File.Delete(path); ShowLocalFiles(); UpdateLocalWeight(); } catch { }
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e) 
         {
             SearchBox.Text = "";
-            CategoryCombo.SelectedIndex = 0;
+            if (CategoryList != null) CategoryList.SelectedIndex = 0;
             _ = SearchModrinth("", true);
         }
 
