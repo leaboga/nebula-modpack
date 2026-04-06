@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace NebulaLauncher.Modules
@@ -107,33 +108,64 @@ namespace NebulaLauncher.Modules
                 // MODRINTH FACETS: AND logic must use separate nested arrays: [["facet1:val1"], ["facet2:val2"]]
                 var facetGroups = new List<string> { $"[\"project_type:{_currentType}\"]" };
                 
-                if (_profile != null && !string.IsNullOrEmpty(_profile.Version))
-                    facetGroups.Add($"[\"versions:{_profile.Version}\"]");
+                string cleanVersion = _profile?.Version ?? "";
+                if (!string.IsNullOrEmpty(cleanVersion))
+                {
+                    // Clean version string: "1.20.1 (Forge)" -> "1.20.1"
+                    cleanVersion = Regex.Match(cleanVersion, @"\d+\.\d+(\.\d+)?").Value;
+                    if (!string.IsNullOrEmpty(cleanVersion))
+                        facetGroups.Add($"[\"versions:{cleanVersion}\"]");
+                }
                 
                 if (_profile != null && _currentType == "mod" && !string.IsNullOrEmpty(_profile.LoaderType) && _profile.LoaderType != "vanilla")
-                    facetGroups.Add($"[\"categories:{_profile.LoaderType}\"]");
+                {
+                    string loader = _profile.LoaderType.ToLower();
+                    facetGroups.Add($"[\"categories:{loader}\"]");
+                }
                 
                 string facets = $"[{string.Join(",", facetGroups)}]";
-
                 string escapedQuery = Uri.EscapeDataString(string.IsNullOrWhiteSpace(query) ? "" : query);
                 string url = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(facets)}&limit=40";
                 
                 Debug.WriteLine("[ModHub] Searching url: " + url);
                 
-                var response = await _http.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
+                HttpResponseMessage response;
+                try 
                 {
-                    string errContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Modrinth API Error ({response.StatusCode}): {errContent}");
+                    response = await _http.GetAsync(url);
+                }
+                catch (Exception ex)
+                {
+                    // Network level error
+                    throw new Exception("Enlace galáctico perdido. Verifique su conexión.");
                 }
 
-                var json = await response.Content.ReadAsStringAsync();
+                string json;
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        // Fallback immediate for 404
+                        string simpleFacets = $"[[\"project_type:{_currentType}\"]]";
+                        string simpleUrl = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(simpleFacets)}&limit=40";
+                        json = await _http.GetStringAsync(simpleUrl);
+                    }
+                    else
+                    {
+                        string err = await response.Content.ReadAsStringAsync();
+                        throw new Exception($"Error {response.StatusCode} de Modrinth.");
+                    }
+                }
+                else
+                {
+                    json = await response.Content.ReadAsStringAsync();
+                }
+
                 var data = JsonConvert.DeserializeObject<dynamic>(json);
                 
-                // Fallback: Si no hay hits, reintentar sin filtros de versión/categoría
+                // Secondary Fallback: Si no hay hits, reintentar sin filtros de versión/categoría
                 if (data == null || data.hits == null || data.hits.Count == 0)
                 {
-                    Debug.WriteLine("[ModHub] No results with filters, retrying without filters...");
                     string simpleFacets = $"[[\"project_type:{_currentType}\"]]";
                     string simpleUrl = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(simpleFacets)}&limit=40";
                     json = await _http.GetStringAsync(simpleUrl);
