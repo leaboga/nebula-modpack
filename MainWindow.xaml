@@ -192,10 +192,10 @@
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,12,0,12">
                             <TextBlock Text="COMANDOS ADMIN" Foreground="#EF4444" FontSize="9" FontWeight="Black" Margin="4,0,0,8"/>
                             <Button Content="🚀 Publicar Update" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
+                            <CheckBox x:Name="SkipConfigSyncCheck" Content="Omitir Sincro Configs" Foreground="#EF4444" FontSize="10" Margin="4,0,0,8" Click="SkipConfigSyncCheck_Click"/>
                             <Button Content="🛠️ Reparar Pack" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="RepararModpack_Click" Margin="0,0,0,6"/>
                             <Button Content="🗑️ Limpiar Caché" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="LimpiarCache_Click" Margin="0,0,0,6"/>
-                        </StackPanel>
-                        <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
+                        </StackPanel>                        <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>

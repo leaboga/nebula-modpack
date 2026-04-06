@@ -720,7 +720,16 @@ namespace NebulaLauncher
             _crashReporter = new CrashReporterService(GameFolder, _session.CrashWebhookUrl);
             ActualizarSidebar();
             ActualizarGreeting();
+            if (SkipConfigSyncCheck != null) SkipConfigSyncCheck.IsChecked = _session.SkipConfigSync;
             _isInitializing = false;
+        }
+
+        private void SkipConfigSyncCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isInitializing) return;
+            _session.SkipConfigSync = SkipConfigSyncCheck.IsChecked ?? false;
+            GuardarSesion();
+            AgregarLog(_session.SkipConfigSync ? "🛠️ Modo Dev: Sincronización de configs desactivada." : "🛠️ Sincronización de configs activada.");
         }
 
         public void GuardarSesion()
@@ -1215,11 +1224,17 @@ namespace NebulaLauncher
                     _discord.SetActivity("Sincronizando mods...");
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
                     if (!modsOk) { AgregarLog("❌ Falló la descarga de mods."); return; }
-                    
-                    PlayButton.Content = "Actualizando configs...";
-                    await _syncer.SincronizarConfigs();
-                }
 
+                    if (!_session.SkipConfigSync)
+                    {
+                        PlayButton.Content = "Actualizando configs...";
+                        await _syncer.SincronizarConfigs();
+                    }
+                    else
+                    {
+                        AgregarLog("🛠️ Modo Dev: Omitiendo sincronización de configs.");
+                    }
+                }
                 PlayButton.Content = "Iniciando Minecraft...";
                 _discord.SetActivity("Iniciando Minecraft...");
                 MainProgressBar.Value = 0;

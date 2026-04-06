@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.1",
+    "date": "06 de Abril, 2026",
+    "title": "Modo Desarrollador y Control de Configs",
+    "type": "update",
+    "changes": [
+      "Admin: Añadida opción 'Omitir Sincro Configs' en el panel de administrador.",
+      "Dev: Permite iniciar el juego sincronizando mods pero manteniendo las configuraciones locales intactas (útil para creadores de contenido y admins).",
+      "Persistencia: El estado de la omisión de configs se guarda entre sesiones."
+    ]
+  },
+  {
     "version": "1.9.0",
     "date": "06 de Abril, 2026",
     "title": "Estabilidad Multihilo y Fix de Crash",

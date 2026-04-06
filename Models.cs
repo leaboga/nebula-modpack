@@ -19,6 +19,7 @@ namespace NebulaLauncher
         public string AccentColor            { get; set; } = "#7C3AED";
         public string BackgroundImagePath    { get; set; } = "";
         public bool   IsTurboEnabled         { get; set; } = false;
+        public bool   SkipConfigSync         { get; set; } = false;
         
         // Legacy support
         public string SessionToken       { get; set; } = "";
