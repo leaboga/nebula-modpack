@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.2",
+    "date": "06 de Abril, 2026",
+    "title": "Corrección de Cargadores y Sesión",
+    "type": "fix",
+    "changes": [
+      "Motor: Corregida lógica de detección de NeoForge/Forge que causaba que el juego iniciara en modo Vainilla.",
+      "Sesión: Asegurada la vinculación correcta de la sesión de usuario en el arranque del juego.",
+      "Estabilidad: Separación explícita de Tipo y Versión de cargador para evitar conflictos de identificación."
+    ]
+  },
+  {
     "version": "1.9.1",
     "date": "06 de Abril, 2026",
     "title": "Modo Desarrollador y Control de Configs",

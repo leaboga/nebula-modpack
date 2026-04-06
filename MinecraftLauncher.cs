@@ -20,7 +20,8 @@ namespace NebulaLauncher
         private readonly string _gameFolder;
         private readonly int _ramGB;
         private readonly string _minecraftVersion;
-        private readonly string _neoforgeVersion;
+        private readonly string _loaderType;
+        private readonly string _loaderVersion;
         private readonly MSession _session;
         private readonly string? _manualJavaPath;
 
@@ -28,15 +29,15 @@ namespace NebulaLauncher
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
-        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderVersion, MSession? session = null, string? manualJavaPath = null)
+        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null)
         {
             _gameFolder = gameFolder;
             _ramGB = ramGB;
             _minecraftVersion = minecraftVersion;
-            _neoforgeVersion = loaderVersion;
+            _loaderType = loaderType;
+            _loaderVersion = loaderVersion;
             
             // Fix: Modern Minecraft requires a valid UUID format even in offline mode.
-            // Using a deterministic name-based UUID for offline mode.
             _session = session ?? MSession.GetOfflineSession(username);
             _manualJavaPath = manualJavaPath;
         }
@@ -51,16 +52,16 @@ namespace NebulaLauncher
                 
                 string finalVersionId = _minecraftVersion;
 
-                if (_neoforgeVersion.ToLower().Contains("fabric"))
+                if (_loaderType.ToLower().Contains("fabric"))
                 {
                     finalVersionId = await InstalarFabric(path);
                 }
-                else if (_neoforgeVersion.ToLower().Contains("neoforge"))
+                else if (_loaderType.ToLower().Contains("neoforge"))
                 {
                     string javaPath = await GetJavaPath();
                     finalVersionId = await InstalarNeoForge(path, javaPath);
                 }
-                else if (_neoforgeVersion.ToLower().Contains("forge"))
+                else if (_loaderType.ToLower().Contains("forge"))
                 {
                     string javaPath = await GetJavaPath();
                     finalVersionId = await InstalarForge(path, javaPath);
@@ -109,12 +110,10 @@ namespace NebulaLauncher
         {
              OnLog?.Invoke("⚒ Conectando con NeoForge Maven...");
              try {
-                // Try to use NeoForge installer if available in the library
                 var type = Type.GetType("CmlLib.Core.Installer.NeoForge.NeoForgeInstaller, CmlLib.Core.Installer.NeoForge") ?? typeof(object);
                 dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
-                return await handler.InstallAsync(_minecraftVersion, _neoforgeVersion, path);
+                return await handler.InstallAsync(_minecraftVersion, _loaderVersion, path);
              } catch {
-                // Fallback to Forge installer if NeoForge fails (some versions are compatible)
                 return await InstalarForge(path, javaPath);
              }
         }
@@ -132,7 +131,7 @@ namespace NebulaLauncher
                 new MArgument("-XX:G1MixedGCCountTarget=8"),
                 new MArgument("-XX:+AlwaysPreTouch"),
                 new MArgument("-Dsun.java2d.noddraw=true"),
-                new MArgument("-Djna.nosys=true") // Avoid some JNA conflicts
+                new MArgument("-Djna.nosys=true")
             });
             opt.ExtraJvmArguments = jvmArgs;
         }
@@ -158,8 +157,8 @@ namespace NebulaLauncher
              var type = Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core.Installer.Forge") ?? typeof(object);
              dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
              
-             OnLog?.Invoke($"📥 Descargando e instalando Forge {_neoforgeVersion}...");
-             return await handler.InstallAsync(_minecraftVersion, _neoforgeVersion, path);
+             OnLog?.Invoke($"📥 Descargando e instalando Forge {_loaderVersion}...");
+             return await handler.InstallAsync(_minecraftVersion, _loaderVersion, path);
         }
 
         private async Task<string> GetJavaPath()

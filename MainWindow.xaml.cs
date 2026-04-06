@@ -1288,7 +1288,8 @@ namespace NebulaLauncher
 
             var mcLauncher = new McGameLauncher(GameFolder, profile.RamGB, _session.Username,
                 _session.AuthMode == "premium", profile.Version, 
-                string.IsNullOrEmpty(profile.LoaderVersion) ? profile.LoaderType : profile.LoaderVersion, 
+                profile.LoaderType,
+                profile.LoaderVersion, 
                 manualJavaPath: profile.JavaPath);
             mcLauncher.OnLog      += msg => AgregarLog(msg);
             mcLauncher.OnProgress += pct => Dispatcher.Invoke(() => MainProgressBar.Value = pct);
