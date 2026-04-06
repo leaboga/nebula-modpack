@@ -923,6 +923,54 @@ namespace NebulaLauncher
             catch (Exception ex) { AgregarLog($"⚠️ Error abriendo log: {ex.Message}"); }
         }
 
+        private async void RepararModpack_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            if (btn != null) { btn.IsEnabled = false; btn.Content = "⏳ Reparando..."; }
+            try
+            {
+                await SincronizarTodoAsync();
+                AgregarLog("✅ Sincronización completada.");
+                MessageBox.Show("Sincronización y reparación completada con éxito.", "Nebula Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex) { AgregarLog($"❌ Error en reparación: {ex.Message}"); }
+            finally { if (btn != null) { btn.IsEnabled = true; btn.Content = "🛠️ Reparar Pack"; } }
+        }
+
+        public async Task SincronizarTodoAsync()
+        {
+            if (CurrentProfile == null) return;
+            AgregarLog("🛠️ Iniciando sincronización total (GitHub)...");
+            
+            _manifestActual = null; // Force reload from server
+            await CargarVersionesAsync();
+            
+            if (_manifestActual != null)
+            {
+                // 1. Sync MODS
+                PlayButton.Content = "Sincronizando mods...";
+                bool modsOk = await _syncer.SincronizarMods(_manifestActual);
+                
+                // 2. Sync CONFIGS/ASSETS
+                PlayButton.Content = "Actualizando configs...";
+                await _syncer.SincronizarConfigs();
+                
+                if (modsOk)
+                {
+                    CurrentProfile.LastSyncDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                    CurrentProfile.LastSyncHash = _manifestActual.Version;
+                    GuardarSesion();
+                    AgregarLog($"✓ Perfil '{CurrentProfile.Name}' sincronizado correctamente.");
+                }
+            }
+            else
+            {
+                AgregarLog("⚠ No se pudo obtener el manifiesto de GitHub.");
+            }
+            
+            PlayButton.Content = "▶  JUGAR";
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         { 
             if (!_cerrarDeVerdad) 
@@ -1055,38 +1103,7 @@ namespace NebulaLauncher
             }
         }
 
-        private async void RepararModpack_Click(object sender, RoutedEventArgs e)
-        {
-            await RepararModpack();
-        }
-
-        public async Task RepararModpack()
-        {
-            var result = MessageBox.Show("\u00BFEst\u00E1s seguro de que deseas reparar el pack?\nSe borrar\u00E1n los mods y la configuraci\u00F3n para forzar una descarga limpia.", 
-                                       "Reparaci\u00F3n de Nebula", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    AgregarLog("\uD83D\uDEE0 Iniciando proceso de reparaci\u00F3n...");
-                    string modsDir = System.IO.Path.Combine(GameFolder, "mods");
-                    string configDir = System.IO.Path.Combine(GameFolder, "config");
-                    
-                    if (Directory.Exists(modsDir)) Directory.Delete(modsDir, true);
-                    if (Directory.Exists(configDir)) Directory.Delete(configDir, true);
-                    
-                    AgregarLog("\u2713 Archivos antiguos eliminados.");
-                    await CargarVersionesAsync();
-                    MessageBox.Show("Reparaci\u00F3n lista. Dale a 'Jugar' para descargar todo de nuevo.", "Cuidado", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    AgregarLog($"\u274C Error reparando: {ex.Message}");
-                    MessageBox.Show($"No se pudo completar la reparaci\u00F3n: {ex.Message}", "Error");
-                }
-            }
-        }
+        // Unified sync and repair system already implemented in SincronizarTodoAsync.
 
         // ══════════════════════════════════════════════════════════════════
         //  ADMIN
@@ -1145,11 +1162,11 @@ namespace NebulaLauncher
                 // BACKUP AUTOMATICO (SEGURIDAD PRIMERO)
                 if (!turboMode)
                 {
-                    AgregarLog("\uD83D\uDCBE Creando backup de seguridad (r\u00E1pido)...");
+                    AgregarLog("💾 Creando backup de seguridad (rápido)...");
                     await _backupService.CreateQuickConfigBackupAsync();
                 }
 
-                if (turboMode) AgregarLog("\u26A1 Modo Turbo activado \u2014 omitiendo sincronizaci\u00F3n de archivos.");
+                if (turboMode) AgregarLog("⚡ Modo Turbo activado — omitiendo sincronización de archivos.");
 
                 if (!turboMode && _manifestActual != null)
                 {
@@ -1414,7 +1431,9 @@ namespace NebulaLauncher
                     break;
                 case "modmanager":
                     this.Title = "Nebula — Administrar";
-                    SwitchToModule(new ModManagerView(GameFolder));
+                    var mv = new ModManagerView(GameFolder, CurrentProfile);
+                    mv.OnSyncRequested += SincronizarTodoAsync;
+                    SwitchToModule(mv);
                     break;
                 case "modhub":
                     this.Title = "Nebula — Mod Hub";

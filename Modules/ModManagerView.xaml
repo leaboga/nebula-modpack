@@ -10,17 +10,22 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,24">
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Gesti\u00F3n Local" Foreground="White" FontSize="26" FontWeight="Black"/>
-                <TextBlock Text="ADMINISTRAR MODS INSTALADOS" Foreground="#6B5E8A" FontSize="10" FontWeight="Bold" Margin="2,2,0,0"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Gestión Local" Foreground="White" FontSize="26" FontWeight="Black"/>
+                    <StackPanel Orientation="Horizontal" Margin="2,2,0,0">
+                        <TextBlock Text="ADMINISTRAR MODS INSTALADOS" Foreground="#6B5E8A" FontSize="10" FontWeight="Bold"/>
+                        <Border Width="4" Height="4" Background="#1E1A2E" CornerRadius="2" Margin="10,0"/>
+                        <TextBlock x:Name="SyncStatusLabel" Text="✓ SINCRONIZADO CON GITHUB" Foreground="#10B981" FontSize="10" FontWeight="Bold" Opacity="0.8"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="\uD83D\uDCC1 Abrir Carpeta" Style="{DynamicResource SecondaryButton}" Height="34" Width="140" Click="BtnOpenFolder_Click" Margin="0,0,10,0"/>
-                <Button Content="\uD83D\uDD04 Refrescar" Style="{DynamicResource SecondaryButton}" Height="34" Width="120" Click="BtnRefresh_Click"/>
+                <Button x:Name="BtnSync" Content="🚀 Sincronizar" Style="{DynamicResource SecondaryButton}" Height="34" Width="130" Click="BtnSync_Click" Margin="0,0,10,0" ToolTip="Verificar actualizaciones en GitHub"/>
+                <Button Content="📁 Abrir Carpeta" Style="{DynamicResource SecondaryButton}" Height="34" Width="140" Click="BtnOpenFolder_Click" Margin="0,0,10,0"/>
+                <Button Content="🔄 Refrescar" Style="{DynamicResource SecondaryButton}" Height="34" Width="120" Click="BtnRefresh_Click"/>
             </StackPanel>
-        </Grid>
 
         <!-- Mod List Background -->
         <Border Grid.Row="1" Background="#0A0815" CornerRadius="22" BorderBrush="#1E1A2E" BorderThickness="1" ClipToBounds="True">

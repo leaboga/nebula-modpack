@@ -26,14 +26,26 @@ namespace NebulaLauncher.Modules
     public partial class ModManagerView : UserControl
     {
         private readonly string _gameFolder;
+        private readonly MinecraftProfile? _profile;
         private readonly ObservableCollection<ModItem> _mods = new ObservableCollection<ModItem>();
+        
+        public event Func<Task>? OnSyncRequested;
 
-        public ModManagerView(string gameFolder)
+        public ModManagerView(string gameFolder, MinecraftProfile? profile = null)
         {
             InitializeComponent();
             _gameFolder = gameFolder;
+            _profile = profile;
             ModList.ItemsSource = _mods;
             CargarMods();
+            ActualizarEstadoSync();
+        }
+
+        private void ActualizarEstadoSync()
+        {
+            if (_profile == null || SyncStatusLabel == null) return;
+            SyncStatusLabel.Text = _profile.LastSyncDate == "Nunca" ? "⚠ REQUIERE SINCRONIZACIÓN" : $"✓ ÚLTIMA SINCRO: {_profile.LastSyncDate}";
+            SyncStatusLabel.Foreground = _profile.LastSyncDate == "Nunca" ? (Brush)new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)) : (Brush)new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
         }
 
         private void CargarMods()
@@ -183,5 +195,22 @@ namespace NebulaLauncher.Modules
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e) => CargarMods();
+
+        private async void BtnSync_Click(object sender, RoutedEventArgs e)
+        {
+            if (BtnSync == null) return;
+            BtnSync.IsEnabled = false;
+            BtnSync.Content = "🚀 Sincronizando...";
+            
+            if (OnSyncRequested != null)
+            {
+                await OnSyncRequested.Invoke();
+            }
+            
+            CargarMods();
+            ActualizarEstadoSync();
+            BtnSync.Content = "🚀 Sincronizar";
+            BtnSync.IsEnabled = true;
+        }
     }
 }

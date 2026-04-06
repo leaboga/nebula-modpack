@@ -39,5 +39,7 @@ namespace NebulaLauncher
         public string JavaPath       { get; set; } = "";
         public int    RamGB          { get; set; } = 4;
         public string CreatedAt      { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
+        public string LastSyncDate   { get; set; } = "Nunca";
+        public string LastSyncHash   { get; set; } = "";
     }
 }
