@@ -608,8 +608,13 @@ namespace NebulaLauncher
             try
             {
                 StopCurrentModule();
+                
+                // Nuclear hide to prevent overlapping
                 HomeView.Visibility = Visibility.Collapsed;
+                HomeView.Opacity = 0; 
+
                 ModulesContainer.Content = module;
+                ModulesContainer.Visibility = Visibility.Visible;
                 AnimateView(ModulesContainer);
             }
             catch (Exception ex) { AgregarLog($"Error navegando: {ex.Message}"); }
@@ -860,9 +865,19 @@ namespace NebulaLauncher
             InitializeProfileServices();
             AgregarLog($"\uD83D\uDCC2 Perfil cambiado a: {_session.Profiles[idx].Name}");
             
-            // Re-load version data for the new profile
+            // Sync UI state
             _manifestActual = null;
             _ = CargarVersionesAsync();
+            ActualizarGreeting();
+            ActualizarSidebar();
+            
+            Dispatcher.Invoke(() => {
+                if (CurrentProfile != null) {
+                    VersionComboBox.Items.Clear();
+                    VersionComboBox.Items.Add(CurrentProfile.Version);
+                    VersionComboBox.SelectedIndex = 0;
+                }
+            });
 
             // Sync RAM slider safely
             if (RamSlider != null)
@@ -1381,11 +1396,49 @@ namespace NebulaLauncher
 
         public void CambiarVista(string vista)
         {
-            HomeView.Visibility = Visibility.Collapsed;
+            StopCurrentModule();
+            HomeView.Visibility         = Visibility.Collapsed;
             ModulesContainer.Visibility = Visibility.Collapsed;
+            ModulesContainer.Content    = null; // Clean previous state
+
+            if (vista == "home")
+            {
+                HomeView.Visibility = Visibility.Visible;
+                HomeView.Opacity = 1;
+                AnimateView(HomeView);
+                ActualizarGreeting();
+                ActualizarVersionesEnHome();
+            }
+            else
+            {
+                ModulesContainer.Visibility = Visibility.Visible;
+                AnimateView(ModulesContainer);
+            }
+        }
+
+        private void ActualizarVersionesEnHome()
+        {
+            if (CurrentProfile == null || VersionComboBox == null) return;
             
-            // Re-initialize based on vista name if needed
-            // This is shared logic for sidebar navigation
+            VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
+            VersionComboBox.Items.Clear();
+
+            // All supported versions
+            string[] versions = { "1.21", "1.20.4", "1.20.1", "1.19.4", "1.19.2", "1.18.2", "1.16.5", "1.12.2" };
+            foreach (var v in versions) VersionComboBox.Items.Add(v);
+
+            if (!string.IsNullOrEmpty(CurrentProfile.Version))
+            {
+                if (!VersionComboBox.Items.Contains(CurrentProfile.Version))
+                    VersionComboBox.Items.Add(CurrentProfile.Version);
+                VersionComboBox.SelectedItem = CurrentProfile.Version;
+            }
+            else
+            {
+                VersionComboBox.SelectedIndex = 2; // Default 1.20.1
+            }
+
+            VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
         }
         private void LimpiarCache_Click(object sender, RoutedEventArgs e)
         {
@@ -1402,17 +1455,18 @@ namespace NebulaLauncher
 
         private bool _isMinimal = false;
         private double _originalWidth;
-        private void ToggleMinimalMode_Click(object sender, RoutedEventArgs e)
+        private void ToggleMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if (!_isMinimal) {
-                _originalWidth = this.Width;
-                this.Width = 320;
-                MainRoot.ColumnDefinitions[0].Width = new GridLength(0);
-                _isMinimal = true;
-            } else {
-                this.Width = _originalWidth;
-                MainRoot.ColumnDefinitions[0].Width = new GridLength(230);
-                _isMinimal = false;
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                // Intelligent Maximize (respect taskbar)
+                this.MaxHeight = SystemParameters.WorkArea.Height + 7;
+                this.MaxWidth = SystemParameters.WorkArea.Width + 7;
+                this.WindowState = WindowState.Maximized;
             }
         }
     }
