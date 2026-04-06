@@ -10,6 +10,7 @@
 !plugin.json
 !plugin_config.json
 !appsettings.Development.json
+!changelog.json
 !versions-index.json
 !versions/**/*.json
 /temp_deploy/

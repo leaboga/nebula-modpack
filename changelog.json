@@ -1,0 +1,60 @@
+[
+  {
+    "version": "1.8.7",
+    "date": "06 de Abril, 2026",
+    "title": "Sincronización de Servidor Corregida",
+    "type": "fix",
+    "changes": [
+      "Servidor: Restauración de versions-index.json y manifiestos en la rama main.",
+      "Git: Ajuste de .gitignore para permitir el seguimiento de archivos de sincronización crítica.",
+      "Sync: Corrección de la URL de ModSyncer para habilitar actualizaciones incrementales en la PC del servidor.",
+      "Estabilidad: Reversión de rutas estáticas por dinámicas basadas en la rama principal."
+    ]
+  },
+  {
+    "version": "1.8.6",
+    "date": "06 de Abril, 2026",
+    "title": "Gestión de Perfiles y Mejoras de Red",
+    "type": "update",
+    "changes": [
+      "Ajustes: Añadido botón para eliminar perfiles/instancias directamente desde la configuración.",
+      "Red: Implementada lógica de redirección automática para URLs de manifiestos obsoletas.",
+      "UI: Mejoras en la navegación entre vistas tras acciones administrativas."
+    ]
+  },
+  {
+    "version": "1.8.5",
+    "date": "06 de Abril, 2026",
+    "title": "Hotfix Sincronización Galáctica",
+    "type": "hotfix",
+    "changes": [
+      "Fix: Arreglado fallo que impedía la descarga de mods del servidor debido a un conflicto con versiones vainilla.",
+      "Motor: Optimización del cargador de versiones para priorizar el contenido del Modpack."
+    ]
+  },
+  {
+    "version": "1.6.0",
+    "date": "06 de Abril, 2026",
+    "title": "Nexus Hub: La Nueva Frontera",
+    "type": "update",
+    "changes": [
+      "Nexus Hub: Reescritura total del Mod Hub con diseño Premium Glassmorphism.",
+      "Dependencias: Nuevo sistema cuántico que descarga automáticamente librerías requeridas de Modrinth.",
+      "Rendimiento: Descargas mediante Streams para evitar picos de memoria RAM.",
+      "UX: Implementación de Skeleton Screens y micro-animaciones de entrada.",
+      "Detalles: Panel lateral Flyout con descripción Markdown y galería de imágenes.",
+      "Seguimiento: Implementación de nebula_manifest.json para detección precisa de mods instalados."
+    ]
+  },
+  {
+    "version": "1.5.1",
+    "date": "Abril 2026",
+    "title": "Estabilidad y Limpieza",
+    "type": "fix",
+    "changes": [
+      "UI: Remoción de Padding excedente causante de errores de renderizado.",
+      "Thread: Congelación de pinceles (Brushes.Freeze) para prevenir crashes multihilo.",
+      "Sistema: Limpieza de archivos temporales de compilación en el despliegue."
+    ]
+  }
+]
