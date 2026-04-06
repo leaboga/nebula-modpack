@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.8.9",
+    "date": "06 de Abril, 2026",
+    "title": "Optimización de Motor y Logging",
+    "type": "fix",
+    "changes": [
+      "Motor: Mejora en la detección de versiones de Java para 1.20.5+ (Java 21).",
+      "Logging: Implementada redirección de StandardOutput para ver logs internos del juego en el launcher.",
+      "Estabilidad: Soporte mejorado para NeoForge y resolución de conflictos de librerías JNA.",
+      "Debug: Añadidos prefijos [LOG] y [DEBUG] para identificar el origen de los mensajes en el registro."
+    ]
+  },
+  {
     "version": "1.8.8",
     "date": "06 de Abril, 2026",
     "title": "Corrección de Motor y Versiones",

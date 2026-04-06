@@ -52,6 +52,11 @@ namespace NebulaLauncher
                 {
                     finalVersionId = await InstalarFabric(path);
                 }
+                else if (_neoforgeVersion.ToLower().Contains("neoforge"))
+                {
+                    string javaPath = await GetJavaPath();
+                    finalVersionId = await InstalarNeoForge(path, javaPath);
+                }
                 else if (_neoforgeVersion.ToLower().Contains("forge"))
                 {
                     string javaPath = await GetJavaPath();
@@ -74,6 +79,7 @@ namespace NebulaLauncher
                 
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.CreateNoWindow = true;
 
                 OnLog?.Invoke("🌌 Traspasando horizonte de sucesos...");
@@ -82,7 +88,10 @@ namespace NebulaLauncher
 
                 try { gameProcess.PriorityClass = ProcessPriorityClass.High; } catch { }
 
+                gameProcess.OutputDataReceived += (s, e) => { if (!string.IsNullOrEmpty(e.Data)) OnLog?.Invoke($"[LOG] {e.Data}"); };
                 gameProcess.ErrorDataReceived += (s, e) => { if (!string.IsNullOrEmpty(e.Data)) OnLog?.Invoke($"[DEBUG] {e.Data}"); };
+                
+                gameProcess.BeginOutputReadLine();
                 gameProcess.BeginErrorReadLine();
 
                 await Task.Run(() => gameProcess.WaitForExit());
@@ -91,6 +100,20 @@ namespace NebulaLauncher
                 OnLog?.Invoke("✗ Error de Transmisión: " + ex.Message);
                 return -1;
             }
+        }
+
+        private async Task<string> InstalarNeoForge(MinecraftPath path, string javaPath)
+        {
+             OnLog?.Invoke("⚒ Conectando con NeoForge Maven...");
+             try {
+                // Try to use NeoForge installer if available in the library
+                var type = Type.GetType("CmlLib.Core.Installer.NeoForge.NeoForgeInstaller, CmlLib.Core.Installer.NeoForge") ?? typeof(object);
+                dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
+                return await handler.InstallAsync(_minecraftVersion, _neoforgeVersion, path);
+             } catch {
+                // Fallback to Forge installer if NeoForge fails (some versions are compatible)
+                return await InstalarForge(path, javaPath);
+             }
         }
 
         private void SetOptimizedArgs(MLaunchOption opt)
@@ -105,7 +128,8 @@ namespace NebulaLauncher
                 new MArgument("-XX:G1HeapRegionSize=32M"),
                 new MArgument("-XX:G1MixedGCCountTarget=8"),
                 new MArgument("-XX:+AlwaysPreTouch"),
-                new MArgument("-Dsun.java2d.noddraw=true")
+                new MArgument("-Dsun.java2d.noddraw=true"),
+                new MArgument("-Djna.nosys=true") // Avoid some JNA conflicts
             });
             opt.ExtraJvmArguments = jvmArgs;
         }
@@ -113,12 +137,10 @@ namespace NebulaLauncher
         private async Task<string> InstalarFabric(MinecraftPath path)
         {
             OnLog?.Invoke("🧵 Sincronizando con Fabric API...");
-            var fabricHandler = new FabricInstaller(new HttpClient());
-            dynamic handler = fabricHandler;
+            dynamic handler = new FabricInstaller(new HttpClient());
             
             var loadersRes = await handler.GetLoaderVersionsAsync();
             IEnumerable<dynamic> loaders = loadersRes;
-            
             var latest = loaders.FirstOrDefault()?.Version;
             if (string.IsNullOrEmpty(latest)) throw new Exception("No se encontraron cargadores Fabric.");
             
@@ -130,11 +152,10 @@ namespace NebulaLauncher
         private async Task<string> InstalarForge(MinecraftPath path, string javaPath)
         {
              OnLog?.Invoke("⚒ Conectando con Forge Maven...");
-             // Bypass compile-time checking for Forge as well to avoid namespace issues
-             var forgeHandler = Activator.CreateInstance(Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core.Installer.Forge") ?? typeof(object), new HttpClient());
+             var type = Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core.Installer.Forge") ?? typeof(object);
+             dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
              
              OnLog?.Invoke($"📥 Descargando e instalando Forge {_neoforgeVersion}...");
-             dynamic handler = forgeHandler ?? throw new Exception("Instalador de Forge no encontrado.");
              return await handler.InstallAsync(_minecraftVersion, _neoforgeVersion, path);
         }
 
@@ -144,9 +165,16 @@ namespace NebulaLauncher
             
             int version = 17;
             try {
-               double ver = double.Parse(_minecraftVersion.Replace(".", "").Substring(0, Math.Min(3, _minecraftVersion.Replace(".", "").Length)));
-               if (ver < 116) version = 8;
-               else if (ver >= 1205) version = 21;
+               var parts = _minecraftVersion.Split('.');
+               if (parts.Length >= 2) {
+                   int minor = int.Parse(parts[1]);
+                   int patch = parts.Length >= 3 ? int.Parse(parts[2]) : 0;
+                   
+                   if (minor <= 16) version = 8;
+                   else if (minor <= 19) version = 17;
+                   else if (minor == 20 && patch < 5) version = 17;
+                   else version = 21;
+               }
             } catch { }
 
             string javaRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "runtime", $"java{version}");
