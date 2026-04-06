@@ -1,0 +1,1266 @@
+﻿{
+    "modloader":  "neoforge",
+    "forceConfigUpdate":  true,
+    "version":  "1.3.0",
+    "label":  "v1.3.0 (Master Reset)",
+    "minecraftVersion":  "1.21.1",
+    "mods":  [
+                 {
+                     "md5":  "a51dacb919ef4c94cb105de0f7d563c0",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/AchievementOptimizer_neoforge_1_21_1_2_1_0.jar",
+                     "name":  "AchievementOptimizer_neoforge_1_21_1_2_1_0",
+                     "filename":  "AchievementOptimizer_neoforge_1_21_1_2_1_0.jar"
+                 },
+                 {
+                     "md5":  "2e381342ef87a759d7fb8b6fc225bdbb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/AdditionalStructures_1_21__v_6_3_2_NEO_.jar",
+                     "name":  "AdditionalStructures_1_21__v_6_3_2_NEO_",
+                     "filename":  "AdditionalStructures_1_21__v_6_3_2_NEO_.jar"
+                 },
+                 {
+                     "md5":  "ad1ff51f9ae302227b95d8d70be6a748",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/advancednetherite_neoforge_2_3_1_1_21_1.jar",
+                     "name":  "advancednetherite_neoforge_2_3_1_1_21_1",
+                     "filename":  "advancednetherite_neoforge_2_3_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "6b2b4969ba5d428046d52993a991a6b5",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/airraid_1_0_0.jar",
+                     "name":  "airraid_1_0_0",
+                     "filename":  "airraid_1_0_0.jar"
+                 },
+                 {
+                     "md5":  "ebdb565b20bc1813bb60502967041812",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/airraid_1_0_0_mapped_moj_1_21_1.jar",
+                     "name":  "airraid_1_0_0_mapped_moj_1_21_1",
+                     "filename":  "airraid_1_0_0_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "3897a2cd3ff63948b56c27b42ba06825",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/alexscaves_2_0_9.jar",
+                     "name":  "alexscaves_2_0_9",
+                     "filename":  "alexscaves_2_0_9.jar"
+                 },
+                 {
+                     "md5":  "87970b4846bffc20123ecd267d888ee8",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/alexsmobs_1_22_17.jar",
+                     "name":  "alexsmobs_1_22_17",
+                     "filename":  "alexsmobs_1_22_17.jar"
+                 },
+                 {
+                     "md5":  "49d03c4b56618fda3c7e01af2fc73e7d",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Almanac_1_21_1_2_neoforge_1_5_2.jar",
+                     "name":  "Almanac_1_21_1_2_neoforge_1_5_2",
+                     "filename":  "Almanac_1_21_1_2_neoforge_1_5_2.jar"
+                 },
+                 {
+                     "md5":  "27530bb4fcd327476406d6e3caf94523",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/alternate_current_mc1_21_1_9_0.jar",
+                     "name":  "alternate_current_mc1_21_1_9_0",
+                     "filename":  "alternate_current_mc1_21_1_9_0.jar"
+                 },
+                 {
+                     "md5":  "938236fe501ffbda43b7f5751a2e9c86",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Apotheosis_1_21_1_8_5_1.jar",
+                     "name":  "Apotheosis_1_21_1_8_5_1",
+                     "filename":  "Apotheosis_1_21_1_8_5_1.jar"
+                 },
+                 {
+                     "md5":  "a3eeb5df11aaf5d5a661c498f76b8133",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ApothicAttributes_1_21_1_2_9_1.jar",
+                     "name":  "ApothicAttributes_1_21_1_2_9_1",
+                     "filename":  "ApothicAttributes_1_21_1_2_9_1.jar"
+                 },
+                 {
+                     "md5":  "c10d97b4d96ad417490d45eeb70180a8",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ApothicEnchanting_1_21_1_1_5_2.jar",
+                     "name":  "ApothicEnchanting_1_21_1_1_5_2",
+                     "filename":  "ApothicEnchanting_1_21_1_1_5_2.jar"
+                 },
+                 {
+                     "md5":  "2a02c6572244c815de42d8b9e35aef31",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ApothicSpawners_1_21_1_1_3_4.jar",
+                     "name":  "ApothicSpawners_1_21_1_1_3_4",
+                     "filename":  "ApothicSpawners_1_21_1_1_3_4.jar"
+                 },
+                 {
+                     "md5":  "7a45a948b525c031ca85d221dfdbed85",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/architectury_13_0_8_neoforge.jar",
+                     "name":  "architectury_13_0_8_neoforge",
+                     "filename":  "architectury_13_0_8_neoforge.jar"
+                 },
+                 {
+                     "md5":  "499aba921ddc647cbcf0a5f4db4c4db9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Arda_s_Sculks_1_4_3_5__NEOFORGE___1_21_1_.jar",
+                     "name":  "Arda_s_Sculks_1_4_3_5__NEOFORGE___1_21_1_",
+                     "filename":  "Arda_s_Sculks_1_4_3_5__NEOFORGE___1_21_1_.jar"
+                 },
+                 {
+                     "md5":  "1552cea16a40215f9773e609114ccce1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/attributefix_neoforge_1_21_1_21_1_3.jar",
+                     "name":  "attributefix_neoforge_1_21_1_21_1_3",
+                     "filename":  "attributefix_neoforge_1_21_1_21_1_3.jar"
+                 },
+                 {
+                     "md5":  "59ee243a5ccd09fff1dd2879b3cad72a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/BadOptimizations_2_4_1_1_21_1.jar",
+                     "name":  "BadOptimizations_2_4_1_1_21_1",
+                     "filename":  "BadOptimizations_2_4_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "dea2b315841d5a8167980f39ff3ba526",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/bclib_21_0_13.jar",
+                     "name":  "bclib_21_0_13",
+                     "filename":  "bclib_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "936b7eefc0698881829413052f6d05b6",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/bclib_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "bclib_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "bclib_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "426439919e24518107fa72df4465a6f2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/bettercombat_neoforge_2_3_1_1_21_1.jar",
+                     "name":  "bettercombat_neoforge_2_3_1_1_21_1",
+                     "filename":  "bettercombat_neoforge_2_3_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "943143746179b9c109ec7e1a485b9e9e",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/betterendcities_betterend_1_21_1.jar",
+                     "name":  "betterendcities_betterend_1_21_1",
+                     "filename":  "betterendcities_betterend_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "d91e97b29c2097a74c625d28858be6be",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/betterendcities_betterend_1_21_1_mapped_moj_1_21_1.jar",
+                     "name":  "betterendcities_betterend_1_21_1_mapped_moj_1_21_1",
+                     "filename":  "betterendcities_betterend_1_21_1_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "081882282efe6239ac294b2d1fe2cd22",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/betterfpsdist_1_21_6_0.jar",
+                     "name":  "betterfpsdist_1_21_6_0",
+                     "filename":  "betterfpsdist_1_21_6_0.jar"
+                 },
+                 {
+                     "md5":  "5c9a90850267015ab7ff8d24a76f4d4a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/betterworldloadingnf21_1_0.jar",
+                     "name":  "betterworldloadingnf21_1_0",
+                     "filename":  "betterworldloadingnf21_1_0.jar"
+                 },
+                 {
+                     "md5":  "b75818ce6fdcbca3cde72cb1a31fbbf8",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/better_end_21_0_8.jar",
+                     "name":  "better_end_21_0_8",
+                     "filename":  "better_end_21_0_8.jar"
+                 },
+                 {
+                     "md5":  "6285063df220717c016e21834e81ce72",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/better_end_21_0_8_mapped_moj_1_21_1.jar",
+                     "name":  "better_end_21_0_8_mapped_moj_1_21_1",
+                     "filename":  "better_end_21_0_8_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "3e9bd3af94cb9e31824df829fb482dbb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/blockui_1_0_210_1_21_1_snapshot.jar",
+                     "name":  "blockui_1_0_210_1_21_1_snapshot",
+                     "filename":  "blockui_1_0_210_1_21_1_snapshot.jar"
+                 },
+                 {
+                     "md5":  "9caaedd94650772aeba7d8d8cbdaf5aa",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/block_factorys_bosses_2_0_4_neo_1_21_1.jar",
+                     "name":  "block_factorys_bosses_2_0_4_neo_1_21_1",
+                     "filename":  "block_factorys_bosses_2_0_4_neo_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "9f627fe031221159d74a491e279f773a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/bookshelf_neoforge_1_21_1_21_1_81.jar",
+                     "name":  "bookshelf_neoforge_1_21_1_21_1_81",
+                     "filename":  "bookshelf_neoforge_1_21_1_21_1_81.jar"
+                 },
+                 {
+                     "md5":  "64858cb1bef28edc2b4c10231fc88652",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/boss_checklist_neoforge_4_0_1.jar",
+                     "name":  "boss_checklist_neoforge_4_0_1",
+                     "filename":  "boss_checklist_neoforge_4_0_1.jar"
+                 },
+                 {
+                     "md5":  "979dc8f107a40b0baad2100b0e7b4990",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/chest_item_1_21_1_1_1_3_8.jar",
+                     "name":  "chest_item_1_21_1_1_1_3_8",
+                     "filename":  "chest_item_1_21_1_1_1_3_8.jar"
+                 },
+                 {
+                     "md5":  "19ca2330c30674b01cf8ff75cee2c3a5",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/chunkactivitytracker_neoforge_1_0_1_1_21_1.jar",
+                     "name":  "chunkactivitytracker_neoforge_1_0_1_1_21_1",
+                     "filename":  "chunkactivitytracker_neoforge_1_0_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "c461f3132c48d7bc71a9f2b307273a88",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Chunky_NeoForge_1_4_23.jar",
+                     "name":  "Chunky_NeoForge_1_4_23",
+                     "filename":  "Chunky_NeoForge_1_4_23.jar"
+                 },
+                 {
+                     "md5":  "4fc3116b28fd099066b8c5e97edfedeb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/cinematiczoom_1_0_0_1_21_1.jar",
+                     "name":  "cinematiczoom_1_0_0_1_21_1",
+                     "filename":  "cinematiczoom_1_0_0_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "5b81c237af085baad2635a65e01a1f86",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/citadel_1_21_1_2_7_5.jar",
+                     "name":  "citadel_1_21_1_2_7_5",
+                     "filename":  "citadel_1_21_1_2_7_5.jar"
+                 },
+                 {
+                     "md5":  "d223fde0ed1e216ce4f4379181d29faf",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/CleanF3_mc1_21_1_0_4_9.jar",
+                     "name":  "CleanF3_mc1_21_1_0_4_9",
+                     "filename":  "CleanF3_mc1_21_1_0_4_9.jar"
+                 },
+                 {
+                     "md5":  "13e44da0d39e459e34c3ef6019ceb37a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/clientsort_neoforge_2_2_1_1_21_1.jar",
+                     "name":  "clientsort_neoforge_2_2_1_1_21_1",
+                     "filename":  "clientsort_neoforge_2_2_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "4c3757160403fcccb8ad468c2ea22862",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/cloth_config_15_0_140_neoforge.jar",
+                     "name":  "cloth_config_15_0_140_neoforge",
+                     "filename":  "cloth_config_15_0_140_neoforge.jar"
+                 },
+                 {
+                     "md5":  "8b42a9d7a72bde90fa061d17e2859e7b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Clumps_neoforge_1_21_1_19_0_0_1.jar",
+                     "name":  "Clumps_neoforge_1_21_1_19_0_0_1",
+                     "filename":  "Clumps_neoforge_1_21_1_19_0_0_1.jar"
+                 },
+                 {
+                     "md5":  "ba7a318dcf4190a27e017eacac47427e",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/comforts_neoforge_9_0_5_1_21_1.jar",
+                     "name":  "comforts_neoforge_9_0_5_1_21_1",
+                     "filename":  "comforts_neoforge_9_0_5_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "54d01ce23b1884d10d6e69cf9cb84bc1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ConfluenceOtherworld_1_2_4_260226.jar",
+                     "name":  "ConfluenceOtherworld_1_2_4_260226",
+                     "filename":  "ConfluenceOtherworld_1_2_4_260226.jar"
+                 },
+                 {
+                     "md5":  "f2d38f850688eefa338b807801df2b4b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/connectivity_1_21_1_7_6.jar",
+                     "name":  "connectivity_1_21_1_7_6",
+                     "filename":  "connectivity_1_21_1_7_6.jar"
+                 },
+                 {
+                     "md5":  "35dd11376206a6d6e6666ece79fe24fd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/connector_2_0_0_beta_13_1_21_1_full.jar",
+                     "name":  "connector_2_0_0_beta_13_1_21_1_full",
+                     "filename":  "connector_2_0_0_beta_13_1_21_1_full.jar"
+                 },
+                 {
+                     "md5":  "939fc51820a34f347149b8c726cf78b7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Corgilib_NeoForge_1_21_1_5_0_0_7.jar",
+                     "name":  "Corgilib_NeoForge_1_21_1_5_0_0_7",
+                     "filename":  "Corgilib_NeoForge_1_21_1_5_0_0_7.jar"
+                 },
+                 {
+                     "md5":  "ec29a125a0298eb44f75847e8f59c7f4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/create_1_21_1_6_0_9.jar",
+                     "name":  "create_1_21_1_6_0_9",
+                     "filename":  "create_1_21_1_6_0_9.jar"
+                 },
+                 {
+                     "md5":  "a2c8736ce8c584e62e002955bdb442ad",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/CreativeCore_NEOFORGE_v2_13_34_mc1_21_1.jar",
+                     "name":  "CreativeCore_NEOFORGE_v2_13_34_mc1_21_1",
+                     "filename":  "CreativeCore_NEOFORGE_v2_13_34_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "fba4de114511671aa0c4a10f34268faa",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/CreeperOverhaul_neoforge_1_21_1_4_0_6.jar",
+                     "name":  "CreeperOverhaul_neoforge_1_21_1_4_0_6",
+                     "filename":  "CreeperOverhaul_neoforge_1_21_1_4_0_6.jar"
+                 },
+                 {
+                     "md5":  "2a542779bc634e89c2383da587f2f4bd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/cristellib_neoforge_1_21_1_3_0_3.jar",
+                     "name":  "cristellib_neoforge_1_21_1_3_0_3",
+                     "filename":  "cristellib_neoforge_1_21_1_3_0_3.jar"
+                 },
+                 {
+                     "md5":  "d43ddb1b038a75d940f1a35156eb02f1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/crittersandcompanions_neoforge_1_21_1_2_3_4.jar",
+                     "name":  "crittersandcompanions_neoforge_1_21_1_2_3_4",
+                     "filename":  "crittersandcompanions_neoforge_1_21_1_2_3_4.jar"
+                 },
+                 {
+                     "md5":  "9cc5caf701898ba7236ca1e841d9049b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/cupboard_1_21_2_9.jar",
+                     "name":  "cupboard_1_21_2_9",
+                     "filename":  "cupboard_1_21_2_9.jar"
+                 },
+                 {
+                     "md5":  "e8f0a3574264bb202c153b90293dc84c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/curios_neoforge_9_5_1_1_21_1.jar",
+                     "name":  "curios_neoforge_9_5_1_1_21_1",
+                     "filename":  "curios_neoforge_9_5_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "a37a85fb334f30da25d4b675e5e70297",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/domum_ornamentum_1_0_228_main.jar",
+                     "name":  "domum_ornamentum_1_0_228_main",
+                     "filename":  "domum_ornamentum_1_0_228_main.jar"
+                 },
+                 {
+                     "md5":  "b0f9d9bd40b48aedf92c4d7f2aaf60bb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/drippyloadingscreen_neoforge_3_1_0_MC_1_21_1.jar",
+                     "name":  "drippyloadingscreen_neoforge_3_1_0_MC_1_21_1",
+                     "filename":  "drippyloadingscreen_neoforge_3_1_0_MC_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "ac6021fa4a475ce61d4bfa397987a624",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/dungeons_1_19_mc1_21_1.jar",
+                     "name":  "dungeons_1_19_mc1_21_1",
+                     "filename":  "dungeons_1_19_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "e1f17d9834e66e86742cf68d0d387421",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/dynamictrees_neoforge_1_21_1_1_7_0.jar",
+                     "name":  "dynamictrees_neoforge_1_21_1_1_7_0",
+                     "filename":  "dynamictrees_neoforge_1_21_1_1_7_0.jar"
+                 },
+                 {
+                     "md5":  "e5ef3e5d37eedad79cf44897229fd8f2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/dynamic_fps_3_11_4_minecraft_1_21_0_neoforge.jar",
+                     "name":  "dynamic_fps_3_11_4_minecraft_1_21_0_neoforge",
+                     "filename":  "dynamic_fps_3_11_4_minecraft_1_21_0_neoforge.jar"
+                 },
+                 {
+                     "md5":  "3bd6937afff04a4f22dba7d281bb8000",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/echoes_of_the_end__structures__11_00_12_Release_neoforge_1_21_1.jar",
+                     "name":  "echoes_of_the_end__structures__11_00_12_Release_neoforge_1_21_1",
+                     "filename":  "echoes_of_the_end__structures__11_00_12_Release_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "55d23daccc9bf63447a4cb10e3c21db1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/embeddium_1_0_15_mc1_21_1.jar",
+                     "name":  "embeddium_1_0_15_mc1_21_1",
+                     "filename":  "embeddium_1_0_15_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "ca9775a6f300989cb4d2063e1833579b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/emi_1_1_22_1_21_1_neoforge.jar",
+                     "name":  "emi_1_1_22_1_21_1_neoforge",
+                     "filename":  "emi_1_1_22_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "03e87f38be1a7218c55f35676f6248ac",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/endermanoverhaul_neoforge_1_21_1_2_0_3.jar",
+                     "name":  "endermanoverhaul_neoforge_1_21_1_2_0_3",
+                     "filename":  "endermanoverhaul_neoforge_1_21_1_2_0_3.jar"
+                 },
+                 {
+                     "md5":  "ef1da268d5562d65d85da5af3c290a03",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/entityculling_neoforge_1_9_5_mc1_21_1.jar",
+                     "name":  "entityculling_neoforge_1_9_5_mc1_21_1",
+                     "filename":  "entityculling_neoforge_1_9_5_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "e657e6b037a82733207f9a0664741011",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/entity_model_features_1_21_neoforge_3_0_12.jar",
+                     "name":  "entity_model_features_1_21_neoforge_3_0_12",
+                     "filename":  "entity_model_features_1_21_neoforge_3_0_12.jar"
+                 },
+                 {
+                     "md5":  "488a07b9b5e7c367147507d044c69eab",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/entity_texture_features_1_21_neoforge_7_0_9.jar",
+                     "name":  "entity_texture_features_1_21_neoforge_7_0_9",
+                     "filename":  "entity_texture_features_1_21_neoforge_7_0_9.jar"
+                 },
+                 {
+                     "md5":  "01f261a2304303324b5a66d5570a9e8d",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/EternalNether_v21_1_3_1_21_1_NeoForge.jar",
+                     "name":  "EternalNether_v21_1_3_1_21_1_NeoForge",
+                     "filename":  "EternalNether_v21_1_3_1_21_1_NeoForge.jar"
+                 },
+                 {
+                     "md5":  "161bdf0526ed22d6a4764aa10a1060d9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/evenbetternether_1_3_0_neoforge_1_21_1.jar",
+                     "name":  "evenbetternether_1_3_0_neoforge_1_21_1",
+                     "filename":  "evenbetternether_1_3_0_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "32ef6216a5ae56a2016c8dc046c7fa76",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/fancymenu_neoforge_3_8_1_MC_1_21_1.jar",
+                     "name":  "fancymenu_neoforge_3_8_1_MC_1_21_1",
+                     "filename":  "fancymenu_neoforge_3_8_1_MC_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "b1971a08ee136896c419d94c89702341",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/FarmersDelight_1_21_1_1_2_10.jar",
+                     "name":  "FarmersDelight_1_21_1_1_2_10",
+                     "filename":  "FarmersDelight_1_21_1_1_2_10.jar"
+                 },
+                 {
+                     "md5":  "dc4db71864c44bbece1d66c95c56ad95",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/fast_ip_ping_v1_0_8_mc1_21_1_neoforge.jar",
+                     "name":  "fast_ip_ping_v1_0_8_mc1_21_1_neoforge",
+                     "filename":  "fast_ip_ping_v1_0_8_mc1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "bf9f69eb70e4a85bac05687797139af9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/fdlib_1_0_8_1_21_1.jar",
+                     "name":  "fdlib_1_0_8_1_21_1",
+                     "filename":  "fdlib_1_0_8_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "e0374dac41d6c641903f9e241911e1d3",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ferritecore_7_0_3_neoforge.jar",
+                     "name":  "ferritecore_7_0_3_neoforge",
+                     "filename":  "ferritecore_7_0_3_neoforge.jar"
+                 },
+                 {
+                     "md5":  "d0fee8a0321c9d8978943c72cf1cfb93",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/forgified_fabric_api_0_116_7_2_2_4_1_21_1.jar",
+                     "name":  "forgified_fabric_api_0_116_7_2_2_4_1_21_1",
+                     "filename":  "forgified_fabric_api_0_116_7_2_2_4_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "06f94f31d9e0b59c8b42a5b0df7013d6",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/framework_neoforge_1_21_1_0_13_11.jar",
+                     "name":  "framework_neoforge_1_21_1_0_13_11",
+                     "filename":  "framework_neoforge_1_21_1_0_13_11.jar"
+                 },
+                 {
+                     "md5":  "f6554f4d7f3bd02d9a5ce71334b444d5",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/fwa_1_21_1_neoforge_1_1_1.jar",
+                     "name":  "fwa_1_21_1_neoforge_1_1_1",
+                     "filename":  "fwa_1_21_1_neoforge_1_1_1.jar"
+                 },
+                 {
+                     "md5":  "cd0823556e6d24046bd0f4ba74cd4981",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/fzzy_config_0_7_6_1_21_neoforge.jar",
+                     "name":  "fzzy_config_0_7_6_1_21_neoforge",
+                     "filename":  "fzzy_config_0_7_6_1_21_neoforge.jar"
+                 },
+                 {
+                     "md5":  "097799f159db31dd123eb47e31eacb01",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/geckolib_neoforge_1_21_1_4_8_3.jar",
+                     "name":  "geckolib_neoforge_1_21_1_4_8_3",
+                     "filename":  "geckolib_neoforge_1_21_1_4_8_3.jar"
+                 },
+                 {
+                     "md5":  "c0259885d0d200894ce449fc95a1b63b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/getittogetherdrops_neoforge_1_21_5_1_4.jar",
+                     "name":  "getittogetherdrops_neoforge_1_21_5_1_4",
+                     "filename":  "getittogetherdrops_neoforge_1_21_5_1_4.jar"
+                 },
+                 {
+                     "md5":  "67962a0ca8219359700f02d76cbaf34b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Gobber_NeoForge_1_21_1_2_10_15.jar",
+                     "name":  "Gobber_NeoForge_1_21_1_2_10_15",
+                     "filename":  "Gobber_NeoForge_1_21_1_2_10_15.jar"
+                 },
+                 {
+                     "md5":  "3826175240618a43c2a2d661232235a9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/golemoverhaul_neoforge_1_21_1_1_1_0.jar",
+                     "name":  "golemoverhaul_neoforge_1_21_1_1_1_0",
+                     "filename":  "golemoverhaul_neoforge_1_21_1_1_1_0.jar"
+                 },
+                 {
+                     "md5":  "96a47a7cff915294a949f73a5f2a8816",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/gpumemleakfix_1_21_1_8.jar",
+                     "name":  "gpumemleakfix_1_21_1_8",
+                     "filename":  "gpumemleakfix_1_21_1_8.jar"
+                 },
+                 {
+                     "md5":  "d6efbc897f7634bd121f51eee26041e4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/GPUTape_1_20_6_1_21x_1_0_3.jar",
+                     "name":  "GPUTape_1_20_6_1_21x_1_0_3",
+                     "filename":  "GPUTape_1_20_6_1_21x_1_0_3.jar"
+                 },
+                 {
+                     "md5":  "871dd941714b18ab932a538975dc2368",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/guardvillagers_2_4_7_1_21_1.jar",
+                     "name":  "guardvillagers_2_4_7_1_21_1",
+                     "filename":  "guardvillagers_2_4_7_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "5f26d65a582ebe10a7224b9f68f85425",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/hominid_1_3_1.jar",
+                     "name":  "hominid_1_3_1",
+                     "filename":  "hominid_1_3_1.jar"
+                 },
+                 {
+                     "md5":  "927651e5e8146d8951ef473e7ea50498",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/IceAndFireCE_2_0_beta_13_1_21_1_neoforge.jar",
+                     "name":  "IceAndFireCE_2_0_beta_13_1_21_1_neoforge",
+                     "filename":  "IceAndFireCE_2_0_beta_13_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "567bb6d9155070ad858740af12450c63",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ImmediatelyFast_NeoForge_1_6_10_1_21_1.jar",
+                     "name":  "ImmediatelyFast_NeoForge_1_6_10_1_21_1",
+                     "filename":  "ImmediatelyFast_NeoForge_1_6_10_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "d9f1ab469ff92e45becf11b021338348",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/immersive_aircraft_1_4_2_1_21_1_neoforge.jar",
+                     "name":  "immersive_aircraft_1_4_2_1_21_1_neoforge",
+                     "filename":  "immersive_aircraft_1_4_2_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "30c504230b33f393f2126940fd6fbaec",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/immersive_machinery_0_2_0_1_21_1_neoforge.jar",
+                     "name":  "immersive_machinery_0_2_0_1_21_1_neoforge",
+                     "filename":  "immersive_machinery_0_2_0_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "e02478dbec844c8d2a43be3a99324361",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/immersive_optimization_neoforge_1_21_0_1_4.jar",
+                     "name":  "immersive_optimization_neoforge_1_21_0_1_4",
+                     "filename":  "immersive_optimization_neoforge_1_21_0_1_4.jar"
+                 },
+                 {
+                     "md5":  "37793d374c89e38074bde664fe36df59",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Incendium_1_21_x_v5_4_4.jar",
+                     "name":  "Incendium_1_21_x_v5_4_4",
+                     "filename":  "Incendium_1_21_x_v5_4_4.jar"
+                 },
+                 {
+                     "md5":  "ec722b68291c3f06f305ca2d25fa12a1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/inventoryhud_neoforged_1_21_1_3_4_28.jar",
+                     "name":  "inventoryhud_neoforged_1_21_1_3_4_28",
+                     "filename":  "inventoryhud_neoforged_1_21_1_3_4_28.jar"
+                 },
+                 {
+                     "md5":  "6c1122aa7c2b1a4f24831e394c5b513f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/iris_neoforge_1_8_12_mc1_21_1.jar",
+                     "name":  "iris_neoforge_1_8_12_mc1_21_1",
+                     "filename":  "iris_neoforge_1_8_12_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "79d7b3cd44902c395ba23d464f9b6ed4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/irons_spellbooks_1_21_1_3_15_3.jar",
+                     "name":  "irons_spellbooks_1_21_1_3_15_3",
+                     "filename":  "irons_spellbooks_1_21_1_3_15_3.jar"
+                 },
+                 {
+                     "md5":  "80f9186d25b02ebbfa5773416f5da410",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Jade_1_21_1_NeoForge_15_10_5.jar",
+                     "name":  "Jade_1_21_1_NeoForge_15_10_5",
+                     "filename":  "Jade_1_21_1_NeoForge_15_10_5.jar"
+                 },
+                 {
+                     "md5":  "990c5aec07a45e8336f16bdd13d48cc0",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/jungle_treehouse_village_1_0_0_neoforge_1_21_1.jar",
+                     "name":  "jungle_treehouse_village_1_0_0_neoforge_1_21_1",
+                     "filename":  "jungle_treehouse_village_1_0_0_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "b947d4e0742a7e80b9b4d649a8ef9ac7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/jupiter_2_3_5_1_21_1_neoforge.jar",
+                     "name":  "jupiter_2_3_5_1_21_1_neoforge",
+                     "filename":  "jupiter_2_3_5_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "6e77d08299ea1ec7756a299263bc469b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/konkrete_neoforge_1_9_9_MC_1_21.jar",
+                     "name":  "konkrete_neoforge_1_9_9_MC_1_21",
+                     "filename":  "konkrete_neoforge_1_9_9_MC_1_21.jar"
+                 },
+                 {
+                     "md5":  "046def10d62e5fbeb0ff5bb95828355a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/kotlinforforge_5_8_0_all.jar",
+                     "name":  "kotlinforforge_5_8_0_all",
+                     "filename":  "kotlinforforge_5_8_0_all.jar"
+                 },
+                 {
+                     "md5":  "f7544ec5d55b4f01f76837826ebfb1b7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/LazyDFU__UNOFFICIAL__1_21.jar",
+                     "name":  "LazyDFU__UNOFFICIAL__1_21",
+                     "filename":  "LazyDFU__UNOFFICIAL__1_21.jar"
+                 },
+                 {
+                     "md5":  "2d913f07606373a7f94b0f8cc8b16499",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/letmedespawn_1_21_x_neoforge_1_5_0.jar",
+                     "name":  "letmedespawn_1_21_x_neoforge_1_5_0",
+                     "filename":  "letmedespawn_1_21_x_neoforge_1_5_0.jar"
+                 },
+                 {
+                     "md5":  "f27209702fbb13f1dccb98e77931b5ae",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/lionfishapi_2_6.jar",
+                     "name":  "lionfishapi_2_6",
+                     "filename":  "lionfishapi_2_6.jar"
+                 },
+                 {
+                     "md5":  "d9dd28f5ca52315d592e4bf46c89123c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/lithosphere_1_6_17_06_2025__1_20_5___1_21_5_.jar",
+                     "name":  "lithosphere_1_6_17_06_2025__1_20_5___1_21_5_",
+                     "filename":  "lithosphere_1_6_17_06_2025__1_20_5___1_21_5_.jar"
+                 },
+                 {
+                     "md5":  "963e5674ea13b79564ce21985300b17b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/loadsupport_neoforge_1_21_1_1_2_1.jar",
+                     "name":  "loadsupport_neoforge_1_21_1_1_2_1",
+                     "filename":  "loadsupport_neoforge_1_21_1_1_2_1.jar"
+                 },
+                 {
+                     "md5":  "7ab148b1441805382e140c8eded8e4a6",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Luminous_Nether_V1_3_2___NeoForge_1_3_2.jar",
+                     "name":  "Luminous_Nether_V1_3_2___NeoForge_1_3_2",
+                     "filename":  "Luminous_Nether_V1_3_2___NeoForge_1_3_2.jar"
+                 },
+                 {
+                     "md5":  "c6ea639af210c38cce3130ce4a053fa1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Luminous_Overworld_V1_5_4___NeoForge_1_21_1.jar",
+                     "name":  "Luminous_Overworld_V1_5_4___NeoForge_1_21_1",
+                     "filename":  "Luminous_Overworld_V1_5_4___NeoForge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "fddf4bf59c1afdca5976ab96b735285b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/L_Ender_s_Cataclysm_1_21_1_3_23.jar",
+                     "name":  "L_Ender_s_Cataclysm_1_21_1_3_23",
+                     "filename":  "L_Ender_s_Cataclysm_1_21_1_3_23.jar"
+                 },
+                 {
+                     "md5":  "dc2d5057c84b1a20e72bdc742598b37c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/man_of_many_planes_0_2_1_1_21_1_neoforge.jar",
+                     "name":  "man_of_many_planes_0_2_1_1_21_1_neoforge",
+                     "filename":  "man_of_many_planes_0_2_1_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "cc4acadb79d307e8193a4b4bf1e16487",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/medieval_buildings_1_21_1_1_1_1_neoforge.jar",
+                     "name":  "medieval_buildings_1_21_1_1_1_1_neoforge",
+                     "filename":  "medieval_buildings_1_21_1_1_1_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "c98a8afd7e67e4ca2622bc207b5e5494",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/medieval_buildings_end_edition_1_21_1_1_0_4_neoforge.jar",
+                     "name":  "medieval_buildings_end_edition_1_21_1_1_0_4_neoforge",
+                     "filename":  "medieval_buildings_end_edition_1_21_1_1_0_4_neoforge.jar"
+                 },
+                 {
+                     "md5":  "b35ee4e9b0592b93c2c51ea91ed22de0",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/medieval_buildings_nether_edition_1_21_1_1_0_2_neoforge.jar",
+                     "name":  "medieval_buildings_nether_edition_1_21_1_1_0_2_neoforge",
+                     "filename":  "medieval_buildings_nether_edition_1_21_1_1_0_2_neoforge.jar"
+                 },
+                 {
+                     "md5":  "875f4a68f2cd7ee2cc135904653c93d4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/melody_neoforge_1_0_10_MC_1_21.jar",
+                     "name":  "melody_neoforge_1_0_10_MC_1_21",
+                     "filename":  "melody_neoforge_1_0_10_MC_1_21.jar"
+                 },
+                 {
+                     "md5":  "2ed25f310dc20c6aef4ad032c806d4b7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/midnightlib_neoforge_1_9_2_1_21_1.jar",
+                     "name":  "midnightlib_neoforge_1_9_2_1_21_1",
+                     "filename":  "midnightlib_neoforge_1_9_2_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "34b0f6d807da7acd39623e664efd06b0",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/minecolonies_1_1_1281_1_21_1_snapshot.jar",
+                     "name":  "minecolonies_1_1_1281_1_21_1_snapshot",
+                     "filename":  "minecolonies_1_1_1281_1_21_1_snapshot.jar"
+                 },
+                 {
+                     "md5":  "573e180dbae93cdb8bfe0179f260b6aa",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/modernfix_neoforge_5_26_1_mc1_21_1.jar",
+                     "name":  "modernfix_neoforge_5_26_1_mc1_21_1",
+                     "filename":  "modernfix_neoforge_5_26_1_mc1_21_1.jar"
+                 },
+                 {
+                     "md5":  "a6819ad592eb346bd1343a40b5319ab3",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/monocle_0_2_3_ms.jar",
+                     "name":  "monocle_0_2_3_ms",
+                     "filename":  "monocle_0_2_3_ms.jar"
+                 },
+                 {
+                     "md5":  "21521ab41deedaabc44206f3cca2f6eb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/MoogsNetherStructures_1_21_2_0_31.jar",
+                     "name":  "MoogsNetherStructures_1_21_2_0_31",
+                     "filename":  "MoogsNetherStructures_1_21_2_0_31.jar"
+                 },
+                 {
+                     "md5":  "12ac559170d35c57542998a4f2ccb194",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/MoogsVoyagerStructures_1_21_5_0_5.jar",
+                     "name":  "MoogsVoyagerStructures_1_21_5_0_5",
+                     "filename":  "MoogsVoyagerStructures_1_21_5_0_5.jar"
+                 },
+                 {
+                     "md5":  "6867bf5ba45c9eef1f06a29cf20e5690",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/moogs_structures_1_1_0_1_21_1_21_1_neoforge.jar",
+                     "name":  "moogs_structures_1_1_0_1_21_1_21_1_neoforge",
+                     "filename":  "moogs_structures_1_1_0_1_21_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "1b8789dd093709c27c64911631a31cfe",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/mowziesmobs_1_21_1_1_7_5.jar",
+                     "name":  "mowziesmobs_1_21_1_1_7_5",
+                     "filename":  "mowziesmobs_1_21_1_1_7_5.jar"
+                 },
+                 {
+                     "md5":  "7c503285a54808a9ae80b2364156bd20",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/MutantMonsters_v21_1_1_1_21_1_NeoForge.jar",
+                     "name":  "MutantMonsters_v21_1_1_1_21_1_NeoForge",
+                     "filename":  "MutantMonsters_v21_1_1_1_21_1_NeoForge.jar"
+                 },
+                 {
+                     "md5":  "3b8eced0e31182b29bc5a60d68fe9f04",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/MutantsZombies_1_3_1_NeoForge_mc1_21.jar",
+                     "name":  "MutantsZombies_1_3_1_NeoForge_mc1_21",
+                     "filename":  "MutantsZombies_1_3_1_NeoForge_mc1_21.jar"
+                 },
+                 {
+                     "md5":  "2c7cf8892e4a59130b479ccfcac4ff0e",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/noisium_neoforge_2_7_0_mc1_21_1_21_1.jar",
+                     "name":  "noisium_neoforge_2_7_0_mc1_21_1_21_1",
+                     "filename":  "noisium_neoforge_2_7_0_mc1_21_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "98c12db8c9263bc427d0e06b3228610a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/nordic_structures_1_7_2_neoforge_1_21_1.jar",
+                     "name":  "nordic_structures_1_7_2_neoforge_1_21_1",
+                     "filename":  "nordic_structures_1_7_2_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "ba82d799e646cd49232f3f5dd73a668d",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Oh_The_Biomes_Weve_Gone_NeoForge_2_5_4.jar",
+                     "name":  "Oh_The_Biomes_Weve_Gone_NeoForge_2_5_4",
+                     "filename":  "Oh_The_Biomes_Weve_Gone_NeoForge_2_5_4.jar"
+                 },
+                 {
+                     "md5":  "2110be7f2ffacf4c6093504d67a7cb00",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Oh_The_Trees_Youll_Grow_neoforge_1_21_1_5_2_0.jar",
+                     "name":  "Oh_The_Trees_Youll_Grow_neoforge_1_21_1_5_2_0",
+                     "filename":  "Oh_The_Trees_Youll_Grow_neoforge_1_21_1_5_2_0.jar"
+                 },
+                 {
+                     "md5":  "40ae12e5ea2554ae97ea38e133558e86",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Patchouli_1_21_1_92_NEOFORGE.jar",
+                     "name":  "Patchouli_1_21_1_92_NEOFORGE",
+                     "filename":  "Patchouli_1_21_1_92_NEOFORGE.jar"
+                 },
+                 {
+                     "md5":  "1ed84c147a983ec0bd03bcf74aae948f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/piglinproliferation_1_21_1_2_0_12.jar",
+                     "name":  "piglinproliferation_1_21_1_2_0_12",
+                     "filename":  "piglinproliferation_1_21_1_2_0_12.jar"
+                 },
+                 {
+                     "md5":  "0a5d1ff16496d2bc72305053af3e3077",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Ping_Wheel_1_12_1_neoforge_1_21_1.jar",
+                     "name":  "Ping_Wheel_1_12_1_neoforge_1_21_1",
+                     "filename":  "Ping_Wheel_1_12_1_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "cc725fc5406d3af893484cfbba06f6ed",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Placebo_1_21_1_9_9_1.jar",
+                     "name":  "Placebo_1_21_1_9_9_1",
+                     "filename":  "Placebo_1_21_1_9_9_1.jar"
+                 },
+                 {
+                     "md5":  "ecb81c9479605db12a77bea774b88406",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/player_animation_lib_forge_2_0_4_1_21_1.jar",
+                     "name":  "player_animation_lib_forge_2_0_4_1_21_1",
+                     "filename":  "player_animation_lib_forge_2_0_4_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "533c154fb306cd8043564ee1533873ce",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/prickle_neoforge_1_21_1_21_1_11.jar",
+                     "name":  "prickle_neoforge_1_21_1_21_1_11",
+                     "filename":  "prickle_neoforge_1_21_1_21_1_11.jar"
+                 },
+                 {
+                     "md5":  "1434047357307adf16e8bbe8e9f9796c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/punchy_2_3_neoforge_1_21_1.jar",
+                     "name":  "punchy_2_3_neoforge_1_21_1",
+                     "filename":  "punchy_2_3_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "ccf523ffc1c317a005408d11009350a4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/PuzzlesLib_v21_1_39_1_21_1_NeoForge.jar",
+                     "name":  "PuzzlesLib_v21_1_39_1_21_1_NeoForge",
+                     "filename":  "PuzzlesLib_v21_1_39_1_21_1_NeoForge.jar"
+                 },
+                 {
+                     "md5":  "581a8a1aa99037ae09ef4e6f8536c344",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/qraftyfied_9_1_1.jar",
+                     "name":  "qraftyfied_9_1_1",
+                     "filename":  "qraftyfied_9_1_1.jar"
+                 },
+                 {
+                     "md5":  "0da81fbac386d4f6b3b558316cd129f3",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Raided_1_21_1_0_1_6.jar",
+                     "name":  "Raided_1_21_1_0_1_6",
+                     "filename":  "Raided_1_21_1_0_1_6.jar"
+                 },
+                 {
+                     "md5":  "80daf98b7faab91e6d0ec2b2e7abb1a9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/raidsenhanced_1_0_2_1_21_1.jar",
+                     "name":  "raidsenhanced_1_0_2_1_21_1",
+                     "filename":  "raidsenhanced_1_0_2_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "7379bc72b92f838949c073961dc72351",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/refurbished_furniture_neoforge_1_21_1_1_0_22.jar",
+                     "name":  "refurbished_furniture_neoforge_1_21_1_1_0_22",
+                     "filename":  "refurbished_furniture_neoforge_1_21_1_1_0_22.jar"
+                 },
+                 {
+                     "md5":  "bc14882fddebc0b6361886a68cf0daf2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/regions_unexplored_neoforge_1_21_1_0_5_9.jar",
+                     "name":  "regions_unexplored_neoforge_1_21_1_0_5_9",
+                     "filename":  "regions_unexplored_neoforge_1_21_1_0_5_9.jar"
+                 },
+                 {
+                     "md5":  "029066a0d7b4b77d84ed4337015139f2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/reimagined_intro_1_0_0__2_.jar",
+                     "name":  "reimagined_intro_1_0_0__2_",
+                     "filename":  "reimagined_intro_1_0_0__2_.jar"
+                 },
+                 {
+                     "md5":  "84ff2805a591b10d22b7e0c69b44246c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/resourcefulconfig_neoforge_1_21_3_0_11.jar",
+                     "name":  "resourcefulconfig_neoforge_1_21_3_0_11",
+                     "filename":  "resourcefulconfig_neoforge_1_21_3_0_11.jar"
+                 },
+                 {
+                     "md5":  "32da88903167d24bb20febeeb2c79225",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/resourcefullib_neoforge_1_21_3_0_12.jar",
+                     "name":  "resourcefullib_neoforge_1_21_3_0_12",
+                     "filename":  "resourcefullib_neoforge_1_21_3_0_12.jar"
+                 },
+                 {
+                     "md5":  "ad268857a7089870b6794ac4a834760a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Resourcify__1_21_1_neoforge__1_8_0.jar",
+                     "name":  "Resourcify__1_21_1_neoforge__1_8_0",
+                     "filename":  "Resourcify__1_21_1_neoforge__1_8_0.jar"
+                 },
+                 {
+                     "md5":  "e536a480534445daee5ae25797a54f3e",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/rubidium_extra_0_5_7e_mc1_21_build_132.jar",
+                     "name":  "rubidium_extra_0_5_7e_mc1_21_build_132",
+                     "filename":  "rubidium_extra_0_5_7e_mc1_21_build_132.jar"
+                 },
+                 {
+                     "md5":  "d5a51e3ca44b07172c95e140c2e7688b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/RUExpansion_1_0_1_1_21_1.jar",
+                     "name":  "RUExpansion_1_0_1_1_21_1",
+                     "filename":  "RUExpansion_1_0_1_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "a3cb9782cbc870798458a6623fec52b3",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/sawmillhouse_2_0_1_neoforge_1_21_1.jar",
+                     "name":  "sawmillhouse_2_0_1_neoforge_1_21_1",
+                     "filename":  "sawmillhouse_2_0_1_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "f48ff42396d4c59ee205b8127d1fe540",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/ShoulderSurfing_NeoForge_1_21_1_4_21_0.jar",
+                     "name":  "ShoulderSurfing_NeoForge_1_21_1_4_21_0",
+                     "filename":  "ShoulderSurfing_NeoForge_1_21_1_4_21_0.jar"
+                 },
+                 {
+                     "md5":  "476897de8dfce7473eb324866ea9cc65",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/sky_whale_ship_neoforge_1_21_1.jar",
+                     "name":  "sky_whale_ship_neoforge_1_21_1",
+                     "filename":  "sky_whale_ship_neoforge_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "682f71c574ad03c28989a7707b15b5cd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/sophisticatedbackpacks_1_21_1_3_25_30_1547.jar",
+                     "name":  "sophisticatedbackpacks_1_21_1_3_25_30_1547",
+                     "filename":  "sophisticatedbackpacks_1_21_1_3_25_30_1547.jar"
+                 },
+                 {
+                     "md5":  "d09acfc518f27765bc50a07fe4bdee4f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/sophisticatedcore_1_21_1_1_4_6_1506.jar",
+                     "name":  "sophisticatedcore_1_21_1_1_4_6_1506",
+                     "filename":  "sophisticatedcore_1_21_1_1_4_6_1506.jar"
+                 },
+                 {
+                     "md5":  "a61dd250e618f8fd62fc6b0943831c50",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/spark_1_10_124_neoforge.jar",
+                     "name":  "spark_1_10_124_neoforge",
+                     "filename":  "spark_1_10_124_neoforge.jar"
+                 },
+                 {
+                     "md5":  "bf63762f628e45a76cb2b379fa255d0e",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Stellarity_3_0_6_1.jar",
+                     "name":  "Stellarity_3_0_6_1",
+                     "filename":  "Stellarity_3_0_6_1.jar"
+                 },
+                 {
+                     "md5":  "214db224d3b0e568ea77ff89afb74a90",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Structory_1_21_x_v1_3_14.jar",
+                     "name":  "Structory_1_21_x_v1_3_14",
+                     "filename":  "Structory_1_21_x_v1_3_14.jar"
+                 },
+                 {
+                     "md5":  "65337a0c62807bb7a00f6143fd85faac",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Structory_Towers_1_21_x_v1_0_15.jar",
+                     "name":  "Structory_Towers_1_21_x_v1_0_15",
+                     "filename":  "Structory_Towers_1_21_x_v1_0_15.jar"
+                 },
+                 {
+                     "md5":  "9f5f1da6399a3912a658abc13a8d36f3",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/structureessentials_1_21_1_4_8.jar",
+                     "name":  "structureessentials_1_21_1_4_8",
+                     "filename":  "structureessentials_1_21_1_4_8.jar"
+                 },
+                 {
+                     "md5":  "9b8f9adc57754fc6d0f153e919d217f6",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/structurize_1_0_816_1_21_1_snapshot.jar",
+                     "name":  "structurize_1_0_816_1_21_1_snapshot",
+                     "filename":  "structurize_1_0_816_1_21_1_snapshot.jar"
+                 },
+                 {
+                     "md5":  "4ca5e7c3b8bca1416e1e12c050038cee",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/SubtleEffects_neoforge_1_21_1_1_13_2_hotfix_1.jar",
+                     "name":  "SubtleEffects_neoforge_1_21_1_1_13_2_hotfix_1",
+                     "filename":  "SubtleEffects_neoforge_1_21_1_1_13_2_hotfix_1.jar"
+                 },
+                 {
+                     "md5":  "178719e549834cf9e530565810f61577",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/tombstone_neoforge_1_21_1_9_4_7.jar",
+                     "name":  "tombstone_neoforge_1_21_1_9_4_7",
+                     "filename":  "tombstone_neoforge_1_21_1_9_4_7.jar"
+                 },
+                 {
+                     "md5":  "9bdb93be88fe495613e3ece5585498a1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Too_Many_Entities_1_21_1_NeoForge_v1_2_0.jar",
+                     "name":  "Too_Many_Entities_1_21_1_NeoForge_v1_2_0",
+                     "filename":  "Too_Many_Entities_1_21_1_NeoForge_v1_2_0.jar"
+                 },
+                 {
+                     "md5":  "c87da07af73f649d1fe4ec6ca6d5a3ea",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/TreeChop_1_21_1_neoforge_0_19_3.jar",
+                     "name":  "TreeChop_1_21_1_neoforge_0_19_3",
+                     "filename":  "TreeChop_1_21_1_neoforge_0_19_3.jar"
+                 },
+                 {
+                     "md5":  "e5ba8ad4e5a721b5cb350f57c5c712d9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/trek_B0_6.jar",
+                     "name":  "trek_B0_6",
+                     "filename":  "trek_B0_6.jar"
+                 },
+                 {
+                     "md5":  "3d8c3e550637d4daba2d290647fc8db5",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/twilightforest_1_21_1_4_8_3287_universal.jar",
+                     "name":  "twilightforest_1_21_1_4_8_3287_universal",
+                     "filename":  "twilightforest_1_21_1_4_8_3287_universal.jar"
+                 },
+                 {
+                     "md5":  "69cd87744e40cc444b4176022ec6d17a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/txnilib_neoforge_1_0_24_1_21_1.jar",
+                     "name":  "txnilib_neoforge_1_0_24_1_21_1",
+                     "filename":  "txnilib_neoforge_1_0_24_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "6c1d9eed93d997b734174a42949c9aaf",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/t_and_t_neoforge_fabric_1_13_7_1_21_1.jar",
+                     "name":  "t_and_t_neoforge_fabric_1_13_7_1_21_1",
+                     "filename":  "t_and_t_neoforge_fabric_1_13_7_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "5e1a1369ae0384ff541dee3574768359",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/UndeadNights_2_1_0_NeoForge_mc1_21.jar",
+                     "name":  "UndeadNights_2_1_0_NeoForge_mc1_21",
+                     "filename":  "UndeadNights_2_1_0_NeoForge_mc1_21.jar"
+                 },
+                 {
+                     "md5":  "ae4bd50b20f0ed672987a0da54fe10e2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/uranus_2_4_1_21_1_neoforge.jar",
+                     "name":  "uranus_2_4_1_21_1_neoforge",
+                     "filename":  "uranus_2_4_1_21_1_neoforge.jar"
+                 },
+                 {
+                     "md5":  "a70eb576b761883bb0acf2532c1f929c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/u_desert_2_0_3_mc1_21_1_21_11.jar",
+                     "name":  "u_desert_2_0_3_mc1_21_1_21_11",
+                     "filename":  "u_desert_2_0_3_mc1_21_1_21_11.jar"
+                 },
+                 {
+                     "md5":  "dd11233e55cd61f5bf789f2deeae0bf8",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/u_sea_1_2_5_mc1_19_1_21_11.jar",
+                     "name":  "u_sea_1_2_5_mc1_19_1_21_11",
+                     "filename":  "u_sea_1_2_5_mc1_19_1_21_11.jar"
+                 },
+                 {
+                     "md5":  "8baebdd1f10920df0850206c13ed6b7b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/VisualWorkbench_v21_1_1_1_21_1_NeoForge.jar",
+                     "name":  "VisualWorkbench_v21_1_1_1_21_1_NeoForge",
+                     "filename":  "VisualWorkbench_v21_1_1_1_21_1_NeoForge.jar"
+                 },
+                 {
+                     "md5":  "44da229fb354f6ff8a7a4cb5deec3bfa",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/waifucraft_1_21_1_2_2.jar",
+                     "name":  "waifucraft_1_21_1_2_2",
+                     "filename":  "waifucraft_1_21_1_2_2.jar"
+                 },
+                 {
+                     "md5":  "f34264bf802a2c0050fcea56a204b25a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/waterframes_NEOFORGE_mc1_21_1_v2_1_22.jar",
+                     "name":  "waterframes_NEOFORGE_mc1_21_1_v2_1_22",
+                     "filename":  "waterframes_NEOFORGE_mc1_21_1_v2_1_22.jar"
+                 },
+                 {
+                     "md5":  "4a09ad3ea22ad258802605b8aa929bbd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/watermedia_2_1_37.jar",
+                     "name":  "watermedia_2_1_37",
+                     "filename":  "watermedia_2_1_37.jar"
+                 },
+                 {
+                     "md5":  "e108d2e935ddfcb97e6674ad6225129d",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/Waves_1_21_x_1_6.jar",
+                     "name":  "Waves_1_21_x_1_6",
+                     "filename":  "Waves_1_21_x_1_6.jar"
+                 },
+                 {
+                     "md5":  "6b2ca5e70ba245a74a7cbe71dd0a41bb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13",
+                     "filename":  "worldweaver_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "5f8a88d5184cabaa03eec4a3dfd83c81",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "e59f063248b08cc88f9c64fd52faa269",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_biome_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_biome_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_biome_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "cc7340e52ff007f7cf31b5c305b306e9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_biome_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_biome_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_biome_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "c7ed9be0685231a1094b6b3751cfbed6",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_block_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_block_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_block_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "45b6021da877f779ec18b31214f7316a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_block_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_block_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_block_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "36d868551d202e0275865f23dc438ae4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_common_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_common_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_common_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "aa9e59ee918d32fd7fee8f7c4922ad11",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_common_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_common_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_common_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "66556da5531a08984e62ba4372c601c2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_core_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_core_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_core_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "dd08f93bdd25d8ea0422e1b0796794bd",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_core_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_core_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_core_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "142c867910e6af032daa3c70fa88bd68",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_datagen_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_datagen_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_datagen_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "bc6cec7256abdf4c00d33abd81398d0b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_datagen_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_datagen_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_datagen_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "7cb115726af7c052a76593a7ad642637",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_event_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_event_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_event_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "55a52385edc1c1406f243de694ad9ef7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_event_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_event_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_event_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "f3ff4505097cb86c2bf05fce261e2375",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_feature_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_feature_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_feature_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "4c2c85f8bae85c965be5447a75712d41",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_feature_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_feature_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_feature_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "8e45b97e3da83e38d26dfbc187624374",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_generator_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_generator_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_generator_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "df8822e046bb8805ab4a16841874fd3f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_generator_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_generator_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_generator_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "c56288f6c2b7bd2985f0081b07b2917b",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_item_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_item_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_item_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "7cf8f42ae06969c2980cad5083ffdebf",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_item_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_item_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_item_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "fc866f9f9b1edae706a3dac7f4c283e2",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_math_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_math_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_math_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "03ed9802b9291bf09be265344069fc9c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_math_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_math_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_math_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "7d3ac60ab03bf0416f3ea4ac7d684af4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_preset_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_preset_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_preset_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "b8123e76d354a0bb46d13278a4b77ea4",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_preset_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_preset_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_preset_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "bfb46868afd6fb25d5934f8162e91e72",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_recipe_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_recipe_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_recipe_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "39fab564b9119c7a51ec7efb2856cea1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_recipe_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_recipe_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_recipe_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "0af6c094f2998c1e934e79958766b635",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_structure_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_structure_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_structure_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "c96d0a3e1fa60ff4f4e977756172346c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_structure_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_structure_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_structure_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "79f6549362882c64d379bb01df09e37a",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_surface_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_surface_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_surface_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "844e067bd786ec21689d19f7354250d8",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_surface_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_surface_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_surface_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "9d9c71dccc07f377e719977cd8444ebb",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_tag_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_tag_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_tag_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "c1bee732f6b9b7042fa785ddf3bfbb6c",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_tag_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_tag_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_tag_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "4151ec91810568b07451e544da7380b5",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_ui_api_21_0_13.jar",
+                     "name":  "worldweaver_21_0_13_wover_ui_api_21_0_13",
+                     "filename":  "worldweaver_21_0_13_wover_ui_api_21_0_13.jar"
+                 },
+                 {
+                     "md5":  "f93f8a1b8bd909e190a444aff22675d1",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wover_ui_api_21_0_13_mapped_moj_1_21_1.jar",
+                     "name":  "worldweaver_21_0_13_wover_ui_api_21_0_13_mapped_moj_1_21_1",
+                     "filename":  "worldweaver_21_0_13_wover_ui_api_21_0_13_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "bccb2a1c6195472ce5e71a3bab4b1ee9",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/worldweaver_21_0_13_wunderlib_21_0_8.jar",
+                     "name":  "worldweaver_21_0_13_wunderlib_21_0_8",
+                     "filename":  "worldweaver_21_0_13_wunderlib_21_0_8.jar"
+                 },
+                 {
+                     "md5":  "4fcfb12f3e187f788b3ab9aaa22eab33",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/wunderlib_21_0_8.jar",
+                     "name":  "wunderlib_21_0_8",
+                     "filename":  "wunderlib_21_0_8.jar"
+                 },
+                 {
+                     "md5":  "55278f785cc00e9380e15cba45b81218",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/wunderlib_21_0_8_mapped_moj_1_21_1.jar",
+                     "name":  "wunderlib_21_0_8_mapped_moj_1_21_1",
+                     "filename":  "wunderlib_21_0_8_mapped_moj_1_21_1.jar"
+                 },
+                 {
+                     "md5":  "0513eed6536a3449368be2d9fc1acf88",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/_1_21_1__SecurityCraft_v1_10_1.jar",
+                     "name":  "_1_21_1__SecurityCraft_v1_10_1",
+                     "filename":  "_1_21_1__SecurityCraft_v1_10_1.jar"
+                 },
+                 {
+                     "md5":  "5bd972062fc471f5718aa8e3f54d9597",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/modpack-1.3.0/_Neoforge_imst_2_2_1.jar",
+                     "name":  "_Neoforge_imst_2_2_1",
+                     "filename":  "_Neoforge_imst_2_2_1.jar"
+                 }
+             ],
+    "serverIP":  "200.117.208.146",
+    "modloaderVersion":  "21.1.219",
+    "serverPort":  25565
+}
