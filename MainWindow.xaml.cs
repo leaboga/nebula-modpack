@@ -1456,27 +1456,11 @@ namespace NebulaLauncher
         private void ActualizarVersionesEnHome()
         {
             if (CurrentProfile == null || VersionComboBox == null) return;
-            
-            VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
-            VersionComboBox.Items.Clear();
-
-            // All supported versions
-            string[] versions = { "1.21", "1.20.4", "1.20.1", "1.19.4", "1.19.2", "1.18.2", "1.16.5", "1.12.2" };
-            foreach (var v in versions) VersionComboBox.Items.Add(v);
-
-            if (!string.IsNullOrEmpty(CurrentProfile.Version))
-            {
-                if (!VersionComboBox.Items.Contains(CurrentProfile.Version))
-                    VersionComboBox.Items.Add(CurrentProfile.Version);
-                VersionComboBox.SelectedItem = CurrentProfile.Version;
-            }
-            else
-            {
-                VersionComboBox.SelectedIndex = 2; // Default 1.20.1
-            }
-
-            VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
+            // Removed the hijacking of VersionComboBox with Vanilla versions.
+            // VersionComboBox is meant for the Modpack server versions via CargarVersionesAsync.
+            _ = CargarVersionesAsync();
         }
+
         private void LimpiarCache_Click(object sender, RoutedEventArgs e)
         {
             try {
