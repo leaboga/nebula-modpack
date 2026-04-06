@@ -233,12 +233,14 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                                             <TextBlock Text="PERFIL ACTIVO" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
-                                            <ComboBox x:Name="ProfileComboBox" Height="38" Style="{StaticResource ModernComboBox}" SelectionChanged="ProfileComboBox_SelectionChanged"/>
+                                            <ComboBox x:Name="ProfileComboBox" Height="38" Style="{DynamicResource ModernComboBox}" SelectionChanged="ProfileComboBox_SelectionChanged"/>
                                         </StackPanel>
-                                        <Button Grid.Column="1" Content="➕ Nuevo Perfil" Width="100" Style="{StaticResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Click="NewProfile_Click"/>
+                                        <Button Grid.Column="1" Content="\uD83D\uDCCB Clonar" Width="90" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="CloneProfile_Click"/>
+                                        <Button Grid.Column="2" Content="\u2795 Nuevo Perfil" Width="100" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Click="NewProfile_Click"/>
                                     </Grid>
 
                                     <!-- NEWS -->

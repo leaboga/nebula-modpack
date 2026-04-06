@@ -15,7 +15,7 @@
             <TextBlock Text="Ajustes"
                        Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
-            <TextBlock Text="CONFIGURACIÃ“N DE JUEGO"
+            <TextBlock Text="CONFIGURACI\u00D3N DE JUEGO"
                        Foreground="#3D3560" FontSize="9" FontWeight="Bold"
                        Margin="0,0,0,28"/>
 
@@ -24,9 +24,9 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
-                            <TextBlock Text="ðŸ“" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\uD83D\uDCC1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="GestiÃ³n de Instancias" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Gesti\u00F3n de Instancias" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="NOMBRE DE INSTANCIA" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
@@ -35,8 +35,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="InstanceNameBox" Style="{StaticResource AppleTextBox}" Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="Cambiar" Click="BtnChangeInstance_Click" Style="{StaticResource SecondaryButton}" Height="38" Padding="12,0"/>
+                        <TextBox x:Name="InstanceNameBox" Style="{DynamicResource AppleTextBox}" Margin="0,0,8,0"/>
+                        <Button Grid.Column="1" Content="Cambiar" Click="BtnChangeInstance_Click" Style="{DynamicResource SecondaryButton}" Height="38" Padding="12,0"/>
                     </Grid>
                     <TextBlock Text="Separa tus mundos y mods usando carpetas aisladas (ej: 'creative', 'survival')." Foreground="#4A4266" FontSize="10" Margin="4,8,0,0"/>
                 </StackPanel>
@@ -47,16 +47,16 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
-                            <TextBlock Text="ðŸŒ" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\uD83C\uDF10" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="ConexiÃ³n al Servidor" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Conexi\u00F3n al Servidor" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="IP DEL SERVIDOR" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <TextBox x:Name="ServerIpBox" Style="{StaticResource AppleTextBox}" TextChanged="ServerIpBox_TextChanged" Margin="0,0,0,16"/>
+                    <TextBox x:Name="ServerIpBox" Style="{DynamicResource AppleTextBox}" TextChanged="ServerIpBox_TextChanged" Margin="0,0,0,16"/>
 
                     <TextBlock Text="PUERTO BLUEMAP" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <TextBox x:Name="BlueMapPortBox" Style="{StaticResource AppleTextBox}" TextChanged="BlueMapPortBox_TextChanged"/>
+                    <TextBox x:Name="BlueMapPortBox" Style="{DynamicResource AppleTextBox}" TextChanged="BlueMapPortBox_TextChanged"/>
                 </StackPanel>
             </Border>
 
@@ -65,16 +65,16 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#5865F2">
-                            <TextBlock Text="âš™ï¸" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\u2699\uFE0F" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Ajustes del Launcher" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="ID DEL MAPA (BLUEMAP)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <TextBox x:Name="MapIdBox" Text="world" Style="{StaticResource AppleTextBox}" Margin="0,0,0,16" TextChanged="MapIdBox_TextChanged"/>
+                    <TextBox x:Name="MapIdBox" Text="world" Style="{DynamicResource AppleTextBox}" Margin="0,0,0,16" TextChanged="MapIdBox_TextChanged"/>
 
                     <TextBlock Text="URL DEL WEBHOOK (CRASHES)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <TextBox x:Name="WebhookBox" Style="{StaticResource AppleTextBox}" TextChanged="WebhookBox_TextChanged"/>
+                    <TextBox x:Name="WebhookBox" Style="{DynamicResource AppleTextBox}" TextChanged="WebhookBox_TextChanged"/>
                 </StackPanel>
             </Border>
 
@@ -83,7 +83,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#10B981">
-                            <TextBlock Text="âš¡" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\u26A1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Rendimiento y RAM" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -94,10 +94,10 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="OptimizaciÃ³n AutomÃ¡tica" Foreground="#F0EAFF" FontSize="13"/>
+                            <TextBlock Text="Optimizaci\u00F3n Autom\u00E1tica" Foreground="#F0EAFF" FontSize="13"/>
                             <TextBlock Text="Asigna RAM basada en tu sistema" Foreground="#4A4266" FontSize="10"/>
                         </StackPanel>
-                        <Button Grid.Column="1" Content="Optimizar" Click="BtnAutoOptimize_Click" Style="{StaticResource SecondaryButton}" Height="32"/>
+                        <Button Grid.Column="1" Content="Optimizar" Click="BtnAutoOptimize_Click" Style="{DynamicResource SecondaryButton}" Height="32"/>
                     </Grid>
 
                     <Separator Background="#1A1528" Margin="0,0,0,16"/>
@@ -108,7 +108,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="70"/>
                         </Grid.ColumnDefinitions>
-                        <Slider x:Name="RamSlider" Minimum="2" Maximum="16" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="RamSlider_ValueChanged" Style="{StaticResource AppleSlider}"/>
+                        <Slider x:Name="RamSlider" Minimum="2" Maximum="16" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="RamSlider_ValueChanged" Style="{DynamicResource AppleSlider}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock x:Name="RamValueText" Text="4" Foreground="#7C3AED" FontSize="16" FontWeight="Bold"/>
                             <TextBlock Text=" GB" Foreground="#4A4266" FontSize="11" VerticalAlignment="Bottom" Margin="2,0,0,2"/>
@@ -121,8 +121,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="JavaPathBox" Style="{StaticResource AppleTextBox}" IsReadOnly="True" Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="..." Style="{StaticResource SecondaryButton}" Width="40" Click="BtnBrowseJava_Click"/>
+                        <TextBox x:Name="JavaPathBox" Style="{DynamicResource AppleTextBox}" IsReadOnly="True" Margin="0,0,8,0"/>
+                        <Button Grid.Column="1" Content="..." Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnBrowseJava_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -132,9 +132,9 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#EC4899">
-                            <TextBlock Text="ðŸŽ¨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\uD83C\uDFA8" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="PersonalizaciÃ³n" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Personalizaci\u00F3n" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="COLOR DE ACENTO" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
@@ -164,10 +164,10 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="BgPathBox" IsReadOnly="True" Style="{StaticResource AppleTextBox}"/>
+                        <TextBox x:Name="BgPathBox" IsReadOnly="True" Style="{DynamicResource AppleTextBox}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0,0,0">
-                            <Button Content="..." Width="34" Height="38" Style="{StaticResource SecondaryButton}" Click="BtnBrowseBackground_Click"/>
-                            <Button Content="ðŸ—‘" Width="34" Height="38" Style="{StaticResource SecondaryButton}" Margin="4,0,0,0" Click="BtnResetBackground_Click"/>
+                            <Button Content="..." Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Click="BtnBrowseBackground_Click"/>
+                            <Button Content="\uD83D\uDDD1" Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Click="BtnResetBackground_Click"/>
                         </StackPanel>
                     </Grid>
                     <Border Margin="0,12,0,0" Height="80" CornerRadius="12" BorderBrush="#1A1528" BorderThickness="1" Background="#0A0714" ClipToBounds="True">
@@ -177,7 +177,7 @@
                                     <BlurEffect Radius="2"/>
                                 </Image.Effect>
                             </Image>
-                            <TextBlock Text="PREVISUALIZACIÃ“N" Foreground="#2A2440" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PreviewPlaceholderText"/>
+                            <TextBlock Text="PREVISUALIZACI\u00D3N" Foreground="#2A2440" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PreviewPlaceholderText"/>
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -193,8 +193,8 @@
                             <ColumnDefinition Width="12"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="ðŸ¢ Modo Papa" Style="{StaticResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
-                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="ðŸš€ Modo Ultra" Style="{StaticResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
+                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="\uD83E\uDD54 Modo Papa" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
+                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="\uD83D\uDE80 Modo Ultra" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -202,12 +202,12 @@
             <!-- Shortcuts Section -->
             <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
                 <StackPanel>
-                    <TextBlock Text="ACCESOS RÃ PIDOS" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
+                    <TextBlock Text="ACCESOS R\u00C1PIDOS" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
                     <UniformGrid Columns="2">
-                        <Button Content="✨ Shaders" Click="BtnOpenShaders_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,4,8" Height="38" ToolTip="Abrir carpeta de Shaders"/>
-                        <Button Content="📦 Descargar Shaders" Click="BtnDownloadShaders_Click" Style="{StaticResource PlayButton}" Margin="4,0,0,8" Height="38" FontSize="10"/>
-                        <Button Content="⚙ Configs" Click="BtnOpenConfigs_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,4,0" Height="38"/>
-                        <Button Content="📁 Juego" Click="BtnOpenGame_Click" Style="{StaticResource SecondaryButton}" Margin="4,0,0,0" Height="38"/>
+                        <Button Content="\u2728 Shaders" Click="BtnOpenShaders_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,8" Height="38" ToolTip="Abrir carpeta de Shaders"/>
+                        <Button Content="\uD83D\uDCE6 Descargar Shaders" Click="BtnDownloadShaders_Click" Style="{DynamicResource PlayButton}" Margin="4,0,0,8" Height="38" FontSize="10"/>
+                        <Button Content="\u2699 Configs" Click="BtnOpenConfigs_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,0" Height="38"/>
+                        <Button Content="\uD83D\uDCC2 Juego" Click="BtnOpenGame_Click" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Height="38"/>
                     </UniformGrid>
                 </StackPanel>
             </Border>
@@ -217,18 +217,18 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
-                            <TextBlock Text="ðŸ› " FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="\uD83D\uDEE0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Mantenimiento y Ayuda" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <TextBlock Text="Â¿El juego no arranca o va mal?" Foreground="#4A4266" FontSize="11" Margin="0,0,0,14"/>
+                    <TextBlock Text="\u00BFEl juego no arranca o va mal?" Foreground="#4A4266" FontSize="11" Margin="0,0,0,14"/>
                     
                     <UniformGrid Columns="2">
-                        <Button Content="ðŸ›  Reparar Pack" Click="BtnRepairPack_Click" Style="{StaticResource PlayButton}" Height="38" Margin="0,0,4,0"/>
-                        <Button Content="ðŸ“‚ Ver Crashes" Click="BtnViewCrashes_Click" Style="{StaticResource SecondaryButton}" Height="38" Margin="4,0,0,0"/>
+                        <Button Content="\uD83D\uDEE0 Reparar Pack" Click="BtnRepairPack_Click" Style="{DynamicResource PlayButton}" Height="38" Margin="0,0,4,0"/>
+                        <Button Content="\uD83D\uDCC2 Ver Crashes" Click="BtnViewCrashes_Click" Style="{DynamicResource SecondaryButton}" Height="38" Margin="4,0,0,0"/>
                     </UniformGrid>
                     
-                    <TextBlock Text="Â¡Cuidado! Reparar el pack borrarÃ¡ los mods para reinstalarlos limpiamente." Foreground="#EF4444" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <TextBlock Text="\u00A1Cuidado! Reparar el pack borrar\u00E1 los mods para reinstalarlos limpiamente." Foreground="#EF4444" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                 </StackPanel>
             </Border>
 

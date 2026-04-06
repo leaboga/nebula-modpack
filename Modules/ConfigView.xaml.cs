@@ -139,10 +139,9 @@ namespace NebulaLauncher.Modules
                     _mainWindow.CurrentProfile.RamGB = suggested;
                     RamSlider.Value = suggested;
                 }
-                _mainWindow.GuardarSesion();
-                MessageBox.Show($"Nebula sugiere {suggested}GB para tu sistema ({Math.Round(total,1)}GB Detectados).", "Optimización Lista", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Nebula sugiere {suggested}GB para tu sistema ({Math.Round(total,1)}GB Detectados).", "Optimizaci\u00F3n Lista", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch { MessageBox.Show("No se pudo detectar la memoria automáticamente.", "Error"); }
+            catch { MessageBox.Show("No se pudo detectar la memoria autom\u00E1ticamente.", "Error"); }
         }
 
         private void BtnOpenShaders_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("shaderpacks");
@@ -181,7 +180,7 @@ namespace NebulaLauncher.Modules
                 System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, shaderDir, true);
                 File.Delete(zipPath);
                 
-                MessageBox.Show("✅ 'Nebula Shaders' instalados correctamente.", "Descarga Completada", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("\u2705 'Nebula Shaders' instalados correctamente.", "Descarga Completada", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { MessageBox.Show($"Error al descargar shaders: {ex.Message}", "Error"); }
             finally { btn.IsEnabled = true; btn.Content = "📦 Descargar Shaders"; }
@@ -236,7 +235,7 @@ namespace NebulaLauncher.Modules
             try
             {
                 await _configManager.ApplyPerformancePreset("Papa");
-                MessageBox.Show("✅ Modo Papa aplicado.\nGráficos optimizados para máximo rendimiento.",
+                MessageBox.Show("\u2705 Modo Papa aplicado.\nGr\u00E1ficos optimizados para m\u00E1ximo rendimiento.",
                                 "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -253,7 +252,7 @@ namespace NebulaLauncher.Modules
             try
             {
                 await _configManager.ApplyPerformancePreset("Ultra");
-                MessageBox.Show("✅ Modo Ultra aplicado.\nGráficos en calidad máxima con shaders.",
+                MessageBox.Show("\u2705 Modo Ultra aplicado.\nGr\u00E1ficos en calidad m\u00E1xima con shaders.",
                                 "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -271,7 +270,7 @@ namespace NebulaLauncher.Modules
         private void BtnChangeInstance_Click(object sender, RoutedEventArgs e)
         {
             // La lógica de instancias ahora se maneja por perfiles en el Home
-            MessageBox.Show("Las instancias ahora se gestionan desde la pantalla de Inicio mediante Perfiles.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Las instancias ahora se gestionan desde la pantalla de Inicio mediante Perfiles.", "Informaci\u00F3n", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnViewCrashes_Click(object sender, RoutedEventArgs e)

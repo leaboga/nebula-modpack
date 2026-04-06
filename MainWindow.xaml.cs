@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "1.7.5";
+        private const string CurrentLauncherVersion = "1.8.0";
         private const string UpdateCheckUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/version.json";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -465,7 +465,7 @@ namespace NebulaLauncher
 
                 await File.WriteAllTextAsync(updaterBat, batContent);
 
-                AgregarLog("🔄 Reiniciando para aplicar la actualización...");
+                AgregarLog("\uD83D\uDD04 Reiniciando para aplicar la actualización...");
 
                 Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
                 {
@@ -568,21 +568,21 @@ namespace NebulaLauncher
         private void Nav_Home_Checked(object sender, RoutedEventArgs e)
         {
             if (HomeView == null || ModulesContainer == null) return;
-            this.Title = "Nebula Launcher — Inicio";
+            this.Title = "Nebula Launcher \u2014 Inicio";
             StopCurrentModule();
             ModulesContainer.Visibility = Visibility.Collapsed;
             AnimateView(HomeView);
         }
 
-        private void Nav_Changelog_Checked(object sender, RoutedEventArgs e)  { this.Title = "Nebula Launcher — Novedades"; SwitchToModule(new ChangelogView()); }
-        private void Nav_Settings_Checked(object sender, RoutedEventArgs e)   { this.Title = "Nebula Launcher — Configuración"; SwitchToModule(new ConfigView(this)); }
-        private void Nav_Social_Checked(object sender, RoutedEventArgs e)     { this.Title = "Nebula Launcher — Comunidad"; SwitchToModule(new SocialView(_session.ServerIp, _session.Username)); }
-        private void Nav_Perf_Checked(object sender, RoutedEventArgs e)       { this.Title = "Nebula Launcher — Rendimiento"; SwitchToModule(new PerformanceView(this)); }
-        private void Nav_Screenshots_Checked(object sender, RoutedEventArgs e) { this.Title = "Nebula Launcher — Capturas"; SwitchToModule(new ScreenshotsView(GameFolder)); }
-        private void Nav_ModManager_Checked(object sender, RoutedEventArgs e)  { this.Title = "Nebula — Administrar"; SwitchToModule(new ModManagerView(GameFolder)); }
-        private void Nav_ModHub_Checked(object sender, RoutedEventArgs e)      { this.Title = "Nebula — Mod Hub"; SwitchToModule(new VaultView(GameFolder, CurrentProfile)); }
-        private void Nav_Crash_Checked(object sender, RoutedEventArgs e)       { this.Title = "Nebula Launcher — Diagnóstico"; SwitchToModule(new CrashDiagnosticView(_crashReporter)); }
-        private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { this.Title = "Nebula Launcher — Mapa"; SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId)); }
+        private void Nav_Changelog_Checked(object sender, RoutedEventArgs e)  { this.Title = "Nebula Launcher \u2014 Novedades"; SwitchToModule(new ChangelogView()); }
+        private void Nav_Settings_Checked(object sender, RoutedEventArgs e)   { this.Title = "Nebula Launcher \u2014 Configuraci\u00F3n"; SwitchToModule(new ConfigView(this)); }
+        private void Nav_Social_Checked(object sender, RoutedEventArgs e)     { this.Title = "Nebula Launcher \u2014 Comunidad"; SwitchToModule(new SocialView(_session.ServerIp, _session.Username)); }
+        private void Nav_Perf_Checked(object sender, RoutedEventArgs e)       { this.Title = "Nebula Launcher \u2014 Rendimiento"; SwitchToModule(new PerformanceView(this)); }
+        private void Nav_Screenshots_Checked(object sender, RoutedEventArgs e) { this.Title = "Nebula Launcher \u2014 Capturas"; SwitchToModule(new ScreenshotsView(GameFolder)); }
+        private void Nav_ModManager_Checked(object sender, RoutedEventArgs e)  { this.Title = "Nebula \u2014 Administrar"; SwitchToModule(new ModManagerView(GameFolder)); }
+        private void Nav_ModHub_Checked(object sender, RoutedEventArgs e)      { this.Title = "Nebula \u2014 Mod Hub"; SwitchToModule(new VaultView(GameFolder, CurrentProfile)); }
+        private void Nav_Crash_Checked(object sender, RoutedEventArgs e)       { this.Title = "Nebula Launcher \u2014 Diagn\u00F3stico"; SwitchToModule(new CrashDiagnosticView(_crashReporter)); }
+        private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { this.Title = "Nebula Launcher \u2014 Mapa"; SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId)); }
         
         private void MapQuickCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -625,7 +625,7 @@ namespace NebulaLauncher
                 Clipboard.SetText(_session.ServerIp);
                 var btn = (Button)sender;
                 string orig  = btn.Content.ToString()!;
-                btn.Content  = "✓ Copiado!";
+                btn.Content  = "\u2713 Copiado!";
                 var timer    = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
                 timer.Tick  += (_, _) => { btn.Content = orig; timer.Stop(); };
                 timer.Start();
@@ -640,15 +640,15 @@ namespace NebulaLauncher
         {
             var btn       = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content   = "⏳ Creando backup...";
+            btn.Content   = "\u23F3 Creando backup...";
             try
             {
                 string path = await _backupService.CreateBackupAsync(msg => AgregarLog(msg));
                 MessageBox.Show($"Backup creado exitosamente:\n{System.IO.Path.GetFileName(path)}",
                                 "Backup completado", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"❌ Error en backup: {ex.Message}"); }
-            finally { btn.IsEnabled = true; btn.Content = "💾  Crear Backup Ahora"; }
+            catch (Exception ex) { AgregarLog($"\u274C Error en backup: {ex.Message}"); }
+            finally { btn.IsEnabled = true; btn.Content = "\uD83D\uDCBE  Crear Backup Ahora"; }
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -672,10 +672,10 @@ namespace NebulaLauncher
                     var runText = new Run(mensaje);
 
                     // Syntax Highlighting simple
-                    if (mensaje.StartsWith("✅") || mensaje.StartsWith("✓")) runText.Foreground = Brushes.LightGreen;
-                    else if (mensaje.StartsWith("❌") || mensaje.StartsWith("✗") || mensaje.Contains("Error")) runText.Foreground = Brushes.Salmon;
-                    else if (mensaje.StartsWith("⚠") || mensaje.Contains("Warning")) runText.Foreground = Brushes.Gold;
-                    else if (mensaje.StartsWith("🚀") || mensaje.StartsWith("⚡")) runText.Foreground = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
+                    if (mensaje.StartsWith("\u2705") || mensaje.StartsWith("\u2713")) runText.Foreground = Brushes.LightGreen;
+                    else if (mensaje.StartsWith("\u274C") || mensaje.StartsWith("\u2717") || mensaje.Contains("Error")) runText.Foreground = Brushes.Salmon;
+                    else if (mensaje.StartsWith("\u26A0") || mensaje.Contains("Warning")) runText.Foreground = Brushes.Gold;
+                    else if (mensaje.StartsWith("\uD83D\uDE80") || mensaje.StartsWith("\u26A1")) runText.Foreground = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
                     else runText.Foreground = new SolidColorBrush(Color.FromRgb(0xC4, 0xB5, 0xFD));
 
                     if (LogText.Text == "[Nebula] System initialized. Waiting for command...") LogText.Inlines.Clear();
@@ -705,7 +705,7 @@ namespace NebulaLauncher
                 if (File.Exists(SessionFile))
                     _session = JsonConvert.DeserializeObject<UserSession>(File.ReadAllText(SessionFile)) ?? new UserSession();
             }
-            catch (Exception ex) { AgregarLog($"⚠ Error cargando sesión: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"\u26A0 Error cargando sesi\u00F3n: {ex.Message}"); }
 
             if (_session.Profiles == null) _session.Profiles = new List<MinecraftProfile>();
             if (_session.Profiles.Count == 0)
@@ -750,7 +750,7 @@ namespace NebulaLauncher
                         break;
                     }
                     catch (IOException) { Task.Delay(100).Wait(); }
-                    catch (Exception ex) { Debug.WriteLine($"Error guardando sesión: {ex.Message}"); break; }
+                    catch (Exception ex) { Debug.WriteLine($"Error guardando sesi\u00F3n: {ex.Message}"); break; }
                 }
             });
         }
@@ -758,29 +758,29 @@ namespace NebulaLauncher
         private void ActualizarSidebar()
         {
             bool hasUser = !string.IsNullOrEmpty(_session.Username);
-            SidebarUsername.Text = hasUser ? _session.Username : "Sin sesión";
+            SidebarUsername.Text = hasUser ? _session.Username : "Sin sesi\u00F3n";
             AvatarInitial.Text   = hasUser ? _session.Username[0].ToString().ToUpper() : "?";
-            SidebarAuthType.Text = _session.AuthMode == "premium" ? "✦ Premium" : "Sin cuenta";
+            SidebarAuthType.Text = _session.AuthMode == "premium" ? "\u2726 Premium" : "Sin cuenta";
         }
 
         private void ActualizarGreeting()
         {
             if (HomeGreetingLabel == null) return;
             int hour = DateTime.Now.Hour;
-            string greeting = hour < 12 ? "Buenos días" : hour < 19 ? "Buenas tardes" : "Buenas noches";
+            string greeting = hour < 12 ? "Buenos d\u00EDas" : hour < 19 ? "Buenas tardes" : "Buenas noches";
             
             // News System (Imp 18)
             string[] news = {
-                "¡Nueva actualización de Shaders disponible!",
-                "Se han añadido 5 nuevos mods de optimización.",
-                "El servidor está en modo Evento: x2 de XP.",
-                "Recordá hacer backup antes de grandes cambios.",
-                "¡Gracias por ser parte de Nebula!"
+                "\u00A1Nueva actualizaci\u00F3n de Shaders disponible!",
+                "Se han a\u00F1adido 5 nuevos mods de optimizaci\u00F3n.",
+                "El servidor est\u00E1 en modo Evento: x2 de XP.",
+                "Record\u00E1 hacer backup antes de grandes cambios.",
+                "\u00A1Gracias por ser parte de Nebula!"
             };
             string currentNews = news[new Random().Next(news.Length)];
 
             HomeGreetingLabel.Text = !string.IsNullOrEmpty(_session.Username)
-                ? $"{greeting}, {_session.Username} 👋\n📢 {currentNews}"
+                ? $"{greeting}, {_session.Username} \uD83D\uDC4B\n\uD83D\uDCE2 {currentNews}"
                 : "Listo para jugar";
         }
 
@@ -858,7 +858,7 @@ namespace NebulaLauncher
             _session.CurrentProfileId = _session.Profiles[idx].Id;
             GuardarSesion();
             InitializeProfileServices();
-            AgregarLog($"📁 Perfil cambiado a: {_session.Profiles[idx].Name}");
+            AgregarLog($"\uD83D\uDCC2 Perfil cambiado a: {_session.Profiles[idx].Name}");
             
             // Re-load version data for the new profile
             _manifestActual = null;
@@ -895,19 +895,39 @@ namespace NebulaLauncher
         {
             // Simple logic for PoC: add a new 1.20.1 Fabric instance
             string name = "Perfil " + (_session.Profiles.Count + 1);
-            var p = new MinecraftProfile { Name = name, Version = "1.20.1", LoaderType = "fabric", Icon = "⭐" };
+            var p = new MinecraftProfile { Name = name, Version = "1.20.1", LoaderType = "fabric", Icon = "\u2B50" };
             _session.Profiles.Add(p);
             _session.CurrentProfileId = p.Id;
             GuardarSesion();
             ActualizarComboPerfiles();
-            AgregarLog($"✅ Perfil '{name}' creado con éxito.");
+            AgregarLog($"\u2705 Perfil '{name}' creado con \u00E9xito.");
+        }
+
+        private void CloneProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentProfile == null) return;
+            string newName = CurrentProfile.Name + " (Copia)";
+            var clone = new MinecraftProfile { 
+                Name = newName, 
+                Version = CurrentProfile.Version, 
+                LoaderType = CurrentProfile.LoaderType,
+                LoaderVersion = CurrentProfile.LoaderVersion,
+                RamGB = CurrentProfile.RamGB,
+                JavaPath = CurrentProfile.JavaPath,
+                Icon = CurrentProfile.Icon
+            };
+            _session.Profiles.Add(clone);
+            _session.CurrentProfileId = clone.Id;
+            GuardarSesion();
+            ActualizarComboPerfiles();
+            AgregarLog($"\u2705 Perfil '{newName}' clonado con \u00E9xito.");
         }
 
         private void VerLog_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(LogFile)) { AgregarLog("ℹ No hay log guardado aún."); return; }
+            if (!File.Exists(LogFile)) { AgregarLog("\u2139 No hay log guardado a\u00FAn."); return; }
             try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{LogFile}\"", UseShellExecute = true }); }
-            catch (Exception ex) { AgregarLog($"⚠ Error abriendo log: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"\u26A0 Error abriendo log: {ex.Message}"); }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -939,11 +959,11 @@ namespace NebulaLauncher
         {
             try
             {
-                AgregarLog("🔍 Verificando versiones disponibles...");
+                AgregarLog("\uD83D\uDD0D Verificando versiones disponibles...");
                 _versionsIndex = await _syncer.ObtenerVersionsIndex();
 
                 if (_versionsIndex?.AvailableVersions == null || _versionsIndex.AvailableVersions.Count == 0)
-                { AgregarLog("⚠ No se pudieron cargar las versiones."); return; }
+                { AgregarLog("\u26A0 No se pudieron cargar las versiones."); return; }
 
                 Dispatcher.Invoke(() =>
                 {
@@ -957,7 +977,7 @@ namespace NebulaLauncher
 
                 await CargarManifest(VersionComboBox.SelectedIndex >= 0 ? VersionComboBox.SelectedIndex : 0);
             }
-            catch (Exception ex) { AgregarLog($"⚠ Error cargando versiones: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"\u26A0 Error cargando versiones: {ex.Message}"); }
         }
 
         private async void VersionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -982,11 +1002,11 @@ namespace NebulaLauncher
                     GuardarSesion();
                     InstalledVersionText.Text = manifest?.Version ?? "Sin datos";
                     PlayButton.IsEnabled      = manifest != null;
-                    if (manifest == null) AgregarLog($"⚠ No se pudo cargar manifest para {entry.Label}.");
-                    else AgregarLog($"✓ Versión lista: {manifest.Version}");
+                    if (manifest == null) AgregarLog($"\u26A0 No se pudo cargar manifest para {entry.Label}.");
+                    else AgregarLog($"\u2713 Versi\u00F3n lista: {manifest.Version}");
                 });
             }
-            catch (Exception ex) { AgregarLog($"⚠ Error cargando manifest: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"\u26A0 Error cargando manifest: {ex.Message}"); }
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -995,8 +1015,8 @@ namespace NebulaLauncher
         private async void MicrosoftLoginButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
-            btn.IsEnabled = false; btn.Content = "Iniciando sesión...";
-            AgregarLog("🔐 Abriendo autenticación de Microsoft...");
+            btn.IsEnabled = false; btn.Content = "Iniciando sesi\u00F3n...";
+            AgregarLog("\uD83D\uDD10 Abriendo autenticaci\u00F3n de Microsoft...");
             try
             {
                 var handler = JELoginHandlerBuilder.BuildDefault();
@@ -1007,17 +1027,17 @@ namespace NebulaLauncher
                     _session.AuthMode = "premium";
                     GuardarSesion();
                     MostrarUsuarioPremium(session.Username);
-                    AgregarLog($"✅ Sesión iniciada como {session.Username}.");
+                    AgregarLog($"\u2705 Sesi\u00F3n iniciada como {session.Username}.");
                     await RefrescarSkin();
                 }
-                else AgregarLog("⚠ La autenticación no devolvió sesión válida.");
+                else AgregarLog("\u26A0 La autenticaci\u00F3n no devolvi\u00F3 sesi\u00F3n v\u00E1lida.");
             }
             catch (Exception ex)
             {
-                AgregarLog($"❌ Error en login Microsoft: {ex.Message}");
-                MessageBox.Show($"Error iniciando sesión:\n{ex.Message}", "Error de autenticación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                AgregarLog($"\u274C Error en login Microsoft: {ex.Message}");
+                MessageBox.Show($"Error iniciando sesi\u00F3n:\n{ex.Message}", "Error de autenticaci\u00F3n", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            finally { btn.IsEnabled = true; btn.Content = "Iniciar sesión con Microsoft"; }
+            finally { btn.IsEnabled = true; btn.Content = "Iniciar sesi\u00F3n con Microsoft"; }
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -1031,7 +1051,7 @@ namespace NebulaLauncher
             AvatarInitial.Visibility = Visibility.Visible;
             ActualizarSidebar();
             ActualizarGreeting();
-            AgregarLog("ℹ Sesión cerrada.");
+            AgregarLog("\u2139 Sesi\u00F3n cerrada.");
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1049,28 +1069,28 @@ namespace NebulaLauncher
 
         public async Task RepararModpack()
         {
-            var result = MessageBox.Show("¿Estás seguro de que deseas reparar el pack?\nSe borrarán los mods y la configuración para forzar una descarga limpia.", 
-                                       "Reparación de Nebula", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("\u00BFEst\u00E1s seguro de que deseas reparar el pack?\nSe borrar\u00E1n los mods y la configuraci\u00F3n para forzar una descarga limpia.", 
+                                       "Reparaci\u00F3n de Nebula", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             
             if (result == MessageBoxResult.Yes)
             {
                 try
                 {
-                    AgregarLog("🛠 Iniciando proceso de reparación...");
+                    AgregarLog("\uD83D\uDEE0 Iniciando proceso de reparaci\u00F3n...");
                     string modsDir = System.IO.Path.Combine(GameFolder, "mods");
                     string configDir = System.IO.Path.Combine(GameFolder, "config");
                     
                     if (Directory.Exists(modsDir)) Directory.Delete(modsDir, true);
                     if (Directory.Exists(configDir)) Directory.Delete(configDir, true);
                     
-                    AgregarLog("✓ Archivos antiguos eliminados.");
+                    AgregarLog("\u2713 Archivos antiguos eliminados.");
                     await CargarVersionesAsync();
-                    MessageBox.Show("Reparación lista. Dale a 'Jugar' para descargar todo de nuevo.", "Cuidado", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Reparaci\u00F3n lista. Dale a 'Jugar' para descargar todo de nuevo.", "Cuidado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    AgregarLog($"❌ Error reparando: {ex.Message}");
-                    MessageBox.Show($"No se pudo completar la reparación: {ex.Message}", "Error");
+                    AgregarLog($"\u274C Error reparando: {ex.Message}");
+                    MessageBox.Show($"No se pudo completar la reparaci\u00F3n: {ex.Message}", "Error");
                 }
             }
         }
@@ -1093,8 +1113,8 @@ namespace NebulaLauncher
             panel.Children.Add(lbl); panel.Children.Add(tb); panel.Children.Add(btn);
             dialog.Content = panel;
             dialog.Loaded += (_, _) => tb.Focus();
-            if (dialog.ShowDialog() == true && tb.Password == "1530") { _session.IsAdmin = true; GuardarSesion(); AdminPanel.Visibility = Visibility.Visible; AgregarLog("✅ Modo admin activado."); }
-            else if (dialog.DialogResult == true) AgregarLog("⚠ Clave incorrecta.");
+            if (dialog.ShowDialog() == true && tb.Password == "1530") { _session.IsAdmin = true; GuardarSesion(); AdminPanel.Visibility = Visibility.Visible; AgregarLog("\u2705 Modo admin activado."); }
+            else if (dialog.DialogResult == true) AgregarLog("\u26A0 Clave incorrecta.");
         }
 
         public void ReiniciarInstancia()
@@ -1103,10 +1123,10 @@ namespace NebulaLauncher
             {
                 InitializeProfileServices();
                 _manifestActual = null;
-                AgregarLog($"📁 Instancia sincronizada con el perfil activo.");
+                AgregarLog($"\uD83D\uDCC2 Instancia sincronizada con el perfil activo.");
                 _ = CargarVersionesAsync();
             }
-            catch (Exception ex) { AgregarLog($"❌ Error al cambiar instancia: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"\u274C Error al cambiar instancia: {ex.Message}"); }
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -1115,9 +1135,9 @@ namespace NebulaLauncher
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_session.Username))
-            { AgregarLog("⚠ Ingresá un nombre de usuario."); MessageBox.Show("Ingresá un nombre primero.", "Sin usuario", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-            if (_session.Username.Length < 3) { AgregarLog("⚠ El nombre debe tener al menos 3 caracteres."); return; }
-            if (CurrentProfile == null) { AgregarLog("⚠ No hay perfil seleccionado."); return; }
+            { AgregarLog("\u26A0 Ingres\u00E1 un nombre de usuario."); MessageBox.Show("Ingres\u00E1 un nombre primero.", "Sin usuario", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+            if (_session.Username.Length < 3) { AgregarLog("\u26A0 El nombre debe tener al menos 3 caracteres."); return; }
+            if (CurrentProfile == null) { AgregarLog("\u26A0 No hay perfil seleccionado."); return; }
 
             ImportarConfigsDeMinecraftOriginal();
             PlayButton.IsEnabled = false;
@@ -1132,18 +1152,18 @@ namespace NebulaLauncher
                 // BACKUP AUTOMATICO (SEGURIDAD PRIMERO)
                 if (!turboMode)
                 {
-                    AgregarLog("💾 Creando backup de seguridad (rápido)...");
+                    AgregarLog("\uD83D\uDCBE Creando backup de seguridad (r\u00E1pido)...");
                     await _backupService.CreateQuickConfigBackupAsync();
                 }
 
-                if (turboMode) AgregarLog("⚡ Modo Turbo activado — omitiendo sincronización de archivos.");
+                if (turboMode) AgregarLog("\u26A1 Modo Turbo activado \u2014 omitiendo sincronizaci\u00F3n de archivos.");
 
                 if (!turboMode && _manifestActual != null)
                 {
                     PlayButton.Content = "Sincronizando mods...";
                     _discord.SetActivity("Sincronizando mods...");
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
-                    if (!modsOk) { AgregarLog("✗ Falló la descarga de mods."); return; }
+                    if (!modsOk) { AgregarLog("\u2717 Fall\u00F3 la descarga de mods."); return; }
                 }
 
                 PlayButton.Content = "Iniciando Minecraft...";
@@ -1162,7 +1182,7 @@ namespace NebulaLauncher
 
                 Show(); WindowState = WindowState.Normal; Activate();
                 MainProgressBar.Value = 0;
-                ProgressLabel.Text    = exitCode == 0 ? "Sesión finalizada." : $"Minecraft cerró con código {exitCode}.";
+                ProgressLabel.Text    = exitCode == 0 ? "Sesi\u00F3n finalizada." : $"Minecraft cerr\u00F3 con c\u00F3digo {exitCode}.";
 
                 // Record session
                 var duration = DateTime.Now - sessionStart;
@@ -1172,7 +1192,7 @@ namespace NebulaLauncher
                 var analysis = _crashReporter.AnalyzeLastCrash(sessionStart);
                 if (analysis != null)
                 {
-                    AgregarLog("💥 Crash detectado. Mostrando diagnóstico Nebula...");
+                    AgregarLog("\uD83D\uDCA5 Crash detectado. Mostrando diagn\u00F3stico Nebula...");
                     SwitchToModule(new CrashAnalysisView(analysis, GameFolder));
                     
                     // Auto-report to Discord if configured
@@ -1180,14 +1200,14 @@ namespace NebulaLauncher
                     {
                         string summary = _crashReporter.CheckForCrash(sessionStart) ?? "Error descriptivo no disponible.";
                         await _crashReporter.ReportToDiscordAsync(summary, _session.Username);
-                        AgregarLog("✅ Crash reportado al servidor automáticamente.");
+                        AgregarLog("\u2705 Crash reportado al servidor autom\u00E1ticamente.");
                     }
                 }
 
                 _discord.SetIdle();
             }
-            catch (Exception ex) { AgregarLog($"✗ Error: {ex.Message}"); Show(); }
-            finally { PlayButton.IsEnabled = true; PlayButton.Content = "▶  JUGAR"; }
+             catch (Exception ex) { AgregarLog($"\u2717 Error: {ex.Message}"); Show(); }
+            finally { PlayButton.IsEnabled = true; PlayButton.Content = "\u25B6  JUGAR"; }
         }
 
         // Removed old simple log analyzer, now using CrashReporterService.CrashAnalysis

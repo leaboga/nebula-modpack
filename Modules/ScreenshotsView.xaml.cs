@@ -119,18 +119,41 @@ namespace NebulaLauncher.Modules
 
         private void FullscreenOverlay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.RightButton == MouseButtonState.Pressed && _selectedPath != null)
-            {
-                // Right-click: open in explorer
-                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{_selectedPath}\"") { UseShellExecute = true });
-            }
-            else
+            // Close if clicking the background blur
+            if (e.OriginalSource == sender || e.OriginalSource is Border b && b.Background is SolidColorBrush sc && sc.Opacity < 1)
             {
                 FullscreenOverlay.Visibility = Visibility.Collapsed;
             }
         }
 
+        private void BtnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedPath != null && File.Exists(_selectedPath))
+            {
+                try
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(_selectedPath);
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    Clipboard.SetImage(bitmap);
+                    MessageBox.Show("\u2705 Imagen copiada al portapapeles.", "Nebula Screenshots");
+                }
+                catch (Exception ex) { MessageBox.Show("Error al copiar: " + ex.Message); }
+            }
+        }
+
+        private void BtnOpenInFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedPath != null && File.Exists(_selectedPath))
+            {
+                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{_selectedPath}\"") { UseShellExecute = true });
+            }
+        }
+
         private void RefreshBtn_Click(object sender, RoutedEventArgs e) => LoadScreenshots();
+        private void CloseFlyout_Click(object sender, RoutedEventArgs e) => FullscreenOverlay.Visibility = Visibility.Collapsed;
 
         private void OpenFolderBtn_Click(object sender, RoutedEventArgs e)
         {
