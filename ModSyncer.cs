@@ -36,7 +36,8 @@ namespace NebulaLauncher
 
     public class ModSyncer
     {
-        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions-index.json";
+        private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/client-assets-1.0/versions-index.json";
+        private const string AssetsUrl        = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
         private readonly HttpClient _http = new HttpClient();
         private readonly string _modsFolder;
         private readonly string _gameFolder;
@@ -56,14 +57,30 @@ namespace NebulaLauncher
         public async Task<VersionsIndex?> ObtenerVersionsIndex() {
             try {
                 string json = await _http.GetStringAsync(VersionsIndexUrl + "?t=" + DateTime.Now.Ticks);
-                return JsonConvert.DeserializeObject<VersionsIndex>(json);
+                var index = JsonConvert.DeserializeObject<VersionsIndex>(json);
+                if (index != null) {
+                    // Rewrite broken main-branch URLs to stable tag in memory
+                    foreach(var v in index.AvailableVersions) {
+                        if (v.ManifestUrl.Contains("/main/")) 
+                            v.ManifestUrl = v.ManifestUrl.Replace("/main/", "/client-assets-1.0/");
+                    }
+                }
+                return index;
             } catch (Exception ex) { OnLog?.Invoke("Error Index: " + ex.Message); return null; }
         }
 
         public async Task<ModManifest?> ObtenerManifest(string manifestUrl) {
             try {
                 string json = await _http.GetStringAsync(manifestUrl + "?t=" + DateTime.Now.Ticks);
-                return JsonConvert.DeserializeObject<ModManifest>(json);
+                var manifest = JsonConvert.DeserializeObject<ModManifest>(json);
+                if (manifest != null) {
+                    // Rewrite placeholders in memory to survive broken GitHub files
+                    foreach(var m in manifest.Mods) {
+                        if (m.Url.Contains("/TU-USUARIO/")) 
+                            m.Url = m.Url.Replace("/TU-USUARIO/", "/leaboga/");
+                    }
+                }
+                return manifest;
             } catch (Exception ex) { OnLog?.Invoke("Error Manifest: " + ex.Message); return null; }
         }
 
@@ -143,7 +160,7 @@ namespace NebulaLauncher
 
         public async Task SincronizarConfigs() {
             try {
-                string url = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
+                string url = AssetsUrl;
                 string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
                 if (await DescargarConStream(url, tempZip)) {
                     ZipFile.ExtractToDirectory(tempZip, _gameFolder, true);
