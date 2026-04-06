@@ -1038,6 +1038,7 @@ namespace NebulaLauncher
                 if (_versionsIndex?.AvailableVersions == null || _versionsIndex.AvailableVersions.Count == 0)
                 { AgregarLog("\u26A0 No se pudieron cargar las versiones."); return; }
 
+                int currentIdx = 0;
                 Dispatcher.Invoke(() =>
                 {
                     VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
@@ -1045,10 +1046,11 @@ namespace NebulaLauncher
                     foreach (var v in _versionsIndex.AvailableVersions) VersionComboBox.Items.Add(v.Label);
                     int savedIdx = _versionsIndex.AvailableVersions.FindIndex(v => v.Version == (CurrentProfile?.LastVersion ?? ""));
                     VersionComboBox.SelectedIndex = savedIdx >= 0 ? savedIdx : 0;
+                    currentIdx = VersionComboBox.SelectedIndex;
                     VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
                 });
 
-                await CargarManifest(VersionComboBox.SelectedIndex >= 0 ? VersionComboBox.SelectedIndex : 0);
+                await CargarManifest(currentIdx >= 0 ? currentIdx : 0);
             }
             catch (Exception ex) { AgregarLog($"\u26A0 Error cargando versiones: {ex.Message}"); }
         }

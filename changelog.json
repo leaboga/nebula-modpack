@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.0",
+    "date": "06 de Abril, 2026",
+    "title": "Estabilidad Multihilo y Fix de Crash",
+    "type": "fix",
+    "changes": [
+      "Motor: Corregido crash de Minecraft 1.21+ relacionado con el formato de UUID en modo offline.",
+      "Threading: Resueltos errores de acceso cruzado entre hilos al cargar versiones del servidor.",
+      "Estabilidad: Sincronización atómica de índices de UI para prevenir fallos de concurrencia."
+    ]
+  },
+  {
     "version": "1.8.9",
     "date": "06 de Abril, 2026",
     "title": "Optimización de Motor y Logging",

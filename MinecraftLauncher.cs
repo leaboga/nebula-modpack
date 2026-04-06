@@ -34,7 +34,10 @@ namespace NebulaLauncher
             _ramGB = ramGB;
             _minecraftVersion = minecraftVersion;
             _neoforgeVersion = loaderVersion;
-            _session = session ?? new MSession(username, "token", "uuid");
+            
+            // Fix: Modern Minecraft requires a valid UUID format even in offline mode.
+            // Using a deterministic name-based UUID for offline mode.
+            _session = session ?? MSession.GetOfflineSession(username);
             _manualJavaPath = manualJavaPath;
         }
 
