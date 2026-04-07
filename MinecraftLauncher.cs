@@ -58,13 +58,11 @@ namespace NebulaLauncher
                 }
                 else if (_loaderType.ToLower().Contains("neoforge"))
                 {
-                    string javaPath = await GetJavaPath();
-                    finalVersionId = await InstalarNeoForge(path, javaPath);
+                    finalVersionId = await InstalarNeoForge(path, launcher);
                 }
                 else if (_loaderType.ToLower().Contains("forge"))
                 {
-                    string javaPath = await GetJavaPath();
-                    finalVersionId = await InstalarForge(path, javaPath);
+                    finalVersionId = await InstalarForge(path, launcher);
                 }
 
                 OnLog?.Invoke("📦 Sincronizando recursos base...");
@@ -106,15 +104,15 @@ namespace NebulaLauncher
             }
         }
 
-        private async Task<string> InstalarNeoForge(MinecraftPath path, string javaPath)
+        private async Task<string> InstalarNeoForge(MinecraftPath path, CmlLib.Core.MinecraftLauncher launcher)
         {
              OnLog?.Invoke("⚒ Conectando con NeoForge Maven...");
              try {
                 var type = Type.GetType("CmlLib.Core.Installer.NeoForge.NeoForgeInstaller, CmlLib.Core.Installer.NeoForge") ?? typeof(object);
-                dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
-                return await handler.InstallAsync(_minecraftVersion, _loaderVersion, path);
+                dynamic handler = Activator.CreateInstance(type, launcher)!;
+                return await handler.InstallAsync(_minecraftVersion, _loaderVersion);
              } catch {
-                return await InstalarForge(path, javaPath);
+                return await InstalarForge(path, launcher);
              }
         }
 
@@ -151,14 +149,14 @@ namespace NebulaLauncher
             return $"fabric-loader-{latest}-{_minecraftVersion}";
         }
 
-        private async Task<string> InstalarForge(MinecraftPath path, string javaPath)
+        private async Task<string> InstalarForge(MinecraftPath path, CmlLib.Core.MinecraftLauncher launcher)
         {
              OnLog?.Invoke("⚒ Conectando con Forge Maven...");
              var type = Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core.Installer.Forge") ?? typeof(object);
-             dynamic handler = Activator.CreateInstance(type, new HttpClient())!;
+             dynamic handler = Activator.CreateInstance(type, launcher)!;
              
              OnLog?.Invoke($"📥 Descargando e instalando Forge {_loaderVersion}...");
-             return await handler.InstallAsync(_minecraftVersion, _loaderVersion, path);
+             return await handler.InstallAsync(_minecraftVersion, _loaderVersion);
         }
 
         private async Task<string> GetJavaPath()

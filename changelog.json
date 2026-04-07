@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.3",
+    "date": "06 de Abril, 2026",
+    "title": "Fix Crítico de Instaladores",
+    "type": "hotfix",
+    "changes": [
+      "Motor: Corregida la instanciación de los instaladores de Forge y NeoForge.",
+      "Fix: Resuelto el error 'Constructor not found' que impedía el inicio del juego con mods.",
+      "Estabilidad: Mejorada la integración con CmlLib para la gestión de versiones personalizadas."
+    ]
+  },
+  {
     "version": "1.9.2",
     "date": "06 de Abril, 2026",
     "title": "Corrección de Cargadores y Sesión",
