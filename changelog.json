@@ -1,5 +1,16 @@
 [
   {
+    "version": "2.0.1",
+    "date": "07 de Abril, 2026",
+    "title": "Sistema de Autoupdate Inteligente",
+    "type": "update",
+    "changes": [
+      "Autoupdater: El launcher ahora busca actualizaciones utilizando la API oficial de GitHub de manera dinámica.",
+      "Fix: Sistema de copia tolerante a bloqueos para asegurar que el launcher se pueda actualizar correctamente en segundo plano.",
+      "Mantenimiento: Ya no se requiere mantener múltiples archivos estáticos de versión; todo es manejado dinámicamente con las Releases de GitHub."
+    ]
+  },
+  {
     "version": "2.0.0",
     "date": "07 de Abril, 2026",
     "title": "Expansión Galáctica: Host Local",

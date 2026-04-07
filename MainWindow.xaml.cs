@@ -40,8 +40,8 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.0.0";
-        private const string UpdateCheckUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/version.json";
+        private const string CurrentLauncherVersion = "2.0.1";
+        private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
         private readonly SocialService          _socialService    = new();
@@ -381,15 +381,21 @@ namespace NebulaLauncher
                 var root = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response);
                 if (root == null) return;
 
-                string latest = root.version?.ToString() ?? "";
+                string latest = root.tag_name?.ToString() ?? "";
+                if (latest.StartsWith("v")) latest = latest.Substring(1);
+
                 if (string.IsNullOrEmpty(latest) || latest == CurrentLauncherVersion) 
                 {
                     AgregarLog("Nebula Launcher esta actualizado.");
                     return;
                 }
 
-                string changelog = root.changelog?.ToString() ?? "";
-                _updateDownloadUrl = root.download_url?.ToString();
+                string changelog = root.name?.ToString() ?? "Nueva versión disponible";
+                _updateDownloadUrl = null;
+                if (root.assets != null && root.assets.Count > 0)
+                {
+                    _updateDownloadUrl = root.assets[0].browser_download_url?.ToString();
+                }
                 _updateVersion = latest;
 
                 Dispatcher.Invoke(() =>
@@ -457,8 +463,10 @@ namespace NebulaLauncher
                 await File.WriteAllBytesAsync(tempExe, bytes);
 
                 string batContent = "@echo off\n" +
-                                   "ping -n 3 127.0.0.1 > nul\n" +
+                                   ":loop\n" +
+                                   "ping -n 2 127.0.0.1 > nul\n" +
                                    "copy /Y \"" + tempExe + "\" \"" + currentExe + "\"\n" +
+                                   "if errorlevel 1 goto loop\n" +
                                    "del \"" + tempExe + "\"\n" +
                                    "start \"\" \"" + currentExe + "\"\n" +
                                    "del \"%~f0\"\n";
