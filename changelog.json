@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.9.4",
+    "date": "06 de Abril, 2026",
+    "title": "Motor de Instalación Robusto",
+    "type": "fix",
+    "changes": [
+      "Motor: Implementada invocación por reflexión avanzada para instaladores de Forge/NeoForge.",
+      "Fix: Resuelta incompatibilidad de métodos en librerías CmlLib modernas.",
+      "Estabilidad: Manejo inteligente de parámetros predeterminados en procesos de instalación de mods.",
+      "Sesión: Actualización a métodos no obsoletos para creación de sesiones offline."
+    ]
+  },
+  {
     "version": "1.9.3",
     "date": "06 de Abril, 2026",
     "title": "Fix Crítico de Instaladores",
