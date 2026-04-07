@@ -1,6 +1,6 @@
 ﻿{
     "version":  "1.0.9",
-    "label":  "v1.0.9 (07/04 16:51)",
+    "label":  "v1.0.9 (07/04 16:52)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1235,31 +1235,31 @@
                      "name":  "chefsdelight-1.0.5-neoforge-1.21.1 (1)",
                      "filename":  "chefsdelight-1.0.5-neoforge-1.21.1_1_.jar",
                      "md5":  "a99fb108e22e0bd50dbf543309d29a95",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1651/chefsdelight-1.0.5-neoforge-1.21.1_1_.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1652/chefsdelight-1.0.5-neoforge-1.21.1_1_.jar"
                  },
                  {
                      "name":  "chefsdelight-1.0.5-neoforge-1.21.1",
                      "filename":  "chefsdelight-1.0.5-neoforge-1.21.1.jar",
                      "md5":  "a99fb108e22e0bd50dbf543309d29a95",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1651/chefsdelight-1.0.5-neoforge-1.21.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1652/chefsdelight-1.0.5-neoforge-1.21.1.jar"
                  },
                  {
                      "name":  "legendarysurvivaloverhaul-1.21.1-2.4.2",
                      "filename":  "legendarysurvivaloverhaul-1.21.1-2.4.2.jar",
                      "md5":  "b520c278c830f46d712943ff49186496",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1651/legendarysurvivaloverhaul-1.21.1-2.4.2.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1652/legendarysurvivaloverhaul-1.21.1-2.4.2.jar"
                  },
                  {
                      "name":  "rusticdelight-neoforge-1.21-1.5.4",
                      "filename":  "rusticdelight-neoforge-1.21-1.5.4.jar",
                      "md5":  "41636dcf084c6356da585c523b416514",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1651/rusticdelight-neoforge-1.21-1.5.4.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1652/rusticdelight-neoforge-1.21-1.5.4.jar"
                  },
                  {
                      "name":  "townstead-0.4.4+1.21.1",
                      "filename":  "townstead-0.4.4_1.21.1.jar",
                      "md5":  "2a19aa398c40bc904b5880ec82ce1e28",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1651/townstead-0.4.4_1.21.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.9-1652/townstead-0.4.4_1.21.1.jar"
                  }
              ]
 }
