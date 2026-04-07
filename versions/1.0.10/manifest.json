@@ -1,6 +1,6 @@
 ﻿{
     "version":  "1.0.10",
-    "label":  "v1.0.10 (07/04 16:56)",
+    "label":  "v1.0.10 (07/04 17:01)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1265,7 +1265,7 @@
                      "name":  "mca-neoforge-7.7.6+1.21.1",
                      "filename":  "mca-neoforge-7.7.6_1.21.1.jar",
                      "md5":  "70d647250099df831fd7535530cdb0f0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.10-1656/mca-neoforge-7.7.6_1.21.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.10-1701/mca-neoforge-7.7.6_1.21.1.jar"
                  }
              ]
 }
