@@ -1,0 +1,65 @@
+<UserControl x:Class="NebulaLauncher.Modules.HostingServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0A0714" Offset="0"/>
+            <GradientStop Color="#0F0B1A" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+
+    <Grid Margin="40,36,40,28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,28">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Servicio de Hosting"
+                           Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
+                           Margin="0,0,0,4"/>
+                <Border Background="#7C3AED" CornerRadius="4" Padding="6,2" Margin="12,0,0,6" VerticalAlignment="Center">
+                    <TextBlock Text="EXPERIMENTAL" Foreground="White" FontSize="10" FontWeight="Black"/>
+                </Border>
+            </StackPanel>
+            <TextBlock Text="CONEXIÓN CON NUBE NEBULA"
+                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Border Background="#12101E" CornerRadius="20" BorderBrush="#2E2648" BorderThickness="1">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="🌌" FontSize="64" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Text="Próximamente" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="Estamos trabajando en una integración directa con proveedores de hosting" 
+                               Foreground="#7B6FA0" FontSize="14" HorizontalAlignment="Center" TextAlignment="Center" MaxWidth="400" Margin="0,0,0,24"/>
+                    
+                    <Border Background="#1A1528" CornerRadius="12" Padding="24" Width="450">
+                        <StackPanel>
+                            <TextBlock Text="¿Qué incluirá esta función?" Foreground="#A78BFA" FontSize="12" FontWeight="Bold" Margin="0,0,0,12"/>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="Gestión de servidores remotos desde el launcher." Foreground="#F0EAFFCC" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="Sincronización automática de archivos del servidor." Foreground="#F0EAFFCC" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="Acceso a consola y logs en tiempo real." Foreground="#F0EAFFCC" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="Escalabilidad dinámica de recursos." Foreground="#F0EAFFCC" FontSize="12"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

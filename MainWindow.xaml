@@ -153,8 +153,10 @@
                             <RadioButton Content="  📸  Capturas" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Screenshots_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🛸  Mod Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🚑  Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton x:Name="NavBlueMap" Content="  🌍  Mapa Galáctico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <RadioButton Content="  🌍  Mapa Galáctico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" x:Name="NavBlueMap" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  👥  Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <RadioButton Content="  ☁️  Servicio Hosting" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <RadioButton Content="  💻  Hostear Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
 
                             <Border Height="1" Margin="4,24,4,24" Background="#1A1528"/>
 

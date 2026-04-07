@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "1.8.4";
+        private const string CurrentLauncherVersion = "2.0.0";
         private const string UpdateCheckUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/version.json";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -575,6 +575,8 @@ namespace NebulaLauncher
         private void Nav_ModHub_Checked(object sender, RoutedEventArgs e)      { CambiarVista("modhub"); }
         private void Nav_Crash_Checked(object sender, RoutedEventArgs e)       { CambiarVista("crash"); }
         private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { CambiarVista("map"); }
+        private void Nav_Hosting_Checked(object sender, RoutedEventArgs e)     { CambiarVista("hosting"); }
+        private void Nav_LocalHost_Checked(object sender, RoutedEventArgs e)    { CambiarVista("localhost"); }
         
         private void MapQuickCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -1506,6 +1508,14 @@ namespace NebulaLauncher
                 case "map":
                     this.Title = "Nebula Launcher — Mapa";
                     SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId));
+                    break;
+                case "hosting":
+                    this.Title = "Nebula Launcher — Servicio Hosting (BETA)";
+                    SwitchToModule(new HostingServiceView());
+                    break;
+                case "localhost":
+                    this.Title = "Nebula Launcher — Hostear Servidor Local";
+                    SwitchToModule(new ServerHostView());
                     break;
             }
         }

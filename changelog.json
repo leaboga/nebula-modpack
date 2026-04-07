@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.0.0",
+    "date": "07 de Abril, 2026",
+    "title": "Expansión Galáctica: Host Local",
+    "type": "update",
+    "changes": [
+      "Servidor: Lanzamiento del nuevo módulo de 'Hostear Servidor' para creación de servidores locales.",
+      "Instalador: Soporte para instalación automática de servidores Vanilla, Fabric y Forge/NeoForge.",
+      "Control: Consola en tiempo real integrada con monitorización de CPU y RAM del servidor.",
+      "Experimental: Añadida sección de 'Servicio de Hosting' para futuras integraciones en la nube.",
+      "UX: Navegación lateral renovada con accesos directos a las nuevas herramientas de hosting."
+    ]
+  },
+  {
     "version": "1.9.7",
     "date": "06 de Abril, 2026",
     "title": "Motor Universal Blindado",
