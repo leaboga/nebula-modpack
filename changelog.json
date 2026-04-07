@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.5",
+    "date": "06 de Abril, 2026",
+    "title": "Blindaje de Compatibilidad Forge",
+    "type": "fix",
+    "changes": [
+      "Reflexión: Corregido error de conversión DBNull en la invocación de instaladores externos.",
+      "Motor: Mejora en la selección dinámica de sobrecargas de métodos para librerías de terceros.",
+      "Estabilidad: Blindaje total contra cambios en los parámetros opcionales de los motores de mods."
+    ]
+  },
+  {
     "version": "1.9.4",
     "date": "06 de Abril, 2026",
     "title": "Motor de Instalación Robusto",

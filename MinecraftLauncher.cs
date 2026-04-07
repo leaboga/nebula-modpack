@@ -144,22 +144,44 @@ namespace NebulaLauncher
         {
             if (instance == null) throw new Exception("No se pudo crear instancia del instalador.");
 
-            // Find method by name and parameter count (to handle optional tokens etc)
-            var method = type.GetMethods()
-                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install"))
-                .OrderByDescending(m => m.GetParameters().Length)
-                .FirstOrDefault(m => m.GetParameters().Length >= 2);
+            // Find method by name and parameter count
+            // We prefer the one with exactly 2 parameters if it exists, otherwise the one with more (optional) params
+            var methods = type.GetMethods()
+                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install") && m.GetParameters().Length >= 2)
+                .OrderBy(m => m.GetParameters().Length) // Smallest parameter count first
+                .ToList();
 
-            if (method == null) {
+            if (methods.Count == 0) {
                 throw new Exception($"Método de instalación no encontrado en {type.Name}.");
             }
 
-            var parameters = method.GetParameters();
-            var args = new object?[parameters.Length];
-            args[0] = mcVersion;
-            args[1] = loaderVersion;
-            // Fill remaining params with default values (null/default)
-            for (int i = 2; i < parameters.Length; i++) args[i] = parameters[i].DefaultValue;
+            MethodInfo? method = null;
+            object?[]? args = null;
+
+            foreach (var m in methods)
+            {
+                try
+                {
+                    var parameters = m.GetParameters();
+                    args = new object?[parameters.Length];
+                    args[0] = mcVersion;
+                    args[1] = loaderVersion;
+
+                    for (int i = 2; i < parameters.Length; i++)
+                    {
+                        var def = parameters[i].DefaultValue;
+                        // DBNull.Value is returned when there is no default value or it's not a simple constant
+                        // We should use null for reference types / nullable types
+                        args[i] = (def == DBNull.Value) ? null : def;
+                    }
+                    
+                    method = m;
+                    break; // Found a workable method
+                }
+                catch { continue; }
+            }
+
+            if (method == null || args == null) throw new Exception("No se pudo preparar la invocación del instalador.");
 
             var result = method.Invoke(instance, args);
             if (result is Task<string> task) return await task;
