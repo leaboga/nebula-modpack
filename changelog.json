@@ -1,5 +1,15 @@
 [
   {
+    "version": "2.0.3",
+    "date": "07 de Abril, 2026",
+    "title": "Fix: Bucle de Actualización Infinito",
+    "type": "hotfix",
+    "changes": [
+      "Fix: Se corrigió un error crítico introducido en la versión 2.0.2 que provocaba un bucle infinito de reinicios al actualizar.",
+      "Sistema: Ajuste interno en las constantes de versión para alinear la compilación local con la API de GitHub."
+    ]
+  },
+  {
     "version": "2.0.1",
     "date": "07 de Abril, 2026",
     "title": "Sistema de Autoupdate Inteligente",
