@@ -144,46 +144,56 @@ namespace NebulaLauncher
         {
             if (instance == null) throw new Exception("No se pudo crear instancia del instalador.");
 
-            // Find method by name and parameter count
-            // We prefer the one with exactly 2 parameters if it exists, otherwise the one with more (optional) params
             var methods = type.GetMethods()
-                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install") && m.GetParameters().Length >= 2)
-                .OrderBy(m => m.GetParameters().Length) // Smallest parameter count first
+                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install"))
                 .ToList();
 
-            if (methods.Count == 0) {
-                throw new Exception($"Método de instalación no encontrado en {type.Name}.");
-            }
+            // 1. Prioritize method with (string, string) as first parameters
+            var targetMethod = methods.FirstOrDefault(m => {
+                var p = m.GetParameters();
+                return p.Length >= 2 && p[0].ParameterType == typeof(string) && p[1].ParameterType == typeof(string);
+            });
 
-            MethodInfo? method = null;
             object?[]? args = null;
 
-            foreach (var m in methods)
+            if (targetMethod != null)
             {
-                try
-                {
-                    var parameters = m.GetParameters();
-                    args = new object?[parameters.Length];
-                    args[0] = mcVersion;
-                    args[1] = loaderVersion;
-
-                    for (int i = 2; i < parameters.Length; i++)
-                    {
-                        var def = parameters[i].DefaultValue;
-                        // DBNull.Value is returned when there is no default value or it's not a simple constant
-                        // We should use null for reference types / nullable types
-                        args[i] = (def == DBNull.Value) ? null : def;
-                    }
-                    
-                    method = m;
-                    break; // Found a workable method
+                var parameters = targetMethod.GetParameters();
+                args = new object?[parameters.Length];
+                args[0] = mcVersion;
+                args[1] = loaderVersion;
+                for (int i = 2; i < parameters.Length; i++) {
+                    var def = parameters[i].DefaultValue;
+                    args[i] = (def == DBNull.Value) ? null : def;
                 }
-                catch { continue; }
+            }
+            else
+            {
+                // 2. Fallback: try any method with at least 2 params and attempt conversion
+                foreach (var m in methods.OrderBy(m => m.GetParameters().Length))
+                {
+                    try {
+                        var parameters = m.GetParameters();
+                        if (parameters.Length < 2) continue;
+                        args = new object?[parameters.Length];
+                        args[0] = Convert.ChangeType(mcVersion, parameters[0].ParameterType);
+                        args[1] = Convert.ChangeType(loaderVersion, parameters[1].ParameterType);
+                        for (int i = 2; i < parameters.Length; i++) {
+                            var def = parameters[i].DefaultValue;
+                            args[i] = (def == DBNull.Value) ? null : def;
+                        }
+                        targetMethod = m;
+                        break;
+                    } catch { continue; }
+                }
             }
 
-            if (method == null || args == null) throw new Exception("No se pudo preparar la invocación del instalador.");
+            if (targetMethod == null || args == null) {
+                var sigs = string.Join(", ", methods.Select(m => $"({string.Join(",", m.GetParameters().Select(p => p.ParameterType.Name))})"));
+                throw new Exception($"No se encontró firma compatible en {type.Name}. Disponibles: {sigs}");
+            }
 
-            var result = method.Invoke(instance, args);
+            var result = targetMethod.Invoke(instance, args);
             if (result is Task<string> task) return await task;
             return result?.ToString() ?? "";
         }

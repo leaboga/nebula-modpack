@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.9.6",
+    "date": "06 de Abril, 2026",
+    "title": "Optimización de Invocación Dinámica",
+    "type": "fix",
+    "changes": [
+      "Motor: Priorización de firmas de método (string, string) para mejorar la compatibilidad con Forge.",
+      "Fix: Resuelto error de conversión de tipos entre String y ForgeInstallOptions.",
+      "Estabilidad: Sistema de respaldo dinámico con conversión automática de parámetros para instaladores."
+    ]
+  },
+  {
     "version": "1.9.5",
     "date": "06 de Abril, 2026",
     "title": "Blindaje de Compatibilidad Forge",
