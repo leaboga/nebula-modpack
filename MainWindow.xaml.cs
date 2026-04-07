@@ -400,11 +400,16 @@ namespace NebulaLauncher
 
                 Dispatcher.Invoke(() =>
                 {
-                    UpdateBadge.Text       = "v" + latest + " disponible";
+                    UpdateBadge.Text       = "Actualizando...";
                     UpdateBadge.Visibility = Visibility.Visible;
                     UpdateBadge.ToolTip    = changelog;
-                    AgregarLog("Actualizacion disponible: v" + latest);
+                    AgregarLog("Actualizacion disponible: v" + latest + ". Iniciando descarga...");
                 });
+
+                if (!string.IsNullOrEmpty(_updateDownloadUrl))
+                {
+                    await AplicarUpdateAsync(_updateDownloadUrl);
+                }
             }
             catch (Exception ex) { AgregarLog("Error verificando actualizaciones: " + ex.Message); }
         }
