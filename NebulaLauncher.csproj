@@ -7,15 +7,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>nebula.ico</ApplicationIcon>
-		<Version>1.9.6</Version>
+		<Version>1.9.7</Version>
 		<Authors>Leandro (Nebula Team)</Authors>
 		<Company>Nebula Launcher Project</Company>
 		<Product>Nebula Launcher</Product>
 		<Description>Stable Minecraft Nexus Hub with Mass Analyzer</Description>
 		<Copyright>Copyright © 2026 Nebula Project</Copyright>
 		
-		<AssemblyVersion>1.9.6.0</AssemblyVersion>
-		<FileVersion>1.9.6.0</FileVersion>
+		<AssemblyVersion>1.9.7.0</AssemblyVersion>
+		<FileVersion>1.9.7.0</FileVersion>
 		
 		<!-- Visuals for EXE -->
 		
@@ -35,6 +35,7 @@
 		<PackageReference Include="CmlLib.Core" Version="4.0.6" />
 		<PackageReference Include="CmlLib.Core.Auth.Microsoft" Version="3.3.1" />
 		<PackageReference Include="CmlLib.Core.Installer.Forge" Version="1.1.1" />
+		<PackageReference Include="CmlLib.Core.Installer.NeoForge" Version="1.1.1" />
 		<PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />

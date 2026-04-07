@@ -38,7 +38,7 @@ namespace NebulaLauncher
             _loaderType = loaderType;
             _loaderVersion = loaderVersion;
             
-            // Use modern offline session creation
+            // Use modern offline session
             _session = session ?? MSession.CreateOfflineSession(username);
             _manualJavaPath = manualJavaPath;
         }
@@ -53,17 +53,18 @@ namespace NebulaLauncher
                 
                 string finalVersionId = _minecraftVersion;
 
-                if (_loaderType.ToLower().Contains("fabric"))
+                string lType = _loaderType.ToLower();
+                if (lType.Contains("fabric"))
                 {
                     finalVersionId = await InstalarFabric(path);
                 }
-                else if (_loaderType.ToLower().Contains("neoforge"))
+                else if (lType.Contains("neoforge"))
                 {
-                    finalVersionId = await InstalarNeoForge(launcher);
+                    finalVersionId = await InstalarConReflexion("NeoForge", launcher);
                 }
-                else if (_loaderType.ToLower().Contains("forge"))
+                else if (lType.Contains("forge"))
                 {
-                    finalVersionId = await InstalarForge(launcher);
+                    finalVersionId = await InstalarConReflexion("Forge", launcher);
                 }
 
                 OnLog?.Invoke("📦 Sincronizando recursos base...");
@@ -106,96 +107,69 @@ namespace NebulaLauncher
             }
         }
 
-        private async Task<string> InstalarNeoForge(CmlLib.Core.MinecraftLauncher launcher)
+        private async Task<string> InstalarConReflexion(string engine, CmlLib.Core.MinecraftLauncher launcher)
         {
-             OnLog?.Invoke("⚒ Conectando con NeoForge Maven...");
-             try {
-                var type = Type.GetType("CmlLib.Core.Installer.NeoForge.NeoForgeInstaller, CmlLib.Core.Installer.NeoForge") ?? 
-                           Type.GetType("CmlLib.Core.Installer.NeoForge.NeoForgeInstaller, CmlLib.Core");
-                
-                if (type == null) throw new Exception("Instalador de NeoForge no encontrado.");
-                
-                var handler = Activator.CreateInstance(type, launcher);
-                return await InvokeInstallAsync(type, handler, _minecraftVersion, _loaderVersion);
-             } catch (Exception ex) {
-                OnLog?.Invoke("⚠ Fallo NeoForge: " + ex.Message + ". Reintentando con Forge...");
-                return await InstalarForge(launcher);
-             }
-        }
+            OnLog?.Invoke($"⚒ Conectando con {engine} Maven...");
+            
+            // Try to find the installer type in multiple known assemblies/namespaces
+            string[] typeNames = {
+                $"CmlLib.Core.Installer.{engine}.{engine}Installer, CmlLib.Core.Installer.{engine}",
+                $"CmlLib.Core.Installer.{engine}.{engine}Installer, CmlLib.Core",
+                $"CmlLib.Core.Installer.{engine}Installer, CmlLib.Core"
+            };
 
-        private async Task<string> InstalarForge(CmlLib.Core.MinecraftLauncher launcher)
-        {
-             OnLog?.Invoke("⚒ Conectando con Forge Maven...");
-             try {
-                var type = Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core.Installer.Forge") ??
-                           Type.GetType("CmlLib.Core.Installer.Forge.ForgeInstaller, CmlLib.Core");
+            Type? type = null;
+            foreach (var name in typeNames) {
+                type = Type.GetType(name);
+                if (type != null) break;
+            }
 
-                if (type == null) throw new Exception("Instalador de Forge no encontrado.");
+            if (type == null) {
+                if (engine == "NeoForge") return await InstalarConReflexion("Forge", launcher);
+                throw new Exception($"Instalador de {engine} no encontrado.");
+            }
 
-                var handler = Activator.CreateInstance(type, launcher);
-                OnLog?.Invoke($"📥 Descargando e instalando Forge {_loaderVersion}...");
-                return await InvokeInstallAsync(type, handler, _minecraftVersion, _loaderVersion);
-             } catch (Exception ex) {
-                throw new Exception("Error en instalador de Forge: " + ex.Message);
-             }
-        }
+            var instance = Activator.CreateInstance(type, launcher);
+            if (instance == null) throw new Exception($"No se pudo crear instancia de {engine}Installer.");
 
-        private async Task<string> InvokeInstallAsync(Type type, object? instance, string mcVersion, string loaderVersion)
-        {
-            if (instance == null) throw new Exception("No se pudo crear instancia del instalador.");
+            OnLog?.Invoke($"📥 Descargando e instalando {engine} {_loaderVersion}...");
 
+            // Find method by name and parameter count, prioritizing those that accept strings
             var methods = type.GetMethods()
-                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install"))
+                .Where(m => (m.Name == "InstallAsync" || m.Name == "Install") && m.GetParameters().Length >= 2)
+                .OrderBy(m => m.GetParameters().Length)
                 .ToList();
 
-            // 1. Prioritize method with (string, string) as first parameters
-            var targetMethod = methods.FirstOrDefault(m => {
-                var p = m.GetParameters();
-                return p.Length >= 2 && p[0].ParameterType == typeof(string) && p[1].ParameterType == typeof(string);
-            });
-
-            object?[]? args = null;
-
-            if (targetMethod != null)
+            Exception? lastEx = null;
+            foreach (var method in methods)
             {
-                var parameters = targetMethod.GetParameters();
-                args = new object?[parameters.Length];
-                args[0] = mcVersion;
-                args[1] = loaderVersion;
-                for (int i = 2; i < parameters.Length; i++) {
-                    var def = parameters[i].DefaultValue;
-                    args[i] = (def == DBNull.Value) ? null : def;
-                }
-            }
-            else
-            {
-                // 2. Fallback: try any method with at least 2 params and attempt conversion
-                foreach (var m in methods.OrderBy(m => m.GetParameters().Length))
+                try
                 {
-                    try {
-                        var parameters = m.GetParameters();
-                        if (parameters.Length < 2) continue;
-                        args = new object?[parameters.Length];
-                        args[0] = Convert.ChangeType(mcVersion, parameters[0].ParameterType);
-                        args[1] = Convert.ChangeType(loaderVersion, parameters[1].ParameterType);
-                        for (int i = 2; i < parameters.Length; i++) {
-                            var def = parameters[i].DefaultValue;
-                            args[i] = (def == DBNull.Value) ? null : def;
+                    var pars = method.GetParameters();
+                    var args = new object?[pars.Length];
+                    
+                    // First 2 are usually Minecraft version and Loader version
+                    args[0] = _minecraftVersion;
+                    args[1] = _loaderVersion;
+
+                    // Fill remaining with defaults or new instances
+                    for (int i = 2; i < pars.Length; i++) {
+                        var pType = pars[i].ParameterType;
+                        if (pars[i].HasDefaultValue) args[i] = pars[i].DefaultValue;
+                        else if (pType.IsClass && pType != typeof(string)) {
+                            try { args[i] = Activator.CreateInstance(pType); } catch { args[i] = null; }
                         }
-                        targetMethod = m;
-                        break;
-                    } catch { continue; }
+                        else args[i] = pType.IsValueType ? Activator.CreateInstance(pType) : null;
+                    }
+
+                    var result = method.Invoke(instance, args);
+                    if (result is Task<string> task) return await task;
+                    return result?.ToString() ?? "";
                 }
+                catch (Exception ex) { lastEx = ex; continue; }
             }
 
-            if (targetMethod == null || args == null) {
-                var sigs = string.Join(", ", methods.Select(m => $"({string.Join(",", m.GetParameters().Select(p => p.ParameterType.Name))})"));
-                throw new Exception($"No se encontró firma compatible en {type.Name}. Disponibles: {sigs}");
-            }
-
-            var result = targetMethod.Invoke(instance, args);
-            if (result is Task<string> task) return await task;
-            return result?.ToString() ?? "";
+            throw new Exception($"Fallo en {engine}: " + (lastEx?.InnerException?.Message ?? lastEx?.Message ?? "Firma no compatible"));
         }
 
         private void SetOptimizedArgs(MLaunchOption opt)
@@ -219,16 +193,20 @@ namespace NebulaLauncher
         private async Task<string> InstalarFabric(MinecraftPath path)
         {
             OnLog?.Invoke("🧵 Sincronizando con Fabric API...");
-            dynamic handler = new FabricInstaller(new HttpClient());
-            
-            var loadersRes = await handler.GetLoaderVersionsAsync();
-            IEnumerable<dynamic> loaders = loadersRes;
-            var latest = loaders.FirstOrDefault()?.Version;
-            if (string.IsNullOrEmpty(latest)) throw new Exception("No se encontraron cargadores Fabric.");
-            
-            OnLog?.Invoke($"📥 Instalando Fabric Loader {latest}...");
-            await handler.InstallAsync(_minecraftVersion, latest, path);
-            return $"fabric-loader-{latest}-{_minecraftVersion}";
+            try {
+                dynamic handler = new FabricInstaller(new HttpClient());
+                
+                var loadersRes = await handler.GetLoaderVersionsAsync();
+                IEnumerable<dynamic> loaders = loadersRes;
+                var latest = loaders.FirstOrDefault()?.Version;
+                if (string.IsNullOrEmpty(latest)) throw new Exception("No se encontraron cargadores Fabric.");
+                
+                OnLog?.Invoke($"📥 Instalando Fabric Loader {latest}...");
+                await handler.InstallAsync(_minecraftVersion, (string)latest, path);
+                return $"fabric-loader-{latest}-{_minecraftVersion}";
+            } catch (Exception ex) {
+                throw new Exception("Error en instalador de Fabric: " + ex.Message);
+            }
         }
 
         private async Task<string> GetJavaPath()
@@ -241,7 +219,6 @@ namespace NebulaLauncher
                if (parts.Length >= 2) {
                    int minor = int.Parse(parts[1]);
                    int patch = parts.Length >= 3 ? int.Parse(parts[2]) : 0;
-                   
                    if (minor <= 16) version = 8;
                    else if (minor <= 19) version = 17;
                    else if (minor == 20 && patch < 5) version = 17;

@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.9.7",
+    "date": "06 de Abril, 2026",
+    "title": "Motor Universal Blindado",
+    "type": "fix",
+    "changes": [
+      "Motor: Implementado sistema de búsqueda de tipos multienmsamblado para instaladores de mods.",
+      "Fabric: Migración a motor dinámico para resolver incompatibilidades de Fabric API.",
+      "Fix: Eliminación de archivos temporales de inspección que causaban conflictos de compilación.",
+      "Estabilidad: Blindaje total del sistema de reflexión con manejo de firmas de método polimórficas."
+    ]
+  },
+  {
     "version": "1.9.6",
     "date": "06 de Abril, 2026",
     "title": "Optimización de Invocación Dinámica",
