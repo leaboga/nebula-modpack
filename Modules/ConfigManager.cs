@@ -65,5 +65,15 @@ namespace NebulaLauncher.Modules
             }
             catch (IOException) { /* Archivo en uso por el juego */ }
         }
+        public async Task UpdateSplashText(string text)
+        {
+            try
+            {
+                string textDir = Path.Combine(_gamePath, "texts");
+                Directory.CreateDirectory(textDir);
+                await File.WriteAllTextAsync(Path.Combine(textDir, "splashes.txt"), text);
+            }
+            catch { }
+        }
     }
 }

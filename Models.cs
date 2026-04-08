@@ -20,6 +20,11 @@ namespace NebulaLauncher
         public string BackgroundImagePath    { get; set; } = "";
         public bool   IsTurboEnabled         { get; set; } = false;
         public bool   SkipConfigSync         { get; set; } = false;
+
+        // Customization & Features
+        public string CloudPath              { get; set; } = "";
+        public string CustomSplashText       { get; set; } = "";
+        public bool   IsOverlayEnabled       { get; set; } = false;
         
         // Legacy support
         public string SessionToken       { get; set; } = "";

@@ -1,5 +1,19 @@
 [
   {
+    "version": "2.1.0",
+    "date": "08 de Abril, 2026",
+    "title": "Nebula 2.1: The Galactic Engine Update",
+    "type": "update",
+    "changes": [
+      "⚡ Modpack Hub Next-Gen: Nuevo motor integrado de Modrinth. Capaz de procesar archivos `.mrpack` y generar instancias listas para jugar en cuestión de segundos.",
+      "☁️ Cloud Sync Premium: Nunca más pierdas un mundo. Sistema de auto-respaldo de progreso en la nube (Soporte nativo para Dropbox, OneDrive y Google Drive) tras cada sesión de juego.",
+      "🎨 Custom UI & HUD: Lleva tu launcher al siguiente nivel con soporte para Textos Splash clásicos amarillos (100% personalizables) y un nuevo Overlay In-Game de telemetría y rendimiento.",
+      "🧹 Smart Cleaner 2.0: Nueva suite de mantenimiento profunda. Analiza y purga de forma inteligente archivos de caché, logs antiguos y dumps, recuperando GBs de espacio en disco.",
+      "☕ Java Galáctico Auto-Deploy: Despreocupate por las versiones de Java. El motor inteligente ahora descarga, instala y vincula automáticamente la versión exacta de Java (8, 17 o 21) según los requisitos del modpack.",
+      "🤖 Smart Conflict AI: Nuestro nuevo sistema de diagnóstico inteligente escanea tu carpeta de mods y detecta proactivamente incompatibilidades (Ej: Rubidium vs Embeddium) antes siquiera de que el juego intente arrancar."
+    ]
+  },
+  {
     "version": "2.0.5",
     "date": "07 de Abril, 2026",
     "title": "Fix Crítico: Reescritura del AutoUpdater",

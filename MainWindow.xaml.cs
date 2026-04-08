@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.0.5";
+        private const string CurrentLauncherVersion = "2.1.0";
         private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -594,6 +594,7 @@ namespace NebulaLauncher
         private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { CambiarVista("map"); }
         private void Nav_Hosting_Checked(object sender, RoutedEventArgs e)     { CambiarVista("hosting"); }
         private void Nav_LocalHost_Checked(object sender, RoutedEventArgs e)    { CambiarVista("localhost"); }
+        private void Nav_Modpacks_Checked(object sender, RoutedEventArgs e)     { CambiarVista("modpacks"); }
         
         private void MapQuickCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -1276,6 +1277,14 @@ namespace NebulaLauncher
                 var duration = DateTime.Now - sessionStart;
                 if (duration.TotalMinutes >= 1) { _historyService.RecordSession(duration); ActualizarSessionHistoryUI(); }
 
+                // Cloud Sync
+                if (!string.IsNullOrEmpty(_session.CloudPath))
+                {
+                    AgregarLog("☁️ Iniciando respaldo en la nube...");
+                    string zip = await _backupService.CreateBackupAsync();
+                    await _backupService.CopyToCloudAsync(zip, _session.CloudPath, msg => AgregarLog(msg));
+                }
+
                 // Check for crashes (Professional Insight)
                 var analysis = _crashReporter.AnalyzeLastCrash(sessionStart);
                 if (analysis != null)
@@ -1309,7 +1318,9 @@ namespace NebulaLauncher
                 _session.AuthMode == "premium", profile.Version, 
                 profile.LoaderType,
                 profile.LoaderVersion, 
-                manualJavaPath: profile.JavaPath);
+                manualJavaPath: profile.JavaPath,
+                customSplash: _session.CustomSplashText,
+                isOverlay: _session.IsOverlayEnabled);
             mcLauncher.OnLog      += msg => AgregarLog(msg);
             mcLauncher.OnProgress += pct => Dispatcher.Invoke(() => MainProgressBar.Value = pct);
             
@@ -1534,6 +1545,10 @@ namespace NebulaLauncher
                     this.Title = "Nebula Launcher — Hostear Servidor Local";
                     SwitchToModule(new ServerHostView());
                     break;
+                case "modpacks":
+                    this.Title = "Nebula Launcher — Modpack Hub";
+                    SwitchToModule(new ModpackView());
+                    break;
             }
         }
 
@@ -1570,6 +1585,12 @@ namespace NebulaLauncher
             {
                 this.WindowState = WindowState.Maximized;
             }
+        }
+        public void RecargarPerfiles()
+        {
+            // Logic to refresh the home view profiles list
+            // If the Home view is active, we might need to recreate it or call its refresh method
+            CambiarVista("home");
         }
     }
 }

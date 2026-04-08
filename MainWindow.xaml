@@ -152,6 +152,7 @@
                             <RadioButton Content="  📊  Rendimiento" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Perf_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  📸  Capturas" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Screenshots_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🛸  Mod Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <RadioButton Content="  📦  Modpacks Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🚑  Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🌍  Mapa Galáctico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" x:Name="NavBlueMap" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  👥  Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>

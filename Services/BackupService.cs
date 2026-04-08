@@ -101,6 +101,19 @@ namespace NebulaLauncher.Services
             if (File.Exists(path)) File.Delete(path);
         }
 
+        public async Task CopyToCloudAsync(string zipPath, string cloudPath, Action<string>? onLog = null)
+        {
+            if (string.IsNullOrEmpty(cloudPath) || !Directory.Exists(cloudPath)) return;
+            try
+            {
+                onLog?.Invoke("☁️ Sincronizando con la nube...");
+                string dest = Path.Combine(cloudPath, Path.GetFileName(zipPath));
+                await Task.Run(() => File.Copy(zipPath, dest, true));
+                onLog?.Invoke("✅ Sincronización completa.");
+            }
+            catch (Exception ex) { onLog?.Invoke($"⚠ Error en nube: {ex.Message}"); }
+        }
+
         private void CopyDirectory(string src, string dst)
         {
             Directory.CreateDirectory(dst);

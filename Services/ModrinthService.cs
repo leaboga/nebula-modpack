@@ -56,6 +56,56 @@ namespace NebulaLauncher.Services
             catch { return new List<ModrinthMod>(); }
         }
 
+        public async Task<List<ModrinthMod>> SearchModpacks(string query)
+        {
+            try
+            {
+                string facets = "[[\"project_type:modpack\"]]";
+                var response = await _client.GetAsync($"search?query={Uri.EscapeDataString(query)}&facets={Uri.EscapeDataString(facets)}&limit=15");
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                dynamic? result = JsonConvert.DeserializeObject(content);
+                var mods = new List<ModrinthMod>();
+
+                if (result?.hits != null)
+                {
+                    foreach (var hit in result.hits)
+                    {
+                        mods.Add(new ModrinthMod
+                        {
+                            Title = hit.title,
+                            Description = hit.description,
+                            IconUrl = hit.icon_url,
+                            ProjectId = hit.project_id,
+                            Author = hit.author
+                        });
+                    }
+                }
+                return mods;
+            }
+            catch { return new List<ModrinthMod>(); }
+        }
+
+        public async Task<string?> GetLatestVersionDownloadUrl(string projectId)
+        {
+            try
+            {
+                var response = await _client.GetAsync($"project/{projectId}/version");
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                dynamic? versions = JsonConvert.DeserializeObject(content);
+
+                if (versions != null && versions.Count > 0)
+                {
+                    var latest = versions[0];
+                    return latest.files[0].url;
+                }
+                return null;
+            }
+            catch { return null; }
+        }
+
         public async Task<bool> DownloadMod(string projectId, string version, string loader, string modsFolder)
         {
             try

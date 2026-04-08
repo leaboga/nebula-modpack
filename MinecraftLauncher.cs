@@ -13,6 +13,7 @@ using CmlLib.Core.Installer;
 using CmlLib.Core.ModLoaders.FabricMC;
 using System.Linq;
 using System.Reflection;
+using NebulaLauncher.Modules;
 
 namespace NebulaLauncher
 {
@@ -25,12 +26,14 @@ namespace NebulaLauncher
         private readonly string _loaderVersion;
         private readonly MSession _session;
         private readonly string? _manualJavaPath;
+        private readonly string? _customSplash;
+        private readonly bool _isOverlay;
 
         public event Action<string>? OnLog;
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
-        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null)
+        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null, string? customSplash = null, bool isOverlay = false)
         {
             _gameFolder = gameFolder;
             _ramGB = ramGB;
@@ -41,6 +44,8 @@ namespace NebulaLauncher
             // Use modern offline session
             _session = session ?? MSession.CreateOfflineSession(username);
             _manualJavaPath = manualJavaPath;
+            _customSplash = customSplash;
+            _isOverlay = isOverlay;
         }
 
         public async Task<int> LaunchAsync()
@@ -70,6 +75,15 @@ namespace NebulaLauncher
                 OnLog?.Invoke("📦 Sincronizando recursos base...");
                 await launcher.InstallAsync(finalVersionId);
 
+                // Custom Splash
+                if (!string.IsNullOrEmpty(_customSplash))
+                {
+                     try {
+                         var cfg = new ConfigManager(_gameFolder);
+                         await cfg.UpdateSplashText(_customSplash);
+                     } catch { }
+                }
+
                 var launchOption = new MLaunchOption
                 {
                     MaximumRamMb = _ramGB * 1024,
@@ -78,6 +92,13 @@ namespace NebulaLauncher
                 };
 
                 SetOptimizedArgs(launchOption);
+                
+                if (_isOverlay)
+                {
+                    var jvmArgs = new List<MArgument>(launchOption.ExtraJvmArguments ?? Enumerable.Empty<MArgument>());
+                    jvmArgs.Add(new MArgument("-Dnebula.overlay=true"));
+                    launchOption.ExtraJvmArguments = jvmArgs;
+                }
 
                 var process = await launcher.BuildProcessAsync(finalVersionId, launchOption);
                 
