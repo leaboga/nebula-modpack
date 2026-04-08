@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.0.4";
+        private const string CurrentLauncherVersion = "2.0.5";
         private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -453,9 +453,8 @@ namespace NebulaLauncher
         {
             try
             {
-                string currentExe = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                if (string.IsNullOrEmpty(currentExe))
-                    currentExe = Process.GetCurrentProcess().MainModule?.FileName ?? "";
+                string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
+                if (string.IsNullOrEmpty(currentExe)) return;
 
                 string tempExe = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "NebulaLauncher_new.exe");
                 string updaterBat = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "nebula_updater.bat");
@@ -467,18 +466,23 @@ namespace NebulaLauncher
                 var bytes = await http.GetByteArrayAsync(downloadUrl);
                 await File.WriteAllBytesAsync(tempExe, bytes);
 
+                int pid = Process.GetCurrentProcess().Id;
                 string batContent = "@echo off\n" +
+                                   $"taskkill /F /PID {pid} > nul 2>&1\n" +
+                                   "ping -n 3 127.0.0.1 > nul\n" +
                                    ":loop\n" +
-                                   "ping -n 2 127.0.0.1 > nul\n" +
                                    "copy /Y \"" + tempExe + "\" \"" + currentExe + "\"\n" +
-                                   "if errorlevel 1 goto loop\n" +
+                                   "if errorlevel 1 (\n" +
+                                   "    ping -n 2 127.0.0.1 > nul\n" +
+                                   "    goto loop\n" +
+                                   ")\n" +
                                    "del \"" + tempExe + "\"\n" +
                                    "start \"\" \"" + currentExe + "\"\n" +
                                    "del \"%~f0\"\n";
 
                 await File.WriteAllTextAsync(updaterBat, batContent);
 
-                AgregarLog("\uD83D\uDD04 Reiniciando para aplicar la actualización...");
+                AgregarLog("🔄 Reiniciando para aplicar la actualización...");
 
                 Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
                 {
@@ -488,7 +492,7 @@ namespace NebulaLauncher
                 });
 
                 _cerrarDeVerdad = true;
-                Dispatcher.Invoke(() => Application.Current.Shutdown());
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {

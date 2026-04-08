@@ -1,5 +1,15 @@
 [
   {
+    "version": "2.0.5",
+    "date": "07 de Abril, 2026",
+    "title": "Fix Crítico: Reescritura del AutoUpdater",
+    "type": "hotfix",
+    "changes": [
+      "Fix: Se reescribió la lógica interna del script de auto-actualización (.bat) para usar `taskkill` y `Environment.ProcessPath`.",
+      "Sistema: Esto soluciona definitivamente el problema donde el archivo ejecutable se mantenía bloqueado en memoria impidiendo la copia de la nueva versión y generando un bucle infinito."
+    ]
+  },
+  {
     "version": "2.0.4",
     "date": "07 de Abril, 2026",
     "title": "Módulo de Servidor Mejorado",
