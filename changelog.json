@@ -1,5 +1,16 @@
 [
   {
+    "version": "2.0.4",
+    "date": "07 de Abril, 2026",
+    "title": "Módulo de Servidor Mejorado",
+    "type": "update",
+    "changes": [
+      "Funcionalidad: Se añadieron nuevos botones al panel de 'Hostear Servidor Local'.",
+      "Explorador: Nuevo botón para abrir la carpeta del servidor local directamente desde la interfaz.",
+      "Sincronización: Nuevo botón para 'Sincronizar Mods' que copia automáticamente los mods y configuraciones de tu cliente actual hacia la carpeta del servidor local (omitiendo mods exclusivos de cliente como Optifine, Rubidium, etc)."
+    ]
+  },
+  {
     "version": "2.0.3",
     "date": "07 de Abril, 2026",
     "title": "Fix: Bucle de Actualización Infinito",

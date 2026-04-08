@@ -358,6 +358,96 @@ namespace NebulaLauncher.Modules
             }
         }
 
+        private void BtnOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(_serverFolderPath))
+            {
+                try { Process.Start("explorer.exe", $"\"{_serverFolderPath}\""); }
+                catch { }
+            }
+            else
+            {
+                MessageBox.Show("La carpeta del servidor no existe todavía. Debes instalarlo primero.", "Carpeta no encontrada", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private async void BtnSyncMods_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow == null || string.IsNullOrEmpty(mainWindow.GameFolder))
+            {
+                MessageBox.Show("No se pudo encontrar la carpeta del cliente actual.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!Directory.Exists(_serverFolderPath))
+            {
+                MessageBox.Show("La carpeta del servidor no existe todavía. Instala el servidor primero.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var result = MessageBox.Show("¿Quieres copiar los mods y configuraciones de tu cliente actual al servidor?\nEsto reemplazará los mods en el servidor con los tuyos.", "Sincronizar Servidor", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes) return;
+
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            btn.Content = "⏳ SINCRONIZANDO...";
+
+            LogToConsole("🔄 Iniciando sincronización de Mods y Configs del cliente al servidor...");
+            
+            await Task.Run(() =>
+            {
+                try
+                {
+                    string[] foldersToSync = { "mods", "config", "scripts", "kubejs" };
+                    foreach (var folder in foldersToSync)
+                    {
+                        string clientFolder = Path.Combine(mainWindow.GameFolder, folder);
+                        string serverFolder = Path.Combine(_serverFolderPath, folder);
+
+                        if (Directory.Exists(clientFolder))
+                        {
+                            if (Directory.Exists(serverFolder)) Directory.Delete(serverFolder, true);
+                            Directory.CreateDirectory(serverFolder);
+                            
+                            foreach (string dirPath in Directory.GetDirectories(clientFolder, "*", SearchOption.AllDirectories))
+                                Directory.CreateDirectory(dirPath.Replace(clientFolder, serverFolder));
+
+                            foreach (string newPath in Directory.GetFiles(clientFolder, "*.*", SearchOption.AllDirectories))
+                                File.Copy(newPath, newPath.Replace(clientFolder, serverFolder), true);
+                                
+                            // Delete client-side only mods from server folder if any are known
+                            // Common client-side only mods:
+                            string[] clientOnlyKeywords = { "rubidium", "embeddium", "oculus", "iris", "optifine", "sodium", "entityculling", "minimap", "mouseweaks", "controllable", "soundphysics", "ambientsounds", "itemphysic", "dynamiclights", "3dskinlayers", "customskin", "farsight", "dynamiccrosshair", "client" };
+                            if (folder == "mods" && Directory.Exists(serverFolder))
+                            {
+                                foreach (string file in Directory.GetFiles(serverFolder, "*.jar"))
+                                {
+                                    string fileName = Path.GetFileName(file).ToLower();
+                                    foreach (var keyword in clientOnlyKeywords)
+                                    {
+                                        if (fileName.Contains(keyword))
+                                        {
+                                            try { File.Delete(file); } catch { }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.Invoke(() => MessageBox.Show($"Error al sincronizar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error));
+                }
+            });
+
+            LogToConsole("✅ Sincronización de servidor completada con éxito. (Mods client-side omitidos)");
+            btn.IsEnabled = true;
+            btn.Content = "🔄 SINCRONIZAR MODS";
+        }
+
         private void OnServerExited()
         {
             _statsTimer.Stop();

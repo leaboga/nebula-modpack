@@ -101,6 +101,15 @@
                                 <Button x:Name="BtnStop" Grid.Column="1" Content="⏹ DETENER" Style="{DynamicResource SecondaryButton}" Foreground="#EF4444" Height="44" Margin="8,0,0,0" Click="BtnStop_Click" IsEnabled="False"/>
                             </Grid>
                             
+                            <Grid Margin="0,16,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="BtnOpenFolder" Grid.Column="0" Content="📂 ABRIR CARPETA" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,0,8,0" Click="BtnOpenFolder_Click"/>
+                                <Button x:Name="BtnSyncMods" Grid.Column="1" Content="🔄 SINCRONIZAR MODS" Style="{DynamicResource SecondaryButton}" Height="36" Margin="8,0,0,0" Click="BtnSyncMods_Click"/>
+                            </Grid>
+                            
                             <CheckBox x:Name="AutoRestartCheck" Content="Auto-reiniciar si falla" Foreground="#7B6FA0" FontSize="11" Margin="4,16,0,0" Style="{DynamicResource TrayToggle}"/>
                             <CheckBox x:Name="GuiCheck" Content="Mostrar interfaz original de Minecraft Server" Foreground="#7B6FA0" FontSize="11" Margin="4,8,0,0" Style="{DynamicResource TrayToggle}"/>
                         </StackPanel>
