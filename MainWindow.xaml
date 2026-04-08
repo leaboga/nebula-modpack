@@ -190,7 +190,7 @@
                         </Border>
 
                         <TextBlock x:Name="UpdateBadge" Text="✨ Actualización lista" Foreground="#7C3AED" FontSize="10" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="VersionFooterLabel" Text="v1.8.0 Stable Hub" Foreground="#2E2648" FontSize="10" FontWeight="Bold"/>
+                        <TextBlock x:Name="VersionFooterLabel" Text="v2.1.1 Stable Hub" Foreground="#2E2648" FontSize="10" FontWeight="Bold"/>
 
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,12,0,12">
                             <TextBlock Text="COMANDOS ADMIN" Foreground="#EF4444" FontSize="9" FontWeight="Black" Margin="4,0,0,8"/>

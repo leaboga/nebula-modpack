@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using NebulaLauncher.Services;
@@ -34,6 +35,10 @@ namespace NebulaLauncher.Modules
             _socialService = new SocialService();
             _cache         = new ServerStatusCache();
 
+            // Vincular lista de chat al Bridge
+            ChatList.ItemsSource = ChatBridgeService.Messages;
+            ChatBridgeService.OnMessageReceived += (msg) => ScrollChatToEnd();
+
             // Show cached data immediately while loading
             ApplyCachedStatus();
 
@@ -42,6 +47,41 @@ namespace NebulaLauncher.Modules
             _timer.Start();
 
             _ = RefreshAll();
+        }
+
+        private void ScrollChatToEnd()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (ChatList.Items.Count > 0)
+                {
+                    ChatList.ScrollIntoView(ChatList.Items[ChatList.Items.Count - 1]);
+                }
+            });
+        }
+
+        private void BtnSend_Click(object sender, RoutedEventArgs e) => SendMessage();
+
+        private void ChatInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) SendMessage();
+        }
+
+        private void SendMessage()
+        {
+            string msg = ChatInput.Text.Trim();
+            if (string.IsNullOrEmpty(msg)) return;
+
+            // Enviar comando al servidor (usando el formato de comando "say" de Minecraft si es para chat)
+            // O procesarlo internamente.
+            ChatBridgeService.RequestCommand($"say {msg}");
+            
+            // Añadir localmente para visualización inmediata si se desea (o esperar a que el servidor lo devuelva)
+            // Por ahora lo añadimos localmente para mejor feedback
+            ChatBridgeService.AddMessage(_username, msg, "chat");
+            
+            ChatInput.Text = "";
+            ScrollChatToEnd();
         }
 
         // ── Apply cached data immediately (offline-first) ─────────────────
@@ -60,7 +100,8 @@ namespace NebulaLauncher.Modules
             try
             {
                 var status = await _socialService.GetServerStatus(_serverIp);
-                var feed   = await _socialService.GetRecentFeedFromWeb();
+                // El feed ya no lo usamos en la lista principal si queremos el chat bridge, 
+                // pero podríamos integrarlo eventualmente.
 
                 Dispatcher.Invoke(() =>
                 {
@@ -92,28 +133,6 @@ namespace NebulaLauncher.Modules
                                 ApplyStatusToUI(new ServerInfo(), isCache: false, cacheLabel: "");
                             }
                         }
-
-                        // Merge global feed with local session history
-                        var combinedFeed = new List<SocialFeedItem>();
-                        
-                        // Add local recent session if exists
-                        var history    = new SessionHistoryService().Load();
-                        if (history.Sessions.Count > 0)
-                        {
-                            var last = history.Sessions[history.Sessions.Count - 1];
-                            combinedFeed.Add(new SocialFeedItem {
-                                player = "Tú (Local)",
-                                text   = $"jugaste durante {last.Duration} minutos.",
-                                date   = last.Date.ToString("HH:mm"),
-                                type   = "local",
-                                head   = $"https://mc-heads.net/avatar/{_username}/32"
-                            });
-                        }
-
-                        if (feed != null) combinedFeed.AddRange(feed);
-
-                        if (AdvancementsList != null && combinedFeed.Count > 0)
-                            AdvancementsList.ItemsSource = combinedFeed;
                     }
                     catch { }
                 });
@@ -165,16 +184,8 @@ namespace NebulaLauncher.Modules
             if (RamText != null) { RamText.Text = $"{ram:F1} GB"; RamText.Foreground = resourceColor; }
             if (RamBar  != null) RamBar.Value   = (ram / 16.0) * 100;
 
-            // Cache badge
-            if (CacheBadge != null)
-                CacheBadge.Visibility = isCache && cached_HasData()
-                    ? Visibility.Visible : Visibility.Collapsed;
-            if (CacheLabel != null && isCache)
-                CacheLabel.Text = $"📦 Datos en caché · {cacheLabel}";
+            // Cache badge (No longer in XAML but we'll keep logic if needed)
         }
-
-        // Small helper to avoid loading cache twice
-        private bool cached_HasData() => _cache.Load().HasData;
 
         public void Stop() => _timer.Stop();
     }

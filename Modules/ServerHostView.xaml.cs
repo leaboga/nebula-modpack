@@ -30,6 +30,15 @@ namespace NebulaLauncher.Modules
             _serverFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "servers", "default_server");
             ServerPathBox.Text = _serverFolderPath;
             
+            // Suscribir al bridge para enviar comandos
+            ChatBridgeService.OnCommandRequest += (cmd) => 
+            {
+                if (_serverProcess != null && !_serverProcess.HasExited)
+                {
+                    try { _serverProcess.StandardInput.WriteLine(cmd); } catch { }
+                }
+            };
+            
             _statsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _statsTimer.Tick += StatsTimer_Tick;
             
@@ -491,12 +500,65 @@ namespace NebulaLauncher.Modules
                 ConsoleText.Text += $"\n{text}";
                 if (ConsoleText.Text.Length > 20000) ConsoleText.Text = ConsoleText.Text.Substring(10000);
                 ConsoleScroll.ScrollToEnd();
+
+                // Procesar chat para el Bridge
+                ParseChatLine(text);
             });
+        }
+
+        private void ParseChatLine(string line)
+        {
+            if (string.IsNullOrEmpty(line)) return;
+            
+            // Intento de parseo de chat estándar: [12:34:56] [Server thread/INFO]: <Player> Message
+            if (line.Contains("[INFO]") || line.Contains("/INFO]"))
+            {
+                int colonIndex = line.IndexOf("]: ");
+                if (colonIndex != -1)
+                {
+                    string content = line.Substring(colonIndex + 3);
+                    
+                    // Si empieza con < indica que es un mensaje de jugador
+                    if (content.Trim().StartsWith("<"))
+                    {
+                        int endBracket = content.IndexOf(">");
+                        if (endBracket != -1)
+                        {
+                            string sender = content.Substring(1, endBracket - 1);
+                            string msg = content.Substring(endBracket + 1).Trim();
+                            ChatBridgeService.AddMessage(sender, msg, "chat");
+                        }
+                    }
+                    else if (content.Contains("joined the game"))
+                    {
+                        string player = content.Split(' ')[0];
+                        ChatBridgeService.AddMessage("Sistema", $"🌍 {player} se unió al mundo", "sys");
+                    }
+                    else if (content.Contains("left the game"))
+                    {
+                        string player = content.Split(' ')[0];
+                        ChatBridgeService.AddMessage("Sistema", $"🚪 {player} salió del mundo", "sys");
+                    }
+                }
+            }
         }
 
         private void RamSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (RamValueText != null) RamValueText.Text = $"{(int)e.NewValue} GB";
+            int val = (int)e.NewValue;
+            if (RamValueText != null) RamValueText.Text = $"{val} GB";
+            if (RamText != null)
+            {
+                if (RamText.Text.Contains("/"))
+                {
+                    string used = RamText.Text.Split('/')[0].Trim();
+                    RamText.Text = $"{used} / {val} GB";
+                }
+                else
+                {
+                    RamText.Text = $"0 MB / {val} GB";
+                }
+            }
         }
     }
 }

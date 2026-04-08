@@ -31,7 +31,7 @@
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
     <SolidColorBrush x:Key="TextMutedBrush"     Color="{StaticResource TextMutedColor}"/>
 
-    <!-- â”€â”€â”€ PLAY BUTTON â”€â”€â”€ -->
+    <!-- --- PLAY BUTTON --- -->
     <Style x:Key="PlayButton" TargetType="Button">
         <Setter Property="Background">
             <Setter.Value>
@@ -94,7 +94,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ SECONDARY BUTTON â”€â”€â”€ -->
+    <!-- --- SECONDARY BUTTON --- -->
     <Style x:Key="SecondaryButton" TargetType="Button">
         <Setter Property="Background"      Value="#1A1528"/>
         <Setter Property="Foreground"      Value="#C4B5FD"/>
@@ -128,7 +128,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ TEXTBOX â”€â”€â”€ -->
+    <!-- --- TEXTBOX --- -->
     <Style x:Key="AppleTextBox" TargetType="TextBox">
         <Setter Property="Background"      Value="#1A1528"/>
         <Setter Property="Foreground"      Value="#F0EAFF"/>
@@ -171,7 +171,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ SLIDER â”€â”€â”€ -->
+    <!-- --- SLIDER --- -->
     <Style x:Key="AppleSlider" TargetType="Slider">
         <Setter Property="Template">
             <Setter.Value>
@@ -224,7 +224,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ PROGRESS BAR â”€â”€â”€ -->
+    <!-- --- PROGRESS BAR --- -->
     <Style x:Key="AppleProgress" TargetType="ProgressBar">
         <Setter Property="Template">
             <Setter.Value>
@@ -347,7 +347,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ TRAY TOGGLE  â”€â”€â”€ -->
+    <!-- --- TRAY TOGGLE  --- -->
     <Style x:Key="TrayToggle" TargetType="CheckBox">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -387,7 +387,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ SCROLLBAR SLIM â”€â”€â”€ -->
+    <!-- --- SCROLLBAR SLIM --- -->
     <Style TargetType="ScrollBar">
         <Setter Property="Width"      Value="5"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -410,7 +410,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ TITLEBAR BUTTON â”€â”€â”€ -->
+    <!-- --- TITLEBAR BUTTON --- -->
     <Style x:Key="TitleBarButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#4A4266"/>
@@ -441,7 +441,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ MODERN COMBOBOX â”€â”€â”€ -->
+    <!-- --- MODERN COMBOBOX --- -->
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
         <Setter Property="Background"      Value="#1A1528"/>
         <Setter Property="Foreground"      Value="#F0EAFF"/>
@@ -517,7 +517,7 @@
         </Setter>
     </Style>
 
-    <!-- â”€â”€â”€ COMBOBOX ITEM â”€â”€â”€ -->
+    <!-- --- COMBOBOX ITEM --- -->
     <Style TargetType="ComboBoxItem">
         <Setter Property="Foreground"  Value="#C4B5FD"/>
         <Setter Property="Background"  Value="Transparent"/>

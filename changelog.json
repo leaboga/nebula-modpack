@@ -1,5 +1,17 @@
 [
   {
+    "version": "2.1.1",
+    "date": "08 de Abril, 2026",
+    "title": "Real-Time Chat Bridge & UI Polish",
+    "type": "update",
+    "changes": [
+      "💬 Social: Implementación del **Chat Bridge** en tiempo real. Ahora puedes chatear con los jugadores del servidor directamente desde la pestaña de Comunidad.",
+      "🚀 Hosting: Integración del puente de chat con el servidor local para capturar mensajes, entradas y salidas en tiempo real desde la consola.",
+      "✨ UI/UX: Fix masivo de errores de codificación (encoding) en todas las pestañas. Se restauraron iconos y caracteres especiales en Configuración, Bóveda, Mapa y Novedades.",
+      "🛠️ Estabilidad: Normalización del sistema de estilos para prevenir fallos visuales y asegurar una experiencia premium consistente."
+    ]
+  },
+  {
     "version": "2.1.0",
     "date": "08 de Abril, 2026",
     "title": "Nebula 2.1: The Galactic Engine Update",

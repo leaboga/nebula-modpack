@@ -74,7 +74,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="60"/>
                                 </Grid.ColumnDefinitions>
-                                <Slider x:Name="RamSlider" Minimum="1" Maximum="32" IsSnapToTickEnabled="True" TickFrequency="1" Value="4" Style="{DynamicResource AppleSlider}"/>
+                                <Slider x:Name="RamSlider" Minimum="1" Maximum="32" IsSnapToTickEnabled="True" TickFrequency="1" Value="4" ValueChanged="RamSlider_ValueChanged" Style="{DynamicResource AppleSlider}"/>
                                 <TextBlock Grid.Column="1" x:Name="RamValueText" Text="4 GB" Foreground="#7C3AED" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
 
