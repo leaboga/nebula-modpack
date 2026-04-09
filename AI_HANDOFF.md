@@ -60,4 +60,8 @@ git commit -m "Rebranding radical: Nebula -> KRAKEN (Abyssal Theme v2.5.0)"
 git push origin master
 ```
 
-El flujo de GitHub Actions del proyecto (si existe) debería detectar el cambio de versión en el `.csproj` y procesarlo normalmente.
+## Publicación
+
+Se ha generado el ejecutable y se ha publicado en la sección de Releases de GitHub:
+- **Link**: [Release v2.5.0 - KRAKEN Alpha](https://github.com/leaboga/nebula-modpack/releases/tag/v2.5.0)
+- **Asset**: `NebulaLauncher.exe` (Single-file, self-contained win-x64).
