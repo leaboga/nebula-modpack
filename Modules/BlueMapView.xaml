@@ -4,8 +4,8 @@
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -23,8 +23,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <TextBlock Text="Mapa" Foreground="#F0EAFF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
-                    <TextBlock Text="MAPA 3D EN TIEMPO REAL (BLUEMAP)" Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+                    <TextBlock Text="Mapa" Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBlock Text="MAPA 3D EN TIEMPO REAL (BLUEMAP)" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button Content="🌐 Ver en navegador"
@@ -42,13 +42,13 @@
         </StackPanel>
 
         <!-- WebView2 -->
-        <Border Grid.Row="1" CornerRadius="16" Background="#12101E"
-                BorderBrush="#2E2648" BorderThickness="1" ClipToBounds="True">
+        <Border Grid.Row="1" CornerRadius="16" Background="#0A0E14"
+                BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
             <Grid>
                 <wv2:WebView2 x:Name="MapView"/>
                 <TextBlock x:Name="LoadingLabel"
                            Text="🗺️  Cargando BlueMap (paciencia, es pesado)..."
-                           Foreground="#4A4266" FontSize="14"
+                           Foreground="#344A5B" FontSize="14"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            IsHitTestVisible="False"/>
             </Grid>

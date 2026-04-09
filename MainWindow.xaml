@@ -2,7 +2,7 @@
         x:Class="NebulaLauncher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Nebula Launcher"
+        Title="KRAKEN Launcher"
         Height="660" Width="1020"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
@@ -13,7 +13,7 @@
         Closing="Window_Closing">
 
     <Window.Resources>
-        <DropShadowEffect x:Key="CardGlow"   Color="#7C3AED" Opacity="0.12" BlurRadius="30" ShadowDepth="0"/>
+        <DropShadowEffect x:Key="CardGlow"   Color="#00F2FF" Opacity="0.12" BlurRadius="30" ShadowDepth="0"/>
         <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.4"  BlurRadius="25" ShadowDepth="6"/>
         
         <Storyboard x:Key="FadeIn">
@@ -43,13 +43,13 @@
 
     <Grid>
         <!-- MASTER BACKGROUND -->
-        <Border Background="#100A1C"/>
+        <Border Background="#05080D"/>
         
         <!-- GLOW EFFECTS -->
-        <Ellipse Fill="#307C3AED" Width="900" Height="900" Margin="-400,-400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+        <Ellipse Fill="#3000F2FF" Width="900" Height="900" Margin="-400,-400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
             <Ellipse.Effect><BlurEffect Radius="200"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="#157C3AED" Width="600" Height="600" Margin="0,0,-200,-200" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
+        <Ellipse Fill="#1500F2FF" Width="600" Height="600" Margin="0,0,-200,-200" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
             <Ellipse.Effect><BlurEffect Radius="150"/></Ellipse.Effect>
         </Ellipse>
         <Ellipse Fill="Black" Opacity="0.5" IsHitTestVisible="False"/>
@@ -72,8 +72,8 @@
             <Border Grid.Column="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#0D0A1A" Offset="0"/>
-                        <GradientStop Color="#0A0714" Offset="1"/>
+                        <GradientStop Color="#081016" Offset="0"/>
+                        <GradientStop Color="#05080D" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border.Effect>
@@ -90,7 +90,7 @@
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <GradientStop Color="Transparent" Offset="0"/>
-                                <GradientStop Color="#7C3AED" Offset="0.5"/>
+                                <GradientStop Color="#00F2FF" Offset="0.5"/>
                                 <GradientStop Color="Transparent" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
@@ -103,34 +103,34 @@
                                 <Border Width="44" Height="44" CornerRadius="12">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#7C3AED" Offset="0"/>
-                                            <GradientStop Color="#4C1D95" Offset="1"/>
+                                            <GradientStop Color="#00F2FF" Offset="0"/>
+                                            <GradientStop Color="#00B8C2" Offset="1"/>
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#7C3AED" Opacity="0.6" BlurRadius="20" ShadowDepth="0"/>
+                                        <DropShadowEffect Color="#00F2FF" Opacity="0.6" BlurRadius="20" ShadowDepth="0"/>
                                     </Border.Effect>
-                                    <TextBlock Text="🌌" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="🦑" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
                                 </Border>
                                 <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="Nebula" Foreground="White" FontSize="18" FontWeight="ExtraBold"/>
-                                    <TextBlock Text="Lanzador Galáctico" Foreground="#4A4266" FontSize="10" FontWeight="SemiBold"/>
+                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black" Tracking="2"/>
+                                    <TextBlock Text="THE ABYSSAL TITAN" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Tracking="1"/>
                                 </StackPanel>
                             </StackPanel>
 
                             <!-- ACCOUNT -->
-                            <TextBlock Text="PERSONAL" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
-                            <Border Background="#12101E" CornerRadius="12" Padding="12,12" Margin="0,0,0,24" BorderBrush="#1A1528" BorderThickness="1">
+                            <TextBlock Text="PERSONAL" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
+                            <Border Background="#0A0E14" CornerRadius="12" Padding="12,12" Margin="0,0,0,24" BorderBrush="#0D151D" BorderThickness="1">
                                 <StackPanel Orientation="Horizontal">
                                      <Border Width="42" Height="42" CornerRadius="12" ClipToBounds="True">
                                          <Border.Background>
                                              <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                 <GradientStop Color="#2E2648" Offset="0"/>
-                                                 <GradientStop Color="#1A1528" Offset="1"/>
+                                                 <GradientStop Color="#1E2C38" Offset="0"/>
+                                                 <GradientStop Color="#0D151D" Offset="1"/>
                                              </LinearGradientBrush>
                                          </Border.Background>
                                          <Grid>
-                                             <TextBlock x:Name="AvatarInitial" Text="?" FontSize="18" FontWeight="Bold" Foreground="#7B6FA0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                             <TextBlock x:Name="AvatarInitial" Text="?" FontSize="18" FontWeight="Bold" Foreground="#6D8A99" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                              <Image x:Name="SkinImage" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Collapsed"/>
                                              <Ellipse Width="10" Height="10" Fill="#10B981" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,2,2" x:Name="ActiveUserDot">
                                                  <Ellipse.Effect><BlurEffect Radius="2"/></Ellipse.Effect>
@@ -138,13 +138,13 @@
                                          </Grid>
                                      </Border>
                                      <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                         <TextBlock x:Name="SidebarUsername" Text="Nebula User" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                                         <TextBlock x:Name="SidebarAuthType" Text="Cuenta Conectada" Foreground="#4A4266" FontSize="10"/>
+                                         <TextBlock x:Name="SidebarUsername" Text="KRAKEN Pilot" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                         <TextBlock x:Name="SidebarAuthType" Text="Cuenta Conectada" Foreground="#344A5B" FontSize="10"/>
                                      </StackPanel>
                                  </StackPanel>
                             </Border>
 
-                            <TextBlock Text="MENÚ PRINCIPAL" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
+                            <TextBlock Text="MENÚ PRINCIPAL" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
                             <RadioButton Content="  🏠  Inicio" Style="{DynamicResource ToggleTab}" IsChecked="True" GroupName="Nav" Checked="Nav_Home_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  📰  Novedades" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Changelog_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  ⚙️  Configuración" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Settings_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
@@ -154,21 +154,21 @@
                             <RadioButton Content="  🛸  Mod Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  📦  Modpacks Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  🚑  Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  🌍  Mapa Galáctico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" x:Name="NavBlueMap" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <RadioButton Content="  🌍  Deep Map" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" x:Name="NavBlueMap" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  👥  Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  ☁️  Servicio Hosting" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
                             <RadioButton Content="  💻  Hostear Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
 
-                            <Border Height="1" Margin="4,24,4,24" Background="#1A1528"/>
+                            <Border Height="1" Margin="4,24,4,24" Background="#0D151D"/>
 
-                            <TextBlock Text="ESTADO" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
-                            <Border Background="#12101E" CornerRadius="12" Padding="12,12" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+                            <TextBlock Text="ESTADO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
+                            <Border Background="#0A0E14" CornerRadius="12" Padding="12,12" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="#EF4444" VerticalAlignment="Center"/>
-                                        <TextBlock x:Name="StatusText" Text="Sin conexión" Foreground="#7B6FA0" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="StatusText" Text="Sin conexión" Foreground="#6D8A99" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                    <TextBlock x:Name="PlayersText" Text="" Foreground="#4A4266" FontSize="10" Margin="18,4,0,0"/>
+                                    <TextBlock x:Name="PlayersText" Text="" Foreground="#344A5B" FontSize="10" Margin="18,4,0,0"/>
                                 </StackPanel>
                             </Border>
 
@@ -177,20 +177,20 @@
                     </ScrollViewer>
 
                     <StackPanel Grid.Row="1" Margin="20,0,20,20">
-                        <Border Background="#12101E" CornerRadius="8" Padding="12,8" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+                        <Border Background="#0A0E14" CornerRadius="8" Padding="12,8" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                             <StackPanel>
-                                <TextBlock Text="ESTADÍSTICAS" Foreground="#3D3560" FontSize="8" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="ESTADÍSTICAS" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <Grid>
                                     <TextBlock x:Name="TotalTimeLabel" Text="0h 0m" Foreground="#C4B5FD" FontSize="11" FontWeight="SemiBold"/>
-                                    <TextBlock x:Name="SessionCountLabel" Text="0 sesiones" Foreground="#4A4266" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="SessionCountLabel" Text="0 sesiones" Foreground="#344A5B" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
-                                <Border Height="1" Background="#1A1528" Margin="0,6"/>
-                                <TextBlock x:Name="InstalledVersionText" Text="Sin datos" Foreground="#7B6FA0" FontSize="10"/>
+                                <Border Height="1" Background="#0D151D" Margin="0,6"/>
+                                <TextBlock x:Name="InstalledVersionText" Text="Sin datos" Foreground="#6D8A99" FontSize="10"/>
                             </StackPanel>
                         </Border>
 
-                        <TextBlock x:Name="UpdateBadge" Text="✨ Actualización lista" Foreground="#7C3AED" FontSize="10" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="VersionFooterLabel" Text="v2.1.1 Stable Hub" Foreground="#2E2648" FontSize="10" FontWeight="Bold"/>
+                        <TextBlock x:Name="UpdateBadge" Text="💎 Core Update Ready" Foreground="#00F2FF" FontSize="10" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="VersionFooterLabel" Text="v2.5.0 KRAKEN Engine" Foreground="#1E2C38" FontSize="10" FontWeight="Bold"/>
 
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,12,0,12">
                             <TextBlock Text="COMANDOS ADMIN" Foreground="#EF4444" FontSize="9" FontWeight="Black" Margin="4,0,0,8"/>
@@ -220,7 +220,7 @@
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="32,0,32,0">
-                    <Border Background="#0D0A1ACC" CornerRadius="20" BorderBrush="#1A1528" BorderThickness="1">
+                    <Border Background="#0D0A1ACC" CornerRadius="12" BorderBrush="#0D151D" BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect Color="Black" Opacity="0.3" BlurRadius="50" ShadowDepth="10"/>
                         </Border.Effect>
@@ -228,8 +228,8 @@
                              <!-- HOME VIEW -->
                             <ScrollViewer x:Name="HomeView" VerticalScrollBarVisibility="Auto" Visibility="Visible">
                                 <StackPanel Margin="32,28">
-                                    <TextBlock Text="¡Qué bueno verte!" Foreground="#4A4266" FontSize="12" Margin="0,0,0,4"/>
-                                    <TextBlock x:Name="HomeGreetingLabel" Text="Bienvenido de Nuevo" Foreground="White" FontSize="28" FontWeight="ExtraBold" Margin="0,0,0,24"/>
+                                    <TextBlock Text="Sincronización de Sistemas en curso..." Foreground="#344A5B" FontSize="12" Margin="0,0,0,4"/>
+                                    <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="32" FontWeight="Black" Margin="0,0,0,24"/>
 
                                     <!-- PROFILE SELECTOR -->
                                     <Grid Margin="0,0,0,24">
@@ -239,7 +239,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                            <TextBlock Text="PERFIL ACTIVO" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
+                                            <TextBlock Text="PERFIL ACTIVO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
                                             <ComboBox x:Name="ProfileComboBox" Height="38" Style="{DynamicResource ModernComboBox}" SelectionChanged="ProfileComboBox_SelectionChanged"/>
                                         </StackPanel>
                                         <Button Grid.Column="1" Content="📋 Clonar" Width="90" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="CloneProfile_Click"/>
@@ -247,9 +247,9 @@
                                     </Grid>
 
                                     <!-- NEWS -->
-                                    <Border Background="#1A1528CC" CornerRadius="20" Padding="24" Margin="0,0,0,28" BorderBrush="#2E2648" BorderThickness="1">
+                                    <Border Background="#0D151DCC" CornerRadius="12" Padding="24" Margin="0,0,0,28" BorderBrush="#1E2C38" BorderThickness="1">
                                         <Border.Effect>
-                                            <DropShadowEffect Color="#7C3AED" Opacity="0.1" BlurRadius="40" ShadowDepth="0"/>
+                                            <DropShadowEffect Color="#00F2FF" Opacity="0.1" BlurRadius="40" ShadowDepth="0"/>
                                         </Border.Effect>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -258,24 +258,24 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                    <Border Background="#7C3AED" CornerRadius="6" Padding="10,3">
-                                                        <TextBlock Text="ULTIMA HORA" Foreground="White" FontSize="10" FontWeight="Black" />
+                                                    <Border Background="#00F2FF" CornerRadius="6" Padding="10,3">
+                                                        <TextBlock Text="MODULO CRÍTICO" Foreground="#05080D" FontSize="10" FontWeight="Black" />
                                                     </Border>
                                                     <Border Background="#10B981" CornerRadius="6" Padding="10,3" Margin="8,0,0,0" x:Name="LiveNewsBadge" Visibility="Visible">
                                                         <TextBlock Text="EN VIVO" Foreground="White" FontSize="10" FontWeight="Black" />
                                                     </Border>
                                                 </StackPanel>
-                                                <TextBlock Text="Expansión Nebular: Fase 4" Foreground="White" FontSize="22" FontWeight="ExtraBold" Margin="0,0,0,6"/>
-                                                <TextBlock Text="Nuevas mecánicas de juego, texturas en alta resolución y mejoras críticas de red optimizadas para tu sistema." Foreground="#7B6FA0" FontSize="13" TextWrapping="Wrap"/>
+                                                <TextBlock Text="Protocolo Leviatán: Activo" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,0,0,6"/>
+                                                <TextBlock Text="Motores Abisales optimizados. El ecosistema KRAKEN ahora soporta despliegue de mods en tiempo real con latencia cero." Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap"/>
                                             </StackPanel>
-                                            <Border Grid.Column="1" Width="64" Height="64" Background="#207C3AED" CornerRadius="16" VerticalAlignment="Center" Margin="24,0,0,0">
-                                                <TextBlock Text="🚀" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Grid.Column="1" Width="64" Height="64" Background="#207C3AED" CornerRadius="8" VerticalAlignment="Center" Margin="24,0,0,0">
+                                                <TextBlock Text="⚓" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                         </Grid>
                                     </Border>
                                     
                                     <!-- MAP QUICK ACCESS -->
-                                    <Border Background="#1A152899" CornerRadius="16" Padding="20,16" Margin="0,0,0,24" BorderBrush="#2E2648" BorderThickness="1" Cursor="Hand" MouseDown="MapQuickCard_MouseDown">
+                                    <Border Background="#0D151D99" CornerRadius="8" Padding="20,16" Margin="0,0,0,24" BorderBrush="#1E2C38" BorderThickness="1" Cursor="Hand" MouseDown="MapQuickCard_MouseDown">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
@@ -286,10 +286,10 @@
                                                 <TextBlock Text="🌍" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
-                                                <TextBlock Text="Mapa Satelital en Vivo" Foreground="White" FontSize="15" FontWeight="Bold"/>
-                                                <TextBlock Text="Explora el mundo de Nebula y localiza a tus amigos en tiempo real." Foreground="#7B6FA0" FontSize="11"/>
+                                                <TextBlock Text="Detección de Flota (Live Map)" Foreground="White" FontSize="15" FontWeight="Bold"/>
+                                                <TextBlock Text="Rastrea la posición de otras unidades en el Abismo." Foreground="#6D8A99" FontSize="11"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="➜" Foreground="#7C3AED" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Grid.Column="2" Text="➜" Foreground="#00F2FF" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         </Grid>
                                     </Border>
 
@@ -300,8 +300,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                            <TextBlock Text="MODO DE SESIÓN" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
-                                            <Border Background="#0A0714" CornerRadius="12" Padding="4" HorizontalAlignment="Left" BorderBrush="#1A1528" BorderThickness="1">
+                                            <TextBlock Text="MODO DE SESIÓN" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
+                                            <Border Background="#05080D" CornerRadius="12" Padding="4" HorizontalAlignment="Left" BorderBrush="#0D151D" BorderThickness="1">
                                                 <StackPanel Orientation="Horizontal">
                                                     <RadioButton x:Name="OfflineToggle" Content="Offline" Style="{DynamicResource ToggleTab}" IsChecked="True" GroupName="Mode" Checked="AuthToggle_Changed" Padding="16,6"/>
                                                     <RadioButton x:Name="PremiumToggle" Content="Premium" Style="{DynamicResource ToggleTab}" GroupName="Mode" Checked="AuthToggle_Changed" Padding="16,6"/>
@@ -309,13 +309,13 @@
                                             </Border>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                            <TextBlock Text="VERSIÓN DEL PACK" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
+                                            <TextBlock Text="VERSIÓN DEL PACK" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
                                             <ComboBox x:Name="VersionComboBox" Height="36" Style="{DynamicResource ModernComboBox}"/>
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel x:Name="OfflinePanel" Visibility="Visible">
-                                        <TextBlock Text="NOMBRE DE PILOTO" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                                        <TextBlock Text="NOMBRE DE PILOTO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                                         <TextBox x:Name="NickTextBox" Style="{DynamicResource AppleTextBox}" Height="40" VerticalContentAlignment="Center" TextChanged="NickTextBox_TextChanged"/>
                                     </StackPanel>
 
@@ -324,7 +324,7 @@
                                             <Button x:Name="MicrosoftLoginButton" Content="Conectar con Microsoft" Style="{DynamicResource SecondaryButton}" Height="44" Click="MicrosoftLoginButton_Click"/>
                                         </StackPanel>
                                         <StackPanel x:Name="LoggedPanel" Visibility="Collapsed">
-                                            <Border Background="#0A0714" CornerRadius="12" Padding="16,10" BorderBrush="#2E2648" BorderThickness="1">
+                                            <Border Background="#05080D" CornerRadius="12" Padding="16,10" BorderBrush="#1E2C38" BorderThickness="1">
                                                 <Grid>
                                                     <StackPanel>
                                                         <TextBlock Text="CUENTA PREMIUM" Foreground="#10B981" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
@@ -341,8 +341,8 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="ASIGNACIÓN DE RAM" Foreground="#3D3560" FontSize="9" FontWeight="Bold" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#7C3AED" FontSize="14" FontWeight="Black"/>
+                                        <TextBlock Text="ASIGNACIÓN DE RAM" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#00F2FF" FontSize="14" FontWeight="Black"/>
                                     </Grid>
                                     <Slider x:Name="RamSlider" Minimum="2" Maximum="16" Value="8" Style="{DynamicResource AppleSlider}" ValueChanged="RamSlider_ValueChanged"/>
                                 </StackPanel>
@@ -360,26 +360,26 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Background="#0A0714" CornerRadius="12" Padding="12" BorderBrush="#1A1528" BorderThickness="1" Margin="0,0,16,0">
+                    <Border Grid.Column="0" Background="#05080D" CornerRadius="12" Padding="12" BorderBrush="#0D151D" BorderThickness="1" Margin="0,0,16,0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <ScrollViewer x:Name="LogScroll">
-                                <TextBlock x:Name="LogText" Foreground="#4A4266" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="LogText" Foreground="#344A5B" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap"/>
                             </ScrollViewer>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,6,0,0">
-                                <TextBlock x:Name="ProgressLabel" Text="Iniciador preparado." Foreground="#3D3560" FontSize="11"/>
-                                <TextBlock x:Name="PercentageLabel" Text="" Foreground="#7C3AED" FontSize="11" FontWeight="Bold" Margin="8,0,0,0"/>
+                                <TextBlock x:Name="ProgressLabel" Text="Iniciador preparado." Foreground="#1C2D3A" FontSize="11"/>
+                                <TextBlock x:Name="PercentageLabel" Text="" Foreground="#00F2FF" FontSize="11" FontWeight="Bold" Margin="8,0,0,0"/>
 
                                 <!-- Perf Monitor -->
-                                <Border Background="#1A1528" CornerRadius="4" Padding="6,2" Margin="14,0,0,0">
+                                <Border Background="#0D151D" CornerRadius="4" Padding="6,2" Margin="14,0,0,0">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="CPU" Foreground="#4A4266" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
+                                        <TextBlock Text="CPU" Foreground="#344A5B" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
                                         <TextBlock x:Name="CpuPerfText" Text="0%" Foreground="#C4B5FD" FontSize="9"/>
-                                        <Border Width="1" Height="8" Background="#2E2648" Margin="8,0"/>
-                                        <TextBlock Text="RAM" Foreground="#4A4266" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
+                                        <Border Width="1" Height="8" Background="#1E2C38" Margin="8,0"/>
+                                        <TextBlock Text="RAM" Foreground="#344A5B" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
                                         <TextBlock x:Name="RamPerfText" Text="0 MB" Foreground="#C4B5FD" FontSize="9"/>
                                     </StackPanel>
                                 </Border>

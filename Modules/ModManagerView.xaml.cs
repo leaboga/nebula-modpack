@@ -171,7 +171,7 @@ namespace NebulaLauncher.Modules
         {
             if (sender is Button btn && btn.Tag is string modName)
             {
-                var result = MessageBox.Show($"\u00BFEst\u00E1s seguro de eliminar '{modName}'?", "Nebula Launcher", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show($"\u00BFEst\u00E1s seguro de eliminar '{modName}'?", "KRAKEN Launcher", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result != MessageBoxResult.Yes) return;
 
                 try

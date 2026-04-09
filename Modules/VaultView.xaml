@@ -8,9 +8,9 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
         <Style x:Key="GlassCard" TargetType="Border">
-            <Setter Property="Background" Value="#1A1528"/>
+            <Setter Property="Background" Value="#0D151D"/>
             <Setter Property="CornerRadius" Value="18"/>
-            <Setter Property="BorderBrush" Value="#2E2648"/>
+            <Setter Property="BorderBrush" Value="#1E2C38"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Width" Value="250"/>
             <Setter Property="Height" Value="360"/>
@@ -30,7 +30,7 @@
             <!-- HEADER -->
             <Grid Grid.Row="0" Margin="0,0,0,24">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="🌌 HUB NEBULAR" Foreground="White" FontSize="26" FontWeight="Black"/>
+                    <TextBlock Text="🌌 ABYSSAL VAULT" Foreground="White" FontSize="26" FontWeight="Black"/>
                     <Border Background="#207C3AED" CornerRadius="8" Padding="12,4" Margin="20,0,0,0">
                         <TextBlock Text="MODS &amp; SHADERS" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold"/>
                     </Border>
@@ -45,10 +45,10 @@
                     
                     <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,0" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
                     
-                    <Border Background="#1A1528" CornerRadius="12" Width="200" BorderBrush="#2E2648" BorderThickness="1" Margin="12,0,0,0">
+                    <Border Background="#0D151D" CornerRadius="12" Width="200" BorderBrush="#1E2C38" BorderThickness="1" Margin="12,0,0,0">
                         <Grid>
                             <TextBox x:Name="SearchBox" Background="Transparent" BorderThickness="0" Foreground="White" Padding="14,8,40,8" KeyDown="SearchBox_KeyDown" VerticalContentAlignment="Center"/>
-                            <Button HorizontalAlignment="Right" Content="🔍" Background="Transparent" BorderThickness="0" Foreground="#7B6FA0" Width="40" Click="BtnSearch_Click"/>
+                            <Button HorizontalAlignment="Right" Content="🔍" Background="Transparent" BorderThickness="0" Foreground="#6D8A99" Width="40" Click="BtnSearch_Click"/>
                         </Grid>
                     </Border>
                     
@@ -68,7 +68,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- SIDEBAR -->
-                <Border Grid.Column="0" Margin="0,0,16,0" Background="#0D0A1ACC" CornerRadius="22" BorderBrush="#1E1A2E" BorderThickness="1">
+                <Border Grid.Column="0" Margin="0,0,16,0" Background="#0D0A1ACC" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1">
                     <Grid Margin="18">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -77,7 +77,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0">
-                            <TextBlock Text="CATEGORÍAS" Foreground="#4A4266" FontSize="10" FontWeight="Black" Margin="4,0,0,12"/>
+                            <TextBlock Text="CATEGORÍAS" Foreground="#344A5B" FontSize="10" FontWeight="Black" Margin="4,0,0,12"/>
                             <ListBox x:Name="CategoryList" Background="Transparent" BorderThickness="0" SelectionChanged="CategoryList_SelectionChanged">
                                 <ListBoxItem IsSelected="True" Tag="all"><TextBlock Text="🌌 Todos"/></ListBoxItem>
                                 <ListBoxItem Tag="optimization"><TextBlock Text="⚡ Optimización"/></ListBoxItem>
@@ -87,11 +87,11 @@
                             </ListBox>
                         </StackPanel>
 
-                        <Border Grid.Row="2" Background="#0A0714" CornerRadius="12" Padding="14">
+                        <Border Grid.Row="2" Background="#05080D" CornerRadius="12" Padding="14">
                             <StackPanel>
-                                <TextBlock Text="MASA DE MODS" Foreground="#3D3560" FontSize="9" FontWeight="Black" Margin="0,0,0,10"/>
+                                <TextBlock Text="MASA DE MODS" Foreground="#1C2D3A" FontSize="9" FontWeight="Black" Margin="0,0,0,10"/>
                                 <Grid Margin="0,0,0,4">
-                                    <TextBlock Text="Local" Foreground="#7B6FA0" FontSize="11"/>
+                                    <TextBlock Text="Local" Foreground="#6D8A99" FontSize="11"/>
                                     <TextBlock x:Name="TxtTotalWeight" Text="0 MB" Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <ProgressBar x:Name="WeightProgress" Height="4" Value="0" Maximum="1000" Style="{DynamicResource AppleProgress}" Margin="0,4"/>
@@ -102,12 +102,12 @@
                 </Border>
 
                 <!-- RESULTADOS -->
-                <Border Grid.Column="1" Background="#0A0815" CornerRadius="22" BorderBrush="#1E1A2E" BorderThickness="1" ClipToBounds="True">
+                <Border Grid.Column="1" Background="#05080D" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
                     <Grid>
                         <ScrollViewer x:Name="SkeletonPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Hidden" Padding="14">
                             <WrapPanel HorizontalAlignment="Center">
-                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12"/>
-                                <Border Width="250" Height="360" Background="#161125" CornerRadius="18" Margin="12"/>
+                                <Border Width="250" Height="360" Background="#0D151D" CornerRadius="18" Margin="12"/>
+                                <Border Width="250" Height="360" Background="#0D151D" CornerRadius="18" Margin="12"/>
                             </WrapPanel>
                         </ScrollViewer>
 
@@ -120,12 +120,12 @@
                                             <Border Style="{StaticResource GlassCard}" MouseLeftButtonUp="Card_MouseLeftButtonUp">
                                                 <Grid Margin="18">
                                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                                                    <Border Width="90" Height="90" CornerRadius="24" Background="#161125">
+                                                    <Border Width="90" Height="90" CornerRadius="24" Background="#0D151D">
                                                         <Image Source="{Binding IconUrl}" Stretch="UniformToFill"/>
                                                     </Border>
                                                     <StackPanel Grid.Row="1" Margin="0,12,0,0">
                                                         <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="50"/>
-                                                        <TextBlock Text="{Binding Author}" Foreground="#A78BFA" FontSize="11" HorizontalAlignment="Center" Margin="0,4"/>
+                                                        <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,4"/>
                                                         <TextBlock Text="{Binding DownloadsText}" Foreground="#C4B5FD" FontSize="12" HorizontalAlignment="Center" FontWeight="Bold"/>
                                                     </StackPanel>
                                                     <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{DynamicResource PlayButton}" Background="{Binding ButtonBrush}" Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="40" Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
@@ -146,11 +146,11 @@
                             <ItemsControl x:Name="LocalList">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="#161125" CornerRadius="12" Margin="0,0,0,10" Padding="16" BorderBrush="#2E2648" BorderThickness="1">
+                                        <Border Background="#0D151D" CornerRadius="12" Margin="0,0,0,10" Padding="16" BorderBrush="#1E2C38" BorderThickness="1">
                                             <Grid>
                                                 <StackPanel VerticalAlignment="Center">
                                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                                                    <TextBlock Text="{Binding SizeText}" Foreground="#7B6FA0" FontSize="11"/>
+                                                    <TextBlock Text="{Binding SizeText}" Foreground="#6D8A99" FontSize="11"/>
                                                 </StackPanel>
                                                 <Button HorizontalAlignment="Right" Content="🗑️" Style="{DynamicResource SecondaryButton}" Tag="{Binding FilePath}" Click="DeleteFileBtn_Click"/>
                                             </Grid>
@@ -169,7 +169,7 @@
         </Grid>
 
         <!-- FLYOUT -->
-        <Border x:Name="DetailFlyout" Background="#0A0815" BorderBrush="#2E2648" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Width="480" Visibility="Collapsed">
+        <Border x:Name="DetailFlyout" Background="#05080D" BorderBrush="#1E2C38" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Width="480" Visibility="Collapsed">
             <Border.RenderTransform><TranslateTransform X="480"/></Border.RenderTransform>
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
@@ -177,22 +177,22 @@
                 <ScrollViewer Grid.Row="1" Padding="24">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
-                            <Border Width="80" Height="80" CornerRadius="18" Background="#161125">
+                            <Border Width="80" Height="80" CornerRadius="18" Background="#0D151D">
                                 <Image x:Name="DetailIcon" Stretch="UniformToFill"/>
                             </Border>
                             <StackPanel VerticalAlignment="Center" Margin="16,0,0,0">
                                 <TextBlock x:Name="DetailTitle" Foreground="White" FontSize="22" FontWeight="Black" TextWrapping="Wrap"/>
-                                <TextBlock x:Name="DetailAuthor" Foreground="#A78BFA" FontSize="13"/>
+                                <TextBlock x:Name="DetailAuthor" Foreground="#70F9FF" FontSize="13"/>
                             </StackPanel>
                         </StackPanel>
-                        <Border Background="#1A1528" CornerRadius="12" Padding="16" Margin="0,0,0,20">
+                        <Border Background="#0D151D" CornerRadius="12" Padding="16" Margin="0,0,0,20">
                             <StackPanel>
-                                <TextBlock Text="ANÁLISIS DE IMPACTO" Foreground="#7B6FA0" FontSize="9" FontWeight="Black"/>
+                                <TextBlock Text="ANÁLISIS DE IMPACTO" Foreground="#6D8A99" FontSize="9" FontWeight="Black"/>
                                 <StackPanel Orientation="Horizontal" Margin="0,4">
                                     <TextBlock x:Name="TxtImpactIcon" Text="🟢" Margin="0,0,8,0"/>
                                     <TextBlock x:Name="TxtModImpact" Text="Bajo" Foreground="#10B981" FontSize="14" FontWeight="Bold"/>
                                 </StackPanel>
-                                <TextBlock x:Name="TxtModWeightEstimate" Text="0 MB" Foreground="#4A4266" FontSize="10"/>
+                                <TextBlock x:Name="TxtModWeightEstimate" Text="0 MB" Foreground="#344A5B" FontSize="10"/>
                             </StackPanel>
                         </Border>
                         <TextBlock x:Name="DetailDescription" Foreground="#D1D5DB" FontSize="13" TextWrapping="Wrap" LineHeight="20"/>

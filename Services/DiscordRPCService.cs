@@ -37,7 +37,7 @@ namespace NebulaLauncher.Services
                     Assets  = new Assets
                     {
                         LargeImageKey  = "nebula_logo",
-                        LargeImageText = "Nebula Launcher",
+                        LargeImageText = "KRAKEN Launcher",
                         SmallImageKey  = "minecraft_icon",
                         SmallImageText = "Minecraft"
                     },
@@ -57,7 +57,7 @@ namespace NebulaLauncher.Services
             => SetPresence($"Jugando como {username}", $"Servidor Nebula", onlinePlayers, maxPlayers);
 
         public void SetActivity(string task)
-            => SetPresence(task, "Nebula Launcher");
+            => SetPresence(task, "KRAKEN Launcher");
 
         public void SetIdle()
             => SetActivity("En el menú principal");

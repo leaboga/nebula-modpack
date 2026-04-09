@@ -9,8 +9,8 @@
     
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -24,7 +24,7 @@
         <Grid Grid.Row="0" Margin="0,0,0,24">
             <StackPanel>
                 <TextBlock Text="Capturas de Pantalla" Foreground="White" FontSize="24" FontWeight="ExtraBold" Margin="0,0,0,4"/>
-                <TextBlock x:Name="CountLabel" Text="RECUERDOS DE TU VIAJE GAL\u00C1CTICO" Foreground="#4A4266" FontSize="10" FontWeight="Bold"/>
+                <TextBlock x:Name="CountLabel" Text="RECUERDOS DE TU VIAJE GAL\u00C1CTICO" Foreground="#344A5B" FontSize="10" FontWeight="Bold"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -39,8 +39,8 @@
                 <!-- Empty state -->
                 <StackPanel x:Name="EmptyState" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Collapsed">
                     <TextBlock Text="📷" FontSize="56" HorizontalAlignment="Center" Margin="0,0,0,16" Opacity="0.5"/>
-                    <TextBlock Text="No hay capturas todavía" Foreground="#7B6FA0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Presioná F2 en el juego para capturar un momento." Foreground="#3D3560" FontSize="12" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    <TextBlock Text="No hay capturas todavía" Foreground="#6D8A99" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Presioná F2 en el juego para capturar un momento." Foreground="#1C2D3A" FontSize="12" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                 </StackPanel>
                 
                 <WrapPanel x:Name="GalleryPanel" HorizontalAlignment="Left"/>
@@ -59,18 +59,18 @@
                 </Image.Effect>
             </Image>
             
-            <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#1A1528" CornerRadius="12" Padding="20,12" Margin="0,0,0,40" BorderBrush="#2E2648" BorderThickness="1">
+            <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#0D151D" CornerRadius="12" Padding="20,12" Margin="0,0,0,40" BorderBrush="#1E2C38" BorderThickness="1">
                 <StackPanel>
                     <TextBlock x:Name="FullscreenLabel" Foreground="White" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,4">
                         <Button Content="\uD83D\uDCCB Copiar al Portapapeles" Style="{DynamicResource PlayButton}" Height="34" Padding="16,0" Click="BtnCopy_Click" Margin="0,0,8,0"/>
                         <Button Content="\uD83D\uDCC1 Ver en Carpeta" Style="{DynamicResource SecondaryButton}" Height="34" Padding="16,0" Click="BtnOpenInFolder_Click"/>
                     </StackPanel>
-                    <TextBlock Text="Click para cerrar" Foreground="#4A4266" FontSize="10" TextAlignment="Center"/>
+                    <TextBlock Text="Click para cerrar" Foreground="#344A5B" FontSize="10" TextAlignment="Center"/>
                 </StackPanel>
             </Border>
             
-            <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="24" Background="Transparent" Foreground="#4A4266" BorderThickness="0" FontSize="28" Cursor="Hand" Click="RefreshBtn_Click"/>
+            <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="24" Background="Transparent" Foreground="#344A5B" BorderThickness="0" FontSize="28" Cursor="Hand" Click="RefreshBtn_Click"/>
         </Grid>
     </Grid>
 </UserControl>

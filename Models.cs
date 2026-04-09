@@ -16,7 +16,7 @@ namespace NebulaLauncher
         public string CrashWebhookUrl        { get; set; } = "";
         public string BlueMapPort            { get; set; } = "8100";
         public string BlueMapId              { get; set; } = "world";
-        public string AccentColor            { get; set; } = "#7C3AED";
+        public string AccentColor            { get; set; } = "#00F2FF";
         public string BackgroundImagePath    { get; set; } = "";
         public bool   IsTurboEnabled         { get; set; } = false;
         public bool   SkipConfigSync         { get; set; } = false;

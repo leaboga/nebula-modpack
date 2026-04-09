@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Grid Margin="40">
-        <Border Background="#1A1528" CornerRadius="24" BorderBrush="#EF4444" BorderThickness="1">
+        <Border Background="#0D151D" CornerRadius="24" BorderBrush="#EF4444" BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect Color="#EF4444" Opacity="0.2" BlurRadius="50" ShadowDepth="0"/>
             </Border.Effect>
@@ -24,23 +24,23 @@
                     </Border>
                     <StackPanel Margin="20,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="Anomalía Detectada" Foreground="White" FontSize="24" FontWeight="Bold"/>
-                        <TextBlock x:Name="CrashDateLabel" Text="Minecraft cerró de forma inesperada" Foreground="#7B6FA0" FontSize="13"/>
+                        <TextBlock x:Name="CrashDateLabel" Text="Minecraft cerró de forma inesperada" Foreground="#6D8A99" FontSize="13"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!-- Error Summary Card -->
-                <Border Grid.Row="1" Background="#12101E" CornerRadius="16" Padding="20" Margin="0,0,0,20" BorderBrush="#2E2648" BorderThickness="1">
+                <Border Grid.Row="1" Background="#0A0E14" CornerRadius="16" Padding="20" Margin="0,0,0,20" BorderBrush="#1E2C38" BorderThickness="1">
                     <StackPanel>
                         <TextBlock Text="DIAGNÓSTICO NEBULA:" Foreground="#EF4444" FontSize="10" FontWeight="Black" Margin="0,0,0,8"/>
                         <TextBlock x:Name="ErrorTitleLabel" Text="Cargando análisis..." Foreground="White" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock x:Name="ErrorDescriptionLabel" Text="Estamos analizando los logs para encontrar la causa raíz..." Foreground="#7B6FA0" FontSize="13" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ErrorDescriptionLabel" Text="Estamos analizando los logs para encontrar la causa raíz..." Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Log Preview -->
-                <Border Grid.Row="2" Background="#0A0714" CornerRadius="12" Padding="15" BorderBrush="#1A1528" BorderThickness="1">
+                <Border Grid.Row="2" Background="#05080D" CornerRadius="12" Padding="15" BorderBrush="#0D151D" BorderThickness="1">
                     <ScrollViewer>
-                        <TextBlock x:Name="LogPreviewText" Foreground="#4A4266" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="LogPreviewText" Foreground="#344A5B" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </Border>
 

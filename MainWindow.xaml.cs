@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.1.1";
+        private const string CurrentLauncherVersion = "2.5.0";
         private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -156,7 +156,7 @@ namespace NebulaLauncher
                 string currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
                 
                 Dispatcher.Invoke(() => {
-                    VersionFooterLabel.Text = $"Nebula Launcher v{currentVersion}";
+                    VersionFooterLabel.Text = $"KRAKEN Launcher v{currentVersion}";
                     AgregarLog($"🛡️ Version v{currentVersion} — Sistema operativo cargado con éxito.");
                     
                     // Auto-focus para piloto en offline
@@ -329,9 +329,9 @@ namespace NebulaLauncher
                 
                 // Dynamic System Backgrounds (Based on Hour) - Improvement 13
                 int hour = DateTime.Now.Hour;
-                string nebulaUrl = "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1000"; // Default: Night
-                if (hour >= 6 && hour < 12)  nebulaUrl = "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1000"; // Morning
-                if (hour >= 12 && hour < 19) nebulaUrl = "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?q=80&w=1000"; // Evening
+                string nebulaUrl = "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1000"; // Deep Ocean Night
+                if (hour >= 6 && hour < 12)  nebulaUrl = "https://images.unsplash.com/photo-1439066615861-d1af74d74000?q=80&w=1000"; // Ocean Morning
+                if (hour >= 12 && hour < 19) nebulaUrl = "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?q=80&w=1000"; // Deep Blue Evening
                 
                 var img = new BitmapImage(new Uri(nebulaUrl));
                 LauncherBackground.Source = img;
@@ -386,7 +386,7 @@ namespace NebulaLauncher
 
                 if (string.IsNullOrEmpty(latest) || latest == CurrentLauncherVersion) 
                 {
-                    AgregarLog("Nebula Launcher esta actualizado.");
+                    AgregarLog("KRAKEN Launcher esta actualizado.");
                     return;
                 }
 
@@ -468,17 +468,29 @@ namespace NebulaLauncher
 
                 int pid = Process.GetCurrentProcess().Id;
                 string batContent = "@echo off\n" +
+                                   "title Nebula Updater\n" +
+                                   "echo Finalizando procesos...\n" +
                                    $"taskkill /F /PID {pid} > nul 2>&1\n" +
-                                   "ping -n 3 127.0.0.1 > nul\n" +
+                                   "timeout /t 3 /nobreak > nul\n" +
+                                   "set /a count=0\n" +
                                    ":loop\n" +
+                                   "set /a count+=1\n" +
+                                   "echo Intentando actualizar (intento %count% de 10)...\n" +
                                    "copy /Y \"" + tempExe + "\" \"" + currentExe + "\"\n" +
                                    "if errorlevel 1 (\n" +
-                                   "    ping -n 2 127.0.0.1 > nul\n" +
+                                   "    if %count% geq 10 goto failed\n" +
+                                   "    timeout /t 2 /nobreak > nul\n" +
                                    "    goto loop\n" +
                                    ")\n" +
+                                   "echo Actualizacion exitosa. Iniciando Nebula...\n" +
                                    "del \"" + tempExe + "\"\n" +
                                    "start \"\" \"" + currentExe + "\"\n" +
-                                   "del \"%~f0\"\n";
+                                   "del \"%~f0\"\n" +
+                                   "exit\n" +
+                                   ":failed\n" +
+                                   "echo Error: No se pudo sobrescribir el archivo. El proceso sigue bloqueado.\n" +
+                                   "pause\n" +
+                                   "exit\n";
 
                 await File.WriteAllTextAsync(updaterBat, batContent);
 
@@ -992,7 +1004,7 @@ namespace NebulaLauncher
             {
                 await SincronizarTodoAsync();
                 AgregarLog("✅ Sincronización completada.");
-                MessageBox.Show("Sincronización y reparación completada con éxito.", "Nebula Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Sincronización y reparación completada con éxito.", "KRAKEN Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { AgregarLog($"❌ Error en reparación: {ex.Message}"); }
             finally { if (btn != null) { btn.IsEnabled = true; btn.Content = "🛠️ Reparar Pack"; } }
@@ -1492,7 +1504,7 @@ namespace NebulaLauncher
             switch (vista)
             {
                 case "home":
-                    this.Title = "Nebula Launcher — Inicio";
+                    this.Title = "KRAKEN Launcher — Inicio";
                     HomeView.Visibility = Visibility.Visible;
                     HomeView.Opacity = 1;
                     AnimateView(HomeView);
@@ -1500,23 +1512,23 @@ namespace NebulaLauncher
                     ActualizarVersionesEnHome();
                     break;
                 case "changelog":
-                    this.Title = "Nebula Launcher — Novedades";
+                    this.Title = "KRAKEN Launcher — Novedades";
                     SwitchToModule(new ChangelogView());
                     break;
                 case "settings":
-                    this.Title = "Nebula Launcher — Configuración";
+                    this.Title = "KRAKEN Launcher — Configuración";
                     SwitchToModule(new ConfigView(this));
                     break;
                 case "social":
-                    this.Title = "Nebula Launcher — Comunidad";
+                    this.Title = "KRAKEN Launcher — Comunidad";
                     SwitchToModule(new SocialView(_session.ServerIp, _session.Username));
                     break;
                 case "perf":
-                    this.Title = "Nebula Launcher — Rendimiento";
+                    this.Title = "KRAKEN Launcher — Rendimiento";
                     SwitchToModule(new PerformanceView(this));
                     break;
                 case "screenshots":
-                    this.Title = "Nebula Launcher — Capturas";
+                    this.Title = "KRAKEN Launcher — Capturas";
                     SwitchToModule(new ScreenshotsView(GameFolder));
                     break;
                 case "modmanager":
@@ -1530,23 +1542,23 @@ namespace NebulaLauncher
                     SwitchToModule(new VaultView(GameFolder, CurrentProfile));
                     break;
                 case "crash":
-                    this.Title = "Nebula Launcher — Diagnóstico";
+                    this.Title = "KRAKEN Launcher — Diagnóstico";
                     SwitchToModule(new CrashDiagnosticView(_crashReporter));
                     break;
                 case "map":
-                    this.Title = "Nebula Launcher — Mapa";
+                    this.Title = "KRAKEN Launcher — Mapa";
                     SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId));
                     break;
                 case "hosting":
-                    this.Title = "Nebula Launcher — Servicio Hosting (BETA)";
+                    this.Title = "KRAKEN Launcher — Servicio Hosting (BETA)";
                     SwitchToModule(new HostingServiceView());
                     break;
                 case "localhost":
-                    this.Title = "Nebula Launcher — Hostear Servidor Local";
+                    this.Title = "KRAKEN Launcher — Hostear Servidor Local";
                     SwitchToModule(new ServerHostView());
                     break;
                 case "modpacks":
-                    this.Title = "Nebula Launcher — Modpack Hub";
+                    this.Title = "KRAKEN Launcher — Modpack Hub";
                     SwitchToModule(new ModpackView());
                     break;
             }

@@ -111,7 +111,7 @@ namespace NebulaLauncher.Modules
                 _mainWindow.ActualizarColorTema();
                 
                 // Actualizar bordes de selección (UI simple feedback)
-                ThemeNebula.BorderThickness  = new Thickness(hex == "#7C3AED" ? 2 : 1);
+                ThemeNebula.BorderThickness  = new Thickness(hex == "#00F2FF" ? 2 : 1);
                 ThemeCrimson.BorderThickness = new Thickness(hex == "#EF4444" ? 2 : 1);
                 ThemeEmerald.BorderThickness = new Thickness(hex == "#10B981" ? 2 : 1);
             }

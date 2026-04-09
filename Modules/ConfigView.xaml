@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -13,23 +13,23 @@
 
             <!-- Header -->
             <TextBlock Text="Ajustes"
-                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
             <TextBlock Text="CONFIGURACIÓN DE JUEGO"
-                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"
                        Margin="0,0,0,28"/>
 
             <!-- Instances Config Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                        <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
+                        <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
                             <TextBlock Text="📁" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Gestión de Instancias" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Gestión de Instancias" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="NOMBRE DE INSTANCIA" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="NOMBRE DE INSTANCIA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -40,54 +40,54 @@
                         <Button Grid.Column="1" Content="Cambiar" Click="BtnChangeInstance_Click" Style="{DynamicResource SecondaryButton}" Height="38" Padding="12,0" Margin="0,0,8,0"/>
                         <Button Grid.Column="2" Content="Eliminar" Click="BtnDeleteInstance_Click" Style="{DynamicResource SecondaryButton}" Foreground="#EF4444" Height="38" Padding="12,0"/>
                     </Grid>
-                    <TextBlock Text="Separa tus mundos y mods usando carpetas aisladas (ej: 'creative', 'survival')." Foreground="#4A4266" FontSize="10" Margin="4,8,0,0"/>
+                    <TextBlock Text="Separa tus mundos y mods usando carpetas aisladas (ej: 'creative', 'survival')." Foreground="#344A5B" FontSize="10" Margin="4,8,0,0"/>
                 </StackPanel>
             </Border>
 
             <!-- Server Config Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                        <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
+                        <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
                             <TextBlock Text="🌐" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Conexión al Servidor" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Conexión al Servidor" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="IP DEL SERVIDOR" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="IP DEL SERVIDOR" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <TextBox x:Name="ServerIpBox" Style="{DynamicResource AppleTextBox}" TextChanged="ServerIpBox_TextChanged" Margin="0,0,0,16"/>
 
-                    <TextBlock Text="PUERTO BLUEMAP" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="PUERTO BLUEMAP" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <TextBox x:Name="BlueMapPortBox" Style="{DynamicResource AppleTextBox}" TextChanged="BlueMapPortBox_TextChanged"/>
                 </StackPanel>
             </Border>
 
             <!-- App Configuration Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#5865F2">
                             <TextBlock Text="⚙️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Ajustes del Launcher" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Ajustes del Launcher" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="ID DEL MAPA (BLUEMAP)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="ID DEL MAPA (BLUEMAP)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <TextBox x:Name="MapIdBox" Text="world" Style="{DynamicResource AppleTextBox}" Margin="0,0,0,16" TextChanged="MapIdBox_TextChanged"/>
 
-                    <TextBlock Text="URL DEL WEBHOOK (CRASHES)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="URL DEL WEBHOOK (CRASHES)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <TextBox x:Name="WebhookBox" Style="{DynamicResource AppleTextBox}" TextChanged="WebhookBox_TextChanged"/>
                 </StackPanel>
             </Border>
 
             <!-- Memory & Performance Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#10B981">
                             <TextBlock Text="⚡" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Rendimiento y RAM" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Rendimiento y RAM" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <Grid Margin="0,0,0,16">
@@ -96,15 +96,15 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Optimización Automática" Foreground="#F0EAFF" FontSize="13"/>
-                            <TextBlock Text="Asigna RAM basada en tu sistema" Foreground="#4A4266" FontSize="10"/>
+                            <TextBlock Text="Optimización Automática" Foreground="#E6F9FF" FontSize="13"/>
+                            <TextBlock Text="Asigna RAM basada en tu sistema" Foreground="#344A5B" FontSize="10"/>
                         </StackPanel>
                         <Button Grid.Column="1" Content="Optimizar" Click="BtnAutoOptimize_Click" Style="{DynamicResource SecondaryButton}" Height="32"/>
                     </Grid>
 
-                    <Separator Background="#1A1528" Margin="0,0,0,16"/>
+                    <Separator Background="#0D151D" Margin="0,0,0,16"/>
 
-                    <TextBlock Text="AJUSTE MANUAL" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <TextBlock Text="AJUSTE MANUAL" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -112,12 +112,12 @@
                         </Grid.ColumnDefinitions>
                         <Slider x:Name="RamSlider" Minimum="2" Maximum="16" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="RamSlider_ValueChanged" Style="{DynamicResource AppleSlider}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock x:Name="RamValueText" Text="4" Foreground="#7C3AED" FontSize="16" FontWeight="Bold"/>
-                            <TextBlock Text=" GB" Foreground="#4A4266" FontSize="11" VerticalAlignment="Bottom" Margin="2,0,0,2"/>
+                            <TextBlock x:Name="RamValueText" Text="4" Foreground="#00F2FF" FontSize="16" FontWeight="Bold"/>
+                            <TextBlock Text=" GB" Foreground="#344A5B" FontSize="11" VerticalAlignment="Bottom" Margin="2,0,0,2"/>
                         </StackPanel>
                     </Grid>
                     
-                    <TextBlock Text="RUTA DE JAVA (OPCIONAL)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
+                    <TextBlock Text="RUTA DE JAVA (OPCIONAL)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -132,18 +132,18 @@
             </Border>
 
             <!-- Maintenance & Cloud Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
                             <TextBlock Text="🧹" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Mantenimiento Galáctico" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Mantenimiento Galáctico" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                     
                     <Button Content="清理 Limpiar Logs y Caché" Style="{DynamicResource SecondaryButton}" Height="38" Margin="0,0,0,12" Click="BtnCleanLogs_Click"/>
                     
-                    <TextBlock Text="RESPALDO EN LA NUBE" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="RESPALDO EN LA NUBE" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -156,54 +156,54 @@
             </Border>
 
             <!-- Game Customization -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                        <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
+                        <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
                             <TextBlock Text="✨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Personalización del Juego" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Personalización del Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="TEXTO DE SPLASH (AMARILLO)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="TEXTO DE SPLASH (AMARILLO)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <TextBox x:Name="SplashTextBox" Style="{DynamicResource AppleTextBox}" MaxLength="50" TextChanged="SplashTextBox_TextChanged" Margin="0,0,0,16"/>
 
-                    <CheckBox x:Name="OverlayToggle" Content="Habilitar Overlay de Rendimiento (FPS/RAM)" Foreground="#7B6FA0" FontSize="11" Margin="4,0,0,0" Style="{DynamicResource TrayToggle}" Click="OverlayToggle_Click"/>
+                    <CheckBox x:Name="OverlayToggle" Content="Habilitar Overlay de Rendimiento (FPS/RAM)" Foreground="#6D8A99" FontSize="11" Margin="4,0,0,0" Style="{DynamicResource TrayToggle}" Click="OverlayToggle_Click"/>
                 </StackPanel>
             </Border>
 
             <!-- Appearance Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#EC4899">
                             <TextBlock Text="🎨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Personalización" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Personalización" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="COLOR DE ACENTO" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
+                    <TextBlock Text="COLOR DE ACENTO" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ColorPurple"  MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#7C3AED" Background="#7C3AED" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
+                        <Border x:Name="ColorPurple"  MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#00F2FF" Background="#00F2FF" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
                         <Border x:Name="ColorBlue"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#3B82F6" Background="#3B82F6" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
                         <Border x:Name="ColorEmerald" MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#10B981" Background="#10B981" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
                         <Border x:Name="ColorRose"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#F43F5E" Background="#F43F5E" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
                     </StackPanel>
 
-                    <TextBlock Text="TEMAS PREDEFINIDOS" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
+                    <TextBlock Text="TEMAS PREDEFINIDOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ThemeNebula"  MouseDown="Theme_MouseDown" Tag="#7C3AED" Width="90" Height="34" Background="#1A1528" BorderBrush="#7C3AED" BorderThickness="2" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Nebula" Foreground="#F0EAFF" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="ThemeNebula"  MouseDown="Theme_MouseDown" Tag="#00F2FF" Width="90" Height="34" Background="#0D151D" BorderBrush="#00F2FF" BorderThickness="2" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
+                            <TextBlock Text="Nebula" Foreground="#E6F9FF" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <Border x:Name="ThemeCrimson" MouseDown="Theme_MouseDown" Tag="#EF4444" Width="90" Height="34" Background="#1A1528" BorderBrush="#2E2648" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
+                        <Border x:Name="ThemeCrimson" MouseDown="Theme_MouseDown" Tag="#EF4444" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
                             <TextBlock Text="Crimson" Foreground="#EF4444" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <Border x:Name="ThemeEmerald" MouseDown="Theme_MouseDown" Tag="#10B981" Width="90" Height="34" Background="#1A1528" BorderBrush="#2E2648" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
+                        <Border x:Name="ThemeEmerald" MouseDown="Theme_MouseDown" Tag="#10B981" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
                             <TextBlock Text="Emerald" Foreground="#10B981" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </StackPanel>
 
-                    <TextBlock Text="FONDO DE PANTALLA" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
+                    <TextBlock Text="FONDO DE PANTALLA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -215,7 +215,7 @@
                             <Button Content="🗑️" Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Click="BtnResetBackground_Click"/>
                         </StackPanel>
                     </Grid>
-                    <Border Margin="0,12,0,0" Height="80" CornerRadius="12" BorderBrush="#1A1528" BorderThickness="1" Background="#0A0714" ClipToBounds="True">
+                    <Border Margin="0,12,0,0" Height="80" CornerRadius="12" BorderBrush="#0D151D" BorderThickness="1" Background="#05080D" ClipToBounds="True">
                         <Grid>
                             <Image x:Name="BgPreviewImage" Stretch="UniformToFill" Opacity="0.5">
                                 <Image.Effect>
@@ -229,9 +229,9 @@
             </Border>
 
             <!-- Presets Section -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
-                    <TextBlock Text="MODOS DE JUEGO" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
+                    <TextBlock Text="MODOS DE JUEGO" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -245,9 +245,9 @@
             </Border>
 
             <!-- Shortcuts Section -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
-                    <TextBlock Text="ACCESOS RÁPIDOS" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
+                    <TextBlock Text="ACCESOS RÁPIDOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
                     <UniformGrid Columns="2">
                         <Button Content="✨ Shaders" Click="BtnOpenShaders_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,8" Height="38" ToolTip="Abrir carpeta de Shaders"/>
                         <Button Content="📦 Descargar Shaders" Click="BtnDownloadShaders_Click" Style="{DynamicResource PlayButton}" Margin="4,0,0,8" Height="38" FontSize="10"/>
@@ -258,15 +258,15 @@
             </Border>
 
             <!-- Maintenance & Support Card -->
-            <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
                             <TextBlock Text="🛠️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Mantenimiento y Ayuda" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Mantenimiento y Ayuda" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <TextBlock Text="¿El juego no arranca o va mal?" Foreground="#4A4266" FontSize="11" Margin="0,0,0,14"/>
+                    <TextBlock Text="¿El juego no arranca o va mal?" Foreground="#344A5B" FontSize="11" Margin="0,0,0,14"/>
                     
                     <UniformGrid Columns="2">
                         <Button Content="🛠️ Reparar Pack" Click="BtnRepairPack_Click" Style="{DynamicResource PlayButton}" Height="38" Margin="0,0,4,0"/>

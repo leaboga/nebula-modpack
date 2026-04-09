@@ -45,7 +45,7 @@ namespace NebulaLauncher.Modules
             {
                 "fix"    => ("#10B981", "🔧 FIX"),
                 "hotfix" => ("#EF4444", "🚨 HOTFIX"),
-                _        => ("#7C3AED", "✦ UPDATE")
+                _        => ("#00F2FF", "✦ UPDATE")
             };
 
             var border = new Border

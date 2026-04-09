@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -23,7 +23,7 @@
                                 <Thumb>
                                     <Thumb.Template>
                                         <ControlTemplate TargetType="Thumb">
-                                            <Border Background="#2E2648" CornerRadius="3"/>
+                                            <Border Background="#1E2C38" CornerRadius="3"/>
                                         </ControlTemplate>
                                     </Thumb.Template>
                                 </Thumb>
@@ -46,10 +46,10 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
             <TextBlock Text="Social"
-                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
             <TextBlock Text="NEBULA LIVE HUB"
-                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -63,35 +63,35 @@
             <StackPanel Grid.Column="0">
 
                 <!-- SERVER STATUS CARD -->
-                <Border Background="#12101E" CornerRadius="16" Padding="22,18" Margin="0,0,0,14" BorderBrush="#2E2648" BorderThickness="1">
+                <Border Background="#0A0E14" CornerRadius="16" Padding="22,18" Margin="0,0,0,14" BorderBrush="#1E2C38" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="SERVIDOR" FontSize="9" FontWeight="Bold" Foreground="#3D3560" Margin="0,0,0,16"/>
+                        <TextBlock Text="SERVIDOR" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,16"/>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
                             <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#EF4444" VerticalAlignment="Center">
                                 <Ellipse.Effect><DropShadowEffect Color="#EF4444" Opacity="0.8" BlurRadius="8" ShadowDepth="0"/></Ellipse.Effect>
                             </Ellipse>
-                            <TextBlock x:Name="StatusText" Text="OFFLINE" FontSize="20" FontWeight="Bold" Foreground="#F0EAFF" Margin="12,0,0,0"/>
+                            <TextBlock x:Name="StatusText" Text="OFFLINE" FontSize="20" FontWeight="Bold" Foreground="#E6F9FF" Margin="12,0,0,0"/>
                         </StackPanel>
-                        <Border Height="1" Margin="0,0,0,16" Background="#1A1528"/>
-                        <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#3D3560" Margin="0,0,0,4"/>
-                        <TextBlock x:Name="PlayerCountText" Text="0 Jugadores" FontSize="15" FontWeight="Bold" Foreground="#A78BFA" Margin="0,0,0,14"/>
-                        <TextBlock Text="VERSIÓN" FontSize="9" FontWeight="Bold" Foreground="#3D3560" Margin="0,0,0,4"/>
-                        <TextBlock x:Name="VersionText" Text="NeoForge 1.21.1" FontSize="12" Foreground="#7B6FA0"/>
+                        <Border Height="1" Margin="0,0,0,16" Background="#0D151D"/>
+                        <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="PlayerCountText" Text="0 Jugadores" FontSize="15" FontWeight="Bold" Foreground="#70F9FF" Margin="0,0,0,14"/>
+                        <TextBlock Text="VERSIÓN" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="VersionText" Text="NeoForge 1.21.1" FontSize="12" Foreground="#6D8A99"/>
                     </StackPanel>
                 </Border>
 
                 <!-- HOST RESOURCES CARD -->
-                <Border Background="#12101E" CornerRadius="16" Padding="22,18" BorderBrush="#2E2648" BorderThickness="1">
+                <Border Background="#0A0E14" CornerRadius="16" Padding="22,18" BorderBrush="#1E2C38" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="RECURSOS DEL HOST" FontSize="9" FontWeight="Bold" Foreground="#3D3560" Margin="0,0,0,16"/>
+                        <TextBlock Text="RECURSOS DEL HOST" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,16"/>
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="CPU" FontSize="11" FontWeight="SemiBold" Foreground="#C4B5FD"/>
-                            <TextBlock x:Name="CpuText" Text="0%" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#A78BFA"/>
+                            <TextBlock x:Name="CpuText" Text="0%" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#70F9FF"/>
                         </Grid>
                         <ProgressBar x:Name="CpuBar" Height="4" Value="0" Style="{StaticResource AppleProgress}" Margin="0,0,0,16"/>
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="RAM" FontSize="11" FontWeight="SemiBold" Foreground="#C4B5FD"/>
-                            <TextBlock x:Name="RamText" Text="0 GB" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#A78BFA"/>
+                            <TextBlock x:Name="RamText" Text="0 GB" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#70F9FF"/>
                         </Grid>
                         <ProgressBar x:Name="RamBar" Height="4" Value="0" Style="{StaticResource AppleProgress}"/>
                     </StackPanel>
@@ -99,7 +99,7 @@
             </StackPanel>
 
             <!-- CHAT BRIDGE COLUMN -->
-            <Border Grid.Column="2" Background="#12101E" CornerRadius="16" BorderBrush="#2E2648" BorderThickness="1">
+            <Border Grid.Column="2" Background="#0A0E14" CornerRadius="16" BorderBrush="#1E2C38" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -108,10 +108,10 @@
                     </Grid.RowDefinitions>
 
                     <!-- Feed header -->
-                    <Border Grid.Row="0" Padding="22,18,22,14" BorderBrush="#2E2648" BorderThickness="0,0,0,1">
+                    <Border Grid.Row="0" Padding="22,18,22,14" BorderBrush="#1E2C38" BorderThickness="0,0,0,1">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="⚡" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBlock Text="BRIDGE DE CHAT EN TIEMPO REAL" FontSize="9" FontWeight="Bold" Foreground="#7B6FA0" VerticalAlignment="Center"/>
+                            <TextBlock Text="BRIDGE DE CHAT EN TIEMPO REAL" FontSize="9" FontWeight="Bold" Foreground="#6D8A99" VerticalAlignment="Center"/>
                             <Border Background="#207C3AED" CornerRadius="4" Padding="6,2" Margin="12,0,0,0">
                                 <TextBlock Text="LIVE" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
                             </Border>
@@ -130,17 +130,17 @@
                                         </Grid.ColumnDefinitions>
                                         
                                         <!-- Avatar / Icon -->
-                                        <Border Width="28" Height="28" CornerRadius="8" Background="#1A1528" BorderBrush="#2E2648" BorderThickness="1" VerticalAlignment="Top">
+                                        <Border Width="28" Height="28" CornerRadius="8" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" VerticalAlignment="Top">
                                             <TextBlock Text="👤" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.5"/>
                                         </Border>
 
                                         <StackPanel Grid.Column="1" Margin="12,0,0,0">
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
-                                                <TextBlock Text="{Binding Sender}" Foreground="#A78BFA" FontSize="11" FontWeight="Bold"/>
-                                                <TextBlock Text="{Binding Time}" Foreground="#3D3560" FontSize="9" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Sender}" Foreground="#70F9FF" FontSize="11" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding Time}" Foreground="#1C2D3A" FontSize="9" Margin="8,0,0,0" VerticalAlignment="Center"/>
                                             </StackPanel>
-                                            <Border Background="#1A1528" CornerRadius="10" Padding="12,8" HorizontalAlignment="Left" MaxWidth="400">
-                                                <TextBlock Text="{Binding Content}" Foreground="#F0EAFFDD" FontSize="12" TextWrapping="Wrap"/>
+                                            <Border Background="#0D151D" CornerRadius="10" Padding="12,8" HorizontalAlignment="Left" MaxWidth="400">
+                                                <TextBlock Text="{Binding Content}" Foreground="#E6F9FFDD" FontSize="12" TextWrapping="Wrap"/>
                                             </Border>
                                         </StackPanel>
                                     </Grid>
@@ -150,13 +150,13 @@
                     </ListBox>
 
                     <!-- Input Area -->
-                    <Border Grid.Row="2" Padding="16" BorderBrush="#2E2648" BorderThickness="0,1,0,0">
+                    <Border Grid.Row="2" Padding="16" BorderBrush="#1E2C38" BorderThickness="0,1,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="ChatInput" Style="{DynamicResource AppleTextBox}" Tag="Escribe un mensaje al servidor..." KeyDown="ChatInput_KeyDown" Background="#0A0714"/>
+                            <TextBox x:Name="ChatInput" Style="{DynamicResource AppleTextBox}" Tag="Escribe un mensaje al servidor..." KeyDown="ChatInput_KeyDown" Background="#05080D"/>
                             <Button Grid.Column="1" Content="➔" Width="40" Height="40" Style="{DynamicResource PlayButton}" Margin="10,0,0,0" Click="BtnSend_Click"/>
                         </Grid>
                     </Border>

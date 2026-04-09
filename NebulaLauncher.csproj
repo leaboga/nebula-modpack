@@ -7,12 +7,12 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>nebula.ico</ApplicationIcon>
-		<Version>2.1.0</Version>
-		<Authors>Leandro (Nebula Team)</Authors>
-		<Company>Nebula Launcher Project</Company>
-		<Product>Nebula Launcher</Product>
-		<Description>Stable Minecraft Nexus Hub with Mass Analyzer</Description>
-		<Copyright>Copyright © 2026 Nebula Project</Copyright>
+		<Version>2.5.0</Version>
+		<Authors>Leandro (KRAKEN Development)</Authors>
+		<Company>KRAKEN Ecosystem</Company>
+		<Product>KRAKEN Launcher</Product>
+		<Description>The Ultimate Abyssal Minecraft Hub</Description>
+		<Copyright>Copyright © 2026 KRAKEN Project</Copyright>
 		
 		<AssemblyVersion>2.1.0.0</AssemblyVersion>
 		<FileVersion>2.1.0.0</FileVersion>

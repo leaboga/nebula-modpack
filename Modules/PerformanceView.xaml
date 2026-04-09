@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -17,10 +17,10 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
             <TextBlock Text="Rendimiento y Estadísticas"
-                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
             <TextBlock Text="MÉTRICAS DE HARDWARE Y TIEMPO DE VUELO"
-                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -40,35 +40,35 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- CPU CARD -->
-                <Border Grid.Column="0" CornerRadius="20" Background="#12101E" BorderBrush="#1A1528" BorderThickness="1" Padding="20">
+                <Border Grid.Column="0" CornerRadius="20" Background="#0A0E14" BorderBrush="#0D151D" BorderThickness="1" Padding="20">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="⚡" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <TextBlock Text="CARGA CPU" FontSize="9" Foreground="#4A4266" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <TextBlock Text="CARGA CPU" FontSize="9" Foreground="#344A5B" FontWeight="Bold" HorizontalAlignment="Center"/>
                         <TextBlock x:Name="CpuValueText" Text="0%" FontSize="32" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
                 <!-- RAM CARD -->
-                <Border Grid.Column="2" CornerRadius="20" Background="#12101E" BorderBrush="#1A1528" BorderThickness="1" Padding="20">
+                <Border Grid.Column="2" CornerRadius="20" Background="#0A0E14" BorderBrush="#0D151D" BorderThickness="1" Padding="20">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="💾" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <TextBlock Text="MEMORIA RAM" FontSize="9" Foreground="#4A4266" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock x:Name="RamValueText" Text="0 MB" FontSize="32" FontWeight="Bold" Foreground="#7C3AED" HorizontalAlignment="Center"/>
+                        <TextBlock Text="MEMORIA RAM" FontSize="9" Foreground="#344A5B" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="RamValueText" Text="0 MB" FontSize="32" FontWeight="Bold" Foreground="#00F2FF" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
                 
                 <!-- STATS CARD (Play Time) -->
-                <Border Grid.Column="4" CornerRadius="20" Background="#12101E" BorderBrush="#1A1528" BorderThickness="1" Padding="20">
+                <Border Grid.Column="4" CornerRadius="20" Background="#0A0E14" BorderBrush="#0D151D" BorderThickness="1" Padding="20">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="⏱" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <TextBlock Text="TIEMPO TOTAL" FontSize="9" Foreground="#4A4266" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <TextBlock Text="TIEMPO TOTAL" FontSize="9" Foreground="#344A5B" FontWeight="Bold" HorizontalAlignment="Center"/>
                         <TextBlock x:Name="TotalPlayTimeText" Text="0h 0m" FontSize="32" FontWeight="Bold" Foreground="#F59E0B" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
             </Grid>
 
             <!-- ACTIVITY GRAPH PANEL -->
-            <Border Grid.Row="2" Background="#12101E" CornerRadius="20" BorderBrush="#1A1528" BorderThickness="1" Padding="20">
+            <Border Grid.Row="2" Background="#0A0E14" CornerRadius="20" BorderBrush="#0D151D" BorderThickness="1" Padding="20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -76,17 +76,17 @@
                     </Grid.RowDefinitions>
                     
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
-                        <TextBlock Text="TELEMETRÍA EN VIVO" FontSize="10" FontWeight="Bold" Foreground="#3D3560"/>
+                        <TextBlock Text="TELEMETRÍA EN VIVO" FontSize="10" FontWeight="Bold" Foreground="#1C2D3A"/>
                         <TextBlock Text="  ·  Consumo de recursos del sistema" FontSize="10" Foreground="#2A2440"/>
                     </StackPanel>
 
                     <!-- Graph Canvas -->
                     <Canvas Grid.Row="1" x:Name="GraphCanvas" ClipToBounds="True">
-                        <Line X1="0" Y1="100" X2="1000" Y2="100" Stroke="#1A1528" StrokeThickness="1" StrokeDashArray="4 2"/>
-                        <Line X1="0" Y1="150" X2="1000" Y2="150" Stroke="#1A1528" StrokeThickness="1" StrokeDashArray="4 2"/>
-                        <Polyline x:Name="ActivityLine" Stroke="#7C3AED" StrokeThickness="3" StrokeLineJoin="Round">
+                        <Line X1="0" Y1="100" X2="1000" Y2="100" Stroke="#0D151D" StrokeThickness="1" StrokeDashArray="4 2"/>
+                        <Line X1="0" Y1="150" X2="1000" Y2="150" Stroke="#0D151D" StrokeThickness="1" StrokeDashArray="4 2"/>
+                        <Polyline x:Name="ActivityLine" Stroke="#00F2FF" StrokeThickness="3" StrokeLineJoin="Round">
                             <Polyline.Effect>
-                                <DropShadowEffect Color="#7C3AED" Opacity="0.6" BlurRadius="12" ShadowDepth="0"/>
+                                <DropShadowEffect Color="#00F2FF" Opacity="0.6" BlurRadius="12" ShadowDepth="0"/>
                             </Polyline.Effect>
                         </Polyline>
                     </Canvas>

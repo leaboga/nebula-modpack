@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -12,10 +12,10 @@
         <StackPanel Margin="40,36,40,28">
             <!-- Header -->
             <TextBlock Text="Hostear Servidor"
-                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold"
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
             <TextBlock Text="CREA TU PROPIA GALAXIA LOCAL"
-                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"
                        Margin="0,0,0,28"/>
 
             <Grid>
@@ -27,16 +27,16 @@
                 <!-- Configuration column -->
                 <StackPanel Grid.Column="0" Margin="0,0,20,0">
                     <!-- Installation Card -->
-                    <Border Background="#12101E" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#1A1528" BorderThickness="1">
+                    <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
+                                <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
                                     <TextBlock Text="🛠️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
-                                <TextBlock Text="Configuración del Servidor" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Configuración del Servidor" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
-                            <TextBlock Text="RUTA DE INSTALACIÓN" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                            <TextBlock Text="RUTA DE INSTALACIÓN" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                             <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -53,12 +53,12 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                    <TextBlock Text="VERSIÓN DE MINECRAFT" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                                    <TextBlock Text="VERSIÓN DE MINECRAFT" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                                     <ComboBox x:Name="VersionComboBox" Style="{DynamicResource ModernComboBox}" Height="38"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                    <TextBlock Text="CARGADOR (LOADER)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                                    <TextBlock Text="CARGADOR (LOADER)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                                     <ComboBox x:Name="LoaderComboBox" Style="{DynamicResource ModernComboBox}" Height="38">
                                         <ComboBoxItem Content="Vanilla" Tag="vanilla" IsSelected="True"/>
                                         <ComboBoxItem Content="Fabric" Tag="fabric"/>
@@ -68,14 +68,14 @@
                                 </StackPanel>
                             </Grid>
 
-                            <TextBlock Text="MEMORIA RAM (GB)" Foreground="#4A4266" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                            <TextBlock Text="MEMORIA RAM (GB)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                              <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="60"/>
                                 </Grid.ColumnDefinitions>
                                 <Slider x:Name="RamSlider" Minimum="1" Maximum="32" IsSnapToTickEnabled="True" TickFrequency="1" Value="4" ValueChanged="RamSlider_ValueChanged" Style="{DynamicResource AppleSlider}"/>
-                                <TextBlock Grid.Column="1" x:Name="RamValueText" Text="4 GB" Foreground="#7C3AED" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" x:Name="RamValueText" Text="4 GB" Foreground="#00F2FF" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
 
                             <Button x:Name="BtnInstall" Content="⚡ INSTALAR SERVIDOR" Style="{DynamicResource PlayButton}" Height="48" Click="BtnInstall_Click"/>
@@ -83,13 +83,13 @@
                     </Border>
 
                     <!-- Control Card -->
-                    <Border Background="#12101E" CornerRadius="16" Padding="24,20" BorderBrush="#1A1528" BorderThickness="1">
+                    <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" BorderBrush="#0D151D" BorderThickness="1">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                 <Border Width="32" Height="32" CornerRadius="9" Background="#10B981">
                                     <TextBlock Text="🚀" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
-                                <TextBlock Text="Control de Ejecución" Foreground="#F0EAFF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Control de Ejecución" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
                             <Grid>
@@ -110,43 +110,43 @@
                                 <Button x:Name="BtnSyncMods" Grid.Column="1" Content="🔄 SINCRONIZAR MODS" Style="{DynamicResource SecondaryButton}" Height="36" Margin="8,0,0,0" Click="BtnSyncMods_Click"/>
                             </Grid>
                             
-                            <CheckBox x:Name="AutoRestartCheck" Content="Auto-reiniciar si falla" Foreground="#7B6FA0" FontSize="11" Margin="4,16,0,0" Style="{DynamicResource TrayToggle}"/>
-                            <CheckBox x:Name="GuiCheck" Content="Mostrar interfaz original de Minecraft Server" Foreground="#7B6FA0" FontSize="11" Margin="4,8,0,0" Style="{DynamicResource TrayToggle}"/>
+                            <CheckBox x:Name="AutoRestartCheck" Content="Auto-reiniciar si falla" Foreground="#6D8A99" FontSize="11" Margin="4,16,0,0" Style="{DynamicResource TrayToggle}"/>
+                            <CheckBox x:Name="GuiCheck" Content="Mostrar interfaz original de Minecraft Server" Foreground="#6D8A99" FontSize="11" Margin="4,8,0,0" Style="{DynamicResource TrayToggle}"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
 
                 <!-- Status column -->
                 <StackPanel Grid.Column="1">
-                    <Border Background="#12101E" CornerRadius="16" Padding="20" BorderBrush="#1A1528" BorderThickness="1" Margin="0,0,0,16">
+                    <Border Background="#0A0E14" CornerRadius="16" Padding="20" BorderBrush="#0D151D" BorderThickness="1" Margin="0,0,0,16">
                         <StackPanel>
-                            <TextBlock Text="ESTADO" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="0,0,0,12"/>
+                            <TextBlock Text="ESTADO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="0,0,0,12"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#3D3560" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="StatusText" Text="No instalado" Foreground="#F0EAFF" FontSize="14" FontWeight="Bold" Margin="10,0,0,0"/>
+                                <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#1C2D3A" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="StatusText" Text="No instalado" Foreground="#E6F9FF" FontSize="14" FontWeight="Bold" Margin="10,0,0,0"/>
                             </StackPanel>
                             
-                            <Border Height="1" Background="#1A1528" Margin="0,0,0,12"/>
+                            <Border Height="1" Background="#0D151D" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="JUGADORES" Foreground="#3D3560" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
-                            <TextBlock x:Name="PlayersText" Text="0 / 20" Foreground="#A78BFA" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,12"/>
+                            <TextBlock Text="JUGADORES" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="PlayersText" Text="0 / 20" Foreground="#70F9FF" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="USO DE CPU" Foreground="#3D3560" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock Text="USO DE CPU" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
                             <ProgressBar x:Name="CpuBar" Height="4" Value="0" Style="{DynamicResource AppleProgress}" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="USO DE RAM" Foreground="#3D3560" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
-                            <TextBlock x:Name="RamText" Text="0 MB / 4 GB" Foreground="#7B6FA0" FontSize="10" Margin="0,0,0,4" HorizontalAlignment="Right"/>
+                            <TextBlock Text="USO DE RAM" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="RamText" Text="0 MB / 4 GB" Foreground="#6D8A99" FontSize="10" Margin="0,0,0,4" HorizontalAlignment="Right"/>
                             <ProgressBar x:Name="RamBar" Height="4" Value="0" Style="{DynamicResource AppleProgress}"/>
                         </StackPanel>
                     </Border>
 
-                    <Border Background="#0A0714" CornerRadius="16" Padding="16" BorderBrush="#1A1528" BorderThickness="1" Height="250">
+                    <Border Background="#05080D" CornerRadius="16" Padding="16" BorderBrush="#0D151D" BorderThickness="1" Height="250">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="CONSOLA" Foreground="#3D3560" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="CONSOLA" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
                             <ScrollViewer Grid.Row="1" x:Name="ConsoleScroll">
                                 <TextBlock x:Name="ConsoleText" Foreground="#10B981" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Text="Esperando inicio..."/>
                             </ScrollViewer>

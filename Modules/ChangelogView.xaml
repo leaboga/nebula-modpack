@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0714" Offset="0"/>
-            <GradientStop Color="#0F0B1A" Offset="1"/>
+            <GradientStop Color="#05080D" Offset="0"/>
+            <GradientStop Color="#05080D" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
 
@@ -17,15 +17,15 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
             <TextBlock Text="Novedades"
-                       Foreground="#F0EAFF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
             <TextBlock Text="HISTORIAL DE CAMBIOS"
-                       Foreground="#3D3560" FontSize="9" FontWeight="Bold"/>
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <!-- Loading indicator -->
         <TextBlock x:Name="LoadingText" Grid.Row="1"
                    Text="⌛ Cargando novedades..."
-                   Foreground="#4A4266" FontSize="13"
+                   Foreground="#344A5B" FontSize="13"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <!-- Changelog list -->
