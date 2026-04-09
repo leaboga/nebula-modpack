@@ -1,80 +1,55 @@
-# KRAKEN Launcher - AI Handoff
+# KRAKEN Launcher Development Handoff
 
-Este documento resume el proceso de rebranding y rediseño total aplicado al repositorio `NebulaLauncher`.
+## Estado actual
 
-## Resumen del Rebranding
+- Version publicada mas reciente: `2.6.5`
+- Fecha de referencia: `2026-04-09`
+- Release rules obligatorias: `docs/RELEASE_RULES.md`
 
-- **Nuevo Nombre**: **KRAKEN** (The Abyssal Titan).
-- **Concepto**: Industrial, abisal, agresivo pero elegante. Abandono total de la temática espacial violeta.
-- **Paleta de Colores**:
-  - **Acento**: `#00F2FF` (Bioluminescent Cyan).
-  - **Fondo Principal**: `#05080D` (Deep Abyssal Black).
-  - **Superficies**: `#0D151D` y `#16212B` (Slate Industrial).
-  - **Bordes**: `#1E2C38`.
-- **Iconografía**: Uso de Squid/Kraken (🦑), Anclas (⚓) y barcos (⛴️) en lugar de galaxias y cohetes.
+## Resumen reciente
 
-## Decisiones Visuales Clave
+La base del launcher fue reforzada en varias capas:
 
-1. **Geometría Industrial**: Se redujeron los `CornerRadius` de 20-22px a 8-12px para dar un aspecto más sólido y profesional.
-2. **Contraste Abisal**: La paleta se movió hacia azules profundos y cianes brillantes para simular la bioluminiscencia en las profundidades.
-3. **Jerarquía de Textos**: Se actualizaron todos los labels para usar un tono más "militar/comando" (ej. "Comandante en el Deck", "Protocolo Leviatán").
-4. **Fondo Dinámico**: Se actualizaron las URLs de Unsplash en `MainWindow.xaml.cs` para mostrar océanos profundos según la hora del día.
+- `PathService` centraliza rutas operativas del launcher.
+- `LoggerService` centraliza logs persistentes y reduce dependencia de logging local ad hoc.
+- `KrakenStrings` centraliza parte del copy visible para mejorar consistencia y facilitar mantenimiento.
+- El sistema de updates/publicacion fue endurecido para evitar loops e inconsistencias entre version local, binario publicado y release de GitHub.
 
-## Archivos Principales Tocados
+## Version 2.6.5
 
-- `Themes/Styles.xaml`: Reescritura total del sistema de tokens y pinceles.
-- `MainWindow.xaml`: Rediseño de la estructura visual, logos y efectos de brillo.
-- `MainWindow.xaml.cs`: Actualización de lógica de fondos, versiones (v2.6.3) y logs.
-- `NebulaLauncher.csproj`: Actualización de metadatos del producto y autor.
-- `App.xaml`: Cambio de tooltip en el tray icon.
-- `Modules/*.xaml`: Aplicación global de la nueva identidad visual.
+Esta version se describe como una pasada de estabilizacion UX/UI enfocada en discovery y consistencia.
 
-## Deuda Pendiente / Siguientes Pasos
+Cambios reportados:
+- mejoras en Boveda / Mod Hub y Modpacks con tarjetas mas ricas en metadata
+- estados de instalacion mas claros (`INSTALADO`, `DISPONIBLE`, etc.)
+- mejor contexto visual del perfil activo (version, loader, ruta de instancia)
+- mayor unificacion de headers, spacing y jerarquia de texto
+- mejoras en feedback de carga
 
-1. **Icono del Ejecutable**: El archivo `nebula.ico` sigue siendo el icono físico del .exe. Sería ideal generar un `kraken.ico` para completar la transformación.
-2. **Nombres de Archivos**: Internamente, muchos archivos y namespaces siguen llamándose `NebulaLauncher`.
-3. **Optimización de Recursos**: Mejorar el manejo de memoria en el feed de Social si el tráfico aumenta.
-4. **Validación de Assets**: Automatizar aún más la verificación de assets en el CI si se implementa.
+## Reglas operativas obligatorias
 
-## Reglas de Lanzamiento
-Se ha establecido el archivo `docs/RELEASE_RULES.md` como ley fundamental para cualquier cambio que afecte la versión o la publicación del binario. **Cualquier agente debe leerlo antes de actuar.**
+Antes de cualquier tarea que implique release, update o cambios que deban llegar al usuario final por auto-update, revisar:
 
-## ¿Cómo validar los cambios?
+- [RELEASE_RULES.md](/C:/Users/Leandro/source/repos/NebulaLauncher/docs/RELEASE_RULES.md)
 
-1. Abrir el proyecto en Visual Studio.
-2. Compilar en modo `Debug` o `Release`.
-3. Ejecutar y verificar que la ventana principal muestre "KRAKEN" y la paleta cian.
-4. Navegar por los módulos (Modpack Hub, Blue Map, etc.) para asegurar que la paleta es consistente.
+Punto critico agregado:
+- si se hacen cambios nuevos que el usuario deba recibir en el launcher, es obligatorio subir una nueva version superior a la publicada
+- no dejar cambios importantes sobre la misma version ya publicada
 
-## Instrucciones para publicar en GitHub
+Ejemplo:
+- si la version publicada actual es `2.6.4` y se hacen cambios nuevos, la siguiente release debe ser `2.6.5` o la que corresponda
 
-Para subir estos cambios al repositorio:
+## Riesgos / deuda pendiente
 
-```bash
-# 1. Verificar estado
-git status
+- `MainWindow.xaml.cs` sigue siendo un archivo grande y todavia conviene seguir extrayendo responsabilidades.
+- Conviene expandir `KrakenStrings` para cubrir mas textos visibles y evitar hardcodes dispersos.
+- Mod Hub y Modpack Hub probablemente necesiten una pasada funcional adicional para filtros, compatibilidad y estados.
+- Revisar si quedan textos con encoding raro en descripciones largas o contenido proveniente de APIs externas.
 
-# 2. Agregar cambios
-git add .
+## Proximos pasos sugeridos
 
-# 3. Commit con mensaje claro
-git commit -m "Rebranding radical: Nebula -> KRAKEN (Abyssal Theme v2.6.3)"
-
-# 4. Push a la rama actual (ej. master/main)
-git push origin master
-```
-
-## Publicaciones Recientes
-
-- **v2.6.4 (Actual)**: [Hardening Arquitectónico](https://github.com/leaboga/nebula-modpack/releases/tag/v2.6.4)
-  - Centralización total de rutas en `PathService`.
-  - Implementación de `LoggerService` hilo-seguro para diagnóstico global.
-  - Unificación visual de Headers y Márgenes en todos los módulos.
-  - Lexicón centralizado en `KrakenStrings` para consistencia lingüística.
-- **v2.6.3**: [Interfaz Refinada](https://github.com/leaboga/nebula-modpack/releases/tag/v2.6.3)
-  - Pulido total de UX/UI y traducción completa a español.
-  - Implementación de `RELEASE_RULES.md` para estandarizar despliegues.
-  - Hardening de seguridad y metadatos de integridad.
-- **v2.6.2**: Estabilización de núcleo y blindaje de versionado.
-- **v2.6.1**: Hotfix de bucle de actualización.
-- **v2.5.0**: Rebranding radical Nebula -> KRAKEN.
+1. Mejorar Mod Hub con filtros mas claros, mejor metadata y mejores estados vacios/error/loading.
+2. Mejorar Modpack Hub con filtros por version, loader y categoria.
+3. Seguir reduciendo deuda tecnica en `MainWindow.xaml.cs`.
+4. Expandir `KrakenStrings` y centralizar mas copy del producto.
+5. Si se publican nuevos cambios, respetar `docs/RELEASE_RULES.md` y bump-ear version obligatoriamente.
