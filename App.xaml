@@ -11,7 +11,7 @@
 
             <!-- Restaurar el recurso del Icono de Bandeja -->
             <tb:TaskbarIcon x:Key="TrayIcon"
-                            IconSource="/nebula.ico"
+                            IconSource="/kraken.ico"
                             ToolTipText="KRAKEN Launcher">
                 <tb:TaskbarIcon.ContextMenu>
                     <ContextMenu>

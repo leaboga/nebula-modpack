@@ -1,4 +1,4 @@
-<Window Icon="/nebula.ico"
+<Window Icon="/kraken.ico"
         x:Class="NebulaLauncher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

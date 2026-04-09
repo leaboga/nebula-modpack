@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.6.6` (objetivo de esta tanda)
+- Version publicada mas reciente: `2.6.7` (objetivo de esta tanda)
 - Fecha de referencia: `2026-04-09`
 - Release rules obligatorias: `docs/RELEASE_RULES.md`
 
@@ -49,6 +49,18 @@ Esta sesion agrega una nueva pasada enfocada en mejoras funcionales sin duplicar
   - exportar reporte tecnico a archivo
   - abrir `launcher.log` desde la UI
 
+## Version 2.6.7
+
+Esta sesion corrige identidad tecnica del binario para que el ejecutable y el asset ya no salgan con nombre Nebula:
+
+- `AssemblyName` cambiado para generar `KrakenLauncher.exe`
+- `app.manifest` actualizado a `KrakenLauncher.app`
+- updater adaptado para reutilizar el nombre real del `.exe` actual
+- auto-update reactivado para que una version anterior descargue y aplique la release nueva sin depender del click manual
+- seleccion de asset endurecida para priorizar `KrakenLauncher.exe` sin romper compatibilidad con releases viejas
+- icono de aplicacion y de escritorio actualizado a `kraken.ico`
+- script de Inno Setup ajustado a `KRAKEN Launcher` y `KrakenLauncher.exe`
+
 Validacion realizada:
 - compilacion `Release` correcta a carpeta temporal separada (`temp_build_verify`) para no cerrar el launcher que estaba abierto
 - el build normal a `bin\\Release` fallo solo por archivo bloqueado del ejecutable en uso, no por errores de codigo
@@ -79,4 +91,4 @@ Ejemplo:
 2. Mejorar Modpack Hub con filtros por version, loader y categoria.
 3. Seguir reduciendo deuda tecnica en `MainWindow.xaml.cs`.
 4. Expandir `KrakenStrings` y centralizar mas copy del producto.
-5. Si se publican cambios nuevos despues de esta tanda, respetar `docs/RELEASE_RULES.md`, bump-ear version y generar nueva release superior a `2.6.6`.
+5. Si se publican cambios nuevos despues de esta tanda, respetar `docs/RELEASE_RULES.md`, bump-ear version y generar nueva release superior a `2.6.7`.
