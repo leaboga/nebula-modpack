@@ -152,6 +152,33 @@ namespace NebulaLauncher.Modules
             }
         }
 
+        private void BtnCopyPath_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedPath == null || !File.Exists(_selectedPath)) return;
+            Clipboard.SetText(_selectedPath);
+            MessageBox.Show("Ruta copiada al portapapeles.", "KRAKEN Capturas");
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedPath == null || !File.Exists(_selectedPath)) return;
+            if (MessageBox.Show($"Eliminar '{Path.GetFileName(_selectedPath)}'?", "KRAKEN Capturas", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                return;
+
+            try
+            {
+                File.Delete(_selectedPath);
+                _selectedPath = null;
+                FullscreenOverlay.Visibility = Visibility.Collapsed;
+                LoadScreenshots();
+                MessageBox.Show("Captura eliminada.", "KRAKEN Capturas");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo eliminar la captura: " + ex.Message, "KRAKEN Capturas");
+            }
+        }
+
         private void RefreshBtn_Click(object sender, RoutedEventArgs e) => LoadScreenshots();
         private void CloseFlyout_Click(object sender, RoutedEventArgs e) => FullscreenOverlay.Visibility = Visibility.Collapsed;
 

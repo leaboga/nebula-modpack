@@ -64,7 +64,9 @@
                     <TextBlock x:Name="FullscreenLabel" Foreground="White" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,4">
                         <Button Content="\uD83D\uDCCB Copiar al Portapapeles" Style="{DynamicResource PlayButton}" Height="34" Padding="16,0" Click="BtnCopy_Click" Margin="0,0,8,0"/>
+                        <Button Content="Ruta" Style="{DynamicResource SecondaryButton}" Height="34" Padding="16,0" Click="BtnCopyPath_Click" Margin="0,0,8,0"/>
                         <Button Content="\uD83D\uDCC1 Ver en Carpeta" Style="{DynamicResource SecondaryButton}" Height="34" Padding="16,0" Click="BtnOpenInFolder_Click"/>
+                        <Button Content="Eliminar" Style="{DynamicResource SecondaryButton}" Height="34" Padding="16,0" Margin="8,0,0,0" Click="BtnDelete_Click"/>
                     </StackPanel>
                     <TextBlock Text="Click para cerrar" Foreground="#344A5B" FontSize="10" TextAlignment="Center"/>
                 </StackPanel>

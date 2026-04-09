@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -18,6 +19,10 @@ namespace NebulaLauncher.Services
         public List<string> Categories { get; set; } = new();
         public string DateModified { get; set; } = "";
         public string DisplayDownloads => (Downloads >= 1000000) ? (Downloads / 1000000.0).ToString("0.#") + "M" : (Downloads >= 1000) ? (Downloads / 1000.0).ToString("0.#") + "K" : Downloads.ToString();
+        public bool IsFavorite { get; set; }
+        public bool IsRecent { get; set; }
+        public string FavoriteGlyph => IsFavorite ? "★" : "☆";
+        public string CategoryLabel => Categories.Count > 0 ? string.Join(" · ", Categories.Take(2)) : "General";
     }
 
     public class ModrinthService

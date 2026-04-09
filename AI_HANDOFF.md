@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.6.5`
+- Version publicada mas reciente: `2.6.6` (objetivo de esta tanda)
 - Fecha de referencia: `2026-04-09`
 - Release rules obligatorias: `docs/RELEASE_RULES.md`
 
@@ -25,6 +25,33 @@ Cambios reportados:
 - mejor contexto visual del perfil activo (version, loader, ruta de instancia)
 - mayor unificacion de headers, spacing y jerarquia de texto
 - mejoras en feedback de carga
+
+## Version 2.6.6
+
+Esta sesion agrega una nueva pasada enfocada en mejoras funcionales sin duplicar features ya existentes:
+
+- nuevo `DiscoveryStateService` para persistir favoritos y recientes en Mod Hub y Modpack Hub
+- Mod Hub mejorado con:
+  - filtro `Solo favoritos`
+  - orden por favoritos y recientes
+  - marcador visual de favoritos y recientes en cards
+  - metadata de descargas mas visible
+- Modpack Hub mejorado con:
+  - filtro `Solo favoritos`
+  - orden por descargas, favoritos, recientes y nombre
+  - badges de favorito/reciente
+  - mejor contexto del perfil activo en el header
+  - estado vacio explicativo
+- Capturas mejoradas con:
+  - copiar ruta
+  - eliminar captura desde el overlay
+- Diagnostico mejorado con:
+  - exportar reporte tecnico a archivo
+  - abrir `launcher.log` desde la UI
+
+Validacion realizada:
+- compilacion `Release` correcta a carpeta temporal separada (`temp_build_verify`) para no cerrar el launcher que estaba abierto
+- el build normal a `bin\\Release` fallo solo por archivo bloqueado del ejecutable en uso, no por errores de codigo
 
 ## Reglas operativas obligatorias
 
@@ -52,4 +79,4 @@ Ejemplo:
 2. Mejorar Modpack Hub con filtros por version, loader y categoria.
 3. Seguir reduciendo deuda tecnica en `MainWindow.xaml.cs`.
 4. Expandir `KrakenStrings` y centralizar mas copy del producto.
-5. Si se publican nuevos cambios, respetar `docs/RELEASE_RULES.md` y bump-ear version obligatoriamente.
+5. Si se publican cambios nuevos despues de esta tanda, respetar `docs/RELEASE_RULES.md`, bump-ear version y generar nueva release superior a `2.6.6`.

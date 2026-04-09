@@ -29,6 +29,7 @@
             <Grid Grid.Row="1" Margin="0,0,0,16">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Button Content="Refrescar Manifiesto" Style="{DynamicResource SecondaryButton}" Height="34" Click="BtnRefresh_Click"/>
+                    <CheckBox x:Name="FavoritesOnlyCheck" Content="Solo favoritos" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="14,0,0,0" Checked="FavoritesOnly_Changed" Unchecked="FavoritesOnly_Changed"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -43,7 +44,8 @@
                     <ComboBox x:Name="SortCombo" Width="140" Height="36" Style="{DynamicResource ModernComboBox}" Margin="12,0,0,0" SelectionChanged="SortCombo_SelectionChanged">
                         <ComboBoxItem Content="Relevancia" Tag="relevance" IsSelected="True"/>
                         <ComboBoxItem Content="Descargas" Tag="downloads"/>
-                        <ComboBoxItem Content="Recientes" Tag="newest"/>
+                        <ComboBoxItem Content="Recientes" Tag="recent"/>
+                        <ComboBoxItem Content="Favoritos" Tag="favorites"/>
                     </ComboBox>
                 </StackPanel>
             </Grid>
@@ -118,6 +120,7 @@
                                                     
                                                     <!-- Icon & Badge -->
                                                     <Grid>
+                                                        <Button Content="{Binding FavoriteGlyph}" Tag="{Binding ProjectId}" Click="FavoriteBtn_Click" Width="28" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource SecondaryButton}" FontSize="13" Padding="0" Margin="0,0,0,6"/>
                                                         <Border Width="90" Height="90" CornerRadius="24" Background="#05080D">
                                                             <Image Source="{Binding IconUrl}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
                                                         </Border>
@@ -126,10 +129,17 @@
                                                     <StackPanel Grid.Row="1" Margin="0,14,0,0">
                                                         <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="44"/>
                                                         <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
+                                                        <TextBlock Text="{Binding MetadataLine}" Foreground="#6D8A99" FontSize="10" HorizontalAlignment="Center" Margin="0,0,0,4"/>
                                                         
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4">
                                                             <Border Background="{Binding StatusBadgeBrush}" CornerRadius="4" Padding="6,2" Margin="0,0,6,0">
                                                                 <TextBlock Text="{Binding StatusBadgeText}" Foreground="{Binding StatusBadgeTextBrush}" FontSize="8" FontWeight="Black"/>
+                                                            </Border>
+                                                            <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsFavorite, Converter={StaticResource BoolToVis}}">
+                                                                <TextBlock Text="FAVORITO" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
+                                                            </Border>
+                                                            <Border Background="#1A60A5FA" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsRecent, Converter={StaticResource BoolToVis}}">
+                                                                <TextBlock Text="RECIENTE" Foreground="#93C5FD" FontSize="8" FontWeight="Black"/>
                                                             </Border>
                                                             <Border Background="#1A10B981" CornerRadius="4" Padding="6,2">
                                                                 <TextBlock Text="COINCIDENCIA" Foreground="#10B981" FontSize="8" FontWeight="Black"/>

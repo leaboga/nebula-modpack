@@ -28,6 +28,23 @@ namespace NebulaLauncher.Modules
         public string Author { get; set; } = "";
         public string IconUrl { get; set; } = "";
         public string DisplayDownloads { get; set; } = "";
+        public string MetadataLine => $"{DisplayDownloads} descargas";
+
+        private bool _isFavorite;
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set { _isFavorite = value; OnPropertyChanged(); OnPropertyChanged(nameof(FavoriteGlyph)); }
+        }
+
+        private bool _isRecent;
+        public bool IsRecent
+        {
+            get => _isRecent;
+            set { _isRecent = value; OnPropertyChanged(); }
+        }
+
+        public string FavoriteGlyph => IsFavorite ? "★" : "☆";
 
         private bool _isInstalled;
         public bool IsInstalled 
@@ -107,6 +124,7 @@ namespace NebulaLauncher.Modules
         private string _currentType = "mod";
         private bool _showInstalled = false;
         private readonly ObservableCollection<ModrinthItem> _results = new ObservableCollection<ModrinthItem>();
+        private readonly DiscoveryStateService _discoveryState = DiscoveryStateService.Instance;
         private bool _isSearching = false;
 
         private int _currentPage = 1;
@@ -292,9 +310,21 @@ namespace NebulaLauncher.Modules
                         Author = author,
                         IconUrl = string.IsNullOrEmpty(icon) ? "pack://application:,,,/nebula.ico" : icon,
                         DisplayDownloads = FormatDownloads(dl),
-                        IsInstalled = installed
+                        IsInstalled = installed,
+                        IsFavorite = _discoveryState.IsFavoriteMod(pid),
+                        IsRecent = _discoveryState.IsRecentMod(pid)
                     });
                 }
+
+                if (FavoritesOnlyCheck?.IsChecked == true)
+                    tempResults = tempResults.Where(x => x.IsFavorite).ToList();
+
+                if (sort == "downloads")
+                    tempResults = tempResults.OrderByDescending(x => ParseDownloadCount(x.DisplayDownloads)).ToList();
+                else if (sort == "favorites")
+                    tempResults = tempResults.OrderByDescending(x => x.IsFavorite).ThenBy(x => x.Title).ToList();
+                else if (sort == "recent")
+                    tempResults = tempResults.OrderByDescending(x => x.IsRecent).ThenByDescending(x => ParseDownloadCount(x.DisplayDownloads)).ToList();
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -331,6 +361,8 @@ namespace NebulaLauncher.Modules
             try
             {
                 await InstallModAndDependenciesAsync(pid, item);
+                _discoveryState.MarkRecentMod(pid);
+                item.IsRecent = true;
             }
             catch (Exception ex) 
             { 
@@ -471,6 +503,9 @@ namespace NebulaLauncher.Modules
         {
             if (sender is FrameworkElement b && b.DataContext is ModrinthItem item)
             {
+                _discoveryState.MarkRecentMod(item.ProjectId);
+                item.IsRecent = true;
+
                 // Detail Flyout (v1.7.0 simplificado)
                 DetailTitle.Text = item.Title;
                 DetailAuthor.Text = "por " + item.Author;
@@ -604,7 +639,28 @@ namespace NebulaLauncher.Modules
         {
             SearchBox.Text = "";
             if (CategoryList != null) CategoryList.SelectedIndex = 0;
+            if (FavoritesOnlyCheck != null) FavoritesOnlyCheck.IsChecked = false;
             _ = SearchModrinth("", true);
+        }
+
+        private void FavoritesOnly_Changed(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded && !_isSearching) _ = SearchModrinth(SearchBox?.Text ?? "", true);
+        }
+
+        private void FavoriteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            if (sender is not Button btn || btn.Tag is not string projectId) return;
+
+            var item = _results.FirstOrDefault(x => x.ProjectId == projectId);
+            if (item == null) return;
+
+            _discoveryState.ToggleFavoriteMod(projectId);
+            item.IsFavorite = _discoveryState.IsFavoriteMod(projectId);
+
+            if (FavoritesOnlyCheck?.IsChecked == true && !item.IsFavorite)
+                _results.Remove(item);
         }
 
         private string GetInstallDir() => _currentType switch { "shader" => Path.Combine(_gameFolder, "shaderpacks"), "resourcepack" => Path.Combine(_gameFolder, "resourcepacks"), _ => Path.Combine(_gameFolder, "mods") };
@@ -659,6 +715,15 @@ namespace NebulaLauncher.Modules
         }
 
         private string FormatDownloads(long n) => n switch { >= 1_000_000 => $"{n / 1000000.0:F1}M", >= 1000 => $"{n / 1000.0:F0}K", _ => n.ToString() };
+        
+        private static double ParseDownloadCount(string raw)
+        {
+            if (string.IsNullOrWhiteSpace(raw)) return 0;
+            raw = raw.Trim().ToUpperInvariant();
+            if (raw.EndsWith("M") && double.TryParse(raw[..^1], out double m)) return m * 1_000_000;
+            if (raw.EndsWith("K") && double.TryParse(raw[..^1], out double k)) return k * 1_000;
+            return double.TryParse(raw, out double n) ? n : 0;
+        }
         
         private void SetLoading(bool loading)
         {

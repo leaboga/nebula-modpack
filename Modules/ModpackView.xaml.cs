@@ -17,11 +17,17 @@ namespace NebulaLauncher.Modules
         private readonly ModrinthService _modrinth = new();
         private readonly MainWindow _mainWindow;
         private readonly HttpClient _http = new();
+        private readonly DiscoveryStateService _discoveryState = DiscoveryStateService.Instance;
 
         public ModpackView()
         {
             InitializeComponent();
             _mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (_mainWindow.CurrentProfile != null)
+            {
+                var profile = _mainWindow.CurrentProfile;
+                ProfileContextLabel.Text = $"Perfil activo: {profile.Name} · {profile.Version} · {profile.LoaderType}";
+            }
             LoadFeaturedModpacks();
         }
 
@@ -40,6 +46,11 @@ namespace NebulaLauncher.Modules
             if (this.IsLoaded) await ExecuteSearch();
         }
 
+        private async void FavoritesOnly_Changed(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded) await ExecuteSearch();
+        }
+
         private async Task ExecuteSearch()
         {
             if (ModpackList == null) return;
@@ -48,9 +59,26 @@ namespace NebulaLauncher.Modules
             string version = (FilterVersion?.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "";
             string loader = (FilterLoader?.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "";
             string category = (FilterCategory?.SelectedItem as ListBoxItem)?.Tag?.ToString() ?? "all";
+            string sort = (SortCombo?.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "downloads";
 
             var packs = await _modrinth.SearchModpacks(query, version, loader, category);
-            ModpackList.ItemsSource = packs.OrderByDescending(p => p.Downloads).ToList();
+            foreach (var pack in packs)
+            {
+                pack.IsFavorite = _discoveryState.IsFavoriteModpack(pack.ProjectId);
+                pack.IsRecent = _discoveryState.IsRecentModpack(pack.ProjectId);
+            }
+
+            if (FavoritesOnlyCheck?.IsChecked == true)
+                packs = packs.FindAll(p => p.IsFavorite);
+
+            ModpackList.ItemsSource = sort switch
+            {
+                "favorites" => packs.OrderByDescending(p => p.IsFavorite).ThenBy(p => p.Title).ToList(),
+                "recent" => packs.OrderByDescending(p => p.IsRecent).ThenByDescending(p => p.Downloads).ToList(),
+                "title" => packs.OrderBy(p => p.Title).ToList(),
+                _ => packs.OrderByDescending(p => p.Downloads).ToList()
+            };
+            EmptyState.Visibility = ModpackList.Items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
@@ -116,6 +144,7 @@ namespace NebulaLauncher.Modules
                         _mainWindow.Session.Profiles.Add(newProfile);
                         _mainWindow.Session.CurrentProfileId = newProfile.Id;
                         _mainWindow.GuardarSesion();
+                        _discoveryState.MarkRecentModpack(projectId);
 
                         string instanceFolder = Path.Combine(PathService.InstancesFolder, newProfile.Id);
                         Directory.CreateDirectory(instanceFolder);
@@ -171,6 +200,13 @@ namespace NebulaLauncher.Modules
                     LoadingOverlay.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+
+        private async void BtnFavorite_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button btn || btn.Tag is not string projectId) return;
+            _discoveryState.ToggleFavoriteModpack(projectId);
+            await ExecuteSearch();
         }
     }
 }
