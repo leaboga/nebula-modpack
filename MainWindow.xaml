@@ -113,8 +113,8 @@
                                     <TextBlock Text="🦑" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
                                 </Border>
                                 <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black" Tracking="2"/>
-                                    <TextBlock Text="THE ABYSSAL TITAN" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Tracking="1"/>
+                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black"/>
+                                    <TextBlock Text="THE ABYSSAL TITAN" Foreground="#344A5B" FontSize="9" FontWeight="Bold"/>
                                 </StackPanel>
                             </StackPanel>
 
@@ -144,61 +144,61 @@
                                  </StackPanel>
                             </Border>
 
-                            <TextBlock Text="MENÚ PRINCIPAL" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
-                            <RadioButton Content="  🏠  Inicio" Style="{DynamicResource ToggleTab}" IsChecked="True" GroupName="Nav" Checked="Nav_Home_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  📰  Novedades" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Changelog_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  ⚙️  Configuración" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Settings_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  🛡️  Administrar" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModManager_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  📊  Rendimiento" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Perf_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  📸  Capturas" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Screenshots_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  🛸  Mod Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  📦  Modpacks Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  🚑  Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  🌍  Deep Map" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_BlueMap_Checked" x:Name="NavBlueMap" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  👥  Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  ☁️  Servicio Hosting" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
-                            <RadioButton Content="  💻  Hostear Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked" HorizontalAlignment="Stretch" Margin="0,2"/>
+                            <!-- NAVIGATION -->
+                            <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
+                            
+                            <RadioButton Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
+                            <RadioButton Content="Biblioteca de Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked"/>
+                            <RadioButton Content="Administrar Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModManager_Checked"/>
+                            <RadioButton Content="Modpack Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked"/>
+                            <RadioButton Content="Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked"/>
 
-                            <Border Height="1" Margin="4,24,4,24" Background="#0D151D"/>
+                            <Border Height="1" Margin="4,20,4,20" Background="{DynamicResource BorderBrush}"/>
 
-                            <TextBlock Text="ESTADO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
-                            <Border Background="#0A0E14" CornerRadius="12" Padding="12,12" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
+                            <TextBlock Text="SERVICIOS" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
+                            <RadioButton Content="Deep Map" Style="{DynamicResource ToggleTab}" GroupName="Nav" x:Name="NavBlueMap" Checked="Nav_BlueMap_Checked"/>
+                            <RadioButton Content="Servidor Local" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked"/>
+                            <RadioButton Content="Infraestructura" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked"/>
+                            <RadioButton Content="Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked"/>
+                            <RadioButton Content="Rendimiento" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Perf_Checked"/>
+                            <RadioButton Content="Novedades" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Changelog_Checked"/>
+
+                            <Border Height="1" Margin="4,24,4,24" Background="{DynamicResource BorderBrush}"/>
+
+                            <!-- SERVER STATUS (Integrated) -->
+                            <Border Style="{DynamicResource GlassPanel}" Background="#0A0E14" Padding="14,12" Margin="4,0,4,16">
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="#EF4444" VerticalAlignment="Center"/>
-                                        <TextBlock x:Name="StatusText" Text="Sin conexión" Foreground="#6D8A99" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="#EF4444" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="StatusText" Text="DESCONECTADO" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontWeight="Black" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                    <TextBlock x:Name="PlayersText" Text="" Foreground="#344A5B" FontSize="10" Margin="18,4,0,0"/>
+                                    <TextBlock x:Name="PlayersText" Text="Sin datos de red" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" Margin="16,0,0,0"/>
                                 </StackPanel>
                             </Border>
 
-                            <Button x:Name="CopyIpBtn" Content="📋  Copiar IP" Style="{DynamicResource SecondaryButton}" Height="32" Click="CopyIpBtn_Click" FontSize="11" Margin="0,0,0,24"/>
+                            <Button x:Name="CopyIpBtn" Content="Copiar Dirección IP" Style="{DynamicResource SecondaryButton}" Height="36" Click="CopyIpBtn_Click" Margin="4,0,4,24"/>
                         </StackPanel>
                     </ScrollViewer>
 
                     <StackPanel Grid.Row="1" Margin="20,0,20,20">
-                        <Border Background="#0A0E14" CornerRadius="8" Padding="12,8" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
+                        <Border Background="#0A0E14" CornerRadius="10" Padding="12,10" Margin="0,0,0,16" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                             <StackPanel>
-                                <TextBlock Text="ESTADÍSTICAS" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="MÉTRICAS" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black" Margin="0,0,0,8"/>
                                 <Grid>
-                                    <TextBlock x:Name="TotalTimeLabel" Text="0h 0m" Foreground="#C4B5FD" FontSize="11" FontWeight="SemiBold"/>
-                                    <TextBlock x:Name="SessionCountLabel" Text="0 sesiones" Foreground="#344A5B" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TotalTimeLabel" Text="0h 0m" Foreground="White" FontSize="12" FontWeight="Black"/>
+                                    <TextBlock x:Name="SessionCountLabel" Text="0 SESIONES" Foreground="{DynamicResource AccentBrush}" FontSize="8" FontWeight="Black" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
-                                <Border Height="1" Background="#0D151D" Margin="0,6"/>
-                                <TextBlock x:Name="InstalledVersionText" Text="Sin datos" Foreground="#6D8A99" FontSize="10"/>
                             </StackPanel>
                         </Border>
 
-                        <TextBlock x:Name="UpdateBadge" Text="💎 Core Update Ready" Foreground="#00F2FF" FontSize="10" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="VersionFooterLabel" Text="v2.5.0 KRAKEN Engine" Foreground="#1E2C38" FontSize="10" FontWeight="Bold"/>
+                        <TextBlock x:Name="UpdateBadge" Text="CORE UPDATE PENDING" Foreground="{DynamicResource AccentBrush}" FontSize="9" FontWeight="Black" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="4,0,0,8"/>
+                        <TextBlock x:Name="VersionFooterLabel" Text="KRAKEN ENGINE v2.6.0" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="4,0,0,0"/>
 
-                        <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,12,0,12">
-                            <TextBlock Text="COMANDOS ADMIN" Foreground="#EF4444" FontSize="9" FontWeight="Black" Margin="4,0,0,8"/>
-                            <Button Content="🚀 Publicar Update" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
-                            <CheckBox x:Name="SkipConfigSyncCheck" Content="Omitir Sincro Configs" Foreground="#EF4444" FontSize="10" Margin="4,0,0,8" Click="SkipConfigSyncCheck_Click"/>
-                            <Button Content="🛠️ Reparar Pack" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="RepararModpack_Click" Margin="0,0,0,6"/>
-                            <Button Content="🗑️ Limpiar Caché" Style="{DynamicResource SecondaryButton}" Height="30" FontSize="11" Click="LimpiarCache_Click" Margin="0,0,0,6"/>
-                        </StackPanel>                        <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
+                        <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,16,0,0">
+                            <TextBlock Text="ADMINISTRACIÓN" Foreground="#FF4B4B" FontSize="8" FontWeight="Black" Margin="4,0,0,8"/>
+                            <Button Content="Publicar Actualización" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
+                        </StackPanel>
+                        <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -206,28 +206,39 @@
             <!-- MAIN PANEL -->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="40"/> <!-- Titlebar -->
+                    <RowDefinition Height="60"/> <!-- Context Header -->
+                    <RowDefinition Height="*"/>  <!-- Content Area -->
+                    <RowDefinition Height="120"/> <!-- Bottom Action Bar -->
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center">
-                        <Button Content="—" Style="{DynamicResource TitleBarButton}" Width="32" Height="32" FontSize="14" Click="MinimizeButton_Click"/>
-                        <Button Content="🗖" Style="{DynamicResource TitleBarButton}" Width="32" Height="32" FontSize="14" Click="ToggleMaximize_Click" ToolTip="Maximizar/Restaurar"/>
-                        <Button Content="✕" Style="{DynamicResource TitleBarButton}" Width="32" Height="32" FontSize="14" Click="CloseButton_Click" x:Name="MainCloseBtn"/>
+                        <Button Content="—" Style="{DynamicResource TitleBarButton}" Click="MinimizeButton_Click"/>
+                        <Button Content="🗖" Style="{DynamicResource TitleBarButton}" Click="ToggleMaximize_Click" ToolTip="Maximizar/Restaurar"/>
+                        <Button Content="✕" Style="{DynamicResource TitleBarButton}" Click="CloseButton_Click" x:Name="MainCloseBtn"/>
                     </StackPanel>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="32,0,32,0">
-                    <Border Background="#0D0A1ACC" CornerRadius="12" BorderBrush="#0D151D" BorderThickness="1">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Opacity="0.3" BlurRadius="50" ShadowDepth="10"/>
-                        </Border.Effect>
+                <!-- 2. Context Header (Breadcrumbs/Status) -->
+                <Grid Grid.Row="1" Margin="32,0">
+                    <StackPanel VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CurrentViewLabel" Text="CENTRO DE COMANDO" Foreground="{DynamicResource AccentBrush}" FontSize="10" FontWeight="Black" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <Border Width="1" Height="10" Background="{DynamicResource BorderBrush}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ActiveProfileLabel" Text="Perfil Predeterminado" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock x:Name="ViewTitleLabel" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- 3. Content Area -->
+                <Grid Grid.Row="2" Margin="32,4,32,0">
+                    <Border Style="{DynamicResource GlassPanel}">
                         <Grid ClipToBounds="True">
                              <!-- HOME VIEW -->
                             <ScrollViewer x:Name="HomeView" VerticalScrollBarVisibility="Auto" Visibility="Visible">
-                                <StackPanel Margin="32,28">
+                                <StackPanel Margin="32,24">
                                     <TextBlock Text="Sincronización de Sistemas en curso..." Foreground="#344A5B" FontSize="12" Margin="0,0,0,4"/>
                                     <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="32" FontWeight="Black" Margin="0,0,0,24"/>
 
@@ -246,30 +257,22 @@
                                         <Button Grid.Column="2" Content="➕ Nuevo Perfil" Width="100" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Click="NewProfile_Click"/>
                                     </Grid>
 
-                                    <!-- NEWS -->
-                                    <Border Background="#0D151DCC" CornerRadius="12" Padding="24" Margin="0,0,0,28" BorderBrush="#1E2C38" BorderThickness="1">
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#00F2FF" Opacity="0.1" BlurRadius="40" ShadowDepth="0"/>
-                                        </Border.Effect>
+                                    <!-- NEWS CARD (Unified) -->
+                                    <Border Style="{DynamicResource GlassCard}" Margin="0,0,0,28" Background="#0D151D88" Padding="24">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
-                                                    <Border Background="#00F2FF" CornerRadius="6" Padding="10,3">
-                                                        <TextBlock Text="MODULO CRÍTICO" Foreground="#05080D" FontSize="10" FontWeight="Black" />
-                                                    </Border>
-                                                    <Border Background="#10B981" CornerRadius="6" Padding="10,3" Margin="8,0,0,0" x:Name="LiveNewsBadge" Visibility="Visible">
-                                                        <TextBlock Text="EN VIVO" Foreground="White" FontSize="10" FontWeight="Black" />
-                                                    </Border>
-                                                </StackPanel>
-                                                <TextBlock Text="Protocolo Leviatán: Activo" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,0,0,6"/>
-                                                <TextBlock Text="Motores Abisales optimizados. El ecosistema KRAKEN ahora soporta despliegue de mods en tiempo real con latencia cero." Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap"/>
+                                                <Border Background="#10B981" CornerRadius="4" Padding="8,2" HorizontalAlignment="Left" Margin="0,0,0,12" x:Name="LiveNewsBadge">
+                                                    <TextBlock Text="ESTADO: ESTABLE" Foreground="White" FontSize="9" FontWeight="Black"/>
+                                                </Border>
+                                                <TextBlock Text="Motores Abisales Listos" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
+                                                <TextBlock Text="El ecosistema KRAKEN está optimizado para la versión actual. Todos los sistemas de red funcionan dentro de los parámetros esperados." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextWrapping="Wrap" MaxWidth="500"/>
                                             </StackPanel>
-                                            <Border Grid.Column="1" Width="64" Height="64" Background="#207C3AED" CornerRadius="8" VerticalAlignment="Center" Margin="24,0,0,0">
-                                                <TextBlock Text="⚓" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border Grid.Column="1" Width="50" Height="50" CornerRadius="10" Background="#1A00F2FF" VerticalAlignment="Center">
+                                                <TextBlock Text="⚓" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                         </Grid>
                                     </Border>
@@ -348,53 +351,73 @@
                                 </StackPanel>
                             </ScrollViewer>
 
+                            <!-- SKELETON LOADING OVERLAY (Reusable) -->
+                            <Grid x:Name="LoadingOverlay" Visibility="Collapsed" Background="#05080D">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Border Width="60" Height="60" Style="{DynamicResource SkeletonBlock}" CornerRadius="30" Margin="0,0,0,20"/>
+                                    <Border Width="120" Height="10" Style="{DynamicResource SkeletonBlock}" Margin="0,0,0,8"/>
+                                    <Border Width="80" Height="8" Style="{DynamicResource SkeletonBlock}" Opacity="0.5"/>
+                                </StackPanel>
+                            </Grid>
+
                             <!-- MODULES -->
                             <ContentControl x:Name="ModulesContainer" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
                 </Grid>
 
-                <!-- STATUS BAR -->
-                <Grid Grid.Row="2" Margin="32,16,32,16">
+                <!-- 4. BOTTOM ACTION BAR (Refined) -->
+                <Grid Grid.Row="3" Margin="32,20,32,24">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="220"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Background="#05080D" CornerRadius="12" Padding="12" BorderBrush="#0D151D" BorderThickness="1" Margin="0,0,16,0">
+                    
+                    <!-- Console/Diagnostic -->
+                    <Border Grid.Column="0" Background="#0A0E14" CornerRadius="12" BorderBrush="#1E2C38" BorderThickness="1" Margin="0,0,20,0" Padding="14">
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ScrollViewer x:Name="LogScroll">
-                                <TextBlock x:Name="LogText" Foreground="#344A5B" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap"/>
-                            </ScrollViewer>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,6,0,0">
-                                <TextBlock x:Name="ProgressLabel" Text="Iniciador preparado." Foreground="#1C2D3A" FontSize="11"/>
-                                <TextBlock x:Name="PercentageLabel" Text="" Foreground="#00F2FF" FontSize="11" FontWeight="Bold" Margin="8,0,0,0"/>
-
-                                <!-- Perf Monitor -->
-                                <Border Background="#0D151D" CornerRadius="4" Padding="6,2" Margin="14,0,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="CPU" Foreground="#344A5B" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
-                                        <TextBlock x:Name="CpuPerfText" Text="0%" Foreground="#C4B5FD" FontSize="9"/>
-                                        <Border Width="1" Height="8" Background="#1E2C38" Margin="8,0"/>
-                                        <TextBlock Text="RAM" Foreground="#344A5B" FontSize="8" FontWeight="Bold" Margin="0,0,4,0"/>
-                                        <TextBlock x:Name="RamPerfText" Text="0 MB" Foreground="#C4B5FD" FontSize="9"/>
-                                    </StackPanel>
-                                </Border>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="TELEMETRÍA DE SISTEMAS" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
+                                <Ellipse Width="6" Height="6" Fill="#10B981" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
+
+                            <ScrollViewer x:Name="LogScroll" Grid.Row="1">
+                                <TextBlock x:Name="LogText" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Opacity="0.8"/>
+                            </ScrollViewer>
+
+                            <Grid Grid.Row="2" Margin="0,10,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="ProgressLabel" Text="SISTEMA LISTO" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontWeight="Bold"/>
+                                    <TextBlock x:Name="PercentageLabel" Text="" Foreground="{DynamicResource AccentBrush}" FontSize="10" FontWeight="Black" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="CPU" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Bold" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="CpuPerfText" Text="0%" Foreground="White" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    <Border Width="1" Height="10" Background="#1E2C38" Margin="12,0"/>
+                                    <TextBlock Text="RAM" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Bold" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="RamPerfText" Text="0 MB" Foreground="White" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </Border>
 
+                    <!-- Play Section -->
                     <StackPanel Grid.Column="1">
-                        <Button x:Name="PlayButton" Content="▶  LOGUEATE" Style="{DynamicResource PlayButton}" Height="52" Click="PlayButton_Click"/>
-                        <Grid Margin="4,8,4,0">
-                            <CheckBox x:Name="TrayToggle" Content="Tray" Style="{DynamicResource TrayToggle}" Checked="TrayToggle_Changed" Unchecked="TrayToggle_Changed"/>
-                            <CheckBox x:Name="TurboToggle" Content="Turbo" Style="{DynamicResource TrayToggle}" HorizontalAlignment="Right" Checked="TurboToggle_Changed" Unchecked="TurboToggle_Changed"/>
+                        <Button x:Name="PlayButton" Content="INICIAR SECUENCIA" Style="{DynamicResource PlayButton}" Height="56" Click="PlayButton_Click" FontSize="15"/>
+                        <Grid Margin="4,12,4,0">
+                            <CheckBox x:Name="TrayToggle" Content="Segundo Plano" Style="{DynamicResource TrayToggle}" Checked="TrayToggle_Changed" Unchecked="TrayToggle_Changed"/>
+                            <CheckBox x:Name="TurboToggle" Content="Modo Turbo" Style="{DynamicResource TrayToggle}" HorizontalAlignment="Right" Checked="TurboToggle_Changed" Unchecked="TurboToggle_Changed"/>
                         </Grid>
                     </StackPanel>
-                    <ProgressBar x:Name="MainProgressBar" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="3" Style="{DynamicResource AppleProgress}" ValueChanged="MainProgressBar_ValueChanged"/>
+                    
+                    <ProgressBar x:Name="MainProgressBar" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="3" Style="{DynamicResource AppleProgress}" Margin="0,0,0,-8"/>
                 </Grid>
             </Grid>
         </Grid>

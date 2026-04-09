@@ -26,8 +26,8 @@
         <Grid Grid.Row="0" Margin="0,0,0,24">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="📦 MODPACK HUB" Foreground="White" FontSize="26" FontWeight="Black"/>
-                <Border Background="#2010B981" CornerRadius="8" Padding="12,4" Margin="20,0,0,0">
-                    <TextBlock Text="MODRINTH COMPATIBLE" Foreground="#6EE7B7" FontSize="11" FontWeight="Bold"/>
+                <Border Background="#207C3AED" CornerRadius="8" Padding="12,4" Margin="20,0,0,0">
+                    <TextBlock Text="EXPLORADOR ABISAL" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold"/>
                 </Border>
             </StackPanel>
 
@@ -41,14 +41,55 @@
             </StackPanel>
         </Grid>
 
-        <!-- Content -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="ModpackList">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel HorizontalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+        <!-- CUERPO -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- SIDEBAR FILTERS -->
+            <Border Grid.Column="0" Margin="0,0,16,0" Background="#0D0A1ACC" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="18">
+                        <TextBlock Text="VERSION" Foreground="#344A5B" FontSize="10" FontWeight="Black" Margin="4,0,0,10"/>
+                        <ComboBox x:Name="FilterVersion" Style="{DynamicResource ModernComboBox}" Margin="0,0,0,20" SelectionChanged="Filter_Changed">
+                            <ComboBoxItem Content="Todas las versiones" Tag="" IsSelected="True"/>
+                            <ComboBoxItem Content="1.21" Tag="1.21"/>
+                            <ComboBoxItem Content="1.20.1" Tag="1.20.1"/>
+                            <ComboBoxItem Content="1.19.2" Tag="1.19.2"/>
+                            <ComboBoxItem Content="1.18.2" Tag="1.18.2"/>
+                            <ComboBoxItem Content="1.16.5" Tag="1.16.5"/>
+                        </ComboBox>
+
+                        <TextBlock Text="LOADER" Foreground="#344A5B" FontSize="10" FontWeight="Black" Margin="4,0,0,10"/>
+                        <ComboBox x:Name="FilterLoader" Style="{DynamicResource ModernComboBox}" Margin="0,0,0,20" SelectionChanged="Filter_Changed">
+                            <ComboBoxItem Content="Cualquier Loader" Tag="" IsSelected="True"/>
+                            <ComboBoxItem Content="Fabric" Tag="fabric"/>
+                            <ComboBoxItem Content="Forge" Tag="forge"/>
+                            <ComboBoxItem Content="NeoForge" Tag="neoforge"/>
+                            <ComboBoxItem Content="Quilt" Tag="quilt"/>
+                        </ComboBox>
+
+                        <TextBlock Text="CATEGORÍAS" Foreground="#344A5B" FontSize="10" FontWeight="Black" Margin="4,0,0,10"/>
+                        <ListBox x:Name="FilterCategory" Background="Transparent" BorderThickness="0" SelectionChanged="Filter_Changed">
+                            <ListBoxItem IsSelected="True" Tag="all"><TextBlock Text="🌌 Todos"/></ListBoxItem>
+                            <ListBoxItem Tag="adventure"><TextBlock Text="🧗 Aventura"/></ListBoxItem>
+                            <ListBoxItem Tag="exploration"><TextBlock Text="🗺️ Exploración"/></ListBoxItem>
+                            <ListBoxItem Tag="tech"><TextBlock Text="🤖 Tecnología"/></ListBoxItem>
+                            <ListBoxItem Tag="magic"><TextBlock Text="🔮 Magia"/></ListBoxItem>
+                            <ListBoxItem Tag="quest"><TextBlock Text="📜 Misiones"/></ListBoxItem>
+                            <ListBoxItem Tag="hardcore"><TextBlock Text="💀 Hardcore"/></ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- RESULTADOS -->
+            <Border Grid.Column="1" Background="#05080D" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="ModpackList" Margin="10">
+                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel HorizontalAlignment="Center"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource ModpackCard}">
@@ -75,7 +116,9 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>
+                </ScrollViewer>
+            </Border>
+        </Grid>
 
         <!-- Loading Overlay -->
         <Border x:Name="LoadingOverlay" Grid.RowSpan="2" Background="#DD0A0714" Visibility="Collapsed">

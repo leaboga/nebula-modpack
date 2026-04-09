@@ -120,9 +120,11 @@ namespace NebulaLauncher.Modules
             }
         }
 
-        private void VaultView_Loaded(object sender, RoutedEventArgs e)
+        private async void VaultView_Loaded(object sender, RoutedEventArgs e)
         {
-            _ = SearchModrinth("", true);
+            await Task.Delay(50);
+            if (_results.Count == 0 && !_isSearching)
+                _ = SearchModrinth("", true);
         }
 
         private void FilterType_Changed(object sender, RoutedEventArgs e)
@@ -220,14 +222,14 @@ namespace NebulaLauncher.Modules
                 string url = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(facets)}&limit={_pageSize}&offset={offset}&index={sort}";
                 
                 string json = "";
-                var response = await _http.GetAsync(url).ConfigureAwait(false);
+                var response = await _http.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
                         string simpleFacets = $"[[\"project_type:{_currentType}\"]]";
                         string simpleUrl = $"https://api.modrinth.com/v2/search?query={escapedQuery}&facets={Uri.EscapeDataString(simpleFacets)}&limit={_pageSize}&offset={offset}&index={sort}";
-                        json = await _http.GetStringAsync(simpleUrl).ConfigureAwait(false);
+                        json = await _http.GetStringAsync(simpleUrl);
                     }
                     else
                     {
@@ -236,7 +238,7 @@ namespace NebulaLauncher.Modules
                 }
                 else
                 {
-                    json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    json = await response.Content.ReadAsStringAsync();
                 }
 
                 var data = JObject.Parse(json);

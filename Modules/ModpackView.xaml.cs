@@ -27,20 +27,35 @@ namespace NebulaLauncher.Modules
 
         private async void LoadFeaturedModpacks()
         {
-            var packs = await _modrinth.SearchModpacks("");
-            ModpackList.ItemsSource = packs;
+            await ExecuteSearch();
         }
 
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            string query = SearchBox.Text.Trim();
-            var packs = await _modrinth.SearchModpacks(query);
+            await ExecuteSearch();
+        }
+
+        private async void Filter_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.IsLoaded) await ExecuteSearch();
+        }
+
+        private async Task ExecuteSearch()
+        {
+            if (ModpackList == null) return;
+            
+            string query = SearchBox?.Text?.Trim() ?? "";
+            string version = (FilterVersion?.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "";
+            string loader = (FilterLoader?.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "";
+            string category = (FilterCategory?.SelectedItem as ListBoxItem)?.Tag?.ToString() ?? "all";
+
+            var packs = await _modrinth.SearchModpacks(query, version, loader, category);
             ModpackList.ItemsSource = packs;
         }
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) BtnSearch_Click(sender, e);
+            if (e.Key == Key.Enter) _ = ExecuteSearch();
         }
 
         private async void BtnInstall_Click(object sender, RoutedEventArgs e)

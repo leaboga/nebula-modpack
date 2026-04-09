@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.5.0";
+        private const string CurrentLauncherVersion = "2.6.0";
         private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -359,7 +359,6 @@ namespace NebulaLauncher
 
                 if (AvatarInitial != null) AvatarInitial.Foreground = new SolidColorBrush(color);
                 if (PercentageLabel != null) PercentageLabel.Foreground = new SolidColorBrush(color);
-                if (InstalledVersionText != null) InstalledVersionText.Foreground = new SolidColorBrush(color);
             }
             catch (Exception ex) { AgregarLog($"⚠ Error aplicando tema: {ex.Message}"); }
         }
@@ -421,8 +420,8 @@ namespace NebulaLauncher
             var result = MessageBox.Show(
                 "Nueva version disponible: v" + _updateVersion + "\n\n" +
                 UpdateBadge.ToolTip + "\n\n" +
-                "El launcher se descargara y reiniciara. \u00BFContinuar?",
-                "Actualizacion",
+                "El launcher se descargará y reiniciará. ¿Continuar?",
+                "Actualización",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Information);
 
@@ -659,15 +658,15 @@ namespace NebulaLauncher
         {
             var btn       = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content   = "\u23F3 Creando backup...";
+            btn.Content   = "⏳ Creando backup...";
             try
             {
                 string path = await _backupService.CreateBackupAsync(msg => AgregarLog(msg));
                 MessageBox.Show($"Backup creado exitosamente:\n{System.IO.Path.GetFileName(path)}",
                                 "Backup completado", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"\u274C Error en backup: {ex.Message}"); }
-            finally { btn.IsEnabled = true; btn.Content = "\uD83D\uDCBE  Crear Backup Ahora"; }
+            catch (Exception ex) { AgregarLog($"❌ Error en backup: {ex.Message}"); }
+            finally { btn.IsEnabled = true; btn.Content = "💾 Crear Backup Ahora"; }
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -691,10 +690,10 @@ namespace NebulaLauncher
                     var runText = new Run(mensaje);
 
                     // Syntax Highlighting simple
-                    if (mensaje.StartsWith("\u2705") || mensaje.StartsWith("\u2713")) runText.Foreground = Brushes.LightGreen;
-                    else if (mensaje.StartsWith("\u274C") || mensaje.StartsWith("\u2717") || mensaje.Contains("Error")) runText.Foreground = Brushes.Salmon;
-                    else if (mensaje.StartsWith("\u26A0") || mensaje.Contains("Warning")) runText.Foreground = Brushes.Gold;
-                    else if (mensaje.StartsWith("\uD83D\uDE80") || mensaje.StartsWith("\u26A1")) runText.Foreground = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
+                    if (mensaje.StartsWith("✅") || mensaje.StartsWith("✓")) runText.Foreground = Brushes.LightGreen;
+                    else if (mensaje.StartsWith("❌") || mensaje.StartsWith("✗") || mensaje.Contains("Error")) runText.Foreground = Brushes.Salmon;
+                    else if (mensaje.StartsWith("⚠️") || mensaje.Contains("Warning")) runText.Foreground = Brushes.Gold;
+                    else if (mensaje.StartsWith("🚀") || mensaje.StartsWith("⚡")) runText.Foreground = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
                     else runText.Foreground = new SolidColorBrush(Color.FromRgb(0xC4, 0xB5, 0xFD));
 
                     if (LogText.Text == "[Nebula] System initialized. Waiting for command...") LogText.Inlines.Clear();
@@ -752,16 +751,7 @@ namespace NebulaLauncher
             _crashReporter = new CrashReporterService(GameFolder, _session.CrashWebhookUrl);
             ActualizarSidebar();
             ActualizarGreeting();
-            if (SkipConfigSyncCheck != null) SkipConfigSyncCheck.IsChecked = _session.SkipConfigSync;
             _isInitializing = false;
-        }
-
-        private void SkipConfigSyncCheck_Click(object sender, RoutedEventArgs e)
-        {
-            if (_isInitializing) return;
-            _session.SkipConfigSync = SkipConfigSyncCheck.IsChecked ?? false;
-            GuardarSesion();
-            AgregarLog(_session.SkipConfigSync ? "🛠️ Modo Dev: Sincronización de configs desactivada." : "🛠️ Sincronización de configs activada.");
         }
 
         public void GuardarSesion()
@@ -795,7 +785,7 @@ namespace NebulaLauncher
         {
             if (HomeGreetingLabel == null) return;
             int hour = DateTime.Now.Hour;
-            string greeting = hour < 12 ? "Buenos d\u00EDas" : hour < 19 ? "Buenas tardes" : "Buenas noches";
+            string greeting = hour < 12 ? "Buenos días" : hour < 19 ? "Buenas tardes" : "Buenas noches";
             
             // News System (Imp 18)
             string[] news = {
@@ -808,7 +798,7 @@ namespace NebulaLauncher
             string currentNews = news[new Random().Next(news.Length)];
 
             HomeGreetingLabel.Text = !string.IsNullOrEmpty(_session.Username)
-                ? $"{greeting}, {_session.Username} \uD83D\uDC4B\n\uD83D\uDCE2 {currentNews}"
+                ? $"{greeting}, {_session.Username} 👋\n📢 {currentNews}"
                 : "Listo para jugar";
         }
 
@@ -1077,7 +1067,7 @@ namespace NebulaLauncher
                 _versionsIndex = await _syncer.ObtenerVersionsIndex();
 
                 if (_versionsIndex?.AvailableVersions == null || _versionsIndex.AvailableVersions.Count == 0)
-                { AgregarLog("\u26A0 No se pudieron cargar las versiones."); return; }
+                { AgregarLog("⚠️ No se pudieron cargar las versiones."); return; }
 
                 int currentIdx = 0;
                 Dispatcher.Invoke(() =>
@@ -1123,7 +1113,7 @@ namespace NebulaLauncher
                         }
                     }
                     GuardarSesion();
-                    InstalledVersionText.Text = manifest?.Version ?? "Sin datos";
+                    // Version label removed from UI
                     PlayButton.IsEnabled      = manifest != null;
                     if (manifest == null) AgregarLog($"\u26A0 No se pudo cargar manifest para {entry.Label}.");
                     else AgregarLog($"\u2713 Versi\u00F3n lista: {manifest.Version}");
@@ -1153,7 +1143,7 @@ namespace NebulaLauncher
                     AgregarLog($"\u2705 Sesi\u00F3n iniciada como {session.Username}.");
                     await RefrescarSkin();
                 }
-                else AgregarLog("\u26A0 La autenticaci\u00F3n no devolvi\u00F3 sesi\u00F3n v\u00E1lida.");
+                else AgregarLog("⚠️ La autenticación no devolvió sesión válida.");
             }
             catch (Exception ex)
             {
@@ -1215,7 +1205,7 @@ namespace NebulaLauncher
             {
                 InitializeProfileServices();
                 _manifestActual = null;
-                AgregarLog($"\uD83D\uDCC2 Instancia sincronizada con el perfil activo.");
+                AgregarLog($"📂 Instancia sincronizada con el perfil activo.");
                 _ = CargarVersionesAsync();
             }
             catch (Exception ex) { AgregarLog($"\u274C Error al cambiar instancia: {ex.Message}"); }
@@ -1227,8 +1217,8 @@ namespace NebulaLauncher
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_session.Username))
-            { AgregarLog("\u26A0 Ingres\u00E1 un nombre de usuario."); MessageBox.Show("Ingres\u00E1 un nombre primero.", "Sin usuario", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-            if (_session.Username.Length < 3) { AgregarLog("\u26A0 El nombre debe tener al menos 3 caracteres."); return; }
+            { AgregarLog("⚠️ Ingresa un nombre de usuario."); MessageBox.Show("Ingresa un nombre primero.", "Sin usuario", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+            if (_session.Username.Length < 3) { AgregarLog("⚠️ El nombre debe tener al menos 3 caracteres."); return; }
             if (CurrentProfile == null) { AgregarLog("\u26A0 No hay perfil seleccionado."); return; }
 
             ImportarConfigsDeMinecraftOriginal();
@@ -1504,7 +1494,8 @@ namespace NebulaLauncher
             switch (vista)
             {
                 case "home":
-                    this.Title = "KRAKEN Launcher — Inicio";
+                    CurrentViewLabel.Text = "CENTRO DE OPERACIONES";
+                    ViewTitleLabel.Text = "Bienvenido, Comandante";
                     HomeView.Visibility = Visibility.Visible;
                     HomeView.Opacity = 1;
                     AnimateView(HomeView);
@@ -1512,56 +1503,71 @@ namespace NebulaLauncher
                     ActualizarVersionesEnHome();
                     break;
                 case "changelog":
-                    this.Title = "KRAKEN Launcher — Novedades";
+                    CurrentViewLabel.Text = "NOTIFICACIONES";
+                    ViewTitleLabel.Text = "Bitácora de Versiones";
                     SwitchToModule(new ChangelogView());
                     break;
                 case "settings":
-                    this.Title = "KRAKEN Launcher — Configuración";
+                    CurrentViewLabel.Text = "SISTEMAS";
+                    ViewTitleLabel.Text = "Configuración del Iniciador";
                     SwitchToModule(new ConfigView(this));
                     break;
                 case "social":
-                    this.Title = "KRAKEN Launcher — Comunidad";
+                    CurrentViewLabel.Text = "RED EXTERNA";
+                    ViewTitleLabel.Text = "Comunidad KRAKEN";
                     SwitchToModule(new SocialView(_session.ServerIp, _session.Username));
                     break;
                 case "perf":
-                    this.Title = "KRAKEN Launcher — Rendimiento";
+                    CurrentViewLabel.Text = "OPTIMIZACIÓN";
+                    ViewTitleLabel.Text = "Rendimiento y Memoria";
                     SwitchToModule(new PerformanceView(this));
                     break;
                 case "screenshots":
-                    this.Title = "KRAKEN Launcher — Capturas";
+                    CurrentViewLabel.Text = "ARCHIVOS";
+                    ViewTitleLabel.Text = "Capturas de Despliegue";
                     SwitchToModule(new ScreenshotsView(GameFolder));
                     break;
                 case "modmanager":
-                    this.Title = "Nebula — Administrar";
+                    CurrentViewLabel.Text = "LOGÍSTICA";
+                    ViewTitleLabel.Text = "Gestión de Módulos (Local)";
                     var mv = new ModManagerView(GameFolder, CurrentProfile);
                     mv.OnSyncRequested += SincronizarTodoAsync;
                     SwitchToModule(mv);
                     break;
                 case "modhub":
-                    this.Title = "Nebula — Mod Hub";
+                    CurrentViewLabel.Text = "CENTRO DE RECURSOS";
+                    ViewTitleLabel.Text = "Biblioteca de Mods";
                     SwitchToModule(new VaultView(GameFolder, CurrentProfile));
                     break;
                 case "crash":
-                    this.Title = "KRAKEN Launcher — Diagnóstico";
+                    CurrentViewLabel.Text = "DIAGNÓSTICO";
+                    ViewTitleLabel.Text = "Reportes de Error";
                     SwitchToModule(new CrashDiagnosticView(_crashReporter));
                     break;
                 case "map":
-                    this.Title = "KRAKEN Launcher — Mapa";
+                    CurrentViewLabel.Text = "INTELIGENCIA";
+                    ViewTitleLabel.Text = "Servicio de Cartografía";
                     SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId));
                     break;
                 case "hosting":
-                    this.Title = "KRAKEN Launcher — Servicio Hosting (BETA)";
+                    CurrentViewLabel.Text = "INFRAESTRUCTURA";
+                    ViewTitleLabel.Text = "Servicios Hosting (BETA)";
                     SwitchToModule(new HostingServiceView());
                     break;
                 case "localhost":
-                    this.Title = "KRAKEN Launcher — Hostear Servidor Local";
+                    CurrentViewLabel.Text = "NODOS LOCALES";
+                    ViewTitleLabel.Text = "Servidor de Pruebas";
                     SwitchToModule(new ServerHostView());
                     break;
                 case "modpacks":
-                    this.Title = "KRAKEN Launcher — Modpack Hub";
+                    CurrentViewLabel.Text = "MODPACK HUB";
+                    ViewTitleLabel.Text = "Catálogo de Expediciones";
                     SwitchToModule(new ModpackView());
                     break;
             }
+            
+            if (ActiveProfileLabel != null && CurrentProfile != null)
+                ActiveProfileLabel.Text = $"Perfil: {CurrentProfile.Name}";
         }
 
         private void ActualizarVersionesEnHome()

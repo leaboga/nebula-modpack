@@ -56,12 +56,17 @@ namespace NebulaLauncher.Services
             catch { return new List<ModrinthMod>(); }
         }
 
-        public async Task<List<ModrinthMod>> SearchModpacks(string query)
+        public async Task<List<ModrinthMod>> SearchModpacks(string query, string? version = null, string? loader = null, string? category = null)
         {
             try
             {
-                string facets = "[[\"project_type:modpack\"]]";
-                var response = await _client.GetAsync($"search?query={Uri.EscapeDataString(query)}&facets={Uri.EscapeDataString(facets)}&limit=15");
+                var facetGroups = new List<string> { "[\"project_type:modpack\"]" };
+                if (!string.IsNullOrEmpty(version)) facetGroups.Add($"[\"versions:{version}\"]");
+                if (!string.IsNullOrEmpty(loader)) facetGroups.Add($"[\"categories:{loader}\"]");
+                if (!string.IsNullOrEmpty(category) && category != "all") facetGroups.Add($"[\"categories:{category}\"]");
+
+                string facets = $"[{string.Join(",", facetGroups)}]";
+                var response = await _client.GetAsync($"search?query={Uri.EscapeDataString(query)}&facets={Uri.EscapeDataString(facets)}&limit=20");
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -84,7 +89,11 @@ namespace NebulaLauncher.Services
                 }
                 return mods;
             }
-            catch { return new List<ModrinthMod>(); }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine("Error en búsqueda de modpacks: " + ex.Message);
+                return new List<ModrinthMod>(); 
+            }
         }
 
         public async Task<string?> GetLatestVersionDownloadUrl(string projectId)
