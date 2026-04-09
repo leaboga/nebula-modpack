@@ -87,7 +87,7 @@ namespace NebulaLauncher.Modules
 
     public partial class VaultView : UserControl
     {
-        private readonly string _gameFolder;
+        private readonly string _gameFolder = string.Empty;
         private readonly MinecraftProfile? _profile;
         private static readonly HttpClient _http = new HttpClient() { Timeout = TimeSpan.FromSeconds(20) };
         private string _currentType = "mod";

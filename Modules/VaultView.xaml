@@ -62,6 +62,9 @@
                                 <ListBoxItem Tag="technology"><TextBlock Text="🤖 Tecnología"/></ListBoxItem>
                                 <ListBoxItem Tag="magic"><TextBlock Text="🔮 Magia"/></ListBoxItem>
                                 <ListBoxItem Tag="adventure"><TextBlock Text="🧗 Aventura"/></ListBoxItem>
+                                <ListBoxItem Tag="quest"><TextBlock Text="📜 Misiones"/></ListBoxItem>
+                                <ListBoxItem Tag="food"><TextBlock Text="🍎 Alimentos"/></ListBoxItem>
+                                <ListBoxItem Tag="utility"><TextBlock Text="🛠️ Herramientas"/></ListBoxItem>
                             </ListBox>
                         </StackPanel>
 
@@ -139,7 +142,8 @@
                         </ScrollViewer>
 
                         <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-                            <TextBlock Text="Vacío Cósmico" Foreground="#C4B5FD" FontSize="18" HorizontalAlignment="Center"/>
+                            <TextBlock Text="☄ El Abismo está despejado" Foreground="#344A5B" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                            <TextBlock Text="No se detectaron recursos con este patrón." Foreground="#1C2D3A" FontSize="11" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                         </StackPanel>
                     </Grid>
                 </Border>

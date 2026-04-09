@@ -238,8 +238,8 @@
                             <ColumnDefinition Width="12"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="🥔 Modo Papa" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
-                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="🚀 Modo Ultra" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
+                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="🥔 Modo Patata (Bajo Rendimiento)" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
+                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="🚀 Modo Galáctico (Alto Rendimiento)" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

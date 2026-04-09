@@ -45,10 +45,10 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
-            <TextBlock Text="Social"
+            <TextBlock Text="Comunidad"
                        Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
-            <TextBlock Text="NEBULA LIVE HUB"
+            <TextBlock Text="NÚCLEO SOCIAL NEBULA"
                        Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
@@ -70,7 +70,7 @@
                             <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#EF4444" VerticalAlignment="Center">
                                 <Ellipse.Effect><DropShadowEffect Color="#EF4444" Opacity="0.8" BlurRadius="8" ShadowDepth="0"/></Ellipse.Effect>
                             </Ellipse>
-                            <TextBlock x:Name="StatusText" Text="OFFLINE" FontSize="20" FontWeight="Bold" Foreground="#E6F9FF" Margin="12,0,0,0"/>
+                            <TextBlock x:Name="StatusText" Text="DESCONECTADO" FontSize="20" FontWeight="Bold" Foreground="#E6F9FF" Margin="12,0,0,0"/>
                         </StackPanel>
                         <Border Height="1" Margin="0,0,0,16" Background="#0D151D"/>
                         <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,4"/>
@@ -111,7 +111,7 @@
                     <Border Grid.Row="0" Padding="22,18,22,14" BorderBrush="#1E2C38" BorderThickness="0,0,0,1">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="⚡" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBlock Text="BRIDGE DE CHAT EN TIEMPO REAL" FontSize="9" FontWeight="Bold" Foreground="#6D8A99" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="PART_BridgeLabel" Text="PUENTE DE CHAT EN TIEMPO REAL" FontSize="9" FontWeight="Bold" Foreground="#6D8A99" VerticalAlignment="Center"/>
                             <Border Background="#207C3AED" CornerRadius="4" Padding="6,2" Margin="12,0,0,0">
                                 <TextBlock Text="LIVE" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
                             </Border>

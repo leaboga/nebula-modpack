@@ -138,7 +138,7 @@
                                          </Grid>
                                      </Border>
                                      <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                         <TextBlock x:Name="SidebarUsername" Text="KRAKEN Pilot" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                         <TextBlock x:Name="SidebarUsername" Text="Piloto del Abismo" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                          <TextBlock x:Name="SidebarAuthType" Text="Cuenta Conectada" Foreground="#344A5B" FontSize="10"/>
                                      </StackPanel>
                                  </StackPanel>
@@ -156,7 +156,7 @@
                             <Border Height="1" Margin="4,20,4,20" Background="{DynamicResource BorderBrush}"/>
 
                             <TextBlock Text="SERVICIOS" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
-                            <RadioButton Content="Deep Map" Style="{DynamicResource ToggleTab}" GroupName="Nav" x:Name="NavBlueMap" Checked="Nav_BlueMap_Checked"/>
+                            <RadioButton Content="Mapa Abisal" Style="{DynamicResource ToggleTab}" GroupName="Nav" x:Name="NavBlueMap" Checked="Nav_BlueMap_Checked"/>
                             <RadioButton Content="Servidor Local" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked"/>
                             <RadioButton Content="Infraestructura" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked"/>
                             <RadioButton Content="Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked"/>
@@ -191,7 +191,7 @@
                             </StackPanel>
                         </Border>
 
-                        <TextBlock x:Name="UpdateBadge" Text="CORE UPDATE PENDING" Foreground="{DynamicResource AccentBrush}" FontSize="9" FontWeight="Black" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="4,0,0,8"/>
+                        <TextBlock x:Name="UpdateBadge" Text="CORE: ACTUALIZACIÓN PENDIENTE" Foreground="{DynamicResource AccentBrush}" FontSize="9" FontWeight="Black" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="4,0,0,8"/>
                         <TextBlock x:Name="VersionFooterLabel" Text="KRAKEN ENGINE" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="4,0,0,0"/>
 
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,16,0,0">
