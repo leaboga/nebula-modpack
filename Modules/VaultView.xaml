@@ -38,7 +38,7 @@
                     
                     <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,0" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
                     
-                    <TextBox x:Name="SearchBox" Width="220" Style="{DynamicResource AppleTextBox}" Height="36" Tag="Buscar en la bóveda..." KeyDown="SearchBox_KeyDown" Margin="12,0,0,0"/>
+                    <TextBox x:Name="SearchBox" Width="220" Style="{DynamicResource SearchTextBox}" Height="36" Tag="Buscar en la bóveda..." KeyDown="SearchBox_KeyDown" Margin="12,0,0,0"/>
                     
                     <ComboBox x:Name="SortCombo" Width="140" Height="36" Style="{DynamicResource ModernComboBox}" Margin="12,0,0,0" SelectionChanged="SortCombo_SelectionChanged">
                         <ComboBoxItem Content="Relevancia" Tag="relevance" IsSelected="True"/>
@@ -95,10 +95,14 @@
                 <!-- RESULTADOS -->
                 <Border Grid.Column="1" Background="#05080D" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
                     <Grid>
+                        <!-- FEEDBACK OVERLAYS -->
+                        <ProgressBar x:Name="NebulaLoadingBar" VerticalAlignment="Top" Height="2" Style="{DynamicResource AppleProgress}" Visibility="Collapsed" Panel.ZIndex="10"/>
+
                         <ScrollViewer x:Name="SkeletonPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Hidden" Padding="14">
                             <WrapPanel HorizontalAlignment="Center">
-                                <Border Width="250" Height="360" Background="#0D151D" CornerRadius="18" Margin="12"/>
-                                <Border Width="250" Height="360" Background="#0D151D" CornerRadius="18" Margin="12"/>
+                                <Border Width="250" Height="400" Style="{StaticResource SkeletonBlock}" Margin="12"/>
+                                <Border Width="250" Height="400" Style="{StaticResource SkeletonBlock}" Margin="12"/>
+                                <Border Width="250" Height="400" Style="{StaticResource SkeletonBlock}" Margin="12"/>
                             </WrapPanel>
                         </ScrollViewer>
 
@@ -111,15 +115,29 @@
                                             <Border Style="{StaticResource GlassCard}" MouseLeftButtonUp="Card_MouseLeftButtonUp">
                                                 <Grid Margin="18">
                                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                                                    <Border Width="90" Height="90" CornerRadius="24" Background="#0D151D">
-                                                        <Image Source="{Binding IconUrl}" Stretch="UniformToFill"/>
-                                                    </Border>
-                                                    <StackPanel Grid.Row="1" Margin="0,12,0,0">
-                                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="50"/>
-                                                        <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,4"/>
-                                                        <TextBlock Text="{Binding DownloadsText}" Foreground="#C4B5FD" FontSize="12" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                                    
+                                                    <!-- Icon & Badge -->
+                                                    <Grid>
+                                                        <Border Width="90" Height="90" CornerRadius="24" Background="#05080D">
+                                                            <Image Source="{Binding IconUrl}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                                        </Border>
+                                                    </Grid>
+
+                                                    <StackPanel Grid.Row="1" Margin="0,14,0,0">
+                                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="44"/>
+                                                        <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
+                                                        
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4">
+                                                            <Border Background="{Binding StatusBadgeBrush}" CornerRadius="4" Padding="6,2" Margin="0,0,6,0">
+                                                                <TextBlock Text="{Binding StatusBadgeText}" Foreground="{Binding StatusBadgeTextBrush}" FontSize="8" FontWeight="Black"/>
+                                                            </Border>
+                                                            <Border Background="#1A10B981" CornerRadius="4" Padding="6,2">
+                                                                <TextBlock Text="COINCIDENCIA" Foreground="#10B981" FontSize="8" FontWeight="Black"/>
+                                                            </Border>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                    <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{DynamicResource PlayButton}" Background="{Binding ButtonBrush}" Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="40" Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
+                                                    
+                                                    <Button Grid.Row="2" Content="{Binding ButtonLabel}" Style="{DynamicResource PlayButton}" Background="{Binding ButtonBrush}" Click="InstallBtn_Click" Tag="{Binding ProjectId}" Height="38" Margin="0,8,0,0" Visibility="{Binding ShowButton, Converter={StaticResource BoolToVis}}"/>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>
@@ -127,7 +145,7 @@
                                 </ItemsControl>
                                 <StackPanel x:Name="PaginationPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20" Visibility="Collapsed">
                                     <Button Content="«" Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnPrevPage_Click"/>
-                                    <TextBlock x:Name="TxtPage" Text="1" VerticalAlignment="Center" Margin="15,0" Foreground="White" FontWeight="Bold"/>
+                                    <TextBlock x:Name="TxtPage" Text="Página 1" VerticalAlignment="Center" Margin="15,0" Foreground="White" FontWeight="Bold"/>
                                     <Button Content="»" Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnNextPage_Click"/>
                                 </StackPanel>
                             </StackPanel>
@@ -152,8 +170,10 @@
                         </ScrollViewer>
 
                         <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-                            <TextBlock Text="☄ El Abismo está despejado" Foreground="#344A5B" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                            <TextBlock Text="No se detectaron recursos con este patrón." Foreground="#1C2D3A" FontSize="11" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                            <TextBlock Text="🦑" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16" Opacity="0.3"/>
+                            <TextBlock Text="EL ABISMO ESTÁ DESPEJADO" Foreground="White" FontSize="16" FontWeight="Black" HorizontalAlignment="Center"/>
+                            <TextBlock Text="No se detectaron recursos con los parámetros actuales." Foreground="#344A5B" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                            <Button Content="Limpiar Filtros" Style="{DynamicResource SecondaryButton}" Margin="0,20,0,0" Width="140" Click="BtnRefresh_Click"/>
                         </StackPanel>
                     </Grid>
                 </Border>

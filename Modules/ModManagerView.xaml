@@ -12,9 +12,9 @@
         <!-- Header -->
         <Grid Grid.Row="0" Margin="0,0,0,28">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Gestión Local" Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBlock Text="Gestión de Sistemas" Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="ADMINISTRAR MODS INSTALADOS" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                    <TextBlock Text="ADMINISTRAR COMPONENTES INSTALADOS" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
                     <Border Width="4" Height="4" Background="#1E2C38" CornerRadius="2" Margin="10,0" VerticalAlignment="Center"/>
                     <TextBlock x:Name="SyncStatusLabel" Text="✓ SINCRONIZADO" Foreground="#10B981" FontSize="9" FontWeight="Bold" VerticalAlignment="Center"/>
                 </StackPanel>

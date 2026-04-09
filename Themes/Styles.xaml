@@ -191,6 +191,32 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource AppleTextBox}">
+        <Setter Property="Padding" Value="38,10,14,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" CornerRadius="12">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <TextBlock Text="🔍" Foreground="#344A5B" FontSize="14" VerticalAlignment="Center" Margin="14,0,0,0" IsHitTestVisible="False"/>
+                        <TextBlock x:Name="Placeholder" Text="{TemplateBinding Tag}" Foreground="#344A5B" FontSize="13" VerticalAlignment="Center" Margin="38,0,0,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- COMBOBOX -->
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="#0D151D"/>

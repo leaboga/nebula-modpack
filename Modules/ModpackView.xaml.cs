@@ -50,7 +50,7 @@ namespace NebulaLauncher.Modules
             string category = (FilterCategory?.SelectedItem as ListBoxItem)?.Tag?.ToString() ?? "all";
 
             var packs = await _modrinth.SearchModpacks(query, version, loader, category);
-            ModpackList.ItemsSource = packs;
+            ModpackList.ItemsSource = packs.OrderByDescending(p => p.Downloads).ToList();
         }
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
@@ -117,8 +117,7 @@ namespace NebulaLauncher.Modules
                         _mainWindow.Session.CurrentProfileId = newProfile.Id;
                         _mainWindow.GuardarSesion();
 
-                        string instanceFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
-                                                            "NebulaLauncher", "instances", newProfile.Id);
+                        string instanceFolder = Path.Combine(PathService.InstancesFolder, newProfile.Id);
                         Directory.CreateDirectory(instanceFolder);
                         Directory.CreateDirectory(Path.Combine(instanceFolder, "mods"));
 

@@ -45,10 +45,10 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
-            <TextBlock Text="Comunidad"
+            <TextBlock Text="Interfase Social"
                        Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
-            <TextBlock Text="NÚCLEO SOCIAL NEBULA"
+            <TextBlock Text="NÚCLEO SOCIAL KRAKEN"
                        Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 

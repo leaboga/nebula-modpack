@@ -14,6 +14,10 @@ namespace NebulaLauncher.Services
         public string IconUrl { get; set; } = "";
         public string ProjectId { get; set; } = "";
         public string Author { get; set; } = "";
+        public int Downloads { get; set; }
+        public List<string> Categories { get; set; } = new();
+        public string DateModified { get; set; } = "";
+        public string DisplayDownloads => (Downloads >= 1000000) ? (Downloads / 1000000.0).ToString("0.#") + "M" : (Downloads >= 1000) ? (Downloads / 1000.0).ToString("0.#") + "K" : Downloads.ToString();
     }
 
     public class ModrinthService
@@ -47,7 +51,10 @@ namespace NebulaLauncher.Services
                             Description = hit.description,
                             IconUrl = hit.icon_url,
                             ProjectId = hit.project_id,
-                            Author = hit.author
+                            Author = hit.author,
+                            Downloads = hit.downloads ?? 0,
+                            Categories = hit.categories?.ToObject<List<string>>() ?? new List<string>(),
+                            DateModified = hit.date_modified
                         });
                     }
                 }
@@ -83,7 +90,10 @@ namespace NebulaLauncher.Services
                             Description = hit.description,
                             IconUrl = hit.icon_url,
                             ProjectId = hit.project_id,
-                            Author = hit.author
+                            Author = hit.author,
+                            Downloads = hit.downloads ?? 0,
+                            Categories = hit.categories?.ToObject<List<string>>() ?? new List<string>(),
+                            DateModified = hit.date_modified
                         });
                     }
                 }

@@ -1725,7 +1725,18 @@ namespace NebulaLauncher
             }
             
             if (ActiveProfileLabel != null && CurrentProfile != null)
-                ActiveProfileLabel.Text = $"Perfil: {CurrentProfile.Name}";
+            {
+                ActiveProfileLabel.Text = CurrentProfile.Name;
+                ActiveVersionLabel.Text = CurrentProfile.Version ?? "---";
+                ActiveLoaderLabel.Text = (CurrentProfile.LoaderType ?? "Vanilla").ToUpperInvariant();
+                
+                if (ProfilePathLabel != null)
+                {
+                    string pPath = System.IO.Path.Combine(PathService.InstancesFolder, CurrentProfile.Id);
+                    ProfilePathLabel.Text = pPath;
+                    ProfilePathLabel.ToolTip = pPath;
+                }
+            }
         }
 
         private void ActualizarVersionesEnHome()

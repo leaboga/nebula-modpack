@@ -31,6 +31,18 @@ No saltar de segmento incorrecto.
 No convertir `x.y.z` en `x.z.y`.
 No publicar sin bump de version cuando el cambio debe generar update.
 
+## Regla 2.1: todo cambio que el usuario deba recibir por auto-update requiere nueva version
+
+Si la tarea incluye cambios de codigo, UI, fixes, mejoras funcionales, refactors que impacten el binario o cualquier modificacion que el usuario deba ver en el launcher actualizado, entonces es obligatorio:
+- incrementar la version antes de publicar
+- generar una nueva release/tag real en GitHub
+- validar que una instalacion anterior detecte esa nueva version
+
+No dejar cambios importantes sobre la misma version ya publicada.
+Si la version actual publicada es `2.6.4` y se hacen cambios nuevos que deben llegar por update, la siguiente publicacion debe pasar a `2.6.5` o al numero que corresponda.
+
+Solo se permite no cambiar la version si la tarea es puramente local, exploratoria o explicitamente no destinada a release/update.
+
 ## Regla 3: build/publish limpio obligatorio
 
 Antes de subir una release:
@@ -60,6 +72,7 @@ Una publicacion correcta incluye:
 
 No alcanza con modificar archivos localmente.
 No alcanza con dejar solo commit y push sin release si el objetivo es update automatico.
+No alcanza con editar codigo sobre la version actual si el usuario espera ver esos cambios mediante auto-update.
 
 ## Regla 6: asset correcto
 

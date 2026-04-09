@@ -27,14 +27,27 @@ namespace NebulaLauncher.Modules
         public string Description { get; set; } = "";
         public string Author { get; set; } = "";
         public string IconUrl { get; set; } = "";
-        public string DownloadsText { get; set; } = "";
+        public string DisplayDownloads { get; set; } = "";
 
         private bool _isInstalled;
         public bool IsInstalled 
         { 
             get => _isInstalled; 
-            set { _isInstalled = value; OnPropertyChanged(); OnPropertyChanged(nameof(ShowButton)); OnPropertyChanged(nameof(ButtonLabel)); OnPropertyChanged(nameof(ButtonBrush)); } 
+            set { 
+                _isInstalled = value; 
+                OnPropertyChanged(); 
+                OnPropertyChanged(nameof(ShowButton)); 
+                OnPropertyChanged(nameof(ButtonLabel)); 
+                OnPropertyChanged(nameof(ButtonBrush)); 
+                OnPropertyChanged(nameof(StatusBadgeText));
+                OnPropertyChanged(nameof(StatusBadgeBrush));
+                OnPropertyChanged(nameof(StatusBadgeTextBrush));
+            } 
         }
+
+        public string StatusBadgeText => IsInstalled ? "INSTALADO" : "DISPONIBLE";
+        public Brush StatusBadgeBrush => IsInstalled ? new SolidColorBrush(Color.FromRgb(16, 185, 129)) : new SolidColorBrush(Color.FromArgb(40, 0, 242, 255));
+        public Brush StatusBadgeTextBrush => IsInstalled ? Brushes.White : new SolidColorBrush(Color.FromRgb(0, 242, 255));
 
         private bool _isDownloading;
         public bool IsDownloading 
@@ -278,7 +291,7 @@ namespace NebulaLauncher.Modules
                         Description = desc,
                         Author = author,
                         IconUrl = string.IsNullOrEmpty(icon) ? "pack://application:,,,/nebula.ico" : icon,
-                        DownloadsText = FormatDownloads(dl),
+                        DisplayDownloads = FormatDownloads(dl),
                         IsInstalled = installed
                     });
                 }
@@ -649,8 +662,12 @@ namespace NebulaLauncher.Modules
         
         private void SetLoading(bool loading)
         {
-            SkeletonPanel.Visibility = loading ? Visibility.Visible : Visibility.Collapsed; 
-            ResultsScroll.Visibility = loading ? Visibility.Collapsed : Visibility.Visible; 
+            NebulaLoadingBar.Visibility = loading ? Visibility.Visible : Visibility.Collapsed;
+            NebulaLoadingBar.IsIndeterminate = loading;
+            
+            SkeletonPanel.Visibility = (loading && _results.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+            ResultsScroll.Visibility = (loading && _results.Count == 0) ? Visibility.Collapsed : Visibility.Visible;
+            
             LocalScroll.Visibility = Visibility.Collapsed; 
             EmptyPanel.Visibility = Visibility.Collapsed; 
             if (loading) PaginationPanel.Visibility = Visibility.Collapsed;

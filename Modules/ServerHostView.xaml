@@ -11,12 +11,13 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40,36,40,28">
             <!-- Header -->
-            <TextBlock Text="Hostear Servidor"
-                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
-                       Margin="0,0,0,4"/>
-            <TextBlock Text="CREA TU PROPIA GALAXIA LOCAL"
-                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"
-                       Margin="0,0,0,28"/>
+            <StackPanel Margin="0,0,0,28">
+                <TextBlock Text="Hostear Servidor"
+                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="GESTIÓN DE NODOS Y GALAXIAS LOCALES"
+                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+            </StackPanel>
 
             <Grid>
                 <Grid.ColumnDefinitions>

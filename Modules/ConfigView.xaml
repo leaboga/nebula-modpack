@@ -12,12 +12,13 @@
         <StackPanel Margin="40,36,40,28">
 
             <!-- Header -->
-            <TextBlock Text="Ajustes"
-                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
-                       Margin="0,0,0,4"/>
-            <TextBlock Text="CONFIGURACIÓN DE JUEGO"
-                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"
-                       Margin="0,0,0,28"/>
+            <StackPanel Grid.Row="0" Margin="0,0,0,28">
+                <TextBlock Text="Panel de Ajustes"
+                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="CONFIGURACIÓN DEL NÚCLEO KRAKEN"
+                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+            </StackPanel>
 
             <!-- Instances Config Card -->
             <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">

@@ -16,6 +16,31 @@ namespace NebulaLauncher.Services
         public const string StatusStopped      = "Detenido";
         public const string StatusInstalling   = "Instalando...";
         public const string StatusNotInstalled = "No instalado";
+        public const string StatusReady        = "Listo";
+        public const string StatusError        = "Fallo de Sistema";
+
+        // Filter Labels
+        public const string FilterAll          = "🌌 Todos";
+        public const string FilterOptimization = "⚡ Optimización";
+        public const string FilterTech         = "🤖 Tecnología";
+        public const string FilterMagic        = "🔮 Magia";
+        public const string FilterAdventure    = "🧗 Aventura";
+        public const string FilterQuest        = "📜 Misiones";
+        public const string FilterFood         = "🍎 Alimentos";
+        public const string FilterUtility      = "🛠️ Herramientas";
+        
+        // UI Actions
+        public const string ActionInstall      = "⚡ INSTALAR";
+        public const string ActionReinstall    = "🔨 REINSTALAR";
+        public const string ActionUpdate       = "🔄 ACTUALIZAR";
+        public const string ActionDelete       = "🗑️ ELIMINAR";
+        public const string ActionSearch       = "Buscar...";
+        
+        // Generic Feedbacks
+        public const string FeedbackEmpty      = "El Abismo está despejado";
+        public const string FeedbackEmptyDesc  = "No se detectaron recursos con este patrón.";
+        public const string FeedbackLoading    = "Sincronizando con Modrinth...";
+        public const string FeedbackSearching  = "Explorando la Bóveda...";
 
         // Error Messages
         public const string ErrNetwork         = "Error de enlace galáctico: Fallo de red.";

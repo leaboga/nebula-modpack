@@ -226,8 +226,17 @@
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Name="CurrentViewLabel" Text="CENTRO DE COMANDO" Foreground="{DynamicResource AccentBrush}" FontSize="10" FontWeight="Black" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                            <Border Width="1" Height="10" Background="{DynamicResource BorderBrush}" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="ActiveProfileLabel" Text="Perfil Predeterminado" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            <Border Width="1" Height="12" Background="{DynamicResource BorderBrush}" Margin="0,0,12,0" VerticalAlignment="Center" Opacity="0.5"/>
+                            
+                            <StackPanel Orientation="Horizontal" x:Name="ActiveProfileInfo">
+                                <TextBlock x:Name="ActiveProfileLabel" Text="Perfil Predeterminado" Foreground="White" FontSize="11" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                <Border Background="#1A00F2FF" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" VerticalAlignment="Center">
+                                    <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#00F2FF" FontSize="9" FontWeight="Black"/>
+                                </Border>
+                                <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
+                                    <TextBlock x:Name="ActiveLoaderLabel" Text="---" Foreground="#10B981" FontSize="9" FontWeight="Black"/>
+                                </Border>
+                            </StackPanel>
                         </StackPanel>
                         <TextBlock x:Name="ViewTitleLabel" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
                     </StackPanel>
@@ -253,6 +262,10 @@
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                                             <TextBlock Text="PERFIL ACTIVO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
                                             <ComboBox x:Name="ProfileComboBox" Height="38" Style="{DynamicResource ModernComboBox}" SelectionChanged="ProfileComboBox_SelectionChanged"/>
+                                            <StackPanel Orientation="Horizontal" Margin="4,6,0,0" Opacity="0.5">
+                                                <TextBlock Text="RUTA: " Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black"/>
+                                                <TextBlock x:Name="ProfilePathLabel" Text="---" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="9" FontWeight="Bold"/>
+                                            </StackPanel>
                                         </StackPanel>
                                         <Button Grid.Column="1" Content="📋 Clonar" Width="90" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="CloneProfile_Click"/>
                                         <Button Grid.Column="2" Content="➕ Nuevo Perfil" Width="100" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Click="NewProfile_Click"/>
