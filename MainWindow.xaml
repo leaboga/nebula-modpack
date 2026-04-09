@@ -192,11 +192,12 @@
                         </Border>
 
                         <TextBlock x:Name="UpdateBadge" Text="CORE UPDATE PENDING" Foreground="{DynamicResource AccentBrush}" FontSize="9" FontWeight="Black" Cursor="Hand" Visibility="Collapsed" MouseDown="UpdateBadge_Click" Margin="4,0,0,8"/>
-                        <TextBlock x:Name="VersionFooterLabel" Text="KRAKEN ENGINE v2.6.0" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="4,0,0,0"/>
+                        <TextBlock x:Name="VersionFooterLabel" Text="KRAKEN ENGINE" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="4,0,0,0"/>
 
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,16,0,0">
                             <TextBlock Text="ADMINISTRACIÓN" Foreground="#FF4B4B" FontSize="8" FontWeight="Black" Margin="4,0,0,8"/>
-                            <Button Content="Publicar Actualización" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
+                            <Button Content="Publicar Motor Core" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarLauncher_Click" Margin="0,0,0,6"/>
+                            <Button Content="Publicar Assets/Mods" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
                         </StackPanel>
                         <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
                     </StackPanel>

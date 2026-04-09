@@ -40,7 +40,7 @@ namespace NebulaLauncher
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
         private static readonly SolidColorBrush BrushOffline = new(Color.FromRgb(0xEF, 0x44, 0x44));
 
-        private const string CurrentLauncherVersion = "2.6.0";
+
         private const string UpdateCheckUrl = "https://api.github.com/repos/leaboga/nebula-modpack/releases/latest";
         
         // ── Services ──────────────────────────────────────────────────────
@@ -138,6 +138,9 @@ namespace NebulaLauncher
                 var pulse = (Storyboard)FindResource("PulseEffect");
                 pulse.Begin(LiveNewsBadge);
                 pulse.Begin(ActiveUserDot);
+
+                // SINGLE SOURCE OF TRUTH: Set real version in footer
+                VersionFooterLabel.Text = $"KRAKEN ENGINE v{VersionManager.GetCurrentVersion()}";
             };
 
             this.SourceInitialized += (s, e) =>
@@ -153,19 +156,22 @@ namespace NebulaLauncher
                 await CargarVersionesAsync();
                 await UpdateServerStatus();
                 
-                string currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
+                string liveVersion = VersionManager.GetCurrentVersion();
                 
                 Dispatcher.Invoke(() => {
-                    VersionFooterLabel.Text = $"KRAKEN Launcher v{currentVersion}";
-                    AgregarLog($"🛡️ Version v{currentVersion} — Sistema operativo cargado con éxito.");
+                    VersionFooterLabel.Text = $"KRAKEN ENGINE v{liveVersion}";
+                    AgregarLog($"🛡️ Sistema Operativo Kraken v{liveVersion} — Núcleo estable.");
                     
-                    // Auto-focus para piloto en offline
                     if (_session.AuthMode == "offline" && string.IsNullOrEmpty(_session.Username))
                         NickTextBox.Focus();
                 });
                 
                 // Diferir update check para no quitar prioridad al juego
                 await Task.Delay(2000);
+                
+                // INTEGRITY SELF-TEST
+                VersionManager.RunSelfTests(msg => Debug.WriteLine($"[Versioning] {msg}"));
+
                 await CheckForLauncherUpdate();
                 ActualizarSessionHistoryUI();
                 await RefrescarSkin();
@@ -373,6 +379,7 @@ namespace NebulaLauncher
         {
             try
             {
+                string localV = VersionManager.GetCurrentVersion();
                 using var http = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
                 http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher");
                 
@@ -380,37 +387,67 @@ namespace NebulaLauncher
                 var root = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response);
                 if (root == null) return;
 
-                string latest = root.tag_name?.ToString() ?? "";
-                if (latest.StartsWith("v")) latest = latest.Substring(1);
+                string remoteTag = root.tag_name?.ToString() ?? "";
+                string remoteV   = VersionManager.CleanVersion(remoteTag);
+                
+                AgregarLog($"🔍 Auditoría de Actualización: Local={localV} | Remota={remoteV}");
 
-                if (string.IsNullOrEmpty(latest) || latest == CurrentLauncherVersion) 
+                // CRITICAL: Semantic comparison prevents loops
+                if (!VersionManager.IsNewer(localV, remoteV)) 
                 {
-                    AgregarLog("KRAKEN Launcher esta actualizado.");
+                    Dispatcher.Invoke(() => {
+                        UpdateBadge.Visibility = Visibility.Collapsed;
+                    });
                     return;
                 }
 
                 string changelog = root.name?.ToString() ?? "Nueva versión disponible";
+                
                 _updateDownloadUrl = null;
-                if (root.assets != null && root.assets.Count > 0)
+                if (root.assets != null)
                 {
-                    _updateDownloadUrl = root.assets[0].browser_download_url?.ToString();
+                    foreach (var asset in root.assets)
+                    {
+                        string assetName = asset.name?.ToString() ?? "";
+                        // TARGET: Explicit binary match (ignoring case)
+                        if (assetName.Equals("NebulaLauncher.exe", StringComparison.OrdinalIgnoreCase))
+                        {
+                            _updateDownloadUrl = asset.browser_download_url?.ToString();
+                            break;
+                        }
+                    }
+                    
+                    // Fallback: If specific name not found, take the first EXE
+                    if (string.IsNullOrEmpty(_updateDownloadUrl))
+                    {
+                        foreach (var asset in root.assets)
+                        {
+                            if (asset.name?.ToString()?.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) == true)
+                            {
+                                _updateDownloadUrl = asset.browser_download_url?.ToString();
+                                break;
+                            }
+                        }
+                    }
                 }
-                _updateVersion = latest;
+
+                if (string.IsNullOrEmpty(_updateDownloadUrl))
+                {
+                    AgregarLog("⚠ No se encontró un binario (.exe) válido en la release remota. Abortando update.");
+                    return;
+                }
+
+                _updateVersion = remoteV;
 
                 Dispatcher.Invoke(() =>
                 {
-                    UpdateBadge.Text       = "Actualizando...";
+                    UpdateBadge.Text       = "⚡ NUEVA CORE v" + remoteV;
                     UpdateBadge.Visibility = Visibility.Visible;
-                    UpdateBadge.ToolTip    = changelog;
-                    AgregarLog("Actualizacion disponible: v" + latest + ". Iniciando descarga...");
+                    UpdateBadge.ToolTip    = $"Detectada v{remoteV}: " + changelog;
+                    AgregarLog($"✨ [Actualización] Kraken v{remoteV} detectado. Cliqueá en el badge para instalar.");
                 });
-
-                if (!string.IsNullOrEmpty(_updateDownloadUrl))
-                {
-                    await AplicarUpdateAsync(_updateDownloadUrl);
-                }
             }
-            catch (Exception ex) { AgregarLog("Error verificando actualizaciones: " + ex.Message); }
+            catch (Exception ex) { AgregarLog("⚠ Error en auditoría de versión: " + ex.Message); }
         }
 
         private async void UpdateBadge_Click(object sender, MouseButtonEventArgs e)
@@ -455,42 +492,45 @@ namespace NebulaLauncher
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
 
-                string tempExe = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "NebulaLauncher_new.exe");
-                string updaterBat = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "nebula_updater.bat");
-
                 AgregarLog("Descargando actualizacion...");
 
                 using var http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher");
                 var bytes = await http.GetByteArrayAsync(downloadUrl);
+                
+                // Use a clean temp folder to avoid access conflicts
+                string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "NebulaUpdate_" + Guid.NewGuid().ToString("N"));
+                Directory.CreateDirectory(updateDir);
+                string tempExe = System.IO.Path.Combine(updateDir, "NebulaLauncher.exe");
                 await File.WriteAllBytesAsync(tempExe, bytes);
 
                 int pid = Process.GetCurrentProcess().Id;
                 string batContent = "@echo off\n" +
-                                   "title Nebula Updater\n" +
-                                   "echo Finalizando procesos...\n" +
+                                   "title Nebula Core Updater\n" +
+                                   "echo [UPDATE] Aguardando el cierre de procesos activos...\n" +
                                    $"taskkill /F /PID {pid} > nul 2>&1\n" +
                                    "timeout /t 3 /nobreak > nul\n" +
                                    "set /a count=0\n" +
                                    ":loop\n" +
                                    "set /a count+=1\n" +
-                                   "echo Intentando actualizar (intento %count% de 10)...\n" +
+                                   "echo [UPDATE] Intento de reemplazo %count% de 10...\n" +
                                    "copy /Y \"" + tempExe + "\" \"" + currentExe + "\"\n" +
                                    "if errorlevel 1 (\n" +
                                    "    if %count% geq 10 goto failed\n" +
                                    "    timeout /t 2 /nobreak > nul\n" +
                                    "    goto loop\n" +
                                    ")\n" +
-                                   "echo Actualizacion exitosa. Iniciando Nebula...\n" +
-                                   "del \"" + tempExe + "\"\n" +
+                                   "echo [UPDATE] Motor actualizado con éxito. Reiniciando...\n" +
                                    "start \"\" \"" + currentExe + "\"\n" +
+                                   "rmdir /s /q \"" + updateDir + "\"\n" +
                                    "del \"%~f0\"\n" +
                                    "exit\n" +
                                    ":failed\n" +
-                                   "echo Error: No se pudo sobrescribir el archivo. El proceso sigue bloqueado.\n" +
+                                   "echo [ERROR] No se pudo sobrescribir el motor galáctico. El archivo sigue bloqueado.\n" +
                                    "pause\n" +
                                    "exit\n";
 
+                string updaterBat = System.IO.Path.Combine(updateDir, "nebula_updater.bat");
                 await File.WriteAllTextAsync(updaterBat, batContent);
 
                 AgregarLog("🔄 Reiniciando para aplicar la actualización...");
@@ -518,6 +558,9 @@ namespace NebulaLauncher
             var t = new DispatcherTimer { Interval = TimeSpan.FromHours(1) };
             t.Tick += (_, _) => _ = CheckForLauncherUpdate();
             t.Start();
+            
+            // Run self-tests on startup
+            Task.Run(() => VersionManager.RunSelfTests(_ => { }));
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -1353,16 +1396,76 @@ namespace NebulaLauncher
         // ══════════════════════════════════════════════════════════════════
         //  ADMIN — PUBLISH UPDATE
         // ══════════════════════════════════════════════════════════════════
+        private async void PublicarLauncher_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender; btn.IsEnabled = false;
+            AgregarLog("🚀 Iniciando publicación de MOTOR CORE...");
+            try
+            {
+                // 1. Rebuild en modo Release
+                AgregarLog("🔨 Compilando binario final (Release)...");
+                int buildResult = await RunCommand("dotnet", "publish NebulaLauncher.csproj -c Release -r win-x64 --self-contained true");
+                if (buildResult != 0) { AgregarLog("❌ Error: Falló la compilación del motor."); return; }
+
+                // 2. Extraer versión REAL del binario generado
+                string publishPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "bin", "Release", "net8.0-windows", "win-x64", "publish", "NebulaLauncher.exe");
+                
+                // Fallback attempt to find the publish folder
+                if (!File.Exists(publishPath))
+                    publishPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "bin", "Release", "net8.0-windows", "win-x64", "publish", "NebulaLauncher.exe");
+
+                if (!File.Exists(publishPath))
+                {
+                    AgregarLog($"❌ Error: No se encontró el binario en '{publishPath}'");
+                    return;
+                }
+
+                var info = FileVersionInfo.GetVersionInfo(publishPath);
+                string realV = VersionManager.CleanVersion(info.ProductVersion ?? info.FileVersion ?? "1.0.0");
+                
+                // PRE-FLIGHT INTEGRITY CHECK: Prevents uploading stale binaries
+                string currentV = VersionManager.GetCurrentVersion();
+                if (realV != currentV)
+                {
+                    AgregarLog($"❌ ABORTANDO: Se detectó una inconsistencia crítica.");
+                    AgregarLog($"Binario Destino: v{realV}");
+                    AgregarLog($"Entorno Local:   v{currentV}");
+                    AgregarLog("Asegúrate de haber guardado cambios en el .csproj y recompilado.");
+                    return;
+                }
+
+                AgregarLog($"🛡️ Integridad verificada: Motor v{realV} listo para el Abismo.");
+
+                // 3. Crear Release en GitHub
+                string tag = $"v{realV}";
+                AgregarLog($"☁ Subiendo release '{tag}' a GitHub...");
+                
+                // Borrar release vieja si existe (opcional, pero ayuda a corregir errores de dedo)
+                await RunCommand("gh", $"release delete {tag} -y --repo leaboga/nebula-modpack");
+                
+                int code = await RunCommand("gh", $"release create {tag} \"{publishPath}\" --repo leaboga/nebula-modpack --title \"KRAKEN Launcher v{realV}\" --notes \"Actualización obligatoria del motor core.\"");
+                
+                if (code == 0)
+                {
+                    AgregarLog($"✅ Publicación de MOTOR v{realV} completada.");
+                    MessageBox.Show($"El Motor Core v{realV} ha sido desplegado.", "Kraken Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else AgregarLog($"⚠ Fallo al subir a GitHub (Código {code}).");
+            }
+            catch (Exception ex) { AgregarLog($"❌ Error fatal en publicación de motor: {ex.Message}"); }
+            finally { btn.IsEnabled = true; }
+        }
+
         private async void PublicarActualizacion_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("🚀 Iniciando proceso de publicación centralizado...");
+            AgregarLog("🚀 Iniciando publicación de ASSETS (Mods/Configs)...");
             try
             {
                 // 1. Determinar Nueva Versión (SemVer Patch default)
                 string currentV = _manifestActual?.Version ?? "1.0.0";
                 string nextV    = VersionManager.Increment(currentV, VersionSegment.Patch);
-                AgregarLog($"📦 Versionado: {currentV} ➔ {nextV}");
+                AgregarLog($"📦 Versionado de Assets: {currentV} ➔ {nextV}");
 
                 // 2. Empaquetar Assets Locales
                 string tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "kraken-pub-" + Guid.NewGuid().ToString("N"));
