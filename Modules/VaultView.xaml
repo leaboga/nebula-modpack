@@ -9,14 +9,24 @@
     </UserControl.Resources>
 
     <Grid x:Name="VaultRoot">
-        <Grid Margin="24,18">
+        <Grid Margin="40,36,40,28">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,28">
+                <TextBlock Text="Bóveda de Recursos"
+                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="SISTEMA DE EXPLORACIÓN MODRINTH"
+                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+            </StackPanel>
+
             <!-- CONTROLS HEADER -->
-            <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid Grid.Row="1" Margin="0,0,0,16">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Button Content="Refrescar Manifiesto" Style="{DynamicResource SecondaryButton}" Height="34" Click="BtnRefresh_Click"/>
                 </StackPanel>
@@ -39,7 +49,7 @@
             </Grid>
 
             <!-- CUERPO -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="220"/>
                     <ColumnDefinition Width="*"/>

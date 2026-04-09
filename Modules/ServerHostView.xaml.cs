@@ -12,6 +12,7 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.Linq;
+using NebulaLauncher.Services;
 
 namespace NebulaLauncher.Modules
 {
@@ -27,7 +28,7 @@ namespace NebulaLauncher.Modules
             InitializeComponent();
             
             // Set default path
-            _serverFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "servers", "default_server");
+            _serverFolderPath = Path.Combine(PathService.ServersFolder, "default_server");
             ServerPathBox.Text = _serverFolderPath;
             
             // Suscribir al bridge para enviar comandos
@@ -63,14 +64,14 @@ namespace NebulaLauncher.Modules
             
             if (exists)
             {
-                StatusText.Text = "Instalado / Detenido";
+                StatusText.Text = KrakenStrings.StatusStopped;
                 StatusDot.Fill = Brushes.Gray;
                 BtnStart.IsEnabled = true;
                 BtnInstall.Content = "🔨 REINSTALAR SERVIDOR";
             }
             else
             {
-                StatusText.Text = "No instalado";
+                StatusText.Text = KrakenStrings.StatusNotInstalled;
                 StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0x3D, 0x35, 0x60));
                 BtnStart.IsEnabled = false;
                 BtnInstall.Content = "⚡ INSTALAR SERVIDOR";
@@ -330,7 +331,7 @@ namespace NebulaLauncher.Modules
                     _serverProcess.BeginOutputReadLine();
                     _serverProcess.BeginErrorReadLine();
                     
-                    StatusText.Text = "Ejecutando";
+                    StatusText.Text = KrakenStrings.StatusRunning;
                     StatusDot.Fill = Brushes.LimeGreen;
                     BtnStart.IsEnabled = false;
                     BtnStop.IsEnabled = true;

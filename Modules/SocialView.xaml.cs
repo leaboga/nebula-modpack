@@ -126,7 +126,7 @@ namespace NebulaLauncher.Modules
 
                                 // But force the dot/status offline
                                 if (StatusDot  != null) StatusDot.Fill = BrushOffline;
-                                if (StatusText != null) { StatusText.Text = "OFFLINE"; StatusText.Foreground = BrushOffline; }
+                                if (StatusText != null) { StatusText.Text = KrakenStrings.StatusOffline; StatusText.Foreground = BrushOffline; }
                             }
                             else
                             {
@@ -158,7 +158,7 @@ namespace NebulaLauncher.Modules
 
             if (StatusText != null)
             {
-                StatusText.Text       = online ? "ONLINE" : "OFFLINE";
+                StatusText.Text       = online ? KrakenStrings.StatusOnline : KrakenStrings.StatusOffline;
                 StatusText.Foreground = online ? BrushFg : BrushOffline;
             }
 

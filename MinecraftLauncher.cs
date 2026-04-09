@@ -14,6 +14,7 @@ using CmlLib.Core.ModLoaders.FabricMC;
 using System.Linq;
 using System.Reflection;
 using NebulaLauncher.Modules;
+using NebulaLauncher.Services;
 
 namespace NebulaLauncher
 {
@@ -247,7 +248,7 @@ namespace NebulaLauncher
                }
             } catch { }
 
-            string javaRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "runtime", $"java{version}");
+            string javaRoot = Path.Combine(PathService.AppFolder, "runtime", $"java{version}");
             string binPath = Path.Combine(javaRoot, "bin", "java.exe");
             if (File.Exists(binPath)) return binPath;
             return "java.exe";

@@ -51,7 +51,7 @@ namespace NebulaLauncher
             _modsFolder = Path.Combine(gameFolder, "mods");
             Directory.CreateDirectory(_modsFolder);
             _http.Timeout = TimeSpan.FromSeconds(5);
-            _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/5.0");
+            _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/" + Services.VersionManager.GetCurrentVersion());
         }
 
         public async Task<VersionsIndex?> ObtenerVersionsIndex() {

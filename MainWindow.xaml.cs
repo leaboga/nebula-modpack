@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using NebulaLauncher.Services;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -31,10 +32,7 @@ namespace NebulaLauncher
     {
         // ── Paths ─────────────────────────────────────────────────────────
         public MinecraftProfile? CurrentProfile => _session.Profiles.Find(p => p.Id == _session.CurrentProfileId) ?? (_session.Profiles.Count > 0 ? _session.Profiles[0] : null);
-        private static readonly string AppFolder   = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher");
-        private static readonly string SessionFile = System.IO.Path.Combine(AppFolder, "session.json");
-        public string GameFolder => System.IO.Path.Combine(AppFolder, "instances", CurrentProfile?.Id ?? "default");
-        private static readonly string LogFile     = System.IO.Path.Combine(AppFolder, "launcher.log");
+        public string GameFolder => PathService.GetInstanceFolder(CurrentProfile?.Id ?? "default");
 
         // ── Theme brushes ─────────────────────────────────────────────────
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
@@ -107,7 +105,7 @@ namespace NebulaLauncher
         {
             InitializeComponent();
 
-            Directory.CreateDirectory(AppFolder);
+            PathService.Initialize();
             CargarSesion();
 
             InitializeProfileServices();
@@ -140,7 +138,7 @@ namespace NebulaLauncher
                 pulse.Begin(ActiveUserDot);
 
                 // SINGLE SOURCE OF TRUTH: Set real version in footer
-                VersionFooterLabel.Text = $"KRAKEN ENGINE v{VersionManager.GetCurrentVersion()}";
+                VersionFooterLabel.Text = $"{KrakenStrings.LauncherName} v{VersionManager.GetCurrentVersion()}";
             };
 
             this.SourceInitialized += (s, e) =>
@@ -724,6 +722,7 @@ namespace NebulaLauncher
 
         public void AgregarLog(string mensaje)
         {
+            LoggerService.Log(mensaje);
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 try
@@ -752,7 +751,7 @@ namespace NebulaLauncher
                 catch { }
             }), DispatcherPriority.Background);
             
-            Task.Run(() => { try { File.AppendAllText(LogFile, $"[{DateTime.Now:HH:mm:ss}] {mensaje}\n"); } catch { } });
+            Task.Run(() => { try { File.AppendAllText(PathService.LogFile, $"[{DateTime.Now:HH:mm:ss}] {mensaje}\n"); } catch { } });
         }
 
         // ══════════════════════════════════════════════════════════════════
@@ -763,8 +762,8 @@ namespace NebulaLauncher
             _isInitializing = true;
             try
             {
-                if (File.Exists(SessionFile))
-                    _session = JsonConvert.DeserializeObject<UserSession>(File.ReadAllText(SessionFile)) ?? new UserSession();
+                if (File.Exists(PathService.SessionFile))
+                    _session = JsonConvert.DeserializeObject<UserSession>(File.ReadAllText(PathService.SessionFile)) ?? new UserSession();
             }
             catch (Exception ex) { AgregarLog($"\u26A0 Error cargando sesi\u00F3n: {ex.Message}"); }
 
@@ -807,7 +806,7 @@ namespace NebulaLauncher
                     try
                     {
                         string json = JsonConvert.SerializeObject(_session, Formatting.Indented);
-                        File.WriteAllText(SessionFile, json);
+                        File.WriteAllText(PathService.SessionFile, json);
                         break;
                     }
                     catch (IOException) { Task.Delay(100).Wait(); }
@@ -1024,8 +1023,8 @@ namespace NebulaLauncher
 
         private void VerLog_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(LogFile)) { AgregarLog("ℹ️ No hay log guardado aún."); return; }
-            try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{LogFile}\"", UseShellExecute = true }); }
+            if (!File.Exists(PathService.LogFile)) { AgregarLog("ℹ️ No hay log guardado aún."); return; }
+            try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.LogFile}\"", UseShellExecute = true }); }
             catch (Exception ex) { AgregarLog($"⚠️ Error abriendo log: {ex.Message}"); }
         }
 

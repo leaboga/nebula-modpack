@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using NebulaLauncher.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -43,7 +44,7 @@ namespace NebulaLauncher.Modules
         }
 
         public bool ShowButton => !IsDownloading;
-        public string ButtonLabel => IsInstalled ? "✓ INSTALADO" : "📥 INSTALAR";
+        public string ButtonLabel => IsInstalled ? KrakenStrings.LabelInstalled : KrakenStrings.LabelInstall;
 
         public Brush ButtonBrush 
         {
@@ -109,7 +110,7 @@ namespace NebulaLauncher.Modules
                 ResultsList.ItemsSource = _results;
 
                 if (!_http.DefaultRequestHeaders.Contains("User-Agent"))
-                    _http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NebulaLauncher/2.0");
+                    _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/" + VersionManager.GetCurrentVersion());
 
                 LoadManifest();
                 UpdateLocalWeight();

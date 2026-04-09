@@ -16,25 +16,28 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="24">
+    <Grid Margin="40,36,40,28">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,24">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="📦 MODPACK HUB" Foreground="White" FontSize="26" FontWeight="Black"/>
-                <Border Background="#207C3AED" CornerRadius="8" Padding="12,4" Margin="20,0,0,0">
-                    <TextBlock Text="EXPLORADOR ABISAL" Foreground="#C4B5FD" FontSize="11" FontWeight="Bold"/>
-                </Border>
-            </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0,0,0,28">
+            <TextBlock Text="Modpack Hub"
+                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                       Margin="0,0,0,4"/>
+            <TextBlock Text="NÚCLEO DE PERFILES GALÁCTICOS"
+                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+        </StackPanel>
 
+        <!-- Search / Actions -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Border Background="#0D151D" CornerRadius="12" Width="250" BorderBrush="#1E2C38" BorderThickness="1">
                     <Grid>
-                        <TextBox x:Name="SearchBox" Background="Transparent" BorderThickness="0" Foreground="White" Padding="14,8,40,8" VerticalContentAlignment="Center" KeyDown="SearchBox_KeyDown"/>
+                        <TextBox x:Name="SearchBox" Background="Transparent" BorderThickness="0" Foreground="White" Padding="14,8,40,8" VerticalContentAlignment="Center" KeyDown="SearchBox_KeyDown" Tag="Buscar modpacks..."/>
                         <Button HorizontalAlignment="Right" Content="🔍" Background="Transparent" BorderThickness="0" Foreground="#6D8A99" Width="40" Click="BtnSearch_Click"/>
                     </Grid>
                 </Border>
@@ -42,7 +45,7 @@
         </Grid>
 
         <!-- CUERPO -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>

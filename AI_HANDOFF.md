@@ -24,7 +24,7 @@ Este documento resume el proceso de rebranding y rediseño total aplicado al rep
 
 - `Themes/Styles.xaml`: Reescritura total del sistema de tokens y pinceles.
 - `MainWindow.xaml`: Rediseño de la estructura visual, logos y efectos de brillo.
-- `MainWindow.xaml.cs`: Actualización de lógica de fondos, versiones (v2.5.0) y logs.
+- `MainWindow.xaml.cs`: Actualización de lógica de fondos, versiones (v2.6.3) y logs.
 - `NebulaLauncher.csproj`: Actualización de metadatos del producto y autor.
 - `App.xaml`: Cambio de tooltip en el tray icon.
 - `Modules/*.xaml`: Aplicación global de la nueva identidad visual.
@@ -32,8 +32,12 @@ Este documento resume el proceso de rebranding y rediseño total aplicado al rep
 ## Deuda Pendiente / Siguientes Pasos
 
 1. **Icono del Ejecutable**: El archivo `nebula.ico` sigue siendo el icono físico del .exe. Sería ideal generar un `kraken.ico` para completar la transformación.
-2. **Nombres de Archivos**: Internamente, muchos archivos y namespaces siguen llamándose `NebulaLauncher`. Esto se mantuvo para evitar romper referencias técnicas masivas, pero se puede refactorizar en el futuro si se desea coherencia total.
-3. **Imágenes Locales**: Algunas imágenes incrustadas en el repo (si las hay) podrían seguir teniendo logos antiguos.
+2. **Nombres de Archivos**: Internamente, muchos archivos y namespaces siguen llamándose `NebulaLauncher`.
+3. **Optimización de Recursos**: Mejorar el manejo de memoria en el feed de Social si el tráfico aumenta.
+4. **Validación de Assets**: Automatizar aún más la verificación de assets en el CI si se implementa.
+
+## Reglas de Lanzamiento
+Se ha establecido el archivo `docs/RELEASE_RULES.md` como ley fundamental para cualquier cambio que afecte la versión o la publicación del binario. **Cualquier agente debe leerlo antes de actuar.**
 
 ## ¿Cómo validar los cambios?
 
@@ -54,14 +58,23 @@ git status
 git add .
 
 # 3. Commit con mensaje claro
-git commit -m "Rebranding radical: Nebula -> KRAKEN (Abyssal Theme v2.5.0)"
+git commit -m "Rebranding radical: Nebula -> KRAKEN (Abyssal Theme v2.6.3)"
 
 # 4. Push a la rama actual (ej. master/main)
 git push origin master
 ```
 
-## Publicación
+## Publicaciones Recientes
 
-Se ha generado el ejecutable y se ha publicado en la sección de Releases de GitHub:
-- **Link**: [Release v2.5.0 - KRAKEN Alpha](https://github.com/leaboga/nebula-modpack/releases/tag/v2.5.0)
-- **Asset**: `NebulaLauncher.exe` (Single-file, self-contained win-x64).
+- **v2.6.4 (Actual)**: [Hardening Arquitectónico](https://github.com/leaboga/nebula-modpack/releases/tag/v2.6.4)
+  - Centralización total de rutas en `PathService`.
+  - Implementación de `LoggerService` hilo-seguro para diagnóstico global.
+  - Unificación visual de Headers y Márgenes en todos los módulos.
+  - Lexicón centralizado en `KrakenStrings` para consistencia lingüística.
+- **v2.6.3**: [Interfaz Refinada](https://github.com/leaboga/nebula-modpack/releases/tag/v2.6.3)
+  - Pulido total de UX/UI y traducción completa a español.
+  - Implementación de `RELEASE_RULES.md` para estandarizar despliegues.
+  - Hardening de seguridad y metadatos de integridad.
+- **v2.6.2**: Estabilización de núcleo y blindaje de versionado.
+- **v2.6.1**: Hotfix de bucle de actualización.
+- **v2.5.0**: Rebranding radical Nebula -> KRAKEN.
