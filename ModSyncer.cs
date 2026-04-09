@@ -91,10 +91,6 @@ namespace NebulaLauncher
                             m.Url = m.Url.Replace("/TU-USUARIO/", "/leaboga/");
                             fixedAny = true;
                         }
-                        if (m.Url.Contains("/modpack-1.0.0/")) {
-                            m.Url = m.Url.Replace("/modpack-1.0.0/", "/modpack-1.0.1/");
-                            fixedAny = true;
-                        }
                     }
                     if (fixedAny) OnLog?.Invoke("✨ Centinela: Se han corregido URLs de GitHub automáticamente.");
                 }

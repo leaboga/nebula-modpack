@@ -1356,44 +1356,83 @@ namespace NebulaLauncher
         private async void PublicarActualizacion_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("🚀 Publicando actualización global...");
+            AgregarLog("🚀 Iniciando proceso de publicación centralizado...");
             try
             {
-                string tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "nebula-pub-" + Guid.NewGuid().ToString("N"));
+                // 1. Determinar Nueva Versión (SemVer Patch default)
+                string currentV = _manifestActual?.Version ?? "1.0.0";
+                string nextV    = VersionManager.Increment(currentV, VersionSegment.Patch);
+                AgregarLog($"📦 Versionado: {currentV} ➔ {nextV}");
+
+                // 2. Empaquetar Assets Locales
+                string tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "kraken-pub-" + Guid.NewGuid().ToString("N"));
                 string zipPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "client-assets.zip");
                 Directory.CreateDirectory(tempDir);
+                
                 foreach (var target in new[] { "options.txt", "config", "shaderpacks", "resourcepacks", "scripts" })
                 {
                     string source = System.IO.Path.Combine(GameFolder, target);
                     if      (File.Exists(source))      File.Copy(source, System.IO.Path.Combine(tempDir, target), true);
                     else if (Directory.Exists(source)) CopyDirectory(source, System.IO.Path.Combine(tempDir, target));
                 }
+                
                 if (File.Exists(zipPath)) File.Delete(zipPath);
                 ZipFile.CreateFromDirectory(tempDir, zipPath);
-                await RunCommand("gh", $"release delete client-assets-1.0 --repo leaboga/nebula-modpack --yes");
-                int code = await RunCommand("gh", $"release create client-assets-1.0 \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Client Assets\" --notes \"Update\"");
-                if (code != 0) { AgregarLog($"⚠ gh create falló con código {code}."); return; }
+
+                // 3. Crear Release en GitHub con Tag Dinámico
+                string tag = $"v{nextV}-assets";
+                AgregarLog($"☁ Subiendo release '{tag}' a GitHub...");
+                int code = await RunCommand("gh", $"release create {tag} \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Assets v{nextV}\" --notes \"Actualización automática de configuración y mods.\"");
+                if (code != 0) { AgregarLog($"⚠ Fallo al crear release (código {code}). Verificá credenciales de gh."); return; }
+
+                // 4. Sincronizar Repositorio de Manifiesto
+                string tempRepo = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "kraken-repo-sync");
+                if (Directory.Exists(tempRepo)) RobustDelete(tempRepo);
+                await RunCommand("gh", $"repo clone leaboga/nebula-modpack \"{tempRepo}\"");
+
+                // Crear nueva carpeta de versión
+                string newVersionDir = System.IO.Path.Combine(tempRepo, "versions", nextV);
+                Directory.CreateDirectory(newVersionDir);
+                string manifestPath = System.IO.Path.Combine(newVersionDir, "manifest.json");
+
+                // Generar nuevo manifiesto basado en el actual
                 if (_manifestActual != null)
                 {
-                    string tempRepo = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "nebula-repo-sync");
-                    if (Directory.Exists(tempRepo)) RobustDelete(tempRepo);
-                    await RunCommand("gh", $"repo clone leaboga/nebula-modpack \"{tempRepo}\"");
-                    string manifestPath = System.IO.Path.Combine(tempRepo, "versions", _manifestActual.Version, "manifest.json");
-                    if (File.Exists(manifestPath))
+                    _manifestActual.Version = nextV;
+                    _manifestActual.ConfigHash = DateTime.Now.Ticks.ToString();
+                    _manifestActual.ForceConfigUpdate = true;
+                    File.WriteAllText(manifestPath, JsonConvert.SerializeObject(_manifestActual, Formatting.Indented));
+                    
+                    // Actualizar versions-index.json
+                    string indexPath = System.IO.Path.Combine(tempRepo, "versions-index.json");
+                    if (File.Exists(indexPath))
                     {
-                        dynamic manifest = JsonConvert.DeserializeObject(File.ReadAllText(manifestPath))!;
-                        manifest.configHash = DateTime.Now.Ticks.ToString();
-                        manifest.forceConfigUpdate = true;
-                        File.WriteAllText(manifestPath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
-                        string savedDir = Directory.GetCurrentDirectory();
-                        Directory.SetCurrentDirectory(tempRepo);
-                        await RunCommand("git", "add ."); await RunCommand("git", "commit -m \"Update Configs Hash\""); await RunCommand("git", "push origin main");
-                        Directory.SetCurrentDirectory(savedDir);
+                        var index = JsonConvert.DeserializeObject<VersionsIndex>(File.ReadAllText(indexPath));
+                        if (index != null)
+                        {
+                            index.LatestVersion = nextV;
+                            index.AvailableVersions.Insert(0, new VersionEntry { 
+                                Version = nextV, 
+                                Label = $"v{nextV} ({DateTime.Now:dd/MM HH:mm})",
+                                ManifestUrl = $"https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/{nextV}/manifest.json"
+                            });
+                            File.WriteAllText(indexPath, JsonConvert.SerializeObject(index, Formatting.Indented));
+                        }
                     }
+
+                    // Push a GitHub
+                    string savedDir = Directory.GetCurrentDirectory();
+                    Directory.SetCurrentDirectory(tempRepo);
+                    await RunCommand("git", "add ."); 
+                    await RunCommand("git", "commit -m \"Release v" + nextV + "\""); 
+                    await RunCommand("git", "push origin main");
+                    Directory.SetCurrentDirectory(savedDir);
                 }
-                AgregarLog("✅ Actualización publicada con éxito.");
+
+                AgregarLog($"✅ Publicación v{nextV} completada satisfactoriamente.");
+                MessageBox.Show($"La versión {nextV} ha sido desplegada en el enjambre.", "Éxito Galáctico", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"❌ Error: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"❌ Error fatal en publicación: {ex.Message}"); }
             finally { btn.IsEnabled = true; }
         }
 
@@ -1419,8 +1458,25 @@ namespace NebulaLauncher
 
         private void RobustDelete(string path)
         {
-            try { var d = new DirectoryInfo(path) { Attributes = FileAttributes.Normal }; foreach (var i in d.GetFileSystemInfos("*", SearchOption.AllDirectories)) i.Attributes = FileAttributes.Normal; d.Delete(true); }
-            catch (Exception ex) { AgregarLog($"⚠ RobustDelete: {ex.Message}"); }
+            try 
+            {
+                if (!Directory.Exists(path)) return;
+                var d = new DirectoryInfo(path) { Attributes = FileAttributes.Normal }; 
+                foreach (var i in d.GetFileSystemInfos("*", SearchOption.AllDirectories)) i.Attributes = FileAttributes.Normal; 
+                d.Delete(true); 
+            }
+            catch (Exception ex) 
+            { 
+                AgregarLog($"⚠ RobustDelete (Fase 1): {ex.Message}. Intentando desintegración forzada..."); 
+                try
+                {
+                    // Fallback agresivo para locks de Windows (Memoria de Usuario)
+                    var psi = new ProcessStartInfo("cmd.exe", $"/c rd /s /q \"{path}\"") { CreateNoWindow = true, UseShellExecute = false };
+                    Process.Start(psi)?.WaitForExit();
+                    if (Directory.Exists(path)) AgregarLog("❌ Error: La carpeta resiste la eliminación forzada.");
+                }
+                catch (Exception ex2) { AgregarLog($"⚠ RobustDelete (Fase 2): {ex2.Message}"); }
+            }
         }
 
         private Task<int> RunCommand(string cmd, string args)

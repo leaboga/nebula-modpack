@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.6.1",
+    "date": "09 de Abril, 2026",
+    "title": "KRAKEN Stabilization & Centralized Versioning",
+    "type": "update",
+    "changes": [
+      "🛠️ Estabilidad: Corregido crash crítico (XamlParseException) en la vista Social al restaurar el estilo global de barras de progreso.",
+      "📦 Versionado: Implementación del **VersionManager Service**. Ahora las publicaciones incrementan automáticamente la versión del parche (x.x.+1) de forma semántica.",
+      "🚀 Admin: Refactorización total de la lógica de publicación. Se eliminaron etiquetas hardcodeadas en favor de tags dinámicos y sincronización de manifiesto automatizada.",
+      "✨ UX: Corregido el bug de renderizado en el Mod Hub que causaba que la lista apareciera vacía al entrar por primera vez.",
+      "🗑️ Sistema: Mejora en la función RobustDelete con desintegración forzada vía shell para evitar errores de permisos al eliminar carpetas bloqueadas."
+    ]
+  },
+  {
     "version": "2.1.1",
     "date": "08 de Abril, 2026",
     "title": "Real-Time Chat Bridge & UI Polish",

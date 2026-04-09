@@ -122,14 +122,21 @@ namespace NebulaLauncher.Modules
 
         private async void VaultView_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(50);
+            // Give WPF time to settle the bindings and templates
+            await Task.Delay(150);
+            
             if (_results.Count == 0 && !_isSearching)
+            {
+                Debug.WriteLine("[VaultView] Initializing primary search...");
                 _ = SearchModrinth("", true);
+            }
         }
 
         private void FilterType_Changed(object sender, RoutedEventArgs e)
         {
-            if (FilterMods == null || _isSearching) return;
+            if (FilterMods == null) return;
+            
+            // Allow changing type even if searching (it will cancel/be overridden)
             if (FilterMods.IsChecked == true) _currentType = "mod";
             else if (FilterShaders.IsChecked == true) _currentType = "shader";
             else if (FilterResourcePacks.IsChecked == true) _currentType = "resourcepack";
