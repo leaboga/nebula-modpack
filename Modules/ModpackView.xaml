@@ -114,6 +114,9 @@
                                                     <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsFavorite, Converter={StaticResource BoolToVis}}">
                                                         <TextBlock Text="FAVORITO" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
                                                     </Border>
+                                                    <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}">
+                                                        <TextBlock Text="INSTALADO" Foreground="#10B981" FontSize="8" FontWeight="Black"/>
+                                                    </Border>
                                                     <Border Background="#1A60A5FA" CornerRadius="4" Padding="6,2" Visibility="{Binding IsRecent, Converter={StaticResource BoolToVis}}">
                                                         <TextBlock Text="RECIENTE" Foreground="#93C5FD" FontSize="8" FontWeight="Black"/>
                                                     </Border>

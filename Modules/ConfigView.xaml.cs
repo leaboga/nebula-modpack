@@ -142,9 +142,9 @@ namespace NebulaLauncher.Modules
                     _mainWindow.CurrentProfile.RamGB = suggested;
                     RamSlider.Value = suggested;
                 }
-                MessageBox.Show($"Nebula sugiere {suggested}GB para tu sistema ({Math.Round(total,1)}GB Detectados).", "Optimizaci\u00F3n Lista", MessageBoxButton.OK, MessageBoxImage.Information);
+                NotificationService.Instance.ShowInfo($"Nebula sugiere {suggested}GB para tu sistema ({Math.Round(total,1)}GB Detectados).");
             }
-            catch { MessageBox.Show("No se pudo detectar la memoria autom\u00E1ticamente.", "Error"); }
+            catch { NotificationService.Instance.ShowError("No se pudo detectar la memoria automáticamente."); }
         }
 
         private void BtnOpenShaders_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("shaderpacks");
@@ -183,9 +183,9 @@ namespace NebulaLauncher.Modules
                 System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, shaderDir, true);
                 File.Delete(zipPath);
                 
-                MessageBox.Show("✅ 'Nebula Shaders' instalados correctamente.", "Descarga Completada", MessageBoxButton.OK, MessageBoxImage.Information);
+                NotificationService.Instance.ShowSuccess("'Nebula Shaders' instalados correctamente.");
             }
-            catch (Exception ex) { MessageBox.Show($"Error al descargar shaders: {ex.Message}", "Error"); }
+            catch (Exception ex) { NotificationService.Instance.ShowError($"Error al descargar shaders: {ex.Message}"); }
             finally { btn.IsEnabled = true; btn.Content = "📦 Descargar Shaders"; }
         }
 
@@ -238,12 +238,11 @@ namespace NebulaLauncher.Modules
             try
             {
                 await _configManager.ApplyPerformancePreset("Papa");
-                MessageBox.Show("✅ Modo Papa aplicado.\nGráficos optimizados para máximo rendimiento.",
-                                "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
+                NotificationService.Instance.ShowSuccess("Modo Papa aplicado. Gráficos optimizados.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error aplicando preset:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                NotificationService.Instance.ShowError($"Error aplicando preset: {ex.Message}");
             }
             finally { btn.IsEnabled = true; }
         }
@@ -325,11 +324,11 @@ namespace NebulaLauncher.Modules
                 {
                     var files = Directory.GetFiles(logsDir);
                     foreach (var f in files) try { File.Delete(f); } catch { }
-                    MessageBox.Show($"✅ Se han limpiado {files.Length} archivos de registro (logs).", "Limpieza Completada");
+                    NotificationService.Instance.ShowSuccess($"Se han limpiado {files.Length} archivos de registro (logs).");
                 }
-                else MessageBox.Show("No se encontraron registros para limpiar.", "Mantenimiento");
+                else NotificationService.Instance.ShowInfo("No se encontraron registros para limpiar.");
             }
-            catch (Exception ex) { MessageBox.Show("Error en la limpieza: " + ex.Message); }
+            catch (Exception ex) { NotificationService.Instance.ShowError("Error en la limpieza: " + ex.Message); }
         }
 
         private void BtnLinkCloud_Click(object sender, RoutedEventArgs e)

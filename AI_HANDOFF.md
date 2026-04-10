@@ -80,17 +80,39 @@ Punto critico agregado:
 Ejemplo:
 - si la version publicada actual es `2.6.4` y se hacen cambios nuevos, la siguiente release debe ser `2.6.5` o la que corresponda
 
+## Version 2.6.9
+
+Esta sesión se enfoca en una refactorización arquitectónica profunda y mejoras en la retroalimentación del sistema:
+
+- **Refactorización Arquitectónica**: 
+  - Se crearon servicios dedicados (`NavigationService`, `EffectService`, `NotificationService`) para reducir el tamaño y complejidad de `MainWindow.xaml.cs`.
+  - La navegación entre módulos ahora está centralizada, eliminando el switch-case gigante del lanzador.
+  - Los efectos visuales (partículas, temas, fondos) fueron desacoplados de la lógica de negocio.
+- **Sistema de Notificaciones (Toasts)**:
+  - Implementación de un sistema de notificaciones no intrusivas (`NotificationToast`).
+  - Reemplazo de múltiples `MessageBox` tradicionales por avisos visuales modernos y animados.
+- **Discovery Enhancements**:
+  - `Modpack Hub` ahora detecta y marca modpacks instalados mediante `ModpackId`.
+  - Sincronización automática del estado de instalación con el sistema de perfiles.
+- **Limpieza de Deuda**: 
+  - Eliminación de lógica de renderizado redundante en el hilo de la UI.
+  - Mejora en la estructura del layout principal para soporte de capas de notificación.
+
+Validación:
+- Estructura de servicios verificada.
+- Notificaciones integradas en `ConfigView`, `ModpackView` y `MainWindow`.
+
 ## Riesgos / deuda pendiente
 
-- `MainWindow.xaml.cs` sigue siendo un archivo grande y todavia conviene seguir extrayendo responsabilidades.
-- Conviene expandir `KrakenStrings` para cubrir mas textos visibles y evitar hardcodes dispersos.
-- Mod Hub y Modpack Hub probablemente necesiten una pasada funcional adicional para filtros, compatibilidad y estados.
-- Revisar si quedan textos con encoding raro en descripciones largas o contenido proveniente de APIs externas.
+- A pesar de la refactorización, `MainWindow.xaml.cs` aún conserva lógica de alto nivel que podría ser extraída (ej. lógica de login/auth).
+- Ampliar el uso de `NotificationService` a todos los módulos restantes (`SocialView`, `ModManagerView`, etc).
+- Optimizar la virtualización en el `VaultView` para catálogos muy extensos.
 
 ## Proximos pasos sugeridos
 
-1. Mejorar Mod Hub con filtros mas claros, mejor metadata y mejores estados vacios/error/loading.
-2. Mejorar Modpack Hub con filtros por version, loader y categoria.
-3. Seguir reduciendo deuda tecnica en `MainWindow.xaml.cs`.
-4. Expandir `KrakenStrings` y centralizar mas copy del producto.
-5. Si se publican cambios nuevos despues de esta tanda, respetar `docs/RELEASE_RULES.md`, bump-ear version y generar nueva release superior a `2.6.8`.
+1. Migrar la lógica de autenticación (Premium/Offline) a un `AuthService` dedicado.
+2. Implementar confirmaciones personalizadas mediante el sistema de toasts para unificar el lenguaje visual.
+3. Revisar el rendimiento del Mod Hub en búsquedas con resultados masivos (>50 items).
+4. Continuar la expansión de `KrakenStrings` para soportar multi-idioma en el futuro.
+5. Mantener la consistencia de versiones en `.csproj` al publicar.
+

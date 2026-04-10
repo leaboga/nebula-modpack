@@ -156,7 +156,7 @@ namespace NebulaLauncher.Modules
         {
             if (_selectedPath == null || !File.Exists(_selectedPath)) return;
             Clipboard.SetText(_selectedPath);
-            MessageBox.Show("Ruta copiada al portapapeles.", "KRAKEN Capturas");
+            NotificationService.Instance.ShowSuccess("Ruta copiada al portapapeles.");
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -171,11 +171,11 @@ namespace NebulaLauncher.Modules
                 _selectedPath = null;
                 FullscreenOverlay.Visibility = Visibility.Collapsed;
                 LoadScreenshots();
-                MessageBox.Show("Captura eliminada.", "KRAKEN Capturas");
+                NotificationService.Instance.ShowSuccess("Captura eliminada.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo eliminar la captura: " + ex.Message, "KRAKEN Capturas");
+                NotificationService.Instance.ShowError("No se pudo eliminar la captura: " + ex.Message);
             }
         }
 

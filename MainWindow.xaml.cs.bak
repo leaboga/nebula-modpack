@@ -109,6 +109,7 @@ namespace NebulaLauncher
 
             InitializeProfileServices();
             InitializeModernServices();
+            InitializeModernServices();
 
             PlayButton.IsEnabled = false;
 
@@ -198,7 +199,36 @@ namespace NebulaLauncher
         }// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         //  PARTICLES
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        private void IniciarParticulas() => EffectService.Instance.StartParticles();
+        private void IniciarParticulas()
+        {
+            for (int i = 0; i < 45; i++)
+            {
+                double size    = _rnd.NextDouble() * 3 + 1;
+                double opacity = _rnd.NextDouble() * 0.35 + 0.05;
+                var dot = new Ellipse
+                {
+                    Width  = size,
+                    Height = size,
+                    Fill   = new SolidColorBrush(Color.FromArgb(
+                        (byte)(opacity * 255),
+                        (byte)_rnd.Next(100, 200),
+                        (byte)_rnd.Next(50, 150),
+                        (byte)_rnd.Next(200, 255)))
+                };
+                double x = _rnd.NextDouble() * 1020;
+                double y = _rnd.NextDouble() * 660;
+                Canvas.SetLeft(dot, x);
+                Canvas.SetTop(dot,  y);
+                ParticleCanvas.Children.Add(dot);
+
+                double speed = _rnd.NextDouble() * 0.3 + 0.05;
+                double angle = _rnd.NextDouble() * Math.PI * 2;
+                _particles.Add((dot, Math.Cos(angle) * speed, Math.Sin(angle) * speed));
+            }
+
+            _particleTimer = null; // No longer using timer
+            CompositionTarget.Rendering += OnRendering;
+        }
 
         private void OnRendering(object? sender, EventArgs e)
         {
@@ -300,9 +330,52 @@ namespace NebulaLauncher
             _lastOnlinePlayers = currentPlayers;
         }
 
-        private void ActualizarFondo() => EffectService.Instance.UpdateBackground(_session);
+        public void ActualizarFondo()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_session.BackgroundImagePath) && System.IO.File.Exists(_session.BackgroundImagePath)) {
+                    var uri = new Uri(_session.BackgroundImagePath);
+                    var bmp = new BitmapImage();
+                    bmp.BeginInit(); bmp.UriSource = uri; bmp.CacheOption = BitmapCacheOption.OnLoad; bmp.EndInit();
+                    LauncherBackground.Source = bmp; return;
+                }
+                
+                // Dynamic System Backgrounds (Based on Hour) - Improvement 13
+                int hour = DateTime.Now.Hour;
+                string nebulaUrl = "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1000"; // Deep Ocean Night
+                if (hour >= 6 && hour < 12)  nebulaUrl = "https://images.unsplash.com/photo-1439066615861-d1af74d74000?q=80&w=1000"; // Ocean Morning
+                if (hour >= 12 && hour < 19) nebulaUrl = "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?q=80&w=1000"; // Deep Blue Evening
+                
+                var img = new BitmapImage(new Uri(nebulaUrl));
+                LauncherBackground.Source = img;
+                LauncherBackground.Opacity = 0.15;
+            }
+            catch { LauncherBackground.Source = null; }
+        }
 
-        private void ActualizarColorTema() => EffectService.Instance.ApplyThemeColor(_session, AvatarInitial, PercentageLabel);
+        public void ActualizarColorTema()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(_session.AccentColor)) return;
+                var color = (Color)ColorConverter.ConvertFromString(_session.AccentColor);
+                
+                Application.Current.Resources["AccentColor"]      = color;
+                Application.Current.Resources["AccentBrush"]      = new SolidColorBrush(color);
+                Application.Current.Resources["GlowColor"]        = color;
+                
+                var hoverColor = Color.FromArgb(color.A, 
+                    (byte)Math.Min(255, color.R + 30), 
+                    (byte)Math.Min(255, color.G + 30), 
+                    (byte)Math.Min(255, color.B + 30));
+                Application.Current.Resources["AccentHoverColor"] = hoverColor;
+
+                if (AvatarInitial != null) AvatarInitial.Foreground = new SolidColorBrush(color);
+                if (PercentageLabel != null) PercentageLabel.Foreground = new SolidColorBrush(color);
+            }
+            catch (Exception ex) { AgregarLog($"âš  Error aplicando tema: {ex.Message}"); }
+        }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         //  LAUNCHER UPDATE CHECK
@@ -1606,7 +1679,105 @@ namespace NebulaLauncher
             sb.Begin(element);
         }
 
-        public void CambiarVista(string vista) => NavigationService.Instance.NavigateTo(vista, this);
+        public void CambiarVista(string vista)
+        {
+            if (HomeView == null || ModulesContainer == null) return;
+            StopCurrentModule();
+            
+            // Atomic cleanup
+            ModulesContainer.Visibility = Visibility.Collapsed;
+            HomeView.Visibility = Visibility.Collapsed;
+            ModulesContainer.Content = null; 
+
+            switch (vista)
+            {
+                case "home":
+                    CurrentViewLabel.Text = "CENTRO DE OPERACIONES";
+                    ViewTitleLabel.Text = "Bienvenido, Comandante";
+                    HomeView.Visibility = Visibility.Visible;
+                    HomeView.Opacity = 1;
+                    AnimateView(HomeView);
+                    ActualizarGreeting();
+                    ActualizarVersionesEnHome();
+                    break;
+                case "changelog":
+                    CurrentViewLabel.Text = "NOTIFICACIONES";
+                    ViewTitleLabel.Text = "BitÃ¡cora de Versiones";
+                    SwitchToModule(new ChangelogView());
+                    break;
+                case "settings":
+                    CurrentViewLabel.Text = "SISTEMAS";
+                    ViewTitleLabel.Text = "ConfiguraciÃ³n del Iniciador";
+                    SwitchToModule(new ConfigView(this));
+                    break;
+                case "social":
+                    CurrentViewLabel.Text = "RED EXTERNA";
+                    ViewTitleLabel.Text = "Comunidad KRAKEN";
+                    SwitchToModule(new SocialView(_session.ServerIp, _session.Username));
+                    break;
+                case "perf":
+                    CurrentViewLabel.Text = "OPTIMIZACIÃ“N";
+                    ViewTitleLabel.Text = "Rendimiento y Memoria";
+                    SwitchToModule(new PerformanceView(this));
+                    break;
+                case "screenshots":
+                    CurrentViewLabel.Text = "ARCHIVOS";
+                    ViewTitleLabel.Text = "Capturas de Despliegue";
+                    SwitchToModule(new ScreenshotsView(GameFolder));
+                    break;
+                case "modmanager":
+                    CurrentViewLabel.Text = "LOGÃSTICA";
+                    ViewTitleLabel.Text = "GestiÃ³n de MÃ³dulos (Local)";
+                    var mv = new ModManagerView(GameFolder, CurrentProfile);
+                    mv.OnSyncRequested += SincronizarTodoAsync;
+                    SwitchToModule(mv);
+                    break;
+                case "modhub":
+                    CurrentViewLabel.Text = "CENTRO DE RECURSOS";
+                    ViewTitleLabel.Text = "Biblioteca de Mods";
+                    SwitchToModule(new VaultView(GameFolder, CurrentProfile));
+                    break;
+                case "crash":
+                    CurrentViewLabel.Text = "DIAGNÃ“STICO";
+                    ViewTitleLabel.Text = "Reportes de Error";
+                    SwitchToModule(new CrashDiagnosticView(_crashReporter));
+                    break;
+                case "map":
+                    CurrentViewLabel.Text = "INTELIGENCIA";
+                    ViewTitleLabel.Text = "Servicio de CartografÃ­a";
+                    SwitchToModule(new BlueMapView(_session.ServerIp, _session.BlueMapPort, _session.BlueMapId));
+                    break;
+                case "hosting":
+                    CurrentViewLabel.Text = "INFRAESTRUCTURA";
+                    ViewTitleLabel.Text = "Servicios Hosting (BETA)";
+                    SwitchToModule(new HostingServiceView());
+                    break;
+                case "localhost":
+                    CurrentViewLabel.Text = "NODOS LOCALES";
+                    ViewTitleLabel.Text = "Servidor de Pruebas";
+                    SwitchToModule(new ServerHostView());
+                    break;
+                case "modpacks":
+                    CurrentViewLabel.Text = "MODPACK HUB";
+                    ViewTitleLabel.Text = "CatÃ¡logo de Expediciones";
+                    SwitchToModule(new ModpackView());
+                    break;
+            }
+            
+            if (ActiveProfileLabel != null && CurrentProfile != null)
+            {
+                ActiveProfileLabel.Text = CurrentProfile.Name;
+                ActiveVersionLabel.Text = CurrentProfile.Version ?? "---";
+                ActiveLoaderLabel.Text = (CurrentProfile.LoaderType ?? "Vanilla").ToUpperInvariant();
+                
+                if (ProfilePathLabel != null)
+                {
+                    string pPath = System.IO.Path.Combine(PathService.InstancesFolder, CurrentProfile.Id);
+                    ProfilePathLabel.Text = pPath;
+                    ProfilePathLabel.ToolTip = pPath;
+                }
+            }
+        }
 
         private void ActualizarVersionesEnHome()
         {

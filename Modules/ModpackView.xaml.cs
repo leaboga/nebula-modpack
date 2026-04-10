@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using NebulaLauncher.Services;
@@ -66,6 +67,7 @@ namespace NebulaLauncher.Modules
             {
                 pack.IsFavorite = _discoveryState.IsFavoriteModpack(pack.ProjectId);
                 pack.IsRecent = _discoveryState.IsRecentModpack(pack.ProjectId);
+                pack.IsInstalled = _mainWindow.Session.Profiles.Exists(p => p.ModpackId == pack.ProjectId);
             }
 
             if (FavoritesOnlyCheck?.IsChecked == true)
@@ -138,7 +140,8 @@ namespace NebulaLauncher.Modules
                             Name = "Pack: " + packName,
                             Version = mcVersion,
                             LoaderType = loader,
-                            LoaderVersion = loaderVer
+                            LoaderVersion = loaderVer,
+                            ModpackId = projectId
                         };
 
                         _mainWindow.Session.Profiles.Add(newProfile);
@@ -185,15 +188,15 @@ namespace NebulaLauncher.Modules
                     File.Delete(tempPath);
                     InstallProgress.Value = 100;
                     StatusLabel.Text = "¡Pack instalado con éxito!";
-                    MessageBox.Show($"✅ El modpack se ha instalado como un nuevo perfil.\nVersión: {mcVersion}\nLoader: {loader}", 
-                                    "Instalación Galáctica", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
+                    NotificationService.Instance.ShowSuccess($"Modpack '{packName}' instalado exitosamente.");
                     
                     _mainWindow.RecargarPerfiles();
                     _mainWindow.CambiarVista("home");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error instalando modpack: " + ex.Message, "Fallo de Transmisión");
+                    NotificationService.Instance.ShowError("Error instalando modpack: " + ex.Message);
                 }
                 finally
                 {

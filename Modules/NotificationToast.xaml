@@ -1,0 +1,54 @@
+<UserControl x:Class="NebulaLauncher.Modules.NotificationToast"
+             xmlns="http://schemas.microsoft.com/winfx/2000/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2000/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="300"
+             HorizontalAlignment="Right" VerticalAlignment="Bottom"
+             Margin="0,0,20,20">
+    <Grid>
+        <Border Background="#1A1528" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1,1,1,4" CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect Color="{DynamicResource GlowColor}" BlurRadius="15" Opacity="0.3" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid Margin="15,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="IconLabel" Text="📡" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"/>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock x:Name="TitleText" Text="TRANSMISIÓN" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" LetterSpacing="2"/>
+                    <TextBlock x:Name="MessageText" Text="Vinculación exitosa con el núcleo." FontSize="13" Foreground="#E2E8F0" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <Button Grid.Column="2" Click="Close_Click" Background="Transparent" BorderThickness="0" Foreground="#4A5568" VerticalAlignment="Top" Margin="5,0,0,0">
+                    <TextBlock Text="✕" FontSize="10"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+
+    <UserControl.Resources>
+        <Storyboard x:Key="EnterAnim">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3"/>
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-300,20" To="0,0,20,20" Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut" Exponent="5"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+        <Storyboard x:Key="ExitAnim">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,0,-300,20" Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseIn" Exponent="5"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+</UserControl>

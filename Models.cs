@@ -47,5 +47,6 @@ namespace NebulaLauncher
         public string CreatedAt      { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
         public string LastSyncDate   { get; set; } = "Nunca";
         public string LastSyncHash   { get; set; } = "";
+        public string ModpackId      { get; set; } = "";
     }
 }
