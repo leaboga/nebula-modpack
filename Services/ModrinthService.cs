@@ -22,6 +22,10 @@ namespace NebulaLauncher.Services
         public bool IsFavorite { get; set; }
         public bool IsRecent { get; set; }
         public bool IsInstalled { get; set; }
+        public bool IsCompatible { get; set; }
+        public string CompatibilityLabel { get; set; } = "Revisar";
+        public string LoaderSummary { get; set; } = "Loader desconocido";
+        public string VersionSummary { get; set; } = "Version no detectada";
         public string FavoriteGlyph => IsFavorite ? "★" : "☆";
         public string CategoryLabel => Categories.Count > 0 ? string.Join(" · ", Categories.Take(2)) : "General";
     }

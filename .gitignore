@@ -16,3 +16,6 @@
 /temp_deploy/
 /temp_changelog/
 /temp_source.txt
+/temp_dist/
+/temp_dist_v*/
+/temp_build_verify/

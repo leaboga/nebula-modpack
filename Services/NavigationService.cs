@@ -94,6 +94,10 @@ namespace NebulaLauncher.Services
                     UpdateHeaders("MODPACK HUB", "Catálogo de Expediciones");
                     SwitchToModule(new ModpackView(), main);
                     break;
+                case "console":
+                    UpdateHeaders("TERMINAL", "Consola de Sistema");
+                    SwitchToModule(new ConsoleView(), main);
+                    break;
             }
         }
 

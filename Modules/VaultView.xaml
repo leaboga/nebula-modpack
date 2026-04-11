@@ -141,8 +141,8 @@
                                                             <Border Background="#1A60A5FA" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsRecent, Converter={StaticResource BoolToVis}}">
                                                                 <TextBlock Text="RECIENTE" Foreground="#93C5FD" FontSize="8" FontWeight="Black"/>
                                                             </Border>
-                                                            <Border Background="#1A10B981" CornerRadius="4" Padding="6,2">
-                                                                <TextBlock Text="COINCIDENCIA" Foreground="#10B981" FontSize="8" FontWeight="Black"/>
+                                                            <Border Background="{Binding CompatibilityBrush}" CornerRadius="4" Padding="6,2">
+                                                                <TextBlock Text="{Binding CompatibilityLabel}" Foreground="{Binding CompatibilityTextBrush}" FontSize="8" FontWeight="Black"/>
                                                             </Border>
                                                         </StackPanel>
                                                     </StackPanel>

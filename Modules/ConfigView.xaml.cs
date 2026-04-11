@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using NebulaLauncher.Services;
 
 namespace NebulaLauncher.Modules
 {
@@ -331,16 +332,25 @@ namespace NebulaLauncher.Modules
             catch (Exception ex) { NotificationService.Instance.ShowError("Error en la limpieza: " + ex.Message); }
         }
 
-        private void BtnLinkCloud_Click(object sender, RoutedEventArgs e)
+        private async void BtnLinkCloud_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(CloudPathBox.Text))
             {
                 var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "Seleccionar carpeta de Nube (Dropbox/OneDrive/etc)" };
-                if (dlg.ShowDialog() == true) CloudPathBox.Text = dlg.FolderName;
+                if (dlg.ShowDialog() == true) 
+                {
+                    CloudPathBox.Text = dlg.FolderName;
+                    await CloudService.Instance.SyncToCloud(_mainWindow.Session, dlg.FolderName);
+                }
             }
             else
             {
-                MessageBox.Show("☁️ Sincronización en la nube activada. Los mundos se respaldarán cada vez que cierres el juego.", "Nube Nebula", MessageBoxButton.OK, MessageBoxImage.Information);
+                try {
+                    await CloudService.Instance.SyncToCloud(_mainWindow.Session, CloudPathBox.Text);
+                    NotificationService.Instance.ShowSuccess("Respaldo instantáneo completado en la nube.");
+                } catch (Exception ex) {
+                    NotificationService.Instance.ShowError(ex.Message);
+                }
             }
         }
 

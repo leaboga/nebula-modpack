@@ -110,7 +110,7 @@
                                     <Border.Effect>
                                         <DropShadowEffect Color="#00F2FF" Opacity="0.6" BlurRadius="20" ShadowDepth="0"/>
                                     </Border.Effect>
-                                    <TextBlock Text="🦑" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
+                                    <Image Source="/Assets/logo_premium.png" Width="44" Height="44" Stretch="Uniform"/>
                                 </Border>
                                 <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
                                     <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black"/>
@@ -160,6 +160,7 @@
                             <RadioButton Content="Servidor Local" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked"/>
                             <RadioButton Content="Infraestructura" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked"/>
                             <RadioButton Content="Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked"/>
+                            <RadioButton Content="Consola Live" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Console_Checked"/>
                             <RadioButton Content="Rendimiento" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Perf_Checked"/>
                             <RadioButton Content="Novedades" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Changelog_Checked"/>
 

@@ -70,6 +70,8 @@ namespace NebulaLauncher.Modules
                 pack.IsInstalled = _mainWindow.Session.Profiles.Exists(p => p.ModpackId == pack.ProjectId);
             }
 
+            ApplyCompatibilityMetadata(packs, version, loader);
+
             if (FavoritesOnlyCheck?.IsChecked == true)
                 packs = packs.FindAll(p => p.IsFavorite);
 
@@ -210,6 +212,54 @@ namespace NebulaLauncher.Modules
             if (sender is not Button btn || btn.Tag is not string projectId) return;
             _discoveryState.ToggleFavoriteModpack(projectId);
             await ExecuteSearch();
+        }
+
+        private void ApplyCompatibilityMetadata(List<ModrinthMod> packs, string requestedVersion, string requestedLoader)
+        {
+            var profile = _mainWindow.CurrentProfile;
+
+            foreach (var pack in packs)
+            {
+                pack.LoaderSummary = !string.IsNullOrWhiteSpace(requestedLoader)
+                    ? requestedLoader
+                    : InferLoader(pack.Categories);
+
+                pack.VersionSummary = !string.IsNullOrWhiteSpace(requestedVersion)
+                    ? requestedVersion
+                    : (profile?.Version ?? "Sin version definida");
+
+                if (profile == null)
+                {
+                    pack.IsCompatible = false;
+                    pack.CompatibilityLabel = "Sin perfil activo";
+                    continue;
+                }
+
+                bool loaderMatches = string.IsNullOrWhiteSpace(requestedLoader)
+                    || string.Equals(profile.LoaderType, requestedLoader, StringComparison.OrdinalIgnoreCase)
+                    || pack.Categories.Any(x => string.Equals(x, profile.LoaderType, StringComparison.OrdinalIgnoreCase));
+
+                bool versionMatches = string.IsNullOrWhiteSpace(requestedVersion)
+                    || string.Equals(profile.Version, requestedVersion, StringComparison.OrdinalIgnoreCase)
+                    || profile.Version.Contains(requestedVersion, StringComparison.OrdinalIgnoreCase);
+
+                pack.IsCompatible = loaderMatches && versionMatches;
+                pack.CompatibilityLabel = pack.IsCompatible
+                    ? "Compatible con perfil"
+                    : loaderMatches
+                        ? "Revisar version"
+                        : "Revisar loader";
+            }
+        }
+
+        private static string InferLoader(IEnumerable<string> categories)
+        {
+            var normalized = categories.Select(x => x.Trim().ToLowerInvariant()).ToList();
+            if (normalized.Contains("fabric")) return "fabric";
+            if (normalized.Contains("forge")) return "forge";
+            if (normalized.Contains("neoforge")) return "neoforge";
+            if (normalized.Contains("quilt")) return "quilt";
+            return "multiloader";
         }
     }
 }

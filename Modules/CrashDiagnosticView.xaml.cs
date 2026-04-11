@@ -96,5 +96,41 @@ namespace NebulaLauncher.Modules
                 MessageBox.Show("No se pudo abrir el log: " + ex.Message, "KRAKEN Diagnostico");
             }
         }
+
+        private void OpenUpdateState_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!File.Exists(PathService.UpdateStateFile))
+                {
+                    MessageBox.Show("Todavia no existe update-state.json.", "KRAKEN Diagnostico");
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{PathService.UpdateStateFile}\"") { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo abrir el estado de update: " + ex.Message, "KRAKEN Diagnostico");
+            }
+        }
+
+        private void OpenUpdaterLog_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!File.Exists(PathService.UpdaterLogFile))
+                {
+                    MessageBox.Show("Todavia no existe updater.log.", "KRAKEN Diagnostico");
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{PathService.UpdaterLogFile}\"") { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo abrir updater.log: " + ex.Message, "KRAKEN Diagnostico");
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@
 [Setup]
 AppId={{8B2C3D4E-5F6A-7B8C-9D0E-1F2A3B4C5D6E}
 AppName=KRAKEN Launcher
-AppVersion=2.6.8
+AppVersion=2.7.1
 AppPublisher=Leandro
 AppPublisherURL=https://github.com/leaboga/nebula-modpack
 AppSupportURL=https://github.com/leaboga/nebula-modpack

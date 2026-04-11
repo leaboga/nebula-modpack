@@ -1,4 +1,4 @@
-﻿using CmlLib.Core.Auth;
+using CmlLib.Core.Auth;
 using CmlLib.Core.Auth.Microsoft;
 using CmlLib.Core.Installer;
 using CmlLib.Core.ModLoaders.FabricMC;
@@ -300,9 +300,9 @@ namespace NebulaLauncher
             _lastOnlinePlayers = currentPlayers;
         }
 
-        private void ActualizarFondo() => EffectService.Instance.UpdateBackground(_session);
+        public void ActualizarFondo() => EffectService.Instance.UpdateBackground(_session);
 
-        private void ActualizarColorTema() => EffectService.Instance.ApplyThemeColor(_session, AvatarInitial, PercentageLabel);
+        public void ActualizarColorTema() => EffectService.Instance.ApplyThemeColor(_session, AvatarInitial, PercentageLabel);
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         //  LAUNCHER UPDATE CHECK
@@ -317,6 +317,7 @@ namespace NebulaLauncher
             try
             {
                 string localV = VersionManager.GetCurrentVersion();
+                string currentExePath = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? string.Empty;
                 using var http = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
                 
@@ -334,6 +335,7 @@ namespace NebulaLauncher
                 {
                     _updateDownloadUrl = null;
                     _updateVersion = null;
+                    UpdateDiagnosticsService.MarkNoUpdate(localV, remoteV);
                     Dispatcher.Invoke(() => {
                         UpdateBadge.Visibility = Visibility.Collapsed;
                     });
@@ -343,6 +345,7 @@ namespace NebulaLauncher
                 string changelog = root.name?.ToString() ?? "Nueva versiÃ³n disponible";
                 
                 _updateDownloadUrl = null;
+                string selectedAssetName = string.Empty;
                 string currentExeName = System.IO.Path.GetFileName(Environment.ProcessPath ?? "KrakenLauncher.exe");
                 string[] preferredAssetNames = new[]
                 {
@@ -360,6 +363,7 @@ namespace NebulaLauncher
                             if (assetName.Equals(preferredAssetName, StringComparison.OrdinalIgnoreCase))
                             {
                                 _updateDownloadUrl = asset.browser_download_url?.ToString();
+                                selectedAssetName = assetName;
                                 break;
                             }
                         }
@@ -376,6 +380,7 @@ namespace NebulaLauncher
                             if (asset.name?.ToString()?.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) == true)
                             {
                                 _updateDownloadUrl = asset.browser_download_url?.ToString();
+                                selectedAssetName = asset.name?.ToString() ?? string.Empty;
                                 break;
                             }
                         }
@@ -384,11 +389,13 @@ namespace NebulaLauncher
 
                 if (string.IsNullOrEmpty(_updateDownloadUrl))
                 {
+                    UpdateDiagnosticsService.MarkFailure("No se encontro un asset .exe valido en la release remota.");
                     AgregarLog("âš  No se encontrÃ³ un binario (.exe) vÃ¡lido en la release remota. Abortando update.");
                     return;
                 }
 
                 _updateVersion = remoteV;
+                UpdateDiagnosticsService.MarkCheck(localV, remoteV, selectedAssetName, _updateDownloadUrl, currentExePath);
 
                 Dispatcher.Invoke(() =>
                 {
@@ -452,19 +459,23 @@ namespace NebulaLauncher
             {
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
+                string currentExeDirectory = System.IO.Path.GetDirectoryName(currentExe) ?? AppDomain.CurrentDomain.BaseDirectory;
+                string downloadedAssetName = GetUpdateAssetName(downloadUrl, currentExe);
+                string targetExe = System.IO.Path.Combine(currentExeDirectory, downloadedAssetName);
 
-                AgregarLog("Descargando actualizacion...");
+                AgregarLog($"Descargando actualizacion hacia {downloadedAssetName}...");
 
                 using var http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
                 var bytes = await http.GetByteArrayAsync(downloadUrl);
                 
                 // Use a clean temp folder to avoid access conflicts
-                string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "NebulaUpdate_" + Guid.NewGuid().ToString("N"));
+                string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "KrakenUpdate_" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(updateDir);
-                string currentExeName = System.IO.Path.GetFileName(currentExe);
-                string tempExe = System.IO.Path.Combine(updateDir, currentExeName);
+                string tempExe = System.IO.Path.Combine(updateDir, downloadedAssetName);
                 await File.WriteAllBytesAsync(tempExe, bytes);
+                File.WriteAllText(PathService.UpdaterLogFile, string.Empty);
+                UpdateDiagnosticsService.MarkApplying(targetExe, isAutomatic);
 
                 int pid = Process.GetCurrentProcess().Id;
                 string batContent = "@echo off\n" +
@@ -476,14 +487,16 @@ namespace NebulaLauncher
                                    ":loop\n" +
                                    "set /a count+=1\n" +
                                    "echo [UPDATE] Intento de reemplazo %count% de 10...\n" +
-                                   "copy /Y \"" + tempExe + "\" \"" + currentExe + "\"\n" +
+                                   "echo [%date% %time%] copy " + tempExe + " -> " + targetExe + ">> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                   "copy /Y \"" + tempExe + "\" \"" + targetExe + "\"\n" +
                                    "if errorlevel 1 (\n" +
                                    "    if %count% geq 10 goto failed\n" +
                                    "    timeout /t 2 /nobreak > nul\n" +
                                    "    goto loop\n" +
                                    ")\n" +
                                    "echo [UPDATE] Motor actualizado con Ã©xito. Reiniciando...\n" +
-                                   "start \"\" \"" + currentExe + "\"\n" +
+                                   "if /I not \"" + currentExe + "\"==\"" + targetExe + "\" del /F /Q \"" + currentExe + "\" > nul 2>&1\n" +
+                                   "start \"\" \"" + targetExe + "\"\n" +
                                    "rmdir /s /q \"" + updateDir + "\"\n" +
                                    "del \"%~f0\"\n" +
                                    "exit\n" +
@@ -504,6 +517,7 @@ namespace NebulaLauncher
                     WindowStyle = ProcessWindowStyle.Hidden
                 });
 
+                UpdateDiagnosticsService.MarkRestartScheduled();
                 _cerrarDeVerdad = true;
                 Environment.Exit(0);
             }
@@ -526,6 +540,24 @@ namespace NebulaLauncher
             
             // Run self-tests on startup
             Task.Run(() => VersionManager.RunSelfTests(_ => { }));
+        }
+
+        private static string GetUpdateAssetName(string downloadUrl, string currentExe)
+        {
+            try
+            {
+                if (Uri.TryCreate(downloadUrl, UriKind.Absolute, out var uri))
+                {
+                    string assetName = System.IO.Path.GetFileName(uri.AbsolutePath);
+                    if (!string.IsNullOrWhiteSpace(assetName))
+                        return assetName;
+                }
+            }
+            catch
+            {
+            }
+
+            return System.IO.Path.GetFileName(currentExe);
         }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -610,6 +642,7 @@ namespace NebulaLauncher
         private void Nav_ModManager_Checked(object sender, RoutedEventArgs e)  { CambiarVista("modmanager"); }
         private void Nav_ModHub_Checked(object sender, RoutedEventArgs e)      { CambiarVista("modhub"); }
         private void Nav_Crash_Checked(object sender, RoutedEventArgs e)       { CambiarVista("crash"); }
+        private void Nav_Console_Checked(object sender, RoutedEventArgs e)     { CambiarVista("console"); }
         private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { CambiarVista("map"); }
         private void Nav_Hosting_Checked(object sender, RoutedEventArgs e)     { CambiarVista("hosting"); }
         private void Nav_LocalHost_Checked(object sender, RoutedEventArgs e)    { CambiarVista("localhost"); }
@@ -1043,8 +1076,13 @@ namespace NebulaLauncher
             PlayButton.Content = "â–¶  JUGAR";
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        { 
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_session.CloudPath))
+            {
+                try { await CloudService.Instance.SyncToCloud(_session, _session.CloudPath); } catch { }
+            }
+            GuardarSesion();
             if (!_cerrarDeVerdad) 
             { 
                 e.Cancel = true; 
@@ -1141,8 +1179,7 @@ namespace NebulaLauncher
             AgregarLog("\uD83D\uDD10 Abriendo autenticaci\u00F3n de Microsoft...");
             try
             {
-                var handler = JELoginHandlerBuilder.BuildDefault();
-                var session = await handler.Authenticate();
+                var session = await AuthService.Instance.LoginMicrosoftAsync();
                 if (session != null && !string.IsNullOrEmpty(session.Username))
                 {
                     _session.Username = session.Username;
@@ -1164,7 +1201,7 @@ namespace NebulaLauncher
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            _session.Username = ""; _session.AuthMode = "offline";
+            AuthService.Instance.Logout(_session);
             GuardarSesion();
             if (LoggedPanel    != null) LoggedPanel.Visibility    = Visibility.Collapsed;
             if (NotLoggedPanel != null) NotLoggedPanel.Visibility = Visibility.Visible;

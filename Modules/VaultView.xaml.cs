@@ -65,6 +65,9 @@ namespace NebulaLauncher.Modules
         public string StatusBadgeText => IsInstalled ? "INSTALADO" : "DISPONIBLE";
         public Brush StatusBadgeBrush => IsInstalled ? new SolidColorBrush(Color.FromRgb(16, 185, 129)) : new SolidColorBrush(Color.FromArgb(40, 0, 242, 255));
         public Brush StatusBadgeTextBrush => IsInstalled ? Brushes.White : new SolidColorBrush(Color.FromRgb(0, 242, 255));
+        public string CompatibilityLabel { get; set; } = "Revisar perfil";
+        public Brush CompatibilityBrush { get; set; } = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+        public Brush CompatibilityTextBrush { get; set; } = Brushes.White;
 
         private bool _isDownloading;
         public bool IsDownloading 
@@ -315,6 +318,8 @@ namespace NebulaLauncher.Modules
                         IsRecent = _discoveryState.IsRecentMod(pid)
                     });
                 }
+
+                ApplyCompatibilityState(tempResults);
 
                 if (FavoritesOnlyCheck?.IsChecked == true)
                     tempResults = tempResults.Where(x => x.IsFavorite).ToList();
@@ -736,6 +741,44 @@ namespace NebulaLauncher.Modules
             LocalScroll.Visibility = Visibility.Collapsed; 
             EmptyPanel.Visibility = Visibility.Collapsed; 
             if (loading) PaginationPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ApplyCompatibilityState(IEnumerable<ModrinthItem> items)
+        {
+            bool hasProfile = _profile != null;
+            bool hasVersion = !string.IsNullOrWhiteSpace(GetCleanGameVersion());
+            bool hasLoader = !string.IsNullOrWhiteSpace(GetCleanLoaderType()) || _currentType != "mod";
+
+            foreach (var item in items)
+            {
+                if (!hasProfile)
+                {
+                    item.CompatibilityLabel = "Sin perfil";
+                    item.CompatibilityBrush = new SolidColorBrush(Color.FromRgb(75, 85, 99));
+                    item.CompatibilityTextBrush = Brushes.White;
+                    continue;
+                }
+
+                if (!hasVersion)
+                {
+                    item.CompatibilityLabel = "Defini version";
+                    item.CompatibilityBrush = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+                    item.CompatibilityTextBrush = Brushes.White;
+                    continue;
+                }
+
+                if (!hasLoader)
+                {
+                    item.CompatibilityLabel = "Defini loader";
+                    item.CompatibilityBrush = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+                    item.CompatibilityTextBrush = Brushes.White;
+                    continue;
+                }
+
+                item.CompatibilityLabel = "Compatible";
+                item.CompatibilityBrush = new SolidColorBrush(Color.FromRgb(59, 130, 246));
+                item.CompatibilityTextBrush = Brushes.White;
+            }
         }
     }
 }

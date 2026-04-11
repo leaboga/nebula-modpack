@@ -24,6 +24,10 @@
                     <Button Content="Exportar reporte" Style="{StaticResource SecondaryButton}" Width="160" Height="40" Margin="12,0,0,0" Click="ExportReport_Click"/>
                     <Button Content="Abrir logs" Style="{StaticResource SecondaryButton}" Width="120" Height="40" Margin="12,0,0,0" Click="OpenLogs_Click"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
+                    <Button Content="Estado de update" Style="{StaticResource SecondaryButton}" Width="160" Height="40" Click="OpenUpdateState_Click"/>
+                    <Button Content="Log del updater" Style="{StaticResource SecondaryButton}" Width="160" Height="40" Margin="12,0,0,0" Click="OpenUpdaterLog_Click"/>
+                </StackPanel>
             </StackPanel>
         </Border>
     </Grid>

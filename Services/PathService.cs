@@ -8,6 +8,8 @@ namespace NebulaLauncher.Services
         public static readonly string AppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher");
         public static readonly string SessionFile = Path.Combine(AppFolder, "session.json");
         public static readonly string LogFile = Path.Combine(AppFolder, "launcher.log");
+        public static readonly string UpdateStateFile = Path.Combine(AppFolder, "update-state.json");
+        public static readonly string UpdaterLogFile = Path.Combine(AppFolder, "updater.log");
         public static readonly string DiscoveryStateFile = Path.Combine(AppFolder, "discovery-state.json");
         public static readonly string InstancesFolder = Path.Combine(AppFolder, "instances");
         public static readonly string CacheFolder = Path.Combine(AppFolder, "cache");
