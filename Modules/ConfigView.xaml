@@ -278,6 +278,95 @@
                 </StackPanel>
             </Border>
 
-        </StackPanel>
+            <!-- ╔═══════════════════════════════════╗ -->
+            <!-- ║       CONFIGS DE PEPITA           ║ -->
+            <!-- ╚═══════════════════════════════════╝ -->
+
+            <!-- Panel USUARIO: Notificación de configs nuevas -->
+            <Border x:Name="PepitaUserPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
+                    BorderBrush="#00F2FF30" BorderThickness="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
+                        <TextBlock Text="👑" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Configs de Pepita" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="CONFIGURACIONES OFICIALES DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Background="#0D1A1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock x:Name="PepitaConfigStatusText"
+                                   Text="Verificando estado de configs..."
+                                   Foreground="#7ECFDF" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="PepitaConfigHashText"
+                                   Text=""
+                                   Foreground="#344A5B" FontSize="9" Margin="0,4,0,0" FontFamily="Consolas"/>
+                    </StackPanel>
+                </Border>
+
+                <UniformGrid Columns="2">
+                    <Button x:Name="BtnAplicarConfigsPepita"
+                            Content="⬇ Aplicar Configs de Pepita"
+                            Click="BtnAplicarConfigsPepita_Click"
+                            Style="{DynamicResource PlayButton}"
+                            Height="40" Margin="0,0,4,0"/>
+                    <Button x:Name="BtnVerificarConfigsPepita"
+                            Content="🔄 Verificar Cambios"
+                            Click="BtnVerificarConfigsPepita_Click"
+                            Style="{DynamicResource SecondaryButton}"
+                            Height="40" Margin="4,0,0,0"/>
+                </UniformGrid>
+                <TextBlock Text="Aplica las configs que Pepita configuró para el servidor. Tus keybinds y opciones personales no se perderán."
+                           Foreground="#344A5B" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Panel ADMIN (solo Pepita): Publicar configs -->
+        <Border x:Name="PepitaAdminPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
+                BorderBrush="#7C3AED40" BorderThickness="1" Visibility="Collapsed">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
+                        <TextBlock Text="🔒" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Panel Admin – Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Background="#120D1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14" BorderBrush="#7C3AED30" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Tus configs actuales (carpeta config/ + options.txt) se empaquetarán y subirán a GitHub." 
+                                   Foreground="#A78BFA" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <TextBlock Text="Los demás jugadores verán una notificación para aplicarlas al iniciar. Sus keybinds y opciones personales serán protegidas automáticamente."
+                                   Foreground="#7B6FA0" FontSize="10" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <Button x:Name="BtnPublicarConfigsAdmin"
+                        Content="☁ Publicar Mis Configs como Pepita"
+                        Click="BtnPublicarConfigsAdmin_Click"
+                        Style="{DynamicResource PlayButton}"
+                        Height="44"
+                        Background="#7C3AED"/>
+
+                <Separator Background="#1A1030" Margin="0,16,0,12"/>
+
+                <TextBlock Text="RESTABLECER CONFIGS EN TU PC" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                <Button x:Name="BtnForzarConfigsPropias"
+                        Content="🔄 Re-aplicar Mis Propias Configs (sobreescribir todo)"
+                        Click="BtnForzarConfigsPropias_Click"
+                        Style="{DynamicResource SecondaryButton}"
+                        Height="38"/>
+                <TextBlock Text="Útil para restaurar tus configs en una nueva PC."
+                           Foreground="#344A5B" FontSize="9" Margin="0,6,0,0"/>
+            </StackPanel>
+        </Border>
+
+    </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,6 +43,9 @@ namespace NebulaLauncher.Modules
             SplashTextBox.Text = _mainWindow.Session.CustomSplashText;
             CloudPathBox.Text = _mainWindow.Session.CloudPath;
             OverlayToggle.IsChecked = _mainWindow.Session.IsOverlayEnabled;
+
+            // Inicialización del panel de configs de Pepita (async, no bloqueante)
+            _ = Dispatcher.InvokeAsync(InicializarPanelPepita, System.Windows.Threading.DispatcherPriority.Background);
         }
 
         private void UpdatePreview(string path)
@@ -373,6 +377,199 @@ namespace NebulaLauncher.Modules
             if (_initializing) return;
             _mainWindow.Session.IsOverlayEnabled = OverlayToggle.IsChecked == true;
             _mainWindow.GuardarSesion();
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  CONFIGS DE PEPITA
+        // ═══════════════════════════════════════════════════════════
+
+        private ModSyncer? _syncerLocal;
+
+        private ModSyncer GetSyncer() =>
+            _syncerLocal ??= new ModSyncer(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                             "NebulaLauncher", "minecraft"));
+
+        /// <summary>Muestra u oculta el panel admin según si el usuario es Pepita.</summary>
+        private async void InicializarPanelPepita()
+        {
+            bool esPepita = _mainWindow.Session.IsAdmin
+                         || _mainWindow.Session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase)
+                         || _mainWindow.Session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
+
+            PepitaAdminPanel.Visibility = esPepita ? Visibility.Visible : Visibility.Collapsed;
+
+            // Verificar estado del hash en background
+            await ActualizarEstadoHashAsync();
+        }
+
+        private async Task ActualizarEstadoHashAsync()
+        {
+            try
+            {
+                PepitaConfigStatusText.Text = "Verificando estado de configs...";
+                PepitaConfigHashText.Text   = "";
+
+                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
+                string  hashLocal  = _mainWindow.Session.LastAppliedConfigHash ?? "";
+
+                if (hashRemoto == null)
+                {
+                    PepitaConfigStatusText.Text     = "Sin conexión — no se puede verificar.";
+                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gray;
+                    return;
+                }
+
+                bool alDia = hashRemoto == hashLocal;
+                if (alDia)
+                {
+                    PepitaConfigStatusText.Text      = "✅ Configs al día — estás usando las configs de Pepita.";
+                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.LightGreen;
+                }
+                else if (string.IsNullOrEmpty(hashLocal))
+                {
+                    PepitaConfigStatusText.Text      = "⚠ Nunca aplicaste las configs de Pepita. ¡Aplicálas para jugar con la config oficial!";
+                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gold;
+                }
+                else
+                {
+                    PepitaConfigStatusText.Text      = "🔔 Pepita actualizó las configs. ¡Hay una versión nueva disponible!";
+                    PepitaConfigStatusText.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00, 0xF2, 0xFF));
+                }
+
+                PepitaConfigHashText.Text = $"Remoto: {hashRemoto[..Math.Min(12, hashRemoto.Length)]}...  |  Local: {(string.IsNullOrEmpty(hashLocal) ? "ninguno" : hashLocal[..Math.Min(12, hashLocal.Length)] + "...")}";
+            }
+            catch (Exception ex)
+            {
+                PepitaConfigStatusText.Text = $"Error: {ex.Message}";
+            }
+        }
+
+        private async void BtnVerificarConfigsPepita_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            try { await ActualizarEstadoHashAsync(); }
+            finally { btn.IsEnabled = true; }
+        }
+
+        private async void BtnAplicarConfigsPepita_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            btn.Content   = "⬇ Aplicando...";
+            try
+            {
+                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
+                if (hashRemoto == null)
+                {
+                    NotificationService.Instance.ShowError("Sin conexión. No se pueden obtener las configs.");
+                    return;
+                }
+
+                var result = MessageBox.Show(
+                    "¿Aplicar las configs de Pepita?\n\n" +
+                    "• Tu options.txt (keybinds, gráficos) NO se tocará si ya existía.\n" +
+                    "• Se actualizarán las configs de mods (carpeta config/).\n\n" +
+                    "Si querés forzar TODO (incluyendo options.txt), usá el panel de Admin.",
+                    "Aplicar Configs de Pepita",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes) return;
+
+                var syncer = GetSyncer();
+                syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
+                await syncer.SincronizarConfigs(sobrescribirTodo: false);
+
+                _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
+                _mainWindow.GuardarSesion();
+
+                await ActualizarEstadoHashAsync();
+                NotificationService.Instance.ShowSuccess("Configs de Pepita aplicadas correctamente.");
+            }
+            catch (Exception ex)
+            {
+                NotificationService.Instance.ShowError($"Error: {ex.Message}");
+            }
+            finally
+            {
+                btn.IsEnabled = true;
+                btn.Content   = "⬇ Aplicar Configs de Pepita";
+            }
+        }
+
+        private async void BtnPublicarConfigsAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            btn.Content   = "☁ Publicando...";
+            try
+            {
+                var confirm = MessageBox.Show(
+                    "¿Publicar tus configs actuales como las configs oficiales del servidor?\n\n" +
+                    "Esto subirá a GitHub:\n" +
+                    "• Toda la carpeta config/\n" +
+                    "• options.txt (tus gráficos y keybinds)\n\n" +
+                    "Los demás jugadores recibirán una notificación para actualizar.",
+                    "Publicar Configs como Pepita",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (confirm != MessageBoxResult.Yes) return;
+
+                var syncer = GetSyncer();
+                bool ok = await syncer.PublicarConfigsAdmin(msg => _mainWindow.AgregarLog(msg));
+
+                if (ok)
+                {
+                    // Actualizar el hash local de Pepita también
+                    string? hashRemoto = await syncer.ObtenerHashConfigsRemoto();
+                    if (hashRemoto != null)
+                    {
+                        _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
+                        _mainWindow.GuardarSesion();
+                    }
+                    await ActualizarEstadoHashAsync();
+                    NotificationService.Instance.ShowSuccess("¡Configs publicadas! Los jugadores serán notificados.");
+                }
+                else
+                {
+                    NotificationService.Instance.ShowError("Error al publicar. Verifica que 'gh' está instalado y autenticado.");
+                }
+            }
+            catch (Exception ex) { NotificationService.Instance.ShowError($"Error: {ex.Message}"); }
+            finally { btn.IsEnabled = true; btn.Content = "☁ Publicar Mis Configs como Pepita"; }
+        }
+
+        private async void BtnForzarConfigsPropias_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            try
+            {
+                var confirm = MessageBox.Show(
+                    "¿Forzar la descarga y aplicación COMPLETA de las configs de Pepita?\n\n" +
+                    "ATENCIÓN: Esto SOBREESCRIBIRÁ tu options.txt y todas las configs de mods.\n" +
+                    "Usalo solo si querés sincronizar esta PC desde cero.",
+                    "¿Sobreescribir todo?",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (confirm != MessageBoxResult.Yes) return;
+
+                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
+                var syncer = GetSyncer();
+                syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
+                await syncer.SincronizarConfigs(sobrescribirTodo: true);
+
+                if (hashRemoto != null)
+                {
+                    _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
+                    _mainWindow.GuardarSesion();
+                }
+                await ActualizarEstadoHashAsync();
+                NotificationService.Instance.ShowSuccess("Configs re-aplicadas completamente.");
+            }
+            catch (Exception ex) { NotificationService.Instance.ShowError($"Error: {ex.Message}"); }
+            finally { btn.IsEnabled = true; }
         }
     }
 }

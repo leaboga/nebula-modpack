@@ -26,6 +26,9 @@ namespace NebulaLauncher
         public string CustomSplashText       { get; set; } = "";
         public bool   IsOverlayEnabled       { get; set; } = false;
         
+        // Config sync tracking
+        public string LastAppliedConfigHash { get; set; } = "";    // Hash de las últimas configs aplicadas
+
         // Legacy support
         public string SessionToken       { get; set; } = "";
         public string SessionUuid        { get; set; } = "";

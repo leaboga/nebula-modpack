@@ -1076,6 +1076,71 @@ namespace NebulaLauncher
             PlayButton.Content = "â–¶  JUGAR";
         }
 
+        /// <summary>
+        /// Verifica si las configs de Pepita cambiaron (via hash remoto).
+        /// Si cambiaron y el usuario no es Pepita, muestra un dialogo para que ELIJA si aplicar.
+        /// Si se llama con forzar=true (desde admin), aplica sin preguntar.
+        /// </summary>
+        private async Task AplicarConfigsSiHayCambiosAsync(bool forzar)
+        {
+            try
+            {
+                bool esPepita = _session.IsAdmin
+                             || _session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase)
+                             || _session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
+
+                string? hashRemoto = await _syncer.ObtenerHashConfigsRemoto();
+                if (string.IsNullOrEmpty(hashRemoto))
+                {
+                    AgregarLog("Info: No se pudo verificar configs de Pepita (sin conexion).");
+                    return;
+                }
+
+                bool hayNuevasConfigs = hashRemoto != _session.LastAppliedConfigHash;
+
+                if (!hayNuevasConfigs)
+                {
+                    AgregarLog("Configs al dia (sin cambios de Pepita).");
+                    return;
+                }
+
+                if (esPepita && !forzar)
+                {
+                    AgregarLog("Pepita: hay configs nuevas publicadas. Podas aplicarlas desde el panel Config.");
+                    return;
+                }
+
+                bool aplicar = forzar;
+                if (!forzar)
+                {
+                    var resultado = Dispatcher.Invoke(() =>
+                        MessageBox.Show(
+                            "Pepita actualizo las configuraciones del modpack!\n\n" +
+                            "Deseas aplicar las configs nuevas?\n" +
+                            "(Tus opciones personales de controles y graficos seran respetadas)",
+                            "Configs de Pepita disponibles",
+                            MessageBoxButton.YesNo,
+                            MessageBoxImage.Question));
+                    aplicar = resultado == MessageBoxResult.Yes;
+                }
+
+                if (aplicar)
+                {
+                    AgregarLog("Aplicando configs de Pepita...");
+                    await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+                    _session.LastAppliedConfigHash = hashRemoto;
+                    GuardarSesion();
+                    Services.NotificationService.Instance.ShowSuccess("Configs de Pepita aplicadas correctamente.");
+                }
+                else
+                {
+                    AgregarLog("Configs de Pepita omitidas por eleccion del usuario.");
+                }
+            }
+            catch (Exception ex) { AgregarLog($"Error al verificar configs: {ex.Message}"); }
+        }
+
+
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!string.IsNullOrEmpty(_session.CloudPath))
@@ -1293,15 +1358,9 @@ namespace NebulaLauncher
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
                     if (!modsOk) { AgregarLog("âŒ FallÃ³ la descarga de mods."); return; }
 
-                    if (!_session.SkipConfigSync)
-                    {
-                        PlayButton.Content = "Actualizando configs...";
-                        await _syncer.SincronizarConfigs();
-                    }
-                    else
-                    {
-                        AgregarLog("ðŸ› ï¸ Modo Dev: Omitiendo sincronizaciÃ³n de configs.");
-                    }
+                    // --- CONFIGS DE PEPITA: verificar hash remoto ---
+                    PlayButton.Content = "Verificando configs...";
+                    await AplicarConfigsSiHayCambiosAsync(forzar: false);
                 }
                 PlayButton.Content = "Iniciando Minecraft...";
                 _discord.SetActivity("Iniciando Minecraft...");

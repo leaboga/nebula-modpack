@@ -175,21 +175,181 @@ namespace NebulaLauncher
             } catch { }
         }
 
-        public async Task SincronizarConfigs() {
-            try {
-                string url = AssetsUrl;
-                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
-                if (await DescargarConStream(url, tempZip)) {
-                    ZipFile.ExtractToDirectory(tempZip, _gameFolder, true);
-                    File.Delete(tempZip);
-                    
-                    // Re-corregir después de extraer los assets del servidor
-                    CorregirConfigsDeCamara();
-                    
-                    OnLog?.Invoke("✓ Ajustes visuales cargados.");
-                }
-            } catch { }
+        // URL del JSON que pepita publica con el hash de sus configs
+        private const string ConfigHashUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/config-hash.json";
+
+        /// <summary>
+        /// Devuelve el hash remoto de las configs de Pepita, o null si no se puede obtener.
+        /// </summary>
+        public async Task<string?> ObtenerHashConfigsRemoto()
+        {
+            try
+            {
+                string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
+                var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
+                return (string?)obj?.hash;
+            }
+            catch { return null; }
         }
+
+        /// <summary>
+        /// Aplica las configs de Pepita desde GitHub. Respeta archivos que el usuario no debería perder
+        /// (options.txt, options.of.txt) extrayéndolos pero SIN pisar si ya existen.
+        /// Llame a este método solo con consentimiento explícito del usuario.
+        /// </summary>
+        public async Task SincronizarConfigs(bool sobrescribirTodo = false)
+        {
+            try
+            {
+                string url     = AssetsUrl;
+                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
+                if (!await DescargarConStream(url, tempZip)) return;
+
+                // Archivos que NO deben sobreescribirse nunca (preferencias personales de Minecraft)
+                var protegidos = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    "options.txt",
+                    "options.of.txt",
+                    "servers.dat",
+                    "hotbar.nbt",
+                    "realms_persistence.json"
+                };
+
+                using (var zip = System.IO.Compression.ZipFile.OpenRead(tempZip))
+                {
+                    foreach (var entry in zip.Entries)
+                    {
+                        if (string.IsNullOrEmpty(entry.Name)) continue; // es directorio
+
+                        string destPath = Path.Combine(_gameFolder, entry.FullName.Replace('/', Path.DirectorySeparatorChar));
+                        string fileName = Path.GetFileName(destPath);
+
+                        // Proteger archivos personales si no se forzó sobrescritura
+                        if (!sobrescribirTodo && File.Exists(destPath) && protegidos.Contains(fileName))
+                        {
+                            OnLog?.Invoke($"  🛡 Protegido (no sobreescrito): {fileName}");
+                            continue;
+                        }
+
+                        Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
+                        entry.ExtractToFile(destPath, overwrite: true);
+                    }
+                }
+
+                File.Delete(tempZip);
+                OnLog?.Invoke("✓ Ajustes visuales de Pepita aplicados.");
+            }
+            catch (Exception ex) { OnLog?.Invoke("⚠ Error sincronizando configs: " + ex.Message); }
+        }
+
+        /// <summary>
+        /// [ADMIN - solo Pepita] Empaqueta la carpeta config/ local y la sube a GitHub Releases
+        /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
+        /// Retorna true si todo OK.
+        /// </summary>
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log)
+        {
+            try
+            {
+                string configDir = Path.Combine(_gameFolder, "config");
+                if (!Directory.Exists(configDir))
+                { log("❌ No existe la carpeta config/"); return false; }
+
+                // 1. Crear ZIP temporal con todo el contenido del gameFolder relevante
+                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets-pepita.zip");
+                if (File.Exists(tempZip)) File.Delete(tempZip);
+
+                log("📦 Empaquetando configs...");
+
+                // Incluimos config/ y options.txt y options.of.txt si existen
+                using (var archive = System.IO.Compression.ZipFile.Open(tempZip, System.IO.Compression.ZipArchiveMode.Create))
+                {
+                    // config/ completa
+                    foreach (var file in Directory.GetFiles(configDir, "*", SearchOption.AllDirectories))
+                    {
+                        string relative = Path.GetRelativePath(_gameFolder, file);
+                        archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
+                    }
+
+                    // options.txt
+                    string optsPath = Path.Combine(_gameFolder, "options.txt");
+                    if (File.Exists(optsPath))
+                        archive.CreateEntryFromFile(optsPath, "options.txt");
+
+                    // shaderpacks/shaders.txt si existe (shaderpack seleccionado)
+                    string shaderOpts = Path.Combine(_gameFolder, "optionsshaders.txt");
+                    if (File.Exists(shaderOpts))
+                        archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
+                }
+
+                // 2. Calcular hash del ZIP para que los clientes detecten cambios
+                string hash = CalcularMD5(tempZip);
+                log($"🔑 Hash de configs: {hash}");
+
+                // 3. Subir ZIP a GitHub Release (tag: client-assets-1.0 → overwrite asset)
+                log("☁ Subiendo ZIP a GitHub...");
+                var psi = new System.Diagnostics.ProcessStartInfo("gh",
+                    $"release upload client-assets-1.0 \"{tempZip}\" --repo leaboga/nebula-modpack --clobber")
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError  = true,
+                    UseShellExecute        = false,
+                    CreateNoWindow         = true
+                };
+                var proc = System.Diagnostics.Process.Start(psi);
+                if (proc == null) { log("❌ No se pudo iniciar gh."); return false; }
+                await proc.WaitForExitAsync();
+                if (proc.ExitCode != 0)
+                {
+                    log("❌ Error subiendo asset: " + await proc.StandardError.ReadToEndAsync());
+                    return false;
+                }
+
+                // 4. Crear/actualizar config-hash.json en el repo (requiere gh + repo clonado o API)
+                //    Usamos un archivo temporal y lo subimos via gh api
+                string hashJson = Newtonsoft.Json.JsonConvert.SerializeObject(new { hash = hash, updated = DateTime.UtcNow.ToString("o") }, Newtonsoft.Json.Formatting.Indented);
+                string hashFile = Path.Combine(Path.GetTempPath(), "config-hash.json");
+                await File.WriteAllTextAsync(hashFile, hashJson);
+
+                // Intentar actualizar via gh api (puede fallar si no tiene permisos de push directo)
+                var psi2 = new System.Diagnostics.ProcessStartInfo("gh",
+                    $"api repos/leaboga/nebula-modpack/contents/config-hash.json " +
+                    $"--method PUT " +
+                    $"-f message=\"chore: update config hash [{hash[..8]}]\" " +
+                    $"-f content=\"{Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(hashJson))}\" " +
+                    $"--jq .commit.sha")
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError  = true,
+                    UseShellExecute        = false,
+                    CreateNoWindow         = true
+                };
+
+                // Si el archivo ya existe necesitamos el SHA previo
+                try
+                {
+                    var shaResult = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("gh",
+                        "api repos/leaboga/nebula-modpack/contents/config-hash.json --jq .sha")
+                    {
+                        RedirectStandardOutput = true, UseShellExecute = false, CreateNoWindow = true
+                    })!;
+                    await shaResult.WaitForExitAsync();
+                    string sha = (await shaResult.StandardOutput.ReadToEndAsync()).Trim();
+                    if (!string.IsNullOrEmpty(sha))
+                        psi2.Arguments += $" -f sha=\"{sha}\"";
+                }
+                catch { }
+
+                var proc2 = System.Diagnostics.Process.Start(psi2);
+                if (proc2 != null) await proc2.WaitForExitAsync();
+
+                File.Delete(tempZip);
+                log($"✅ Configs de Pepita publicadas (hash: {hash[..8]}...)");
+                return true;
+            }
+            catch (Exception ex) { log("❌ Error publicando configs: " + ex.Message); return false; }
+        }
+
 
         private async Task<bool> DescargarConStream(string url, string dest) {
             int intentos = 3;
