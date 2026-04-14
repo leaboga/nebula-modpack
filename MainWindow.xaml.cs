@@ -80,6 +80,7 @@ namespace NebulaLauncher
         }
 
         public UserSession    Session          => _session;
+        public CrashReporterService GetCrashReporter() => _crashReporter;
         private UserSession   _session         = new();
         private ModManifest?  _manifestActual;
         private VersionsIndex? _versionsIndex;
@@ -1358,8 +1359,8 @@ namespace NebulaLauncher
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
                     if (!modsOk) { AgregarLog("âŒ FallÃ³ la descarga de mods."); return; }
 
-                    // --- CONFIGS DE PEPITA: verificar hash remoto ---
-                    PlayButton.Content = "Verificando configs...";
+                    // --- CONFIGS DE PEPITA: verificar hash remoto ---
+                    PlayButton.Content = "Verificando configs...";
                     await AplicarConfigsSiHayCambiosAsync(forzar: false);
                 }
                 PlayButton.Content = "Iniciando Minecraft...";

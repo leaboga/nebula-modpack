@@ -1,9 +1,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using NebulaLauncher.Services;
 
 namespace NebulaLauncher.Modules
@@ -16,6 +18,105 @@ namespace NebulaLauncher.Modules
         {
             InitializeComponent();
             _reporter = reporter;
+            LoadInfo();
+        }
+
+        private void LoadInfo()
+        {
+            try
+            {
+                bool isAdmin = IsRunningAsAdmin();
+                AdminStatusLabel.Text = isAdmin ? "ADMINISTRADOR (ELEVADO)" : "USUARIO ESTÁNDAR";
+                AdminStatusLabel.Foreground = isAdmin ? new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81)) : new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                ElevateBtn.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+
+                AppPathLabel.Text = PathService.AppFolder;
+                InstancesPathLabel.Text = PathService.InstancesFolder;
+                ExePathLabel.Text = Environment.ProcessPath ?? "KrakenLauncher.exe";
+            }
+            catch { }
+        }
+
+        private bool IsRunningAsAdmin()
+        {
+            try
+            {
+                using var identity = WindowsIdentity.GetCurrent();
+                var principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch { return false; }
+        }
+
+        private void Elevate_Click(object sender, RoutedEventArgs e)
+        {
+            string exe = Environment.ProcessPath ?? "";
+            if (string.IsNullOrEmpty(exe))
+            {
+                MessageBox.Show("No se pudo determinar la ruta del ejecutable para elevar privilegios.", "Error de Elevación");
+                return;
+            }
+
+            try
+            {
+                LoggerService.Log("[ADMIN] Solicitando relanzamiento con privilegios elevados...");
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = exe,
+                    UseShellExecute = true,
+                    Verb = "runas"
+                });
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                LoggerService.Log($"[ADMIN] Falló el intento de elevación: {ex.Message}");
+                MessageBox.Show("El usuario canceló la elevación o ocurrió un error: " + ex.Message, "Elevación Cancelada");
+            }
+        }
+
+        private void OpenAppFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try { Process.Start("explorer.exe", PathService.AppFolder); } catch { }
+        }
+
+        private void OpenInstancesFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try { Process.Start("explorer.exe", PathService.InstancesFolder); } catch { }
+        }
+
+        private void CopyExePath_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(Environment.ProcessPath ?? "KrakenLauncher.exe");
+                MessageBox.Show("Ruta del ejecutable copiada al portapapeles.", "KRAKEN");
+            }
+            catch { }
+        }
+
+        private void OpenLogs_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(PathService.LogFile))
+                try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.LogFile}\"", UseShellExecute = true }); } catch { }
+            else
+                MessageBox.Show("El archivo de log no existe aún.", "KRAKEN");
+        }
+
+        private void OpenSession_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(PathService.SessionFile))
+                try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.SessionFile}\"", UseShellExecute = true }); } catch { }
+            else
+                MessageBox.Show("El archivo de sesión no existe aún.", "KRAKEN");
+        }
+
+        private void OpenUpdaterLog_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(PathService.UpdaterLogFile))
+                try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.UpdaterLogFile}\"", UseShellExecute = true }); } catch { }
+            else
+                MessageBox.Show("El log del updater no existe aún.", "KRAKEN");
         }
 
         private void Analyze_Click(object sender, RoutedEventArgs e)
@@ -23,14 +124,14 @@ namespace NebulaLauncher.Modules
             var analysis = _reporter.AnalyzeLastCrash(DateTime.Now.AddDays(-7));
             if (analysis != null)
             {
-                StatusLabel.Text = "Crash encontrado";
-                StatusLabel.Foreground = System.Windows.Media.Brushes.OrangeRed;
-                DetailLabel.Text = $"Se encontro un error registrado en: {analysis.FileName}";
-                MessageBox.Show($"Ultimo error: {analysis.DetectedError}\n\n{analysis.UserSolution}", "Resultado de analisis");
+                StatusLabel.Text = "Crash Detectado";
+                StatusLabel.Foreground = Brushes.OrangeRed;
+                DetailLabel.Text = $"Error: {analysis.DetectedError}";
+                MessageBox.Show($"Último error: {analysis.DetectedError}\n\nSolución: {analysis.UserSolution}", "Análisis de Crash");
             }
             else
             {
-                MessageBox.Show("No se encontraron rastros de errores en los ultimos 7 dias.", "Salud optima");
+                MessageBox.Show("No se detectaron errores críticos en los últimos 7 días.", "Estado Óptimo");
             }
         }
 
@@ -39,98 +140,25 @@ namespace NebulaLauncher.Modules
             try
             {
                 var analysis = _reporter.AnalyzeLastCrash(DateTime.Now.AddDays(-7));
-                string reportPath = Path.Combine(PathService.AppFolder, $"kraken-diagnostic-{DateTime.Now:yyyyMMdd-HHmmss}.txt");
+                string reportPath = Path.Combine(PathService.AppFolder, $"kraken-report-{DateTime.Now:yyyyMMdd}.txt");
                 var sb = new StringBuilder();
-                sb.AppendLine("KRAKEN DIAGNOSTIC REPORT");
-                sb.AppendLine($"Generado: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                sb.AppendLine($"Launcher: {VersionManager.GetCurrentVersion()}");
+                sb.AppendLine("KRAKEN SYSTEM REPORT");
+                sb.AppendLine($"Fecha: {DateTime.Now}");
+                sb.AppendLine($"Admin: {IsRunningAsAdmin()}");
+                sb.AppendLine($"Version: {VersionManager.GetCurrentVersion()}");
                 sb.AppendLine();
-
-                if (analysis == null)
+                if (analysis != null)
                 {
-                    sb.AppendLine("Estado: sin crashes recientes detectados.");
-                }
-                else
-                {
+                    sb.AppendLine("ÚLTIMO CRASH:");
                     sb.AppendLine($"Archivo: {analysis.FileName}");
-                    sb.AppendLine($"Error detectado: {analysis.DetectedError}");
-                    sb.AppendLine($"Solucion sugerida: {analysis.UserSolution}");
-                    sb.AppendLine();
-                    sb.AppendLine("Extracto del crash:");
-                    sb.AppendLine(analysis.FullLog.Length > 4000 ? analysis.FullLog[..4000] : analysis.FullLog);
+                    sb.AppendLine($"Error: {analysis.DetectedError}");
                 }
+                else sb.AppendLine("Estado: No se detectaron fallos recientes.");
 
-                if (File.Exists(PathService.LogFile))
-                {
-                    sb.AppendLine();
-                    sb.AppendLine("Ultimas lineas del launcher.log:");
-                    string[] lines = File.ReadAllLines(PathService.LogFile);
-                    foreach (var line in lines[^Math.Min(lines.Length, 60)..])
-                        sb.AppendLine(line);
-                }
-
-                File.WriteAllText(reportPath, sb.ToString(), Encoding.UTF8);
-                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{reportPath}\"") { UseShellExecute = true });
-                MessageBox.Show($"Reporte exportado en:\n{reportPath}", "KRAKEN Diagnostico");
+                File.WriteAllText(reportPath, sb.ToString());
+                Process.Start("explorer.exe", $"/select,\"{reportPath}\"");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo exportar el reporte: " + ex.Message, "KRAKEN Diagnostico");
-            }
-        }
-
-        private void OpenLogs_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!File.Exists(PathService.LogFile))
-                {
-                    MessageBox.Show("Todavia no existe launcher.log.", "KRAKEN Diagnostico");
-                    return;
-                }
-
-                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{PathService.LogFile}\"") { UseShellExecute = true });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo abrir el log: " + ex.Message, "KRAKEN Diagnostico");
-            }
-        }
-
-        private void OpenUpdateState_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!File.Exists(PathService.UpdateStateFile))
-                {
-                    MessageBox.Show("Todavia no existe update-state.json.", "KRAKEN Diagnostico");
-                    return;
-                }
-
-                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{PathService.UpdateStateFile}\"") { UseShellExecute = true });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo abrir el estado de update: " + ex.Message, "KRAKEN Diagnostico");
-            }
-        }
-
-        private void OpenUpdaterLog_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!File.Exists(PathService.UpdaterLogFile))
-                {
-                    MessageBox.Show("Todavia no existe updater.log.", "KRAKEN Diagnostico");
-                    return;
-                }
-
-                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{PathService.UpdaterLogFile}\"") { UseShellExecute = true });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo abrir updater.log: " + ex.Message, "KRAKEN Diagnostico");
-            }
+            catch (Exception ex) { MessageBox.Show("Error al exportar: " + ex.Message); }
         }
     }
 }

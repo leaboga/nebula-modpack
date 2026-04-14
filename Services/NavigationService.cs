@@ -74,9 +74,8 @@ namespace NebulaLauncher.Services
                     SwitchToModule(new VaultView(main.GameFolder, main.CurrentProfile), main);
                     break;
                 case "crash":
-                    UpdateHeaders("DIAGNÓSTICO", "Reportes de Error");
-                    // Assuming _crashReporter is accessible or passed
-                    // We might need to pass the service instead of the whole main window sometimes
+                    UpdateHeaders("DIAGNÓSTICO", "Herramientas de Soporte");
+                    SwitchToModule(new CrashDiagnosticView(main.GetCrashReporter()), main);
                     break;
                 case "map":
                     UpdateHeaders("INTELIGENCIA", "Servicio de Cartografía");
