@@ -173,6 +173,61 @@
                 </StackPanel>
             </Border>
 
+            <!-- Configuration Presets Card -->
+            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Border Width="32" Height="32" CornerRadius="9" Background="#8B5CF6">
+                            <TextBlock Text="💾" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Gestión de Presets de Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock Text="MIS PRESETS GUARDADOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <ListBox x:Name="PresetsListBox" Background="#05080D" BorderBrush="#1E2C38" BorderThickness="1" MaxHeight="180" Margin="0,0,0,12" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4" Width="550">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding MinecraftVersion}" Foreground="#00F2FF" FontSize="10" FontWeight="Black" Margin="0,0,8,0"/>
+                                            <TextBlock Text="{Binding CreatedAt, StringFormat=d}" Foreground="#6D8A99" FontSize="10"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <Button Content="Aplicar" Click="BtnApplyPreset_Click" Tag="{Binding Name}" Style="{StaticResource SecondaryButton}" Height="32" Padding="14,0" Margin="0,0,8,0"/>
+                                        <Button Content="🗑️" Click="BtnDeletePreset_Click" Tag="{Binding Name}" Style="{StaticResource SecondaryButton}" Foreground="#EF4444" Width="32" Height="32"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <TextBlock Text="OPCIONES AL APLICAR" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <WrapPanel Margin="0,0,0,16">
+                        <CheckBox x:Name="PresetControlsCheck" Content="Controles" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
+                        <CheckBox x:Name="PresetGraphicsCheck" Content="Gráficos" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
+                        <CheckBox x:Name="PresetModsCheck" Content="Configs de Mods" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
+                        <CheckBox x:Name="PresetOthersCheck" Content="Otros (Servers/Shaders)" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,0,8" Style="{DynamicResource TrayToggle}"/>
+                    </WrapPanel>
+
+                    <TextBlock Text="NUEVO PRESET (DESDE ACTUAL)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="NewPresetNameBox" Style="{DynamicResource AppleTextBox}" Tag="Nombre del nuevo preset..." Margin="0,0,8,0"/>
+                        <Button Grid.Column="1" Content="Guardar Config Actual" Click="BtnSavePreset_Click" Style="{DynamicResource PlayButton}" Height="40" Padding="20,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
             <!-- Appearance Card -->
             <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>

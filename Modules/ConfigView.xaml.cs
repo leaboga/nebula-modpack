@@ -12,6 +12,7 @@ namespace NebulaLauncher.Modules
     public partial class ConfigView : UserControl
     {
         private readonly ConfigManager _configManager;
+        private readonly PresetService _presetService;
         private readonly MainWindow _mainWindow;
         private bool _initializing = true;
 
@@ -23,6 +24,7 @@ namespace NebulaLauncher.Modules
             _configManager = new ConfigManager(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                              "NebulaLauncher", "minecraft"));
+            _presetService = new PresetService();
 
             ServerIpBox.Text = _mainWindow.Session.ServerIp;
             BlueMapPortBox.Text = _mainWindow.Session.BlueMapPort;
@@ -44,8 +46,95 @@ namespace NebulaLauncher.Modules
             CloudPathBox.Text = _mainWindow.Session.CloudPath;
             OverlayToggle.IsChecked = _mainWindow.Session.IsOverlayEnabled;
 
+            LoadPresets();
+
             // Inicialización del panel de configs de Pepita (async, no bloqueante)
             _ = Dispatcher.InvokeAsync(InicializarPanelPepita, System.Windows.Threading.DispatcherPriority.Background);
+        }
+
+        private void LoadPresets()
+        {
+            try
+            {
+                PresetsListBox.ItemsSource = _presetService.GetPresets();
+            }
+            catch { }
+        }
+
+        private async void BtnSavePreset_Click(object sender, RoutedEventArgs e)
+        {
+            string name = NewPresetNameBox.Text.Trim();
+            if (string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Por favor ingresa un nombre para el preset.", "KRAKEN");
+                return;
+            }
+
+            if (_mainWindow.CurrentProfile == null) return;
+
+            try
+            {
+                _mainWindow.AgregarLog($"💾 Guardando preset: {name}...");
+                await _presetService.SavePresetAsync(_mainWindow.GameFolder, name, _mainWindow.CurrentProfile.Version);
+                _mainWindow.AgregarLog("✅ Preset guardado exitosamente.");
+                NewPresetNameBox.Text = "";
+                LoadPresets();
+            }
+            catch (Exception ex)
+            {
+                _mainWindow.AgregarLog($"⚠ Error al guardar preset: {ex.Message}");
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private async void BtnApplyPreset_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            string presetName = btn?.Tag?.ToString() ?? "";
+            if (string.IsNullOrEmpty(presetName)) return;
+
+            if (_mainWindow.CurrentProfile == null) return;
+
+            var res = MessageBox.Show($"¿Deseas aplicar el preset '{presetName}' al perfil actual?\nSe realizará un backup automático de la configuración actual.", 
+                "Aplicar Preset", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
+            if (res != MessageBoxResult.Yes) return;
+
+            try
+            {
+                _mainWindow.AgregarLog($"🔄 Aplicando preset '{presetName}'...");
+                bool controls = PresetControlsCheck.IsChecked ?? false;
+                bool graphics = PresetGraphicsCheck.IsChecked ?? false;
+                bool mods = PresetModsCheck.IsChecked ?? false;
+                bool others = PresetOthersCheck.IsChecked ?? false;
+
+                await _presetService.ApplyPresetAsync(_mainWindow.GameFolder, presetName, controls, graphics, mods, others);
+                
+                _mainWindow.AgregarLog("✅ Preset aplicado. Los cambios se verán al iniciar el juego.");
+                MessageBox.Show("Preset aplicado exitosamente.\nSe guardó un backup en la carpeta 'backups' de la instancia.", "KRAKEN");
+            }
+            catch (Exception ex)
+            {
+                _mainWindow.AgregarLog($"⚠ Error al aplicar preset: {ex.Message}");
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void BtnDeletePreset_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            string presetName = btn?.Tag?.ToString() ?? "";
+            if (string.IsNullOrEmpty(presetName)) return;
+
+            var res = MessageBox.Show($"¿Estás seguro de eliminar el preset '{presetName}'?\nEsta acción no se puede deshacer.", 
+                "Eliminar Preset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (res == MessageBoxResult.Yes)
+            {
+                _presetService.DeletePreset(presetName);
+                LoadPresets();
+                _mainWindow.AgregarLog($"🗑️ Preset '{presetName}' eliminado.");
+            }
         }
 
         private void UpdatePreview(string path)

@@ -2,45 +2,43 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.7.2`
+- Version publicada mas reciente: `2.7.3`
 - Fecha de referencia: `2026-04-14`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
 
-Se ha implementado una nueva sección de Diagnóstico y Soporte que centraliza la gestión de permisos, rutas de configuración y análisis de errores. Esta mejora facilita el soporte técnico y permite al usuario elevar privilegios de forma autónoma desde la propia interfaz.
+Se ha implementado el sistema de **Presets de Configuración**, una funcionalidad clave que permite a los usuarios guardar, gestionar y replicar su configuración de juego (controles, gráficos, mods, shaders) entre diferentes perfiles e instancias.
 
-## Version 2.7.2
+## Version 2.7.3
 
 ### Cambios principales
 
-- **Nueva Vista de Diagnóstico y Soporte**:
-  - Centraliza herramientas de soporte en un solo lugar.
-  - Indicador visual de estado de administrador (Elevado vs Estándar).
-  - Botón para relanzar el launcher como administrador de forma segura.
-  - Accesos directos para abrir carpetas de la App e Instancias.
-  - Botón para copiar la ruta del ejecutable actual.
-  - Accesos rápidos a logs del sistema y archivos de configuración (`launcher.log`, `session.json`, `updater.log`).
-- **Mejoras en Navegación**:
-  - Se habilitó la ruta "crash" en `NavigationService` para cargar correctamente el nuevo `CrashDiagnosticView`.
-  - Se expuso el `CrashReporterService` desde `MainWindow` para su uso en módulos.
-- **Identidad**:
-  - Se mantiene `KrakenLauncher.exe` como el nombre de ensamblado y binario oficial.
+- **Sistema de Presets de Juego**:
+  - Nuevo `PresetService` para la gestión de archivos de configuración.
+  - Capacidad de guardar "Presets" que incluyen `options.txt`, `servers.dat`, `hotbar.nbt` y carpetas de `config`, `shaderpacks` y `resourcepacks`.
+  - Nueva tarjeta en `ConfigView` para gestionar presets guardados.
+  - **Aplicación Selectiva**: El usuario puede elegir qué parte del preset aplicar (solo controles, solo gráficos, solo configs de mods, o todo).
+  - **Filtro de options.txt**: Al aplicar solo controles o solo gráficos, se realiza un merge inteligente de las líneas correspondientes en el archivo `options.txt` sin sobrescribir el resto.
+  - **Backup Automático**: Antes de aplicar un preset, se realiza una copia de seguridad de la configuración actual en la carpeta `backups` de la instancia.
+- **UI/UX**:
+  - Lista interactiva de presets con fecha y versión de Minecraft.
+  - Botones para Guardar, Aplicar y Eliminar presets.
+  - Feedback visual en la consola de telemetría del launcher.
 
 ### Archivos principales tocados
 
-- `MainWindow.xaml.cs`: Se agregó getter para `CrashReporterService`.
-- `Services/NavigationService.cs`: Se implementó la navegación a la vista de diagnóstico.
-- `Modules/CrashDiagnosticView.xaml`: Rediseño completo de la interfaz de diagnóstico.
-- `Modules/CrashDiagnosticView.xaml.cs`: Lógica de permisos, elevación y gestión de rutas.
-- `NebulaLauncher.csproj`: Bump de versión a `2.7.2`.
+- `Services/PresetService.cs`: Lógica de persistencia y aplicación de presets.
+- `Modules/ConfigView.xaml`: Nueva interfaz de gestión de presets.
+- `Modules/ConfigView.xaml.cs`: Handlers para la interacción con el usuario.
+- `NebulaLauncher.csproj`: Bump de versión a `2.7.3`.
 
 ## Validacion realizada
 
 - Build `Release` exitoso.
-- Verificación manual de la UI: la nueva sección de soporte es funcional.
-- Verificación de elevación: el launcher se relanza correctamente solicitando UAC.
-- Verificación de rutas: los botones de "Abrir" y "Ver" apuntan a las rutas correctas en `AppData`.
+- Verificación de guardado: Los archivos se copian correctamente a la carpeta `presets` de `AppData`.
+- Verificación de aplicación: Se comprobó que el backup se genera y los archivos se sobrescriben/mezclan correctamente en la instancia destino.
+- Verificación de borrado: La carpeta del preset se elimina correctamente.
 
 ## Reglas operativas importantes
 
@@ -55,16 +53,9 @@ Antes de cualquier release o cambio que deba llegar por auto-update:
 
 ## Riesgos pendientes
 
-- `MainWindow.xaml.cs` sigue concentrando demasiada logica y conviene seguir extrayendo responsabilidades.
-- Todavia hay strings con encoding roto en algunas zonas historicas del archivo principal.
-- Si vuelve a fallar un update en una maquina especifica, revisar primero:
-  - `launcher.log`
-  - `update-state.json`
-  - `updater.log`
+- Si un preset es de una versión de Minecraft muy diferente (ej: 1.8 vs 1.21), algunas opciones de `options.txt` podrían no ser compatibles, aunque el merge mitiga gran parte del riesgo.
 
 ## Proximos pasos sugeridos
 
-- consolidar mas mensajes visibles en `KrakenStrings`
-- seguir limpiando `MainWindow.xaml.cs`
-- agregar una cola visible de tareas para descargas e instalaciones
-- reforzar validaciones previas en el panel de publicacion
+- Agregar soporte para exportar/importar presets como archivos `.kraken` para compartir con otros jugadores.
+- Sincronización de presets en la nube mediante el `CloudService` existente.
