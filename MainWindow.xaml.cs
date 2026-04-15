@@ -775,13 +775,17 @@ namespace KrakenLauncher
             if (_session.Profiles == null) _session.Profiles = new List<MinecraftProfile>();
             if (_session.Profiles.Count == 0)
             {
-                var defaultProfile = new MinecraftProfile { Name = "Nebula Default (1.20.1)", Version = "1.20.1", LoaderType = "vanilla" };
+                var defaultProfile = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
                 _session.Profiles.Add(defaultProfile);
                 _session.CurrentProfileId = defaultProfile.Id;
             }
             if (string.IsNullOrEmpty(_session.CurrentProfileId)) _session.CurrentProfileId = _session.Profiles[0].Id;
 
-            _session.Profiles.ForEach(p => { if (p.RamGB < 2) p.RamGB = 4; });
+            // Migración de nombres
+            _session.Profiles.ForEach(p => { 
+                if (p.Name.Contains("Nebula Default")) p.Name = "KRAKEN Default";
+                if (p.RamGB < 2) p.RamGB = 4; 
+            });
 
             if (RamSlider   != null) RamSlider.Value      = CurrentProfile?.RamGB ?? 4;
             if (TrayToggle  != null) TrayToggle.IsChecked = _session.MinimizeToTray;
@@ -972,7 +976,7 @@ namespace KrakenLauncher
             if (_session.Profiles.Count == 0)
             {
                 // Create a default profile if none left
-                var p = new MinecraftProfile { Name = "Default", Version = "1.20.1", LoaderType = "fabric" };
+                var p = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
                 _session.Profiles.Add(p);
                 _session.CurrentProfileId = p.Id;
             }
@@ -996,14 +1000,16 @@ namespace KrakenLauncher
 
         private void NewProfile_Click(object sender, RoutedEventArgs e)
         {
-            // Simple logic for PoC: add a new 1.20.1 Fabric instance
-            string name = "Perfil " + (_session.Profiles.Count + 1);
-            var p = new MinecraftProfile { Name = name, Version = "1.20.1", LoaderType = "fabric", Icon = "\u2B50" };
-            _session.Profiles.Add(p);
-            _session.CurrentProfileId = p.Id;
-            GuardarSesion();
-            ActualizarComboPerfiles();
-            AgregarLog($"âœ… Perfil '{name}' creado con Ã©xito.");
+            var dialog = new AddProfileWindow { Owner = this };
+            if (dialog.ShowDialog() == true && dialog.ResultProfile != null)
+            {
+                var p = dialog.ResultProfile;
+                _session.Profiles.Add(p);
+                _session.CurrentProfileId = p.Id;
+                GuardarSesion();
+                ActualizarComboPerfiles();
+                AgregarLog($"✅ Perfil '{p.Name}' ({p.Version} {p.LoaderType}) creado.");
+            }
         }
 
         private void CloneProfile_Click(object sender, RoutedEventArgs e)

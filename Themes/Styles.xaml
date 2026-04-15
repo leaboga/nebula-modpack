@@ -344,4 +344,32 @@
         </Setter>
     </Style>
 
+    <!-- CHECKBOXES -->
+    <Style x:Key="TrayToggle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Border x:Name="box" Width="14" Height="14" Background="#16212B" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="4">
+                            <TextBlock x:Name="mark" Text="✓" Foreground="{StaticResource AccentBrush}" FontSize="10" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="mark" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

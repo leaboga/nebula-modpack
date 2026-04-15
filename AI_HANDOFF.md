@@ -2,38 +2,37 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.7.7`
+- Version publicada mas reciente: `2.7.8`
 - Fecha de referencia: `2026-04-15`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
 
-Se ha implementado un sistema robusto de **Instalación Limpia** y **Gestión de Java Optimizado (Adoptium)**. El launcher ahora garantiza que los usuarios sin dependencias previas puedan jugar inmediatamente sin configurar Java manualmente.
+Se ha completado la **transición total de marca (branding overhaul)**. El launcher ha dejado de identificarse como "Nebula" para ser oficialmente **KRAKEN Launcher**. Esto incluye cambios en namespaces, nombres de archivos de proyecto, rutas de carpetas de usuario y mensajes de sistema.
 
-## Version 2.7.7
+## Version 2.7.8 (The Kraken Core)
 
 ### Cambios principales
 
-- **Gestión de Java (Adoptium Temurin)**:
-  - Nuevo `JavaService` que descarga el JRE optimizado (8, 17 o 21) según la versión de Minecraft.
-  - Los binarios se instalan en `%AppData%\KrakenLauncher\runtime`.
-- **Detección de Instalación Limpia**:
-  - `PlayButton_Click` ahora detecta si el perfil está vacío (sin `versions` o `mods`).
-  - Fuerza una sincronización completa de mods y configuraciones oficiales de Pepita en la primera ejecución.
-- **Robustez en UI**:
-  - Corregida ambigüedad de referencia entre `System.Windows.Shapes.Path` y `System.IO.Path`.
-  - Mejorada la gestión de estados de carga durante la instalación.
+- **Identidad KRAKEN**:
+  - Namespace base renombrado de `NebulaLauncher` a `KrakenLauncher`.
+  - Proyecto renombrado a `KrakenLauncher.csproj`.
+  - Todos los diálogos, títulos de ventanas y logs ahora usan la marca **KRAKEN**.
+- **Migración de Datos**:
+  - `PathService` ahora usa `%AppData%\KrakenLauncher`.
+  - Se implementó una rutina de migración que renombra automáticamente la carpeta vieja `NebulaLauncher` a `KrakenLauncher` si existe, evitando que los usuarios pierdan sus perfiles o sesiones.
+- **Funcionalidad Heredada**:
+  - Mantiene las mejoras de la v2.7.7: Java optimizado (Adoptium) y sistema de instalación limpia para perfiles nuevos.
 
 ### Archivos principales tocados
 
-- `Services/JavaService.cs`: Nuevo servicio para descarga de Java.
-- `MinecraftLauncher.cs`: Integración de `JavaService` para obtención dinámica de ruta.
-- `MainWindow.xaml.cs`: Lógica de detección de perfiles vacíos y flujo de sincronización forzada.
-- `KrakenLauncher.csproj`: Bump de versión a `2.7.7`.
+- `KrakenLauncher.csproj`: Renombrado y actualizado (Version, Product, Company).
+- `PathService.cs`: Cambio de ruta base y lógica de migración.
+- `App.xaml.cs` & `MainWindow.xaml.cs`: Actualización de namespaces y literales de texto (Identity Fix).
+- `rename_to_kraken.py`: Script de utilidad creado para el procesamiento masivo.
 
 ## Validacion realizada
 
-- Build `Release` exitoso.
-- Verificación de binario: `ProductVersion` reporta `2.7.7`.
-- Upload exitoso: Release `v2.7.7` creada en GitHub con el asset `KrakenLauncher.exe`.
-- Auto-update: El launcher detecta la versión remota mayor y aplica el parche correctamente.
+- Build `Release` del nuevo `.csproj` exitoso.
+- Publicación: Release `v2.7.8` creada en GitHub con el asset `KrakenLauncher.exe`.
+- Repositorio: Los cambios han sido pusheados con el nuevo esquema de nombres.
