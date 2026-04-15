@@ -53,18 +53,29 @@ namespace NebulaLauncher.Services
         {
             try
             {
-                var fileVersion = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileVersionInfo.ProductVersion;
-                if (string.IsNullOrEmpty(fileVersion))
+                // Try InformationalVersion first (often has the full SemVer)
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var infoVer = assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
+                                      .FirstOrDefault() as System.Reflection.AssemblyInformationalVersionAttribute;
+                
+                string? version = infoVer?.InformationalVersion;
+
+                if (string.IsNullOrEmpty(version))
                 {
-                    var assemblyV = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                    return assemblyV != null ? $"{assemblyV.Major}.{assemblyV.Minor}.{assemblyV.Build}" : "1.0.0";
+                    version = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileVersionInfo.ProductVersion;
                 }
 
-                // Strip SourceLink metadata if present (e.g. 2.6.1+c8f151d -> 2.6.1)
-                if (fileVersion.Contains("+"))
-                    fileVersion = fileVersion.Split('+')[0];
+                if (string.IsNullOrEmpty(version))
+                {
+                    var assemblyV = assembly.GetName().Version;
+                    version = assemblyV != null ? $"{assemblyV.Major}.{assemblyV.Minor}.{assemblyV.Build}" : "1.0.0";
+                }
 
-                return CleanVersion(fileVersion);
+                // Strip SourceLink/Git metadata if present (e.g. 2.6.1+c8f151d -> 2.6.1)
+                if (version.Contains("+"))
+                    version = version.Split('+')[0];
+
+                return CleanVersion(version);
             }
             catch { return "1.0.0"; }
         }

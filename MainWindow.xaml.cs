@@ -317,6 +317,7 @@ namespace NebulaLauncher
         {
             try
             {
+                AgregarLog("🔍 Verificando integridad del núcleo Kraken...");
                 string localV = VersionManager.GetCurrentVersion();
                 string currentExePath = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? string.Empty;
                 using var http = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
@@ -460,22 +461,23 @@ namespace NebulaLauncher
             {
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
-                string currentExeDirectory = System.IO.Path.GetDirectoryName(currentExe) ?? AppDomain.CurrentDomain.BaseDirectory;
-                string downloadedAssetName = GetUpdateAssetName(downloadUrl, currentExe);
-                string targetExe = System.IO.Path.Combine(currentExeDirectory, downloadedAssetName);
+                
+                // CRITICAL: Always target the RUNNING executable
+                string targetExe = currentExe;
+                string downloadedAssetName = System.IO.Path.GetFileName(targetExe);
 
-                AgregarLog($"Descargando actualizacion hacia {downloadedAssetName}...");
+                AgregarLog($"🛡️ Iniciando actualización del núcleo: {downloadUrl}");
+                AgregarLog($"📂 Destino: {targetExe}");
 
                 using var http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
                 var bytes = await http.GetByteArrayAsync(downloadUrl);
                 
-                // Use a clean temp folder to avoid access conflicts
                 string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "KrakenUpdate_" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(updateDir);
                 string tempExe = System.IO.Path.Combine(updateDir, downloadedAssetName);
                 await File.WriteAllBytesAsync(tempExe, bytes);
-                File.WriteAllText(PathService.UpdaterLogFile, string.Empty);
+                
                 UpdateDiagnosticsService.MarkApplying(targetExe, isAutomatic);
 
                 int pid = Process.GetCurrentProcess().Id;
@@ -483,33 +485,34 @@ namespace NebulaLauncher
                                    "title Kraken Core Updater\n" +
                                    "echo [UPDATE] Aguardando el cierre de procesos activos...\n" +
                                    $"taskkill /F /PID {pid} > nul 2>&1\n" +
-                                   "timeout /t 3 /nobreak > nul\n" +
+                                   "timeout /t 2 /nobreak > nul\n" +
                                    "set /a count=0\n" +
                                    ":loop\n" +
                                    "set /a count+=1\n" +
                                    "echo [UPDATE] Intento de reemplazo %count% de 10...\n" +
-                                   "echo [%date% %time%] copy " + tempExe + " -> " + targetExe + ">> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                   "echo [%date% %time%] Intento %count%: copy \"" + tempExe + "\" -> \"" + targetExe + "\">> \"" + PathService.UpdaterLogFile + "\"\n" +
                                    "copy /Y \"" + tempExe + "\" \"" + targetExe + "\"\n" +
                                    "if errorlevel 1 (\n" +
+                                   "    echo [WARN] Archivo bloqueado. Reintentando en 2s...\n" +
                                    "    if %count% geq 10 goto failed\n" +
                                    "    timeout /t 2 /nobreak > nul\n" +
                                    "    goto loop\n" +
                                    ")\n" +
-                                   "echo [UPDATE] Motor actualizado con Ã©xito. Reiniciando...\n" +
-                                   "if /I not \"" + currentExe + "\"==\"" + targetExe + "\" del /F /Q \"" + currentExe + "\" > nul 2>&1\n" +
+                                   "echo [UPDATE] Motor actualizado con éxito. Reiniciando...\n" +
+                                   "echo [%date% %time%] EXITO: Nucleo actualizado. >> \"" + PathService.UpdaterLogFile + "\"\n" +
                                    "start \"\" \"" + targetExe + "\"\n" +
                                    "rmdir /s /q \"" + updateDir + "\"\n" +
-                                   "del \"%~f0\"\n" +
                                    "exit\n" +
                                    ":failed\n" +
-                                   "echo [ERROR] No se pudo sobrescribir el motor galÃ¡ctico. El archivo sigue bloqueado.\n" +
+                                   "echo [ERROR] No se pudo sobrescribir el motor galáctico. >> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                   "echo [ERROR] El archivo sigue bloqueado por otro proceso.\n" +
                                    "pause\n" +
                                    "exit\n";
 
                 string updaterBat = System.IO.Path.Combine(updateDir, "kraken_updater.bat");
                 await File.WriteAllTextAsync(updaterBat, batContent);
 
-                AgregarLog("ðŸ”„ Reiniciando para aplicar la actualizaciÃ³n...");
+                AgregarLog("🚀 Reiniciando para aplicar la actualización...");
 
                 Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
                 {
@@ -525,14 +528,14 @@ namespace NebulaLauncher
             catch (Exception ex)
             {
                 _isAutoUpdating = false;
-                AgregarLog("âš  Error al aplicar actualizaciÃ³n: " + ex.Message);
+                AgregarLog("⚠️ Error al aplicar actualización: " + ex.Message);
                 if (!isAutomatic)
-                    MessageBox.Show("Error al aplicar actualizaciÃ³n: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al aplicar actualización: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 UpdateBadge.IsEnabled = true;
             }
         }
 
-        // Checker periÃ³dico (cada 1 hora)
+        // Checker periódico (cada 1 hora)
         private void IniciarUpdateTimer()
         {
             var t = new DispatcherTimer { Interval = TimeSpan.FromHours(1) };
