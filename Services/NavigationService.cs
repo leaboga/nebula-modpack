@@ -47,6 +47,12 @@ namespace NebulaLauncher.Services
                     UpdateHeaders("NOTIFICACIONES", "Bitácora de Versiones");
                     SwitchToModule(new ChangelogView(), main);
                     break;
+                case "configsync":
+                    UpdateHeaders("SINCRONIZACIÓN", "Setup de Pepa");
+                    // We reuse the ConfigView logic but it could be a separate view.
+                    // For now, as requested, we make the feature visible.
+                    SwitchToModule(new ConfigView(main), main);
+                    break;
                 case "settings":
                     UpdateHeaders("SISTEMAS", "Configuración del Iniciador");
                     SwitchToModule(new ConfigView(main), main);

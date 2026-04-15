@@ -635,6 +635,7 @@ namespace NebulaLauncher
         //  NAVIGATION
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private void Nav_Home_Checked(object sender, RoutedEventArgs e)       { CambiarVista("home"); }
+        private void Nav_ConfigSync_Checked(object sender, RoutedEventArgs e) { CambiarVista("configsync"); }
         private void Nav_Changelog_Checked(object sender, RoutedEventArgs e)  { CambiarVista("changelog"); }
         private void Nav_Settings_Checked(object sender, RoutedEventArgs e)   { CambiarVista("settings"); }
         private void Nav_Social_Checked(object sender, RoutedEventArgs e)     { CambiarVista("social"); }

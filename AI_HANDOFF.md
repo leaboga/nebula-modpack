@@ -2,47 +2,40 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.7.4`
+- Version publicada mas reciente: `2.7.5`
 - Fecha de referencia: `2026-04-14`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
 
-Se ha implementado el sistema de **Configuración Oficial Vinculada (Config Sync v2)**. Este sistema permite a los administradores (Pepita/Leandro) publicar configuraciones recomendadas directamente desde el launcher hacia GitHub, y a los usuarios recibirlas y aplicarlas de forma opcional y no intrusiva.
+Se ha integrado visualmente el sistema de **Config Sync (Setup de Pepa)** en la interfaz principal del launcher. Ahora la funcionalidad de sincronización oficial es una característica de primer nivel, fácilmente descubrible por el usuario a través de la navegación lateral.
 
-## Version 2.7.4
+## Version 2.7.5
 
 ### Cambios principales
 
-- **Sistema de Configuración Oficial (Cloud Sync)**:
-  - **Publicación Protegida**: Nueva ventana de login (`AdminLoginWindow`) para proteger la publicación de configs con contraseña.
-  - **Versionado Independiente**: Las configs ahora tienen su propia versión (`ConfigVersion` en el manifest) separada de la versión del launcher.
-  - **Incremento Automático**: Al publicar, el launcher detecta la versión actual y propone el incremento a la siguiente (v1 -> v2).
-  - **Detección Inteligente**: El launcher verifica al inicio si existe una `ConfigVersion` más reciente que la aplicada por el usuario para ese perfil.
-  - **Popup No Intrusivo**: Si hay una actualización, se muestra un aviso. Si el usuario elige "No", la versión se marca como rechazada y no vuelve a aparecer el popup hasta que se publique una versión NUEVA.
-  - **Botón de Aplicación Manual**: El usuario puede aplicar la config oficial en cualquier momento desde el panel de Ajustes.
-  - **Backup Automático**: Se realiza un backup previo en la carpeta `backups` de la instancia antes de aplicar la configuración oficial.
-- **Modelos de Datos**:
-  - `UserSession` ahora persiste `AppliedConfigVersions` y `RejectedConfigVersions` mapeadas por ID de perfil.
-  - `ModManifest` incluye el campo `ConfigVersion`.
-- **Infraestructura**:
-  - Integración con `gh api` para actualizar el archivo `manifest.json` remoto directamente desde el código tras subir los assets.
+- **Integración Visual de Config Sync**:
+  - **Nueva Entrada en Navegación**: Se añadió la opción "Setup de Pepa" en la barra lateral (Sidebar), bajo la sección de "Operaciones".
+  - **Tooltip Informativo**: La nueva opción incluye un tooltip que explica brevemente la función de sincronización oficial.
+  - **Módulo Dedicado**: Se habilitó la ruta `configsync` en el `NavigationService`, la cual dirige al usuario directamente al panel de gestión de configuraciones oficiales.
+  - **Identidad de Marca**: Se actualizó el título de la vista a "Setup de Pepa" y la categoría a "SINCRONIZACIÓN" para mantener la consistencia con el ecosistema.
+- **Mejoras de Navegación**:
+  - Sincronización de handlers entre `MainWindow.xaml` y `MainWindow.xaml.cs`.
+  - Refuerzo de la lógica de cambio de vista para asegurar que el contenido se cargue correctamente al pulsar la nueva opción.
 
 ### Archivos principales tocados
 
-- `Models.cs`: Persistencia de versiones aplicadas/rechazadas.
-- `ModSyncer.cs`: Soporte para `ConfigVersion` en manifiesto.
-- `MainWindow.xaml.cs`: Lógica de detección de updates al cargar versiones y aplicación automática/manual.
-- `Modules/ConfigView.xaml.cs`: Panel de administración protegido y gestión de estados de config oficial.
-- `AdminLoginWindow.xaml/.cs`: Interfaz de acceso protegido.
-- `NebulaLauncher.csproj`: Bump de versión a `2.7.4`.
+- `MainWindow.xaml`: Adición del `RadioButton` en la sidebar.
+- `MainWindow.xaml.cs`: Handler `Nav_ConfigSync_Checked`.
+- `Services/NavigationService.cs`: Implementación del caso `configsync`.
+- `NebulaLauncher.csproj`: Bump de versión a `2.7.5`.
 
 ## Validacion realizada
 
 - Build `Release` exitoso.
-- Verificación de Publicación: Se probó el login protegido y la subida de assets + actualización de manifest en GitHub.
-- Verificación de Detección: Al simular una versión de config superior en el manifest, el launcher muestra el aviso correctamente.
-- Verificación de Rechazo: Tras pulsar "No", el aviso no se repite al reiniciar. Al publicar una v+1, el aviso vuelve a aparecer.
+- Verificación de UI: La opción "Setup de Pepa" aparece visible en la sidebar.
+- Verificación de Navegación: Al hacer clic, se carga el panel de configuraciones con el título y categoría correctos.
+- Verificación de Funcionalidad: Se mantiene la capacidad de aplicar, rechazar y publicar configuraciones oficiales desde el nuevo acceso directo.
 
 ## Reglas operativas importantes
 
@@ -57,9 +50,9 @@ Antes de cualquier release o cambio que deba llegar por auto-update:
 
 ## Riesgos pendientes
 
-- La clave de administración está hardcodeada (`pepita2026`) para este despliegue. En futuras versiones se recomienda moverla a una validación vía API o hash remoto.
+- Actualmente, el panel de "Setup de Pepa" reutiliza la vista de ajustes generales (`ConfigView`). En versiones futuras se recomienda separar la lógica de presets y sync oficial en una vista dedicada para evitar saturar el panel de ajustes.
 
 ## Proximos pasos sugeridos
 
-- Notificaciones push más visuales para cambios de configuración.
-- Historial de versiones de configuración para permitir "rollback" a una configuración oficial anterior.
+- Crear un módulo UI exclusivo para "Setup de Pepa" con comparativas visuales de qué cambios trae la config oficial (ej: "Nuevos keybinds", "Mejoras de FPS").
+- Implementar indicadores de "visto/no visto" en la sidebar para nuevas configuraciones publicadas.

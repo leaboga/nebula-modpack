@@ -148,6 +148,11 @@
                             <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
                             
                             <RadioButton Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
+                            <RadioButton Content="Setup de Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ConfigSync_Checked">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Sincroniza y aplica las configuraciones oficiales de Pepa (controles, gráficos, mods)." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
                             <RadioButton Content="Biblioteca de Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked"/>
                             <RadioButton Content="Administrar Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModManager_Checked"/>
                             <RadioButton Content="Modpack Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked"/>
