@@ -28,6 +28,8 @@ namespace NebulaLauncher
         
         // Config sync tracking
         public string LastAppliedConfigHash { get; set; } = "";    // Hash de las últimas configs aplicadas
+        public Dictionary<string, string> AppliedConfigVersions { get; set; } = new(); // PerfilId -> Version de Config
+        public Dictionary<string, string> RejectedConfigVersions { get; set; } = new(); // PerfilId -> Version de Config rechazada
 
         // Legacy support
         public string SessionToken       { get; set; } = "";

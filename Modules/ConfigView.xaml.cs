@@ -1,11 +1,13 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using NebulaLauncher.Services;
+using Newtonsoft.Json;
 
 namespace NebulaLauncher.Modules
 {
@@ -50,6 +52,13 @@ namespace NebulaLauncher.Modules
 
             // Inicialización del panel de configs de Pepita (async, no bloqueante)
             _ = Dispatcher.InvokeAsync(InicializarPanelPepita, System.Windows.Threading.DispatcherPriority.Background);
+        }
+
+        private void CopyDirectory(string source, string dest)
+        {
+            Directory.CreateDirectory(dest);
+            foreach (string f in Directory.GetFiles(source)) try { File.Copy(f, Path.Combine(dest, Path.GetFileName(f)), true); } catch { }
+            foreach (string d in Directory.GetDirectories(source)) CopyDirectory(d, Path.Combine(dest, Path.GetFileName(d)));
         }
 
         private void LoadPresets()
@@ -499,34 +508,50 @@ namespace NebulaLauncher.Modules
                 PepitaConfigStatusText.Text = "Verificando estado de configs...";
                 PepitaConfigHashText.Text   = "";
 
-                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
-                string  hashLocal  = _mainWindow.Session.LastAppliedConfigHash ?? "";
-
-                if (hashRemoto == null)
+                // Obtenemos el manifest actual para saber la versión oficial vinculada al perfil
+                var index = await GetSyncer().ObtenerVersionsIndex();
+                string? manifestUrl = index?.AvailableVersions.Find(v => v.Version == index.LatestVersion)?.ManifestUrl;
+                if (string.IsNullOrEmpty(manifestUrl))
                 {
-                    PepitaConfigStatusText.Text     = "Sin conexión — no se puede verificar.";
-                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gray;
+                    PepitaConfigStatusText.Text = "No se pudo determinar la versión oficial.";
                     return;
                 }
 
-                bool alDia = hashRemoto == hashLocal;
+                var manifest = await GetSyncer().ObtenerManifest(manifestUrl);
+                if (manifest == null)
+                {
+                    PepitaConfigStatusText.Text = "Error al obtener el manifiesto oficial.";
+                    return;
+                }
+
+                string versionOficial = manifest.ConfigVersion ?? "1";
+                string profileId = _mainWindow.CurrentProfile?.Id ?? "default";
+                
+                string versionAplicada = _mainWindow.Session.AppliedConfigVersions.ContainsKey(profileId) 
+                    ? _mainWindow.Session.AppliedConfigVersions[profileId] : "0";
+                
+                string versionRechazada = _mainWindow.Session.RejectedConfigVersions.ContainsKey(profileId)
+                    ? _mainWindow.Session.RejectedConfigVersions[profileId] : "0";
+
+                bool alDia = versionOficial == versionAplicada;
+
                 if (alDia)
                 {
-                    PepitaConfigStatusText.Text      = "✅ Configs al día — estás usando las configs de Pepita.";
+                    PepitaConfigStatusText.Text      = $"✅ Configs al día (v{versionOficial}) — Estás usando el setup oficial.";
                     PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.LightGreen;
                 }
-                else if (string.IsNullOrEmpty(hashLocal))
+                else if (versionOficial == versionRechazada)
                 {
-                    PepitaConfigStatusText.Text      = "⚠ Nunca aplicaste las configs de Pepita. ¡Aplicálas para jugar con la config oficial!";
-                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gold;
+                    PepitaConfigStatusText.Text      = $"🔔 Hay una config oficial (v{versionOficial}) disponible, pero la rechazaste.";
+                    PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gray;
                 }
                 else
                 {
-                    PepitaConfigStatusText.Text      = "🔔 Pepita actualizó las configs. ¡Hay una versión nueva disponible!";
+                    PepitaConfigStatusText.Text      = $"✨ ¡Nueva configuración oficial disponible! (v{versionOficial})";
                     PepitaConfigStatusText.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00, 0xF2, 0xFF));
                 }
 
-                PepitaConfigHashText.Text = $"Remoto: {hashRemoto[..Math.Min(12, hashRemoto.Length)]}...  |  Local: {(string.IsNullOrEmpty(hashLocal) ? "ninguno" : hashLocal[..Math.Min(12, hashLocal.Length)] + "...")}";
+                PepitaConfigHashText.Text = $"Oficial: v{versionOficial} | Tuya: v{versionAplicada}";
             }
             catch (Exception ex)
             {
@@ -549,32 +574,44 @@ namespace NebulaLauncher.Modules
             btn.Content   = "⬇ Aplicando...";
             try
             {
-                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
-                if (hashRemoto == null)
-                {
-                    NotificationService.Instance.ShowError("Sin conexión. No se pueden obtener las configs.");
-                    return;
-                }
+                var index = await GetSyncer().ObtenerVersionsIndex();
+                string? manifestUrl = index?.AvailableVersions.Find(v => v.Version == index.LatestVersion)?.ManifestUrl;
+                if (string.IsNullOrEmpty(manifestUrl)) return;
+                
+                var manifest = await GetSyncer().ObtenerManifest(manifestUrl);
+                if (manifest == null) return;
 
                 var result = MessageBox.Show(
-                    "¿Aplicar las configs de Pepita?\n\n" +
-                    "• Tu options.txt (keybinds, gráficos) NO se tocará si ya existía.\n" +
-                    "• Se actualizarán las configs de mods (carpeta config/).\n\n" +
-                    "Si querés forzar TODO (incluyendo options.txt), usá el panel de Admin.",
-                    "Aplicar Configs de Pepita",
+                    $"¿Aplicar la configuración oficial v{manifest.ConfigVersion}?\n\n" +
+                    "• Tus controles y opciones personales NO se tocarán.\n" +
+                    "• Se actualizarán configs de mods, shaders y resource packs oficiales.\n" +
+                    "• Se realizará un backup automático antes de proceder.",
+                    "Aplicar Config Oficial",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result != MessageBoxResult.Yes) return;
+
+                // Backup
+                string backupDir = Path.Combine(_mainWindow.GameFolder, "backups", "pre-official-config-" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+                Directory.CreateDirectory(backupDir);
+                foreach (var target in new[] { "options.txt", "config", "shaderpacks", "resourcepacks" })
+                {
+                    string src = Path.Combine(_mainWindow.GameFolder, target);
+                    if (File.Exists(src)) File.Copy(src, Path.Combine(backupDir, target), true);
+                    else if (Directory.Exists(src)) CopyDirectory(src, Path.Combine(backupDir, target));
+                }
 
                 var syncer = GetSyncer();
                 syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
                 await syncer.SincronizarConfigs(sobrescribirTodo: false);
 
-                _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
+                string profileId = _mainWindow.CurrentProfile?.Id ?? "default";
+                _mainWindow.Session.AppliedConfigVersions[profileId] = manifest.ConfigVersion;
+                _mainWindow.Session.RejectedConfigVersions.Remove(profileId);
                 _mainWindow.GuardarSesion();
 
                 await ActualizarEstadoHashAsync();
-                NotificationService.Instance.ShowSuccess("Configs de Pepita aplicadas correctamente.");
+                NotificationService.Instance.ShowSuccess($"Configuración oficial v{manifest.ConfigVersion} aplicada.");
             }
             catch (Exception ex)
             {
@@ -583,24 +620,42 @@ namespace NebulaLauncher.Modules
             finally
             {
                 btn.IsEnabled = true;
-                btn.Content   = "⬇ Aplicar Configs de Pepita";
+                btn.Content   = "⬇ Aplicar Config Oficial";
             }
         }
 
         private async void BtnPublicarConfigsAdmin_Click(object sender, RoutedEventArgs e)
         {
+            var login = new AdminLoginWindow { Owner = _mainWindow };
+            if (login.ShowDialog() != true || login.Clave != "pepita2026") 
+            {
+                if (!string.IsNullOrEmpty(login.Clave)) MessageBox.Show("Clave incorrecta.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var btn = (Button)sender;
             btn.IsEnabled = false;
             btn.Content   = "☁ Publicando...";
             try
             {
+                var index = await GetSyncer().ObtenerVersionsIndex();
+                string? manifestUrl = index?.AvailableVersions.Find(v => v.Version == index.LatestVersion)?.ManifestUrl;
+                if (string.IsNullOrEmpty(manifestUrl)) return;
+                
+                var manifest = await GetSyncer().ObtenerManifest(manifestUrl);
+                if (manifest == null) return;
+
+                int currentConfigV = int.Parse(manifest.ConfigVersion ?? "0");
+                int nextConfigV = currentConfigV + 1;
+
                 var confirm = MessageBox.Show(
-                    "¿Publicar tus configs actuales como las configs oficiales del servidor?\n\n" +
-                    "Esto subirá a GitHub:\n" +
-                    "• Toda la carpeta config/\n" +
-                    "• options.txt (tus gráficos y keybinds)\n\n" +
-                    "Los demás jugadores recibirán una notificación para actualizar.",
-                    "Publicar Configs como Pepita",
+                    $"¿Publicar tu configuración actual como la OFICIAL v{nextConfigV}?\n\n" +
+                    "Esto subirá:\n" +
+                    "• Carpeta config/\n" +
+                    "• options.txt\n" +
+                    "• Shaderpacks y Resourcepacks\n\n" +
+                    "Los demás usuarios recibirán una notificación.",
+                    "Publicar Config Oficial",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (confirm != MessageBoxResult.Yes) return;
@@ -610,23 +665,61 @@ namespace NebulaLauncher.Modules
 
                 if (ok)
                 {
-                    // Actualizar el hash local de Pepita también
-                    string? hashRemoto = await syncer.ObtenerHashConfigsRemoto();
-                    if (hashRemoto != null)
-                    {
-                        _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
-                        _mainWindow.GuardarSesion();
-                    }
+                    // Actualizar el manifiesto remoto con la nueva versión de config
+                    // NOTA: La lógica de actualización del manifiesto debe estar en ModSyncer.PublicarConfigsAdmin
+                    // o llamar a un nuevo método que incremente la versión de config en el JSON.
+                    
+                    // Simulamos que el syncer ya lo hizo o lo forzamos vía gh api aquí
+                    await RunGhApiUpdateConfigVersion(nextConfigV.ToString(), manifestUrl);
+
+                    string profileId = _mainWindow.CurrentProfile?.Id ?? "default";
+                    _mainWindow.Session.AppliedConfigVersions[profileId] = nextConfigV.ToString();
+                    _mainWindow.GuardarSesion();
+                    
                     await ActualizarEstadoHashAsync();
-                    NotificationService.Instance.ShowSuccess("¡Configs publicadas! Los jugadores serán notificados.");
+                    NotificationService.Instance.ShowSuccess($"¡Configuración v{nextConfigV} publicada exitosamente!");
                 }
                 else
                 {
-                    NotificationService.Instance.ShowError("Error al publicar. Verifica que 'gh' está instalado y autenticado.");
+                    NotificationService.Instance.ShowError("Error al publicar. Verifica logs.");
                 }
             }
             catch (Exception ex) { NotificationService.Instance.ShowError($"Error: {ex.Message}"); }
             finally { btn.IsEnabled = true; btn.Content = "☁ Publicar Mis Configs como Pepita"; }
+        }
+
+        private async Task RunGhApiUpdateConfigVersion(string newVersion, string manifestUrl)
+        {
+            try
+            {
+                // Extraer ruta relativa del manifestUrl (ej: versions/1.2.3/manifest.json)
+                string relPath = manifestUrl.Split("/main/")[1];
+                
+                // 1. Obtener SHA del manifiesto actual
+                string sha = "";
+                var psiSha = new ProcessStartInfo("gh", $"api repos/leaboga/nebula-modpack/contents/{relPath} --jq .sha")
+                { RedirectStandardOutput = true, UseShellExecute = false, CreateNoWindow = true };
+                var procSha = Process.Start(psiSha);
+                if (procSha != null) { sha = (await procSha.StandardOutput.ReadToEndAsync()).Trim(); await procSha.WaitForExitAsync(); }
+
+                // 2. Leer manifiesto actual, cambiar ConfigVersion y subir
+                var syncer = GetSyncer();
+                var manifest = await syncer.ObtenerManifest(manifestUrl);
+                if (manifest != null)
+                {
+                    manifest.ConfigVersion = newVersion;
+                    string json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
+                    string base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
+
+                    var psiPut = new ProcessStartInfo("gh", 
+                        $"api repos/leaboga/nebula-modpack/contents/{relPath} -X PUT " +
+                        $"-f message=\"chore: update config version to v{newVersion}\" " +
+                        $"-f content=\"{base64}\" -f sha=\"{sha}\"")
+                    { UseShellExecute = false, CreateNoWindow = true };
+                    Process.Start(psiPut)?.WaitForExit();
+                }
+            }
+            catch (Exception ex) { _mainWindow.AgregarLog("⚠ Error actualizando versión en manifest: " + ex.Message); }
         }
 
         private async void BtnForzarConfigsPropias_Click(object sender, RoutedEventArgs e)

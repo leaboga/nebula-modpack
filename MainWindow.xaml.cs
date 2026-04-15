@@ -1195,8 +1195,90 @@ namespace NebulaLauncher
                 });
 
                 await CargarManifest(currentIdx >= 0 ? currentIdx : 0);
+
+                // --- NUEVO: Verificación de Config Oficial ---
+                await VerificandoConfigOficialAlCargar();
             }
             catch (Exception ex) { AgregarLog($"\u26A0 Error cargando versiones: {ex.Message}"); }
+        }
+
+        private async Task VerificandoConfigOficialAlCargar()
+        {
+            try
+            {
+                if (_versionsIndex == null) return;
+                
+                string? manifestUrl = _versionsIndex.AvailableVersions.Find(v => v.Version == _versionsIndex.LatestVersion)?.ManifestUrl;
+                if (string.IsNullOrEmpty(manifestUrl)) return;
+                
+                var manifest = await _syncer.ObtenerManifest(manifestUrl);
+                if (manifest == null) return;
+
+                string versionOficial = manifest.ConfigVersion ?? "1";
+                string profileId = CurrentProfile?.Id ?? "default";
+                
+                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId) 
+                    ? _session.AppliedConfigVersions[profileId] : "0";
+                
+                string versionRechazada = _session.RejectedConfigVersions.ContainsKey(profileId)
+                    ? _session.RejectedConfigVersions[profileId] : "0";
+
+                if (versionOficial != versionAplicada && versionOficial != versionRechazada)
+                {
+                    // Nueva config disponible y no rechazada
+                    Dispatcher.Invoke(() => {
+                        var res = MessageBox.Show(
+                            $"âœ¨ Hay una nueva configuraciÃ³n oficial v{versionOficial} disponible para este perfil.\n\n" +
+                            "Incluye optimizaciones de rendimiento, shaders y keybinds recomendados.\n" +
+                            "Â¿Deseas aplicarla ahora?\n\n" +
+                            "(Tus controles personales serÃ¡n respetados)",
+                            "ConfiguraciÃ³n Recomendada",
+                            MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                        if (res == MessageBoxResult.Yes)
+                        {
+                            _ = AplicarConfigOficialAsync(manifest);
+                        }
+                        else if (res == MessageBoxResult.No)
+                        {
+                            // Guardar rechazo para no volver a molestar con ESTA versiÃ³n
+                            _session.RejectedConfigVersions[profileId] = versionOficial;
+                            GuardarSesion();
+                            AgregarLog($"ðŸ”” Config oficial v{versionOficial} rechazada por el usuario.");
+                        }
+                    });
+                }
+            }
+            catch { }
+        }
+
+        private async Task AplicarConfigOficialAsync(ModManifest manifest)
+        {
+            try
+            {
+                AgregarLog($"ðŸ”„ Aplicando configuraciÃ³n oficial v{manifest.ConfigVersion}...");
+                
+                // Backup simple
+                string backupDir = System.IO.Path.Combine(GameFolder, "backups", "auto-config-v" + manifest.ConfigVersion);
+                Directory.CreateDirectory(backupDir);
+                foreach (var target in new[] { "options.txt", "config" })
+                {
+                    string src = System.IO.Path.Combine(GameFolder, target);
+                    if (File.Exists(src)) File.Copy(src, System.IO.Path.Combine(backupDir, target), true);
+                    else if (Directory.Exists(src)) CopyDirectory(src, System.IO.Path.Combine(backupDir, target));
+                }
+
+                await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+
+                string profileId = CurrentProfile?.Id ?? "default";
+                _session.AppliedConfigVersions[profileId] = manifest.ConfigVersion;
+                _session.RejectedConfigVersions.Remove(profileId);
+                GuardarSesion();
+
+                AgregarLog($"âœ… ConfiguraciÃ³n oficial v{manifest.ConfigVersion} aplicada correctamente.");
+                NotificationService.Instance.ShowSuccess($"Config oficial v{manifest.ConfigVersion} lista.");
+            }
+            catch (Exception ex) { AgregarLog($"âš  Error aplicando config oficial: {ex.Message}"); }
         }
 
         private async void VersionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

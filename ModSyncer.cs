@@ -20,6 +20,7 @@ namespace NebulaLauncher
     }
     public class ModManifest {
         public string Version { get; set; } = "";
+        public string ConfigVersion { get; set; } = "1"; // Versión de configuración oficial
         public string MinecraftVersion { get; set; } = "";
         public string Modloader { get; set; } = "";
         public string ModloaderVersion { get; set; } = "";

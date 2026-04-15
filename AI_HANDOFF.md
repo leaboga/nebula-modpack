@@ -2,43 +2,47 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.7.3`
+- Version publicada mas reciente: `2.7.4`
 - Fecha de referencia: `2026-04-14`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
 
-Se ha implementado el sistema de **Presets de Configuración**, una funcionalidad clave que permite a los usuarios guardar, gestionar y replicar su configuración de juego (controles, gráficos, mods, shaders) entre diferentes perfiles e instancias.
+Se ha implementado el sistema de **Configuración Oficial Vinculada (Config Sync v2)**. Este sistema permite a los administradores (Pepita/Leandro) publicar configuraciones recomendadas directamente desde el launcher hacia GitHub, y a los usuarios recibirlas y aplicarlas de forma opcional y no intrusiva.
 
-## Version 2.7.3
+## Version 2.7.4
 
 ### Cambios principales
 
-- **Sistema de Presets de Juego**:
-  - Nuevo `PresetService` para la gestión de archivos de configuración.
-  - Capacidad de guardar "Presets" que incluyen `options.txt`, `servers.dat`, `hotbar.nbt` y carpetas de `config`, `shaderpacks` y `resourcepacks`.
-  - Nueva tarjeta en `ConfigView` para gestionar presets guardados.
-  - **Aplicación Selectiva**: El usuario puede elegir qué parte del preset aplicar (solo controles, solo gráficos, solo configs de mods, o todo).
-  - **Filtro de options.txt**: Al aplicar solo controles o solo gráficos, se realiza un merge inteligente de las líneas correspondientes en el archivo `options.txt` sin sobrescribir el resto.
-  - **Backup Automático**: Antes de aplicar un preset, se realiza una copia de seguridad de la configuración actual en la carpeta `backups` de la instancia.
-- **UI/UX**:
-  - Lista interactiva de presets con fecha y versión de Minecraft.
-  - Botones para Guardar, Aplicar y Eliminar presets.
-  - Feedback visual en la consola de telemetría del launcher.
+- **Sistema de Configuración Oficial (Cloud Sync)**:
+  - **Publicación Protegida**: Nueva ventana de login (`AdminLoginWindow`) para proteger la publicación de configs con contraseña.
+  - **Versionado Independiente**: Las configs ahora tienen su propia versión (`ConfigVersion` en el manifest) separada de la versión del launcher.
+  - **Incremento Automático**: Al publicar, el launcher detecta la versión actual y propone el incremento a la siguiente (v1 -> v2).
+  - **Detección Inteligente**: El launcher verifica al inicio si existe una `ConfigVersion` más reciente que la aplicada por el usuario para ese perfil.
+  - **Popup No Intrusivo**: Si hay una actualización, se muestra un aviso. Si el usuario elige "No", la versión se marca como rechazada y no vuelve a aparecer el popup hasta que se publique una versión NUEVA.
+  - **Botón de Aplicación Manual**: El usuario puede aplicar la config oficial en cualquier momento desde el panel de Ajustes.
+  - **Backup Automático**: Se realiza un backup previo en la carpeta `backups` de la instancia antes de aplicar la configuración oficial.
+- **Modelos de Datos**:
+  - `UserSession` ahora persiste `AppliedConfigVersions` y `RejectedConfigVersions` mapeadas por ID de perfil.
+  - `ModManifest` incluye el campo `ConfigVersion`.
+- **Infraestructura**:
+  - Integración con `gh api` para actualizar el archivo `manifest.json` remoto directamente desde el código tras subir los assets.
 
 ### Archivos principales tocados
 
-- `Services/PresetService.cs`: Lógica de persistencia y aplicación de presets.
-- `Modules/ConfigView.xaml`: Nueva interfaz de gestión de presets.
-- `Modules/ConfigView.xaml.cs`: Handlers para la interacción con el usuario.
-- `NebulaLauncher.csproj`: Bump de versión a `2.7.3`.
+- `Models.cs`: Persistencia de versiones aplicadas/rechazadas.
+- `ModSyncer.cs`: Soporte para `ConfigVersion` en manifiesto.
+- `MainWindow.xaml.cs`: Lógica de detección de updates al cargar versiones y aplicación automática/manual.
+- `Modules/ConfigView.xaml.cs`: Panel de administración protegido y gestión de estados de config oficial.
+- `AdminLoginWindow.xaml/.cs`: Interfaz de acceso protegido.
+- `NebulaLauncher.csproj`: Bump de versión a `2.7.4`.
 
 ## Validacion realizada
 
 - Build `Release` exitoso.
-- Verificación de guardado: Los archivos se copian correctamente a la carpeta `presets` de `AppData`.
-- Verificación de aplicación: Se comprobó que el backup se genera y los archivos se sobrescriben/mezclan correctamente en la instancia destino.
-- Verificación de borrado: La carpeta del preset se elimina correctamente.
+- Verificación de Publicación: Se probó el login protegido y la subida de assets + actualización de manifest en GitHub.
+- Verificación de Detección: Al simular una versión de config superior en el manifest, el launcher muestra el aviso correctamente.
+- Verificación de Rechazo: Tras pulsar "No", el aviso no se repite al reiniciar. Al publicar una v+1, el aviso vuelve a aparecer.
 
 ## Reglas operativas importantes
 
@@ -53,9 +57,9 @@ Antes de cualquier release o cambio que deba llegar por auto-update:
 
 ## Riesgos pendientes
 
-- Si un preset es de una versión de Minecraft muy diferente (ej: 1.8 vs 1.21), algunas opciones de `options.txt` podrían no ser compatibles, aunque el merge mitiga gran parte del riesgo.
+- La clave de administración está hardcodeada (`pepita2026`) para este despliegue. En futuras versiones se recomienda moverla a una validación vía API o hash remoto.
 
 ## Proximos pasos sugeridos
 
-- Agregar soporte para exportar/importar presets como archivos `.kraken` para compartir con otros jugadores.
-- Sincronización de presets en la nube mediante el `CloudService` existente.
+- Notificaciones push más visuales para cambios de configuración.
+- Historial de versiones de configuración para permitir "rollback" a una configuración oficial anterior.

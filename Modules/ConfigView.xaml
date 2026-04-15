@@ -364,7 +364,7 @@
 
                 <UniformGrid Columns="2">
                     <Button x:Name="BtnAplicarConfigsPepita"
-                            Content="⬇ Aplicar Configs de Pepita"
+                            Content="⬇ Aplicar Config Oficial"
                             Click="BtnAplicarConfigsPepita_Click"
                             Style="{DynamicResource PlayButton}"
                             Height="40" Margin="0,0,4,0"/>
@@ -374,7 +374,7 @@
                             Style="{DynamicResource SecondaryButton}"
                             Height="40" Margin="4,0,0,0"/>
                 </UniformGrid>
-                <TextBlock Text="Aplica las configs que Pepita configuró para el servidor. Tus keybinds y opciones personales no se perderán."
+                <TextBlock Text="Aplica la configuración recomendada del servidor. Tus keybinds personales no se perderán."
                            Foreground="#344A5B" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
