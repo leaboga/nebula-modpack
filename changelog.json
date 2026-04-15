@@ -250,7 +250,7 @@
       "Rendimiento: Descargas mediante Streams para evitar picos de memoria RAM.",
       "UX: Implementación de Skeleton Screens y micro-animaciones de entrada.",
       "Detalles: Panel lateral Flyout con descripción Markdown y galería de imágenes.",
-      "Seguimiento: Implementación de nebula_manifest.json para detección precisa de mods instalados."
+      "Seguimiento: Implementación de kraken_manifest.json para detección precisa de mods instalados."
     ]
   },
   {

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public class PerformanceMetrics
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public static class LoggerService
     {

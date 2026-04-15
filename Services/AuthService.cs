@@ -2,9 +2,9 @@ using System;
 using System.Threading.Tasks;
 using CmlLib.Core.Auth;
 using CmlLib.Core.Auth.Microsoft;
-using NebulaLauncher;
+using KrakenLauncher;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class AuthService
     {

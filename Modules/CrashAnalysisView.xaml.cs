@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class CrashAnalysisView : UserControl
     {

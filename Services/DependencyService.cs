@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class ModrinthDependency
     {
@@ -20,7 +20,7 @@ namespace NebulaLauncher.Services
         static DependencyService()
         {
             if (!_client.DefaultRequestHeaders.Contains("User-Agent"))
-                _client.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/1.5 (leandro@nebula.com)");
+                _client.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/1.5 (leandro@nebula.com)");
         }
 
         public async Task<List<string>> GetRequiredDependencies(string projectId, string version, string loader)

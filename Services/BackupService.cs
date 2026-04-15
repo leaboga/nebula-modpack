@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class BackupService
     {
@@ -15,7 +15,7 @@ namespace NebulaLauncher.Services
             _gameFolder   = gameFolder;
             _backupsFolder = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "NebulaLauncher", "backups");
+                "KrakenLauncher", "backups");
             Directory.CreateDirectory(_backupsFolder);
         }
 

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher
+namespace KrakenLauncher
 {
     public class VersionsIndex {
         public string LatestVersion { get; set; } = "";
@@ -52,7 +52,7 @@ namespace NebulaLauncher
             _modsFolder = Path.Combine(gameFolder, "mods");
             Directory.CreateDirectory(_modsFolder);
             _http.Timeout = TimeSpan.FromSeconds(5);
-            _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/" + Services.VersionManager.GetCurrentVersion());
+            _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/" + Services.VersionManager.GetCurrentVersion());
         }
 
         public async Task<VersionsIndex?> ObtenerVersionsIndex() {

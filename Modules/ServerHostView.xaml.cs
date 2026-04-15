@@ -12,9 +12,9 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.Linq;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class ServerHostView : UserControl
     {
@@ -131,7 +131,7 @@ namespace NebulaLauncher.Modules
                 string propertiesPath = Path.Combine(_serverFolderPath, "server.properties");
                 if (!File.Exists(propertiesPath))
                 {
-                    await File.WriteAllTextAsync(propertiesPath, "online-mode=false\nmotd=Nebula Local Server\nmax-players=20\nview-distance=10");
+                    await File.WriteAllTextAsync(propertiesPath, "online-mode=false\nmotd=KRAKEN Local Server\nmax-players=20\nview-distance=10");
                 }
 
                 LogToConsole("✅ Instalación completada con éxito.");

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 
-namespace NebulaLauncher
+namespace KrakenLauncher
 {
     public partial class App : Application
     {
@@ -23,7 +23,7 @@ namespace NebulaLauncher
         {
             if (ex == null) return;
             string msg = $"🌌 Error Galáctico Detectado:\n\n{ex.Message}\n\nTipo: {ex.GetType().Name}\nDetalles:\n{ex.StackTrace}";
-            MessageBox.Show(msg, "Nebula Diagnostics", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(msg, "KRAKEN Diagnostics", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         protected override void OnExit(ExitEventArgs e)

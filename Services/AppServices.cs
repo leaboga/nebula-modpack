@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class ChangelogEntry
     {
@@ -84,7 +84,7 @@ namespace NebulaLauncher.Services
         public SessionHistoryService()
         {
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            _filePath = Path.Combine(appData, "NebulaLauncher", "session_history.json");
+            _filePath = Path.Combine(appData, "KrakenLauncher", "session_history.json");
         }
 
         public SessionHistory Load()

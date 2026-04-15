@@ -1,4 +1,4 @@
-<UserControl x:Class="NebulaLauncher.Modules.CrashDiagnosticView"
+<UserControl x:Class="KrakenLauncher.Modules.CrashDiagnosticView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -48,7 +48,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="CARPETA APP" Foreground="#6D8A99" FontSize="11" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="AppPathLabel" Grid.Column="1" Text="C:\Users\...\NebulaLauncher" Foreground="White" FontSize="12" VerticalAlignment="Center" Margin="10,0"/>
+                            <TextBlock x:Name="AppPathLabel" Grid.Column="1" Text="C:\Users\...\KrakenLauncher" Foreground="White" FontSize="12" VerticalAlignment="Center" Margin="10,0"/>
                             <Button Grid.Column="2" Content="📂 Abrir" Style="{DynamicResource SecondaryButton}" Height="32" Padding="12,0" Click="OpenAppFolder_Click"/>
                         </Grid>
 

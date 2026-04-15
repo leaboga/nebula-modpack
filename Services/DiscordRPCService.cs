@@ -2,7 +2,7 @@ using System;
 using DiscordRPC;
 using DiscordRPC.Logging;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class DiscordRPCService : IDisposable
     {

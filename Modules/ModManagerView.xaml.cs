@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public class ModItem
     {
@@ -93,7 +93,7 @@ namespace NebulaLauncher.Modules
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error listando mods: " + ex.Message, "Nebula Mod Manager");
+                MessageBox.Show("Error listando mods: " + ex.Message, "KRAKEN Mod Manager");
             }
         }
 

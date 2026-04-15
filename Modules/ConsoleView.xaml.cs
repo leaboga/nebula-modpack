@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class ConsoleView : UserControl
     {

@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using NebulaLauncher;
+using KrakenLauncher;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class CloudService
     {

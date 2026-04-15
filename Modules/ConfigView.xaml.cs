@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class ConfigView : UserControl
     {
@@ -25,7 +25,7 @@ namespace NebulaLauncher.Modules
             _initializing    = true;
             _configManager = new ConfigManager(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                             "NebulaLauncher", "minecraft"));
+                             "KrakenLauncher", "minecraft"));
             _presetService = new PresetService();
 
             ServerIpBox.Text = _mainWindow.Session.ServerIp;
@@ -296,7 +296,7 @@ namespace NebulaLauncher.Modules
         {
             try 
             { 
-                string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "minecraft", sub);
+                string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "minecraft", sub);
                 Directory.CreateDirectory(appFolder);
                 Process.Start("explorer.exe", appFolder);
             }
@@ -396,7 +396,7 @@ namespace NebulaLauncher.Modules
             try
             {
                 string crashDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
-                                                "NebulaLauncher", "minecraft", "crash-reports");
+                                                "KrakenLauncher", "minecraft", "crash-reports");
                 Directory.CreateDirectory(crashDir);
                 Process.Start("explorer.exe", crashDir);
             }
@@ -486,7 +486,7 @@ namespace NebulaLauncher.Modules
         private ModSyncer GetSyncer() =>
             _syncerLocal ??= new ModSyncer(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                             "NebulaLauncher", "minecraft"));
+                             "KrakenLauncher", "minecraft"));
 
         /// <summary>Muestra u oculta el panel admin según si el usuario es Pepita.</summary>
         private async void InicializarPanelPepita()

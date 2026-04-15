@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class ModrinthMod
     {
@@ -36,7 +36,7 @@ namespace NebulaLauncher.Services
 
         public ModrinthService()
         {
-            _client.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/1.5 (leandro@nebula.com)");
+            _client.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/1.5 (leandro@nebula.com)");
         }
 
         public async Task<List<ModrinthMod>> SearchMods(string query, string version = "1.20.1", string loader = "fabric")

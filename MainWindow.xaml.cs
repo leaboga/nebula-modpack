@@ -13,7 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -22,9 +22,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Documents;
-using NebulaLauncher.Modules;
+using KrakenLauncher.Modules;
 
-namespace NebulaLauncher
+namespace KrakenLauncher
 {
 
     public partial class MainWindow : Window
@@ -353,7 +353,7 @@ namespace NebulaLauncher
                 {
                     currentExeName,
                     "KrakenLauncher.exe",
-                    "NebulaLauncher.exe"
+                    "KrakenLauncher.exe"
                 };
                 if (root.assets != null)
                 {
@@ -743,7 +743,7 @@ namespace NebulaLauncher
                     else if (mensaje.StartsWith("ðŸš€") || mensaje.StartsWith("âš¡")) runText.Foreground = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
                     else runText.Foreground = new SolidColorBrush(Color.FromRgb(0xC4, 0xB5, 0xFD));
 
-                    if (LogText.Text == "[Nebula] System initialized. Waiting for command...") LogText.Inlines.Clear();
+                    if (LogText.Text == "[KRAKEN] System initialized. Waiting for command...") LogText.Inlines.Clear();
                     
                     LogText.Inlines.Add(runTime);
                     LogText.Inlines.Add(runText);
@@ -1574,7 +1574,7 @@ namespace NebulaLauncher
             {
                 // 1. Rebuild en modo Release
                 AgregarLog("ðŸ”¨ Compilando binario final (Release)...");
-                int buildResult = await RunCommand("dotnet", "publish NebulaLauncher.csproj -c Release -r win-x64 --self-contained true");
+                int buildResult = await RunCommand("dotnet", "publish KrakenLauncher.csproj -c Release -r win-x64 --self-contained true");
                 if (buildResult != 0) { AgregarLog("âŒ Error: FallÃ³ la compilaciÃ³n del motor."); return; }
 
                 // 2. Extraer versiÃ³n REAL del binario generado

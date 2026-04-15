@@ -14,11 +14,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public class ModrinthItem : INotifyPropertyChanged
     {
@@ -144,7 +144,7 @@ namespace NebulaLauncher.Modules
                 ResultsList.ItemsSource = _results;
 
                 if (!_http.DefaultRequestHeaders.Contains("User-Agent"))
-                    _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/" + VersionManager.GetCurrentVersion());
+                    _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/" + VersionManager.GetCurrentVersion());
 
                 LoadManifest();
                 UpdateLocalWeight();
@@ -311,7 +311,7 @@ namespace NebulaLauncher.Modules
                         Title = title,
                         Description = desc,
                         Author = author,
-                        IconUrl = string.IsNullOrEmpty(icon) ? "pack://application:,,,/nebula.ico" : icon,
+                        IconUrl = string.IsNullOrEmpty(icon) ? "pack://application:,,,/kraken.ico" : icon,
                         DisplayDownloads = FormatDownloads(dl),
                         IsInstalled = installed,
                         IsFavorite = _discoveryState.IsFavoriteMod(pid),
@@ -371,7 +371,7 @@ namespace NebulaLauncher.Modules
             }
             catch (Exception ex) 
             { 
-                MessageBox.Show($"Fallo en la descarga cuántica: {ex.Message}", "Nebula Hub", MessageBoxButton.OK, MessageBoxImage.Error); 
+                MessageBox.Show($"Fallo en la descarga cuántica: {ex.Message}", "KRAKEN Mod Hub", MessageBoxButton.OK, MessageBoxImage.Error); 
             }
         }
 
@@ -636,7 +636,7 @@ namespace NebulaLauncher.Modules
         private void DeleteFileBtn_Click(object sender, RoutedEventArgs e)
         {
             if (sender is not Button btn || btn.Tag is not string path) return;
-            if (MessageBox.Show($"¿Desintegrar '{Path.GetFileName(path)}' de este universo?", "Nebula Hub", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
+            if (MessageBox.Show($"¿Desintegrar '{Path.GetFileName(path)}' de este universo?", "KRAKEN Mod Hub", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { if (File.Exists(path)) File.Delete(path); ShowLocalFiles(); UpdateLocalWeight(); } catch { }
         }
 
@@ -684,7 +684,7 @@ namespace NebulaLauncher.Modules
         
         private void LoadManifest()
         {
-            string path = Path.Combine(GetInstallDir(), "nebula_manifest.json");
+            string path = Path.Combine(GetInstallDir(), "kraken_manifest.json");
             if (File.Exists(path)) {
                 try {
                     _manifest = JsonConvert.DeserializeObject<NebulaManifest>(File.ReadAllText(path)) ?? new NebulaManifest();
@@ -700,7 +700,7 @@ namespace NebulaLauncher.Modules
             {
                 string dir = GetInstallDir();
                 if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                string path = Path.Combine(dir, "nebula_manifest.json");
+                string path = Path.Combine(dir, "kraken_manifest.json");
                 File.WriteAllText(path, JsonConvert.SerializeObject(_manifest, Formatting.Indented));
             }
             catch { }
@@ -732,8 +732,8 @@ namespace NebulaLauncher.Modules
         
         private void SetLoading(bool loading)
         {
-            NebulaLoadingBar.Visibility = loading ? Visibility.Visible : Visibility.Collapsed;
-            NebulaLoadingBar.IsIndeterminate = loading;
+            KrakenLoadingBar.Visibility = loading ? Visibility.Visible : Visibility.Collapsed;
+            KrakenLoadingBar.IsIndeterminate = loading;
             
             SkeletonPanel.Visibility = (loading && _results.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
             ResultsScroll.Visibility = (loading && _results.Count == 0) ? Visibility.Collapsed : Visibility.Visible;

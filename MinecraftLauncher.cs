@@ -13,10 +13,10 @@ using CmlLib.Core.Installer;
 using CmlLib.Core.ModLoaders.FabricMC;
 using System.Linq;
 using System.Reflection;
-using NebulaLauncher.Modules;
-using NebulaLauncher.Services;
+using KrakenLauncher.Modules;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher
+namespace KrakenLauncher
 {
     public class McGameLauncher
     {

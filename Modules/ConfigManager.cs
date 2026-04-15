@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Tomlyn;
 using Tomlyn.Model;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public class ConfigManager
     {

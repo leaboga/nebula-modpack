@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class NotificationToast : UserControl
     {

@@ -8,10 +8,10 @@ using System.Windows;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class ModpackView : UserControl
     {
@@ -108,7 +108,7 @@ namespace NebulaLauncher.Modules
                     byte[] mrBytes = await _http.GetByteArrayAsync(downloadUrl);
                     InstallProgress.Value = 30;
 
-                    string tempPath = Path.Combine(Path.GetTempPath(), "nebula_pack.mrpack");
+                    string tempPath = Path.Combine(Path.GetTempPath(), "kraken_pack.mrpack");
                     await File.WriteAllBytesAsync(tempPath, mrBytes);
 
                     StatusLabel.Text = "Analizando estructura del pack...";

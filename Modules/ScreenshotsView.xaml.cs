@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class ScreenshotsView : UserControl
     {
@@ -139,7 +139,7 @@ namespace NebulaLauncher.Modules
                     bitmap.CacheOption = BitmapCacheOption.OnLoad;
                     bitmap.EndInit();
                     Clipboard.SetImage(bitmap);
-                    MessageBox.Show("\u2705 Imagen copiada al portapapeles.", "Nebula Screenshots");
+                    MessageBox.Show("\u2705 Imagen copiada al portapapeles.", "KRAKEN Screenshots");
                 }
                 catch (Exception ex) { MessageBox.Show("Error al copiar: " + ex.Message); }
             }

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public sealed class UpdateDiagnosticsSnapshot
     {

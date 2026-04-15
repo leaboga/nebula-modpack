@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Controls;
-using NebulaLauncher.Modules;
+using KrakenLauncher.Modules;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class NotificationService
     {

@@ -4,7 +4,7 @@ Quiero que trabajes directamente sobre este repositorio WPF/C# y hagas un redise
 
 ### Objetivo principal
 
-Transformá por completo la identidad visual del proyecto actual `NebulaLauncher` hacia una marca que represente algo masivo, brutal, dominante y con presencia. Podés proponer y aplicar un nuevo nombre si mejora el resultado. Algunas referencias válidas son nombres tipo `Kraken`, pero no te limites si encontrás una alternativa mejor dentro de esa línea semántica.
+Transformá por completo la identidad visual del proyecto actual `KrakenLauncher` hacia una marca que represente algo masivo, brutal, dominante y con presencia. Podés proponer y aplicar un nuevo nombre si mejora el resultado. Algunas referencias válidas son nombres tipo `Kraken`, pero no te limites si encontrás una alternativa mejor dentro de esa línea semántica.
 
 El cambio tiene que sentirse como un relanzamiento completo del launcher.
 
@@ -20,7 +20,7 @@ Archivos y zonas relevantes:
 - `App.xaml`: recursos globales y tray icon.
 - `Modules/*.xaml`: pantallas/módulos existentes como changelog, rendimiento, screenshots, social, mod manager, crash diagnostics, hosting, modpacks, etc.
 - `Services/*.cs`: helpers y servicios reutilizados.
-- `NebulaLauncher.csproj`: metadata del producto, versión, autor, icono y branding.
+- `KrakenLauncher.csproj`: metadata del producto, versión, autor, icono y branding.
 
 ### Lo que quiero que hagas
 
@@ -71,7 +71,7 @@ Pero elegí la mejor opción según el resultado visual global.
 - Si `MainWindow.xaml` está demasiado acoplado, podés reestructurarlo, extraer secciones o simplificarlo, siempre que preserves comportamiento.
 - Centralizá colores, brushes, estilos y componentes reutilizables en `Themes/Styles.xaml` o en los diccionarios que creas necesarios.
 - Actualizá textos visibles, títulos, nombre de app, tooltip de tray, metadata del `.csproj` y branding asociado.
-- Si renombrar archivos físicos genera demasiado riesgo técnico, podés mantener nombres internos como `NebulaLauncher` donde sea prudente, pero el branding visible al usuario final debe quedar actualizado.
+- Si renombrar archivos físicos genera demasiado riesgo técnico, podés mantener nombres internos como `KrakenLauncher` donde sea prudente, pero el branding visible al usuario final debe quedar actualizado.
 - Revisá posibles textos corruptos/encoding raro visibles en XAML y corregilos.
 
 ### Entregables esperados

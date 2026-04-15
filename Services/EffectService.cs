@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class EffectService
     {

@@ -14,7 +14,7 @@ Garantizar que cada update:
 ## Regla 1: una sola fuente de verdad de version
 
 Antes de publicar, revisar y mantener consistentes:
-- `NebulaLauncher.csproj`
+- `KrakenLauncher.csproj`
 - `<Version>`
 - `<AssemblyVersion>`
 - `<FileVersion>`

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public static class ModernUIHelper
     {

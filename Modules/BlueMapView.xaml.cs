@@ -4,12 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Web.WebView2.Core;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class BlueMapView : UserControl
     {
         private readonly string _mapUrl;
-        private static readonly string WebViewData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher", "webview_data");
+        private static readonly string WebViewData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "webview_data");
         private readonly string _mapId;
 
         public BlueMapView(string serverIp, string port, string mapId)

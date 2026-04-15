@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public class ServerInfo
     {
@@ -39,7 +39,7 @@ namespace NebulaLauncher.Modules
         public SocialService()
         {
             _http = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
-            _http.DefaultRequestHeaders.Add("User-Agent", "NebulaLauncher/5.0");
+            _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/5.0");
         }
 
         /// <summary>Pings the Minecraft server and fetches the social feed JSON, with full error handling.</summary>

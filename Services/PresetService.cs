@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public class PresetService
     {

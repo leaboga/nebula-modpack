@@ -3,9 +3,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
-using NebulaLauncher.Services;
+using KrakenLauncher.Services;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public static class JavaService
     {

@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace NebulaLauncher.Modules
+namespace KrakenLauncher.Modules
 {
     public partial class HostingServiceView : UserControl
     {

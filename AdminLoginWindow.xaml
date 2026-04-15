@@ -1,4 +1,4 @@
-<Window x:Class="NebulaLauncher.AdminLoginWindow"
+<Window x:Class="KrakenLauncher.AdminLoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Admin Access" Height="180" Width="340"

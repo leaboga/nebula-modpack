@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using NebulaLauncher.Modules;
+using KrakenLauncher.Modules;
 
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     /// <summary>
     /// Caches the last known server status to disk so the UI always has something to show,
@@ -18,7 +18,7 @@ namespace NebulaLauncher.Services
         {
             string dir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "NebulaLauncher");
+                "KrakenLauncher");
             Directory.CreateDirectory(dir);
             _cachePath = Path.Combine(dir, "server_cache.json");
         }

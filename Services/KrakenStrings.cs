@@ -1,4 +1,4 @@
-namespace NebulaLauncher.Services
+namespace KrakenLauncher.Services
 {
     public static class KrakenStrings
     {

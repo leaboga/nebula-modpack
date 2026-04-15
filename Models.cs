@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NebulaLauncher
+namespace KrakenLauncher
 {
     public class UserSession
     {
