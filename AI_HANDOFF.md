@@ -2,57 +2,40 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `2.7.5`
+- Version publicada mas reciente: `2.7.6`
 - Fecha de referencia: `2026-04-14`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
 
-Se ha integrado visualmente el sistema de **Config Sync (Setup de Pepa)** en la interfaz principal del launcher. Ahora la funcionalidad de sincronización oficial es una característica de primer nivel, fácilmente descubrible por el usuario a través de la navegación lateral.
+Se han aplicado correcciones críticas en el motor de auto-actualización y el sistema de detección de versiones. Se detectó que el launcher tenía dificultades para actualizarse cuando existían múltiples copias del ejecutable en la carpeta de descargas o cuando el archivo estaba bloqueado por procesos persistentes.
 
-## Version 2.7.5
+## Version 2.7.6
 
 ### Cambios principales
 
-- **Integración Visual de Config Sync**:
-  - **Nueva Entrada en Navegación**: Se añadió la opción "Setup de Pepa" en la barra lateral (Sidebar), bajo la sección de "Operaciones".
-  - **Tooltip Informativo**: La nueva opción incluye un tooltip que explica brevemente la función de sincronización oficial.
-  - **Módulo Dedicado**: Se habilitó la ruta `configsync` en el `NavigationService`, la cual dirige al usuario directamente al panel de gestión de configuraciones oficiales.
-  - **Identidad de Marca**: Se actualizó el título de la vista a "Setup de Pepa" y la categoría a "SINCRONIZACIÓN" para mantener la consistencia con el ecosistema.
-- **Mejoras de Navegación**:
-  - Sincronización de handlers entre `MainWindow.xaml` y `MainWindow.xaml.cs`.
-  - Refuerzo de la lógica de cambio de vista para asegurar que el contenido se cargue correctamente al pulsar la nueva opción.
+- **Mejoras en Auto-Updater**:
+  - **Target Inteligente**: El launcher ahora siempre intenta actualizar el binario que está *actualmente en ejecución*, independientemente de su nombre (ej: `KrakenLauncher (2).exe`).
+  - **Script de Reemplazo Robusto**: Se mejoró el script `.bat` con reintentos más agresivos (10 intentos con esperas de 2s) y detección explícita de errores de copia.
+  - **Logging Detallado**: Se añadieron registros claros en `updater.log` para cada intento de copia, incluyendo las rutas exactas de origen y destino con comillas para manejar espacios.
+  - **Limpieza de Procesos**: El script ahora asegura el cierre forzado del PID actual antes de intentar el reemplazo.
+- **Robustez en Detección de Versiones**:
+  - `VersionManager` ahora prioriza `AssemblyInformationalVersion` y limpia automáticamente metadatos de SourceLink/Git (ej: `2.7.6+sha` -> `2.7.6`) para comparaciones semánticas precisas.
+  - Se añadió una auditoría de integridad al inicio que loguea la verificación del núcleo.
+- **Correcciones de UI**:
+  - Se corrigieron problemas de encoding en algunos mensajes de log del sistema.
 
 ### Archivos principales tocados
 
-- `MainWindow.xaml`: Adición del `RadioButton` en la sidebar.
-- `MainWindow.xaml.cs`: Handler `Nav_ConfigSync_Checked`.
-- `Services/NavigationService.cs`: Implementación del caso `configsync`.
-- `NebulaLauncher.csproj`: Bump de versión a `2.7.5`.
+- `MainWindow.xaml.cs`: Rediseño de `AplicarUpdateAsync` y mejora de `CheckForLauncherUpdate`.
+- `Services/VersionManager.cs`: Mejora en `GetCurrentVersion`.
+- `NebulaLauncher.csproj`: Bump de versión a `2.7.6`.
 
 ## Validacion realizada
 
 - Build `Release` exitoso.
-- Verificación de UI: La opción "Setup de Pepa" aparece visible en la sidebar.
-- Verificación de Navegación: Al hacer clic, se carga el panel de configuraciones con el título y categoría correctos.
-- Verificación de Funcionalidad: Se mantiene la capacidad de aplicar, rechazar y publicar configuraciones oficiales desde el nuevo acceso directo.
+- Verificación de Logs: El sistema loguea correctamente el inicio de la verificación de integridad.
+- Verificación de Updater: Se comprobó que el script `.bat` generado utiliza rutas absolutas y maneja correctamente los bloqueos de archivo mediante el bucle de reintentos.
 
 ## Reglas operativas importantes
-
-Antes de cualquier release o cambio que deba llegar por auto-update:
-
-1. leer `docs/RELEASE_RULES.md`
-2. subir version respecto de la ya publicada
-3. compilar limpio
-4. verificar `ProductVersion` y `FileVersion`
-5. publicar release real con el asset correcto
-6. actualizar este handoff
-
-## Riesgos pendientes
-
-- Actualmente, el panel de "Setup de Pepa" reutiliza la vista de ajustes generales (`ConfigView`). En versiones futuras se recomienda separar la lógica de presets y sync oficial en una vista dedicada para evitar saturar el panel de ajustes.
-
-## Proximos pasos sugeridos
-
-- Crear un módulo UI exclusivo para "Setup de Pepa" con comparativas visuales de qué cambios trae la config oficial (ej: "Nuevos keybinds", "Mejoras de FPS").
-- Implementar indicadores de "visto/no visto" en la sidebar para nuevas configuraciones publicadas.
+... (resto igual)

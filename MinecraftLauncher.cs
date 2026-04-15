@@ -242,16 +242,19 @@ namespace NebulaLauncher
                    int minor = int.Parse(parts[1]);
                    int patch = parts.Length >= 3 ? int.Parse(parts[2]) : 0;
                    if (minor <= 16) version = 8;
-                   else if (minor <= 19) version = 17;
-                   else if (minor == 20 && patch < 5) version = 17;
-                   else version = 21;
+                   else if (minor <= 17) version = 17; // 1.17 uses Java 16/17, we use 17 for stability
+                   else if (minor <= 20 && (minor < 20 || patch < 5)) version = 17;
+                   else version = 21; // 1.20.5+ uses Java 21
                }
             } catch { }
 
-            string javaRoot = Path.Combine(PathService.AppFolder, "runtime", $"java{version}");
-            string binPath = Path.Combine(javaRoot, "bin", "java.exe");
-            if (File.Exists(binPath)) return binPath;
-            return "java.exe";
+            try {
+                return await JavaService.EnsureJavaAsync(version, OnLog, OnProgress);
+            } catch (Exception ex) {
+                OnLog?.Invoke($"⚠️ Error instalando Java optimizado: {ex.Message}");
+                OnLog?.Invoke("🔄 Reintentando con Java del sistema...");
+                return "java.exe";
+            }
         }
     }
 }

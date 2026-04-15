@@ -1428,6 +1428,16 @@ namespace NebulaLauncher
             try
             {
                 bool turboMode = _session.IsTurboEnabled || Keyboard.IsKeyDown(Key.LeftShift);
+
+                bool isNewInstall = !Directory.Exists(System.IO.Path.Combine(GameFolder, "versions")) || 
+                                    !Directory.Exists(System.IO.Path.Combine(GameFolder, "mods")) ||
+                                    Directory.GetFiles(System.IO.Path.Combine(GameFolder, "mods"), "*.jar").Length == 0;
+
+                if (isNewInstall)
+                {
+                    AgregarLog("📡 Perfil vacío detectado. Iniciando configuración inicial completa...");
+                    turboMode = false;
+                }
                 
                 // BACKUP AUTOMATICO (SEGURIDAD PRIMERO)
                 if (!turboMode)
@@ -1447,7 +1457,18 @@ namespace NebulaLauncher
 
                     // --- CONFIGS DE PEPITA: verificar hash remoto ---
                     PlayButton.Content = "Verificando configs...";
-                    await AplicarConfigsSiHayCambiosAsync(forzar: false);
+                    
+                    if (isNewInstall)
+                    {
+                        AgregarLog("📥 Descargando activos y configuraciones base...");
+                        await _syncer.SincronizarConfigs(sobrescribirTodo: true);
+                        _session.LastAppliedConfigHash = await _syncer.ObtenerHashConfigsRemoto();
+                        GuardarSesion();
+                    }
+                    else
+                    {
+                        await AplicarConfigsSiHayCambiosAsync(forzar: false);
+                    }
                 }
                 PlayButton.Content = "Iniciando Minecraft...";
                 _discord.SetActivity("Iniciando Minecraft...");
