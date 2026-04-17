@@ -100,15 +100,9 @@
                         <StackPanel Margin="20,38,20,0">
                             <!-- Logo -->
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
-                                <Border Width="44" Height="44" CornerRadius="12">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#00F2FF" Offset="0"/>
-                                            <GradientStop Color="#00B8C2" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
+                                <Border Width="44" Height="44" CornerRadius="12" Background="Transparent">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#00F2FF" Opacity="0.6" BlurRadius="20" ShadowDepth="0"/>
+                                        <DropShadowEffect Color="#00F2FF" Opacity="0.4" BlurRadius="15" ShadowDepth="0"/>
                                     </Border.Effect>
                                     <Image Source="/Assets/logo_premium.png" Width="44" Height="44" Stretch="Uniform"/>
                                 </Border>
