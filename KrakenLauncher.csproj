@@ -6,17 +6,17 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-		<AssemblyName>KrakenLauncher</AssemblyName>
+		<AssemblyName>Kraken</AssemblyName>
 		<ApplicationIcon>kraken.ico</ApplicationIcon>
-		<Version>2.8.2</Version>
+		<Version>2.8.3</Version>
 		<Authors>Leandro (KRAKEN Development)</Authors>
 		<Company>KRAKEN Ecosystem</Company>
-		<Product>KRAKEN Launcher</Product>
-		<Description>The Ultimate Abyssal Minecraft Hub</Description>
+		<Product>KRAKEN</Product>
+		<Description>KRAKEN Engine - Abyssal Minecraft Hub</Description>
 		<Copyright>Copyright © 2026 KRAKEN Project</Copyright>
 		
-		<AssemblyVersion>2.8.2.0</AssemblyVersion>
-		<FileVersion>2.8.2.0</FileVersion>
+		<AssemblyVersion>2.8.3.0</AssemblyVersion>
+		<FileVersion>2.8.3.0</FileVersion>
 		
 		<!-- Visuals for EXE -->
 		

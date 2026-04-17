@@ -28,7 +28,7 @@ namespace KrakenLauncher
         protected override void OnStartup(StartupEventArgs e)
         {
             // Evita que Windows agrupe el icono con versiones viejas o use el icono de Nebula de la caché
-            SetCurrentProcessExplicitAppUserModelID("KRAKEN.Launcher.v2");
+            SetCurrentProcessExplicitAppUserModelID("KRAKEN.Engine.v4");
 
             const string appName = "Global\\KrakenLauncher-SingleInstance-Check";
             bool createdNew;
