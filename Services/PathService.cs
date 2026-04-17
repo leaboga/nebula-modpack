@@ -20,7 +20,7 @@ namespace KrakenLauncher.Services
         public static void Initialize()
         {
             // Migración: Si existe la carpeta vieja de Nebula y no la nueva de Kraken, renombrar.
-            string oldFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher");
+            string oldFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NebulaLauncher");
             if (Directory.Exists(oldFolder) && !Directory.Exists(_appFolder))
             {
                 try { Directory.Move(oldFolder, _appFolder); } catch { }

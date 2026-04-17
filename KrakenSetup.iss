@@ -4,7 +4,7 @@
 [Setup]
 AppId={{8B2C3D4E-5F6A-7B8C-9D0E-1F2A3B4C5D6E}
 AppName=KRAKEN Launcher
-AppVersion=2.7.1
+AppVersion=2.8.0
 AppPublisher=Leandro
 AppPublisherURL=https://github.com/leaboga/nebula-modpack
 AppSupportURL=https://github.com/leaboga/nebula-modpack
@@ -35,4 +35,4 @@ Name: "{autodesktop}\KRAKEN Launcher"; Filename: "{app}\KrakenLauncher.exe"; Tas
 Filename: "{app}\KrakenLauncher.exe"; Description: "{cm:LaunchProgram,KRAKEN Launcher}"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: filesandordirs; Name: "{localappdata}\NebulaLauncher"
+Type: filesandordirs; Name: "{localappdata}\KrakenLauncher"
