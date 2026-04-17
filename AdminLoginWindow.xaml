@@ -5,7 +5,8 @@
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Background="#05080D"
-        FontFamily="Segoe UI">
+        FontFamily="Segoe UI"
+        ShowInTaskbar="False">
     <StackPanel Margin="28,24">
         <TextBlock Text="Ingrese la clave de administrador"
                    Foreground="#E6F9FF"

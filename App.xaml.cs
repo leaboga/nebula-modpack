@@ -2,15 +2,55 @@ using System;
 using System.Windows;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
+using System.Threading;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace KrakenLauncher
 {
     public partial class App : Application
     {
+        private static Mutex? _mutex;
         public static TaskbarIcon? TrayIcon { get; private set; }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_RESTORE = 9;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            const string appName = "Global\\KrakenLauncher-SingleInstance-Check";
+            bool createdNew;
+
+            _mutex = new Mutex(true, appName, out createdNew);
+
+            if (!createdNew)
+            {
+                // Otra instancia ya está en ejecución
+                Process current = Process.GetCurrentProcess();
+                foreach (Process process in Process.GetProcessesByName(current.ProcessName))
+                {
+                    if (process.Id != current.Id)
+                    {
+                        IntPtr handle = process.MainWindowHandle;
+                        if (handle != IntPtr.Zero)
+                        {
+                            ShowWindow(handle, SW_RESTORE);
+                            SetForegroundWindow(handle);
+                        }
+                        break;
+                    }
+                }
+                
+                Shutdown();
+                return;
+            }
+
             // Global Exception Handler
             AppDomain.CurrentDomain.UnhandledException += (s, ev) => HandleGlobalError(ev.ExceptionObject as Exception);
             DispatcherUnhandledException += (s, ev) => { HandleGlobalError(ev.Exception); ev.Handled = true; };
@@ -29,6 +69,8 @@ namespace KrakenLauncher
         protected override void OnExit(ExitEventArgs e)
         {
             TrayIcon?.Dispose();
+            _mutex?.ReleaseMutex();
+            _mutex?.Dispose();
             base.OnExit(e);
         }
 
