@@ -20,10 +20,16 @@ namespace KrakenLauncher
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
+        [DllImport("shell32.dll", SetLastError = true)]
+        private static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appId);
+
         private const int SW_RESTORE = 9;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            // Evita que Windows agrupe el icono con versiones viejas o use el icono de Nebula de la caché
+            SetCurrentProcessExplicitAppUserModelID("KRAKEN.Launcher.v2");
+
             const string appName = "Global\\KrakenLauncher-SingleInstance-Check";
             bool createdNew;
 
