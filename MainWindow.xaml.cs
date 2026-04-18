@@ -1069,7 +1069,7 @@ namespace KrakenLauncher
                 
                 // 2. Sync CONFIGS/ASSETS
                 PlayButton.Content = "Actualizando configs...";
-                await _syncer.SincronizarConfigs();
+                await _syncer.SincronizarConfigs(_manifestActual?.Version);
                 
                 if (modsOk)
                 {
@@ -1138,7 +1138,7 @@ namespace KrakenLauncher
                 if (aplicar)
                 {
                     AgregarLog("Aplicando configs de Pepita...");
-                    await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+                    await _syncer.SincronizarConfigs(hashRemoto, sobrescribirTodo: false);
                     _session.LastAppliedConfigHash = hashRemoto;
                     GuardarSesion();
                     Services.NotificationService.Instance.ShowSuccess("Configs de Pepita aplicadas correctamente.");
@@ -1278,7 +1278,7 @@ namespace KrakenLauncher
                     else if (Directory.Exists(src)) CopyDirectory(src, System.IO.Path.Combine(backupDir, target));
                 }
 
-                await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+                await _syncer.SincronizarConfigs(manifest.Version, sobrescribirTodo: false);
 
                 string profileId = CurrentProfile?.Id ?? "default";
                 _session.AppliedConfigVersions[profileId] = manifest.ConfigVersion;
@@ -1467,7 +1467,7 @@ namespace KrakenLauncher
                     if (isNewInstall)
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
-                        await _syncer.SincronizarConfigs(sobrescribirTodo: true);
+                        await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
                         _session.LastAppliedConfigHash = await _syncer.ObtenerHashConfigsRemoto();
                         GuardarSesion();
                     }

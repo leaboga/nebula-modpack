@@ -198,13 +198,23 @@ namespace KrakenLauncher
         /// (options.txt, options.of.txt) extrayéndolos pero SIN pisar si ya existen.
         /// Llame a este método solo con consentimiento explícito del usuario.
         /// </summary>
-        public async Task SincronizarConfigs(bool sobrescribirTodo = false)
+        public async Task SincronizarConfigs(string? version = null, bool sobrescribirTodo = false)
         {
             try
             {
-                string url     = AssetsUrl;
+                string url = AssetsUrl;
+                if (!string.IsNullOrEmpty(version)) {
+                    // Si la versión no contiene guiones o puntos raros, asumimos el formato estándar v[version]-assets
+                    url = $"https://github.com/leaboga/nebula-modpack/releases/download/v{version}-assets/client-assets.zip";
+                }
+
                 string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
-                if (!await DescargarConStream(url, tempZip)) return;
+                if (!await DescargarConStream(url, tempZip)) {
+                    if (!string.IsNullOrEmpty(version)) {
+                        OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
+                        if (!await DescargarConStream(AssetsUrl, tempZip)) return;
+                    } else return;
+                }
 
                 // Archivos que NO deben sobreescribirse nunca (preferencias personales de Minecraft)
                 var protegidos = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
