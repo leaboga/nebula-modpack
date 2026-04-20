@@ -475,7 +475,10 @@ namespace KrakenLauncher
 
                 using var http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
+                
+                AgregarLog("📡 Descargando núcleo v" + _updateVersion + " (esto puede tardar unos minutos)...");
                 var bytes = await http.GetByteArrayAsync(downloadUrl);
+                AgregarLog($"✅ Descarga finalizada ({bytes.Length / 1024 / 1024} MB). Preparando reinicio...");
                 
                 string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "KrakenUpdate_" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(updateDir);
@@ -520,14 +523,13 @@ namespace KrakenLauncher
 
                 Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
                 {
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
+                    UseShellExecute = true,
+                    CreateNoWindow = false
                 });
 
                 UpdateDiagnosticsService.MarkRestartScheduled();
                 _cerrarDeVerdad = true;
-                Environment.Exit(0);
+                Dispatcher.Invoke(() => Application.Current.Shutdown());
             }
             catch (Exception ex)
             {
