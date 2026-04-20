@@ -257,7 +257,7 @@ namespace KrakenLauncher
                     {
                         string timeLabel = _cache.GetLastSeenLabel(cached.LastSeen);
                         StatusText.Text = $"Offline ({timeLabel})";
-                        PlayersText.Text = $"Ãšltimo: {cached.Status.OnlinePlayers} jug.";
+                        PlayersText.Text = $"Último: {cached.Status.OnlinePlayers} jug.";
                     }
                     else
                     {
@@ -323,9 +323,13 @@ namespace KrakenLauncher
                 using var http = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
                 
-                var response = await http.GetStringAsync(UpdateCheckUrl);
-                var root = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response);
-                if (root == null) return;
+                var resRels = await http.GetStringAsync("https://api.github.com/repos/leaboga/nebula-modpack/releases?per_page=10");
+                var releases = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic[]>(resRels);
+                if (releases == null || releases.Length == 0) return;
+                dynamic? latestSoftware = null;
+                foreach (var r in releases) { if (!(r.tag_name?.ToString() ?? "").Contains("-assets")) { latestSoftware = r; break; } }
+                if (latestSoftware == null) return;
+                var root = latestSoftware;
 
                 string remoteTag = root.tag_name?.ToString() ?? "";
                 string remoteV   = VersionManager.CleanVersion(remoteTag);
