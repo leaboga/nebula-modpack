@@ -364,7 +364,7 @@
 
                 <UniformGrid Columns="2">
                     <Button x:Name="BtnAplicarConfigsPepita"
-                            Content="⬇ Aplicar Config Oficial"
+                            Content="⬇ Copiar Settings de Pepita"
                             Click="BtnAplicarConfigsPepita_Click"
                             Style="{DynamicResource PlayButton}"
                             Height="40" Margin="0,0,4,0"/>
@@ -374,8 +374,8 @@
                             Style="{DynamicResource SecondaryButton}"
                             Height="40" Margin="4,0,0,0"/>
                 </UniformGrid>
-                <TextBlock Text="Aplica la configuración recomendada del servidor. Tus keybinds personales no se perderán."
-                           Foreground="#344A5B" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                <TextBlock Text="Copia la configuración integral del servidor (Gráficos, RAM y Mods). ¡ESTO SOBREESCRIBIRÁ TODO TU SETUP!"
+                           Foreground="#EF4444" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
         </Border>
 
@@ -395,9 +395,9 @@
 
                 <Border Background="#120D1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14" BorderBrush="#7C3AED30" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="Tus configs actuales (carpeta config/ + options.txt) se empaquetarán y subirán a GitHub." 
+                        <TextBlock Text="Tus configs actuales (config/, options.txt y RAM asignada) se empaquetarán y subirán." 
                                    Foreground="#A78BFA" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <TextBlock Text="Los demás jugadores verán una notificación para aplicarlas al iniciar. Sus keybinds y opciones personales serán protegidas automáticamente."
+                        <TextBlock Text="Los demás jugadores verán una notificación para copiar todo tu setup al iniciar. Solo visible desde tu PC de Admin."
                                    Foreground="#7B6FA0" FontSize="10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>

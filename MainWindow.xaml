@@ -142,26 +142,24 @@
                             <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
                             
                             <RadioButton Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
-                            <RadioButton Content="Setup de Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ConfigSync_Checked">
+                            
+                            <RadioButton Content="Sistemas Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Sincroniza y aplica las configuraciones oficiales de Pepa (controles, gráficos, mods)." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                    <ToolTip Content="Ajustes críticos, sincronización oficial, rendimiento y consola." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
-                            <RadioButton Content="Biblioteca de Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModHub_Checked"/>
-                            <RadioButton Content="Administrar Mods" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_ModManager_Checked"/>
-                            <RadioButton Content="Modpack Hub" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Modpacks_Checked"/>
-                            <RadioButton Content="Comunidad" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Social_Checked"/>
 
-                            <Border Height="1" Margin="4,20,4,20" Background="{DynamicResource BorderBrush}"/>
+                            <RadioButton Content="Biblioteca Mod" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Recursos_Checked">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
 
-                            <TextBlock Text="SERVICIOS" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
-                            <RadioButton Content="Mapa Abisal" Style="{DynamicResource ToggleTab}" GroupName="Nav" x:Name="NavBlueMap" Checked="Nav_BlueMap_Checked"/>
-                            <RadioButton Content="Servidor Local" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_LocalHost_Checked"/>
-                            <RadioButton Content="Infraestructura" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Hosting_Checked"/>
-                            <RadioButton Content="Diagnóstico" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Crash_Checked"/>
-                            <RadioButton Content="Consola Live" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Console_Checked"/>
-                            <RadioButton Content="Rendimiento" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Perf_Checked"/>
-                            <RadioButton Content="Novedades" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Changelog_Checked"/>
+                            <RadioButton Content="Red Abisal" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
 
                             <Border Height="1" Margin="4,24,4,24" Background="{DynamicResource BorderBrush}"/>
 

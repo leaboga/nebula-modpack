@@ -43,67 +43,71 @@ namespace KrakenLauncher.Services
                     _homeView.Visibility = Visibility.Visible;
                     AnimateView(_homeView, main);
                     break;
-                case "changelog":
-                    UpdateHeaders("NOTIFICACIONES", "Bitácora de Versiones");
-                    SwitchToModule(new ChangelogView(), main);
-                    break;
-                case "configsync":
-                    UpdateHeaders("SINCRONIZACIÓN", "Setup de Pepa");
-                    // We reuse the ConfigView logic but it could be a separate view.
-                    // For now, as requested, we make the feature visible.
-                    SwitchToModule(new ConfigView(main), main);
-                    break;
+
+                case "sistemas":
                 case "settings":
-                    UpdateHeaders("SISTEMAS", "Configuración del Iniciador");
-                    SwitchToModule(new ConfigView(main), main);
-                    break;
-                case "social":
-                    UpdateHeaders("RED EXTERNA", "Comunidad KRAKEN");
-                    SwitchToModule(new SocialView(main.Session.ServerIp, main.Session.Username), main);
-                    break;
+                case "configsync":
                 case "perf":
-                    UpdateHeaders("OPTIMIZACIÓN", "Rendimiento y Memoria");
-                    SwitchToModule(new PerformanceView(main), main);
-                    break;
-                case "screenshots":
-                    UpdateHeaders("ARCHIVOS", "Capturas de Despliegue");
-                    SwitchToModule(new ScreenshotsView(main.GameFolder), main);
-                    break;
-                case "modmanager":
-                    UpdateHeaders("LOGÍSTICA", "Gestión de Módulos (Local)");
-                    var mv = new ModManagerView(main.GameFolder, main.CurrentProfile);
-                    mv.OnSyncRequested += main.SincronizarTodoAsync;
-                    SwitchToModule(mv, main);
-                    break;
-                case "modhub":
-                    UpdateHeaders("CENTRO DE RECURSOS", "Biblioteca de Mods");
-                    SwitchToModule(new VaultView(main.GameFolder, main.CurrentProfile), main);
-                    break;
-                case "crash":
-                    UpdateHeaders("DIAGNÓSTICO", "Herramientas de Soporte");
-                    SwitchToModule(new CrashDiagnosticView(main.GetCrashReporter()), main);
-                    break;
-                case "map":
-                    UpdateHeaders("INTELIGENCIA", "Servicio de Cartografía");
-                    SwitchToModule(new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId), main);
-                    break;
-                case "hosting":
-                    UpdateHeaders("INFRAESTRUCTURA", "Servicios Hosting (BETA)");
-                    SwitchToModule(new HostingServiceView(), main);
-                    break;
-                case "localhost":
-                    UpdateHeaders("NODOS LOCALES", "Servidor de Pruebas");
-                    SwitchToModule(new ServerHostView(), main);
-                    break;
-                case "modpacks":
-                    UpdateHeaders("MODPACK HUB", "Catálogo de Expediciones");
-                    SwitchToModule(new ModpackView(), main);
-                    break;
                 case "console":
-                    UpdateHeaders("TERMINAL", "Consola de Sistema");
-                    SwitchToModule(new ConsoleView(), main);
+                case "crash":
+                    var systemsTabs = new List<HubView.HubTab>
+                    {
+                        new HubView.HubTab { Label = "Motor y Sinc", HeaderLabel = "SINCRONIZACIÓN", HeaderTitle = "Setup de Pepa", View = new ConfigView(main) },
+                        new HubView.HubTab { Label = "Rendimiento", HeaderLabel = "OPTIMIZACIÓN", HeaderTitle = "Rendimiento y RAM", View = new PerformanceView(main) },
+                        new HubView.HubTab { Label = "Consola", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", View = new ConsoleView() },
+                        new HubView.HubTab { Label = "Diagnóstico", HeaderLabel = "DIAGNÓSTICO", HeaderTitle = "Herramientas de Soporte", View = new CrashDiagnosticView(main.GetCrashReporter()) }
+                    };
+                    var systemsHub = new HubView(main, systemsTabs);
+                    systemsHub.OnHeaderUpdateRequested += UpdateHeaders;
+                    UpdateHeaders("SISTEMAS", "Núcleo de Control");
+                    SwitchToModule(systemsHub, main);
+                    break;
+
+                case "recursos":
+                case "modhub":
+                case "modmanager":
+                case "modpacks":
+                case "changelog":
+                    var resourcesTabs = new List<HubView.HubTab>
+                    {
+                        new HubView.HubTab { Label = "Biblioteca", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Módulos Externos", View = new VaultView(main.GameFolder, main.CurrentProfile) },
+                        new HubView.HubTab { Label = "Mis Mods", HeaderLabel = "LOGÍSTICA", HeaderTitle = "Gestión Local", View = CreateModManager(main) },
+                        new HubView.HubTab { Label = "Expediciones", HeaderLabel = "MODPACK HUB", HeaderTitle = "Catálogo de Viajes", View = new ModpackView() },
+                        new HubView.HubTab { Label = "Novedades", HeaderLabel = "NOTIFICACIONES", HeaderTitle = "Bitácora de Versiones", View = new ChangelogView() }
+                    };
+                    var resourcesHub = new HubView(main, resourcesTabs);
+                    resourcesHub.OnHeaderUpdateRequested += UpdateHeaders;
+                    UpdateHeaders("RECURSOS", "Almacenamiento y Datos");
+                    SwitchToModule(resourcesHub, main);
+                    break;
+
+                case "red":
+                case "social":
+                case "map":
+                case "hosting":
+                case "localhost":
+                case "screenshots":
+                    var networkTabs = new List<HubView.HubTab>
+                    {
+                        new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(main.Session.ServerIp, main.Session.Username) },
+                        new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartográfico", View = new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
+                        new HubView.HubTab { Label = "Infraestructura", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galáctico", View = new HostingServiceView() },
+                        new HubView.HubTab { Label = "Pruebas", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", View = new ServerHostView() },
+                        new HubView.HubTab { Label = "Capturas", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", View = new ScreenshotsView(main.GameFolder) }
+                    };
+                    var networkHub = new HubView(main, networkTabs);
+                    networkHub.OnHeaderUpdateRequested += UpdateHeaders;
+                    UpdateHeaders("RED ABISAL", "Comunicaciones y Flota");
+                    SwitchToModule(networkHub, main);
                     break;
             }
+        }
+
+        private ModManagerView CreateModManager(MainWindow main)
+        {
+            var mv = new ModManagerView(main.GameFolder, main.CurrentProfile);
+            mv.OnSyncRequested += main.SincronizarTodoAsync;
+            return mv;
         }
 
         private void UpdateHeaders(string label, string title)

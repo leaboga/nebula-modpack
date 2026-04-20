@@ -638,20 +638,9 @@ namespace KrakenLauncher
         //  NAVIGATION
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private void Nav_Home_Checked(object sender, RoutedEventArgs e)       { CambiarVista("home"); }
-        private void Nav_ConfigSync_Checked(object sender, RoutedEventArgs e) { CambiarVista("configsync"); }
-        private void Nav_Changelog_Checked(object sender, RoutedEventArgs e)  { CambiarVista("changelog"); }
-        private void Nav_Settings_Checked(object sender, RoutedEventArgs e)   { CambiarVista("settings"); }
-        private void Nav_Social_Checked(object sender, RoutedEventArgs e)     { CambiarVista("social"); }
-        private void Nav_Perf_Checked(object sender, RoutedEventArgs e)       { CambiarVista("perf"); }
-        private void Nav_Screenshots_Checked(object sender, RoutedEventArgs e) { CambiarVista("screenshots"); }
-        private void Nav_ModManager_Checked(object sender, RoutedEventArgs e)  { CambiarVista("modmanager"); }
-        private void Nav_ModHub_Checked(object sender, RoutedEventArgs e)      { CambiarVista("modhub"); }
-        private void Nav_Crash_Checked(object sender, RoutedEventArgs e)       { CambiarVista("crash"); }
-        private void Nav_Console_Checked(object sender, RoutedEventArgs e)     { CambiarVista("console"); }
-        private void Nav_BlueMap_Checked(object sender, RoutedEventArgs e)     { CambiarVista("map"); }
-        private void Nav_Hosting_Checked(object sender, RoutedEventArgs e)     { CambiarVista("hosting"); }
-        private void Nav_LocalHost_Checked(object sender, RoutedEventArgs e)    { CambiarVista("localhost"); }
-        private void Nav_Modpacks_Checked(object sender, RoutedEventArgs e)     { CambiarVista("modpacks"); }
+        private void Nav_Sistemas_Checked(object sender, RoutedEventArgs e)   { CambiarVista("sistemas"); }
+        private void Nav_Recursos_Checked(object sender, RoutedEventArgs e)   { CambiarVista("recursos"); }
+        private void Nav_Red_Checked(object sender, RoutedEventArgs e)        { CambiarVista("red"); }
         
         private void MapQuickCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -1096,28 +1085,40 @@ namespace KrakenLauncher
         {
             try
             {
-                bool esPepita = _session.IsAdmin
-                             || _session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase)
-                             || _session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
+                // Seguridad de Admin: Solo Pepita/Leandro en SU máquina o con flag Admin
+                bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
+                bool esPepita = (_session.IsAdmin && esAdminPc)
+                             || (_session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
+                             || (_session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
 
-                string? hashRemoto = await _syncer.ObtenerHashConfigsRemoto();
-                if (string.IsNullOrEmpty(hashRemoto))
+                var remoteInfo = await _syncer.ObtenerHashConfigsRemoto();
+                if (remoteInfo == null || string.IsNullOrEmpty(remoteInfo.Value.hash))
                 {
-                    AgregarLog("Info: No se pudo verificar configs de Pepita (sin conexion).");
+                    AgregarLog("Info: No se pudo verificar configs de Pepita (sin conexión).");
                     return;
                 }
 
-                bool hayNuevasConfigs = hashRemoto != _session.LastAppliedConfigHash;
+                string hashRemoto = remoteInfo.Value.hash;
+                int? recommendedRam = remoteInfo.Value.ram;
+                string profileId = CurrentProfile?.Id ?? "default";
 
+                bool hayNuevasConfigs = hashRemoto != _session.LastAppliedConfigHash;
                 if (!hayNuevasConfigs)
                 {
-                    AgregarLog("Configs al dia (sin cambios de Pepita).");
+                    AgregarLog("Configs al día (sin cambios de Pepita).");
+                    return;
+                }
+
+                // Si ya rechazó esta versión específica de hash, no volver a preguntar hasta que cambie el hash
+                if (!forzar && _session.RejectedConfigVersions.ContainsKey(profileId) && _session.RejectedConfigVersions[profileId] == hashRemoto)
+                {
+                    AgregarLog("Aviso: Hay configs de Pepita nuevas, pero ya las rechazaste anteriormente.");
                     return;
                 }
 
                 if (esPepita && !forzar)
                 {
-                    AgregarLog("Pepita: hay configs nuevas publicadas. Podas aplicarlas desde el panel Config.");
+                    AgregarLog("Pepita: hay configs nuevas publicadas. Podés aplicarlas desde el panel Config.");
                     return;
                 }
 
@@ -1126,9 +1127,9 @@ namespace KrakenLauncher
                 {
                     var resultado = Dispatcher.Invoke(() =>
                         MessageBox.Show(
-                            "Pepita actualizo las configuraciones del modpack!\n\n" +
-                            "Deseas aplicar las configs nuevas?\n" +
-                            "(Tus opciones personales de controles y graficos seran respetadas)",
+                            "¡Pepita actualizó las configuraciones del modpack!\n\n" +
+                            "¿Deseas aplicar los ajustes oficiales? (ESTO SOBREESCRIBIRÁ TODO, incluyendo opciones de gráficos y RAM recomendada).\n\n" +
+                            "Si eliges que no, no volverás a ver este mensaje hasta la próxima actualización.",
                             "Configs de Pepita disponibles",
                             MessageBoxButton.YesNo,
                             MessageBoxImage.Question));
@@ -1137,15 +1138,29 @@ namespace KrakenLauncher
 
                 if (aplicar)
                 {
-                    AgregarLog("Aplicando configs de Pepita...");
-                    await _syncer.SincronizarConfigs(hashRemoto, sobrescribirTodo: false);
+                    AgregarLog("Aplicando configs integrales de Pepita...");
+                    
+                    // SobreescribirTodo = true para que incluya options.txt y todo lo de Pepita
+                    await _syncer.SincronizarConfigs(hashRemoto, sobrescribirTodo: true);
                     _session.LastAppliedConfigHash = hashRemoto;
+                    
+                    // Aplicar RAM recomendada si viene en el hash
+                    if (recommendedRam.HasValue && CurrentProfile != null)
+                    {
+                        CurrentProfile.RamGB = recommendedRam.Value;
+                        AgregarLog($"🚀 RAM ajustada a la recomendada: {recommendedRam.Value}GB");
+                    }
+
+                    _session.RejectedConfigVersions.Remove(profileId);
                     GuardarSesion();
-                    Services.NotificationService.Instance.ShowSuccess("Configs de Pepita aplicadas correctamente.");
+                    Services.NotificationService.Instance.ShowSuccess("Ajustes de Pepita aplicados al 100%.");
                 }
                 else
                 {
-                    AgregarLog("Configs de Pepita omitidas por eleccion del usuario.");
+                    // Guardar el hash actual como rechazado para no volver a molestar
+                    _session.RejectedConfigVersions[profileId] = hashRemoto;
+                    GuardarSesion();
+                    AgregarLog("Configs de Pepita omitidas. No se volverá a preguntar para esta versión.");
                 }
             }
             catch (Exception ex) { AgregarLog($"Error al verificar configs: {ex.Message}"); }

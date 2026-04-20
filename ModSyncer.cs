@@ -180,15 +180,17 @@ namespace KrakenLauncher
         private const string ConfigHashUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/config-hash.json";
 
         /// <summary>
-        /// Devuelve el hash remoto de las configs de Pepita, o null si no se puede obtener.
+        /// Devuelve la info remota de las configs de Pepita (hash y RAM recomendada), o null si no se puede obtener.
         /// </summary>
-        public async Task<string?> ObtenerHashConfigsRemoto()
+        public async Task<(string? hash, int? ram)?> ObtenerHashConfigsRemoto()
         {
             try
             {
                 string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
                 var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
-                return (string?)obj?.hash;
+                string? hash = (string?)obj?.hash;
+                int? ram = (int?)obj?.recommendedRam;
+                return (hash, ram);
             }
             catch { return null; }
         }
@@ -258,7 +260,7 @@ namespace KrakenLauncher
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
-        public async Task<bool> PublicarConfigsAdmin(Action<string> log)
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4)
         {
             try
             {
@@ -318,7 +320,12 @@ namespace KrakenLauncher
 
                 // 4. Crear/actualizar config-hash.json en el repo (requiere gh + repo clonado o API)
                 //    Usamos un archivo temporal y lo subimos via gh api
-                string hashJson = Newtonsoft.Json.JsonConvert.SerializeObject(new { hash = hash, updated = DateTime.UtcNow.ToString("o") }, Newtonsoft.Json.Formatting.Indented);
+                var infoObj = new { 
+                    hash = hash, 
+                    recommendedRam = recommendedRam,
+                    updated = DateTime.UtcNow.ToString("o") 
+                };
+                string hashJson = Newtonsoft.Json.JsonConvert.SerializeObject(infoObj, Newtonsoft.Json.Formatting.Indented);
                 string hashFile = Path.Combine(Path.GetTempPath(), "config-hash.json");
                 await File.WriteAllTextAsync(hashFile, hashJson);
 
