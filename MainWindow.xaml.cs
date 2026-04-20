@@ -650,7 +650,7 @@ namespace KrakenLauncher
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                NavBlueMap.IsChecked = true; // Al activar el radio button, se llama a Nav_BlueMap_Checked
+                CambiarVista("red");
             }
         }
 
@@ -1487,7 +1487,8 @@ namespace KrakenLauncher
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
                         await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
-                        _session.LastAppliedConfigHash = await _syncer.ObtenerHashConfigsRemoto();
+                        var res = await _syncer.ObtenerHashConfigsRemoto();
+                        _session.LastAppliedConfigHash = res?.hash;
                         GuardarSesion();
                     }
                     else

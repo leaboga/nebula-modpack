@@ -729,7 +729,8 @@ namespace KrakenLauncher.Modules
 
                 if (confirm != MessageBoxResult.Yes) return;
 
-                string? hashRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
+                var resRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
+                string? hashRemoto = resRemoto?.hash;
                 var syncer = GetSyncer();
                 syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
                 await syncer.SincronizarConfigs(sobrescribirTodo: true);
