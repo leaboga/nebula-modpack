@@ -465,25 +465,44 @@ namespace KrakenLauncher
             {
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
-                
-                // CRITICAL: Always target the RUNNING executable
                 string targetExe = currentExe;
                 string downloadedAssetName = System.IO.Path.GetFileName(targetExe);
-
-                AgregarLog($"🛡️ Iniciando actualización del núcleo: {downloadUrl}");
-                AgregarLog($"📂 Destino: {targetExe}");
-
-                using var http = new HttpClient();
+                
+                AgregarLog("📡 Iniciando descarga del núcleo v" + _updateVersion + "...");
+                
+                using var http = new HttpClient() { Timeout = TimeSpan.FromMinutes(10) };
                 http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher");
-                
-                AgregarLog("📡 Descargando núcleo v" + _updateVersion + " (esto puede tardar unos minutos)...");
-                var bytes = await http.GetByteArrayAsync(downloadUrl);
-                AgregarLog($"✅ Descarga finalizada ({bytes.Length / 1024 / 1024} MB). Preparando reinicio...");
-                
+
                 string updateDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "KrakenUpdate_" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(updateDir);
                 string tempExe = System.IO.Path.Combine(updateDir, downloadedAssetName);
-                await File.WriteAllBytesAsync(tempExe, bytes);
+
+                using (var response = await http.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                {
+                    response.EnsureSuccessStatusCode();
+                    long? totalSize = response.Content.Headers.ContentLength;
+                    using (var fs = new FileStream(tempExe, FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        byte[] buffer = new byte[81920]; // 80 KB
+                        long totalRead = 0;
+                        int read;
+                        while ((read = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                        {
+                            await fs.WriteAsync(buffer, 0, read);
+                            totalRead += read;
+                            
+                            // Log only major milestones to avoid spamming
+                            if (totalSize.HasValue && totalRead % (20 * 1024 * 1024) < 81920) 
+                            {
+                                int pct = (int)((double)totalRead / totalSize.Value * 100);
+                                AgregarLog($"📥 Descargando core: {pct}% completado...");
+                            }
+                        }
+                    }
+                }
+
+                AgregarLog($"✅ Descarga lista. Iniciando secuencia de reinicio...");
                 
                 UpdateDiagnosticsService.MarkApplying(targetExe, isAutomatic);
 
