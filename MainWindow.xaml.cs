@@ -1092,6 +1092,7 @@ namespace KrakenLauncher
                 // 2. Sync CONFIGS/ASSETS
                 PlayButton.Content = "Actualizando configs...";
                 await _syncer.SincronizarConfigs(_manifestActual?.Version);
+                MandatoryFixesService.ApplyToKnownClientFolders(GameFolder, AgregarLog);
                 
                 if (modsOk)
                 {
@@ -1175,6 +1176,7 @@ namespace KrakenLauncher
                     
                     // SobreescribirTodo = true para que incluya options.txt y todo lo de Pepita
                     await _syncer.SincronizarConfigs(hashRemoto, sobrescribirTodo: true);
+                    MandatoryFixesService.ApplyToKnownClientFolders(GameFolder, AgregarLog);
                     _session.LastAppliedConfigHash = hashRemoto;
                     
                     // Aplicar RAM recomendada si viene en el hash
@@ -1327,6 +1329,7 @@ namespace KrakenLauncher
                 }
 
                 await _syncer.SincronizarConfigs(manifest.Version, sobrescribirTodo: false);
+                MandatoryFixesService.ApplyToKnownClientFolders(GameFolder, AgregarLog);
 
                 string profileId = CurrentProfile?.Id ?? "default";
                 _session.AppliedConfigVersions[profileId] = manifest.ConfigVersion;
@@ -1516,6 +1519,7 @@ namespace KrakenLauncher
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
                         await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
+                        MandatoryFixesService.ApplyToKnownClientFolders(GameFolder, AgregarLog);
                         var res = await _syncer.ObtenerHashConfigsRemoto();
                         _session.LastAppliedConfigHash = res?.hash;
                         GuardarSesion();
@@ -1525,6 +1529,7 @@ namespace KrakenLauncher
                         await AplicarConfigsSiHayCambiosAsync(forzar: false);
                     }
                 }
+                MandatoryFixesService.ApplyToKnownClientFolders(GameFolder, AgregarLog);
                 PlayButton.Content = "Iniciando Minecraft...";
                 _discord.SetActivity("Iniciando Minecraft...");
                 MainProgressBar.Value = 0;

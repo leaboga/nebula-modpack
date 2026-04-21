@@ -631,6 +631,7 @@ namespace KrakenLauncher.Modules
                 var syncer = GetSyncer();
                 syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
                 await syncer.SincronizarConfigs(sobrescribirTodo: true);
+                MandatoryFixesService.ApplyToKnownClientFolders(_mainWindow.GameFolder, msg => _mainWindow.AgregarLog(msg));
 
                 if (_mainWindow.CurrentProfile != null)
                 {
@@ -775,6 +776,7 @@ namespace KrakenLauncher.Modules
                 var syncer = GetSyncer();
                 syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
                 await syncer.SincronizarConfigs(sobrescribirTodo: true);
+                MandatoryFixesService.ApplyToKnownClientFolders(_mainWindow.GameFolder, msg => _mainWindow.AgregarLog(msg));
 
                 if (hashRemoto != null)
                 {
