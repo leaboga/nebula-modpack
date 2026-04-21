@@ -689,6 +689,7 @@ namespace KrakenLauncher
             {
                 if (ModulesContainer?.Content is SocialView      sv) sv.Stop();
                 if (ModulesContainer?.Content is PerformanceView pv) pv.Stop();
+                if (ModulesContainer?.Content is HubView hv) hv.StopActive();
             }
             catch { }
         }

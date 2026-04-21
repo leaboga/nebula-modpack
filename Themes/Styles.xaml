@@ -2,51 +2,66 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ══════════════════════════════════════════════════════════════════ -->
-    <!-- KRAKEN ABYSSAL DESIGN SYSTEM (v2.6) -->
+    <!-- KRAKEN ABYSSAL DESIGN SYSTEM (v2.9.9) -->
     <!-- ══════════════════════════════════════════════════════════════════ -->
-    <Color x:Key="AccentColor">#00F2FF</Color>
-    <Color x:Key="AccentHoverColor">#70F9FF</Color>
-    <Color x:Key="AccentPressColor">#00B8C2</Color>
+    <FontFamily x:Key="DisplayFont">Bahnschrift SemiCondensed, Segoe UI Variable Display, Segoe UI</FontFamily>
+    <FontFamily x:Key="BodyFont">Segoe UI Variable Text, Bahnschrift, Segoe UI</FontFamily>
+    <FontFamily x:Key="MonoFont">Cascadia Mono, Consolas</FontFamily>
+
+    <Color x:Key="AccentColor">#18E0D2</Color>
+    <Color x:Key="AccentHoverColor">#73FFF6</Color>
+    <Color x:Key="AccentPressColor">#0F9F99</Color>
     
-    <Color x:Key="SurfaceColor">#05080D</Color>
-    <Color x:Key="Surface2Color">#0D151D</Color>
-    <Color x:Key="Surface3Color">#16212B</Color>
-    <Color x:Key="BorderColor">#1E2C38</Color>
+    <Color x:Key="SurfaceColor">#03070A</Color>
+    <Color x:Key="Surface2Color">#081218</Color>
+    <Color x:Key="Surface3Color">#11242C</Color>
+    <Color x:Key="BorderColor">#203640</Color>
     
     <SolidColorBrush x:Key="AccentBrush"        Color="{StaticResource AccentColor}"/>
     <SolidColorBrush x:Key="SurfaceBrush"       Color="{StaticResource SurfaceColor}"/>
     <SolidColorBrush x:Key="Surface2Brush"      Color="{StaticResource Surface2Color}"/>
     <SolidColorBrush x:Key="BorderBrush"        Color="{StaticResource BorderColor}"/>
-    <SolidColorBrush x:Key="TextPrimaryBrush"   Color="#E6F9FF"/>
-    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#6D8A99"/>
-    <SolidColorBrush x:Key="TextMutedBrush"     Color="#344A5B"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush"   Color="#F2FCFF"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#8EADB6"/>
+    <SolidColorBrush x:Key="TextMutedBrush"     Color="#4E6870"/>
 
     <!-- EFFECT TOKENS -->
-    <DropShadowEffect x:Key="NeonGlow" Color="#00F2FF" Opacity="0.4" BlurRadius="20" ShadowDepth="0"/>
-    <DropShadowEffect x:Key="SoftShadow" Color="Black" Opacity="0.4" BlurRadius="15" ShadowDepth="4"/>
+    <DropShadowEffect x:Key="NeonGlow" Color="#18E0D2" Opacity="0.22" BlurRadius="14" ShadowDepth="0"/>
+    <DropShadowEffect x:Key="SoftShadow" Color="Black" Opacity="0.28" BlurRadius="10" ShadowDepth="3"/>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
 
     <!-- ════════════════════ ELEMENTS ════════════════════ -->
 
     <!-- GLASS PANEL (Unified Container) -->
     <Style x:Key="GlassPanel" TargetType="Border">
-        <Setter Property="Background" Value="#0D0A1ACC"/>
-        <Setter Property="CornerRadius" Value="14"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="Background" Value="#D90A1419"/>
+        <Setter Property="CornerRadius" Value="18"/>
+        <Setter Property="BorderBrush" Value="#263C45"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
     <!-- GLASS CARD (Grid Items) -->
     <Style x:Key="GlassCard" TargetType="Border">
-        <Setter Property="Background" Value="#0D151D"/>
-        <Setter Property="CornerRadius" Value="20"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="Background" Value="#101D24"/>
+        <Setter Property="CornerRadius" Value="18"/>
+        <Setter Property="BorderBrush" Value="#253B45"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="10"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                <Setter Property="Background" Value="#16212B"/>
+                <Setter Property="Background" Value="#152C34"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -71,14 +86,15 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#00B8C2" Offset="0"/>
-                    <GradientStop Color="#007C82" Offset="1"/>
+                    <GradientStop Color="#18E0D2" Offset="0"/>
+                    <GradientStop Color="#0C7C83" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Black"/>
+        <Setter Property="FontFamily" Value="{StaticResource DisplayFont}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -89,7 +105,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#00F2FF"/>
+                            <Setter TargetName="border" Property="Background" Value="#18E0D2"/>
                             <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGlow}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
@@ -104,9 +120,10 @@
     </Style>
 
     <Style x:Key="SecondaryButton" TargetType="Button">
-        <Setter Property="Background" Value="#16212B"/>
-        <Setter Property="Foreground" Value="#C4B5FD"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="Background" Value="#102028"/>
+        <Setter Property="Foreground" Value="#D2F7F5"/>
+        <Setter Property="BorderBrush" Value="#263C45"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -122,7 +139,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                            <Setter TargetName="bd" Property="Background" Value="#1E2C38"/>
+                            <Setter TargetName="bd" Property="Background" Value="#16313A"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -141,8 +158,10 @@
 
     <!-- TOGGLE TAB -->
     <Style x:Key="ToggleTab" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="#6D8A99"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="#8EADB6"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{StaticResource DisplayFont}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -155,7 +174,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="bg" Property="Background" Value="#1E2C38"/>
+                            <Setter TargetName="bg" Property="Background" Value="#14323A"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -170,9 +189,9 @@
 
     <!-- INPUTS -->
     <Style x:Key="AppleTextBox" TargetType="TextBox">
-        <Setter Property="Background" Value="#0D151D"/>
+        <Setter Property="Background" Value="#081218"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#263C45"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -219,8 +238,8 @@
 
     <!-- COMBOBOX -->
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
-        <Setter Property="Background" Value="#0D151D"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="Background" Value="#081218"/>
+        <Setter Property="BorderBrush" Value="#263C45"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>

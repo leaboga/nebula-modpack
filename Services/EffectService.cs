@@ -17,6 +17,7 @@ namespace KrakenLauncher.Services
         private readonly Random _rnd = new();
         private Canvas? _particleCanvas;
         private Image? _backgroundImage;
+        private DateTime _lastParticleFrame = DateTime.MinValue;
 
         public void Initialize(Canvas particleCanvas, Image backgroundImage)
         {
@@ -30,10 +31,10 @@ namespace KrakenLauncher.Services
             _particleCanvas.Children.Clear();
             _particles.Clear();
 
-            for (int i = 0; i < 45; i++)
+            for (int i = 0; i < 18; i++)
             {
-                double size = _rnd.NextDouble() * 3 + 1;
-                double opacity = _rnd.NextDouble() * 0.35 + 0.05;
+                double size = _rnd.NextDouble() * 2 + 1;
+                double opacity = _rnd.NextDouble() * 0.22 + 0.05;
                 var dot = new Ellipse
                 {
                     Width = size,
@@ -61,6 +62,10 @@ namespace KrakenLauncher.Services
         private void OnRendering(object? sender, EventArgs e)
         {
             if (_particleCanvas == null) return;
+            var now = DateTime.UtcNow;
+            if ((now - _lastParticleFrame).TotalMilliseconds < 50) return;
+            _lastParticleFrame = now;
+
             double w = _particleCanvas.ActualWidth;
             double h = _particleCanvas.ActualHeight;
             if (w <= 0 || h <= 0) return;
@@ -97,14 +102,10 @@ namespace KrakenLauncher.Services
                     return;
                 }
 
-                int hour = DateTime.Now.Hour;
-                string nebulaUrl = "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1000";
-                if (hour >= 6 && hour < 12) nebulaUrl = "https://images.unsplash.com/photo-1439066615861-d1af74d74000?q=80&w=1000";
-                if (hour >= 12 && hour < 19) nebulaUrl = "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?q=80&w=1000";
-
-                var img = new BitmapImage(new Uri(nebulaUrl));
-                _backgroundImage.Source = img;
-                _backgroundImage.Opacity = 0.15;
+                // Remote hero images made the launcher feel slow on cold starts.
+                // Keep the GPU-friendly gradient background unless the user chose a local image.
+                _backgroundImage.Source = null;
+                _backgroundImage.Opacity = 0;
             }
             catch { _backgroundImage.Source = null; }
         }

@@ -6,23 +6,25 @@
         Height="660" Width="1020"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
-        FontFamily="Segoe UI"
+        FontFamily="{StaticResource BodyFont}"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
         Closing="Window_Closing">
 
     <Window.Resources>
-        <DropShadowEffect x:Key="CardGlow"   Color="#00F2FF" Opacity="0.12" BlurRadius="30" ShadowDepth="0"/>
-        <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.4"  BlurRadius="25" ShadowDepth="6"/>
+        <DropShadowEffect x:Key="CardGlow"   Color="#18E0D2" Opacity="0.10" BlurRadius="18" ShadowDepth="0"/>
+        <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.32" BlurRadius="16" ShadowDepth="4"/>
         
         <Storyboard x:Key="FadeIn">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.22">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,30,0,0" To="0,0,0,0" Duration="0:0:0.7">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,14,0,0" To="0,0,0,0" Duration="0:0:0.24">
                 <ThicknessAnimation.EasingFunction>
                     <PowerEase Power="5" EasingMode="EaseOut"/>
                 </ThicknessAnimation.EasingFunction>
@@ -30,12 +32,12 @@
         </Storyboard>
         
         <Storyboard x:Key="PulseEffect">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.4" To="1" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.55" To="1" Duration="0:0:1.8" AutoReverse="True" RepeatBehavior="Forever"/>
         </Storyboard>
         
         <Storyboard x:Key="TabChangeEffect">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.3" To="1" Duration="0:0:0.4"/>
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="20,0,0,0" To="0,0,0,0" Duration="0:0:0.3">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.55" To="1" Duration="0:0:0.14"/>
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="10,0,0,0" To="0,0,0,0" Duration="0:0:0.16">
                 <ThicknessAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
         </Storyboard>
@@ -43,16 +45,24 @@
 
     <Grid>
         <!-- MASTER BACKGROUND -->
-        <Border Background="#05080D"/>
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#020507" Offset="0"/>
+                    <GradientStop Color="#07151A" Offset="0.48"/>
+                    <GradientStop Color="#020405" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         
         <!-- GLOW EFFECTS -->
-        <Ellipse Fill="#3000F2FF" Width="900" Height="900" Margin="-400,-400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
-            <Ellipse.Effect><BlurEffect Radius="200"/></Ellipse.Effect>
+        <Ellipse Fill="#2618E0D2" Width="760" Height="760" Margin="-340,-360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+            <Ellipse.Effect><BlurEffect Radius="120"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="#1500F2FF" Width="600" Height="600" Margin="0,0,-200,-200" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
-            <Ellipse.Effect><BlurEffect Radius="150"/></Ellipse.Effect>
+        <Ellipse Fill="#14316063" Width="520" Height="520" Margin="0,0,-170,-170" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
+            <Ellipse.Effect><BlurEffect Radius="95"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="Black" Opacity="0.5" IsHitTestVisible="False"/>
+        <Rectangle Fill="#22000000" IsHitTestVisible="False"/>
 
         <!-- BACKGROUND IMAGE -->
         <Image x:Name="LauncherBackground" Stretch="UniformToFill" Opacity="0.12" IsHitTestVisible="False">
@@ -107,8 +117,8 @@
                                     <Image Source="/Assets/logo_premium.png" Width="44" Height="44" Stretch="Uniform"/>
                                 </Border>
                                 <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black"/>
-                                    <TextBlock Text="THE ABYSSAL TITAN" Foreground="#344A5B" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="24" FontWeight="Black" FontFamily="{StaticResource DisplayFont}"/>
+                                    <TextBlock Text="ABYSSAL ENGINE" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black"/>
                                 </StackPanel>
                             </StackPanel>
 
@@ -247,8 +257,8 @@
                              <!-- HOME VIEW -->
                             <ScrollViewer x:Name="HomeView" VerticalScrollBarVisibility="Auto" Visibility="Visible">
                                 <StackPanel Margin="32,24">
-                                    <TextBlock Text="Sincronización de Sistemas en curso..." Foreground="#344A5B" FontSize="12" Margin="0,0,0,4"/>
-                                    <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="32" FontWeight="Black" Margin="0,0,0,24"/>
+                                    <TextBlock Text="Estado del ecosistema, perfiles y entrada al servidor." Foreground="{DynamicResource TextMutedBrush}" FontSize="12" Margin="0,0,0,4"/>
+                                    <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="34" FontWeight="Black" FontFamily="{StaticResource DisplayFont}" Margin="0,0,0,24"/>
 
                                     <!-- PROFILE SELECTOR -->
                                     <Grid Margin="0,0,0,24">
@@ -400,7 +410,7 @@
                             </StackPanel>
 
                             <ScrollViewer x:Name="LogScroll" Grid.Row="1">
-                                <TextBlock x:Name="LogText" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Opacity="0.8"/>
+                                <TextBlock x:Name="LogText" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontFamily="{StaticResource MonoFont}" TextWrapping="Wrap" Opacity="0.8"/>
                             </ScrollViewer>
 
                             <Grid Grid.Row="2" Margin="0,10,0,0">
@@ -422,7 +432,7 @@
 
                     <!-- Play Section -->
                     <StackPanel Grid.Column="1">
-                        <Button x:Name="PlayButton" Content="INICIAR SECUENCIA" Style="{DynamicResource PlayButton}" Height="56" Click="PlayButton_Click" FontSize="15"/>
+                        <Button x:Name="PlayButton" Content="INICIAR SECUENCIA" Style="{DynamicResource PlayButton}" Height="58" Click="PlayButton_Click" FontSize="16"/>
                         <Grid Margin="4,12,4,0">
                             <CheckBox x:Name="TrayToggle" Content="Segundo Plano" Style="{DynamicResource TrayToggle}" Checked="TrayToggle_Changed" Unchecked="TrayToggle_Changed"/>
                             <CheckBox x:Name="TurboToggle" Content="Modo Turbo" Style="{DynamicResource TrayToggle}" HorizontalAlignment="Right" Checked="TurboToggle_Changed" Unchecked="TurboToggle_Changed"/>
