@@ -530,32 +530,23 @@ namespace KrakenLauncher
 
                 int pid = Process.GetCurrentProcess().Id;
                 string batContent = "@echo off\n" +
-                                   "title Kraken Core Updater\n" +
-                                   "echo [UPDATE] Aguardando el cierre de procesos activos...\n" +
-                                   $"taskkill /F /PID {pid} > nul 2>&1\n" +
-                                   "timeout /t 2 /nobreak > nul\n" +
-                                   "set /a count=0\n" +
-                                   ":loop\n" +
-                                   "set /a count+=1\n" +
-                                   "echo [UPDATE] Intento de reemplazo %count% de 10...\n" +
-                                   "echo [%date% %time%] Intento %count%: copy \"" + tempExe + "\" -> \"" + targetExe + "\">> \"" + PathService.UpdaterLogFile + "\"\n" +
-                                   "copy /Y \"" + tempExe + "\" \"" + targetExe + "\"\n" +
-                                   "if errorlevel 1 (\n" +
-                                   "    echo [WARN] Archivo bloqueado. Reintentando en 2s...\n" +
-                                   "    if %count% geq 10 goto failed\n" +
-                                   "    timeout /t 2 /nobreak > nul\n" +
-                                   "    goto loop\n" +
-                                   ")\n" +
-                                   "echo [UPDATE] Motor actualizado con éxito. Reiniciando...\n" +
-                                   "echo [%date% %time%] EXITO: Nucleo actualizado. >> \"" + PathService.UpdaterLogFile + "\"\n" +
-                                   "start \"\" \"" + targetExe + "\"\n" +
-                                   "rmdir /s /q \"" + updateDir + "\"\n" +
-                                   "exit\n" +
-                                   ":failed\n" +
-                                   "echo [ERROR] No se pudo sobrescribir el motor galáctico. >> \"" + PathService.UpdaterLogFile + "\"\n" +
-                                   "echo [ERROR] El archivo sigue bloqueado por otro proceso.\n" +
-                                   "pause\n" +
-                                   "exit\n";
+                                    "set count=0\n" +
+                                    ":loop\n" +
+                                    "set /a count=%count%+1\n" +
+                                    "echo [%date% %time%] Sync attempt %count% >> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                    "copy /Y \"" + tempExe + "\" \"" + targetExe + "\" > nul 2>&1\n" +
+                                    "if errorlevel 1 (\n" +
+                                    "    if %count% geq 20 goto failed\n" +
+                                    "    timeout /t 1 /nobreak > nul\n" +
+                                    "    goto loop\n" +
+                                    ")\n" +
+                                    "echo [%date% %time%] SUCCESS: Engine updated. >> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                    "start \"\" \"" + targetExe + "\"\n" +
+                                    "rmdir /s /q \"" + updateDir + "\"\n" +
+                                    "exit\n" +
+                                    ":failed\n" +
+                                    "echo [%date% %time%] ERROR: Replacement failed. >> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                    "exit\n";
 
                 string updaterBat = System.IO.Path.Combine(updateDir, "kraken_updater.bat");
                 await File.WriteAllTextAsync(updaterBat, batContent);
@@ -564,8 +555,9 @@ namespace KrakenLauncher
 
                 Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
                 {
-                    UseShellExecute = true,
-                    CreateNoWindow = false
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
                 });
 
                 UpdateDiagnosticsService.MarkRestartScheduled();
