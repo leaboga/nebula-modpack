@@ -334,10 +334,24 @@ namespace KrakenLauncher
                 var resRels = await http.GetStringAsync("https://api.github.com/repos/leaboga/nebula-modpack/releases?per_page=10");
                 var releases = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic[]>(resRels);
                 if (releases == null || releases.Length == 0) return;
-                dynamic? latestSoftware = null;
-                foreach (var r in releases) { if (!(r.tag_name?.ToString() ?? "").Contains("-assets")) { latestSoftware = r; break; } }
-                if (latestSoftware == null) return;
-                var root = latestSoftware;
+                var root = releases.FirstOrDefault(r => 
+                {
+                    string tagStr = r.tag_name?.ToString() ?? "";
+                    // Excluir assets explícitamente y verificar si tiene un .exe
+                    if (tagStr.Contains("-assets") || tagStr.Contains("-1")) return false; 
+                    
+                    if (r.assets != null)
+                    {
+                        foreach (var asset in r.assets)
+                        {
+                            if (asset.name?.ToString().EndsWith(".exe", StringComparison.OrdinalIgnoreCase) == true)
+                                return true;
+                        }
+                    }
+                    return false;
+                });
+
+                if (root == null) return;
 
                 string remoteTag = root.tag_name?.ToString() ?? "";
                 string remoteV   = VersionManager.CleanVersion(remoteTag);
