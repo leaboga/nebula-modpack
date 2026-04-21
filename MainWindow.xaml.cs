@@ -532,20 +532,17 @@ namespace KrakenLauncher
                 string batContent = "@echo off\n" +
                                     "set count=0\n" +
                                     ":loop\n" +
-                                    "set /a count=%count%+1\n" +
-                                    "echo [%date% %time%] Sync attempt %count% >> \"" + PathService.UpdaterLogFile + "\"\n" +
+                                    "set /a count+=1\n" +
                                     "copy /Y \"" + tempExe + "\" \"" + targetExe + "\" > nul 2>&1\n" +
                                     "if errorlevel 1 (\n" +
-                                    "    if %count% geq 20 goto failed\n" +
+                                    "    if %count% geq 25 goto failed\n" +
                                     "    timeout /t 1 /nobreak > nul\n" +
                                     "    goto loop\n" +
                                     ")\n" +
-                                    "echo [%date% %time%] SUCCESS: Engine updated. >> \"" + PathService.UpdaterLogFile + "\"\n" +
                                     "start \"\" \"" + targetExe + "\"\n" +
                                     "rmdir /s /q \"" + updateDir + "\"\n" +
                                     "exit\n" +
                                     ":failed\n" +
-                                    "echo [%date% %time%] ERROR: Replacement failed. >> \"" + PathService.UpdaterLogFile + "\"\n" +
                                     "exit\n";
 
                 string updaterBat = System.IO.Path.Combine(updateDir, "kraken_updater.bat");
