@@ -1869,12 +1869,12 @@ namespace KrakenLauncher
 
         #region DISCOVERY / TUTORIAL SYSTEM
         private int _tutorialStep = 0;
-        private readonly List<(string target, string title, string content, Point pos)> _tutorialSteps = new()
+        private readonly List<(string target, string title, string content, Point pos, string view)> _tutorialSteps = new()
         {
-            ("NavHome", "Comandante: Centro de Mando", "Aqu\u00ED es donde ocurre la acci\u00F3n. Elige tu perfil de juego y l\u00E1nzate al abismo con un solo clic.", new Point(250, 150)),
-            ("NavSistemas", "Sistemas Pepa", "Ajusta la RAM, selecciona el Java adecuado (\u00A1Ahora autom\u00E1tico!) y revisa la consola oficial de Pepita.", new Point(250, 200)),
-            ("PlayButton", "Secuencia de Inicio", "El motor Kraken est\u00E1 optimizado. Pulsa este bot\u00F3n para entrar al servidor con todos los mods sincronizados.", new Point(480, 500)),
-            ("UpdateBadge", "N\u00FAcleo Siempre Vivo", "Si ves este mensaje parpadeando, hay una nueva versi\u00F3n del motor disponible. \u00A1Dale clic!", new Point(10, 560))
+            ("NavHome", "Comandante: Centro de Mando", "Aquí es donde ocurre la acción. Elige tu perfil de juego y lánzate al abismo con un solo clic.", new Point(250, 150), "home"),
+            ("NavSistemas", "Sistemas Pepa", "Ajusta la RAM, selecciona el Java adecuado (¡Ahora automático!) y revisa la consola oficial de Pepita.", new Point(250, 200), "sistemas"),
+            ("PlayButton", "Secuencia de Inicio", "El motor Kraken está optimizado. Pulsa este botón para entrar al servidor con todos los mods sincronizados.", new Point(480, 280), "any"),
+            ("UpdateBadge", "Núcleo Siempre Vivo", "Si ves este mensaje parpadeando, hay una nueva versión del motor disponible. ¡Dale clic!", new Point(10, 380), "any")
         };
 
         private void StartDiscovery()
@@ -1895,13 +1895,25 @@ namespace KrakenLauncher
             var step = _tutorialSteps[_tutorialStep];
             TutorialTitle.Text = step.title;
             TutorialContent.Text = step.content;
+            StepIndicator.Text = $"Paso {_tutorialStep + 1} de {_tutorialSteps.Count}";
 
-            // Positioning of the card
-            TutorialCard.HorizontalAlignment = HorizontalAlignment.Left;
-            TutorialCard.VerticalAlignment = VerticalAlignment.Top;
-            TutorialCard.Margin = new Thickness(step.pos.X, step.pos.Y, 0, 0);
+            if (step.view != "any" && !string.IsNullOrEmpty(step.view))
+            {
+                CambiarVista(step.view);
+            }
 
-            HighlightElement(step.target);
+            // Let the UI layout update before calculating positions
+            Dispatcher.BeginInvoke(new Action(() => {
+                HighlightElement(step.target);
+                
+                // Positioning of the card relative to the highlight or fixed pos
+                TutorialCard.HorizontalAlignment = HorizontalAlignment.Left;
+                TutorialCard.VerticalAlignment = VerticalAlignment.Top;
+                
+                // Adjust card position to not overlap the focus hole if possible, 
+                // but for now use the suggested pos.
+                TutorialCard.Margin = new Thickness(step.pos.X, step.pos.Y, 0, 0);
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
         private void HighlightElement(string elementName)
@@ -1909,14 +1921,21 @@ namespace KrakenLauncher
             try
             {
                 var element = FindName(elementName) as FrameworkElement;
-                if (element == null) return;
+                if (element == null || element.Visibility != Visibility.Visible) 
+                {
+                    TutorialFocusRect.Rect = new Rect(0,0,0,0);
+                    return;
+                }
 
                 var transform = element.TransformToVisual(this);
                 Point pos = transform.Transform(new Point(0, 0));
 
                 TutorialFocusRect.Rect = new Rect(pos.X - 5, pos.Y - 5, element.ActualWidth + 10, element.ActualHeight + 10);
             }
-            catch { }
+            catch 
+            {
+                TutorialFocusRect.Rect = new Rect(0,0,0,0);
+            }
         }
 
         private void BtnNextTutorial_Click(object sender, RoutedEventArgs e)
@@ -1935,10 +1954,16 @@ namespace KrakenLauncher
 
         private void EndDiscovery()
         {
+            if (TutorialOverlay.Visibility == Visibility.Collapsed) return;
+
             TutorialOverlay.Visibility = Visibility.Collapsed;
             _session.HasFinishedDiscovery = true;
             GuardarSesion();
-            AgregarLog("✨ Fase de descubrimiento completada. \u00A1Bienvenido, Comandante!");
+            AgregarLog("✨ Fase de descubrimiento completada. ¡Bienvenido, Comandante!");
+            
+            // Re-check focus for the user
+            if (_session.AuthMode == "offline" && string.IsNullOrEmpty(_session.Username))
+                NickTextBox.Focus();
         }
         #endregion
 
