@@ -140,6 +140,14 @@ namespace KrakenLauncher
 
                 // SINGLE SOURCE OF TRUTH: Set real version in footer
                 VersionFooterLabel.Text = $"{KrakenStrings.LauncherName} v{VersionManager.GetCurrentVersion()}";
+
+                if (!_session.HasFinishedDiscovery)
+                {
+                    Dispatcher.InvokeAsync(async () => {
+                        await Task.Delay(1000);
+                        StartDiscovery();
+                    });
+                }
             };
 
             this.SourceInitialized += (s, e) =>
@@ -1858,6 +1866,82 @@ namespace KrakenLauncher
         }
 
         public void CambiarVista(string vista) => NavigationService.Instance.NavigateTo(vista, this);
+
+        #region DISCOVERY / TUTORIAL SYSTEM
+        private int _tutorialStep = 0;
+        private readonly List<(string target, string title, string content, Point pos)> _tutorialSteps = new()
+        {
+            ("NavHome", "Comandante: Centro de Mando", "Aqu\u00ED es donde ocurre la acci\u00F3n. Elige tu perfil de juego y l\u00E1nzate al abismo con un solo clic.", new Point(250, 150)),
+            ("NavSistemas", "Sistemas Pepa", "Ajusta la RAM, selecciona el Java adecuado (\u00A1Ahora autom\u00E1tico!) y revisa la consola oficial de Pepita.", new Point(250, 200)),
+            ("PlayButton", "Secuencia de Inicio", "El motor Kraken est\u00E1 optimizado. Pulsa este bot\u00F3n para entrar al servidor con todos los mods sincronizados.", new Point(480, 500)),
+            ("UpdateBadge", "N\u00FAcleo Siempre Vivo", "Si ves este mensaje parpadeando, hay una nueva versi\u00F3n del motor disponible. \u00A1Dale clic!", new Point(10, 560))
+        };
+
+        private void StartDiscovery()
+        {
+            _tutorialStep = 0;
+            TutorialOverlay.Visibility = Visibility.Visible;
+            ShowTutorialStep();
+        }
+
+        private void ShowTutorialStep()
+        {
+            if (_tutorialStep < 0 || _tutorialStep >= _tutorialSteps.Count)
+            {
+                EndDiscovery();
+                return;
+            }
+
+            var step = _tutorialSteps[_tutorialStep];
+            TutorialTitle.Text = step.title;
+            TutorialContent.Text = step.content;
+
+            // Positioning of the card
+            TutorialCard.HorizontalAlignment = HorizontalAlignment.Left;
+            TutorialCard.VerticalAlignment = VerticalAlignment.Top;
+            TutorialCard.Margin = new Thickness(step.pos.X, step.pos.Y, 0, 0);
+
+            HighlightElement(step.target);
+        }
+
+        private void HighlightElement(string elementName)
+        {
+            try
+            {
+                var element = FindName(elementName) as FrameworkElement;
+                if (element == null) return;
+
+                var transform = element.TransformToVisual(this);
+                Point pos = transform.Transform(new Point(0, 0));
+
+                TutorialFocusRect.Rect = new Rect(pos.X - 5, pos.Y - 5, element.ActualWidth + 10, element.ActualHeight + 10);
+            }
+            catch { }
+        }
+
+        private void BtnNextTutorial_Click(object sender, RoutedEventArgs e)
+        {
+            _tutorialStep++;
+            if (_tutorialStep >= _tutorialSteps.Count)
+                EndDiscovery();
+            else
+                ShowTutorialStep();
+        }
+
+        private void BtnSkipTutorial_Click(object sender, RoutedEventArgs e)
+        {
+            EndDiscovery();
+        }
+
+        private void EndDiscovery()
+        {
+            TutorialOverlay.Visibility = Visibility.Collapsed;
+            _session.HasFinishedDiscovery = true;
+            GuardarSesion();
+            AgregarLog("✨ Fase de descubrimiento completada. \u00A1Bienvenido, Comandante!");
+        }
+        #endregion
+
 
         private void ActualizarVersionesEnHome()
         {

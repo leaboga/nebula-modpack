@@ -4,7 +4,7 @@ import shutil
 
 REPO_PATH = r"c:\Users\Leandro\source\repos\NebulaLauncher"
 PROJECT_FILE = "KrakenLauncher.csproj"
-VERSION = "2.9.1"
+VERSION = "2.9.2"
 REMOTE_REPO = "leaboga/nebula-modpack"
 
 def run_cmd(args):
@@ -38,7 +38,7 @@ def publish_engine():
     # 4. Push Code to Git
     print("--- Sincronizando codigo con GitHub ---")
     run_cmd(["git", "add", "."])
-    run_cmd(["git", "commit", "-m", f"Release Engine v{VERSION} - Solucion Definitiva Updates"])
+    run_cmd(["git", "commit", "-m", f"Release Engine v{VERSION} - Onboarding & Java Discovery"])
     run_cmd(["git", "push", "origin", "main"])
 
     # 5. Create GitHub Release
@@ -47,7 +47,7 @@ def publish_engine():
     # Delete tag if exists locally to avoid conflicts
     subprocess.run(["git", "tag", "-d", tag], cwd=REPO_PATH)
     
-    notes = f"SISTEMA DE ACTUALIZACION DEFINITIVO (v{VERSION}).\n- Descargas por flujo (Stream) para archivos pesados.\n- Logs de progreso en tiempo real.\n- Mejor manejo de memoria y reinicio robusto.\n- Hubs de navegación consolidados."
+    notes = f"EXPERIENCIA KRAKEN MODERNIZADA (v{VERSION}).\n- Autodetector de Runtimes Java (Prism-like).\n- Onboarding guiado 'Discovery' para nuevos usuarios.\n- Buscador inteligente en Biblioteca Mod.\n- Hubs de navegación consolidados y más rápidos.\n- Solución definitiva a errores de memoria en actualizaciones."
     
     # Use gh to create release and upload asset
     run_cmd(["gh", "release", "create", tag, target_exe, "--repo", REMOTE_REPO, "--title", f"KRAKEN Launcher v{VERSION}", "--notes", notes, "--clobber"])

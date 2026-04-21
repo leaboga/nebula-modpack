@@ -118,17 +118,31 @@
                         </StackPanel>
                     </Grid>
                     
-                    <TextBlock Text="RUTA DE JAVA (OPCIONAL)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
+                    <TextBlock Text="SELECCIÓN DE JAVA (KRAKEN RUNTIME)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="JavaPathBox" Style="{DynamicResource AppleTextBox}" IsReadOnly="True" Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="..." Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnBrowseJava_Click"/>
+                        <ComboBox x:Name="JavaVersionCombo" Style="{DynamicResource ModernComboBox}" Margin="0,0,8,0" SelectionChanged="JavaVersionCombo_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Version}" Foreground="White" FontWeight="Bold"/>
+                                        <TextBlock Text=" - " Foreground="#344A5B"/>
+                                        <TextBlock Text="{Binding Architecture}" Foreground="#00F2FF"/>
+                                        <Border Visibility="{Binding IsRecommended, Converter={StaticResource BooleanToVisibilityConverter}}" Background="#2010B981" Margin="8,0,0,0" Padding="4,0" CornerRadius="4">
+                                            <TextBlock Text="RECOMENDADO" Foreground="#10B981" FontSize="8" FontWeight="Black"/>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Grid.Column="1" Content="🔄 Scan" Style="{DynamicResource SecondaryButton}" Width="70" Click="BtnRefreshJava_Click"/>
                     </Grid>
+                    <TextBlock Text="Detección automática de Javas. Usa v17 o v21 para optimizar el rendimiento." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0"/>
 
-                    <Button Content="📥 Descargar Javas (8, 17, 21)" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
+                    <Button Content="📥 Descargar Runtimes Oficiales" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
                 </StackPanel>
             </Border>
 

@@ -17,6 +17,7 @@ namespace KrakenLauncher.Modules
         private readonly PresetService _presetService;
         private readonly MainWindow _mainWindow;
         private bool _initializing = true;
+        private List<JavaRuntime> _runtimes = new();
 
         public ConfigView(MainWindow mainWindow)
         {
@@ -38,8 +39,9 @@ namespace KrakenLauncher.Modules
             {
                 RamSlider.Value = _mainWindow.CurrentProfile.RamGB;
                 RamValueText.Text = _mainWindow.CurrentProfile.RamGB.ToString();
-                JavaPathBox.Text = _mainWindow.CurrentProfile.JavaPath;
             }
+            
+            CargarJavas();
             
             InstanceNameBox.Text = _mainWindow.CurrentProfile?.Name ?? "default";
             _initializing    = false;
@@ -255,6 +257,44 @@ namespace KrakenLauncher.Modules
         private void BtnOpenConfigs_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("config");
         private void BtnOpenGame_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("");
 
+        #region JAVA RUNTIME
+        private void CargarJavas()
+        {
+            _runtimes = JavaService.DetectRuntimes();
+            JavaVersionCombo.ItemsSource = _runtimes;
+
+            if (_mainWindow.CurrentProfile != null && !string.IsNullOrEmpty(_mainWindow.CurrentProfile.JavaPath))
+            {
+                var current = _runtimes.FirstOrDefault(r => r.Path.Equals(_mainWindow.CurrentProfile.JavaPath, StringComparison.OrdinalIgnoreCase));
+                if (current != null) JavaVersionCombo.SelectedItem = current;
+                else if (!string.IsNullOrEmpty(_mainWindow.CurrentProfile.JavaPath))
+                {
+                    // If not found in scan, add manually as fallback
+                    var manual = new JavaRuntime { Path = _mainWindow.CurrentProfile.JavaPath, Version = "Actual", Architecture = "x64" };
+                    _runtimes.Add(manual);
+                    JavaVersionCombo.ItemsSource = null;
+                    JavaVersionCombo.ItemsSource = _runtimes;
+                    JavaVersionCombo.SelectedItem = manual;
+                }
+            }
+        }
+
+        private void JavaVersionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_initializing) return;
+            if (JavaVersionCombo.SelectedItem is JavaRuntime rt && _mainWindow.CurrentProfile != null)
+            {
+                _mainWindow.CurrentProfile.JavaPath = rt.Path;
+                _mainWindow.GuardarSesion();
+            }
+        }
+
+        private void BtnRefreshJava_Click(object sender, RoutedEventArgs e)
+        {
+            CargarJavas();
+            MessageBox.Show($"Se detectaron {_runtimes.Count} entornos Java.", "KRAKEN Engine");
+        }
+
         private void BtnBrowseJava_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "Java Executable|java.exe" };
@@ -262,9 +302,10 @@ namespace KrakenLauncher.Modules
             {
                 _mainWindow.CurrentProfile.JavaPath = dlg.FileName;
                 _mainWindow.GuardarSesion();
-                JavaPathBox.Text = dlg.FileName;
+                CargarJavas();
             }
         }
+        #endregion
 
         private async void BtnDownloadShaders_Click(object sender, RoutedEventArgs e)
         {

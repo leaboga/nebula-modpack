@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="Themes/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
             <!-- Restaurar el recurso del Icono de Bandeja -->
             <tb:TaskbarIcon x:Key="TrayIcon"
                             IconSource="/kraken.ico"

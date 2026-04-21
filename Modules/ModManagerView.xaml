@@ -6,6 +6,7 @@
     <Grid Margin="40,36,40,28">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -27,8 +28,13 @@
             </StackPanel>
         </Grid>
 
+        <!-- Search Bar -->
+        <Border Grid.Row="1" Margin="0,0,0,16">
+            <TextBox x:Name="SearchBox" Style="{DynamicResource SearchTextBox}" Tag="Filtrar por nombre de mod..." TextChanged="SearchBox_TextChanged"/>
+        </Border>
+
         <!-- Mod List Background -->
-        <Border Grid.Row="1" Background="#05080D" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
+        <Border Grid.Row="2" Background="#05080D" CornerRadius="22" BorderBrush="#1E2C38" BorderThickness="1" ClipToBounds="True">
             <Grid>
                 <ScrollViewer x:Name="ModScroll" VerticalScrollBarVisibility="Auto" Padding="14">
                     <ItemsControl x:Name="ModList">

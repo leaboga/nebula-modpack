@@ -141,9 +141,9 @@
                             <!-- NAVIGATION -->
                             <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
                             
-                            <RadioButton Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
+                            <RadioButton x:Name="NavHome" Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
                             
-                            <RadioButton Content="Sistemas Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
+                            <RadioButton x:Name="NavSistemas" Content="Sistemas Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
                                 <RadioButton.ToolTip>
                                     <ToolTip Content="Ajustes críticos, sincronización oficial, rendimiento y consola." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
                                 </RadioButton.ToolTip>
@@ -436,5 +436,37 @@
         
         <!-- NOTIFICATION AREA -->
         <StackPanel x:Name="NotificationArea" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,0,20,130"/>
+
+        <!-- TUTORIAL / DISCOVERY OVERLAY -->
+        <Grid x:Name="TutorialOverlay" Visibility="Collapsed" Background="#D905080D">
+            <Border x:Name="TutorialCard" VerticalAlignment="Center" HorizontalAlignment="Center" Width="380" Background="#0D151D" CornerRadius="20" BorderBrush="#00F2FF" BorderThickness="1" Padding="28">
+                <Border.Effect><DropShadowEffect Color="#00F2FF" BlurRadius="40" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
+                <StackPanel>
+                    <TextBlock x:Name="TutorialTitle" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TutorialContent" Text="Estamos listos para sincronizar tus sistemas. ¿Quieres un recorrido rápido por las nuevas funciones?" Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap" LineHeight="20" Margin="0,0,0,24"/>
+                    
+                    <Grid>
+                        <Button x:Name="BtnSkipTutorial" Content="Omitir" HorizontalAlignment="Left" Style="{DynamicResource SecondaryButton}" Padding="16,4" Click="BtnSkipTutorial_Click"/>
+                        <Button x:Name="BtnNextTutorial" Content="Siguiente" HorizontalAlignment="Right" Style="{DynamicResource PlayButton}" Width="120" Height="36" Click="BtnNextTutorial_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <!-- Focus Hole (Visual cue) -->
+            <Canvas x:Name="TutorialFocusCanvas" IsHitTestVisible="False">
+                <Path Fill="#A605080D">
+                    <Path.Data>
+                         <CombinedGeometry GeometryCombineMode="Exclude">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry Rect="0,0,1920,1080"/>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry x:Name="TutorialFocusRect" Rect="0,0,0,0"/>
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Grid>
     </Grid>
 </Window>

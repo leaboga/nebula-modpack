@@ -28,6 +28,7 @@ namespace KrakenLauncher.Modules
         private readonly string _gameFolder;
         private readonly MinecraftProfile? _profile;
         private readonly ObservableCollection<ModItem> _mods = new ObservableCollection<ModItem>();
+        private List<ModItem> _allMods = new List<ModItem>();
         
         public event Func<Task>? OnSyncRequested;
 
@@ -60,6 +61,7 @@ namespace KrakenLauncher.Modules
             }
 
             _mods.Clear();
+            _allMods.Clear();
             try
             {
                 var files = Directory.EnumerateFiles(modsPath, "*")
@@ -88,8 +90,10 @@ namespace KrakenLauncher.Modules
                         Icon = ExtraerIconoDeMod(file)
                     };
                     
-                    _mods.Add(item);
+                    
+                    _allMods.Add(item);
                 }
+                ActualizarFiltrado();
             }
             catch (Exception ex)
             {
@@ -211,6 +215,26 @@ namespace KrakenLauncher.Modules
             ActualizarEstadoSync();
             BtnSync.Content = "🚀 Sincronizar";
             BtnSync.IsEnabled = true;
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ActualizarFiltrado();
+        }
+
+        private void ActualizarFiltrado()
+        {
+            string filter = SearchBox?.Text?.ToLower() ?? "";
+            _mods.Clear();
+            
+            var items = string.IsNullOrEmpty(filter) 
+                ? _allMods 
+                : _allMods.Where(m => m.FileName.ToLower().Contains(filter)).ToList();
+
+            foreach (var item in items) _mods.Add(item);
+            
+            if (EmptyPanel != null)
+                EmptyPanel.Visibility = _mods.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

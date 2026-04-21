@@ -20,6 +20,8 @@ namespace KrakenLauncher
         public string BackgroundImagePath    { get; set; } = "";
         public bool   IsTurboEnabled         { get; set; } = false;
         public bool   SkipConfigSync         { get; set; } = false;
+        public bool   HasFinishedDiscovery   { get; set; } = false; // Tutorial state
+        public int    DiscoveryStep          { get; set; } = 0;
 
         // Customization & Features
         public string CloudPath              { get; set; } = "";
@@ -48,8 +50,11 @@ namespace KrakenLauncher
         public string LoaderType     { get; set; } = "vanilla"; // vanilla, forge, fabric, neoforge
         public string LoaderVersion  { get; set; } = "";
         public string JavaPath       { get; set; } = "";
+        public string JvmArgs        { get; set; } = "-Xmx4G -XX:+UseG1GC";
         public int    RamGB          { get; set; } = 4;
         public string CreatedAt      { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
+        public string LastPlayedAt   { get; set; } = "Nunca";
+        public long   TotalPlayTimeMinutes { get; set; } = 0;
         public string LastSyncDate   { get; set; } = "Nunca";
         public string LastSyncHash   { get; set; } = "";
         public string ModpackId      { get; set; } = "";
