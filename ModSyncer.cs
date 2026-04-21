@@ -182,7 +182,7 @@ namespace KrakenLauncher
         /// <summary>
         /// Devuelve la info remota de las configs de Pepita (hash y RAM recomendada), o null si no se puede obtener.
         /// </summary>
-        public async Task<(string? hash, int? ram)?> ObtenerHashConfigsRemoto()
+        public async Task<(string? hash, int? ram, string? jvmArgs)?> ObtenerHashConfigsRemoto()
         {
             try
             {
@@ -190,7 +190,8 @@ namespace KrakenLauncher
                 var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
                 string? hash = (string?)obj?.hash;
                 int? ram = (int?)obj?.recommendedRam;
-                return (hash, ram);
+                string? jvmArgs = (string?)obj?.jvmArgs;
+                return (hash, ram, jvmArgs);
             }
             catch { return null; }
         }
@@ -210,7 +211,7 @@ namespace KrakenLauncher
                     url = $"https://github.com/leaboga/nebula-modpack/releases/download/v{version}-assets/client-assets.zip";
                 }
 
-                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (!await DescargarConStream(url, tempZip)) {
                     if (!string.IsNullOrEmpty(version)) {
                         OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
@@ -260,7 +261,7 @@ namespace KrakenLauncher
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
-        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4)
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string? jvmArgs = null)
         {
             try
             {
@@ -269,12 +270,12 @@ namespace KrakenLauncher
                 { log("❌ No existe la carpeta config/"); return false; }
 
                 // 1. Crear ZIP temporal con todo el contenido del gameFolder relevante
-                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets-pepita.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (File.Exists(tempZip)) File.Delete(tempZip);
 
                 log("📦 Empaquetando configs...");
 
-                // Incluimos config/ y options.txt y options.of.txt si existen
+                // Incluimos config/, options.txt, optionsshaders.txt y shaderpacks/.
                 using (var archive = System.IO.Compression.ZipFile.Open(tempZip, System.IO.Compression.ZipArchiveMode.Create))
                 {
                     // config/ completa
@@ -293,6 +294,16 @@ namespace KrakenLauncher
                     string shaderOpts = Path.Combine(_gameFolder, "optionsshaders.txt");
                     if (File.Exists(shaderOpts))
                         archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
+
+                    string shaderpacksDir = Path.Combine(_gameFolder, "shaderpacks");
+                    if (Directory.Exists(shaderpacksDir))
+                    {
+                        foreach (var file in Directory.GetFiles(shaderpacksDir, "*", SearchOption.AllDirectories))
+                        {
+                            string relative = Path.GetRelativePath(_gameFolder, file);
+                            archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
+                        }
+                    }
                 }
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
@@ -323,6 +334,7 @@ namespace KrakenLauncher
                 var infoObj = new { 
                     hash = hash, 
                     recommendedRam = recommendedRam,
+                    jvmArgs = SanitizeJvmArgs(jvmArgs),
                     updated = DateTime.UtcNow.ToString("o") 
                 };
                 string hashJson = Newtonsoft.Json.JsonConvert.SerializeObject(infoObj, Newtonsoft.Json.Formatting.Indented);
@@ -399,6 +411,20 @@ namespace KrakenLauncher
                 using var stream = File.OpenRead(path);
                 return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
             } catch { return "null"; }
+        }
+
+        private static string SanitizeJvmArgs(string? args)
+        {
+            if (string.IsNullOrWhiteSpace(args)) return "";
+
+            var safe = new List<string>();
+            foreach (var raw in args.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            {
+                if (raw.StartsWith("-Xmx", StringComparison.OrdinalIgnoreCase)) continue;
+                if (raw.StartsWith("-Xms", StringComparison.OrdinalIgnoreCase)) continue;
+                safe.Add(raw);
+            }
+            return string.Join(' ', safe);
         }
     }
 }

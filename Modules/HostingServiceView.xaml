@@ -24,7 +24,7 @@
                     <TextBlock Text="EXPERIMENTAL" Foreground="White" FontSize="10" FontWeight="Black"/>
                 </Border>
             </StackPanel>
-            <TextBlock Text="CONEXIÓN CON Abismo Kraken"
+            <TextBlock Text="CONEXION CON KRAKEN"
                        Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 

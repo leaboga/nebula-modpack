@@ -118,7 +118,7 @@
                         </StackPanel>
                     </Grid>
                     
-                    <TextBlock Text="SELECCIÓN DE JAVA (KRAKEN RUNTIME)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
+                    <TextBlock Text="SELECCION DE JAVA (KRAKEN RUNTIME)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -138,11 +138,15 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Grid.Column="1" Content="🔄 Scan" Style="{DynamicResource SecondaryButton}" Width="70" Click="BtnRefreshJava_Click"/>
+                        <Button Grid.Column="1" Content="Scan" Style="{DynamicResource SecondaryButton}" Width="70" Click="BtnRefreshJava_Click"/>
                     </Grid>
-                    <TextBlock Text="Detección automática de Javas. Usa v17 o v21 para optimizar el rendimiento." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0"/>
+                    <TextBlock Text="Deteccion automatica de Java. Usa Java 21 para Minecraft 1.21.1." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0"/>
 
-                    <Button Content="📥 Descargar Runtimes Oficiales" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
+                    <TextBlock Text="ARGUMENTOS JVM OFICIALES (SIN RAM)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
+                    <TextBox x:Name="JvmArgsBox" Style="{DynamicResource AppleTextBox}" TextWrapping="Wrap" AcceptsReturn="True" Height="72" TextChanged="JvmArgsBox_TextChanged"/>
+                    <TextBlock Text="Estos argumentos se sincronizan con la config oficial. -Xmx y -Xms se ignoran para que cada jugador elija su RAM." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0" TextWrapping="Wrap"/>
+
+                    <Button Content="Descargar runtimes oficiales" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
                 </StackPanel>
             </Border>
 
@@ -153,7 +157,7 @@
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
                             <TextBlock Text="🧹" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Mantenimiento Galáctico" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Mantenimiento" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                     
                     <Button Content="Limpiar Logs y Caché" Style="{DynamicResource SecondaryButton}" Height="38" Margin="0,0,0,12" Click="BtnCleanLogs_Click"/>
@@ -308,8 +312,8 @@
                             <ColumnDefinition Width="12"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="🥔 Modo Patata (Bajo Rendimiento)" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
-                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="🚀 Modo Galáctico (Alto Rendimiento)" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
+                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="Perfil liviano" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
+                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="Perfil alto rendimiento" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -348,7 +352,7 @@
             </Border>
 
             <!-- ╔═══════════════════════════════════╗ -->
-            <!-- ║       CONFIGS DE PEPITA           ║ -->
+            <!-- Config oficial compartida -->
             <!-- ╚═══════════════════════════════════╝ -->
 
             <!-- Panel USUARIO: Notificación de configs nuevas -->
@@ -360,7 +364,7 @@
                         <TextBlock Text="👑" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Configs de Pepita" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="Config oficial" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
                         <TextBlock Text="CONFIGURACIONES OFICIALES DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
@@ -378,22 +382,22 @@
 
                 <UniformGrid Columns="2">
                     <Button x:Name="BtnAplicarConfigsPepita"
-                            Content="⬇ Copiar Settings de Pepita"
+                            Content="Aplicar config oficial"
                             Click="BtnAplicarConfigsPepita_Click"
                             Style="{DynamicResource PlayButton}"
                             Height="40" Margin="0,0,4,0"/>
                     <Button x:Name="BtnVerificarConfigsPepita"
-                            Content="🔄 Verificar Cambios"
+                            Content="Verificar cambios"
                             Click="BtnVerificarConfigsPepita_Click"
                             Style="{DynamicResource SecondaryButton}"
                             Height="40" Margin="4,0,0,0"/>
                 </UniformGrid>
-                <TextBlock Text="Copia la configuración integral del servidor (Gráficos, RAM y Mods). ¡ESTO SOBREESCRIBIRÁ TODO TU SETUP!"
+                <TextBlock Text="Copia config/, options.txt y shaderpacks/ publicados por el admin. Se crea backup antes de aplicar."
                            Foreground="#EF4444" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
         </Border>
 
-        <!-- Panel ADMIN (solo Pepita): Publicar configs -->
+        <!-- Panel ADMIN: Publicar configs -->
         <Border x:Name="PepitaAdminPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
                 BorderBrush="#7C3AED40" BorderThickness="1" Visibility="Collapsed">
             <StackPanel>
@@ -403,21 +407,21 @@
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="Panel Admin – Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="SOLO ADMIN" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Border Background="#120D1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14" BorderBrush="#7C3AED30" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="Tus configs actuales (config/, options.txt y RAM asignada) se empaquetarán y subirán." 
+                        <TextBlock Text="Se publican config/, options.txt, optionsshaders.txt, shaderpacks/ y argumentos JVM seguros."
                                    Foreground="#A78BFA" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <TextBlock Text="Los demás jugadores verán una notificación para copiar todo tu setup al iniciar. Solo visible desde tu PC de Admin."
+                        <TextBlock Text="Los jugadores veran una notificacion para aplicar la config oficial. Sus mods no se modifican desde este panel."
                                    Foreground="#7B6FA0" FontSize="10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <Button x:Name="BtnPublicarConfigsAdmin"
-                        Content="☁ Publicar Mis Configs como Pepita"
+                        Content="Publicar config oficial"
                         Click="BtnPublicarConfigsAdmin_Click"
                         Style="{DynamicResource PlayButton}"
                         Height="44"

@@ -39,6 +39,9 @@ namespace KrakenLauncher.Modules
             {
                 RamSlider.Value = _mainWindow.CurrentProfile.RamGB;
                 RamValueText.Text = _mainWindow.CurrentProfile.RamGB.ToString();
+                JvmArgsBox.Text = string.IsNullOrWhiteSpace(_mainWindow.CurrentProfile.JvmArgs)
+                    ? McGameLauncher.DefaultJvmArgs
+                    : _mainWindow.CurrentProfile.JvmArgs;
             }
             
             CargarJavas();
@@ -231,6 +234,17 @@ namespace KrakenLauncher.Modules
             _mainWindow.GuardarSesion();
         }
 
+        private void JvmArgsBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_initializing || _mainWindow?.Session == null || _mainWindow.CurrentProfile == null) return;
+
+            string sanitized = string.Join(' ', McGameLauncher.ParseJvmArgs(JvmArgsBox.Text));
+            _mainWindow.CurrentProfile.JvmArgs = string.IsNullOrWhiteSpace(sanitized)
+                ? McGameLauncher.DefaultJvmArgs
+                : sanitized;
+            _mainWindow.GuardarSesion();
+        }
+
         private void BtnAutoOptimize_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -247,7 +261,7 @@ namespace KrakenLauncher.Modules
                     _mainWindow.CurrentProfile.RamGB = suggested;
                     RamSlider.Value = suggested;
                 }
-                NotificationService.Instance.ShowInfo($"Nebula sugiere {suggested}GB para tu sistema ({Math.Round(total,1)}GB Detectados).");
+                NotificationService.Instance.ShowInfo($"RAM recomendada: {suggested}GB ({Math.Round(total,1)}GB detectados).");
             }
             catch { NotificationService.Instance.ShowError("No se pudo detectar la memoria automáticamente."); }
         }
@@ -453,7 +467,7 @@ namespace KrakenLauncher.Modules
             {
                 // Logic to simulate or download Javas (using a helper or service)
                 await Task.Delay(2000); // UI feedback
-                MessageBox.Show("✅ Entornos de Java (8, 17, 21) listos. El launcher los usará automáticamente según la versión de Minecraft.", "Java Galáctico", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Entornos de Java (8, 17, 21) listos. El launcher los usara automaticamente segun la version de Minecraft.", "Java listo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { MessageBox.Show("Error al preparar Java: " + ex.Message); }
             finally { btn.IsEnabled = true; btn.Content = "📥 Descargar Javas (8, 17, 21)"; }
@@ -550,10 +564,11 @@ namespace KrakenLauncher.Modules
                 var remoteInfo = await GetSyncer().ObtenerHashConfigsRemoto();
                 string? hashRemoto = remoteInfo?.hash;
                 int? ramOficial = remoteInfo?.ram;
+                bool incluyeJvm = !string.IsNullOrWhiteSpace(remoteInfo?.jvmArgs);
 
                 if (string.IsNullOrEmpty(hashRemoto))
                 {
-                    PepitaConfigStatusText.Text = "No se pudo determinar la versión remota.";
+                    PepitaConfigStatusText.Text = "No se pudo determinar la version remota.";
                     return;
                 }
 
@@ -565,21 +580,21 @@ namespace KrakenLauncher.Modules
 
                 if (alDia)
                 {
-                    PepitaConfigStatusText.Text      = $"✅ Configs integrales aplicadas — Estás usando el setup de Pepita.";
+                    PepitaConfigStatusText.Text      = "Config oficial aplicada en este perfil.";
                     PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.LightGreen;
                 }
                 else if (hashRemoto == versionRechazada)
                 {
-                    PepitaConfigStatusText.Text      = $"🔔 Hay una actualización oficial disponible, pero la rechazaste.";
+                    PepitaConfigStatusText.Text      = "Hay una config oficial disponible, pero fue omitida para este perfil.";
                     PepitaConfigStatusText.Foreground = System.Windows.Media.Brushes.Gray;
                 }
                 else
                 {
-                    PepitaConfigStatusText.Text      = $"✨ ¡Nuevos ajustes integrales de Pepita disponibles!";
+                    PepitaConfigStatusText.Text      = "Hay una nueva config oficial disponible.";
                     PepitaConfigStatusText.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00, 0xF2, 0xFF));
                 }
 
-                PepitaConfigHashText.Text = $"Hash Remoto: {(hashRemoto.Length > 8 ? hashRemoto[..8] : hashRemoto)} | RAM Rec: {ramOficial ?? 4}GB";
+                PepitaConfigHashText.Text = $"Hash remoto: {(hashRemoto.Length > 8 ? hashRemoto[..8] : hashRemoto)} | RAM recomendada: {ramOficial ?? 4}GB | JVM: {(incluyeJvm ? "incluido" : "default")}";
             }
             catch (Exception ex)
             {
@@ -599,7 +614,7 @@ namespace KrakenLauncher.Modules
         {
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content   = "⬇ Aplicando...";
+            btn.Content   = "Aplicando...";
             try
             {
                 var remoteInfo = await GetSyncer().ObtenerHashConfigsRemoto();
@@ -607,13 +622,15 @@ namespace KrakenLauncher.Modules
                 
                 string hashRemoto = remoteInfo.Value.hash!;
                 int ramRec = remoteInfo.Value.ram ?? (_mainWindow.CurrentProfile?.RamGB ?? 4);
+                string? jvmArgs = remoteInfo.Value.jvmArgs;
 
                 var result = MessageBox.Show(
-                    $"¿Copiar los ajustes integrales de Pepita?\n\n" +
-                    "• Se SOBREESCRIBIRÁ todo (options.txt, configs de mods, etc).\n" +
-                    "• Se ajustará la RAM a la recomendada: " + ramRec + "GB.\n" +
-                    "• Se realizará un backup automático antes de proceder.",
-                    "Copiar Settings de Pepita",
+                    $"Aplicar la config oficial?\n\n" +
+                    "Se sobreescriben options.txt, config/ y shaderpacks/.\n" +
+                    "RAM recomendada: " + ramRec + "GB (no se cambia tu RAM actual).\n" +
+                    "Tambien se aplican los argumentos JVM oficiales sin -Xmx/-Xms.\n" +
+                    "Se crea un backup antes de aplicar.",
+                    "Aplicar config oficial",
                     MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 
                 if (result != MessageBoxResult.Yes) return;
@@ -621,7 +638,7 @@ namespace KrakenLauncher.Modules
                 // Backup manual
                 string backupDir = Path.Combine(_mainWindow.GameFolder, "backups", "pre-official-sync-" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
                 Directory.CreateDirectory(backupDir);
-                foreach (var target in new[] { "options.txt", "config" })
+                foreach (var target in new[] { "options.txt", "optionsshaders.txt", "config", "shaderpacks" })
                 {
                     string src = Path.Combine(_mainWindow.GameFolder, target);
                     if (File.Exists(src)) File.Copy(src, Path.Combine(backupDir, target), true);
@@ -635,7 +652,9 @@ namespace KrakenLauncher.Modules
 
                 if (_mainWindow.CurrentProfile != null)
                 {
-                    _mainWindow.CurrentProfile.RamGB = ramRec;
+                    if (!string.IsNullOrWhiteSpace(jvmArgs))
+                        _mainWindow.CurrentProfile.JvmArgs = string.Join(' ', McGameLauncher.ParseJvmArgs(jvmArgs));
+
                     _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
                     
                     string profileId = _mainWindow.CurrentProfile.Id;
@@ -644,7 +663,7 @@ namespace KrakenLauncher.Modules
                 }
 
                 await ActualizarEstadoHashAsync();
-                NotificationService.Instance.ShowSuccess("Ajustes de Pepita aplicados correctamente.");
+                NotificationService.Instance.ShowSuccess("Config oficial aplicada correctamente.");
             }
             catch (Exception ex)
             {
@@ -653,7 +672,7 @@ namespace KrakenLauncher.Modules
             finally
             {
                 btn.IsEnabled = true;
-                btn.Content   = "⬇ Aplicar Config Oficial";
+                btn.Content   = "Aplicar config oficial";
             }
         }
 
@@ -668,7 +687,7 @@ namespace KrakenLauncher.Modules
 
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content   = "☁ Publicando...";
+            btn.Content   = "Publicando...";
             try
             {
                 var index = await GetSyncer().ObtenerVersionsIndex();
@@ -682,12 +701,13 @@ namespace KrakenLauncher.Modules
                 int nextConfigV = currentConfigV + 1;
 
                 var confirm = MessageBox.Show(
-                    $"¿Publicar tu configuración actual como la OFICIAL v{nextConfigV}?\n\n" +
-                    "Esto subirá:\n" +
-                    "• Carpeta config/\n" +
-                    "• options.txt\n" +
-                    "• Shaderpacks y Resourcepacks\n\n" +
-                    "Los demás usuarios recibirán una notificación.",
+                    $"Publicar tu configuracion actual como OFICIAL v{nextConfigV}?\n\n" +
+                    "Esto subira:\n" +
+                    "config/\n" +
+                    "options.txt y optionsshaders.txt\n" +
+                    "shaderpacks/\n\n" +
+                    "Argumentos JVM oficiales sin RAM\n\n" +
+                    "Los usuarios recibiran una notificacion. La RAM de cada jugador no se fuerza.",
                     "Publicar Config Oficial",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -695,7 +715,8 @@ namespace KrakenLauncher.Modules
 
                 var syncer = GetSyncer();
                 int ramActual = _mainWindow.CurrentProfile?.RamGB ?? 4;
-                bool ok = await syncer.PublicarConfigsAdmin(msg => _mainWindow.AgregarLog(msg), ramActual);
+                string jvmArgs = _mainWindow.CurrentProfile?.JvmArgs ?? McGameLauncher.DefaultJvmArgs;
+                bool ok = await syncer.PublicarConfigsAdmin(msg => _mainWindow.AgregarLog(msg), ramActual, jvmArgs);
 
                 if (ok)
                 {
@@ -711,7 +732,7 @@ namespace KrakenLauncher.Modules
                     _mainWindow.GuardarSesion();
                     
                     await ActualizarEstadoHashAsync();
-                    NotificationService.Instance.ShowSuccess($"¡Configuración v{nextConfigV} publicada exitosamente!");
+                    NotificationService.Instance.ShowSuccess($"Config oficial v{nextConfigV} publicada.");
                 }
                 else
                 {
@@ -719,7 +740,7 @@ namespace KrakenLauncher.Modules
                 }
             }
             catch (Exception ex) { NotificationService.Instance.ShowError($"Error: {ex.Message}"); }
-            finally { btn.IsEnabled = true; btn.Content = "☁ Publicar Mis Configs como Pepita"; }
+            finally { btn.IsEnabled = true; btn.Content = "Publicar config oficial"; }
         }
 
         private async Task RunGhApiUpdateConfigVersion(string newVersion, string manifestUrl)
@@ -763,9 +784,9 @@ namespace KrakenLauncher.Modules
             try
             {
                 var confirm = MessageBox.Show(
-                    "¿Forzar la descarga y aplicación COMPLETA de las configs de Pepita?\n\n" +
-                    "ATENCIÓN: Esto SOBREESCRIBIRÁ tu options.txt y todas las configs de mods.\n" +
-                    "Usalo solo si querés sincronizar esta PC desde cero.",
+                    "Forzar la descarga y aplicacion completa de la config oficial?\n\n" +
+                    "Esto sobreescribe options.txt, config/ y shaderpacks/.\n" +
+                    "Usalo solo si queres sincronizar esta PC desde cero.",
                     "¿Sobreescribir todo?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -773,6 +794,7 @@ namespace KrakenLauncher.Modules
 
                 var resRemoto = await GetSyncer().ObtenerHashConfigsRemoto();
                 string? hashRemoto = resRemoto?.hash;
+                string? jvmArgs = resRemoto?.jvmArgs;
                 var syncer = GetSyncer();
                 syncer.OnLog += msg => _mainWindow.AgregarLog(msg);
                 await syncer.SincronizarConfigs(sobrescribirTodo: true);
@@ -781,6 +803,8 @@ namespace KrakenLauncher.Modules
                 if (hashRemoto != null)
                 {
                     _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
+                    if (_mainWindow.CurrentProfile != null && !string.IsNullOrWhiteSpace(jvmArgs))
+                        _mainWindow.CurrentProfile.JvmArgs = string.Join(' ', McGameLauncher.ParseJvmArgs(jvmArgs));
                     _mainWindow.GuardarSesion();
                 }
                 await ActualizarEstadoHashAsync();

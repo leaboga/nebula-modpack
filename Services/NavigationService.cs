@@ -42,7 +42,7 @@ namespace KrakenLauncher.Services
             switch (vista)
             {
                 case "home":
-                    UpdateHeaders("CENTRO DE OPERACIONES", "Bienvenido, Comandante");
+                    UpdateHeaders("INICIO", "Panel principal");
                     _homeView.Visibility = Visibility.Visible;
                     AnimateView(_homeView, main);
                     break;
@@ -53,7 +53,7 @@ namespace KrakenLauncher.Services
                 case "perf":
                 case "console":
                 case "crash":
-                    UpdateHeaders("SISTEMAS", "Nucleo de Control");
+                    UpdateHeaders("SISTEMA", "Configuracion y diagnostico");
                     SwitchToModule(GetOrCreateHub("systems", main, () => new List<HubView.HubTab>
                     {
                         new() { Label = "Motor", Icon = "CORE", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Setup de Pepa", ViewFactory = () => new ConfigView(main) },
@@ -68,7 +68,7 @@ namespace KrakenLauncher.Services
                 case "modmanager":
                 case "modpacks":
                 case "changelog":
-                    UpdateHeaders("RECURSOS", "Almacenamiento y Datos");
+                    UpdateHeaders("RECURSOS", "Mods y archivos locales");
                     SwitchToModule(GetOrCreateHub("resources", main, () => new List<HubView.HubTab>
                     {
                         new() { Label = "Biblioteca", Icon = "LIB", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Modulos Externos", ViewFactory = () => new VaultView(main.GameFolder, main.CurrentProfile) },
@@ -84,7 +84,7 @@ namespace KrakenLauncher.Services
                 case "hosting":
                 case "localhost":
                 case "screenshots":
-                    UpdateHeaders("RED ABISAL", "Comunicaciones y Flota");
+                    UpdateHeaders("SERVIDOR", "Red, mapa y servidor local");
                     SwitchToModule(GetOrCreateHub("network", main, () => new List<HubView.HubTab>
                     {
                         new() { Label = "Comunidad", Icon = "COM", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", ViewFactory = () => new SocialView(main.Session.ServerIp, main.Session.Username) },

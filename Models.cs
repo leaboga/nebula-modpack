@@ -29,7 +29,7 @@ namespace KrakenLauncher
         public bool   IsOverlayEnabled       { get; set; } = false;
         
         // Config sync tracking
-        public string LastAppliedConfigHash { get; set; } = "";    // Hash de las últimas configs aplicadas
+        public string LastAppliedConfigHash { get; set; } = "";    // Hash de las ultimas configs aplicadas
         public Dictionary<string, string> AppliedConfigVersions { get; set; } = new(); // PerfilId -> Version de Config
         public Dictionary<string, string> RejectedConfigVersions { get; set; } = new(); // PerfilId -> Version de Config rechazada
 
@@ -44,13 +44,13 @@ namespace KrakenLauncher
     {
         public string Id             { get; set; } = Guid.NewGuid().ToString("N");
         public string Name           { get; set; } = "Nueva Instancia";
-        public string Icon           { get; set; } = "🚀";
+        public string Icon           { get; set; } = "K";
         public string Version        { get; set; } = "1.20.1";
         public string LastVersion    { get; set; } = "";
         public string LoaderType     { get; set; } = "vanilla"; // vanilla, forge, fabric, neoforge
         public string LoaderVersion  { get; set; } = "";
         public string JavaPath       { get; set; } = "";
-        public string JvmArgs        { get; set; } = "-Xmx4G -XX:+UseG1GC";
+        public string JvmArgs        { get; set; } = McGameLauncher.DefaultJvmArgs;
         public int    RamGB          { get; set; } = 4;
         public string CreatedAt      { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
         public string LastPlayedAt   { get; set; } = "Nunca";

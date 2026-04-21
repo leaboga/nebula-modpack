@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="KRAKEN Launcher"
         Height="660" Width="1020"
+        MinHeight="540" MinWidth="780"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         FontFamily="{StaticResource BodyFont}"
@@ -12,7 +13,8 @@
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
         <DropShadowEffect x:Key="CardGlow"   Color="#18E0D2" Opacity="0.10" BlurRadius="18" ShadowDepth="0"/>
@@ -74,7 +76,7 @@
 
         <Grid x:Name="MainRoot">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="230"/>
+                <ColumnDefinition x:Name="SidebarColumn" Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -142,7 +144,7 @@
                                          </Grid>
                                      </Border>
                                      <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                         <TextBlock x:Name="SidebarUsername" Text="Piloto del Abismo" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                         <TextBlock x:Name="SidebarUsername" Text="Jugador" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                          <TextBlock x:Name="SidebarAuthType" Text="Cuenta Conectada" Foreground="#344A5B" FontSize="10"/>
                                      </StackPanel>
                                  </StackPanel>
@@ -151,9 +153,9 @@
                             <!-- NAVIGATION -->
                             <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
                             
-                            <RadioButton x:Name="NavHome" Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
+                            <RadioButton x:Name="NavHome" Content="Inicio" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
                             
-                            <RadioButton x:Name="NavSistemas" Content="Sistemas Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
+                            <RadioButton x:Name="NavSistemas" Content="Sistema" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
                                 <RadioButton.ToolTip>
                                     <ToolTip Content="Ajustes críticos, sincronización oficial, rendimiento y consola." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
                                 </RadioButton.ToolTip>
@@ -165,7 +167,7 @@
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
-                            <RadioButton Content="Red Abisal" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
+                            <RadioButton Content="Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
                                 <RadioButton.ToolTip>
                                     <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
                                 </RadioButton.ToolTip>
@@ -218,7 +220,7 @@
                     <RowDefinition Height="40"/> <!-- Titlebar -->
                     <RowDefinition Height="60"/> <!-- Context Header -->
                     <RowDefinition Height="*"/>  <!-- Content Area -->
-                    <RowDefinition Height="120"/> <!-- Bottom Action Bar -->
+                    <RowDefinition x:Name="ActionBarRow" Height="120"/> <!-- Bottom Action Bar -->
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
@@ -246,7 +248,7 @@
                                 </Border>
                             </StackPanel>
                         </StackPanel>
-                        <TextBlock x:Name="ViewTitleLabel" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
+                        <TextBlock x:Name="ViewTitleLabel" Text="Panel principal" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
                     </StackPanel>
                 </Grid>
 
@@ -258,7 +260,7 @@
                             <ScrollViewer x:Name="HomeView" VerticalScrollBarVisibility="Auto" Visibility="Visible">
                                 <StackPanel Margin="32,24">
                                     <TextBlock Text="Estado del ecosistema, perfiles y entrada al servidor." Foreground="{DynamicResource TextMutedBrush}" FontSize="12" Margin="0,0,0,4"/>
-                                    <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="34" FontWeight="Black" FontFamily="{StaticResource DisplayFont}" Margin="0,0,0,24"/>
+                                    <TextBlock x:Name="HomeGreetingLabel" Text="Listo para jugar" Foreground="White" FontSize="34" FontWeight="Black" FontFamily="{StaticResource DisplayFont}" Margin="0,0,0,24"/>
 
                                     <!-- PROFILE SELECTOR -->
                                     <Grid Margin="0,0,0,24">
@@ -290,8 +292,8 @@
                                                 <Border Background="#10B981" CornerRadius="4" Padding="8,2" HorizontalAlignment="Left" Margin="0,0,0,12" x:Name="LiveNewsBadge">
                                                     <TextBlock Text="ESTADO: ESTABLE" Foreground="White" FontSize="9" FontWeight="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Motores Abisales Listos" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
-                                                <TextBlock Text="El ecosistema KRAKEN está optimizado para la versión actual. Todos los sistemas de red funcionan dentro de los parámetros esperados." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextWrapping="Wrap" MaxWidth="500"/>
+                                                <TextBlock Text="Instancia lista" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
+                                                <TextBlock Text="Perfil, mods y configuraciones listos para iniciar. Revisa actualizaciones antes de jugar." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextWrapping="Wrap" MaxWidth="500"/>
                                             </StackPanel>
                                             <Border Grid.Column="1" Width="50" Height="50" CornerRadius="10" Background="#1A00F2FF" VerticalAlignment="Center">
                                                 <TextBlock Text="⚓" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -312,7 +314,7 @@
                                             </Border>
                                             <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
                                                 <TextBlock Text="Detección de Flota (Live Map)" Foreground="White" FontSize="15" FontWeight="Bold"/>
-                                                <TextBlock Text="Rastrea la posición de otras unidades en el Abismo." Foreground="#6D8A99" FontSize="11"/>
+                                                <TextBlock Text="Abre el mapa del servidor y revisa la actividad." Foreground="#6D8A99" FontSize="11"/>
                                             </StackPanel>
                                             <TextBlock Grid.Column="2" Text="➜" Foreground="#00F2FF" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         </Grid>
@@ -340,7 +342,7 @@
                                     </Grid>
 
                                     <StackPanel x:Name="OfflinePanel" Visibility="Visible">
-                                        <TextBlock Text="NOMBRE DE PILOTO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                                        <TextBlock Text="NOMBRE DE USUARIO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                                         <TextBox x:Name="NickTextBox" Style="{DynamicResource AppleTextBox}" Height="40" VerticalContentAlignment="Center" TextChanged="NickTextBox_TextChanged"/>
                                     </StackPanel>
 
@@ -405,7 +407,7 @@
                             </Grid.RowDefinitions>
                             
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                <TextBlock Text="TELEMETRÍA DE SISTEMAS" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
+                                <TextBlock Text="ESTADO DEL LAUNCHER" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
                                 <Ellipse Width="6" Height="6" Fill="#10B981" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
@@ -452,7 +454,7 @@
             <Border x:Name="TutorialCard" VerticalAlignment="Center" HorizontalAlignment="Center" Width="380" Background="#0D151D" CornerRadius="20" BorderBrush="#00F2FF" BorderThickness="1" Padding="28">
                 <Border.Effect><DropShadowEffect Color="#00F2FF" BlurRadius="40" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
                 <StackPanel>
-                    <TextBlock x:Name="TutorialTitle" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TutorialTitle" Text="Bienvenido a KRAKEN" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,0,0,12"/>
                     <TextBlock x:Name="TutorialContent" Text="Estamos listos para sincronizar tus sistemas. ¿Quieres un recorrido rápido por las nuevas funciones?" Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap" LineHeight="20" Margin="0,0,0,24"/>
                     
                     <Grid>
