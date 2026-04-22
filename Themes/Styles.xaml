@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!--  -->
     <!-- KRAKEN ABYSSAL DESIGN SYSTEM (v2.9.9) -->
-    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!--  -->
     <FontFamily x:Key="DisplayFont">Bahnschrift SemiCondensed, Segoe UI Variable Display, Segoe UI</FontFamily>
     <FontFamily x:Key="BodyFont">Segoe UI Variable Text, Bahnschrift, Segoe UI</FontFamily>
     <FontFamily x:Key="MonoFont">Cascadia Mono, Consolas</FontFamily>
@@ -40,7 +40,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
-    <!-- ════════════════════ ELEMENTS ════════════════════ -->
+    <!--  ELEMENTS  -->
 
     <!-- GLASS PANEL (Unified Container) -->
     <Style x:Key="GlassPanel" TargetType="Border">
@@ -166,15 +166,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="bg" Background="Transparent" CornerRadius="10" Padding="14,10" Margin="0,2">
+                    <Border x:Name="bg" Background="#0B1820" CornerRadius="10" Padding="14,10" Margin="0,2" BorderBrush="#18303A" BorderThickness="1">
                         <StackPanel Orientation="Horizontal">
                             <Border x:Name="Indicator" Width="3" Height="14" Background="{StaticResource AccentBrush}" CornerRadius="1.5" Margin="-14,0,8,0" Visibility="Hidden"/>
-                            <ContentPresenter x:Name="cp"/>
+                            <ContentPresenter x:Name="cp" TextElement.Foreground="{TemplateBinding Foreground}"/>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="bg" Property="Background" Value="#14323A"/>
+                            <Setter TargetName="bg" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -220,7 +221,7 @@
                                 BorderThickness="1" CornerRadius="12">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                         </Border>
-                        <TextBlock Text="🔍" Foreground="#344A5B" FontSize="14" VerticalAlignment="Center" Margin="14,0,0,0" IsHitTestVisible="False"/>
+                        <TextBlock Text="" Foreground="#344A5B" FontSize="14" VerticalAlignment="Center" Margin="14,0,0,0" IsHitTestVisible="False"/>
                         <TextBlock x:Name="Placeholder" Text="{TemplateBinding Tag}" Foreground="#344A5B" FontSize="13" VerticalAlignment="Center" Margin="38,0,0,0" IsHitTestVisible="False" Visibility="Collapsed"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -253,7 +254,7 @@
                                     <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                                         <Grid>
                                             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="32"/></Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="1" Text="▾" Foreground="#344A5B" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            <TextBlock Grid.Column="1" Text="" Foreground="#344A5B" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Grid>
                                     </Border>
                                 </ControlTemplate>
@@ -373,7 +374,7 @@
                 <ControlTemplate TargetType="CheckBox">
                     <StackPanel Orientation="Horizontal">
                         <Border x:Name="box" Width="14" Height="14" Background="#16212B" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="4">
-                            <TextBlock x:Name="mark" Text="✓" Foreground="{StaticResource AccentBrush}" FontSize="10" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                            <TextBlock x:Name="mark" Text="" Foreground="{StaticResource AccentBrush}" FontSize="10" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </Border>
                         <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>

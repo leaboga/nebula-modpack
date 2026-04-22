@@ -56,7 +56,7 @@ namespace KrakenLauncher.Services
                     UpdateHeaders("SISTEMA", "Configuracion y diagnostico");
                     SwitchToModule(GetOrCreateHub("systems", main, () => new List<HubView.HubTab>
                     {
-                        new() { Label = "Motor", Icon = "CORE", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Setup de Pepa", ViewFactory = () => new ConfigView(main) },
+                        new() { Label = "Motor", Icon = "CORE", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Setup de Kraken", ViewFactory = () => new ConfigView(main) },
                         new() { Label = "Rendimiento", Icon = "TPS", HeaderLabel = "OPTIMIZACION", HeaderTitle = "Rendimiento y RAM", ViewFactory = () => new PerformanceView(main) },
                         new() { Label = "Consola", Icon = "LOG", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", ViewFactory = () => new ConsoleView() },
                         new() { Label = "Diagnostico", Icon = "FIX", HeaderLabel = "DIAGNOSTICO", HeaderTitle = "Herramientas de Soporte", ViewFactory = () => new CrashDiagnosticView(main.GetCrashReporter()) }
@@ -89,7 +89,7 @@ namespace KrakenLauncher.Services
                     {
                         new() { Label = "Comunidad", Icon = "COM", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", ViewFactory = () => new SocialView(main.Session.ServerIp, main.Session.Username) },
                         new() { Label = "Mapa", Icon = "GPS", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", ViewFactory = () => new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
-                        new() { Label = "Hosting", Icon = "NET", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galactico", ViewFactory = () => new HostingServiceView() },
+                        new() { Label = "Hosting", Icon = "NET", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting ", ViewFactory = () => new HostingServiceView() },
                         new() { Label = "Local", Icon = "DEV", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", ViewFactory = () => new ServerHostView() },
                         new() { Label = "Capturas", Icon = "IMG", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", ViewFactory = () => new ScreenshotsView(main.GameFolder) }
                     }), main);

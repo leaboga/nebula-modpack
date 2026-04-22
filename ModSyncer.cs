@@ -20,7 +20,7 @@ namespace KrakenLauncher
     }
     public class ModManifest {
         public string Version { get; set; } = "";
-        public string ConfigVersion { get; set; } = "1"; // Versión de configuración oficial
+        public string ConfigVersion { get; set; } = "1"; // Versin de configuracin oficial
         public string MinecraftVersion { get; set; } = "";
         public string Modloader { get; set; } = "";
         public string ModloaderVersion { get; set; } = "";
@@ -93,7 +93,7 @@ namespace KrakenLauncher
                             fixedAny = true;
                         }
                     }
-                    if (fixedAny) OnLog?.Invoke("✨ Centinela: Se han corregido URLs de GitHub automáticamente.");
+                    if (fixedAny) OnLog?.Invoke(" Centinela: Se han corregido URLs de GitHub automticamente.");
                 }
                 return manifest;
             } catch (Exception ex) { OnLog?.Invoke("Error Manifest: " + ex.Message); return null; }
@@ -109,7 +109,7 @@ namespace KrakenLauncher
                     foreach (var file in Directory.GetFiles(_modsFolder, "*.jar")) {
                         string currentFile = Path.GetFileName(file);
                         if (!requiredMods.Exists(m => m.Filename == currentFile) || currentFile.Contains("mapped_moj")) {
-                            OnLog?.Invoke($"  🗑 Eliminando archivo conflictivo: {currentFile}");
+                            OnLog?.Invoke($"   Eliminando archivo conflictivo: {currentFile}");
                             File.Delete(file);
                         }
                     }
@@ -127,24 +127,24 @@ namespace KrakenLauncher
                             OnProgress?.Invoke((double)(i + 1) / total * 100);
                             continue; 
                         }
-                        OnLog?.Invoke($"  🔄 Actualizando mod: {mod.Filename} (MD5 mismatch)");
+                        OnLog?.Invoke($"   Actualizando mod: {mod.Filename} (MD5 mismatch)");
                         File.Delete(localPath);
                     }
 
-                    OnLog?.Invoke($"  ⬇ [{i+1}/{total}] {mod.Filename}");
+                    OnLog?.Invoke($"   [{i+1}/{total}] {mod.Filename}");
                     OnProgressLabel?.Invoke($"Descargando: {mod.Filename}");
                     
                     if (!await DescargarConStream(mod.Url, localPath)) {
-                        OnLog?.Invoke($"✗ Error crítico descargando {mod.Filename}.");
+                        OnLog?.Invoke($" Error crtico descargando {mod.Filename}.");
                         return false;
                     }
                     OnProgress?.Invoke((double)(i + 1) / total * 100);
                 }
                 
-                // --- ARREGLO DE CÁMARA ---
+                // --- ARREGLO DE CMARA ---
                 CorregirConfigsDeCamara();
                 
-                OnLog?.Invoke("✓ Pack de mods actualizado correctamente.");
+                OnLog?.Invoke(" Pack de mods actualizado correctamente.");
                 return true;
             } catch (Exception ex) { OnLog?.Invoke("Error Sincro: " + ex.Message); return false; }
         }
@@ -155,7 +155,7 @@ namespace KrakenLauncher
                 string configDir = Path.Combine(_gameFolder, "config");
                 if (!Directory.Exists(configDir)) return;
 
-                // Lista de archivos de configuración de mods de cámara comunes que dan problemas
+                // Lista de archivos de configuracin de mods de cmara comunes que dan problemas
                 string[] cameraConfigs = { 
                     "firstperson.json", 
                     "realcamera.toml", 
@@ -169,7 +169,7 @@ namespace KrakenLauncher
                     string path = Path.Combine(configDir, config);
                     if (File.Exists(path))
                     {
-                        OnLog?.Invoke($"🔧 Reseteando cámara conflictiva: {config}");
+                        OnLog?.Invoke($" Reseteando cmara conflictiva: {config}");
                         File.Delete(path); // Forzamos a que el mod cree una config limpia al iniciar
                     }
                 }
@@ -180,9 +180,9 @@ namespace KrakenLauncher
         private const string ConfigHashUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/config-hash.json";
 
         /// <summary>
-        /// Devuelve la info remota de las configs de Pepita (hash y RAM recomendada), o null si no se puede obtener.
+        /// Devuelve la info remota de las configs de admin (hash y RAM recomendada), o null si no se puede obtener.
         /// </summary>
-        public async Task<(string? hash, int? ram, string? jvmArgs)?> ObtenerHashConfigsRemoto()
+        public async Task<(string? hash, int? ram, string? jvmArgs, string? configVersion)?> ObtenerHashConfigsRemoto()
         {
             try
             {
@@ -191,15 +191,16 @@ namespace KrakenLauncher
                 string? hash = (string?)obj?.hash;
                 int? ram = (int?)obj?.recommendedRam;
                 string? jvmArgs = (string?)obj?.jvmArgs;
-                return (hash, ram, jvmArgs);
+                string? configVersion = (string?)obj?.configVersion;
+                return (hash, ram, jvmArgs, configVersion);
             }
             catch { return null; }
         }
 
         /// <summary>
-        /// Aplica las configs de Pepita desde GitHub. Respeta archivos que el usuario no debería perder
-        /// (options.txt, options.of.txt) extrayéndolos pero SIN pisar si ya existen.
-        /// Llame a este método solo con consentimiento explícito del usuario.
+        /// Aplica las configs de admin desde GitHub. Respeta archivos que el usuario no debera perder
+        /// (options.txt, options.of.txt) extrayndolos pero SIN pisar si ya existen.
+        /// Llame a este mtodo solo con consentimiento explcito del usuario.
         /// </summary>
         public async Task SincronizarConfigs(string? version = null, bool sobrescribirTodo = false)
         {
@@ -207,14 +208,14 @@ namespace KrakenLauncher
             {
                 string url = AssetsUrl;
                 if (!string.IsNullOrEmpty(version)) {
-                    // Si la versión no contiene guiones o puntos raros, asumimos el formato estándar v[version]-assets
+                    // Si la versin no contiene guiones o puntos raros, asumimos el formato estndar v[version]-assets
                     url = $"https://github.com/leaboga/nebula-modpack/releases/download/v{version}-assets/client-assets.zip";
                 }
 
                 string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (!await DescargarConStream(url, tempZip)) {
                     if (!string.IsNullOrEmpty(version)) {
-                        OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
+                        OnLog?.Invoke($"   No se encontr asset especfico para v{version}. Reintentando con base...");
                         if (!await DescargarConStream(AssetsUrl, tempZip)) return;
                     } else return;
                 }
@@ -238,10 +239,10 @@ namespace KrakenLauncher
                         string destPath = Path.Combine(_gameFolder, entry.FullName.Replace('/', Path.DirectorySeparatorChar));
                         string fileName = Path.GetFileName(destPath);
 
-                        // Proteger archivos personales si no se forzó sobrescritura
+                        // Proteger archivos personales si no se forz sobrescritura
                         if (!sobrescribirTodo && File.Exists(destPath) && protegidos.Contains(fileName))
                         {
-                            OnLog?.Invoke($"  🛡 Protegido (no sobreescrito): {fileName}");
+                            OnLog?.Invoke($"   Protegido (no sobreescrito): {fileName}");
                             continue;
                         }
 
@@ -251,14 +252,14 @@ namespace KrakenLauncher
                 }
 
                 File.Delete(tempZip);
-                OnLog?.Invoke("✓ Ajustes visuales de Pepita aplicados.");
+                OnLog?.Invoke(" Ajustes visuales de admin aplicados.");
             }
-            catch (Exception ex) { OnLog?.Invoke("⚠ Error sincronizando configs: " + ex.Message); }
+            catch (Exception ex) { OnLog?.Invoke(" Error sincronizando configs: " + ex.Message); }
         }
 
         /// <summary>
-        /// [ADMIN - solo Pepita] Empaqueta la carpeta config/ local y la sube a GitHub Releases
-        /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
+        /// [ADMIN - solo admin] Empaqueta la carpeta config/ local y la sube a GitHub Releases
+        /// como el asset "client-assets.zip". Tambin actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
         public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string? jvmArgs = null)
@@ -267,13 +268,13 @@ namespace KrakenLauncher
             {
                 string configDir = Path.Combine(_gameFolder, "config");
                 if (!Directory.Exists(configDir))
-                { log("❌ No existe la carpeta config/"); return false; }
+                { log(" No existe la carpeta config/"); return false; }
 
                 // 1. Crear ZIP temporal con todo el contenido del gameFolder relevante
                 string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (File.Exists(tempZip)) File.Delete(tempZip);
 
-                log("📦 Empaquetando configs...");
+                log(" Empaquetando configs...");
 
                 // Incluimos config/, options.txt, optionsshaders.txt y shaderpacks/.
                 using (var archive = System.IO.Compression.ZipFile.Open(tempZip, System.IO.Compression.ZipArchiveMode.Create))
@@ -308,10 +309,12 @@ namespace KrakenLauncher
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
                 string hash = CalcularMD5(tempZip);
-                log($"🔑 Hash de configs: {hash}");
+                string configVersion = await ObtenerSiguienteConfigVersion();
+                log($"Hash de configs: {hash}");
+                log($"Version de config: {configVersion}");
 
-                // 3. Subir ZIP a GitHub Release (tag: client-assets-1.0 → overwrite asset)
-                log("☁ Subiendo ZIP a GitHub...");
+                // 3. Subir ZIP a GitHub Release (tag: client-assets-1.0  overwrite asset)
+                log(" Subiendo ZIP a GitHub...");
                 var psi = new System.Diagnostics.ProcessStartInfo("gh",
                     $"release upload client-assets-1.0 \"{tempZip}\" --repo leaboga/nebula-modpack --clobber")
                 {
@@ -321,11 +324,11 @@ namespace KrakenLauncher
                     CreateNoWindow         = true
                 };
                 var proc = System.Diagnostics.Process.Start(psi);
-                if (proc == null) { log("❌ No se pudo iniciar gh."); return false; }
+                if (proc == null) { log(" No se pudo iniciar gh."); return false; }
                 await proc.WaitForExitAsync();
                 if (proc.ExitCode != 0)
                 {
-                    log("❌ Error subiendo asset: " + await proc.StandardError.ReadToEndAsync());
+                    log(" Error subiendo asset: " + await proc.StandardError.ReadToEndAsync());
                     return false;
                 }
 
@@ -333,6 +336,7 @@ namespace KrakenLauncher
                 //    Usamos un archivo temporal y lo subimos via gh api
                 var infoObj = new { 
                     hash = hash, 
+                    configVersion = configVersion,
                     recommendedRam = recommendedRam,
                     jvmArgs = SanitizeJvmArgs(jvmArgs),
                     updated = DateTime.UtcNow.ToString("o") 
@@ -374,10 +378,30 @@ namespace KrakenLauncher
                 if (proc2 != null) await proc2.WaitForExitAsync();
 
                 File.Delete(tempZip);
-                log($"✅ Configs de Pepita publicadas (hash: {hash[..8]}...)");
+                log($"Configs oficiales v{configVersion} publicadas (hash: {hash[..8]}...)");
                 return true;
             }
-            catch (Exception ex) { log("❌ Error publicando configs: " + ex.Message); return false; }
+            catch (Exception ex) { log(" Error publicando configs: " + ex.Message); return false; }
+        }
+
+        private async Task<string> ObtenerSiguienteConfigVersion()
+        {
+            try
+            {
+                string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
+                var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
+                string? current = (string?)obj?.configVersion;
+                if (string.IsNullOrWhiteSpace(current)) current = "1.0";
+
+                var parts = current.Split('.', StringSplitOptions.RemoveEmptyEntries);
+                int major = parts.Length > 0 && int.TryParse(parts[0], out var parsedMajor) ? parsedMajor : 1;
+                int minor = parts.Length > 1 && int.TryParse(parts[1], out var parsedMinor) ? parsedMinor : 0;
+                return $"{major}.{minor + 1}";
+            }
+            catch
+            {
+                return "1.0";
+            }
         }
 
 

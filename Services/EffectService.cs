@@ -27,36 +27,17 @@ namespace KrakenLauncher.Services
 
         public void StartParticles()
         {
+            // Keep the shell light over long sessions; animated particles were a steady render cost.
+            StopParticles();
+            return;
+        }
+
+        public void StopParticles()
+        {
+            CompositionTarget.Rendering -= OnRendering;
             if (_particleCanvas == null) return;
             _particleCanvas.Children.Clear();
             _particles.Clear();
-
-            for (int i = 0; i < 18; i++)
-            {
-                double size = _rnd.NextDouble() * 2 + 1;
-                double opacity = _rnd.NextDouble() * 0.22 + 0.05;
-                var dot = new Ellipse
-                {
-                    Width = size,
-                    Height = size,
-                    Fill = new SolidColorBrush(Color.FromArgb(
-                        (byte)(opacity * 255),
-                        (byte)_rnd.Next(100, 200),
-                        (byte)_rnd.Next(50, 150),
-                        (byte)_rnd.Next(200, 255)))
-                };
-                
-                Canvas.SetLeft(dot, _rnd.NextDouble() * 1020);
-                Canvas.SetTop(dot, _rnd.NextDouble() * 660);
-                _particleCanvas.Children.Add(dot);
-
-                double speed = _rnd.NextDouble() * 0.3 + 0.05;
-                double angle = _rnd.NextDouble() * Math.PI * 2;
-                _particles.Add((dot, Math.Cos(angle) * speed, Math.Sin(angle) * speed));
-            }
-
-            CompositionTarget.Rendering -= OnRendering;
-            CompositionTarget.Rendering += OnRendering;
         }
 
         private void OnRendering(object? sender, EventArgs e)

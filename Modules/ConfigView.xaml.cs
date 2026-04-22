@@ -34,7 +34,7 @@ namespace KrakenLauncher.Modules
             MapIdBox.Text = _mainWindow.Session.BlueMapId;
             WebhookBox.Text = _mainWindow.Session.CrashWebhookUrl;
             BgPathBox.Text = _mainWindow.Session.BackgroundImagePath;
-            
+
             if (_mainWindow.CurrentProfile != null)
             {
                 RamSlider.Value = _mainWindow.CurrentProfile.RamGB;
@@ -43,9 +43,9 @@ namespace KrakenLauncher.Modules
                     ? McGameLauncher.DefaultJvmArgs
                     : _mainWindow.CurrentProfile.JvmArgs;
             }
-            
+
             CargarJavas();
-            
+
             InstanceNameBox.Text = _mainWindow.CurrentProfile?.Name ?? "default";
             _initializing    = false;
             UpdatePreview(_mainWindow.Session.BackgroundImagePath);
@@ -55,7 +55,7 @@ namespace KrakenLauncher.Modules
 
             LoadPresets();
 
-            // Inicialización del panel de configs de Pepita (async, no bloqueante)
+            // Inicializacin del panel de configs de admin (async, no bloqueante)
             _ = Dispatcher.InvokeAsync(InicializarPanelPepita, System.Windows.Threading.DispatcherPriority.Background);
         }
 
@@ -88,15 +88,15 @@ namespace KrakenLauncher.Modules
 
             try
             {
-                _mainWindow.AgregarLog($"💾 Guardando preset: {name}...");
+                _mainWindow.AgregarLog($" Guardando preset: {name}...");
                 await _presetService.SavePresetAsync(_mainWindow.GameFolder, name, _mainWindow.CurrentProfile.Version);
-                _mainWindow.AgregarLog("✅ Preset guardado exitosamente.");
+                _mainWindow.AgregarLog(" Preset guardado exitosamente.");
                 NewPresetNameBox.Text = "";
                 LoadPresets();
             }
             catch (Exception ex)
             {
-                _mainWindow.AgregarLog($"⚠ Error al guardar preset: {ex.Message}");
+                _mainWindow.AgregarLog($" Error al guardar preset: {ex.Message}");
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
@@ -109,27 +109,27 @@ namespace KrakenLauncher.Modules
 
             if (_mainWindow.CurrentProfile == null) return;
 
-            var res = MessageBox.Show($"¿Deseas aplicar el preset '{presetName}' al perfil actual?\nSe realizará un backup automático de la configuración actual.", 
+            var res = MessageBox.Show($"Deseas aplicar el preset '{presetName}' al perfil actual?\nSe realizar un backup automtico de la configuracin actual.",
                 "Aplicar Preset", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            
+
             if (res != MessageBoxResult.Yes) return;
 
             try
             {
-                _mainWindow.AgregarLog($"🔄 Aplicando preset '{presetName}'...");
+                _mainWindow.AgregarLog($" Aplicando preset '{presetName}'...");
                 bool controls = PresetControlsCheck.IsChecked ?? false;
                 bool graphics = PresetGraphicsCheck.IsChecked ?? false;
                 bool mods = PresetModsCheck.IsChecked ?? false;
                 bool others = PresetOthersCheck.IsChecked ?? false;
 
                 await _presetService.ApplyPresetAsync(_mainWindow.GameFolder, presetName, controls, graphics, mods, others);
-                
-                _mainWindow.AgregarLog("✅ Preset aplicado. Los cambios se verán al iniciar el juego.");
-                MessageBox.Show("Preset aplicado exitosamente.\nSe guardó un backup en la carpeta 'backups' de la instancia.", "KRAKEN");
+
+                _mainWindow.AgregarLog(" Preset aplicado. Los cambios se vern al iniciar el juego.");
+                MessageBox.Show("Preset aplicado exitosamente.\nSe guard un backup en la carpeta 'backups' de la instancia.", "KRAKEN");
             }
             catch (Exception ex)
             {
-                _mainWindow.AgregarLog($"⚠ Error al aplicar preset: {ex.Message}");
+                _mainWindow.AgregarLog($" Error al aplicar preset: {ex.Message}");
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
@@ -140,14 +140,14 @@ namespace KrakenLauncher.Modules
             string presetName = btn?.Tag?.ToString() ?? "";
             if (string.IsNullOrEmpty(presetName)) return;
 
-            var res = MessageBox.Show($"¿Estás seguro de eliminar el preset '{presetName}'?\nEsta acción no se puede deshacer.", 
+            var res = MessageBox.Show($"Ests seguro de eliminar el preset '{presetName}'?\nEsta accin no se puede deshacer.",
                 "Eliminar Preset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            
+
             if (res == MessageBoxResult.Yes)
             {
                 _presetService.DeletePreset(presetName);
                 LoadPresets();
-                _mainWindow.AgregarLog($"🗑️ Preset '{presetName}' eliminado.");
+                _mainWindow.AgregarLog($" Preset '{presetName}' eliminado.");
             }
         }
 
@@ -171,7 +171,7 @@ namespace KrakenLauncher.Modules
                 BgPreviewImage.Source = bitmap;
                 PreviewPlaceholderText.Visibility = Visibility.Collapsed;
             }
-            catch 
+            catch
             {
                 BgPreviewImage.Source = null;
                 PreviewPlaceholderText.Visibility = Visibility.Visible;
@@ -217,8 +217,8 @@ namespace KrakenLauncher.Modules
                 _mainWindow.Session.AccentColor = hex;
                 _mainWindow.GuardarSesion();
                 _mainWindow.ActualizarColorTema();
-                
-                // Actualizar bordes de selección (UI simple feedback)
+
+                // Actualizar bordes de seleccin (UI simple feedback)
                 ThemeNebula.BorderThickness  = new Thickness(hex == "#00F2FF" ? 2 : 1);
                 ThemeCrimson.BorderThickness = new Thickness(hex == "#EF4444" ? 2 : 1);
                 ThemeEmerald.BorderThickness = new Thickness(hex == "#10B981" ? 2 : 1);
@@ -252,10 +252,10 @@ namespace KrakenLauncher.Modules
                 // Obtener RAM total del sistema en GB
                 var gc       = GC.GetGCMemoryInfo();
                 double total = (double)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / (1024 * 1024 * 1024);
-                
-                // Sugerir el 50% de la RAM total, máximo 12GB para MC
+
+                // Sugerir el 50% de la RAM total, mximo 12GB para MC
                 int suggested = (int)Math.Min(12, Math.Max(2, total / 2));
-                
+
                 if (_mainWindow.CurrentProfile != null)
                 {
                     _mainWindow.CurrentProfile.RamGB = suggested;
@@ -263,7 +263,7 @@ namespace KrakenLauncher.Modules
                 }
                 NotificationService.Instance.ShowInfo($"RAM recomendada: {suggested}GB ({Math.Round(total,1)}GB detectados).");
             }
-            catch { NotificationService.Instance.ShowError("No se pudo detectar la memoria automáticamente."); }
+            catch { NotificationService.Instance.ShowError("No se pudo detectar la memoria automticamente."); }
         }
 
         private void BtnOpenShaders_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("shaderpacks");
@@ -325,32 +325,32 @@ namespace KrakenLauncher.Modules
         {
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content = "⏳ Descargando...";
+            btn.Content = " Descargando...";
             try
             {
                 string shaderDir = Path.Combine(_mainWindow.GameFolder, "shaderpacks");
                 Directory.CreateDirectory(shaderDir);
                 string zipPath = Path.Combine(shaderDir, "Nebula-Shaders.zip");
-                
+
                 using (var client = new System.Net.Http.HttpClient())
                 {
                     var data = await client.GetByteArrayAsync("https://github.com/leaboga/nebula-modpack/releases/download/assets/shaders.zip");
                     await File.WriteAllBytesAsync(zipPath, data);
                 }
-                
+
                 System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, shaderDir, true);
                 File.Delete(zipPath);
-                
+
                 NotificationService.Instance.ShowSuccess("'Nebula Shaders' instalados correctamente.");
             }
             catch (Exception ex) { NotificationService.Instance.ShowError($"Error al descargar shaders: {ex.Message}"); }
-            finally { btn.IsEnabled = true; btn.Content = "📦 Descargar Shaders"; }
+            finally { btn.IsEnabled = true; btn.Content = " Descargar Shaders"; }
         }
 
         private void OpenGameSubfolder(string sub)
         {
-            try 
-            { 
+            try
+            {
                 string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "minecraft", sub);
                 Directory.CreateDirectory(appFolder);
                 Process.Start("explorer.exe", appFolder);
@@ -396,7 +396,7 @@ namespace KrakenLauncher.Modules
             try
             {
                 await _configManager.ApplyPerformancePreset("Papa");
-                NotificationService.Instance.ShowSuccess("Modo Papa aplicado. Gráficos optimizados.");
+                NotificationService.Instance.ShowSuccess("Modo Papa aplicado. Grficos optimizados.");
             }
             catch (Exception ex)
             {
@@ -412,7 +412,7 @@ namespace KrakenLauncher.Modules
             try
             {
                 await _configManager.ApplyPerformancePreset("Ultra");
-                MessageBox.Show("✅ Modo Ultra aplicado.\nGráficos en calidad máxima con shaders.",
+                MessageBox.Show(" Modo Ultra aplicado.\nGrficos en calidad mxima con shaders.",
                                 "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -429,17 +429,17 @@ namespace KrakenLauncher.Modules
 
         private void BtnChangeInstance_Click(object sender, RoutedEventArgs e)
         {
-            // La lógica de instancias ahora se maneja por perfiles en el Home
+            // La lgica de instancias ahora se maneja por perfiles en el Home
             MessageBox.Show("Las instancias ahora se gestionan desde la pantalla de Inicio mediante Perfiles.", "Informaci\u00F3n", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnDeleteInstance_Click(object sender, RoutedEventArgs e)
         {
             if (_mainWindow.CurrentProfile == null) return;
-            
-            var result = MessageBox.Show($"\u00BFEst\u00E1s seguro de eliminar el perfil '{_mainWindow.CurrentProfile.Name}'?\nEsta acci\u00F3n no se puede deshacer.", 
+
+            var result = MessageBox.Show($"\u00BFEst\u00E1s seguro de eliminar el perfil '{_mainWindow.CurrentProfile.Name}'?\nEsta acci\u00F3n no se puede deshacer.",
                                          "Eliminar Perfil", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            
+
             if (result == MessageBoxResult.Yes)
             {
                 _mainWindow.DeleteCurrentProfile();
@@ -450,7 +450,7 @@ namespace KrakenLauncher.Modules
         {
             try
             {
-                string crashDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+                string crashDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                                 "KrakenLauncher", "minecraft", "crash-reports");
                 Directory.CreateDirectory(crashDir);
                 Process.Start("explorer.exe", crashDir);
@@ -462,7 +462,7 @@ namespace KrakenLauncher.Modules
         {
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content = "⌛ Instalando Entornos Java...";
+            btn.Content = " Instalando Entornos Java...";
             try
             {
                 // Logic to simulate or download Javas (using a helper or service)
@@ -470,7 +470,7 @@ namespace KrakenLauncher.Modules
                 MessageBox.Show("Entornos de Java (8, 17, 21) listos. El launcher los usara automaticamente segun la version de Minecraft.", "Java listo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { MessageBox.Show("Error al preparar Java: " + ex.Message); }
-            finally { btn.IsEnabled = true; btn.Content = "📥 Descargar Javas (8, 17, 21)"; }
+            finally { btn.IsEnabled = true; btn.Content = " Descargar Javas (8, 17, 21)"; }
         }
 
         private void BtnCleanLogs_Click(object sender, RoutedEventArgs e)
@@ -494,7 +494,7 @@ namespace KrakenLauncher.Modules
             if (string.IsNullOrEmpty(CloudPathBox.Text))
             {
                 var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "Seleccionar carpeta de Nube (Dropbox/OneDrive/etc)" };
-                if (dlg.ShowDialog() == true) 
+                if (dlg.ShowDialog() == true)
                 {
                     CloudPathBox.Text = dlg.FolderName;
                     await CloudService.Instance.SyncToCloud(_mainWindow.Session, dlg.FolderName);
@@ -504,7 +504,7 @@ namespace KrakenLauncher.Modules
             {
                 try {
                     await CloudService.Instance.SyncToCloud(_mainWindow.Session, CloudPathBox.Text);
-                    NotificationService.Instance.ShowSuccess("Respaldo instantáneo completado en la nube.");
+                    NotificationService.Instance.ShowSuccess("Respaldo instantneo completado en la nube.");
                 } catch (Exception ex) {
                     NotificationService.Instance.ShowError(ex.Message);
                 }
@@ -532,9 +532,9 @@ namespace KrakenLauncher.Modules
             _mainWindow.GuardarSesion();
         }
 
-        // ═══════════════════════════════════════════════════════════
+        //
         //  CONFIGS DE PEPITA
-        // ═══════════════════════════════════════════════════════════
+        //
 
         private ModSyncer? _syncerLocal;
 
@@ -543,15 +543,16 @@ namespace KrakenLauncher.Modules
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                              "KrakenLauncher", "minecraft"));
 
-        /// <summary>Muestra u oculta el panel admin según si el usuario es Pepita.</summary>
+        /// <summary>Muestra u oculta el panel admin segn si el usuario es admin.</summary>
         private async void InicializarPanelPepita()
         {
             bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-            bool esPepita = (_mainWindow.Session.IsAdmin && esAdminPc)
-                         || (_mainWindow.Session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
+            bool esadmin = (_mainWindow.Session.IsAdmin && esAdminPc)
+                         || (_mainWindow.Session.Username.Equals("admin",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
+                         || (_mainWindow.Session.Username.Equals("Pepita", StringComparison.OrdinalIgnoreCase) && esAdminPc)
                          || (_mainWindow.Session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
 
-            PepitaAdminPanel.Visibility = esPepita ? Visibility.Visible : Visibility.Collapsed;
+            PepitaAdminPanel.Visibility = esadmin ? Visibility.Visible : Visibility.Collapsed;
 
             // Verificar estado del hash en background
             await ActualizarEstadoHashAsync();
@@ -565,6 +566,7 @@ namespace KrakenLauncher.Modules
                 string? hashRemoto = remoteInfo?.hash;
                 int? ramOficial = remoteInfo?.ram;
                 bool incluyeJvm = !string.IsNullOrWhiteSpace(remoteInfo?.jvmArgs);
+                string configVersion = string.IsNullOrWhiteSpace(remoteInfo?.configVersion) ? "1.0" : remoteInfo!.Value.configVersion!;
 
                 if (string.IsNullOrEmpty(hashRemoto))
                 {
@@ -574,7 +576,7 @@ namespace KrakenLauncher.Modules
 
                 string profileId = _mainWindow.CurrentProfile?.Id ?? "default";
                 bool alDia = hashRemoto == _mainWindow.Session.LastAppliedConfigHash;
-                
+
                 string versionRechazada = _mainWindow.Session.RejectedConfigVersions.ContainsKey(profileId)
                     ? _mainWindow.Session.RejectedConfigVersions[profileId] : "0";
 
@@ -594,7 +596,7 @@ namespace KrakenLauncher.Modules
                     PepitaConfigStatusText.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00, 0xF2, 0xFF));
                 }
 
-                PepitaConfigHashText.Text = $"Hash remoto: {(hashRemoto.Length > 8 ? hashRemoto[..8] : hashRemoto)} | RAM recomendada: {ramOficial ?? 4}GB | JVM: {(incluyeJvm ? "incluido" : "default")}";
+                PepitaConfigHashText.Text = $"Config v{configVersion} | Hash: {(hashRemoto.Length > 8 ? hashRemoto[..8] : hashRemoto)} | RAM sugerida: {ramOficial ?? 4}GB | JVM: {(incluyeJvm ? "incluido" : "default")}";
             }
             catch (Exception ex)
             {
@@ -619,7 +621,7 @@ namespace KrakenLauncher.Modules
             {
                 var remoteInfo = await GetSyncer().ObtenerHashConfigsRemoto();
                 if (remoteInfo == null) return;
-                
+
                 string hashRemoto = remoteInfo.Value.hash!;
                 int ramRec = remoteInfo.Value.ram ?? (_mainWindow.CurrentProfile?.RamGB ?? 4);
                 string? jvmArgs = remoteInfo.Value.jvmArgs;
@@ -656,7 +658,7 @@ namespace KrakenLauncher.Modules
                         _mainWindow.CurrentProfile.JvmArgs = string.Join(' ', McGameLauncher.ParseJvmArgs(jvmArgs));
 
                     _mainWindow.Session.LastAppliedConfigHash = hashRemoto;
-                    
+
                     string profileId = _mainWindow.CurrentProfile.Id;
                     _mainWindow.Session.RejectedConfigVersions.Remove(profileId);
                     _mainWindow.GuardarSesion();
@@ -679,7 +681,7 @@ namespace KrakenLauncher.Modules
         private async void BtnPublicarConfigsAdmin_Click(object sender, RoutedEventArgs e)
         {
             var login = new AdminLoginWindow { Owner = _mainWindow };
-            if (login.ShowDialog() != true || login.Clave != "pepita2026") 
+            if (login.ShowDialog() != true || login.Clave != "pepita2026")
             {
                 if (!string.IsNullOrEmpty(login.Clave)) MessageBox.Show("Clave incorrecta.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -690,15 +692,9 @@ namespace KrakenLauncher.Modules
             btn.Content   = "Publicando...";
             try
             {
-                var index = await GetSyncer().ObtenerVersionsIndex();
-                string? manifestUrl = index?.AvailableVersions.Find(v => v.Version == index.LatestVersion)?.ManifestUrl;
-                if (string.IsNullOrEmpty(manifestUrl)) return;
-                
-                var manifest = await GetSyncer().ObtenerManifest(manifestUrl);
-                if (manifest == null) return;
-
-                int currentConfigV = int.Parse(manifest.ConfigVersion ?? "0");
-                int nextConfigV = currentConfigV + 1;
+                var remoteConfig = await GetSyncer().ObtenerHashConfigsRemoto();
+                string currentConfigV = string.IsNullOrWhiteSpace(remoteConfig?.configVersion) ? "1.0" : remoteConfig!.Value.configVersion!;
+                string nextConfigV = GetNextConfigVersion(currentConfigV);
 
                 var confirm = MessageBox.Show(
                     $"Publicar tu configuracion actual como OFICIAL v{nextConfigV}?\n\n" +
@@ -720,17 +716,11 @@ namespace KrakenLauncher.Modules
 
                 if (ok)
                 {
-                    // Actualizar el manifiesto remoto con la nueva versión de config
-                    // NOTA: La lógica de actualización del manifiesto debe estar en ModSyncer.PublicarConfigsAdmin
-                    // o llamar a un nuevo método que incremente la versión de config en el JSON.
-                    
-                    // Simulamos que el syncer ya lo hizo o lo forzamos vía gh api aquí
-                    await RunGhApiUpdateConfigVersion(nextConfigV.ToString(), manifestUrl);
 
                     string profileId = _mainWindow.CurrentProfile?.Id ?? "default";
-                    _mainWindow.Session.AppliedConfigVersions[profileId] = nextConfigV.ToString();
+                    _mainWindow.Session.AppliedConfigVersions[profileId] = nextConfigV;
                     _mainWindow.GuardarSesion();
-                    
+
                     await ActualizarEstadoHashAsync();
                     NotificationService.Instance.ShowSuccess($"Config oficial v{nextConfigV} publicada.");
                 }
@@ -743,38 +733,13 @@ namespace KrakenLauncher.Modules
             finally { btn.IsEnabled = true; btn.Content = "Publicar config oficial"; }
         }
 
-        private async Task RunGhApiUpdateConfigVersion(string newVersion, string manifestUrl)
+
+        private static string GetNextConfigVersion(string current)
         {
-            try
-            {
-                // Extraer ruta relativa del manifestUrl (ej: versions/1.2.3/manifest.json)
-                string relPath = manifestUrl.Split("/main/")[1];
-                
-                // 1. Obtener SHA del manifiesto actual
-                string sha = "";
-                var psiSha = new ProcessStartInfo("gh", $"api repos/leaboga/nebula-modpack/contents/{relPath} --jq .sha")
-                { RedirectStandardOutput = true, UseShellExecute = false, CreateNoWindow = true };
-                var procSha = Process.Start(psiSha);
-                if (procSha != null) { sha = (await procSha.StandardOutput.ReadToEndAsync()).Trim(); await procSha.WaitForExitAsync(); }
-
-                // 2. Leer manifiesto actual, cambiar ConfigVersion y subir
-                var syncer = GetSyncer();
-                var manifest = await syncer.ObtenerManifest(manifestUrl);
-                if (manifest != null)
-                {
-                    manifest.ConfigVersion = newVersion;
-                    string json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
-                    string base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
-
-                    var psiPut = new ProcessStartInfo("gh", 
-                        $"api repos/leaboga/nebula-modpack/contents/{relPath} -X PUT " +
-                        $"-f message=\"chore: update config version to v{newVersion}\" " +
-                        $"-f content=\"{base64}\" -f sha=\"{sha}\"")
-                    { UseShellExecute = false, CreateNoWindow = true };
-                    Process.Start(psiPut)?.WaitForExit();
-                }
-            }
-            catch (Exception ex) { _mainWindow.AgregarLog("⚠ Error actualizando versión en manifest: " + ex.Message); }
+            var parts = current.Split('.', StringSplitOptions.RemoveEmptyEntries);
+            int major = parts.Length > 0 && int.TryParse(parts[0], out var parsedMajor) ? parsedMajor : 1;
+            int minor = parts.Length > 1 && int.TryParse(parts[1], out var parsedMinor) ? parsedMinor : 0;
+            return $"{major}.{minor + 1}";
         }
 
         private async void BtnForzarConfigsPropias_Click(object sender, RoutedEventArgs e)
@@ -787,7 +752,7 @@ namespace KrakenLauncher.Modules
                     "Forzar la descarga y aplicacion completa de la config oficial?\n\n" +
                     "Esto sobreescribe options.txt, config/ y shaderpacks/.\n" +
                     "Usalo solo si queres sincronizar esta PC desde cero.",
-                    "¿Sobreescribir todo?",
+                    "Sobreescribir todo?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (confirm != MessageBoxResult.Yes) return;
