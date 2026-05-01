@@ -8,10 +8,10 @@
     <Color x:Key="AccentHoverColor">#70F9FF</Color>
     <Color x:Key="AccentPressColor">#00B8C2</Color>
     
-    <Color x:Key="SurfaceColor">#05080D</Color>
-    <Color x:Key="Surface2Color">#0D151D</Color>
-    <Color x:Key="Surface3Color">#16212B</Color>
-    <Color x:Key="BorderColor">#1E2C38</Color>
+    <Color x:Key="SurfaceColor">#060A0F</Color>
+    <Color x:Key="Surface2Color">#101821</Color>
+    <Color x:Key="Surface3Color">#172330</Color>
+    <Color x:Key="BorderColor">#253544</Color>
     
     <SolidColorBrush x:Key="AccentBrush"        Color="{StaticResource AccentColor}"/>
     <SolidColorBrush x:Key="SurfaceBrush"       Color="{StaticResource SurfaceColor}"/>
@@ -22,15 +22,15 @@
     <SolidColorBrush x:Key="TextMutedBrush"     Color="#344A5B"/>
 
     <!-- EFFECT TOKENS -->
-    <DropShadowEffect x:Key="NeonGlow" Color="#00F2FF" Opacity="0.4" BlurRadius="20" ShadowDepth="0"/>
-    <DropShadowEffect x:Key="SoftShadow" Color="Black" Opacity="0.4" BlurRadius="15" ShadowDepth="4"/>
+    <DropShadowEffect x:Key="NeonGlow" Color="#00F2FF" Opacity="0.22" BlurRadius="18" ShadowDepth="0"/>
+    <DropShadowEffect x:Key="SoftShadow" Color="Black" Opacity="0.28" BlurRadius="18" ShadowDepth="4"/>
 
     <!-- ════════════════════ ELEMENTS ════════════════════ -->
 
     <!-- GLASS PANEL (Unified Container) -->
     <Style x:Key="GlassPanel" TargetType="Border">
-        <Setter Property="Background" Value="#0D0A1ACC"/>
-        <Setter Property="CornerRadius" Value="14"/>
+        <Setter Property="Background" Value="#C00C1218"/>
+        <Setter Property="CornerRadius" Value="18"/>
         <Setter Property="BorderBrush" Value="#1E2C38"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -38,11 +38,11 @@
 
     <!-- GLASS CARD (Grid Items) -->
     <Style x:Key="GlassCard" TargetType="Border">
-        <Setter Property="Background" Value="#0D151D"/>
-        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="Background" Value="#D0101821"/>
+        <Setter Property="CornerRadius" Value="22"/>
         <Setter Property="BorderBrush" Value="#1E2C38"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="8"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
@@ -71,8 +71,8 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#00B8C2" Offset="0"/>
-                    <GradientStop Color="#007C82" Offset="1"/>
+                    <GradientStop Color="#1EE4F2" Offset="0"/>
+                    <GradientStop Color="#0FAFC1" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -84,13 +84,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="border" CornerRadius="12" Background="{TemplateBinding Background}">
+                    <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#00F2FF"/>
+                            <Setter TargetName="border" Property="Background" Value="#4BEAF5"/>
                             <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGlow}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.55"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="RenderTransform">
@@ -104,8 +107,8 @@
     </Style>
 
     <Style x:Key="SecondaryButton" TargetType="Button">
-        <Setter Property="Background" Value="#16212B"/>
-        <Setter Property="Foreground" Value="#C4B5FD"/>
+        <Setter Property="Background" Value="#121A24"/>
+        <Setter Property="Foreground" Value="#D7E6EF"/>
         <Setter Property="BorderBrush" Value="#1E2C38"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -116,13 +119,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="14">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                            <Setter TargetName="bd" Property="Background" Value="#1E2C38"/>
+                            <Setter TargetName="bd" Property="Background" Value="#18212C"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="bd" Property="Opacity" Value="0.55"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -155,7 +161,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="bg" Property="Background" Value="#1E2C38"/>
+                            <Setter TargetName="bg" Property="Background" Value="#141E29"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -170,7 +176,7 @@
 
     <!-- INPUTS -->
     <Style x:Key="AppleTextBox" TargetType="TextBox">
-        <Setter Property="Background" Value="#0D151D"/>
+        <Setter Property="Background" Value="#0F1720"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="#1E2C38"/>
         <Setter Property="Padding" Value="14,10"/>
@@ -178,7 +184,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
                     <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                            BorderThickness="1" CornerRadius="10">
+                            BorderThickness="1" CornerRadius="14">
                         <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -198,7 +204,7 @@
                 <ControlTemplate TargetType="TextBox">
                     <Grid>
                         <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="1" CornerRadius="12">
+                                BorderThickness="1" CornerRadius="16">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                         </Border>
                         <TextBlock Text="🔍" Foreground="#344A5B" FontSize="14" VerticalAlignment="Center" Margin="14,0,0,0" IsHitTestVisible="False"/>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -16,6 +17,9 @@ namespace KrakenLauncher.Services
         private TextBlock? _viewLabel;
         private TextBlock? _viewTitle;
         private Action? _onStopCurrent;
+        private HubView? _systemsHub;
+        private HubView? _resourcesHub;
+        private HubView? _networkHub;
 
         public void Initialize(ContentControl container, FrameworkElement homeView, TextBlock viewLabel, TextBlock viewTitle, Action onStopCurrent)
         {
@@ -50,17 +54,9 @@ namespace KrakenLauncher.Services
                 case "perf":
                 case "console":
                 case "crash":
-                    var systemsTabs = new List<HubView.HubTab>
-                    {
-                        new HubView.HubTab { Label = "Motor y Sinc", HeaderLabel = "SINCRONIZACIÓN", HeaderTitle = "Setup de Pepa", View = new ConfigView(main) },
-                        new HubView.HubTab { Label = "Rendimiento", HeaderLabel = "OPTIMIZACIÓN", HeaderTitle = "Rendimiento y RAM", View = new PerformanceView(main) },
-                        new HubView.HubTab { Label = "Consola", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", View = new ConsoleView() },
-                        new HubView.HubTab { Label = "Diagnóstico", HeaderLabel = "DIAGNÓSTICO", HeaderTitle = "Herramientas de Soporte", View = new CrashDiagnosticView(main.GetCrashReporter()) }
-                    };
-                    var systemsHub = new HubView(main, systemsTabs);
-                    systemsHub.OnHeaderUpdateRequested += UpdateHeaders;
-                    UpdateHeaders("SISTEMAS", "Núcleo de Control");
-                    SwitchToModule(systemsHub, main);
+                    _systemsHub ??= CreateSystemsHub(main);
+                    UpdateHeaders("SISTEMAS", "Nucleo de Control");
+                    SwitchToModule(_systemsHub, main);
                     break;
 
                 case "recursos":
@@ -68,17 +64,9 @@ namespace KrakenLauncher.Services
                 case "modmanager":
                 case "modpacks":
                 case "changelog":
-                    var resourcesTabs = new List<HubView.HubTab>
-                    {
-                        new HubView.HubTab { Label = "Biblioteca", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Módulos Externos", View = new VaultView(main.GameFolder, main.CurrentProfile) },
-                        new HubView.HubTab { Label = "Mis Mods", HeaderLabel = "LOGÍSTICA", HeaderTitle = "Gestión Local", View = CreateModManager(main) },
-                        new HubView.HubTab { Label = "Expediciones", HeaderLabel = "MODPACK HUB", HeaderTitle = "Catálogo de Viajes", View = new ModpackView() },
-                        new HubView.HubTab { Label = "Novedades", HeaderLabel = "NOTIFICACIONES", HeaderTitle = "Bitácora de Versiones", View = new ChangelogView() }
-                    };
-                    var resourcesHub = new HubView(main, resourcesTabs);
-                    resourcesHub.OnHeaderUpdateRequested += UpdateHeaders;
+                    _resourcesHub ??= CreateResourcesHub(main);
                     UpdateHeaders("RECURSOS", "Almacenamiento y Datos");
-                    SwitchToModule(resourcesHub, main);
+                    SwitchToModule(_resourcesHub, main);
                     break;
 
                 case "red":
@@ -87,20 +75,67 @@ namespace KrakenLauncher.Services
                 case "hosting":
                 case "localhost":
                 case "screenshots":
-                    var networkTabs = new List<HubView.HubTab>
-                    {
-                        new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(main.Session.ServerIp, main.Session.Username) },
-                        new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartográfico", View = new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
-                        new HubView.HubTab { Label = "Infraestructura", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galáctico", View = new HostingServiceView() },
-                        new HubView.HubTab { Label = "Pruebas", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", View = new ServerHostView() },
-                        new HubView.HubTab { Label = "Capturas", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", View = new ScreenshotsView(main.GameFolder) }
-                    };
-                    var networkHub = new HubView(main, networkTabs);
-                    networkHub.OnHeaderUpdateRequested += UpdateHeaders;
+                    _networkHub ??= CreateNetworkHub(main);
                     UpdateHeaders("RED ABISAL", "Comunicaciones y Flota");
-                    SwitchToModule(networkHub, main);
+                    SwitchToModule(_networkHub, main);
                     break;
             }
+        }
+
+        public void InvalidateCache()
+        {
+            _systemsHub?.StopActiveModule();
+            _resourcesHub?.StopActiveModule();
+            _networkHub?.StopActiveModule();
+            _systemsHub = null;
+            _resourcesHub = null;
+            _networkHub = null;
+        }
+
+        private HubView CreateSystemsHub(MainWindow main)
+        {
+            var systemsTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Configs", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Configs y Ajustes", View = new ConfigView(main) },
+                new HubView.HubTab { Label = "Rendimiento", HeaderLabel = "OPTIMIZACION", HeaderTitle = "Rendimiento y RAM", View = new PerformanceView(main) },
+                new HubView.HubTab { Label = "Consola", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", View = new ConsoleView() },
+                new HubView.HubTab { Label = "Soporte", HeaderLabel = "DIAGNOSTICO", HeaderTitle = "Herramientas de Soporte", View = new CrashDiagnosticView(main.GetCrashReporter()) }
+            };
+
+            var hub = new HubView(main, systemsTabs);
+            hub.OnHeaderUpdateRequested += UpdateHeaders;
+            return hub;
+        }
+
+        private HubView CreateResourcesHub(MainWindow main)
+        {
+            var resourcesTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Biblioteca", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Modulos Externos", View = new VaultView(main.GameFolder, main.CurrentProfile) },
+                new HubView.HubTab { Label = "Mis Mods", HeaderLabel = "LOGISTICA", HeaderTitle = "Gestion Local", View = CreateModManager(main) },
+                new HubView.HubTab { Label = "Expediciones", HeaderLabel = "MODPACK HUB", HeaderTitle = "Catalogo de Viajes", View = new ModpackView() },
+                new HubView.HubTab { Label = "Novedades", HeaderLabel = "NOTIFICACIONES", HeaderTitle = "Bitacora de Versiones", View = new ChangelogView() }
+            };
+
+            var hub = new HubView(main, resourcesTabs);
+            hub.OnHeaderUpdateRequested += UpdateHeaders;
+            return hub;
+        }
+
+        private HubView CreateNetworkHub(MainWindow main)
+        {
+            var networkTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(main.Session.ServerIp, main.Session.Username) },
+                new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", View = new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
+                new HubView.HubTab { Label = "Infraestructura", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galactico", View = new HostingServiceView() },
+                new HubView.HubTab { Label = "Pruebas", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", View = new ServerHostView() },
+                new HubView.HubTab { Label = "Capturas", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", View = new ScreenshotsView(main.GameFolder) }
+            };
+
+            var hub = new HubView(main, networkTabs);
+            hub.OnHeaderUpdateRequested += UpdateHeaders;
+            return hub;
         }
 
         private ModManagerView CreateModManager(MainWindow main)

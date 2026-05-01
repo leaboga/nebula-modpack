@@ -19,6 +19,7 @@ namespace KrakenLauncher.Modules
 
         private List<HubTab> _tabs = new List<HubTab>();
         private MainWindow _main;
+        private UserControl? _currentView;
 
         public event Action<string, string>? OnHeaderUpdateRequested;
 
@@ -54,12 +55,32 @@ namespace KrakenLauncher.Modules
         {
             if (sender is RadioButton rb && rb.Tag is HubTab tab)
             {
+                StopView(_currentView);
+                _currentView = tab.View;
                 ActiveModuleContainer.Content = tab.View;
                 OnHeaderUpdateRequested?.Invoke(tab.HeaderLabel, tab.HeaderTitle);
                 
                 // Animation
                 var sb = (Storyboard)_main.FindResource("TabChangeEffect");
                 sb.Begin(ActiveModuleContainer);
+            }
+        }
+
+        public void StopActiveModule()
+        {
+            StopView(_currentView);
+        }
+
+        private static void StopView(UserControl? view)
+        {
+            switch (view)
+            {
+                case SocialView social:
+                    social.Stop();
+                    break;
+                case PerformanceView perf:
+                    perf.Stop();
+                    break;
             }
         }
     }

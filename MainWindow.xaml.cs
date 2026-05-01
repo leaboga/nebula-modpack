@@ -692,6 +692,7 @@ namespace KrakenLauncher
             {
                 if (ModulesContainer?.Content is SocialView      sv) sv.Stop();
                 if (ModulesContainer?.Content is PerformanceView pv) pv.Stop();
+                if (ModulesContainer?.Content is HubView hub) hub.StopActiveModule();
             }
             catch { }
         }
@@ -948,23 +949,23 @@ namespace KrakenLauncher
         {
             int idx = ProfileComboBox.SelectedIndex;
             if (idx < 0 || idx >= _session.Profiles.Count) return;
-            
+
             _session.CurrentProfileId = _session.Profiles[idx].Id;
             GuardarSesion();
             InitializeProfileServices();
-            AgregarLog($"ðŸ“‚ Perfil cambiado a: {_session.Profiles[idx].Name}");
-            
-            // Sync UI state
+            NavigationService.Instance.InvalidateCache();
+            AgregarLog($"[PROFILE] Perfil cambiado a: {_session.Profiles[idx].Name}");
+
             _manifestActual = null;
             _ = CargarVersionesAsync();
             ActualizarGreeting();
             ActualizarSidebar();
-            
-            Dispatcher.Invoke(() => {
+
+            Dispatcher.Invoke(() =>
+            {
                 ActualizarVersionesEnHome();
             });
 
-            // Sync RAM slider safely
             if (RamSlider != null)
             {
                 RamSlider.ValueChanged -= RamSlider_ValueChanged;
@@ -973,10 +974,12 @@ namespace KrakenLauncher
                 RamSlider.ValueChanged += RamSlider_ValueChanged;
             }
 
-            // Reload active module to apply new GameFolder
-            if (ModulesContainer?.Content is ModManagerView) SwitchToModule(new ModManagerView(GameFolder));
-            else if (ModulesContainer?.Content is VaultView) SwitchToModule(new VaultView(GameFolder, CurrentProfile));
-            else if (ModulesContainer?.Content is ScreenshotsView) SwitchToModule(new ScreenshotsView(GameFolder));
+            if (ModulesContainer?.Visibility == Visibility.Visible)
+            {
+                if (CurrentViewLabel?.Text == "SISTEMAS") CambiarVista("sistemas");
+                else if (CurrentViewLabel?.Text == "RED ABISAL") CambiarVista("red");
+                else if (CurrentViewLabel?.Text == "RECURSOS") CambiarVista("recursos");
+            }
         }
 
         private void InitializeProfileServices()
@@ -1121,40 +1124,38 @@ namespace KrakenLauncher
         {
             try
             {
-                // Seguridad de Admin: Solo Pepita/Leandro en SU máquina o con flag Admin
                 bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
                 bool esPepita = (_session.IsAdmin && esAdminPc)
-                             || (_session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
+                             || (_session.Username.Equals("Pepita", StringComparison.OrdinalIgnoreCase) && esAdminPc)
                              || (_session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
 
-                var remoteInfo = await _syncer.ObtenerHashConfigsRemoto();
-                if (remoteInfo == null || string.IsNullOrEmpty(remoteInfo.Value.hash))
+                var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
+                if (remoteInfo == null || string.IsNullOrEmpty(remoteInfo.Hash))
                 {
-                    AgregarLog("Info: No se pudo verificar configs de Pepita (sin conexión).");
+                    AgregarLog("Info: No se pudo verificar la config oficial remota.");
                     return;
                 }
 
-                string hashRemoto = remoteInfo.Value.hash;
-                int? recommendedRam = remoteInfo.Value.ram;
                 string profileId = CurrentProfile?.Id ?? "default";
+                string versionRemota = remoteInfo.ConfigVersion;
+                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId)
+                    ? _session.AppliedConfigVersions[profileId] : "0";
 
-                bool hayNuevasConfigs = hashRemoto != _session.LastAppliedConfigHash;
-                if (!hayNuevasConfigs)
+                if (versionRemota == versionAplicada)
                 {
-                    AgregarLog("Configs al día (sin cambios de Pepita).");
+                    AgregarLog("Config oficial al dia.");
                     return;
                 }
 
-                // Si ya rechazó esta versión específica de hash, no volver a preguntar hasta que cambie el hash
-                if (!forzar && _session.RejectedConfigVersions.ContainsKey(profileId) && _session.RejectedConfigVersions[profileId] == hashRemoto)
+                if (!forzar && _session.RejectedConfigVersions.ContainsKey(profileId) && _session.RejectedConfigVersions[profileId] == versionRemota)
                 {
-                    AgregarLog("Aviso: Hay configs de Pepita nuevas, pero ya las rechazaste anteriormente.");
+                    AgregarLog("Hay una config oficial nueva, pero ya fue rechazada para esta revision.");
                     return;
                 }
 
                 if (esPepita && !forzar)
                 {
-                    AgregarLog("Pepita: hay configs nuevas publicadas. Podés aplicarlas desde el panel Config.");
+                    AgregarLog("Admin detectado: la revision oficial puede gestionarse desde Sistemas Pepa.");
                     return;
                 }
 
@@ -1163,10 +1164,11 @@ namespace KrakenLauncher
                 {
                     var resultado = Dispatcher.Invoke(() =>
                         MessageBox.Show(
-                            "¡Pepita actualizó las configuraciones del modpack!\n\n" +
-                            "¿Deseas aplicar los ajustes oficiales? (ESTO SOBREESCRIBIRÁ TODO, incluyendo opciones de gráficos y RAM recomendada).\n\n" +
-                            "Si eliges que no, no volverás a ver este mensaje hasta la próxima actualización.",
-                            "Configs de Pepita disponibles",
+                            $"Hay una nueva configuracion oficial v{versionRemota} disponible para este perfil.\n\n" +
+                            "Incluye optimizaciones, shaders y ajustes recomendados.\n" +
+                            "Si eliges que no, no volvera a aparecer hasta que Pepa publique otra revision.\n\n" +
+                            "Deseas aplicarla ahora?",
+                            "Configuracion Recomendada",
                             MessageBoxButton.YesNo,
                             MessageBoxImage.Question));
                     aplicar = resultado == MessageBoxResult.Yes;
@@ -1174,34 +1176,30 @@ namespace KrakenLauncher
 
                 if (aplicar)
                 {
-                    AgregarLog("Aplicando configs integrales de Pepita...");
-                    
-                    // SobreescribirTodo = true para que incluya options.txt y todo lo de Pepita
-                    await _syncer.SincronizarConfigs(hashRemoto, sobrescribirTodo: true);
-                    _session.LastAppliedConfigHash = hashRemoto;
-                    
-                    // Aplicar RAM recomendada si viene en el hash
-                    if (recommendedRam.HasValue && CurrentProfile != null)
+                    AgregarLog($"Aplicando config oficial v{versionRemota}...");
+                    await _syncer.SincronizarConfigs(sobrescribirTodo: true);
+                    _session.LastAppliedConfigHash = remoteInfo.Hash;
+                    _session.AppliedConfigVersions[profileId] = versionRemota;
+
+                    if (CurrentProfile != null)
                     {
-                        CurrentProfile.RamGB = recommendedRam.Value;
-                        AgregarLog($"🚀 RAM ajustada a la recomendada: {recommendedRam.Value}GB");
+                        CurrentProfile.RamGB = remoteInfo.RecommendedRam;
+                        AgregarLog($"RAM ajustada a la recomendada: {remoteInfo.RecommendedRam}GB");
                     }
 
                     _session.RejectedConfigVersions.Remove(profileId);
                     GuardarSesion();
-                    Services.NotificationService.Instance.ShowSuccess("Ajustes de Pepita aplicados al 100%.");
+                    Services.NotificationService.Instance.ShowSuccess($"Config oficial v{versionRemota} aplicada.");
                 }
                 else
                 {
-                    // Guardar el hash actual como rechazado para no volver a molestar
-                    _session.RejectedConfigVersions[profileId] = hashRemoto;
+                    _session.RejectedConfigVersions[profileId] = versionRemota;
                     GuardarSesion();
-                    AgregarLog("Configs de Pepita omitidas. No se volverá a preguntar para esta versión.");
+                    AgregarLog($"Config oficial v{versionRemota} rechazada por el usuario.");
                 }
             }
             catch (Exception ex) { AgregarLog($"Error al verificar configs: {ex.Message}"); }
         }
-
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -1225,6 +1223,7 @@ namespace KrakenLauncher
             _updateTimer?.Stop();
             _particleTimer?.Stop();
             StopCurrentModule();
+            EffectService.Instance.StopParticles();
             _discord.Dispose();
             _cerrarDeVerdad = true;
             Close();
@@ -1267,45 +1266,37 @@ namespace KrakenLauncher
         {
             try
             {
-                if (_versionsIndex == null) return;
-                
-                string? manifestUrl = _versionsIndex.AvailableVersions.Find(v => v.Version == _versionsIndex.LatestVersion)?.ManifestUrl;
-                if (string.IsNullOrEmpty(manifestUrl)) return;
-                
-                var manifest = await _syncer.ObtenerManifest(manifestUrl);
-                if (manifest == null) return;
+                var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
+                if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion)) return;
 
-                string versionOficial = manifest.ConfigVersion ?? "1";
+                string versionOficial = remoteInfo.ConfigVersion;
                 string profileId = CurrentProfile?.Id ?? "default";
-                
-                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId) 
+                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId)
                     ? _session.AppliedConfigVersions[profileId] : "0";
-                
                 string versionRechazada = _session.RejectedConfigVersions.ContainsKey(profileId)
                     ? _session.RejectedConfigVersions[profileId] : "0";
 
                 if (versionOficial != versionAplicada && versionOficial != versionRechazada)
                 {
-                    // Nueva config disponible y no rechazada
-                    Dispatcher.Invoke(() => {
+                    Dispatcher.Invoke(() =>
+                    {
                         var res = MessageBox.Show(
-                            $"âœ¨ Hay una nueva configuraciÃ³n oficial v{versionOficial} disponible para este perfil.\n\n" +
+                            $"Hay una nueva configuracion oficial v{versionOficial} disponible para este perfil.\n\n" +
                             "Incluye optimizaciones de rendimiento, shaders y keybinds recomendados.\n" +
-                            "Â¿Deseas aplicarla ahora?\n\n" +
-                            "(Tus controles personales serÃ¡n respetados)",
-                            "ConfiguraciÃ³n Recomendada",
+                            "Deseas aplicarla ahora?\n\n" +
+                            "Tus controles personales se respetaran siempre que sea posible.",
+                            "Configuracion Recomendada",
                             MessageBoxButton.YesNo, MessageBoxImage.Information);
 
                         if (res == MessageBoxResult.Yes)
                         {
-                            _ = AplicarConfigOficialAsync(manifest);
+                            _ = AplicarConfigOficialAsync(remoteInfo);
                         }
-                        else if (res == MessageBoxResult.No)
+                        else
                         {
-                            // Guardar rechazo para no volver a molestar con ESTA versiÃ³n
                             _session.RejectedConfigVersions[profileId] = versionOficial;
                             GuardarSesion();
-                            AgregarLog($"ðŸ”” Config oficial v{versionOficial} rechazada por el usuario.");
+                            AgregarLog($"Config oficial v{versionOficial} rechazada por el usuario.");
                         }
                     });
                 }
@@ -1313,14 +1304,13 @@ namespace KrakenLauncher
             catch { }
         }
 
-        private async Task AplicarConfigOficialAsync(ModManifest manifest)
+        private async Task AplicarConfigOficialAsync(OfficialConfigInfo remoteInfo)
         {
             try
             {
-                AgregarLog($"ðŸ”„ Aplicando configuraciÃ³n oficial v{manifest.ConfigVersion}...");
-                
-                // Backup simple
-                string backupDir = System.IO.Path.Combine(GameFolder, "backups", "auto-config-v" + manifest.ConfigVersion);
+                AgregarLog($"Aplicando configuracion oficial v{remoteInfo.ConfigVersion}...");
+
+                string backupDir = System.IO.Path.Combine(GameFolder, "backups", "auto-config-v" + remoteInfo.ConfigVersion);
                 Directory.CreateDirectory(backupDir);
                 foreach (var target in new[] { "options.txt", "config" })
                 {
@@ -1329,17 +1319,22 @@ namespace KrakenLauncher
                     else if (Directory.Exists(src)) CopyDirectory(src, System.IO.Path.Combine(backupDir, target));
                 }
 
-                await _syncer.SincronizarConfigs(manifest.Version, sobrescribirTodo: false);
+                await _syncer.SincronizarConfigs(sobrescribirTodo: false);
 
                 string profileId = CurrentProfile?.Id ?? "default";
-                _session.AppliedConfigVersions[profileId] = manifest.ConfigVersion;
+                _session.LastAppliedConfigHash = remoteInfo.Hash;
+                _session.AppliedConfigVersions[profileId] = remoteInfo.ConfigVersion;
                 _session.RejectedConfigVersions.Remove(profileId);
+                if (CurrentProfile != null)
+                {
+                    CurrentProfile.RamGB = remoteInfo.RecommendedRam;
+                }
                 GuardarSesion();
 
-                AgregarLog($"âœ… ConfiguraciÃ³n oficial v{manifest.ConfigVersion} aplicada correctamente.");
-                NotificationService.Instance.ShowSuccess($"Config oficial v{manifest.ConfigVersion} lista.");
+                AgregarLog($"Configuracion oficial v{remoteInfo.ConfigVersion} aplicada correctamente.");
+                NotificationService.Instance.ShowSuccess($"Config oficial v{remoteInfo.ConfigVersion} lista.");
             }
-            catch (Exception ex) { AgregarLog($"âš  Error aplicando config oficial: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"Error aplicando config oficial: {ex.Message}"); }
         }
 
         private async void VersionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1512,15 +1507,21 @@ namespace KrakenLauncher
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
                     if (!modsOk) { AgregarLog("âŒ FallÃ³ la descarga de mods."); return; }
 
-                    // --- CONFIGS DE PEPITA: verificar hash remoto ---
+                    // --- Config oficial del perfil ---
                     PlayButton.Content = "Verificando configs...";
                     
                     if (isNewInstall)
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
                         await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
-                        var res = await _syncer.ObtenerHashConfigsRemoto();
-                        _session.LastAppliedConfigHash = res?.hash;
+                        var res = await _syncer.ObtenerConfigOficialRemota();
+                        _session.LastAppliedConfigHash = res?.Hash ?? "";
+                        string profileId = CurrentProfile?.Id ?? "default";
+                        if (res != null)
+                        {
+                            _session.AppliedConfigVersions[profileId] = res.ConfigVersion;
+                            _session.RejectedConfigVersions.Remove(profileId);
+                        }
                         GuardarSesion();
                     }
                     else

@@ -35,6 +35,15 @@ namespace KrakenLauncher
         public string Md5 { get; set; } = "";
     }
 
+    public class OfficialConfigInfo
+    {
+        public string Hash { get; set; } = "";
+        public string ConfigVersion { get; set; } = "0";
+        public int RecommendedRam { get; set; } = 4;
+        public string PublishedAt { get; set; } = "";
+        public string PublishedBy { get; set; } = "Pepa";
+    }
+
     public class ModSyncer
     {
         private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions-index.json";
@@ -182,15 +191,17 @@ namespace KrakenLauncher
         /// <summary>
         /// Devuelve la info remota de las configs de Pepita (hash y RAM recomendada), o null si no se puede obtener.
         /// </summary>
-        public async Task<(string? hash, int? ram)?> ObtenerHashConfigsRemoto()
+        public async Task<OfficialConfigInfo?> ObtenerConfigOficialRemota()
         {
             try
             {
                 string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
-                var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
-                string? hash = (string?)obj?.hash;
-                int? ram = (int?)obj?.recommendedRam;
-                return (hash, ram);
+                var info = JsonConvert.DeserializeObject<OfficialConfigInfo>(json);
+                if (info == null) return null;
+                info.Hash ??= "";
+                info.ConfigVersion ??= "0";
+                if (string.IsNullOrWhiteSpace(info.PublishedBy)) info.PublishedBy = "Pepa";
+                return info;
             }
             catch { return null; }
         }
@@ -260,7 +271,7 @@ namespace KrakenLauncher
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
-        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4)
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string publishedBy = "Pepa")
         {
             try
             {
@@ -320,10 +331,16 @@ namespace KrakenLauncher
 
                 // 4. Crear/actualizar config-hash.json en el repo (requiere gh + repo clonado o API)
                 //    Usamos un archivo temporal y lo subimos via gh api
-                var infoObj = new { 
-                    hash = hash, 
-                    recommendedRam = recommendedRam,
-                    updated = DateTime.UtcNow.ToString("o") 
+                var currentInfo = await ObtenerConfigOficialRemota();
+                int currentVersion = 0;
+                int.TryParse(currentInfo?.ConfigVersion ?? "0", out currentVersion);
+                var infoObj = new OfficialConfigInfo
+                {
+                    Hash = hash,
+                    ConfigVersion = (currentVersion + 1).ToString(),
+                    RecommendedRam = recommendedRam,
+                    PublishedAt = DateTime.UtcNow.ToString("o"),
+                    PublishedBy = string.IsNullOrWhiteSpace(publishedBy) ? "Pepa" : publishedBy
                 };
                 string hashJson = Newtonsoft.Json.JsonConvert.SerializeObject(infoObj, Newtonsoft.Json.Formatting.Indented);
                 string hashFile = Path.Combine(Path.GetTempPath(), "config-hash.json");

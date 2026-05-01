@@ -197,7 +197,7 @@
                         <TextBlock Text="Gestión de Presets de Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="MIS PRESETS GUARDADOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="REVISIONES LOCALES" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <ListBox x:Name="PresetsListBox" Background="#05080D" BorderBrush="#1E2C38" BorderThickness="1" MaxHeight="180" Margin="0,0,0,12" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -209,6 +209,7 @@
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding VersionNumber, StringFormat=REV {0:D3}}" Foreground="#9EE7F1" FontSize="10" FontWeight="Black" Margin="0,0,8,0"/>
                                             <TextBlock Text="{Binding MinecraftVersion}" Foreground="#00F2FF" FontSize="10" FontWeight="Black" Margin="0,0,8,0"/>
                                             <TextBlock Text="{Binding CreatedAt, StringFormat=d}" Foreground="#6D8A99" FontSize="10"/>
                                         </StackPanel>
@@ -230,15 +231,14 @@
                         <CheckBox x:Name="PresetOthersCheck" Content="Otros (Servers/Shaders)" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,0,8" Style="{DynamicResource TrayToggle}"/>
                     </WrapPanel>
 
-                    <TextBlock Text="NUEVO PRESET (DESDE ACTUAL)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="NewPresetNameBox" Style="{DynamicResource AppleTextBox}" Tag="Nombre del nuevo preset..." Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="Guardar Config Actual" Click="BtnSavePreset_Click" Style="{DynamicResource PlayButton}" Height="40" Padding="20,0"/>
-                    </Grid>
+                    <TextBlock Text="NUEVA REVISION LOCAL" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <Border Background="#0C1217" CornerRadius="12" Padding="14,12" Margin="0,0,0,10" BorderBrush="#1E2C38" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock x:Name="NextPresetVersionText" Text="La siguiente revision se asignara automaticamente." Foreground="#E6F9FF" FontSize="12" FontWeight="SemiBold"/>
+                            <TextBlock Text="No hace falta escribir nombres. El launcher guarda snapshots numerados para que despues puedas restaurarlos rapido." Foreground="#6D8A99" FontSize="10" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Content="Guardar Revision Actual" Click="BtnSavePreset_Click" Style="{DynamicResource PlayButton}" Height="40" Padding="20,0"/>
                 </StackPanel>
             </Border>
 
@@ -360,8 +360,8 @@
                         <TextBlock Text="👑" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Configs de Pepita" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="CONFIGURACIONES OFICIALES DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="Config Oficial del Perfil" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="SINCRONIZACION RECOMENDADA DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -373,12 +373,15 @@
                         <TextBlock x:Name="PepitaConfigHashText"
                                    Text=""
                                    Foreground="#344A5B" FontSize="9" Margin="0,4,0,0" FontFamily="Consolas"/>
+                        <TextBlock x:Name="PepitaConfigMetaText"
+                                   Text=""
+                                   Foreground="#6D8A99" FontSize="10" Margin="0,6,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <UniformGrid Columns="2">
                     <Button x:Name="BtnAplicarConfigsPepita"
-                            Content="⬇ Copiar Settings de Pepita"
+                            Content="⬇ Adaptar Config Oficial"
                             Click="BtnAplicarConfigsPepita_Click"
                             Style="{DynamicResource PlayButton}"
                             Height="40" Margin="0,0,4,0"/>
@@ -388,8 +391,8 @@
                             Style="{DynamicResource SecondaryButton}"
                             Height="40" Margin="4,0,0,0"/>
                 </UniformGrid>
-                <TextBlock Text="Copia la configuración integral del servidor (Gráficos, RAM y Mods). ¡ESTO SOBREESCRIBIRÁ TODO TU SETUP!"
-                           Foreground="#EF4444" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text="La aplicacion es opcional. Si rechazas una revision, no volvera a aparecer hasta que Pepa publique otra nueva."
+                           Foreground="#9CAFC0" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="SemiBold"/>
             </StackPanel>
         </Border>
 
@@ -402,22 +405,22 @@
                         <TextBlock Text="🔒" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Panel Admin – Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="Panel Admin - Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
                         <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Border Background="#120D1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14" BorderBrush="#7C3AED30" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="Tus configs actuales (config/, options.txt y RAM asignada) se empaquetarán y subirán." 
+                        <TextBlock Text="Tus configs actuales (config/, options.txt, shaders y packs) se empaquetaran y subiran como nueva revision oficial." 
                                    Foreground="#A78BFA" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <TextBlock Text="Los demás jugadores verán una notificación para copiar todo tu setup al iniciar. Solo visible desde tu PC de Admin."
+                        <TextBlock Text="Los demas jugadores recibiran un aviso solo si existe una revision superior a la que ya aplicaron o rechazaron."
                                    Foreground="#7B6FA0" FontSize="10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <Button x:Name="BtnPublicarConfigsAdmin"
-                        Content="☁ Publicar Mis Configs como Pepita"
+                        Content="☁ Publicar Revision Oficial"
                         Click="BtnPublicarConfigsAdmin_Click"
                         Style="{DynamicResource PlayButton}"
                         Height="44"

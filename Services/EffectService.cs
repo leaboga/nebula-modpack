@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KrakenLauncher.Services
 {
@@ -17,6 +18,7 @@ namespace KrakenLauncher.Services
         private readonly Random _rnd = new();
         private Canvas? _particleCanvas;
         private Image? _backgroundImage;
+        private DispatcherTimer? _particleTimer;
 
         public void Initialize(Canvas particleCanvas, Image backgroundImage)
         {
@@ -27,38 +29,51 @@ namespace KrakenLauncher.Services
         public void StartParticles()
         {
             if (_particleCanvas == null) return;
+
             _particleCanvas.Children.Clear();
             _particles.Clear();
 
-            for (int i = 0; i < 45; i++)
+            for (int i = 0; i < 24; i++)
             {
                 double size = _rnd.NextDouble() * 3 + 1;
-                double opacity = _rnd.NextDouble() * 0.35 + 0.05;
+                double opacity = _rnd.NextDouble() * 0.22 + 0.04;
                 var dot = new Ellipse
                 {
                     Width = size,
                     Height = size,
                     Fill = new SolidColorBrush(Color.FromArgb(
                         (byte)(opacity * 255),
-                        (byte)_rnd.Next(100, 200),
-                        (byte)_rnd.Next(50, 150),
-                        (byte)_rnd.Next(200, 255)))
+                        (byte)_rnd.Next(90, 180),
+                        (byte)_rnd.Next(120, 190),
+                        (byte)_rnd.Next(210, 255)))
                 };
-                
-                Canvas.SetLeft(dot, _rnd.NextDouble() * 1020);
-                Canvas.SetTop(dot, _rnd.NextDouble() * 660);
+
+                Canvas.SetLeft(dot, _rnd.NextDouble() * Math.Max(1, _particleCanvas.ActualWidth > 0 ? _particleCanvas.ActualWidth : 1020));
+                Canvas.SetTop(dot, _rnd.NextDouble() * Math.Max(1, _particleCanvas.ActualHeight > 0 ? _particleCanvas.ActualHeight : 660));
                 _particleCanvas.Children.Add(dot);
 
-                double speed = _rnd.NextDouble() * 0.3 + 0.05;
+                double speed = _rnd.NextDouble() * 0.18 + 0.03;
                 double angle = _rnd.NextDouble() * Math.PI * 2;
                 _particles.Add((dot, Math.Cos(angle) * speed, Math.Sin(angle) * speed));
             }
 
-            CompositionTarget.Rendering -= OnRendering;
-            CompositionTarget.Rendering += OnRendering;
+            _particleTimer?.Stop();
+            _particleTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(33) };
+            _particleTimer.Tick += OnParticleTick;
+            _particleTimer.Start();
         }
 
-        private void OnRendering(object? sender, EventArgs e)
+        public void StopParticles()
+        {
+            if (_particleTimer != null)
+            {
+                _particleTimer.Tick -= OnParticleTick;
+                _particleTimer.Stop();
+                _particleTimer = null;
+            }
+        }
+
+        private void OnParticleTick(object? sender, EventArgs e)
         {
             if (_particleCanvas == null) return;
             double w = _particleCanvas.ActualWidth;
@@ -91,7 +106,12 @@ namespace KrakenLauncher.Services
                 {
                     var uri = new Uri(session.BackgroundImagePath);
                     var bmp = new BitmapImage();
-                    bmp.BeginInit(); bmp.UriSource = uri; bmp.CacheOption = BitmapCacheOption.OnLoad; bmp.EndInit();
+                    bmp.BeginInit();
+                    bmp.UriSource = uri;
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.DecodePixelWidth = 1920;
+                    bmp.EndInit();
+                    bmp.Freeze();
                     _backgroundImage.Source = bmp;
                     _backgroundImage.Opacity = 1.0;
                     return;
@@ -102,11 +122,20 @@ namespace KrakenLauncher.Services
                 if (hour >= 6 && hour < 12) nebulaUrl = "https://images.unsplash.com/photo-1439066615861-d1af74d74000?q=80&w=1000";
                 if (hour >= 12 && hour < 19) nebulaUrl = "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?q=80&w=1000";
 
-                var img = new BitmapImage(new Uri(nebulaUrl));
+                var img = new BitmapImage();
+                img.BeginInit();
+                img.UriSource = new Uri(nebulaUrl);
+                img.CacheOption = BitmapCacheOption.OnLoad;
+                img.DecodePixelWidth = 1600;
+                img.EndInit();
+                img.Freeze();
                 _backgroundImage.Source = img;
-                _backgroundImage.Opacity = 0.15;
+                _backgroundImage.Opacity = 0.12;
             }
-            catch { _backgroundImage.Source = null; }
+            catch
+            {
+                _backgroundImage.Source = null;
+            }
         }
 
         public void ApplyThemeColor(UserSession session, TextBlock? avatarInitial, TextBlock? percentageLabel)
@@ -121,9 +150,9 @@ namespace KrakenLauncher.Services
                 Application.Current.Resources["GlowColor"] = color;
 
                 var hoverColor = Color.FromArgb(color.A,
-                    (byte)Math.Min(255, color.R + 30),
-                    (byte)Math.Min(255, color.G + 30),
-                    (byte)Math.Min(255, color.B + 30));
+                    (byte)Math.Min(255, color.R + 20),
+                    (byte)Math.Min(255, color.G + 20),
+                    (byte)Math.Min(255, color.B + 20));
                 Application.Current.Resources["AccentHoverColor"] = hoverColor;
 
                 if (avatarInitial != null) avatarInitial.Foreground = new SolidColorBrush(color);
