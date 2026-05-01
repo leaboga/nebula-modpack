@@ -6,19 +6,19 @@
     <FontFamily x:Key="MonoFont">Consolas</FontFamily>
 
     <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-    <Color x:Key="GlowColor">#00F2FF</Color>
+    <Color x:Key="GlowColor">#0A84FF</Color>
 
     <!-- ══════════════════════════════════════════════════════════════════ -->
     <!-- KRAKEN ABYSSAL DESIGN SYSTEM (v2.6) -->
     <!-- ══════════════════════════════════════════════════════════════════ -->
-    <Color x:Key="AccentColor">#00F2FF</Color>
-    <Color x:Key="AccentHoverColor">#70F9FF</Color>
-    <Color x:Key="AccentPressColor">#00B8C2</Color>
+    <Color x:Key="AccentColor">#0A84FF</Color>
+    <Color x:Key="AccentHoverColor">#409CFF</Color>
+    <Color x:Key="AccentPressColor">#0060DF</Color>
     
-    <Color x:Key="SurfaceColor">#060A0F</Color>
-    <Color x:Key="Surface2Color">#101821</Color>
-    <Color x:Key="Surface3Color">#172330</Color>
-    <Color x:Key="BorderColor">#253544</Color>
+    <Color x:Key="SurfaceColor">#000000</Color>
+    <Color x:Key="Surface2Color">#1C1C1E</Color>
+    <Color x:Key="Surface3Color">#2C2C2E</Color>
+    <Color x:Key="BorderColor">#38383A</Color>
     
     <SolidColorBrush x:Key="AccentBrush"        Color="{StaticResource AccentColor}"/>
     <SolidColorBrush x:Key="SurfaceBrush"       Color="{StaticResource SurfaceColor}"/>
@@ -36,9 +36,9 @@
 
     <!-- GLASS PANEL (Unified Container) -->
     <Style x:Key="GlassPanel" TargetType="Border">
-        <Setter Property="Background" Value="#C00C1218"/>
+        <Setter Property="Background" Value="#881C1C1E"/>
         <Setter Property="CornerRadius" Value="18"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#38383A"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
@@ -47,7 +47,7 @@
     <Style x:Key="GlassCard" TargetType="Border">
         <Setter Property="Background" Value="#D0101821"/>
         <Setter Property="CornerRadius" Value="22"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#38383A"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="8"/>
         <Style.Triggers>
@@ -116,7 +116,7 @@
     <Style x:Key="SecondaryButton" TargetType="Button">
         <Setter Property="Background" Value="#121A24"/>
         <Setter Property="Foreground" Value="#D7E6EF"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#38383A"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -154,7 +154,7 @@
 
     <!-- TOGGLE TAB -->
     <Style x:Key="ToggleTab" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="#6D8A99"/>
+        <Setter Property="Foreground" Value="#8E8E93"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -168,7 +168,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="bg" Property="Background" Value="#141E29"/>
+                            <Setter TargetName="bg" Property="Background" Value="#2C2C2E"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -185,7 +185,7 @@
     <Style x:Key="AppleTextBox" TargetType="TextBox">
         <Setter Property="Background" Value="#0F1720"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#38383A"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -280,7 +280,7 @@
     <!-- COMBOBOX -->
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="#0D151D"/>
-        <Setter Property="BorderBrush" Value="#1E2C38"/>
+        <Setter Property="BorderBrush" Value="#38383A"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -315,7 +315,7 @@
     </Style>
 
     <Style TargetType="ComboBoxItem">
-        <Setter Property="Foreground" Value="#6D8A99"/>
+        <Setter Property="Foreground" Value="#8E8E93"/>
         <Setter Property="Padding" Value="12,8"/>
         <Setter Property="Template">
             <Setter.Value>

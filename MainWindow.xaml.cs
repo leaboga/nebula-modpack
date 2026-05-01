@@ -71,6 +71,7 @@ namespace KrakenLauncher
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            _cerrarDeVerdad = true;
             this.Close();
         }
 
@@ -167,7 +168,7 @@ namespace KrakenLauncher
                 
                 Dispatcher.Invoke(() => {
                     VersionFooterLabel.Text = $"KRAKEN ENGINE v{liveVersion}";
-                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} â€” NÃºcleo estable.");
+                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} â€” Núcleo estable.");
                     
                     if (_session.AuthMode == "offline" && string.IsNullOrEmpty(_session.Username))
                         NickTextBox.Focus();
@@ -297,9 +298,9 @@ namespace KrakenLauncher
                 if (!_lastOnlinePlayers.Contains(p))
                 {
                     AgregarLog($"ðŸ‘‹ {p} se ha unido al servidor.");
-                    // Mejora: Toast feedback visual rÃ¡pido
+                    // Mejora: Toast feedback visual rápido
                     Dispatcher.Invoke(() => {
-                        StatusText.Text = $"âœ¨ {p} entrÃ³!";
+                        StatusText.Text = $"âœ¨ {p} entró!";
                         var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
                         timer.Tick += (s, e) => { StatusText.Text = "Online"; timer.Stop(); };
                         timer.Start();
@@ -356,7 +357,7 @@ namespace KrakenLauncher
                 string remoteTag = root.tag_name?.ToString() ?? "";
                 string remoteV   = VersionManager.CleanVersion(remoteTag);
                 
-                AgregarLog($"ðŸ” AuditorÃ­a de ActualizaciÃ³n: Local={localV} | Remota={remoteV}");
+                AgregarLog($"ðŸ” Auditoría de Actualización: Local={localV} | Remota={remoteV}");
 
                 // CRITICAL: Semantic comparison prevents loops
                 if (!VersionManager.IsNewer(localV, remoteV)) 
@@ -370,7 +371,7 @@ namespace KrakenLauncher
                     return;
                 }
 
-                string changelog = root.name?.ToString() ?? "Nueva versiÃ³n disponible";
+                string changelog = root.name?.ToString() ?? "Nueva versión disponible";
                 
                 _updateDownloadUrl = null;
                 string selectedAssetName = string.Empty;
@@ -418,7 +419,7 @@ namespace KrakenLauncher
                 if (string.IsNullOrEmpty(_updateDownloadUrl))
                 {
                     UpdateDiagnosticsService.MarkFailure("No se encontro un asset .exe valido en la release remota.");
-                    AgregarLog("âš  No se encontrÃ³ un binario (.exe) vÃ¡lido en la release remota. Abortando update.");
+                    AgregarLog("âš  No se encontró un binario (.exe) válido en la release remota. Abortando update.");
                     return;
                 }
 
@@ -431,7 +432,7 @@ namespace KrakenLauncher
                     UpdateBadge.Visibility = Visibility.Visible;
                     UpdateBadge.ToolTip    = $"Detectada v{remoteV}: " + changelog;
                     UpdateBadge.IsEnabled  = false;
-                    AgregarLog($"âœ¨ [ActualizaciÃ³n] Kraken v{remoteV} detectado. Se inicia la auto-actualizaciÃ³n.");
+                    AgregarLog($"âœ¨ [Actualización] Kraken v{remoteV} detectado. Se inicia la auto-actualización.");
                 });
 
                 if (!_isAutoUpdating && _autoUpdateAttemptedVersion != remoteV)
@@ -441,7 +442,7 @@ namespace KrakenLauncher
                     await AplicarUpdateAsync(_updateDownloadUrl, true);
                 }
             }
-            catch (Exception ex) { AgregarLog("âš  Error en auditorÃ­a de versiÃ³n: " + ex.Message); }
+            catch (Exception ex) { AgregarLog("âš  Error en auditoría de versión: " + ex.Message); }
         }
 
         private async void UpdateBadge_Click(object sender, MouseButtonEventArgs e)
@@ -451,8 +452,8 @@ namespace KrakenLauncher
             var result = MessageBox.Show(
                 "Nueva version disponible: v" + _updateVersion + "\n\n" +
                 UpdateBadge.ToolTip + "\n\n" +
-                "El launcher se descargarÃ¡ y reiniciarÃ¡. Â¿Continuar?",
-                "ActualizaciÃ³n",
+                "El launcher se descargará y reiniciará. Â¿Continuar?",
+                "Actualización",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Information);
 
@@ -904,7 +905,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             if (HomeGreetingLabel == null) return;
             int hour = DateTime.Now.Hour;
-            string greeting = hour < 12 ? "Buenos dÃ­as" : hour < 19 ? "Buenas tardes" : "Buenas noches";
+            string greeting = hour < 12 ? "Buenos días" : hour < 19 ? "Buenas tardes" : "Buenas noches";
             
             // News System (Imp 18)
             string[] news = {
@@ -1099,12 +1100,12 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             _session.CurrentProfileId = clone.Id;
             GuardarSesion();
             ActualizarComboPerfiles();
-            AgregarLog($"âœ… Perfil '{newName}' clonado con Ã©xito.");
+            AgregarLog($"âœ… Perfil '{newName}' clonado con éxito.");
         }
 
         private void VerLog_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(PathService.LogFile)) { AgregarLog("â„¹ï¸ No hay log guardado aÃºn."); return; }
+            if (!File.Exists(PathService.LogFile)) { AgregarLog("â„¹ï¸ No hay log guardado aún."); return; }
             try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.LogFile}\"", UseShellExecute = true }); }
             catch (Exception ex) { AgregarLog($"âš ï¸ Error abriendo log: {ex.Message}"); }
         }
@@ -1116,17 +1117,17 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             try
             {
                 await SincronizarTodoAsync();
-                AgregarLog("âœ… SincronizaciÃ³n completada.");
-                MessageBox.Show("SincronizaciÃ³n y reparaciÃ³n completada con Ã©xito.", "KRAKEN Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
+                AgregarLog("âœ… Sincronización completada.");
+                MessageBox.Show("Sincronización y reparación completada con éxito.", "KRAKEN Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error en reparaciÃ³n: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error en reparación: {ex.Message}"); }
             finally { if (btn != null) { btn.IsEnabled = true; btn.Content = "ðŸ› ï¸ Reparar Pack"; } }
         }
 
         public async Task SincronizarTodoAsync()
         {
             if (CurrentProfile == null) return;
-            AgregarLog("ðŸ› ï¸ Iniciando sincronizaciÃ³n total (GitHub)...");
+            AgregarLog("ðŸ› ï¸ Iniciando sincronización total (GitHub)...");
             
             _manifestActual = null; // Force reload from server
             await CargarVersionesAsync();
@@ -1272,7 +1273,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        //  VERSIONS
+        //  VERSIÓNS
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private async Task CargarVersionesAsync()
         {
@@ -1435,7 +1436,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     AgregarLog($"\u2705 Sesi\u00F3n iniciada como {session.Username}.");
                     await RefrescarSkin();
                 }
-                else AgregarLog("âš ï¸ La autenticaciÃ³n no devolviÃ³ sesiÃ³n vÃ¡lida.");
+                else AgregarLog("âš ï¸ La autenticación no devolvió sesión válida.");
             }
             catch (Exception ex)
             {
@@ -1536,18 +1537,18 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 // BACKUP AUTOMATICO (SEGURIDAD PRIMERO)
                 if (!turboMode)
                 {
-                    AgregarLog("ðŸ’¾ Creando backup de seguridad (rÃ¡pido)...");
+                    AgregarLog("ðŸ’¾ Creando backup de seguridad (rápido)...");
                     await _backupService.CreateQuickConfigBackupAsync();
                 }
 
-                if (turboMode) AgregarLog("âš¡ Modo Turbo activado â€” omitiendo sincronizaciÃ³n de archivos.");
+                if (turboMode) AgregarLog("âš¡ Modo Turbo activado â€” omitiendo sincronización de archivos.");
 
                 if (!turboMode && _manifestActual != null)
                 {
                     PlayButton.Content = "Sincronizando mods...";
                     _discord.SetActivity("Sincronizando mods...");
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
-                    if (!modsOk) { AgregarLog("âŒ FallÃ³ la descarga de mods."); return; }
+                    if (!modsOk) { AgregarLog("âŒ Falló la descarga de mods."); return; }
 
                     // --- Config oficial del perfil ---
                     PlayButton.Content = "Verificando configs...";
@@ -1587,7 +1588,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
                 Show(); WindowState = WindowState.Normal; Activate();
                 MainProgressBar.Value = 0;
-                ProgressLabel.Text = exitCode == 0 ? "SesiÃ³n finalizada." : $"Minecraft cerrÃ³ con cÃ³digo {exitCode}.";
+                ProgressLabel.Text = exitCode == 0 ? "Sesión finalizada." : $"Minecraft cerró con código {exitCode}.";
 
                 // Record session
                 var duration = DateTime.Now - sessionStart;
@@ -1605,7 +1606,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 var analysis = _crashReporter.AnalyzeLastCrash(sessionStart);
                 if (analysis != null)
                 {
-                    AgregarLog("ðŸ’¥ Crash detectado. Mostrando diagnÃ³stico Nebula...");
+                    AgregarLog("ðŸ’¥ Crash detectado. Mostrando diagnóstico Nebula...");
                     SwitchToModule(new CrashAnalysisView(analysis, GameFolder));
                     
                     // Auto-report to Discord if configured
@@ -1613,7 +1614,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     {
                         string summary = _crashReporter.CheckForCrash(sessionStart) ?? "Error descriptivo no disponible.";
                         await _crashReporter.ReportToDiscordAsync(summary, _session.Username);
-                        AgregarLog("âœ… Crash reportado al servidor automÃ¡ticamente.");
+                        AgregarLog("âœ… Crash reportado al servidor automáticamente.");
                     }
                 }
 
@@ -1627,7 +1628,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
         private async Task<int> LanzarMinecraft(MinecraftProfile profile)
         {
-            // VerificaciÃ³n de Conflictos (Imp 11)
+            // Verificación de Conflictos (Imp 11)
             VerificarConflictosDeMods();
 
             var mcLauncher = new McGameLauncher(GameFolder, profile.RamGB, _session.Username,
@@ -1658,7 +1659,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     string name = System.IO.Path.GetFileNameWithoutExtension(f).ToLower();
                     if (name.Contains("rubidium") && name.Contains("embeddium")) {
                         AgregarLog("âš  Conflicto detectado: Rubidium y Embeddium juntos causan crash.");
-                        MessageBox.Show("Se detectÃ³ un conflicto entre Rubidium y Embeddium.\nEjecutÃ¡ 'Reparar Pack' para una instalaciÃ³n limpia.", "Conflicto", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Se detectó un conflicto entre Rubidium y Embeddium.\nEjecutá 'Reparar Pack' para una instalación limpia.", "Conflicto", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             } catch { }
@@ -1670,15 +1671,15 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         private async void PublicarLauncher_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("ðŸš€ Iniciando publicaciÃ³n de MOTOR CORE...");
+            AgregarLog("ðŸš€ Iniciando publicación de MOTOR CORE...");
             try
             {
                 // 1. Rebuild en modo Release
                 AgregarLog("ðŸ”¨ Compilando binario final (Release)...");
                 int buildResult = await RunCommand("dotnet", "publish KrakenLauncher.csproj -c Release -r win-x64 --self-contained true");
-                if (buildResult != 0) { AgregarLog("âŒ Error: FallÃ³ la compilaciÃ³n del motor."); return; }
+                if (buildResult != 0) { AgregarLog("âŒ Error: Falló la compilación del motor."); return; }
 
-                // 2. Extraer versiÃ³n REAL del binario generado
+                // 2. Extraer versión REAL del binario generado
                 string publishPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "bin", "Release", "net8.0-windows", "win-x64", "publish", "KrakenLauncher.exe");
                 
                 // Fallback attempt to find the publish folder
@@ -1687,7 +1688,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
                 if (!File.Exists(publishPath))
                 {
-                    AgregarLog($"âŒ Error: No se encontrÃ³ el binario en '{publishPath}'");
+                    AgregarLog($"âŒ Error: No se encontró el binario en '{publishPath}'");
                     return;
                 }
 
@@ -1698,10 +1699,10 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 string currentV = VersionManager.GetCurrentVersion();
                 if (realV != currentV)
                 {
-                    AgregarLog($"âŒ ABORTANDO: Se detectÃ³ una inconsistencia crÃ­tica.");
+                    AgregarLog($"âŒ ABORTANDO: Se detectó una inconsistencia crítica.");
                     AgregarLog($"Binario Destino: v{realV}");
                     AgregarLog($"Entorno Local:   v{currentV}");
-                    AgregarLog("AsegÃºrate de haber guardado cambios en el .csproj y recompilado.");
+                    AgregarLog("Asegúrate de haber guardado cambios en el .csproj y recompilado.");
                     return;
                 }
 
@@ -1714,26 +1715,26 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 // Borrar release vieja si existe (opcional, pero ayuda a corregir errores de dedo)
                 await RunCommand("gh", $"release delete {tag} -y --repo leaboga/nebula-modpack");
                 
-                int code = await RunCommand("gh", $"release create {tag} \"{publishPath}\" --repo leaboga/nebula-modpack --title \"KRAKEN Launcher v{realV}\" --notes \"ActualizaciÃ³n obligatoria del motor core.\"");
+                int code = await RunCommand("gh", $"release create {tag} \"{publishPath}\" --repo leaboga/nebula-modpack --title \"KRAKEN Launcher v{realV}\" --notes \"Actualización obligatoria del motor core.\"");
                 
                 if (code == 0)
                 {
-                    AgregarLog($"âœ… PublicaciÃ³n de MOTOR v{realV} completada.");
+                    AgregarLog($"âœ… Publicación de MOTOR v{realV} completada.");
                     MessageBox.Show($"El Motor Core v{realV} ha sido desplegado.", "Kraken Update", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else AgregarLog($"âš  Fallo al subir a GitHub (CÃ³digo {code}).");
+                else AgregarLog($"âš  Fallo al subir a GitHub (Código {code}).");
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicaciÃ³n de motor: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicación de motor: {ex.Message}"); }
             finally { btn.IsEnabled = true; }
         }
 
         private async void PublicarActualizacion_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("ðŸš€ Iniciando publicaciÃ³n de ASSETS (Mods/Configs)...");
+            AgregarLog("ðŸš€ Iniciando publicación de ASSETS (Mods/Configs)...");
             try
             {
-                // 1. Determinar Nueva VersiÃ³n (SemVer Patch default)
+                // 1. Determinar Nueva Versión (SemVer Patch default)
                 string currentV = _manifestActual?.Version ?? "1.0.0";
                 string nextV    = VersionManager.Increment(currentV, VersionSegment.Patch);
                 AgregarLog($"ðŸ“¦ Versionado de Assets: {currentV} âž” {nextV}");
@@ -1753,18 +1754,18 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 if (File.Exists(zipPath)) File.Delete(zipPath);
                 ZipFile.CreateFromDirectory(tempDir, zipPath);
 
-                // 3. Crear Release en GitHub con Tag DinÃ¡mico
+                // 3. Crear Release en GitHub con Tag Dinámico
                 string tag = $"v{nextV}-assets";
                 AgregarLog($"â˜ Subiendo release '{tag}' a GitHub...");
-                int code = await RunCommand("gh", $"release create {tag} \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Assets v{nextV}\" --notes \"ActualizaciÃ³n automÃ¡tica de configuraciÃ³n y mods.\"");
-                if (code != 0) { AgregarLog($"âš  Fallo al crear release (cÃ³digo {code}). VerificÃ¡ credenciales de gh."); return; }
+                int code = await RunCommand("gh", $"release create {tag} \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Assets v{nextV}\" --notes \"Actualización automática de configuración y mods.\"");
+                if (code != 0) { AgregarLog($"âš  Fallo al crear release (código {code}). Verificá credenciales de gh."); return; }
 
                 // 4. Sincronizar Repositorio de Manifiesto
                 string tempRepo = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "kraken-repo-sync");
                 if (Directory.Exists(tempRepo)) RobustDelete(tempRepo);
                 await RunCommand("gh", $"repo clone leaboga/nebula-modpack \"{tempRepo}\"");
 
-                // Crear nueva carpeta de versiÃ³n
+                // Crear nueva carpeta de versión
                 string newVersionDir = System.IO.Path.Combine(tempRepo, "versions", nextV);
                 Directory.CreateDirectory(newVersionDir);
                 string manifestPath = System.IO.Path.Combine(newVersionDir, "manifest.json");
@@ -1803,10 +1804,10 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     Directory.SetCurrentDirectory(savedDir);
                 }
 
-                AgregarLog($"âœ… PublicaciÃ³n v{nextV} completada satisfactoriamente.");
-                MessageBox.Show($"La versiÃ³n {nextV} ha sido desplegada en el enjambre.", "Ã‰xito GalÃ¡ctico", MessageBoxButton.OK, MessageBoxImage.Information);
+                AgregarLog($"âœ… Publicación v{nextV} completada satisfactoriamente.");
+                MessageBox.Show($"La versión {nextV} ha sido desplegada en el enjambre.", "Ã‰xito Galáctico", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicaciÃ³n: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicación: {ex.Message}"); }
             finally { btn.IsEnabled = true; }
         }
 
@@ -1841,13 +1842,13 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             }
             catch (Exception ex) 
             { 
-                AgregarLog($"âš  RobustDelete (Fase 1): {ex.Message}. Intentando desintegraciÃ³n forzada..."); 
+                AgregarLog($"âš  RobustDelete (Fase 1): {ex.Message}. Intentando desintegración forzada..."); 
                 try
                 {
                     // Fallback agresivo para locks de Windows (Memoria de Usuario)
                     var psi = new ProcessStartInfo("cmd.exe", $"/c rd /s /q \"{path}\"") { CreateNoWindow = true, UseShellExecute = false };
                     Process.Start(psi)?.WaitForExit();
-                    if (Directory.Exists(path)) AgregarLog("âŒ Error: La carpeta resiste la eliminaciÃ³n forzada.");
+                    if (Directory.Exists(path)) AgregarLog("âŒ Error: La carpeta resiste la eliminación forzada.");
                 }
                 catch (Exception ex2) { AgregarLog($"âš  RobustDelete (Fase 2): {ex2.Message}"); }
             }
@@ -2038,9 +2039,9 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     string path = System.IO.Path.Combine(GameFolder, f);
                     if (Directory.Exists(path)) Directory.Delete(path, true);
                 }
-                AgregarLog("ðŸ§¹ CachÃ© y archivos temporales eliminados con Ã©xito.");
-                MessageBox.Show("CachÃ© y archivos temporales limpiados.", "Limpieza completada", MessageBoxButton.OK, MessageBoxImage.Information);
-            } catch (Exception ex) { AgregarLog($"âŒ Error limpiando cachÃ©: {ex.Message}"); }
+                AgregarLog("ðŸ§¹ Caché y archivos temporales eliminados con éxito.");
+                MessageBox.Show("Caché y archivos temporales limpiados.", "Limpieza completada", MessageBoxButton.OK, MessageBoxImage.Information);
+            } catch (Exception ex) { AgregarLog($"âŒ Error limpiando caché: {ex.Message}"); }
         }
 
         private bool _isMinimal = false;
