@@ -160,7 +160,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="bg" Background="Transparent" CornerRadius="10" Padding="14,10" Margin="0,2">
+                    <Border x:Name="bg" Background="Transparent" CornerRadius="10" Padding="14,10" Margin="0,2" TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontWeight="SemiBold">
                         <StackPanel Orientation="Horizontal">
                             <Border x:Name="Indicator" Width="3" Height="14" Background="{StaticResource AccentBrush}" CornerRadius="1.5" Margin="-14,0,8,0" Visibility="Hidden"/>
                             <ContentPresenter x:Name="cp"/>

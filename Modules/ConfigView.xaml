@@ -14,10 +14,10 @@
             <!-- Header -->
             <StackPanel Grid.Row="0" Margin="0,0,0,28">
                 <TextBlock Text="Panel de Ajustes"
-                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
                 <TextBlock Text="CONFIGURACIÓN DEL NÚCLEO KRAKEN"
-                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                           Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
             </StackPanel>
 
             <!-- Instances Config Card -->

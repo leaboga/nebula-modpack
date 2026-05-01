@@ -23,8 +23,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <TextBlock Text="Mapa" Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
-                    <TextBlock Text="MAPA 3D EN TIEMPO REAL (BLUEMAP)" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                    <TextBlock Text="Mapa" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBlock Text="MAPA 3D EN TIEMPO REAL (BLUEMAP)" Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button Content="🌐 Ver en navegador"

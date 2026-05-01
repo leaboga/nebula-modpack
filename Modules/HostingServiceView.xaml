@@ -18,14 +18,14 @@
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Servicio de Hosting"
-                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
                 <Border Background="#00F2FF" CornerRadius="4" Padding="6,2" Margin="12,0,0,6" VerticalAlignment="Center">
                     <TextBlock Text="EXPERIMENTAL" Foreground="White" FontSize="10" FontWeight="Black"/>
                 </Border>
             </StackPanel>
             <TextBlock Text="CONEXION CON KRAKEN"
-                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                       Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
