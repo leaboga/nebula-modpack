@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.0.2`
+- Version publicada mas reciente: `3.0.3`
 - Fecha de referencia: `2026-05-01`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
@@ -25,6 +25,38 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.0.3 (Updater Hardening)
+
+### Cambios principales
+
+- `MainWindow.xaml.cs`
+  - el updater deja de depender de un `.bat` fragil con `copy /Y`
+  - ahora genera un script de PowerShell temporal que:
+    - espera explicitamente el cierre del PID original
+    - intenta reemplazar el binario varias veces
+    - escribe evidencia en `updater.log`
+    - relanza `KrakenLauncher.exe` despues de copiar
+  - la descarga usa el nombre real del asset remoto, no solo el nombre del ejecutable actual
+- `KrakenLauncher.csproj`
+  - bump a `3.0.3`
+- `app.manifest`
+  - version alineada a `3.0.3.0`
+- `KrakenSetup.iss`
+  - version de instalador alineada a `3.0.3`
+
+### Validacion realizada
+
+- Build `Release` exitoso
+- Publish `win-x64` self-contained exitoso
+- Binario final verificado:
+  - `KrakenLauncher.exe`
+  - `FileVersion 3.0.3.0`
+  - `ProductVersion 3.0.3+<commit>`
+
+### Riesgo que corrige
+
+- Casos donde el launcher detectaba la nueva version, se cerraba, pero no lograba reemplazar el `.exe` correctamente y al abrir de nuevo seguia en la version anterior.
 
 ## Version 3.0.2 (Configs & Performance Hardening)
 

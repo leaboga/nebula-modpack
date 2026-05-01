@@ -488,7 +488,7 @@ namespace KrakenLauncher
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
                 string targetExe = currentExe;
-                string downloadedAssetName = System.IO.Path.GetFileName(targetExe);
+                string downloadedAssetName = GetUpdateAssetName(downloadUrl, targetExe);
                 
                 AgregarLog("📡 Iniciando descarga del núcleo v" + _updateVersion + "...");
                 
@@ -529,30 +529,70 @@ namespace KrakenLauncher
                 UpdateDiagnosticsService.MarkApplying(targetExe, isAutomatic);
 
                 int pid = Process.GetCurrentProcess().Id;
-                string batContent = "@echo off\n" +
-                                    "set count=0\n" +
-                                    ":loop\n" +
-                                    "set /a count+=1\n" +
-                                    "copy /Y \"" + tempExe + "\" \"" + targetExe + "\" > nul 2>&1\n" +
-                                    "if errorlevel 1 (\n" +
-                                    "    if %count% geq 25 goto failed\n" +
-                                    "    timeout /t 1 /nobreak > nul\n" +
-                                    "    goto loop\n" +
-                                    ")\n" +
-                                    "start \"\" \"" + targetExe + "\"\n" +
-                                    "rmdir /s /q \"" + updateDir + "\"\n" +
-                                    "exit\n" +
-                                    ":failed\n" +
-                                    "exit\n";
+                string updaterLog = PathService.UpdaterLogFile;
+                string scriptContent =
+$@"$ErrorActionPreference = 'Stop'
+$pidToWait = {pid}
+$sourceExe = '{EscapePowerShellLiteral(tempExe)}'
+$targetExe = '{EscapePowerShellLiteral(targetExe)}'
+$updateDir = '{EscapePowerShellLiteral(updateDir)}'
+$updaterLog = '{EscapePowerShellLiteral(updaterLog)}'
 
-                string updaterBat = System.IO.Path.Combine(updateDir, "kraken_updater.bat");
-                await File.WriteAllTextAsync(updaterBat, batContent);
+function Write-UpdateLog([string]$message) {{
+    $stamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    Add-Content -LiteralPath $updaterLog -Value ""[$stamp] $message""
+}}
+
+New-Item -ItemType Directory -Force -Path ([System.IO.Path]::GetDirectoryName($updaterLog)) | Out-Null
+Write-UpdateLog ""Updater iniciado. PID=$pidToWait""
+Write-UpdateLog ""Source=$sourceExe""
+Write-UpdateLog ""Target=$targetExe""
+
+for ($attempt = 0; $attempt -lt 120; $attempt++) {{
+    $proc = Get-Process -Id $pidToWait -ErrorAction SilentlyContinue
+    if (-not $proc) {{ break }}
+    Start-Sleep -Milliseconds 500
+}}
+
+if (Get-Process -Id $pidToWait -ErrorAction SilentlyContinue) {{
+    Write-UpdateLog 'ERROR: el proceso original no cerro a tiempo.'
+    exit 10
+}}
+
+$copied = $false
+for ($copyAttempt = 1; $copyAttempt -le 30; $copyAttempt++) {{
+    try {{
+        Copy-Item -LiteralPath $sourceExe -Destination $targetExe -Force
+        Write-UpdateLog ""EXITO: binario reemplazado en intento $copyAttempt.""
+        $copied = $true
+        break
+    }}
+    catch {{
+        Write-UpdateLog ""Intento $copyAttempt fallido: $($_.Exception.Message)""
+        Start-Sleep -Milliseconds 750
+    }}
+}}
+
+if (-not $copied) {{
+    Write-UpdateLog 'ERROR: no se pudo reemplazar el ejecutable.'
+    exit 11
+}}
+
+Start-Sleep -Milliseconds 300
+Start-Process -FilePath $targetExe | Out-Null
+Write-UpdateLog 'EXITO: launcher relanzado.'
+Start-Sleep -Seconds 2
+Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinue
+";
+
+                string updaterScript = System.IO.Path.Combine(updateDir, "kraken_updater.ps1");
+                await File.WriteAllTextAsync(updaterScript, scriptContent, Encoding.UTF8);
 
                 AgregarLog("🚀 Reiniciando para aplicar la actualización...");
 
-                Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
+                Process.Start(new ProcessStartInfo("powershell.exe", $"-NoProfile -ExecutionPolicy Bypass -File \"{updaterScript}\"")
                 {
-                    UseShellExecute = false,
+                    UseShellExecute = true,
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden
                 });
@@ -599,6 +639,8 @@ namespace KrakenLauncher
 
             return System.IO.Path.GetFileName(currentExe);
         }
+
+        private static string EscapePowerShellLiteral(string value) => value.Replace("'", "''");
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         //  SKIN
