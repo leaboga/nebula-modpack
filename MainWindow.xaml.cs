@@ -1920,6 +1920,14 @@ namespace KrakenLauncher
             }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (TutorialOverlay.Visibility == Visibility.Visible && _tutorialStep >= 0 && _tutorialStep < _tutorialSteps.Count)
+            {
+                HighlightElement(_tutorialSteps[_tutorialStep].target);
+            }
+        }
+
         private void HighlightElement(string elementName)
         {
             try

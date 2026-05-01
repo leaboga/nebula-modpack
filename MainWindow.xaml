@@ -456,6 +456,7 @@
                 <StackPanel>
                     <TextBlock x:Name="TutorialTitle" Text="Bienvenido a KRAKEN" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,0,0,12"/>
                     <TextBlock x:Name="TutorialContent" Text="Estamos listos para sincronizar tus sistemas. Quieres un recorrido rpido por las nuevas funciones?" Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap" LineHeight="20" Margin="0,0,0,24"/>
+                    <TextBlock x:Name="StepIndicator" Text="Paso 1 de 1" Foreground="#7ECFDF" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,16"/>
                     
                     <Grid>
                         <Button x:Name="BtnSkipTutorial" Content="Omitir" HorizontalAlignment="Left" Style="{DynamicResource SecondaryButton}" Padding="16,4" Click="BtnSkipTutorial_Click"/>
