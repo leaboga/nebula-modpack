@@ -16,7 +16,7 @@
                 <TextBlock Text="Panel de Ajustes"
                            Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
-                <TextBlock Text="CONFIGURACIN DEL NCLEO KRAKEN"
+                <TextBlock Text="CONFIGURACIÓN DEL NÚCLEO KRAKEN"
                            Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
             </StackPanel>
 
@@ -25,9 +25,9 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="📁" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Gestion de Instancias" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Gestión de Instancias" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="NOMBRE DE INSTANCIA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
@@ -50,9 +50,9 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="🌐" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Conexion al Servidor" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Conexión al Servidor" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="IP DEL SERVIDOR" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
@@ -68,7 +68,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#5865F2">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="⚙️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Ajustes del Launcher" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -86,7 +86,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#10B981">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="⚡" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Rendimiento y RAM" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -97,7 +97,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Optimizacion Automatica" Foreground="#E6F9FF" FontSize="13"/>
+                            <TextBlock Text="Optimización Automática" Foreground="#E6F9FF" FontSize="13"/>
                             <TextBlock Text="Asigna RAM basada en tu sistema" Foreground="#344A5B" FontSize="10"/>
                         </StackPanel>
                         <Button Grid.Column="1" Content="Optimizar" Click="BtnAutoOptimize_Click" Style="{DynamicResource SecondaryButton}" Height="32"/>
@@ -118,7 +118,7 @@
                         </StackPanel>
                     </Grid>
                     
-                    <TextBlock Text="SELECCION DE JAVA (KRAKEN RUNTIME)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
+                    <TextBlock Text="SELECCIÓN DE JAVA (KRAKEN RUNTIME)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -138,15 +138,11 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Grid.Column="1" Content="Scan" Style="{DynamicResource SecondaryButton}" Width="70" Click="BtnRefreshJava_Click"/>
+                        <Button Grid.Column="1" Content="🔄 Scan" Style="{DynamicResource SecondaryButton}" Width="70" Click="BtnRefreshJava_Click"/>
                     </Grid>
-                    <TextBlock Text="Deteccion automatica de Java. Usa Java 21 para Minecraft 1.21.1." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0"/>
+                    <TextBlock Text="Detección automática de Javas. Usa v17 o v21 para optimizar el rendimiento." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0"/>
 
-                    <TextBlock Text="ARGUMENTOS JVM OFICIALES (SIN RAM)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,16,0,8"/>
-                    <TextBox x:Name="JvmArgsBox" Style="{DynamicResource AppleTextBox}" TextWrapping="Wrap" AcceptsReturn="True" Height="72" TextChanged="JvmArgsBox_TextChanged"/>
-                    <TextBlock Text="Estos argumentos se sincronizan con la config oficial. -Xmx y -Xms se ignoran para que cada jugador elija su RAM." Foreground="#344A5B" FontSize="9" Margin="4,6,0,0" TextWrapping="Wrap"/>
-
-                    <Button Content="Descargar runtimes oficiales" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
+                    <Button Content="📥 Descargar Runtimes Oficiales" Style="{DynamicResource SecondaryButton}" Height="36" Margin="0,16,0,0" Click="BtnDownloadJava_Click"/>
                 </StackPanel>
             </Border>
 
@@ -155,12 +151,12 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="🧹" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Mantenimiento" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Mantenimiento Galáctico" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                     
-                    <Button Content="Limpiar Logs y cache" Style="{DynamicResource SecondaryButton}" Height="38" Margin="0,0,0,12" Click="BtnCleanLogs_Click"/>
+                    <Button Content="Limpiar Logs y Caché" Style="{DynamicResource SecondaryButton}" Height="38" Margin="0,0,0,12" Click="BtnCleanLogs_Click"/>
                     
                     <TextBlock Text="RESPALDO EN LA NUBE" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <Grid>
@@ -179,9 +175,9 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="✨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Personalizacion del Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Personalización del Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <TextBlock Text="TEXTO DE SPLASH (AMARILLO)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
@@ -196,12 +192,12 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#8B5CF6">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="💾" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Gestion de Presets de Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Gestión de Presets de Juego" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="MIS PRESETS GUARDADOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <TextBlock Text="REVISIONES LOCALES" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <ListBox x:Name="PresetsListBox" Background="#05080D" BorderBrush="#1E2C38" BorderThickness="1" MaxHeight="180" Margin="0,0,0,12" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -213,13 +209,14 @@
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding VersionNumber, StringFormat=REV {0:D3}}" Foreground="#9EE7F1" FontSize="10" FontWeight="Black" Margin="0,0,8,0"/>
                                             <TextBlock Text="{Binding MinecraftVersion}" Foreground="#00F2FF" FontSize="10" FontWeight="Black" Margin="0,0,8,0"/>
                                             <TextBlock Text="{Binding CreatedAt, StringFormat=d}" Foreground="#6D8A99" FontSize="10"/>
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                                         <Button Content="Aplicar" Click="BtnApplyPreset_Click" Tag="{Binding Name}" Style="{StaticResource SecondaryButton}" Height="32" Padding="14,0" Margin="0,0,8,0"/>
-                                        <Button Content="" Click="BtnDeletePreset_Click" Tag="{Binding Name}" Style="{StaticResource SecondaryButton}" Foreground="#EF4444" Width="32" Height="32"/>
+                                        <Button Content="🗑️" Click="BtnDeletePreset_Click" Tag="{Binding Name}" Style="{StaticResource SecondaryButton}" Foreground="#EF4444" Width="32" Height="32"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -229,20 +226,19 @@
                     <TextBlock Text="OPCIONES AL APLICAR" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                     <WrapPanel Margin="0,0,0,16">
                         <CheckBox x:Name="PresetControlsCheck" Content="Controles" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
-                        <CheckBox x:Name="PresetGraphicsCheck" Content="Graficos" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
+                        <CheckBox x:Name="PresetGraphicsCheck" Content="Gráficos" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
                         <CheckBox x:Name="PresetModsCheck" Content="Configs de Mods" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,20,8" Style="{DynamicResource TrayToggle}"/>
                         <CheckBox x:Name="PresetOthersCheck" Content="Otros (Servers/Shaders)" IsChecked="True" Foreground="#6D8A99" FontSize="11" Margin="0,0,0,8" Style="{DynamicResource TrayToggle}"/>
                     </WrapPanel>
 
-                    <TextBlock Text="NUEVO PRESET (DESDE ACTUAL)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="NewPresetNameBox" Style="{DynamicResource AppleTextBox}" Tag="Nombre del nuevo preset..." Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="Guardar Config Actual" Click="BtnSavePreset_Click" Style="{DynamicResource PlayButton}" Height="40" Padding="20,0"/>
-                    </Grid>
+                    <TextBlock Text="NUEVA REVISION LOCAL" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                    <Border Background="#0C1217" CornerRadius="12" Padding="14,12" Margin="0,0,0,10" BorderBrush="#1E2C38" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock x:Name="NextPresetVersionText" Text="La siguiente revision se asignara automaticamente." Foreground="#E6F9FF" FontSize="12" FontWeight="SemiBold"/>
+                            <TextBlock Text="No hace falta escribir nombres. El launcher guarda snapshots numerados para que despues puedas restaurarlos rapido." Foreground="#6D8A99" FontSize="10" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Content="Guardar Revision Actual" Click="BtnSavePreset_Click" Style="{DynamicResource PlayButton}" Height="40" Padding="20,0"/>
                 </StackPanel>
             </Border>
 
@@ -251,7 +247,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#EC4899">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="🎨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Tema y Apariencia" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -286,7 +282,7 @@
                         <TextBox x:Name="BgPathBox" IsReadOnly="True" Style="{DynamicResource AppleTextBox}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0,0,0">
                             <Button Content="..." Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Click="BtnBrowseBackground_Click"/>
-                            <Button Content="" Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Click="BtnResetBackground_Click"/>
+                            <Button Content="🗑️" Width="34" Height="38" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Click="BtnResetBackground_Click"/>
                         </StackPanel>
                     </Grid>
                     <Border Margin="0,12,0,0" Height="80" CornerRadius="12" BorderBrush="#0D151D" BorderThickness="1" Background="#05080D" ClipToBounds="True">
@@ -296,7 +292,7 @@
                                     <BlurEffect Radius="2"/>
                                 </Image.Effect>
                             </Image>
-                            <TextBlock Text="PREVISUALIZACION" Foreground="#2A2440" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PreviewPlaceholderText"/>
+                            <TextBlock Text="PREVISUALIZACIÓN" Foreground="#2A2440" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PreviewPlaceholderText"/>
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -312,8 +308,8 @@
                             <ColumnDefinition Width="12"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="Perfil liviano" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
-                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="Perfil alto rendimiento" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
+                        <Button x:Name="PapaModeBtn" Grid.Column="0" Content="🥔 Modo Patata (Bajo Rendimiento)" Style="{DynamicResource SecondaryButton}" Height="44" Click="PapaModeBtn_Click"/>
+                        <Button x:Name="UltraModeBtn" Grid.Column="2" Content="🚀 Modo Galáctico (Alto Rendimiento)" Style="{DynamicResource PlayButton}" Height="44" Click="UltraModeBtn_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -321,12 +317,12 @@
             <!-- Shortcuts Section -->
             <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
-                    <TextBlock Text="ACCESOS RAPIDOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
+                    <TextBlock Text="ACCESOS RÁPIDOS" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,16"/>
                     <UniformGrid Columns="2">
-                        <Button Content=" Shaders" Click="BtnOpenShaders_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,8" Height="38" ToolTip="Abrir carpeta de Shaders"/>
-                        <Button Content=" Descargar Shaders" Click="BtnDownloadShaders_Click" Style="{DynamicResource PlayButton}" Margin="4,0,0,8" Height="38" FontSize="10"/>
-                        <Button Content=" Configs" Click="BtnOpenConfigs_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,0" Height="38"/>
-                        <Button Content=" Juego" Click="BtnOpenGame_Click" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Height="38"/>
+                        <Button Content="✨ Shaders" Click="BtnOpenShaders_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,8" Height="38" ToolTip="Abrir carpeta de Shaders"/>
+                        <Button Content="📦 Descargar Shaders" Click="BtnDownloadShaders_Click" Style="{DynamicResource PlayButton}" Margin="4,0,0,8" Height="38" FontSize="10"/>
+                        <Button Content="⚙️ Configs" Click="BtnOpenConfigs_Click" Style="{DynamicResource SecondaryButton}" Margin="0,0,4,0" Height="38"/>
+                        <Button Content="📂 Juego" Click="BtnOpenGame_Click" Style="{DynamicResource SecondaryButton}" Margin="4,0,0,0" Height="38"/>
                     </UniformGrid>
                 </StackPanel>
             </Border>
@@ -336,36 +332,36 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#F59E0B">
-                            <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="🛠️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="Mantenimiento y Ayuda" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <TextBlock Text="El juego no arranca o va mal?" Foreground="#344A5B" FontSize="11" Margin="0,0,0,14"/>
+                    <TextBlock Text="¿El juego no arranca o va mal?" Foreground="#344A5B" FontSize="11" Margin="0,0,0,14"/>
                     
                     <UniformGrid Columns="2">
-                        <Button Content=" Reparar pack" Click="BtnRepairPack_Click" Style="{DynamicResource PlayButton}" Height="38" Margin="0,0,4,0"/>
-                        <Button Content=" Ver Crashes" Click="BtnViewCrashes_Click" Style="{DynamicResource SecondaryButton}" Height="38" Margin="4,0,0,0"/>
+                        <Button Content="🛠️ Reparar Pack" Click="BtnRepairPack_Click" Style="{DynamicResource PlayButton}" Height="38" Margin="0,0,4,0"/>
+                        <Button Content="📋 Ver Crashes" Click="BtnViewCrashes_Click" Style="{DynamicResource SecondaryButton}" Height="38" Margin="4,0,0,0"/>
                     </UniformGrid>
                     
-                    <TextBlock Text="Cuidado! Reparar el pack borrar los mods para reinstalarlos limpiamente." Foreground="#EF4444" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <TextBlock Text="¡Cuidado! Reparar el pack borrará los mods para reinstalarlos limpiamente." Foreground="#EF4444" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                 </StackPanel>
             </Border>
 
-            <!--  -->
-            <!-- Config oficial compartida -->
-            <!--  -->
+            <!-- ╔═══════════════════════════════════╗ -->
+            <!-- ║       CONFIGS DE PEPITA           ║ -->
+            <!-- ╚═══════════════════════════════════╝ -->
 
-            <!-- Panel USUARIO: Notificacin de configs nuevas -->
+            <!-- Panel USUARIO: Notificación de configs nuevas -->
             <Border x:Name="PepitaUserPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
                     BorderBrush="#00F2FF30" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
-                        <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="👑" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Config oficial" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="CONFIGURACIONES OFICIALES DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="Config Oficial del Perfil" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="SINCRONIZACION RECOMENDADA DEL SERVIDOR" Foreground="#00F2FF" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -377,51 +373,54 @@
                         <TextBlock x:Name="PepitaConfigHashText"
                                    Text=""
                                    Foreground="#344A5B" FontSize="9" Margin="0,4,0,0" FontFamily="Consolas"/>
+                        <TextBlock x:Name="PepitaConfigMetaText"
+                                   Text=""
+                                   Foreground="#6D8A99" FontSize="10" Margin="0,6,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <UniformGrid Columns="2">
                     <Button x:Name="BtnAplicarConfigsPepita"
-                            Content="Aplicar config oficial"
+                            Content="⬇ Adaptar Config Oficial"
                             Click="BtnAplicarConfigsPepita_Click"
                             Style="{DynamicResource PlayButton}"
                             Height="40" Margin="0,0,4,0"/>
                     <Button x:Name="BtnVerificarConfigsPepita"
-                            Content="Verificar cambios"
+                            Content="🔄 Verificar Cambios"
                             Click="BtnVerificarConfigsPepita_Click"
                             Style="{DynamicResource SecondaryButton}"
                             Height="40" Margin="4,0,0,0"/>
                 </UniformGrid>
-                <TextBlock Text="Copia config/, options.txt y shaderpacks/ publicados por el admin. Se crea backup antes de aplicar."
-                           Foreground="#EF4444" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text="La aplicacion es opcional. Si rechazas una revision, no volvera a aparecer hasta que Pepa publique otra nueva."
+                           Foreground="#9CAFC0" FontSize="9" Margin="0,8,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="SemiBold"/>
             </StackPanel>
         </Border>
 
-        <!-- Panel ADMIN: Publicar configs -->
+        <!-- Panel ADMIN (solo Pepita): Publicar configs -->
         <Border x:Name="PepitaAdminPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
                 BorderBrush="#7C3AED40" BorderThickness="1" Visibility="Collapsed">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                     <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
-                        <TextBlock Text="" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="🔒" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Panel Admin  Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="SOLO ADMIN" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="Panel Admin - Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Border Background="#120D1F" CornerRadius="10" Padding="16,12" Margin="0,0,0,14" BorderBrush="#7C3AED30" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="Se publican config/, options.txt, optionsshaders.txt, shaderpacks/ y argumentos JVM seguros."
+                        <TextBlock Text="Tus configs actuales (config/, options.txt, shaders y packs) se empaquetaran y subiran como nueva revision oficial." 
                                    Foreground="#A78BFA" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <TextBlock Text="Los jugadores veran una notificacion para aplicar la config oficial. Sus mods no se modifican desde este panel."
+                        <TextBlock Text="Los demas jugadores recibiran un aviso solo si existe una revision superior a la que ya aplicaron o rechazaron."
                                    Foreground="#7B6FA0" FontSize="10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <Button x:Name="BtnPublicarConfigsAdmin"
-                        Content="Publicar config oficial"
+                        Content="☁ Publicar Revision Oficial"
                         Click="BtnPublicarConfigsAdmin_Click"
                         Style="{DynamicResource PlayButton}"
                         Height="44"
@@ -431,11 +430,11 @@
 
                 <TextBlock Text="RESTABLECER CONFIGS EN TU PC" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
                 <Button x:Name="BtnForzarConfigsPropias"
-                        Content=" Re-aplicar Mis Propias Configs (sobreescribir todo)"
+                        Content="🔄 Re-aplicar Mis Propias Configs (sobreescribir todo)"
                         Click="BtnForzarConfigsPropias_Click"
                         Style="{DynamicResource SecondaryButton}"
                         Height="38"/>
-                <TextBlock Text="til para restaurar tus configs en una nueva PC."
+                <TextBlock Text="Útil para restaurar tus configs en una nueva PC."
                            Foreground="#344A5B" FontSize="9" Margin="0,6,0,0"/>
             </StackPanel>
         </Border>

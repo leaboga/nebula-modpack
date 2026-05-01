@@ -12,13 +12,14 @@ namespace KrakenLauncher.Services
         private static NavigationService? _instance;
         public static NavigationService Instance => _instance ??= new NavigationService();
 
-        private readonly Dictionary<string, HubView> _hubCache = new();
         private ContentControl? _container;
         private FrameworkElement? _homeView;
         private TextBlock? _viewLabel;
         private TextBlock? _viewTitle;
         private Action? _onStopCurrent;
-        private string _lastGameFolder = "";
+        private HubView? _systemsHub;
+        private HubView? _resourcesHub;
+        private HubView? _networkHub;
 
         public void Initialize(ContentControl container, FrameworkElement homeView, TextBlock viewLabel, TextBlock viewTitle, Action onStopCurrent)
         {
@@ -34,15 +35,15 @@ namespace KrakenLauncher.Services
             if (_container == null || _homeView == null) return;
 
             _onStopCurrent?.Invoke();
-            ResetCacheIfProfileChanged(main);
 
             _container.Visibility = Visibility.Collapsed;
             _homeView.Visibility = Visibility.Collapsed;
+            _container.Content = null;
 
             switch (vista)
             {
                 case "home":
-                    UpdateHeaders("INICIO", "Panel principal");
+                    UpdateHeaders("CENTRO DE OPERACIONES", "Bienvenido, Comandante");
                     _homeView.Visibility = Visibility.Visible;
                     AnimateView(_homeView, main);
                     break;
@@ -53,14 +54,9 @@ namespace KrakenLauncher.Services
                 case "perf":
                 case "console":
                 case "crash":
-                    UpdateHeaders("SISTEMA", "Configuracion y diagnostico");
-                    SwitchToModule(GetOrCreateHub("systems", main, () => new List<HubView.HubTab>
-                    {
-                        new() { Label = "Motor", Icon = "CORE", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Setup de Kraken", ViewFactory = () => new ConfigView(main) },
-                        new() { Label = "Rendimiento", Icon = "TPS", HeaderLabel = "OPTIMIZACION", HeaderTitle = "Rendimiento y RAM", ViewFactory = () => new PerformanceView(main) },
-                        new() { Label = "Consola", Icon = "LOG", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", ViewFactory = () => new ConsoleView() },
-                        new() { Label = "Diagnostico", Icon = "FIX", HeaderLabel = "DIAGNOSTICO", HeaderTitle = "Herramientas de Soporte", ViewFactory = () => new CrashDiagnosticView(main.GetCrashReporter()) }
-                    }), main);
+                    _systemsHub ??= CreateSystemsHub(main);
+                    UpdateHeaders("SISTEMAS", "Nucleo de Control");
+                    SwitchToModule(_systemsHub, main);
                     break;
 
                 case "recursos":
@@ -68,14 +64,9 @@ namespace KrakenLauncher.Services
                 case "modmanager":
                 case "modpacks":
                 case "changelog":
-                    UpdateHeaders("RECURSOS", "Mods y archivos locales");
-                    SwitchToModule(GetOrCreateHub("resources", main, () => new List<HubView.HubTab>
-                    {
-                        new() { Label = "Biblioteca", Icon = "LIB", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Modulos Externos", ViewFactory = () => new VaultView(main.GameFolder, main.CurrentProfile) },
-                        new() { Label = "Mis Mods", Icon = "JAR", HeaderLabel = "LOGISTICA", HeaderTitle = "Gestion Local", ViewFactory = () => CreateModManager(main) },
-                        new() { Label = "Expediciones", Icon = "MAP", HeaderLabel = "MODPACK HUB", HeaderTitle = "Catalogo de Viajes", ViewFactory = () => new ModpackView() },
-                        new() { Label = "Novedades", Icon = "NEW", HeaderLabel = "NOTIFICACIONES", HeaderTitle = "Bitacora de Versiones", ViewFactory = () => new ChangelogView() }
-                    }), main);
+                    _resourcesHub ??= CreateResourcesHub(main);
+                    UpdateHeaders("RECURSOS", "Almacenamiento y Datos");
+                    SwitchToModule(_resourcesHub, main);
                     break;
 
                 case "red":
@@ -84,36 +75,67 @@ namespace KrakenLauncher.Services
                 case "hosting":
                 case "localhost":
                 case "screenshots":
-                    UpdateHeaders("SERVIDOR", "Red, mapa y servidor local");
-                    SwitchToModule(GetOrCreateHub("network", main, () => new List<HubView.HubTab>
-                    {
-                        new() { Label = "Comunidad", Icon = "COM", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", ViewFactory = () => new SocialView(main.Session.ServerIp, main.Session.Username) },
-                        new() { Label = "Mapa", Icon = "GPS", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", ViewFactory = () => new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
-                        new() { Label = "Hosting", Icon = "NET", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting ", ViewFactory = () => new HostingServiceView() },
-                        new() { Label = "Local", Icon = "DEV", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", ViewFactory = () => new ServerHostView() },
-                        new() { Label = "Capturas", Icon = "IMG", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", ViewFactory = () => new ScreenshotsView(main.GameFolder) }
-                    }), main);
+                    _networkHub ??= CreateNetworkHub(main);
+                    UpdateHeaders("RED ABISAL", "Comunicaciones y Flota");
+                    SwitchToModule(_networkHub, main);
                     break;
             }
         }
 
-        private HubView GetOrCreateHub(string key, MainWindow main, Func<List<HubView.HubTab>> tabsFactory)
+        public void InvalidateCache()
         {
-            if (_hubCache.TryGetValue(key, out var cached)) return cached;
+            _systemsHub?.StopActiveModule();
+            _resourcesHub?.StopActiveModule();
+            _networkHub?.StopActiveModule();
+            _systemsHub = null;
+            _resourcesHub = null;
+            _networkHub = null;
+        }
 
-            var hub = new HubView(main, tabsFactory());
+        private HubView CreateSystemsHub(MainWindow main)
+        {
+            var systemsTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Configs", HeaderLabel = "SINCRONIZACION", HeaderTitle = "Configs y Ajustes", View = new ConfigView(main) },
+                new HubView.HubTab { Label = "Rendimiento", HeaderLabel = "OPTIMIZACION", HeaderTitle = "Rendimiento y RAM", View = new PerformanceView(main) },
+                new HubView.HubTab { Label = "Consola", HeaderLabel = "TERMINAL", HeaderTitle = "Consola de Sistema", View = new ConsoleView() },
+                new HubView.HubTab { Label = "Soporte", HeaderLabel = "DIAGNOSTICO", HeaderTitle = "Herramientas de Soporte", View = new CrashDiagnosticView(main.GetCrashReporter()) }
+            };
+
+            var hub = new HubView(main, systemsTabs);
             hub.OnHeaderUpdateRequested += UpdateHeaders;
-            _hubCache[key] = hub;
             return hub;
         }
 
-        private void ResetCacheIfProfileChanged(MainWindow main)
+        private HubView CreateResourcesHub(MainWindow main)
         {
-            if (_lastGameFolder == main.GameFolder) return;
+            var resourcesTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Biblioteca", HeaderLabel = "CENTRO DE RECURSOS", HeaderTitle = "Modulos Externos", View = new VaultView(main.GameFolder, main.CurrentProfile) },
+                new HubView.HubTab { Label = "Mis Mods", HeaderLabel = "LOGISTICA", HeaderTitle = "Gestion Local", View = CreateModManager(main) },
+                new HubView.HubTab { Label = "Expediciones", HeaderLabel = "MODPACK HUB", HeaderTitle = "Catalogo de Viajes", View = new ModpackView() },
+                new HubView.HubTab { Label = "Novedades", HeaderLabel = "NOTIFICACIONES", HeaderTitle = "Bitacora de Versiones", View = new ChangelogView() }
+            };
 
-            _lastGameFolder = main.GameFolder;
-            foreach (var hub in _hubCache.Values) hub.StopActive();
-            _hubCache.Clear();
+            var hub = new HubView(main, resourcesTabs);
+            hub.OnHeaderUpdateRequested += UpdateHeaders;
+            return hub;
+        }
+
+        private HubView CreateNetworkHub(MainWindow main)
+        {
+            var networkTabs = new List<HubView.HubTab>
+            {
+                new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(main.Session.ServerIp, main.Session.Username) },
+                new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", View = new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
+                new HubView.HubTab { Label = "Infraestructura", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galactico", View = new HostingServiceView() },
+                new HubView.HubTab { Label = "Pruebas", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", View = new ServerHostView() },
+                new HubView.HubTab { Label = "Capturas", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", View = new ScreenshotsView(main.GameFolder) }
+            };
+
+            var hub = new HubView(main, networkTabs);
+            hub.OnHeaderUpdateRequested += UpdateHeaders;
+            return hub;
         }
 
         private ModManagerView CreateModManager(MainWindow main)
@@ -133,7 +155,6 @@ namespace KrakenLauncher.Services
         {
             if (_container == null) return;
             _container.Visibility = Visibility.Visible;
-            if (ReferenceEquals(_container.Content, module)) return;
             _container.Content = module;
             AnimateView(_container, main);
         }

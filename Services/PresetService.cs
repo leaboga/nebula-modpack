@@ -20,12 +20,28 @@ namespace KrakenLauncher.Services
         public class PresetMetadata
         {
             public string Name { get; set; } = "";
+            public int VersionNumber { get; set; }
             public DateTime CreatedAt { get; set; }
             public string MinecraftVersion { get; set; } = "";
             public List<string> IncludedFiles { get; set; } = new();
         }
 
-        public async Task SavePresetAsync(string gameFolder, string presetName, string mcVersion)
+        public int GetNextPresetVersion()
+        {
+            int maxVersion = 0;
+            foreach (var preset in GetPresets())
+            {
+                if (preset.VersionNumber > maxVersion)
+                {
+                    maxVersion = preset.VersionNumber;
+                }
+            }
+            return maxVersion + 1;
+        }
+
+        public string BuildPresetName(int versionNumber) => $"Revision {versionNumber:D3}";
+
+        public async Task<PresetMetadata> SavePresetAsync(string gameFolder, string presetName, string mcVersion)
         {
             string targetDir = Path.Combine(_presetsFolder, presetName);
             if (Directory.Exists(targetDir)) Directory.Delete(targetDir, true);
@@ -36,7 +52,7 @@ namespace KrakenLauncher.Services
 
             var included = new List<string>();
 
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 foreach (var file in filesToCopy)
                 {
@@ -58,9 +74,11 @@ namespace KrakenLauncher.Services
                     }
                 }
 
+                int versionNumber = ExtractVersionNumber(presetName);
                 var metadata = new PresetMetadata
                 {
                     Name = presetName,
+                    VersionNumber = versionNumber,
                     CreatedAt = DateTime.Now,
                     MinecraftVersion = mcVersion,
                     IncludedFiles = included
@@ -68,6 +86,8 @@ namespace KrakenLauncher.Services
 
                 File.WriteAllText(Path.Combine(targetDir, "metadata.json"), 
                     JsonSerializer.Serialize(metadata, new JsonSerializerOptions { WriteIndented = true }));
+
+                return metadata;
             });
         }
 
@@ -191,6 +211,17 @@ namespace KrakenLauncher.Services
         {
             string path = Path.Combine(_presetsFolder, name);
             if (Directory.Exists(path)) Directory.Delete(path, true);
+        }
+
+        private static int ExtractVersionNumber(string presetName)
+        {
+            string[] parts = presetName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length > 1 && int.TryParse(parts[^1], out int parsed))
+            {
+                return parsed;
+            }
+
+            return 0;
         }
     }
 }

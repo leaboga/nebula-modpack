@@ -11,21 +11,15 @@ namespace KrakenLauncher.Modules
         public class HubTab
         {
             public string Label { get; set; } = "";
-            public string Icon { get; set; } = "";
+            public string Icon { get; set; } = "⚙️";
             public UserControl? View { get; set; }
-            public Func<UserControl>? ViewFactory { get; set; }
             public string HeaderLabel { get; set; } = "";
             public string HeaderTitle { get; set; } = "";
-
-            public UserControl GetView()
-            {
-                if (View == null && ViewFactory != null) View = ViewFactory();
-                return View ?? new UserControl();
-            }
         }
 
-        private readonly List<HubTab> _tabs;
-        private readonly MainWindow _main;
+        private List<HubTab> _tabs = new List<HubTab>();
+        private MainWindow _main;
+        private UserControl? _currentView;
 
         public event Action<string, string>? OnHeaderUpdateRequested;
 
@@ -34,7 +28,7 @@ namespace KrakenLauncher.Modules
             InitializeComponent();
             _main = main;
             _tabs = tabs;
-
+            
             InitializeTabs();
         }
 
@@ -45,7 +39,7 @@ namespace KrakenLauncher.Modules
             {
                 var rb = new RadioButton
                 {
-                    Content = string.IsNullOrWhiteSpace(tab.Icon) ? tab.Label : $"{tab.Icon}  {tab.Label}",
+                    Content = tab.Label,
                     Style = (Style)_main.FindResource("ToggleTab"),
                     Margin = new Thickness(0, 0, 12, 0),
                     Tag = tab
@@ -59,24 +53,35 @@ namespace KrakenLauncher.Modules
 
         private void Tab_Checked(object sender, RoutedEventArgs e)
         {
-            if (sender is not RadioButton rb || rb.Tag is not HubTab tab) return;
-
-            StopActive();
-            ActiveModuleContainer.Content = tab.GetView();
-            OnHeaderUpdateRequested?.Invoke(tab.HeaderLabel, tab.HeaderTitle);
-
-            var sb = (Storyboard)_main.FindResource("TabChangeEffect");
-            sb.Begin(ActiveModuleContainer);
+            if (sender is RadioButton rb && rb.Tag is HubTab tab)
+            {
+                StopView(_currentView);
+                _currentView = tab.View;
+                ActiveModuleContainer.Content = tab.View;
+                OnHeaderUpdateRequested?.Invoke(tab.HeaderLabel, tab.HeaderTitle);
+                
+                // Animation
+                var sb = (Storyboard)_main.FindResource("TabChangeEffect");
+                sb.Begin(ActiveModuleContainer);
+            }
         }
 
-        public void StopActive()
+        public void StopActiveModule()
         {
-            try
+            StopView(_currentView);
+        }
+
+        private static void StopView(UserControl? view)
+        {
+            switch (view)
             {
-                if (ActiveModuleContainer?.Content is SocialView sv) sv.Stop();
-                if (ActiveModuleContainer?.Content is PerformanceView pv) pv.Stop();
+                case SocialView social:
+                    social.Stop();
+                    break;
+                case PerformanceView perf:
+                    perf.Stop();
+                    break;
             }
-            catch { }
         }
     }
 }
