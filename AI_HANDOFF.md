@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.0.3`
+- Version publicada mas reciente: `3.0.4`
 - Fecha de referencia: `2026-05-01`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
@@ -25,6 +25,27 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.0.4 (Startup Resource Hotfix)
+
+### Cambios principales
+
+- `Themes/Styles.xaml`
+  - se restauraron recursos base que la UI ya estaba consumiendo pero no existian en el diccionario:
+    - `BodyFont`
+    - `DisplayFont`
+    - `MonoFont`
+    - `BoolToVis`
+    - `GlowColor`
+    - `AppleSlider`
+- esto corrige el `XamlParseException` de arranque relacionado con `StaticResourceExtension`
+- `KrakenLauncher.csproj`, `app.manifest`, `KrakenSetup.iss`
+  - bump a `3.0.4`
+
+### Validacion realizada
+
+- Build `Release` exitoso tras restaurar los recursos faltantes
+- Se verifico que las keys consumidas por la UI de arranque ahora existen en `Themes/Styles.xaml`
 
 ## Version 3.0.3 (Updater Hardening)
 
