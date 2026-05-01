@@ -168,7 +168,7 @@ namespace KrakenLauncher
                 
                 Dispatcher.Invoke(() => {
                     VersionFooterLabel.Text = $"KRAKEN ENGINE v{liveVersion}";
-                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} â€” Núcleo estable.");
+                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} - Núcleo estable.");
                     
                     if (_session.AuthMode == "offline" && string.IsNullOrEmpty(_session.Username))
                         NickTextBox.Focus();
@@ -297,7 +297,7 @@ namespace KrakenLauncher
             {
                 if (!_lastOnlinePlayers.Contains(p))
                 {
-                    AgregarLog($"ðŸ‘‹ {p} se ha unido al servidor.");
+                    AgregarLog($" {p} se ha unido al servidor.");
                     // Mejora: Toast feedback visual rápido
                     Dispatcher.Invoke(() => {
                         StatusText.Text = $"âœ¨ {p} entró!";
@@ -918,7 +918,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             string currentNews = news[new Random().Next(news.Length)];
 
             HomeGreetingLabel.Text = !string.IsNullOrEmpty(_session.Username)
-                ? $"{greeting}, {_session.Username} ðŸ‘‹\nðŸ“¢ {currentNews}"
+                ? $"{greeting}, {_session.Username}\n>> {currentNews}"
                 : "Listo para jugar";
         }
 
@@ -1541,7 +1541,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     await _backupService.CreateQuickConfigBackupAsync();
                 }
 
-                if (turboMode) AgregarLog("âš¡ Modo Turbo activado â€” omitiendo sincronización de archivos.");
+                if (turboMode) AgregarLog("âš¡ Modo Turbo activado - omitiendo sincronización de archivos.");
 
                 if (!turboMode && _manifestActual != null)
                 {
@@ -1666,7 +1666,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        //  ADMIN â€” PUBLISH UPDATE
+        //  ADMIN - PUBLISH UPDATE
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private async void PublicarLauncher_Click(object sender, RoutedEventArgs e)
         {

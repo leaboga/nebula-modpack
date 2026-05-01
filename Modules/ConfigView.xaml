@@ -249,31 +249,10 @@
                         <Border Width="32" Height="32" CornerRadius="9" Background="#EC4899">
                             <TextBlock Text="🎨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Tema y Apariencia" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Fondo de Pantalla" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="COLOR DE ACENTO" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ColorPurple"  MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#00F2FF" Background="#00F2FF" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorBlue"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#3B82F6" Background="#3B82F6" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorEmerald" MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#10B981" Background="#10B981" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorRose"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#F43F5E" Background="#F43F5E" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                    </StackPanel>
-
-                    <TextBlock Text="ESTILO GLOBAL (PRESSET)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ThemeNebula"  MouseDown="Theme_MouseDown" Tag="#00F2FF" Width="90" Height="34" Background="#0D151D" BorderBrush="#00F2FF" BorderThickness="2" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Abisal" Foreground="#E6F9FF" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border x:Name="ThemeCrimson" MouseDown="Theme_MouseDown" Tag="#EF4444" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Relikt" Foreground="#EF4444" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border x:Name="ThemeEmerald" MouseDown="Theme_MouseDown" Tag="#10B981" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Bosque" Foreground="#10B981" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </StackPanel>
-
-                    <TextBlock Text="FONDO DE PANTALLA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
+                    <TextBlock Text="IMAGEN PERSONALIZADA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

@@ -201,20 +201,7 @@ namespace KrakenLauncher.Modules
             _ = _mainWindow.ForceUpdateStatus();
         }
 
-        private void Theme_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border btn && btn.Tag is string hex)
-            {
-                _mainWindow.Session.AccentColor = hex;
-                _mainWindow.GuardarSesion();
-                _mainWindow.ActualizarColorTema();
-                
-                // Actualizar bordes de selección (UI simple feedback)
-                ThemeNebula.BorderThickness  = new Thickness(hex == "#00F2FF" ? 2 : 1);
-                ThemeCrimson.BorderThickness = new Thickness(hex == "#EF4444" ? 2 : 1);
-                ThemeEmerald.BorderThickness = new Thickness(hex == "#10B981" ? 2 : 1);
-            }
-        }
+        
 
         private void RamSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -359,15 +346,7 @@ namespace KrakenLauncher.Modules
             _mainWindow.GuardarSesion();
         }
 
-        private void Color_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border btn && btn.Tag is string hex)
-            {
-                _mainWindow.Session.AccentColor = hex;
-                _mainWindow.GuardarSesion();
-                _mainWindow.ActualizarColorTema();
-            }
-        }
+        
 
         private async void PapaModeBtn_Click(object sender, RoutedEventArgs e)
         {
