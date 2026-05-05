@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KrakenLauncher
 {
@@ -197,14 +198,32 @@ namespace KrakenLauncher
             try
             {
                 string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
-                var info = JsonConvert.DeserializeObject<OfficialConfigInfo>(json);
-                if (info == null) return null;
-                info.Hash ??= "";
-                info.ConfigVersion ??= "0";
-                if (string.IsNullOrWhiteSpace(info.PublishedBy)) info.PublishedBy = "Pepa";
-                return info;
+                return NormalizarConfigInfo(json);
             }
-            catch { return null; }
+            catch
+            {
+                try
+                {
+                    string apiJson = await _http.GetStringAsync("https://api.github.com/repos/leaboga/nebula-modpack/contents/config-hash.json?ref=main&t=" + DateTime.Now.Ticks);
+                    var apiObj = JObject.Parse(apiJson);
+                    string encoded = apiObj["content"]?.ToString() ?? "";
+                    if (string.IsNullOrWhiteSpace(encoded)) return null;
+
+                    string json = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(encoded.Replace("\n", "").Replace("\r", "")));
+                    return NormalizarConfigInfo(json);
+                }
+                catch { return null; }
+            }
+        }
+
+        private OfficialConfigInfo? NormalizarConfigInfo(string json)
+        {
+            var info = JsonConvert.DeserializeObject<OfficialConfigInfo>(json);
+            if (info == null) return null;
+            info.Hash ??= "";
+            info.ConfigVersion ??= "0";
+            if (string.IsNullOrWhiteSpace(info.PublishedBy)) info.PublishedBy = "Pepa";
+            return info;
         }
 
         /// <summary>
