@@ -58,6 +58,16 @@ namespace KrakenLauncher
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
+        private static readonly HashSet<string> ArchivosPersonalesConfig = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "options.txt",
+            "options.of.txt",
+            "servers.dat",
+            "servers.dat_old",
+            "hotbar.nbt",
+            "realms_persistence.json"
+        };
+
         public ModSyncer(string gameFolder) {
             _gameFolder = gameFolder;
             _modsFolder = Path.Combine(gameFolder, "mods");
@@ -241,7 +251,8 @@ namespace KrakenLauncher
                     url = $"https://github.com/leaboga/nebula-modpack/releases/download/v{version}-assets/client-assets.zip";
                 }
 
-                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets_" + Guid.NewGuid().ToString("N") + ".zip");
+                string stagingDir = Path.Combine(Path.GetTempPath(), "nebula_assets_extract_" + Guid.NewGuid().ToString("N"));
                 if (!await DescargarConStream(url, tempZip)) {
                     if (!string.IsNullOrEmpty(version)) {
                         OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
@@ -249,41 +260,100 @@ namespace KrakenLauncher
                     } else if (!await DescargarConStream(LegacyPepitaAssetsUrl, tempZip)) return;
                 }
 
-                // Archivos que NO deben sobreescribirse nunca (preferencias personales de Minecraft)
-                var protegidos = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "options.txt",
-                    "options.of.txt",
-                    "servers.dat",
-                    "hotbar.nbt",
-                    "realms_persistence.json"
-                };
-
                 using (var zip = System.IO.Compression.ZipFile.OpenRead(tempZip))
                 {
+                    ValidarRutasZip(zip);
+                    Directory.CreateDirectory(stagingDir);
+                    zip.ExtractToDirectory(stagingDir, overwriteFiles: true);
+
+                    if (sobrescribirTodo)
+                    {
+                        LimpiarTargetsDelPaquete(zip);
+                    }
+
                     foreach (var entry in zip.Entries)
                     {
                         if (string.IsNullOrEmpty(entry.Name)) continue; // es directorio
 
-                        string destPath = Path.Combine(_gameFolder, entry.FullName.Replace('/', Path.DirectorySeparatorChar));
+                        string relativePath = entry.FullName.Replace('/', Path.DirectorySeparatorChar);
+                        string sourcePath = Path.Combine(stagingDir, relativePath);
+                        string destPath = Path.Combine(_gameFolder, relativePath);
                         string fileName = Path.GetFileName(destPath);
 
                         // Proteger archivos personales si no se forzó sobrescritura
-                        if (!sobrescribirTodo && File.Exists(destPath) && protegidos.Contains(fileName))
+                        if (!sobrescribirTodo && File.Exists(destPath) && ArchivosPersonalesConfig.Contains(fileName))
                         {
                             OnLog?.Invoke($"  🛡 Protegido (no sobreescrito): {fileName}");
                             continue;
                         }
 
                         Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
-                        entry.ExtractToFile(destPath, overwrite: true);
+                        File.Copy(sourcePath, destPath, overwrite: true);
                     }
                 }
 
-                File.Delete(tempZip);
+                if (File.Exists(tempZip)) File.Delete(tempZip);
+                if (Directory.Exists(stagingDir)) Directory.Delete(stagingDir, recursive: true);
                 OnLog?.Invoke("✓ Ajustes visuales de Pepita aplicados.");
             }
             catch (Exception ex) { OnLog?.Invoke("⚠ Error sincronizando configs: " + ex.Message); }
+        }
+
+        private void ValidarRutasZip(ZipArchive zip)
+        {
+            string root = Path.GetFullPath(_gameFolder).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) + Path.DirectorySeparatorChar;
+            foreach (var entry in zip.Entries)
+            {
+                if (string.IsNullOrEmpty(entry.Name)) continue;
+                string relativePath = entry.FullName.Replace('/', Path.DirectorySeparatorChar);
+                string fullPath = Path.GetFullPath(Path.Combine(_gameFolder, relativePath));
+                if (!fullPath.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException("El paquete de configs contiene una ruta invalida: " + entry.FullName);
+                }
+            }
+        }
+
+        private void LimpiarTargetsDelPaquete(ZipArchive zip)
+        {
+            var cleaned = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var entry in zip.Entries)
+            {
+                if (string.IsNullOrEmpty(entry.Name)) continue;
+                string normalized = entry.FullName.Replace('\\', '/').Trim('/');
+                if (string.IsNullOrWhiteSpace(normalized)) continue;
+
+                string target;
+                int slash = normalized.IndexOf('/');
+                if (slash > 0)
+                {
+                    string topLevel = normalized[..slash];
+                    if (!topLevel.Equals("config", StringComparison.OrdinalIgnoreCase)) continue;
+                    target = Path.Combine(_gameFolder, topLevel);
+                }
+                else
+                {
+                    target = Path.Combine(_gameFolder, normalized);
+                }
+
+                if (!cleaned.Add(target)) continue;
+                try
+                {
+                    if (Directory.Exists(target))
+                    {
+                        OnLog?.Invoke("  Limpiando configs anteriores: " + Path.GetFileName(target));
+                        Directory.Delete(target, recursive: true);
+                    }
+                    else if (File.Exists(target))
+                    {
+                        File.Delete(target);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new IOException("No se pudo limpiar config anterior: " + target + " (" + ex.Message + ")", ex);
+                }
+            }
         }
 
         /// <summary>
