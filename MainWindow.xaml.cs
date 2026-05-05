@@ -1310,7 +1310,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             try
             {
                 var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
-                if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion)) return;
+                if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion) || string.IsNullOrWhiteSpace(remoteInfo.Hash)) return;
 
                 string versionOficial = remoteInfo.ConfigVersion;
                 string profileId = CurrentProfile?.Id ?? "default";
@@ -1324,11 +1324,11 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     Dispatcher.Invoke(() =>
                     {
                         var res = MessageBox.Show(
-                            $"Hay una nueva configuracion oficial v{versionOficial} disponible para este perfil.\n\n" +
-                            "Incluye optimizaciones de rendimiento, shaders y keybinds recomendados.\n" +
-                            "Deseas aplicarla ahora?\n\n" +
-                            "Tus controles personales se respetaran siempre que sea posible.",
-                            "Configuracion Recomendada",
+                            $"{remoteInfo.PublishedBy} actualizo sus configs para mayor rendimiento.\n\n" +
+                            $"Revision oficial v{versionOficial} disponible.\n" +
+                            "Quieres copiarlas ahora?\n\n" +
+                            "Se hara un backup automatico antes de sobrescribir tus configs actuales.",
+                            "Configs recomendadas",
                             MessageBoxButton.YesNo, MessageBoxImage.Information);
 
                         if (res == MessageBoxResult.Yes)
@@ -1362,7 +1362,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     else if (Directory.Exists(src)) CopyDirectory(src, System.IO.Path.Combine(backupDir, target));
                 }
 
-                await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+                await _syncer.SincronizarConfigs(sobrescribirTodo: true);
 
                 string profileId = CurrentProfile?.Id ?? "default";
                 _session.LastAppliedConfigHash = remoteInfo.Hash;

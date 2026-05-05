@@ -506,7 +506,7 @@ namespace KrakenLauncher.Modules
         private async void InicializarPanelPepita()
         {
             bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-            bool esPepita = (_mainWindow.Session.IsAdmin && esAdminPc)
+            bool esPepita = _mainWindow.Session.IsAdmin
                          || (_mainWindow.Session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
                          || (_mainWindow.Session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
 

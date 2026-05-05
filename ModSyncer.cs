@@ -48,6 +48,7 @@ namespace KrakenLauncher
     {
         private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions-index.json";
         private const string AssetsUrl        = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
+        private const string LegacyPepitaAssetsUrl = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets-pepita.zip";
         private readonly HttpClient _http = new HttpClient();
         private readonly string _modsFolder;
         private readonly string _gameFolder;
@@ -60,7 +61,7 @@ namespace KrakenLauncher
             _gameFolder = gameFolder;
             _modsFolder = Path.Combine(gameFolder, "mods");
             Directory.CreateDirectory(_modsFolder);
-            _http.Timeout = TimeSpan.FromSeconds(5);
+            _http.Timeout = TimeSpan.FromSeconds(30);
             _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/" + Services.VersionManager.GetCurrentVersion());
         }
 
@@ -225,8 +226,8 @@ namespace KrakenLauncher
                 if (!await DescargarConStream(url, tempZip)) {
                     if (!string.IsNullOrEmpty(version)) {
                         OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
-                        if (!await DescargarConStream(AssetsUrl, tempZip)) return;
-                    } else return;
+                        if (!await DescargarConStream(AssetsUrl, tempZip) && !await DescargarConStream(LegacyPepitaAssetsUrl, tempZip)) return;
+                    } else if (!await DescargarConStream(LegacyPepitaAssetsUrl, tempZip)) return;
                 }
 
                 // Archivos que NO deben sobreescribirse nunca (preferencias personales de Minecraft)
@@ -280,7 +281,7 @@ namespace KrakenLauncher
                 { log("❌ No existe la carpeta config/"); return false; }
 
                 // 1. Crear ZIP temporal con todo el contenido del gameFolder relevante
-                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets-pepita.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (File.Exists(tempZip)) File.Delete(tempZip);
 
                 log("📦 Empaquetando configs...");
@@ -376,7 +377,18 @@ namespace KrakenLauncher
                 catch { }
 
                 var proc2 = System.Diagnostics.Process.Start(psi2);
-                if (proc2 != null) await proc2.WaitForExitAsync();
+                if (proc2 == null)
+                {
+                    log("No se pudo actualizar config-hash.json.");
+                    return false;
+                }
+
+                await proc2.WaitForExitAsync();
+                if (proc2.ExitCode != 0)
+                {
+                    log("Error actualizando config-hash.json: " + await proc2.StandardError.ReadToEndAsync());
+                    return false;
+                }
 
                 File.Delete(tempZip);
                 log($"✅ Configs de Pepita publicadas (hash: {hash[..8]}...)");
