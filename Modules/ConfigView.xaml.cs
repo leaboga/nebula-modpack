@@ -644,7 +644,8 @@ namespace KrakenLauncher.Modules
 
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content = "Publicando...";
+            btn.Content = "Subiendo...";
+            SetAdminPublishProgress(0, "Esperando confirmacion...", false);
             try
             {
                 var remoteInfo = await GetSyncer().ObtenerConfigOficialRemota();
@@ -665,7 +666,11 @@ namespace KrakenLauncher.Modules
 
                 var syncer = GetSyncer();
                 int ramActual = _mainWindow.CurrentProfile?.RamGB ?? 4;
-                bool ok = await syncer.PublicarConfigsAdmin(msg => _mainWindow.AgregarLog(msg), ramActual, _mainWindow.Session.Username);
+                bool ok = await syncer.PublicarConfigsAdmin(
+                    msg => _mainWindow.AgregarLog(msg),
+                    ramActual,
+                    _mainWindow.Session.Username,
+                    (percent, status, indeterminate) => Dispatcher.Invoke(() => SetAdminPublishProgress(percent, status, indeterminate)));
 
                 if (ok)
                 {
@@ -674,22 +679,34 @@ namespace KrakenLauncher.Modules
                     _mainWindow.Session.RejectedConfigVersions.Remove(profileId);
                     _mainWindow.GuardarSesion();
                     await ActualizarEstadoHashAsync();
+                    SetAdminPublishProgress(100, $"Revision oficial v{nextConfigV} publicada.", false);
                     NotificationService.Instance.ShowSuccess($"Revision oficial v{nextConfigV} publicada exitosamente.");
                 }
                 else
                 {
+                    SetAdminPublishProgress(0, "No se pudo publicar. Revisa los logs.", false);
                     NotificationService.Instance.ShowError("Error al publicar. Verifica logs.");
                 }
             }
             catch (Exception ex)
             {
+                SetAdminPublishProgress(0, "Error al publicar configs.", false);
                 NotificationService.Instance.ShowError($"Error: {ex.Message}");
             }
             finally
             {
                 btn.IsEnabled = true;
-                btn.Content = "Publicar Revision Oficial";
+                btn.Content = "Subir configs oficiales";
             }
+        }
+
+        private void SetAdminPublishProgress(int percent, string status, bool indeterminate)
+        {
+            AdminPublishStatusPanel.Visibility = Visibility.Visible;
+            AdminPublishStatusText.Text = status;
+            AdminPublishProgress.IsIndeterminate = indeterminate;
+            AdminPublishProgress.Value = indeterminate ? 50 : Math.Max(0, Math.Min(100, percent));
+            AdminPublishPercentText.Text = indeterminate ? "..." : $"{Math.Max(0, Math.Min(100, percent))}%";
         }
 
         private async void BtnForzarConfigsPropias_Click(object sender, RoutedEventArgs e)

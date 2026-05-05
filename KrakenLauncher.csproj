@@ -8,15 +8,15 @@
 		<UseWPF>true</UseWPF>
 		<AssemblyName>KrakenLauncher</AssemblyName>
 		<ApplicationIcon>kraken.ico</ApplicationIcon>
-		<Version>3.0.9</Version>
+		<Version>3.0.10</Version>
 		<Authors>Leandro (KRAKEN Development)</Authors>
 		<Company>KRAKEN Ecosystem</Company>
 		<Product>KRAKEN</Product>
 		<Description>KRAKEN Engine - Abyssal Minecraft Hub</Description>
 		<Copyright>Copyright © 2026 KRAKEN Project</Copyright>
 		
-		<AssemblyVersion>3.0.9</AssemblyVersion>
-		<FileVersion>3.0.9</FileVersion>
+		<AssemblyVersion>3.0.10</AssemblyVersion>
+		<FileVersion>3.0.10</FileVersion>
 		
 		<!-- Visuals for EXE -->
 		

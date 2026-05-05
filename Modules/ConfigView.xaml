@@ -399,11 +399,48 @@
                 </Border>
 
                 <Button x:Name="BtnPublicarConfigsAdmin"
-                        Content="☁ Publicar Revision Oficial"
+                        Content="Subir configs oficiales"
                         Click="BtnPublicarConfigsAdmin_Click"
                         Style="{DynamicResource PlayButton}"
                         Height="44"
                         Background="#7C3AED"/>
+
+                <Border x:Name="AdminPublishStatusPanel"
+                        Background="#0C1320"
+                        CornerRadius="10"
+                        Padding="12"
+                        Margin="0,10,0,0"
+                        BorderBrush="#7C3AED30"
+                        BorderThickness="1"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,8">
+                            <TextBlock x:Name="AdminPublishStatusText"
+                                       Text="Listo para subir configs."
+                                       Foreground="#D8B4FE"
+                                       FontSize="11"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       DockPanel.Dock="Left"/>
+                            <TextBlock x:Name="AdminPublishPercentText"
+                                       Text="0%"
+                                       Foreground="#A78BFA"
+                                       FontSize="11"
+                                       FontFamily="Consolas"
+                                       HorizontalAlignment="Right"/>
+                        </DockPanel>
+                        <ProgressBar x:Name="AdminPublishProgress"
+                                     Minimum="0"
+                                     Maximum="100"
+                                     Value="0"
+                                     Height="8"/>
+                        <TextBlock Text="Mantene el launcher abierto hasta que termine la subida."
+                                   Foreground="#7B6FA0"
+                                   FontSize="9"
+                                   Margin="0,8,0,0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
 
                 <Separator Background="#1A1030" Margin="0,16,0,12"/>
 
@@ -421,3 +458,4 @@
     </StackPanel>
     </ScrollViewer>
 </UserControl>
+

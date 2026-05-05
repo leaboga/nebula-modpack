@@ -291,7 +291,7 @@ namespace KrakenLauncher
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
-        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string publishedBy = "Pepa")
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string publishedBy = "Pepa", Action<int, string, bool>? progress = null)
         {
             try
             {
@@ -305,6 +305,7 @@ namespace KrakenLauncher
 
                 log("📦 Empaquetando configs...");
 
+                progress?.Invoke(10, "Preparando paquete de configs...", false);
                 // Incluimos config/ y options.txt y options.of.txt si existen
                 using (var archive = System.IO.Compression.ZipFile.Open(tempZip, System.IO.Compression.ZipArchiveMode.Create))
                 {
@@ -327,11 +328,13 @@ namespace KrakenLauncher
                 }
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
+                progress?.Invoke(35, "Calculando hash de la revision...", false);
                 string hash = CalcularMD5(tempZip);
                 log($"🔑 Hash de configs: {hash}");
 
                 // 3. Subir ZIP a GitHub Release (tag: client-assets-1.0 → overwrite asset)
                 log("☁ Subiendo ZIP a GitHub...");
+                progress?.Invoke(50, "Subiendo configs a GitHub...", true);
                 var psi = new System.Diagnostics.ProcessStartInfo("gh",
                     $"release upload client-assets-1.0 \"{tempZip}\" --repo leaboga/nebula-modpack --clobber")
                 {
@@ -351,6 +354,7 @@ namespace KrakenLauncher
 
                 // 4. Crear/actualizar config-hash.json en el repo (requiere gh + repo clonado o API)
                 //    Usamos un archivo temporal y lo subimos via gh api
+                progress?.Invoke(80, "Publicando aviso para los jugadores...", false);
                 var currentInfo = await ObtenerConfigOficialRemota();
                 int currentVersion = 0;
                 int.TryParse(currentInfo?.ConfigVersion ?? "0", out currentVersion);
@@ -410,6 +414,7 @@ namespace KrakenLauncher
                 }
 
                 File.Delete(tempZip);
+                progress?.Invoke(100, "Configs oficiales publicadas.", false);
                 log($"✅ Configs de Pepita publicadas (hash: {hash[..8]}...)");
                 return true;
             }
