@@ -502,10 +502,10 @@ namespace KrakenLauncher.Modules
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                              "KrakenLauncher", "minecraft"));
 
-        /// <summary>Muestra u oculta el panel admin segun el modo admin del launcher.</summary>
+        /// <summary>Inicializa el bloque de configs oficiales. El boton de subida pide clave al usarse.</summary>
         private async void InicializarPanelPepita()
         {
-            PepitaAdminPanel.Visibility = _mainWindow.Session.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
+            PepitaAdminPanel.Visibility = Visibility.Visible;
 
             // Verificar estado del hash en background
             await ActualizarEstadoHashAsync();
@@ -631,7 +631,7 @@ namespace KrakenLauncher.Modules
         private async void BtnPublicarConfigsAdmin_Click(object sender, RoutedEventArgs e)
         {
             var login = new AdminLoginWindow { Owner = _mainWindow };
-            if (login.ShowDialog() != true || login.Clave != "pepita2026")
+            if (login.ShowDialog() != true || login.Clave != "1530")
             {
                 if (!string.IsNullOrEmpty(login.Clave)) MessageBox.Show("Clave incorrecta.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

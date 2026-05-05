@@ -108,8 +108,6 @@ namespace KrakenLauncher
 
             PathService.Initialize();
             CargarSesion();
-            ApplyAdminState();
-
             InitializeProfileServices();
             InitializeModernServices();
 
@@ -1425,11 +1423,10 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
         private void ApplyAdminState()
         {
-            if (AdminPanel == null || AdminAccessButton == null) return;
+            if (AdminPanel == null) return;
 
             bool isAdmin = _session.IsAdmin || _session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
             AdminPanel.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
-            AdminAccessButton.Content = isAdmin ? "Admin activo" : "Modo admin";
         }
 
         private void OpenConfigAdmin_Click(object sender, RoutedEventArgs e)
