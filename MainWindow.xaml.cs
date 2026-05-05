@@ -108,6 +108,7 @@ namespace KrakenLauncher
 
             PathService.Initialize();
             CargarSesion();
+            ApplyAdminState();
 
             InitializeProfileServices();
             InitializeModernServices();
@@ -1158,92 +1159,6 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             PlayButton.Content = "â–¶  JUGAR";
         }
 
-        /// <summary>
-        /// Verifica si las configs de Pepita cambiaron (via hash remoto).
-        /// Si cambiaron y el usuario no es Pepita, muestra un dialogo para que ELIJA si aplicar.
-        /// Si se llama con forzar=true (desde admin), aplica sin preguntar.
-        /// </summary>
-        private async Task AplicarConfigsSiHayCambiosAsync(bool forzar)
-        {
-            try
-            {
-                bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-                bool esPepita = (_session.IsAdmin && esAdminPc)
-                             || (_session.Username.Equals("Pepita", StringComparison.OrdinalIgnoreCase) && esAdminPc)
-                             || (_session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
-
-                var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
-                if (remoteInfo == null || string.IsNullOrEmpty(remoteInfo.Hash))
-                {
-                    AgregarLog("Info: No se pudo verificar la config oficial remota.");
-                    return;
-                }
-
-                string profileId = CurrentProfile?.Id ?? "default";
-                string versionRemota = remoteInfo.ConfigVersion;
-                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId)
-                    ? _session.AppliedConfigVersions[profileId] : "0";
-
-                if (versionRemota == versionAplicada)
-                {
-                    AgregarLog("Config oficial al dia.");
-                    return;
-                }
-
-                if (!forzar && _session.RejectedConfigVersions.ContainsKey(profileId) && _session.RejectedConfigVersions[profileId] == versionRemota)
-                {
-                    AgregarLog("Hay una config oficial nueva, pero ya fue rechazada para esta revision.");
-                    return;
-                }
-
-                if (esPepita && !forzar)
-                {
-                    AgregarLog("Admin detectado: la revision oficial puede gestionarse desde Sistemas Pepa.");
-                    return;
-                }
-
-                bool aplicar = forzar;
-                if (!forzar)
-                {
-                    var resultado = Dispatcher.Invoke(() =>
-                        MessageBox.Show(
-                            $"Hay una nueva configuracion oficial v{versionRemota} disponible para este perfil.\n\n" +
-                            "Incluye optimizaciones, shaders y ajustes recomendados.\n" +
-                            "Si eliges que no, no volvera a aparecer hasta que Pepa publique otra revision.\n\n" +
-                            "Deseas aplicarla ahora?",
-                            "Configuracion Recomendada",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Question));
-                    aplicar = resultado == MessageBoxResult.Yes;
-                }
-
-                if (aplicar)
-                {
-                    AgregarLog($"Aplicando config oficial v{versionRemota}...");
-                    await _syncer.SincronizarConfigs(sobrescribirTodo: true);
-                    _session.LastAppliedConfigHash = remoteInfo.Hash;
-                    _session.AppliedConfigVersions[profileId] = versionRemota;
-
-                    if (CurrentProfile != null)
-                    {
-                        CurrentProfile.RamGB = remoteInfo.RecommendedRam;
-                        AgregarLog($"RAM ajustada a la recomendada: {remoteInfo.RecommendedRam}GB");
-                    }
-
-                    _session.RejectedConfigVersions.Remove(profileId);
-                    GuardarSesion();
-                    Services.NotificationService.Instance.ShowSuccess($"Config oficial v{versionRemota} aplicada.");
-                }
-                else
-                {
-                    _session.RejectedConfigVersions[profileId] = versionRemota;
-                    GuardarSesion();
-                    AgregarLog($"Config oficial v{versionRemota} rechazada por el usuario.");
-                }
-            }
-            catch (Exception ex) { AgregarLog($"Error al verificar configs: {ex.Message}"); }
-        }
-
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!string.IsNullOrEmpty(_session.CloudPath))
@@ -1476,7 +1391,15 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         private void AdminAccessButton_Click(object sender, RoutedEventArgs e)
         {
             bool isAdmin = _session.Username.ToLower() == "leandro" || _session.IsAdmin;
-            if (isAdmin) { AdminPanel.Visibility = AdminPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible; return; }
+            if (isAdmin)
+            {
+                _session.IsAdmin = true;
+                GuardarSesion();
+                ApplyAdminState();
+                NavigationService.Instance.InvalidateCache();
+                if (CurrentViewLabel?.Text == "SISTEMAS") CambiarVista("sistemas");
+                return;
+            }
 
             var dialog = new Window { Title = "Acceso Admin", Width = 340, Height = 160, WindowStartupLocation = WindowStartupLocation.CenterOwner, Owner = this, ResizeMode = ResizeMode.NoResize, Background = new SolidColorBrush(Color.FromRgb(0x0F, 0x0B, 0x1A)), FontFamily = FontFamily };
             var panel  = new StackPanel { Margin = new Thickness(24) };
@@ -1488,8 +1411,31 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             panel.Children.Add(lbl); panel.Children.Add(tb); panel.Children.Add(btn);
             dialog.Content = panel;
             dialog.Loaded += (_, _) => tb.Focus();
-            if (dialog.ShowDialog() == true && tb.Password == "1530") { _session.IsAdmin = true; GuardarSesion(); AdminPanel.Visibility = Visibility.Visible; AgregarLog("\u2705 Modo admin activado."); }
+            if (dialog.ShowDialog() == true && tb.Password == "1530")
+            {
+                _session.IsAdmin = true;
+                GuardarSesion();
+                ApplyAdminState();
+                NavigationService.Instance.InvalidateCache();
+                if (CurrentViewLabel?.Text == "SISTEMAS") CambiarVista("sistemas");
+                AgregarLog("\u2705 Modo admin activado.");
+            }
             else if (dialog.DialogResult == true) AgregarLog("\u26A0 Clave incorrecta.");
+        }
+
+        private void ApplyAdminState()
+        {
+            if (AdminPanel == null || AdminAccessButton == null) return;
+
+            bool isAdmin = _session.IsAdmin || _session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
+            AdminPanel.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+            AdminAccessButton.Content = isAdmin ? "Admin activo" : "Modo admin";
+        }
+
+        private void OpenConfigAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista("sistemas");
+            AgregarLog("Panel de configs oficiales abierto.");
         }
 
         public void ReiniciarInstancia()
@@ -1569,7 +1515,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     }
                     else
                     {
-                        await AplicarConfigsSiHayCambiosAsync(forzar: false);
+                        await VerificandoConfigOficialAlCargar();
                     }
                 }
                 PlayButton.Content = "Iniciando Minecraft...";

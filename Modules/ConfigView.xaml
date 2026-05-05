@@ -385,7 +385,7 @@
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="Panel Admin - Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="SOLO MODO ADMIN" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 

@@ -502,15 +502,10 @@ namespace KrakenLauncher.Modules
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                              "KrakenLauncher", "minecraft"));
 
-        /// <summary>Muestra u oculta el panel admin según si el usuario es Pepita.</summary>
+        /// <summary>Muestra u oculta el panel admin segun el modo admin del launcher.</summary>
         private async void InicializarPanelPepita()
         {
-            bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-            bool esPepita = _mainWindow.Session.IsAdmin
-                         || (_mainWindow.Session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
-                         || (_mainWindow.Session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
-
-            PepitaAdminPanel.Visibility = esPepita ? Visibility.Visible : Visibility.Collapsed;
+            PepitaAdminPanel.Visibility = _mainWindow.Session.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
 
             // Verificar estado del hash en background
             await ActualizarEstadoHashAsync();
