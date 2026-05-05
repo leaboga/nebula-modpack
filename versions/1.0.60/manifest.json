@@ -1,6 +1,6 @@
 {
     "version":  "1.0.60",
-    "label":  "v1.0.60 (05/05 20:07)",
+    "label":  "v1.0.60 (05/05 20:10)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1418,40 +1418,46 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/xaeroworldmap-neoforge-1.21.1-1.40.11.jar"
                  },
                  {
+                     "name":  "collective-1.21.1-8.22",
+                     "filename":  "collective-1.21.1-8.22.jar",
+                     "md5":  "8075d9a7daf7bb35b59333db0280145f",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/collective-1.21.1-8.22.jar"
+                 },
+                 {
                      "name":  "continuity-3.0.0+1.21.neoforge",
                      "filename":  "continuity-3.0.0_1.21.neoforge.jar",
                      "md5":  "06a2323e992834efcac3505e3ee57b15",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/continuity-3.0.0_1.21.neoforge.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/continuity-3.0.0_1.21.neoforge.jar"
                  },
                  {
                      "name":  "create_ltab-3.9.2",
                      "filename":  "create_ltab-3.9.2.jar",
                      "md5":  "62fbb7828440d69270be829cbc837b80",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/create_ltab-3.9.2.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/create_ltab-3.9.2.jar"
                  },
                  {
                      "name":  "emotecraft-for-MC1.21.1-2.4.12-neoforge",
                      "filename":  "emotecraft-for-MC1.21.1-2.4.12-neoforge.jar",
                      "md5":  "c4840725c74865e2ba95807396c66a4f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/emotecraft-for-MC1.21.1-2.4.12-neoforge.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/emotecraft-for-MC1.21.1-2.4.12-neoforge.jar"
                  },
                  {
                      "name":  "stackrefill-1.21.1-4.9",
                      "filename":  "stackrefill-1.21.1-4.9.jar",
                      "md5":  "273174368b609bde49b5e7b272c24dd5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/stackrefill-1.21.1-4.9.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/stackrefill-1.21.1-4.9.jar"
                  },
                  {
                      "name":  "tempad-1.21.1-3.0.4-all",
                      "filename":  "tempad-1.21.1-3.0.4-all.jar",
                      "md5":  "9d39322d3e6faacd6f4de706a3272b4b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/tempad-1.21.1-3.0.4-all.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/tempad-1.21.1-3.0.4-all.jar"
                  },
                  {
                      "name":  "rrls-5.0.10+mc1.21.1-forge",
                      "filename":  "rrls-5.0.10_mc1.21.1-forge.jar",
                      "md5":  "4d7bcd6cb496085e9371a3a5d10ad4c6",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2007/rrls-5.0.10_mc1.21.1-forge.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.60-2010/rrls-5.0.10_mc1.21.1-forge.jar"
                  }
              ]
 }
