@@ -1,6 +1,6 @@
 {
     "version":  "1.0.54",
-    "label":  "v1.0.54 (05/05 01:54)",
+    "label":  "v1.0.54 (05/05 01:55)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1445,7 +1445,7 @@
                      "name":  "AAAA_SYNC_FORCE_1.0.54",
                      "filename":  "AAAA_SYNC_FORCE_1.0.54.jar",
                      "md5":  "fab9ceef4be76a3d6b4616a08b38b6f0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.54-0154/AAAA_SYNC_FORCE_1.0.54.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.54-0155/AAAA_SYNC_FORCE_1.0.54.jar"
                  }
              ]
 }
