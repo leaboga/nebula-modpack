@@ -266,11 +266,6 @@ namespace KrakenLauncher
                     Directory.CreateDirectory(stagingDir);
                     zip.ExtractToDirectory(stagingDir, overwriteFiles: true);
 
-                    if (sobrescribirTodo)
-                    {
-                        LimpiarTargetsDelPaquete(zip);
-                    }
-
                     foreach (var entry in zip.Entries)
                     {
                         if (string.IsNullOrEmpty(entry.Name)) continue; // es directorio
@@ -356,6 +351,18 @@ namespace KrakenLauncher
             }
         }
 
+        private static bool DebeExcluirDeConfigsOficiales(string relativePath, long length)
+        {
+            string normalized = relativePath.Replace('\\', '/').TrimStart('/');
+            string extension = Path.GetExtension(normalized);
+
+            if (length > 25 * 1024 * 1024) return true;
+            if (normalized.StartsWith("config/fancymenu/assets/", StringComparison.OrdinalIgnoreCase)) return true;
+            if (extension.Equals(".fma", StringComparison.OrdinalIgnoreCase)) return true;
+
+            return false;
+        }
+
         /// <summary>
         /// [ADMIN - solo Pepita] Empaqueta la carpeta config/ local y la sube a GitHub Releases
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
@@ -383,6 +390,11 @@ namespace KrakenLauncher
                     foreach (var file in Directory.GetFiles(configDir, "*", SearchOption.AllDirectories))
                     {
                         string relative = Path.GetRelativePath(_gameFolder, file);
+                        if (DebeExcluirDeConfigsOficiales(relative, new FileInfo(file).Length))
+                        {
+                            log("  Omitido asset pesado/no-config: " + relative);
+                            continue;
+                        }
                         archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
                     }
 
