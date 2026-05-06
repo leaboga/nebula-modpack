@@ -394,6 +394,44 @@ namespace KrakenLauncher
             log("  Incluido: " + folderName + "/");
         }
 
+        private static bool CarpetaConfigsValida(string folder)
+        {
+            string configDir = Path.Combine(folder, "config");
+            return File.Exists(Path.Combine(folder, "options.txt"))
+                && Directory.Exists(configDir)
+                && Directory.GetFiles(configDir, "*", SearchOption.AllDirectories).Length >= 25;
+        }
+
+        private static string ResolverCarpetaFuenteConfigs(string gameFolder, Action<string> log)
+        {
+            if (CarpetaConfigsValida(gameFolder)) return gameFolder;
+
+            string instances = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "instances");
+            if (!Directory.Exists(instances)) return gameFolder;
+
+            string best = gameFolder;
+            int bestCount = 0;
+            foreach (var dir in Directory.GetDirectories(instances))
+            {
+                string configDir = Path.Combine(dir, "config");
+                if (!File.Exists(Path.Combine(dir, "options.txt")) || !Directory.Exists(configDir)) continue;
+                int count = Directory.GetFiles(configDir, "*", SearchOption.AllDirectories).Length;
+                if (count > bestCount)
+                {
+                    best = dir;
+                    bestCount = count;
+                }
+            }
+
+            if (!best.Equals(gameFolder, StringComparison.OrdinalIgnoreCase) && bestCount >= 25)
+            {
+                log("  Perfil actual incompleto. Publicando desde instancia valida: " + Path.GetFileName(best));
+                return best;
+            }
+
+            return gameFolder;
+        }
+
         /// <summary>
         /// [ADMIN - solo Pepita] Empaqueta la carpeta config/ local y la sube a GitHub Releases
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
@@ -403,7 +441,8 @@ namespace KrakenLauncher
         {
             try
             {
-                string configDir = Path.Combine(_gameFolder, "config");
+                string sourceFolder = ResolverCarpetaFuenteConfigs(_gameFolder, log);
+                string configDir = Path.Combine(sourceFolder, "config");
                 if (!Directory.Exists(configDir))
                 { log("❌ No existe la carpeta config/"); return false; }
 
@@ -420,7 +459,7 @@ namespace KrakenLauncher
                     // config/ completa
                     foreach (var file in Directory.GetFiles(configDir, "*", SearchOption.AllDirectories))
                     {
-                        string relative = Path.GetRelativePath(_gameFolder, file);
+                        string relative = Path.GetRelativePath(sourceFolder, file);
                         if (DebeExcluirDeConfigsOficiales(relative, new FileInfo(file).Length))
                         {
                             log("  Omitido asset pesado/no-config: " + relative);
@@ -430,19 +469,20 @@ namespace KrakenLauncher
                     }
 
                     // options.txt
-                    string optsPath = Path.Combine(_gameFolder, "options.txt");
+                    string optsPath = Path.Combine(sourceFolder, "options.txt");
                     if (File.Exists(optsPath))
                         archive.CreateEntryFromFile(optsPath, "options.txt");
 
                     // shaderpacks/shaders.txt si existe (shaderpack seleccionado)
-                    string shaderOpts = Path.Combine(_gameFolder, "optionsshaders.txt");
+                    string shaderOpts = Path.Combine(sourceFolder, "optionsshaders.txt");
                     if (File.Exists(shaderOpts))
                         archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
 
-                    EmpaquetarCarpetaOficial(archive, _gameFolder, "shaderpacks", log);
-                    EmpaquetarCarpetaOficial(archive, _gameFolder, "resourcepacks", log);
+                    EmpaquetarCarpetaOficial(archive, sourceFolder, "shaderpacks", log);
+                    EmpaquetarCarpetaOficial(archive, sourceFolder, "resourcepacks", log);
                 }
 
+                bool paqueteIncompleto = false;
                 using (var check = System.IO.Compression.ZipFile.OpenRead(tempZip))
                 {
                     int totalEntries = 0;
@@ -465,11 +505,17 @@ namespace KrakenLauncher
                     {
                         log($"❌ Paquete oficial incompleto: {configEntries} configs, options.txt={(hasOptions ? "si" : "no")}.");
                         log("Aborto la subida para no publicar configs parciales.");
-                        File.Delete(tempZip);
-                        return false;
+                        paqueteIncompleto = true;
                     }
 
-                    log($"  Paquete validado: {configEntries} configs, {shaderPackEntries} shaders, {resourcePackEntries} resource packs.");
+                    if (!paqueteIncompleto)
+                        log($"  Paquete validado: {configEntries} configs, {shaderPackEntries} shaders, {resourcePackEntries} resource packs.");
+                }
+
+                if (paqueteIncompleto)
+                {
+                    if (File.Exists(tempZip)) File.Delete(tempZip);
+                    return false;
                 }
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
