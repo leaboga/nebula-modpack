@@ -283,7 +283,7 @@ namespace KrakenLauncher
                         }
 
                         Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
-                        File.Copy(sourcePath, destPath, overwrite: true);
+                        CopiarConfigEntry(sourcePath, destPath, fileName);
                     }
                 }
 
@@ -292,6 +292,23 @@ namespace KrakenLauncher
                 OnLog?.Invoke("✓ Ajustes visuales de Pepita aplicados.");
             }
             catch (Exception ex) { OnLog?.Invoke("⚠ Error sincronizando configs: " + ex.Message); }
+        }
+
+        private void CopiarConfigEntry(string sourcePath, string destPath, string fileName)
+        {
+            if (!fileName.Equals("options.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                File.Copy(sourcePath, destPath, overwrite: true);
+                return;
+            }
+
+            string text = File.ReadAllText(sourcePath);
+            string localFolder = _gameFolder.Replace("\\", "\\\\");
+            text = System.Text.RegularExpressions.Regex.Replace(
+                text,
+                @"[A-Z]:\\\\Users\\\\[^""]+?\\\\AppData\\\\Roaming\\\\KrakenLauncher\\\\instances\\\\[^""]+",
+                localFolder);
+            File.WriteAllText(destPath, text);
         }
 
         private void ValidarRutasZip(ZipArchive zip)
@@ -363,6 +380,20 @@ namespace KrakenLauncher
             return false;
         }
 
+        private static void EmpaquetarCarpetaOficial(ZipArchive archive, string gameFolder, string folderName, Action<string> log)
+        {
+            string folder = Path.Combine(gameFolder, folderName);
+            if (!Directory.Exists(folder)) return;
+
+            foreach (var file in Directory.GetFiles(folder, "*", SearchOption.AllDirectories))
+            {
+                string relative = Path.GetRelativePath(gameFolder, file);
+                archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
+            }
+
+            log("  Incluido: " + folderName + "/");
+        }
+
         /// <summary>
         /// [ADMIN - solo Pepita] Empaqueta la carpeta config/ local y la sube a GitHub Releases
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
@@ -407,12 +438,17 @@ namespace KrakenLauncher
                     string shaderOpts = Path.Combine(_gameFolder, "optionsshaders.txt");
                     if (File.Exists(shaderOpts))
                         archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
+
+                    EmpaquetarCarpetaOficial(archive, _gameFolder, "shaderpacks", log);
+                    EmpaquetarCarpetaOficial(archive, _gameFolder, "resourcepacks", log);
                 }
 
                 using (var check = System.IO.Compression.ZipFile.OpenRead(tempZip))
                 {
                     int totalEntries = 0;
                     int configEntries = 0;
+                    int shaderPackEntries = 0;
+                    int resourcePackEntries = 0;
                     bool hasOptions = false;
                     foreach (var entry in check.Entries)
                     {
@@ -420,6 +456,8 @@ namespace KrakenLauncher
                         totalEntries++;
                         string normalized = entry.FullName.Replace('\\', '/');
                         if (normalized.StartsWith("config/", StringComparison.OrdinalIgnoreCase)) configEntries++;
+                        if (normalized.StartsWith("shaderpacks/", StringComparison.OrdinalIgnoreCase)) shaderPackEntries++;
+                        if (normalized.StartsWith("resourcepacks/", StringComparison.OrdinalIgnoreCase)) resourcePackEntries++;
                         if (normalized.Equals("options.txt", StringComparison.OrdinalIgnoreCase)) hasOptions = true;
                     }
 
@@ -430,6 +468,8 @@ namespace KrakenLauncher
                         File.Delete(tempZip);
                         return false;
                     }
+
+                    log($"  Paquete validado: {configEntries} configs, {shaderPackEntries} shaders, {resourcePackEntries} resource packs.");
                 }
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
