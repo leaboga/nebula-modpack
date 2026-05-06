@@ -1,6 +1,6 @@
 {
     "version":  "1.0.63",
-    "label":  "v1.0.63 (05/05 20:58)",
+    "label":  "v1.0.63 (05/05 21:02)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1475,7 +1475,13 @@
                      "name":  "connectedglass-1.1.14-neoforge-mc1.21",
                      "filename":  "connectedglass-1.1.14-neoforge-mc1.21.jar",
                      "md5":  "978a7bee8daa65f9e3b480405e6da41c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.63-2058/connectedglass-1.1.14-neoforge-mc1.21.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.63-2102/connectedglass-1.1.14-neoforge-mc1.21.jar"
+                 },
+                 {
+                     "name":  "supermartijn642corelib-1.1.21-neoforge-mc1.21",
+                     "filename":  "supermartijn642corelib-1.1.21-neoforge-mc1.21.jar",
+                     "md5":  "8da575ef57766fd02875b10fccae3aca",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.63-2102/supermartijn642corelib-1.1.21-neoforge-mc1.21.jar"
                  }
              ]
 }
