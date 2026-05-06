@@ -1139,7 +1139,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 
                 // 2. Sync CONFIGS/ASSETS
                 PlayButton.Content = "Actualizando configs...";
-                await _syncer.SincronizarConfigs(_manifestActual?.Version);
+                await _syncer.SincronizarConfigs(sobrescribirTodo: true);
                 
                 if (modsOk)
                 {
@@ -1499,7 +1499,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     if (isNewInstall)
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
-                        await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
+                        await _syncer.SincronizarConfigs(sobrescribirTodo: true);
                         var res = await _syncer.ObtenerConfigOficialRemota();
                         _session.LastAppliedConfigHash = res?.Hash ?? "";
                         string profileId = CurrentProfile?.Id ?? "default";

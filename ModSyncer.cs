@@ -397,6 +397,29 @@ namespace KrakenLauncher
                         archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
                 }
 
+                using (var check = System.IO.Compression.ZipFile.OpenRead(tempZip))
+                {
+                    int totalEntries = 0;
+                    int configEntries = 0;
+                    bool hasOptions = false;
+                    foreach (var entry in check.Entries)
+                    {
+                        if (string.IsNullOrEmpty(entry.Name)) continue;
+                        totalEntries++;
+                        string normalized = entry.FullName.Replace('\\', '/');
+                        if (normalized.StartsWith("config/", StringComparison.OrdinalIgnoreCase)) configEntries++;
+                        if (normalized.Equals("options.txt", StringComparison.OrdinalIgnoreCase)) hasOptions = true;
+                    }
+
+                    if (!hasOptions || configEntries < 25 || totalEntries < 30)
+                    {
+                        log($"❌ Paquete oficial incompleto: {configEntries} configs, options.txt={(hasOptions ? "si" : "no")}.");
+                        log("Aborto la subida para no publicar configs parciales.");
+                        File.Delete(tempZip);
+                        return false;
+                    }
+                }
+
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
                 progress?.Invoke(35, "Calculando hash de la revision...", false);
                 string hash = CalcularMD5(tempZip);
