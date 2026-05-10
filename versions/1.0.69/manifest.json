@@ -1,6 +1,6 @@
 {
     "version":  "1.0.69",
-    "label":  "v1.0.69 (10/05 19:35)",
+    "label":  "v1.0.69 (10/05 19:38)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1460,28 +1460,34 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/xaeroworldmap-neoforge-1.21.1-1.40.11.jar"
                  },
                  {
+                     "name":  "moonlight-neoforge-1.21.1-3.0.7",
+                     "filename":  "moonlight-neoforge-1.21.1-3.0.7.jar",
+                     "md5":  "79ca047d53cb8d0c2f0f99a7e2b8c9e7",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/moonlight-neoforge-1.21.1-3.0.7.jar"
+                 },
+                 {
                      "name":  "plonk-1.21.1-10.0.6-neo",
                      "filename":  "plonk-1.21.1-10.0.6-neo.jar",
                      "md5":  "043634c2e3a4ca651a71f32b10f112c4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1935/plonk-1.21.1-10.0.6-neo.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/plonk-1.21.1-10.0.6-neo.jar"
                  },
                  {
                      "name":  "seamlesssleep-neoforge-1.21-2.5.3",
                      "filename":  "seamlesssleep-neoforge-1.21-2.5.3.jar",
                      "md5":  "64e31b876775c461ec1835fdab102982",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1935/seamlesssleep-neoforge-1.21-2.5.3.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/seamlesssleep-neoforge-1.21-2.5.3.jar"
                  },
                  {
                      "name":  "serversleep-mod",
                      "filename":  "serversleep-mod.jar",
                      "md5":  "1c09c362be06750d23b910a7b5b972a4",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1935/serversleep-mod.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/serversleep-mod.jar"
                  },
                  {
                      "name":  "sleep_tight-1.21-1.4.1-neoforge",
                      "filename":  "sleep_tight-1.21-1.4.1-neoforge.jar",
                      "md5":  "93ebb496ffe65714ca48c4977d0b4d5c",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1935/sleep_tight-1.21-1.4.1-neoforge.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/sleep_tight-1.21-1.4.1-neoforge.jar"
                  }
              ]
 }
