@@ -1,6 +1,6 @@
 {
     "version":  "1.0.81",
-    "label":  "v1.0.81 (13/05 15:25)",
+    "label":  "v1.0.81 (13/05 15:28)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -864,12 +864,6 @@
                      "filename":  "plonk-1.21.1-10.0.6-neo.jar",
                      "md5":  "043634c2e3a4ca651a71f32b10f112c4",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.69-1938/plonk-1.21.1-10.0.6-neo.jar"
-                 },
-                 {
-                     "name":  "polytone-1.21-3.6.7-neoforge",
-                     "filename":  "polytone-1.21-3.6.7-neoforge.jar",
-                     "md5":  "f62765f39337b2fc74f86d25de07dd7e",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.79-1512/polytone-1.21-3.6.7-neoforge.jar"
                  },
                  {
                      "name":  "ponderjs-neoforge-1.21.1-2.4.0",
