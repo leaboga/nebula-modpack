@@ -32,6 +32,8 @@ namespace KrakenLauncher
         // â”€â”€ Paths â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public MinecraftProfile? CurrentProfile => _session.Profiles.Find(p => p.Id == _session.CurrentProfileId) ?? (_session.Profiles.Count > 0 ? _session.Profiles[0] : null);
         public string GameFolder => PathService.GetInstanceFolder(CurrentProfile?.Id ?? "default");
+        private static readonly string[] FreeMinecraftVersions = { "1.21.1", "1.20.1", "1.19.2", "1.18.2", "1.16.5", "1.8.9" };
+        private bool CurrentProfileSyncsWithServer => CurrentProfile?.SyncWithServer == true;
 
         // â”€â”€ Theme brushes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
@@ -843,15 +845,27 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             if (_session.Profiles == null) _session.Profiles = new List<MinecraftProfile>();
             if (_session.Profiles.Count == 0)
             {
-                var defaultProfile = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
+                var defaultProfile = new MinecraftProfile { Name = "Perfil sincronizado con server", Version = "1.21.1", LoaderType = "neoforge", SyncWithServer = true };
                 _session.Profiles.Add(defaultProfile);
                 _session.CurrentProfileId = defaultProfile.Id;
             }
             if (string.IsNullOrEmpty(_session.CurrentProfileId)) _session.CurrentProfileId = _session.Profiles[0].Id;
 
+            var serverProfiles = _session.Profiles.Where(p => p.SyncWithServer).ToList();
+            if (serverProfiles.Count == 0)
+            {
+                _session.Profiles[0].SyncWithServer = true;
+            }
+            else if (serverProfiles.Count > 1)
+            {
+                var primaryServerProfile = serverProfiles[0];
+                foreach (var profile in serverProfiles.Skip(1)) profile.SyncWithServer = false;
+                primaryServerProfile.SyncWithServer = true;
+            }
+
             // Migración de nombres
             _session.Profiles.ForEach(p => { 
-                if (p.Name.Contains("Nebula Default")) p.Name = "KRAKEN Default";
+                if (p.SyncWithServer && (p.Name.Contains("Nebula Default") || p.Name.Contains("KRAKEN Default"))) p.Name = "Perfil sincronizado con server";
                 if (p.RamGB < 2) p.RamGB = 4; 
             });
 
@@ -982,9 +996,56 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             ProfileComboBox.SelectionChanged -= ProfileComboBox_SelectionChanged;
             ProfileComboBox.Items.Clear();
-            foreach (var p in _session.Profiles) ProfileComboBox.Items.Add($"{p.Icon} {p.Name}");
+            foreach (var p in _session.Profiles)
+            {
+                string mode = p.SyncWithServer ? "SERVER" : "LIBRE";
+                ProfileComboBox.Items.Add($"{p.Icon} {p.Name} [{mode}]");
+            }
             ProfileComboBox.SelectedIndex = _session.Profiles.FindIndex(p => p.Id == _session.CurrentProfileId);
             ProfileComboBox.SelectionChanged += ProfileComboBox_SelectionChanged;
+            ActualizarControlesPerfil();
+        }
+
+        private void ActualizarControlesPerfil()
+        {
+            if (CurrentProfile == null) return;
+
+            if (ProfileModeLabel != null)
+                ProfileModeLabel.Text = CurrentProfile.SyncWithServer
+                    ? "PERFIL SINCRONIZADO CON SERVER: mods/configs desde GitHub"
+                    : "PERFIL LIBRE: no sincroniza mods/configs del server";
+
+            if (DeleteProfileButton != null)
+                DeleteProfileButton.IsEnabled = _session.Profiles.Count > 1 && !CurrentProfile.SyncWithServer;
+
+            if (ProfileLoaderCombo != null)
+            {
+                ProfileLoaderCombo.SelectionChanged -= ProfileLoaderCombo_SelectionChanged;
+                for (int i = 0; i < ProfileLoaderCombo.Items.Count; i++)
+                {
+                    if (ProfileLoaderCombo.Items[i] is ComboBoxItem item &&
+                        string.Equals(item.Tag?.ToString(), CurrentProfile.LoaderType, StringComparison.OrdinalIgnoreCase))
+                    {
+                        ProfileLoaderCombo.SelectedIndex = i;
+                        break;
+                    }
+                }
+                ProfileLoaderCombo.IsEnabled = !CurrentProfile.SyncWithServer;
+                ProfileLoaderCombo.SelectionChanged += ProfileLoaderCombo_SelectionChanged;
+            }
+
+            ActualizarVersionesEnHome();
+        }
+
+        private void ActualizarEtiquetasPerfilActivo()
+        {
+            if (CurrentProfile == null) return;
+            if (ActiveProfileLabel != null) ActiveProfileLabel.Text = CurrentProfile.Name;
+            if (ActiveVersionLabel != null) ActiveVersionLabel.Text = CurrentProfile.SyncWithServer
+                ? (CurrentProfile.LastVersion == "" ? "SERVER" : CurrentProfile.LastVersion)
+                : CurrentProfile.Version;
+            if (ActiveLoaderLabel != null) ActiveLoaderLabel.Text = CurrentProfile.LoaderType.ToUpperInvariant();
+            if (ProfilePathLabel != null) ProfilePathLabel.Text = GameFolder;
         }
 
         private void ProfileComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -999,14 +1060,10 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             AgregarLog($"[PROFILE] Perfil cambiado a: {_session.Profiles[idx].Name}");
 
             _manifestActual = null;
-            _ = CargarVersionesAsync();
+            if (CurrentProfileSyncsWithServer) _ = CargarVersionesAsync();
+            else ActualizarVersionesEnHome();
             ActualizarGreeting();
             ActualizarSidebar();
-
-            Dispatcher.Invoke(() =>
-            {
-                ActualizarVersionesEnHome();
-            });
 
             if (RamSlider != null)
             {
@@ -1039,6 +1096,11 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         public void DeleteCurrentProfile()
         {
             if (CurrentProfile == null) return;
+            if (CurrentProfile.SyncWithServer)
+            {
+                AgregarLog("El perfil sincronizado con server esta protegido.");
+                return;
+            }
             
             var profileToDelete = CurrentProfile;
             _session.Profiles.Remove(profileToDelete);
@@ -1046,7 +1108,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             if (_session.Profiles.Count == 0)
             {
                 // Create a default profile if none left
-                var p = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
+                var p = new MinecraftProfile { Name = "Perfil sincronizado con server", Version = "1.21.1", LoaderType = "neoforge", SyncWithServer = true };
                 _session.Profiles.Add(p);
                 _session.CurrentProfileId = p.Id;
             }
@@ -1074,9 +1136,11 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             if (dialog.ShowDialog() == true && dialog.ResultProfile != null)
             {
                 var p = dialog.ResultProfile;
+                p.SyncWithServer = false;
                 _session.Profiles.Add(p);
                 _session.CurrentProfileId = p.Id;
                 GuardarSesion();
+                InitializeProfileServices();
                 ActualizarComboPerfiles();
                 AgregarLog($"✅ Perfil '{p.Name}' ({p.Version} {p.LoaderType}) creado.");
             }
@@ -1093,13 +1157,28 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                 LoaderVersion = CurrentProfile.LoaderVersion,
                 RamGB = CurrentProfile.RamGB,
                 JavaPath = CurrentProfile.JavaPath,
-                Icon = CurrentProfile.Icon
+                Icon = CurrentProfile.Icon,
+                SyncWithServer = false
             };
             _session.Profiles.Add(clone);
             _session.CurrentProfileId = clone.Id;
             GuardarSesion();
+            InitializeProfileServices();
             ActualizarComboPerfiles();
             AgregarLog($"âœ… Perfil '{newName}' clonado con éxito.");
+        }
+
+        private void DeleteProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentProfile == null) return;
+            if (CurrentProfile.SyncWithServer)
+            {
+                MessageBox.Show("El perfil sincronizado con server no se puede eliminar.", "Perfil protegido", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var res = MessageBox.Show($"Eliminar el perfil '{CurrentProfile.Name}'?\n\nEl perfil se quita del launcher; tus archivos de instancia no se borran automaticamente.", "Eliminar perfil", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (res == MessageBoxResult.Yes) DeleteCurrentProfile();
         }
 
         private void VerLog_Click(object sender, RoutedEventArgs e)
@@ -1126,6 +1205,11 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         public async Task SincronizarTodoAsync()
         {
             if (CurrentProfile == null) return;
+            if (!CurrentProfile.SyncWithServer)
+            {
+                AgregarLog($"Perfil libre '{CurrentProfile.Name}': no se sincronizan mods/configs de GitHub.");
+                return;
+            }
             AgregarLog("ðŸ› ï¸ Iniciando sincronización total (GitHub)...");
             
             _manifestActual = null; // Force reload from server
@@ -1192,6 +1276,13 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             try
             {
+                if (!CurrentProfileSyncsWithServer)
+                {
+                    _manifestActual = null;
+                    Dispatcher.Invoke(ActualizarVersionesEnHome);
+                    return;
+                }
+
                 AgregarLog("\uD83D\uDD0D Verificando versiones disponibles...");
                 _versionsIndex = await _syncer.ObtenerVersionsIndex();
 
@@ -1222,6 +1313,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             try
             {
+                if (!CurrentProfileSyncsWithServer) return;
                 var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
                 if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion) || string.IsNullOrWhiteSpace(remoteInfo.Hash)) return;
 
@@ -1297,12 +1389,44 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             int idx = VersionComboBox.SelectedIndex;
             if (idx < 0) return;
+            if (!CurrentProfileSyncsWithServer)
+            {
+                if (CurrentProfile != null && VersionComboBox.SelectedItem != null)
+                {
+                    CurrentProfile.Version = VersionComboBox.SelectedItem.ToString() ?? CurrentProfile.Version;
+                    CurrentProfile.LastVersion = "";
+                    GuardarSesion();
+                    ActualizarSidebar();
+                }
+                return;
+            }
             PlayButton.IsEnabled = false;
             await CargarManifest(idx);
         }
 
+        private void ProfileLoaderCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CurrentProfile == null || CurrentProfile.SyncWithServer) return;
+            if (ProfileLoaderCombo.SelectedItem is ComboBoxItem item)
+            {
+                CurrentProfile.LoaderType = item.Tag?.ToString() ?? "vanilla";
+                CurrentProfile.LoaderVersion = "";
+                CurrentProfile.Icon = CurrentProfile.LoaderType switch
+                {
+                    "fabric" => "F",
+                    "neoforge" => "N",
+                    "forge" => "G",
+                    _ => "V"
+                };
+                GuardarSesion();
+                ActualizarComboPerfiles();
+                ActualizarSidebar();
+            }
+        }
+
         private async Task CargarManifest(int idx)
         {
+            if (!CurrentProfileSyncsWithServer) return;
             if (_versionsIndex?.AvailableVersions == null || idx >= _versionsIndex.AvailableVersions.Count) return;
             var entry = _versionsIndex.AvailableVersions[idx];
             try
@@ -1320,6 +1444,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                         }
                     }
                     GuardarSesion();
+                    ActualizarEtiquetasPerfilActivo();
                     // Version label removed from UI
                     PlayButton.IsEnabled      = manifest != null;
                     if (manifest == null) AgregarLog($"\u26A0 No se pudo cargar manifest para {entry.Label}.");
@@ -1471,7 +1596,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                                     !Directory.Exists(System.IO.Path.Combine(GameFolder, "mods")) ||
                                     Directory.GetFiles(System.IO.Path.Combine(GameFolder, "mods"), "*.jar").Length == 0;
 
-                if (isNewInstall)
+                if (isNewInstall && CurrentProfile.SyncWithServer)
                 {
                     AgregarLog("📡 Perfil vacío detectado. Iniciando configuración inicial completa...");
                     turboMode = false;
@@ -1486,7 +1611,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
                 if (turboMode) AgregarLog("âš¡ Modo Turbo activado - omitiendo sincronización de archivos.");
 
-                if (!turboMode && _manifestActual != null)
+                if (!turboMode && CurrentProfile.SyncWithServer && _manifestActual != null)
                 {
                     PlayButton.Content = "Sincronizando mods...";
                     _discord.SetActivity("Sincronizando mods...");
@@ -1969,9 +2094,29 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         private void ActualizarVersionesEnHome()
         {
             if (CurrentProfile == null || VersionComboBox == null) return;
-            // Removed the hijacking of VersionComboBox with Vanilla versions.
-            // VersionComboBox is meant for the Modpack server versions via CargarVersionesAsync.
-            _ = CargarVersionesAsync();
+            VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
+            VersionComboBox.Items.Clear();
+            if (VersionComboTitle != null)
+                VersionComboTitle.Text = CurrentProfile.SyncWithServer ? "VERSION DEL PACK" : "VERSION DE MINECRAFT";
+
+            if (CurrentProfile.SyncWithServer)
+            {
+                if (_versionsIndex?.AvailableVersions != null && _versionsIndex.AvailableVersions.Count > 0)
+                {
+                    foreach (var v in _versionsIndex.AvailableVersions) VersionComboBox.Items.Add(v.Label);
+                    int savedIdx = _versionsIndex.AvailableVersions.FindIndex(v => v.Version == (CurrentProfile.LastVersion ?? ""));
+                    VersionComboBox.SelectedIndex = savedIdx >= 0 ? savedIdx : 0;
+                }
+            }
+            else
+            {
+                foreach (var version in FreeMinecraftVersions) VersionComboBox.Items.Add(version);
+                int idx = Array.IndexOf(FreeMinecraftVersions, CurrentProfile.Version);
+                VersionComboBox.SelectedIndex = idx >= 0 ? idx : 0;
+            }
+
+            VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
+            ActualizarEtiquetasPerfilActivo();
         }
 
         private void LimpiarCache_Click(object sender, RoutedEventArgs e)

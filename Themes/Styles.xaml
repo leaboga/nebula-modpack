@@ -157,20 +157,28 @@
         <Setter Property="Foreground" Value="#8E8E93"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="10,8"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="bg" Background="Transparent" CornerRadius="10" Padding="14,10" Margin="0,2" TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontWeight="SemiBold">
+                    <Border x:Name="bg" Background="Transparent" CornerRadius="10" Padding="{TemplateBinding Padding}" Margin="0,2" TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontWeight="SemiBold">
                         <StackPanel Orientation="Horizontal">
-                            <Border x:Name="Indicator" Width="3" Height="14" Background="{StaticResource AccentBrush}" CornerRadius="1.5" Margin="-14,0,8,0" Visibility="Hidden"/>
-                            <ContentPresenter x:Name="cp"/>
+                            <Border x:Name="Indicator" Width="0" Height="14" Background="{StaticResource AccentBrush}" CornerRadius="1.5" Margin="0" Visibility="Collapsed"/>
+                            <TextBlock x:Name="cp"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"
+                                       TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="bg" Property="Background" Value="#2C2C2E"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter TargetName="Indicator" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="Indicator" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>

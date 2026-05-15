@@ -32,8 +32,8 @@
                     <StackPanel Grid.Column="0" Margin="0,0,10,0">
                         <TextBlock Text="VERSIÓN MC" Foreground="#6D8A99" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                         <ComboBox x:Name="VersionCombo" Style="{DynamicResource ModernComboBox}" Height="40">
-                            <ComboBoxItem Content="1.20.1" IsSelected="True"/>
-                            <ComboBoxItem Content="1.21.1"/>
+                            <ComboBoxItem Content="1.21.1" IsSelected="True"/>
+                            <ComboBoxItem Content="1.20.1"/>
                             <ComboBoxItem Content="1.19.2"/>
                             <ComboBoxItem Content="1.18.2"/>
                             <ComboBoxItem Content="1.16.5"/>

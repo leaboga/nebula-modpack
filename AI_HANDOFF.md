@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.0.4`
-- Fecha de referencia: `2026-05-01`
+- Version publicada mas reciente: `3.1.7`
+- Fecha de referencia: `2026-05-15`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
@@ -25,6 +25,26 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.1.7 (Versioning & UI Polish)
+
+### Cambios principales
+
+- `KrakenLauncher.csproj`, `app.manifest`, `KrakenSetup.iss`
+  - Bump de versión a `3.1.7`.
+- `MainWindow.xaml.cs`
+  - Implementación de lógica dinámica para el selector de versiones del perfil.
+- `Modules/ConfigView.xaml`
+  - Se ocultó el panel de configuración de instancias por estar obsoleto.
+- `changelog.json`
+  - Actualizado con las novedades de la versión.
+
+### Validacion realizada
+
+- Build `Release` exitoso.
+- Verificación de consistencia de versiones en todos los archivos de manifiesto.
+- Creación de release en GitHub con el binario compilado.
+
 
 ## Version 3.0.4 (Startup Resource Hotfix)
 

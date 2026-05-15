@@ -58,5 +58,6 @@ namespace KrakenLauncher
         public string LastSyncDate   { get; set; } = "Nunca";
         public string LastSyncHash   { get; set; } = "";
         public string ModpackId      { get; set; } = "";
+        public bool   SyncWithServer { get; set; } = false;
     }
 }

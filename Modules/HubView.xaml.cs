@@ -42,14 +42,14 @@ namespace KrakenLauncher.Modules
             {
                 var rb = new RadioButton
                 {
-                    Content = CreateTabContent(tab.Label),
+                    Content = "  " + tab.Label.ToUpperInvariant(),
                     Style = (Style)_main.FindResource("ToggleTab"),
-                    Foreground = new SolidColorBrush(Color.FromRgb(0xA0, 0xA0, 0xA6)),
-                    FontSize = 13,
-                    FontWeight = FontWeights.SemiBold,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xC8, 0xD0, 0xD8)),
+                    FontSize = 12,
+                    FontWeight = FontWeights.Bold,
                     Cursor = System.Windows.Input.Cursors.Hand,
-                    Padding = new Thickness(14, 8, 14, 8),
-                    MinWidth = 92,
+                    Padding = new Thickness(12, 5, 12, 5),
+                    MinWidth = 128,
                     Margin = new Thickness(0, 0, 12, 0),
                     Tag = tab
                 };
@@ -59,21 +59,6 @@ namespace KrakenLauncher.Modules
 
                 if (TabContainer.Children.Count == 1) rb.IsChecked = true;
             }
-        }
-
-        private static Border CreateTabContent(string label)
-        {
-            return new Border
-            {
-                CornerRadius = new CornerRadius(10),
-                Padding = new Thickness(12, 8, 12, 8),
-                Child = new TextBlock
-                {
-                    Text = label,
-                    TextAlignment = TextAlignment.Center,
-                    TextWrapping = TextWrapping.NoWrap
-                }
-            };
         }
 
         private void Tab_Checked(object sender, RoutedEventArgs e)
@@ -99,14 +84,7 @@ namespace KrakenLauncher.Modules
                 bool isActive = rb == active;
                 rb.Foreground = isActive
                     ? Brushes.White
-                    : new SolidColorBrush(Color.FromRgb(0xA0, 0xA0, 0xA6));
-
-                if (rb.Content is Border border)
-                {
-                    border.Background = isActive
-                        ? new SolidColorBrush(Color.FromRgb(0x2C, 0x2C, 0x2E))
-                        : Brushes.Transparent;
-                }
+                    : new SolidColorBrush(Color.FromRgb(0xC8, 0xD0, 0xD8));
             }
         }
 

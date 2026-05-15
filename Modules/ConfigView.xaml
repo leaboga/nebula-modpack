@@ -21,7 +21,7 @@
             </StackPanel>
 
             <!-- Instances Config Card -->
-            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
+            <Border Visibility="Collapsed" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
