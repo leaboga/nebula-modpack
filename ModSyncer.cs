@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -64,9 +65,36 @@ namespace KrakenLauncher
             _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/" + Services.VersionManager.GetCurrentVersion());
         }
 
+        private async Task<string> GetGithubTextAsync(string url)
+        {
+            string cleanUrl = url.Split('?')[0];
+            const string rawPrefix = "https://raw.githubusercontent.com/";
+
+            if (cleanUrl.StartsWith(rawPrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                string relative = cleanUrl.Substring(rawPrefix.Length);
+                string[] parts = relative.Split('/', 4);
+                if (parts.Length == 4)
+                {
+                    string apiUrl = $"https://api.github.com/repos/{parts[0]}/{parts[1]}/contents/{parts[3]}?ref={parts[2]}";
+                    string response = await _http.GetStringAsync(apiUrl);
+                    dynamic? payload = JsonConvert.DeserializeObject(response);
+                    string? encoded = payload?.content;
+
+                    if (!string.IsNullOrWhiteSpace(encoded))
+                    {
+                        encoded = encoded.Replace("\n", "").Replace("\r", "");
+                        return Encoding.UTF8.GetString(Convert.FromBase64String(encoded));
+                    }
+                }
+            }
+
+            return await _http.GetStringAsync(url + (url.Contains("?") ? "&" : "?") + "t=" + DateTime.Now.Ticks);
+        }
+
         public async Task<VersionsIndex?> ObtenerVersionsIndex() {
             try {
-                string json = await _http.GetStringAsync(VersionsIndexUrl + "?t=" + DateTime.Now.Ticks);
+                string json = await GetGithubTextAsync(VersionsIndexUrl);
                 var index = JsonConvert.DeserializeObject<VersionsIndex>(json);
                 if (index != null) {
                     // Logic: If we are using a modpack-X.Y.Z tag for the index, we must also use it for the manifests
@@ -92,7 +120,7 @@ namespace KrakenLauncher
 
         public async Task<ModManifest?> ObtenerManifest(string manifestUrl) {
             try {
-                string json = await _http.GetStringAsync(manifestUrl + "?t=" + DateTime.Now.Ticks);
+                string json = await GetGithubTextAsync(manifestUrl);
                 var manifest = JsonConvert.DeserializeObject<ModManifest>(json);
                 if (manifest != null) {
                     bool fixedAny = false;
