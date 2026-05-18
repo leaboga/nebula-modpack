@@ -1,6 +1,6 @@
 {
     "version":  "1.0.111",
-    "label":  "v1.0.111 (18/05 14:52)",
+    "label":  "v1.0.111 (18/05 14:54)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -74,12 +74,6 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/alternate_current-mc1.21-1.9.0.jar"
                  },
                  {
-                     "name":  "antiquetradingship-1.3.0-neoforge-1.21.1",
-                     "filename":  "antiquetradingship-1.3.0-neoforge-1.21.1.jar",
-                     "md5":  "1cbcf70856476447bb9db4f349834e68",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/antiquetradingship-1.3.0-neoforge-1.21.1.jar"
-                 },
-                 {
                      "name":  "apex-v2.2.0-1.21.1-fabric",
                      "filename":  "apex-v2.2.0-1.21.1-fabric.jar",
                      "md5":  "148d8ae5dd161dbaab8fde52c86bd828",
@@ -138,12 +132,6 @@
                      "filename":  "attributefix-neoforge-1.21.1-21.1.3.jar",
                      "md5":  "1552cea16a40215f9773e609114ccce1",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/attributefix-neoforge-1.21.1-21.1.3.jar"
-                 },
-                 {
-                     "name":  "awesomedungeonocean-neoforge-1.21.1-3.3.0",
-                     "filename":  "awesomedungeonocean-neoforge-1.21.1-3.3.0.jar",
-                     "md5":  "35cc488ad3a60954414a59d3987eb134",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/awesomedungeonocean-neoforge-1.21.1-3.3.0.jar"
                  },
                  {
                      "name":  "azurelib-neo-1.21.1-3.1.8",
@@ -488,12 +476,6 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/evenbetternether-1.3.0-neoforge-1.21.1.jar"
                  },
                  {
-                     "name":  "Explorify v1.6.5.mod",
-                     "filename":  "Explorify_v1.6.5.mod.jar",
-                     "md5":  "55bb6ffd4c69edb45a0d4e75a0b071ca",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/Explorify_v1.6.5.mod.jar"
-                 },
-                 {
                      "name":  "FarmersDelight-1.21.1-1.2.11",
                      "filename":  "FarmersDelight-1.21.1-1.2.11.jar",
                      "md5":  "031f81f1de33d0acbca9105a54616bae",
@@ -618,12 +600,6 @@
                      "filename":  "hominid-1.3.1.jar",
                      "md5":  "5f26d65a582ebe10a7224b9f68f85425",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/hominid-1.3.1.jar"
-                 },
-                 {
-                     "name":  "HopoBetterUnderwaterRuins-[1.21.1-1.21.3]-1.2.1b",
-                     "filename":  "HopoBetterUnderwaterRuins-_1.21.1-1.21.3_-1.2.1b.jar",
-                     "md5":  "b6c89b75015b3f555277639edd643d3f",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/HopoBetterUnderwaterRuins-_1.21.1-1.21.3_-1.2.1b.jar"
                  },
                  {
                      "name":  "immersive_aircraft-1.4.2_1.21.1-neoforge",
@@ -818,12 +794,6 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.10-1701/mca-neoforge-7.7.6_1.21.1.jar"
                  },
                  {
-                     "name":  "medieval_buildings-1.21.1-1.1.1-neoforge",
-                     "filename":  "medieval_buildings-1.21.1-1.1.1-neoforge.jar",
-                     "md5":  "cc4acadb79d307e8193a4b4bf1e16487",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/medieval_buildings-1.21.1-1.1.1-neoforge.jar"
-                 },
-                 {
                      "name":  "melody_neoforge_1.0.10_MC_1.21",
                      "filename":  "melody_neoforge_1.0.10_MC_1.21.jar",
                      "md5":  "875f4a68f2cd7ee2cc135904653c93d4",
@@ -858,12 +828,6 @@
                      "filename":  "modtabs-1.21.1-2.3.1-Neoforge.jar",
                      "md5":  "c7763b1ca2519ba9d38c5ef3b4175af4",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.19-1842/modtabs-1.21.1-2.3.1-Neoforge.jar"
-                 },
-                 {
-                     "name":  "MoogsVoyagerStructures-1.21-5.0.10",
-                     "filename":  "MoogsVoyagerStructures-1.21-5.0.10.jar",
-                     "md5":  "e7e9809176284f13d04458cb7b419195",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/MoogsVoyagerStructures-1.21-5.0.10.jar"
                  },
                  {
                      "name":  "moogs_structures-1.1.0-1.21-1.21.1-neoforge",
@@ -926,12 +890,6 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.50-2228/Northstar-0.5.4_1.21.1.jar"
                  },
                  {
-                     "name":  "ocean_lily_pad_village-1.0.1-neoforge-1.21.1",
-                     "filename":  "ocean_lily_pad_village-1.0.1-neoforge-1.21.1.jar",
-                     "md5":  "605627416ff151d59d8b89b876768929",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/ocean_lily_pad_village-1.0.1-neoforge-1.21.1.jar"
-                 },
-                 {
                      "name":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0",
                      "filename":  "Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.2.0.jar",
                      "md5":  "2110be7f2ffacf4c6093504d67a7cb00",
@@ -954,12 +912,6 @@
                      "filename":  "Patchouli-1.21.1-93-NEOFORGE.jar",
                      "md5":  "8178d65cd07dd7a646446729058ae2bf",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.32-2233/Patchouli-1.21.1-93-NEOFORGE.jar"
-                 },
-                 {
-                     "name":  "Philips-Ruins1.21.1-2.0-NeoForge",
-                     "filename":  "Philips-Ruins1.21.1-2.0-NeoForge.jar",
-                     "md5":  "f83fdfba7d39a02bf2f5adc921eef2f5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/Philips-Ruins1.21.1-2.0-NeoForge.jar"
                  },
                  {
                      "name":  "piglinproliferation-1.21.1-2.0.12",
@@ -1328,22 +1280,10 @@
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/t_and_t-neoforge-fabric-1.13.7_1.21.1.jar"
                  },
                  {
-                     "name":  "underground-rivers-1.0.2-neoforge-21.1",
-                     "filename":  "underground-rivers-1.0.2-neoforge-21.1.jar",
-                     "md5":  "120157ac6f2a1f928317e39d09195797",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/underground-rivers-1.0.2-neoforge-21.1.jar"
-                 },
-                 {
                      "name":  "UndergroundVillages-neoforge-1.21.1-4.0.3",
                      "filename":  "UndergroundVillages-neoforge-1.21.1-4.0.3.jar",
                      "md5":  "ec17ae1103d21ddbd97d6cafc81ee176",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/UndergroundVillages-neoforge-1.21.1-4.0.3.jar"
-                 },
-                 {
-                     "name":  "underwater_village-1.0.2-neoforge-1.21.1",
-                     "filename":  "underwater_village-1.0.2-neoforge-1.21.1.jar",
-                     "md5":  "489fc7f95b812d190f4e31d31c8f9c3a",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/underwater_village-1.0.2-neoforge-1.21.1.jar"
                  },
                  {
                      "name":  "upgrade_aquatic-1.21.1-7.0.1",
@@ -1476,12 +1416,6 @@
                      "filename":  "YungsBetterStrongholds-1.21.1-NeoForge-5.1.3.jar",
                      "md5":  "43266a72adc75ba8bb2e234e065e6139",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.50-2228/YungsBetterStrongholds-1.21.1-NeoForge-5.1.3.jar"
-                 },
-                 {
-                     "name":  "YungsExtras-1.21.1-NeoForge-5.1.1",
-                     "filename":  "YungsExtras-1.21.1-NeoForge-5.1.1.jar",
-                     "md5":  "61a189ae7ffcf35ebe577582b2d683f0",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/YungsExtras-1.21.1-NeoForge-5.1.1.jar"
                  },
                  {
                      "name":  "zombieawareness-neoforge-1.21.0-1.13.2",
