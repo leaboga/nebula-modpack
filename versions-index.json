@@ -1,6 +1,11 @@
 {
-    "latestVersion":  "1.0.105",
+    "latestVersion":  "1.0.106",
     "availableVersions":  [
+                              {
+                                  "version":  "1.0.106",
+                                  "label":  "v1.0.106 (18/05 00:35)",
+                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.106/manifest.json"
+                              },
                               {
                                   "version":  "1.0.105",
                                   "label":  "v1.0.105 (17/05 23:01)",
@@ -45,11 +50,6 @@
                                   "version":  "1.0.97",
                                   "label":  "v1.0.97 (16/05 12:30)",
                                   "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.97/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.96",
-                                  "label":  "v1.0.96 (15/05 17:18)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.96/manifest.json"
                               }
                           ]
 }
