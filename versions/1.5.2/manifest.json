@@ -1,6 +1,6 @@
 {
     "version":  "1.5.2",
-    "label":  "v1.5.2 (19/05 19:12)",
+    "label":  "v1.5.2 (19/05 19:15)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1733,7 +1733,7 @@
                      "name":  "GlitchCore-neoforge-1.21.1-2.1.0.0-nebula",
                      "filename":  "GlitchCore-neoforge-1.21.1-2.1.0.0-nebula.jar",
                      "md5":  "1204356d946f4e4c9f5956aa45c84dbd",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.5.2-1912/GlitchCore-neoforge-1.21.1-2.1.0.0-nebula.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.5.2-1915/GlitchCore-neoforge-1.21.1-2.1.0.0-nebula.jar"
                  }
              ]
 }
