@@ -1,6 +1,6 @@
 {
     "version":  "1.4.2",
-    "label":  "v1.4.2 (19/05 16:12)",
+    "label":  "v1.4.2 (19/05 16:14)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1733,7 +1733,7 @@
                      "name":  "sable-neoforge-1.21.1-1.2.2",
                      "filename":  "sable-neoforge-1.21.1-1.2.2.jar",
                      "md5":  "1704d138ecf22c2f0db3ce9f9bf6207b",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.4.2-1612/sable-neoforge-1.21.1-1.2.2.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.4.2-1614/sable-neoforge-1.21.1-1.2.2.jar"
                  }
              ]
 }
