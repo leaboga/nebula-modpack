@@ -1,6 +1,11 @@
-{
-    "latestVersion":  "1.2.6",
+﻿{
+    "latestVersion":  "1.2.7",
     "availableVersions":  [
+                              {
+                                  "version":  "1.2.7",
+                                  "label":  "v1.2.7 (18/05 22:05) - WAB only test",
+                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.7/manifest.json"
+                              },
                               {
                                   "version":  "1.2.6",
                                   "label":  "v1.2.6 (18/05 22:04)",
@@ -656,5 +661,6 @@
                                   "label":  "v1.0.0",
                                   "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.0/manifest.json"
                               }
-                          ]
+                          ],
+    "refreshedAt":  "2026-05-19T01:04:56.0860660+00:00"
 }
