@@ -1,6 +1,6 @@
 {
     "version":  "1.2.2",
-    "label":  "v1.2.2 (18/05 21:17)",
+    "label":  "v1.2.2 (18/05 21:19)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -558,6 +558,12 @@
                      "filename":  "getittogetherdrops-neoforge-1.21.5-1.4.jar",
                      "md5":  "c0259885d0d200894ce449fc95a1b63b",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.1-2210/getittogetherdrops-neoforge-1.21.5-1.4.jar"
+                 },
+                 {
+                     "name":  "gigeresque-neoforge-1.21.1-0.8.16",
+                     "filename":  "gigeresque-neoforge-1.21.1-0.8.16.jar",
+                     "md5":  "281c9e533e932ea8b04c71abc644f839",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.86-1506/gigeresque-neoforge-1.21.1-0.8.16.jar"
                  },
                  {
                      "name":  "GlitchCore-neoforge-1.21.1-2.1.0.0",
@@ -1242,6 +1248,12 @@
                      "filename":  "the_knocker-1.5.0-neoforge-1.21.1.jar",
                      "md5":  "e69c3f6f0c8d63bade67672c98061837",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.86-1506/the_knocker-1.5.0-neoforge-1.21.1.jar"
+                 },
+                 {
+                     "name":  "The_Undergarden-1.21.1-0.9.6",
+                     "filename":  "The_Undergarden-1.21.1-0.9.6.jar",
+                     "md5":  "e60107eb8cc3cab98883acb91e124e05",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.102-0359/The_Undergarden-1.21.1-0.9.6.jar"
                  },
                  {
                      "name":  "tombstone-neoforge-1.21.1-9.4.7",
