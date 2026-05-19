@@ -1,6 +1,6 @@
 {
     "version":  "1.4.6",
-    "label":  "v1.4.6 (19/05 17:46)",
+    "label":  "v1.4.6 (19/05 17:47)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1733,7 +1733,7 @@
                      "name":  "structurize-1.0.828-1.21.1-snapshot",
                      "filename":  "structurize-1.0.828-1.21.1-snapshot.jar",
                      "md5":  "aa89e938e946032e68421b25b73fbc94",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.4.6-1746/structurize-1.0.828-1.21.1-snapshot.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.4.6-1747/structurize-1.0.828-1.21.1-snapshot.jar"
                  }
              ]
 }
