@@ -1,6 +1,11 @@
-﻿{
-    "latestVersion":  "1.2.8",
+{
+    "latestVersion":  "1.2.9",
     "availableVersions":  [
+                              {
+                                  "version":  "1.2.9",
+                                  "label":  "v1.2.9 (18/05 22:41)",
+                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.9/manifest.json"
+                              },
                               {
                                   "version":  "1.2.8",
                                   "label":  "v1.2.8 (18/05 22:16) - stable kubejs fix",
@@ -666,6 +671,5 @@
                                   "label":  "v1.0.0",
                                   "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.0/manifest.json"
                               }
-                          ],
-    "refreshedAt":  "2026-05-19T01:17:03.6398521+00:00"
+                          ]
 }
