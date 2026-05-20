@@ -1,6 +1,6 @@
 {
     "version":  "1.7.0",
-    "label":  "v1.7.0 (20/05 12:39)",
+    "label":  "v1.7.0 (20/05 12:41)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -1721,13 +1721,13 @@
                      "name":  "createbetterfps-1.21.1-1.1.4",
                      "filename":  "createbetterfps-1.21.1-1.1.4.jar",
                      "md5":  "88827dcbad6f5bf8974c40e6fff77ed5",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.7.0-1239/createbetterfps-1.21.1-1.1.4.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.7.0-1241/createbetterfps-1.21.1-1.1.4.jar"
                  },
                  {
                      "name":  "flerovium-neoforge-1.21.1-1.0.18-all",
                      "filename":  "flerovium-neoforge-1.21.1-1.0.18-all.jar",
                      "md5":  "50b894e7bc41d8d4ccf11f2c8418b504",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.7.0-1239/flerovium-neoforge-1.21.1-1.0.18-all.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.7.0-1241/flerovium-neoforge-1.21.1-1.0.18-all.jar"
                  }
              ]
 }
