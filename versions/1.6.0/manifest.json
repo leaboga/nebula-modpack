@@ -1,6 +1,6 @@
 {
     "version":  "1.6.0",
-    "label":  "v1.6.0 (19/05 23:10)",
+    "label":  "v1.6.0 (19/05 23:13)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.219",
@@ -24,6 +24,12 @@
                      "filename":  "abyssal_corrupter.jar",
                      "md5":  "657e4b98eebf54ace669b4c5a9751597",
                      "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.48-1232/abyssal_corrupter.jar"
+                 },
+                 {
+                     "name":  "aces_spell_utils-1.2.6.1-1.21.1",
+                     "filename":  "aces_spell_utils-1.2.6.1-1.21.1.jar",
+                     "md5":  "784c42cbf04b5315e8e57e093c447137",
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v1.0.82-1536/aces_spell_utils-1.2.6.1-1.21.1.jar"
                  },
                  {
                      "name":  "AchievementOptimizer-neoforge-1.21.1-2.1.0",
