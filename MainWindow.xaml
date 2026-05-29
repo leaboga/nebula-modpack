@@ -102,7 +102,7 @@
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <GradientStop Color="Transparent" Offset="0"/>
-                                <GradientStop Color="#00F2FF" Offset="0.5"/>
+                                <GradientStop Color="#FF9500" Offset="0.5"/>
                                 <GradientStop Color="Transparent" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
@@ -114,7 +114,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
                                 <Border Width="44" Height="44" CornerRadius="12" Background="Transparent">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#00F2FF" Opacity="0.4" BlurRadius="15" ShadowDepth="0"/>
+                                        <DropShadowEffect Color="#FF9500" Opacity="0.4" BlurRadius="15" ShadowDepth="0"/>
                                     </Border.Effect>
                                     <Image Source="/Assets/logo_premium.png" Width="44" Height="44" Stretch="Uniform"/>
                                 </Border>
@@ -157,19 +157,19 @@
                             
                             <RadioButton x:Name="NavSistemas" Content="Sistema" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Ajustes crticos, sincronizacin oficial, rendimiento y consola." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
+                                    <ToolTip Content="Ajustes crticos, sincronizacin oficial, rendimiento y consola." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
                             <RadioButton Content="Biblioteca Mod" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Recursos_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
+                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
                             <RadioButton Content="Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
+                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
@@ -242,7 +242,7 @@
                             <StackPanel Orientation="Horizontal" x:Name="ActiveProfileInfo">
                                 <TextBlock x:Name="ActiveProfileLabel" Text="Perfil Predeterminado" Foreground="White" FontSize="11" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,12,0"/>
                                 <Border Background="#1A00F2FF" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" VerticalAlignment="Center">
-                                    <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#0A84FF" FontSize="9" FontWeight="Black"/>
+                                    <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#FF9500" FontSize="9" FontWeight="Black"/>
                                 </Border>
                                 <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
                                     <TextBlock x:Name="ActiveLoaderLabel" Text="---" Foreground="#10B981" FontSize="9" FontWeight="Black"/>
@@ -320,7 +320,7 @@
                                                 <TextBlock Text="Detección de Flota (Live Map)" Foreground="White" FontSize="15" FontWeight="Bold"/>
                                                 <TextBlock Text="Abre el mapa del servidor y revisa la actividad." Foreground="#6D8A99" FontSize="11"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="" Foreground="#0A84FF" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Grid.Column="2" Text="" Foreground="#FF9500" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         </Grid>
                                     </Border>
 
@@ -383,7 +383,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="ASIGNACIÓN DE RAM" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#0A84FF" FontSize="14" FontWeight="Black"/>
+                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#FF9500" FontSize="14" FontWeight="Black"/>
                                     </Grid>
                                     <Slider x:Name="RamSlider" Minimum="2" Maximum="16" Value="8" Style="{DynamicResource AppleSlider}" ValueChanged="RamSlider_ValueChanged"/>
                                 </StackPanel>
@@ -482,8 +482,8 @@
                 </Path>
             </Canvas>
 
-            <Border x:Name="TutorialCard" VerticalAlignment="Top" HorizontalAlignment="Left" Width="380" Background="#0D151D" CornerRadius="20" BorderBrush="#00F2FF" BorderThickness="1" Padding="24">
-                <Border.Effect><DropShadowEffect Color="#00F2FF" BlurRadius="40" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
+            <Border x:Name="TutorialCard" VerticalAlignment="Top" HorizontalAlignment="Left" Width="380" Background="#0D151D" CornerRadius="20" BorderBrush="#FF9500" BorderThickness="1" Padding="24">
+                <Border.Effect><DropShadowEffect Color="#FF9500" BlurRadius="40" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
                 <Grid>
                     <StackPanel>
                         <Grid Margin="0,0,0,12">

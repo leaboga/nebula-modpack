@@ -6,14 +6,14 @@
     <FontFamily x:Key="MonoFont">Consolas</FontFamily>
 
     <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-    <Color x:Key="GlowColor">#0A84FF</Color>
+    <Color x:Key="GlowColor">#FF9500</Color>
 
     <!-- ══════════════════════════════════════════════════════════════════ -->
     <!-- KRAKEN ABYSSAL DESIGN SYSTEM (v2.6) -->
     <!-- ══════════════════════════════════════════════════════════════════ -->
-    <Color x:Key="AccentColor">#0A84FF</Color>
-    <Color x:Key="AccentHoverColor">#409CFF</Color>
-    <Color x:Key="AccentPressColor">#0060DF</Color>
+    <Color x:Key="AccentColor">#FF9500</Color>
+    <Color x:Key="AccentHoverColor">#FFB340</Color>
+    <Color x:Key="AccentPressColor">#CC7700</Color>
     
     <Color x:Key="SurfaceColor">#000000</Color>
     <Color x:Key="Surface2Color">#1C1C1E</Color>
@@ -29,7 +29,7 @@
     <SolidColorBrush x:Key="TextMutedBrush"     Color="#344A5B"/>
 
     <!-- EFFECT TOKENS -->
-    <DropShadowEffect x:Key="NeonGlow" Color="#00F2FF" Opacity="0.22" BlurRadius="18" ShadowDepth="0"/>
+    <DropShadowEffect x:Key="NeonGlow" Color="#FF9500" Opacity="0.22" BlurRadius="18" ShadowDepth="0"/>
     <DropShadowEffect x:Key="SoftShadow" Color="Black" Opacity="0.28" BlurRadius="18" ShadowDepth="4"/>
 
     <!-- ════════════════════ ELEMENTS ════════════════════ -->
@@ -78,8 +78,8 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1EE4F2" Offset="0"/>
-                    <GradientStop Color="#0FAFC1" Offset="1"/>
+                    <GradientStop Color="#FF9F0A" Offset="0"/>
+                    <GradientStop Color="#FF7E00" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -96,7 +96,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#4BEAF5"/>
+                            <Setter TargetName="border" Property="Background" Value="#FFB340"/>
                             <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGlow}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -147,8 +147,8 @@
     <Style x:Key="StatusBadge" TargetType="Border">
         <Setter Property="Padding" Value="8,3"/>
         <Setter Property="CornerRadius" Value="6"/>
-        <Setter Property="Background" Value="#2000F2FF"/>
-        <Setter Property="BorderBrush" Value="#4000F2FF"/>
+        <Setter Property="Background" Value="#20FF9500"/>
+        <Setter Property="BorderBrush" Value="#40FF9500"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
@@ -398,12 +398,12 @@
                         <Border x:Name="PART_Indicator" HorizontalAlignment="Left" CornerRadius="3">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#00F2FF" Offset="0"/>
-                                    <GradientStop Color="#00B8C2" Offset="1"/>
+                                    <GradientStop Color="#FF9500" Offset="0"/>
+                                    <GradientStop Color="#FF7E00" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Border.Effect>
-                                <DropShadowEffect Color="#00F2FF" BlurRadius="10" Opacity="0.6" ShadowDepth="0"/>
+                                <DropShadowEffect Color="#FF9500" BlurRadius="10" Opacity="0.6" ShadowDepth="0"/>
                             </Border.Effect>
                         </Border>
                     </Grid>
