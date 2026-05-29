@@ -70,5 +70,14 @@ namespace KrakenLauncher.Modules
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_mapUrl) { UseShellExecute = true }); }
             catch { }
         }
+
+        public void Stop()
+        {
+            try
+            {
+                MapView?.Dispose();
+            }
+            catch { }
+        }
     }
 }

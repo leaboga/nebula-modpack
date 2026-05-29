@@ -122,12 +122,50 @@ namespace KrakenLauncher.Services
             return hub;
         }
 
+        public static string GetActiveServerIp(MainWindow main)
+        {
+            try
+            {
+                if (main.CurrentProfile != null)
+                {
+                    string serversDatPath = System.IO.Path.Combine(main.GameFolder, "servers.dat");
+                    if (System.IO.File.Exists(serversDatPath))
+                    {
+                        byte[] data = System.IO.File.ReadAllBytes(serversDatPath);
+                        byte[] searchPattern = new byte[] { 0x08, 0x00, 0x02, 0x69, 0x70 };
+                        for (int i = 0; i < data.Length - searchPattern.Length - 2; i++)
+                        {
+                            bool match = true;
+                            for (int j = 0; j < searchPattern.Length; j++)
+                            {
+                                if (data[i + j] != searchPattern[j]) { match = false; break; }
+                            }
+                            if (match)
+                            {
+                                int ipLengthIdx = i + searchPattern.Length;
+                                int ipLength = (data[ipLengthIdx] << 8) | data[ipLengthIdx + 1];
+                                int ipStartIdx = ipLengthIdx + 2;
+                                if (ipStartIdx + ipLength <= data.Length)
+                                {
+                                    string fullIp = System.Text.Encoding.UTF8.GetString(data, ipStartIdx, ipLength);
+                                    return fullIp.Contains(":") ? fullIp.Split(':')[0] : fullIp;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+            return main.Session.ServerIp;
+        }
+
         private HubView CreateNetworkHub(MainWindow main)
         {
+            string activeIp = GetActiveServerIp(main);
             var networkTabs = new List<HubView.HubTab>
             {
-                new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(main.Session.ServerIp, main.Session.Username) },
-                new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", View = new BlueMapView(main.Session.ServerIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
+                new HubView.HubTab { Label = "Comunidad", HeaderLabel = "RED EXTERNA", HeaderTitle = "Comunidad KRAKEN", View = new SocialView(activeIp, main.Session.Username) },
+                new HubView.HubTab { Label = "Mapa Abisal", HeaderLabel = "INTELIGENCIA", HeaderTitle = "Servicio Cartografico", View = new BlueMapView(activeIp, main.Session.BlueMapPort, main.Session.BlueMapId) },
                 new HubView.HubTab { Label = "Infraestructura", HeaderLabel = "SERVICIOS", HeaderTitle = "Hosting Galactico", View = new HostingServiceView() },
                 new HubView.HubTab { Label = "Pruebas", HeaderLabel = "NODOS", HeaderTitle = "Servidor de Desarrollo", View = new ServerHostView() },
                 new HubView.HubTab { Label = "Capturas", HeaderLabel = "ARCHIVOS", HeaderTitle = "Registros Visuales", View = new ScreenshotsView(main.GameFolder) }

@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.1.7`
-- Fecha de referencia: `2026-05-15`
+- Version publicada mas reciente: `3.1.8`
+- Fecha de referencia: `2026-05-29`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
@@ -25,6 +25,27 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.1.8 (System Optimizations & Performance)
+
+### Cambios principales
+
+- `Modules/BlueMapView.xaml.cs` & `Modules/HubView.xaml.cs`
+  - Implementación de `.Dispose()` para el control WebView2 del Mapa Abisal, eliminando fugas de memoria críticas al cambiar de vista.
+- `MainWindow.xaml`
+  - Implementación de `<Canvas.CacheMode><BitmapCache/></Canvas.CacheMode>` en el sistema de partículas y elementos estáticos pesados para descarga del CPU.
+- `MinecraftLauncher.cs`
+  - Integración por reflexión para anular `CheckHash` en `CmlLib.Core` al activar el Modo Turbo, reduciendo a segundos la validación local de assets.
+- `MainWindow.xaml.cs` & `Services/GameLaunchManager.cs`
+  - Desintegración de responsabilidad cruzada. La lógica de lanzamiento se extrajo completamente a `GameLaunchManager`.
+- `Services/Logger.cs`
+  - Nuevo servicio global persistente para registrar excepciones en `%AppData%/KrakenLauncher/kraken_debug.log`.
+
+### Validacion realizada
+
+- Compilación limpia local (0 errores, warnings obsoletos).
+- Verificación del proceso de background de msedgewebview2.exe cerrándose correctamente.
+- Auto-publish a GitHub mediante script.
 
 ## Version 3.1.7 (Versioning & UI Polish)
 

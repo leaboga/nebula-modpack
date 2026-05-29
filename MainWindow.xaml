@@ -58,21 +58,21 @@
         </Border>
         
         <!-- GLOW EFFECTS -->
-        <Ellipse Fill="#150A84FF" Width="760" Height="760" Margin="-340,-360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+        <Ellipse Fill="#150A84FF" Width="760" Height="760" Margin="-340,-360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache">
             <Ellipse.Effect><BlurEffect Radius="120"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="#100A84FF" Width="520" Height="520" Margin="0,0,-170,-170" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
+        <Ellipse Fill="#100A84FF" Width="520" Height="520" Margin="0,0,-170,-170" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False" CacheMode="BitmapCache">
             <Ellipse.Effect><BlurEffect Radius="95"/></Ellipse.Effect>
         </Ellipse>
         <Rectangle Fill="#22000000" IsHitTestVisible="False"/>
 
         <!-- BACKGROUND IMAGE -->
-        <Image x:Name="LauncherBackground" Stretch="UniformToFill" Opacity="0.12" IsHitTestVisible="False">
+        <Image x:Name="LauncherBackground" Stretch="UniformToFill" Opacity="0.12" IsHitTestVisible="False" CacheMode="BitmapCache">
             <Image.Effect><BlurEffect Radius="15"/></Image.Effect>
         </Image>
 
         <!-- PARTICLES -->
-        <Canvas x:Name="ParticleCanvas" IsHitTestVisible="False"/>
+        <Canvas x:Name="ParticleCanvas" IsHitTestVisible="False" CacheMode="BitmapCache"/>
 
         <Grid x:Name="MainRoot">
             <Grid.ColumnDefinitions>
@@ -150,30 +150,38 @@
                                  </StackPanel>
                             </Border>
 
-                            <!-- NAVIGATION -->
-                            <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
-                            
-                            <RadioButton x:Name="NavHome" Content="Inicio" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
-                            
-                            <RadioButton x:Name="NavSistemas" Content="Sistema" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
-                                <RadioButton.ToolTip>
-                                    <ToolTip Content="Ajustes crticos, sincronizacin oficial, rendimiento y consola." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
-                                </RadioButton.ToolTip>
-                            </RadioButton>
+                            <!-- NAVIGATION MENUS -->
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                                <StackPanel Margin="24,0">
+                                    <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
+                                    
+                                    <RadioButton x:Name="NavHome" Content="Inicio" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked">
+                                        <RadioButton.ToolTip>
+                                            <ToolTip Content="Tablero principal con estadísticas, tu ecosistema y acceso rápido a mundos." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
 
-                            <RadioButton Content="Biblioteca Mod" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Recursos_Checked">
-                                <RadioButton.ToolTip>
-                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
-                                </RadioButton.ToolTip>
-                            </RadioButton>
+                                    <RadioButton x:Name="NavSistemas" Content="Sistema" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
+                                        <RadioButton.ToolTip>
+                                            <ToolTip Content="Ajustes críticos, sincronización oficial, rendimiento y consola." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
 
-                            <RadioButton Content="Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
-                                <RadioButton.ToolTip>
-                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
-                                </RadioButton.ToolTip>
-                            </RadioButton>
+                                    <RadioButton Content="Biblioteca Mod" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Recursos_Checked">
+                                        <RadioButton.ToolTip>
+                                            <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
 
-                            <Border Height="1" Margin="4,24,4,24" Background="{DynamicResource BorderBrush}"/>
+                                    <RadioButton Content="Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
+                                        <RadioButton.ToolTip>
+                                            <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#1C1C1E" Foreground="White" BorderBrush="#FF9500"/>
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
+
+                                    <Border Height="1" Margin="4,24,4,24" Background="{DynamicResource BorderBrush}"/>
+                                </StackPanel>
+                            </ScrollViewer>
 
                             <!-- SERVER STATUS (Integrated) -->
                             <Border Style="{DynamicResource GlassPanel}" Background="#1C1C1E" Padding="14,12" Margin="4,0,4,16">
@@ -221,7 +229,7 @@
                     <RowDefinition Height="40"/> <!-- Titlebar -->
                     <RowDefinition Height="60"/> <!-- Context Header -->
                     <RowDefinition Height="*"/>  <!-- Content Area -->
-                    <RowDefinition x:Name="ActionBarRow" Height="120"/> <!-- Bottom Action Bar -->
+                    <RowDefinition x:Name="ActionBarRow" Height="Auto"/> <!-- Bottom Action Bar -->
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">

@@ -30,12 +30,13 @@ namespace KrakenLauncher
         private readonly string? _customSplash;
         private readonly bool _isOverlay;
         private readonly string _jvmArgs;
+        private readonly bool _isTurboEnabled;
 
         public event Action<string>? OnLog;
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
-        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null, string? customSplash = null, bool isOverlay = false, string? jvmArgs = null)
+        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null, string? customSplash = null, bool isOverlay = false, string? jvmArgs = null, bool isTurboEnabled = false)
         {
             _gameFolder = gameFolder;
             _ramGB = ramGB;
@@ -49,6 +50,7 @@ namespace KrakenLauncher
             _customSplash = customSplash;
             _isOverlay = isOverlay;
             _jvmArgs = string.IsNullOrWhiteSpace(jvmArgs) ? DefaultJvmArgs : jvmArgs;
+            _isTurboEnabled = isTurboEnabled;
         }
 
         public async Task<int> LaunchAsync()
@@ -73,6 +75,18 @@ namespace KrakenLauncher
                 else if (lType.Contains("forge"))
                 {
                     finalVersionId = await InstalarConReflexion("Forge", launcher);
+                }
+
+                if (_isTurboEnabled)
+                {
+                    OnLog?.Invoke("⚡ MODO TURBO: Omitiendo validación de hashes locales...");
+                    try {
+                        var fd = launcher.GetType().GetProperty("FileDownloader")?.GetValue(launcher);
+                        if (fd != null) {
+                            fd.GetType().GetProperty("CheckHash")?.SetValue(fd, false);
+                            fd.GetType().GetProperty("IgnoreInvalidFiles")?.SetValue(fd, true);
+                        }
+                    } catch { }
                 }
 
                 OnLog?.Invoke("📦 Sincronizando recursos base...");

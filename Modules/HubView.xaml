@@ -4,7 +4,7 @@
              Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto" MinHeight="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 

@@ -245,7 +245,7 @@ namespace KrakenLauncher
         private async Task UpdateServerStatus()
         {
             ServerInfo? status = null;
-            try { status = await _socialService.GetServerStatus(_session.ServerIp); } catch { }
+            try { status = await _socialService.GetServerStatus(Services.NavigationService.GetActiveServerIp(this)); } catch { }
 
             Dispatcher.Invoke(() =>
             {
@@ -756,7 +756,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
         {
             try
             {
-                Clipboard.SetText(_session.ServerIp);
+                Clipboard.SetText(Services.NavigationService.GetActiveServerIp(this));
                 var btn = (Button)sender;
                 string orig  = btn.Content.ToString()!;
                 btn.Content  = "\u2713 Copiado!";
@@ -1647,7 +1647,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
                 // Discord: in game
                 int onlinePlayers = 0;
-                try { var s = await _socialService.GetServerStatus(_session.ServerIp); onlinePlayers = s?.OnlinePlayers ?? 0; } catch { }
+                try { var s = await _socialService.GetServerStatus(Services.NavigationService.GetActiveServerIp(this)); onlinePlayers = s?.OnlinePlayers ?? 0; } catch { }
                 _discord.SetInGame(_session.Username, onlinePlayers, 20);
 
                 if (_session.MinimizeToTray) Hide(); else WindowState = WindowState.Minimized;
@@ -1688,7 +1688,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
 
                 _discord.SetIdle();
             }
-             catch (Exception ex) { AgregarLog($"âœ— Error: {ex.Message}"); Show(); }
+             catch (Exception ex) { AgregarLog($"❌ Error: {ex.Message}"); Services.Logger.LogError("Error in PlayButton_Click", ex); Show(); }
             finally { PlayButton.IsEnabled = true; PlayButton.Content = "â–¶  JUGAR"; }
         }
 
@@ -1699,20 +1699,11 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
             // Verificación de Conflictos (Imp 11)
             VerificarConflictosDeMods();
 
-            var mcLauncher = new McGameLauncher(GameFolder, profile.RamGB, _session.Username,
-                _session.AuthMode == "premium", profile.Version, 
-                profile.LoaderType,
-                profile.LoaderVersion, 
-                manualJavaPath: profile.JavaPath,
-                customSplash: _session.CustomSplashText,
-                isOverlay: _session.IsOverlayEnabled);
-            mcLauncher.OnLog      += msg => AgregarLog(msg);
-            mcLauncher.OnProgress += pct => Dispatcher.Invoke(() => MainProgressBar.Value = pct);
+            var launchManager = new Services.GameLaunchManager(GameFolder, _session);
+            launchManager.OnLog += msg => AgregarLog(msg);
+            launchManager.OnProgress += pct => Dispatcher.Invoke(() => MainProgressBar.Value = pct);
             
-            // SFX: Inicio de motor (Imp 19)
-            try { System.Media.SystemSounds.Exclamation.Play(); } catch { }
-
-            return await mcLauncher.LaunchAsync();
+            return await launchManager.LaunchMinecraftAsync(profile);
         }
 
         private void VerificarConflictosDeMods()

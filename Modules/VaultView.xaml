@@ -26,29 +26,29 @@
             </StackPanel>
 
             <!-- CONTROLS HEADER -->
-            <Grid Grid.Row="1" Margin="0,0,0,16">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <WrapPanel Grid.Row="1" Margin="0,0,0,16" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,12">
                     <Button Content="Refrescar Manifiesto" Style="{DynamicResource SecondaryButton}" Height="34" Click="BtnRefresh_Click"/>
                     <CheckBox x:Name="FavoritesOnlyCheck" Content="Solo favoritos" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="14,0,0,0" Checked="FavoritesOnly_Changed" Unchecked="FavoritesOnly_Changed"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <RadioButton x:Name="FilterMods" Content="Mods" IsChecked="True" Style="{DynamicResource ToggleTab}" Margin="0,0,8,0" Click="FilterType_Changed"/>
-                    <RadioButton x:Name="FilterShaders" Content="Shaders" Style="{DynamicResource ToggleTab}" Margin="0,0,8,0" Click="FilterType_Changed"/>
-                    <RadioButton x:Name="FilterResourcePacks" Content="Packs" Style="{DynamicResource ToggleTab}" Margin="0,0,16,0" Click="FilterType_Changed"/>
+                <WrapPanel VerticalAlignment="Center" Margin="0,0,0,12">
+                    <RadioButton x:Name="FilterMods" Content="Mods" IsChecked="True" Style="{DynamicResource ToggleTab}" Margin="0,0,8,4" Click="FilterType_Changed"/>
+                    <RadioButton x:Name="FilterShaders" Content="Shaders" Style="{DynamicResource ToggleTab}" Margin="0,0,8,4" Click="FilterType_Changed"/>
+                    <RadioButton x:Name="FilterResourcePacks" Content="Packs" Style="{DynamicResource ToggleTab}" Margin="0,0,16,4" Click="FilterType_Changed"/>
                     
-                    <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,0" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
+                    <CheckBox x:Name="FilterInstalled" Content="Instalados" Style="{DynamicResource TrayToggle}" VerticalAlignment="Center" Margin="0,0,16,4" Checked="FilterInstalled_Changed" Unchecked="FilterInstalled_Changed"/>
                     
-                    <TextBox x:Name="SearchBox" Width="220" Style="{DynamicResource SearchTextBox}" Height="36" Tag="Buscar en la bóveda..." KeyDown="SearchBox_KeyDown" Margin="12,0,0,0"/>
+                    <TextBox x:Name="SearchBox" Width="200" Style="{DynamicResource SearchTextBox}" Height="36" Tag="Buscar en la bóveda..." KeyDown="SearchBox_KeyDown" Margin="0,0,12,4"/>
                     
-                    <ComboBox x:Name="SortCombo" Width="140" Height="36" Style="{DynamicResource ModernComboBox}" Margin="12,0,0,0" SelectionChanged="SortCombo_SelectionChanged">
+                    <ComboBox x:Name="SortCombo" Width="140" Height="36" Style="{DynamicResource ModernComboBox}" Margin="0,0,0,4" SelectionChanged="SortCombo_SelectionChanged">
                         <ComboBoxItem Content="Relevancia" Tag="relevance" IsSelected="True"/>
                         <ComboBoxItem Content="Descargas" Tag="downloads"/>
                         <ComboBoxItem Content="Recientes" Tag="recent"/>
                         <ComboBoxItem Content="Favoritos" Tag="favorites"/>
                     </ComboBox>
-                </StackPanel>
-            </Grid>
+                </WrapPanel>
+            </WrapPanel>
 
             <!-- CUERPO -->
             <Grid Grid.Row="2">

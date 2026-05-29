@@ -1,5 +1,18 @@
 [
   {
+    "version": "3.1.8",
+    "date": "29 de Mayo, 2026",
+    "title": "KRAKEN Engine: System Optimizations & Performance",
+    "type": "update",
+    "changes": [
+      "🚀 Rendimiento: Implementación de BitmapCache en animaciones UI complejas para descargar drásticamente la CPU y elevar los FPS.",
+      "🧹 Memoria: Solucionada fuga crítica (Memory Leak) en el Mapa Abisal. El proceso en segundo plano (WebView2) ahora se destruye correctamente al cambiar de vista.",
+      "⚡ Modo Turbo: Nuevo bypass por Reflexión en el núcleo CmlLib. Al iniciar con Turbo, el juego salta la validación de miles de hashes locales reduciendo el tiempo de carga a segundos.",
+      "🏗️ Arquitectura: Desintegración estructural de MainWindow. La secuencia de lanzamiento fue movida exitosamente a un nuevo módulo GameLaunchManager aislado.",
+      "📜 Telemetría: Integración de un Logger Global en todo el sistema para registrar crasheos silenciosos de manera persistente en disco."
+    ]
+  },
+  {
     "version": "3.1.7",
     "date": "15 de Mayo, 2026",
     "title": "KRAKEN Engine: Versioning & UI Polish",

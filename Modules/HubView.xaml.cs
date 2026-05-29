@@ -38,19 +38,26 @@ namespace KrakenLauncher.Modules
         {
             TabContainer.Children.Clear();
             _tabButtons.Clear();
+
             foreach (var tab in _tabs)
             {
+                var txt = new TextBlock
+                {
+                    Text = " " + tab.Label.ToUpperInvariant(),
+                    Foreground = new SolidColorBrush(Color.FromRgb(220, 225, 230)),
+                    FontSize = 13,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
                 var rb = new RadioButton
                 {
-                    Content = "  " + tab.Label.ToUpperInvariant(),
+                    Content = txt,
                     Style = (Style)_main.FindResource("ToggleTab"),
-                    Foreground = new SolidColorBrush(Color.FromRgb(0xC8, 0xD0, 0xD8)),
-                    FontSize = 12,
-                    FontWeight = FontWeights.Bold,
                     Cursor = System.Windows.Input.Cursors.Hand,
                     Padding = new Thickness(12, 5, 12, 5),
-                    MinWidth = 128,
-                    Margin = new Thickness(0, 0, 12, 0),
+                    MinWidth = 100,
+                    Margin = new Thickness(0, 0, 8, 0),
                     Tag = tab
                 };
                 rb.Checked += Tab_Checked;
@@ -99,6 +106,9 @@ namespace KrakenLauncher.Modules
             {
                 case SocialView social:
                     social.Stop();
+                    break;
+                case BlueMapView blueMap:
+                    blueMap.Stop();
                     break;
                 case PerformanceView perf:
                     perf.Stop();
