@@ -19,10 +19,10 @@
             <!-- Header -->
             <StackPanel Grid.Row="0" Margin="0,0,0,28">
                 <TextBlock Text="Bóveda de Recursos"
-                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
                 <TextBlock Text="SISTEMA DE EXPLORACIÓN MODRINTH"
-                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                           Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
             </StackPanel>
 
             <!-- CONTROLS HEADER -->
@@ -82,7 +82,7 @@
 
                         <Border Grid.Row="2" Background="#05080D" CornerRadius="12" Padding="14">
                             <StackPanel>
-                                <TextBlock Text="MASA DE MODS" Foreground="#1C2D3A" FontSize="9" FontWeight="Black" Margin="0,0,0,10"/>
+                                <TextBlock Text="MASA DE MODS" Foreground="#8E8E93" FontSize="9" FontWeight="Black" Margin="0,0,0,10"/>
                                 <Grid Margin="0,0,0,4">
                                     <TextBlock Text="Local" Foreground="#6D8A99" FontSize="11"/>
                                     <TextBlock x:Name="TxtTotalWeight" Text="0 MB" Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right"/>
@@ -181,7 +181,7 @@
 
                         <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
                             <TextBlock Text="🦑" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16" Opacity="0.3"/>
-                            <TextBlock Text="EL ABISMO ESTÁ DESPEJADO" Foreground="White" FontSize="16" FontWeight="Black" HorizontalAlignment="Center"/>
+                            <TextBlock Text="TODO ESTA LISTO" Foreground="White" FontSize="16" FontWeight="Black" HorizontalAlignment="Center"/>
                             <TextBlock Text="No se detectaron recursos con los parámetros actuales." Foreground="#344A5B" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                             <Button Content="Limpiar Filtros" Style="{DynamicResource SecondaryButton}" Margin="0,20,0,0" Width="140" Click="BtnRefresh_Click"/>
                         </StackPanel>

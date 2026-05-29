@@ -9,8 +9,10 @@
         </Grid.RowDefinitions>
 
         <!-- Dynamic Tab Bar -->
-        <Border Grid.Row="0" Margin="32,0,32,0" BorderBrush="#1E2C38" BorderThickness="0,0,0,1">
-            <StackPanel x:Name="TabContainer" Orientation="Horizontal"/>
+        <Border Grid.Row="0" Margin="32,0,32,8" Background="#1C1C1E" CornerRadius="16" BorderBrush="#38383A" BorderThickness="1" Padding="8,6">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="TabContainer" Orientation="Horizontal"/>
+            </ScrollViewer>
         </Border>
 
         <!-- Content Area -->

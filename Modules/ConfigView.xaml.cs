@@ -201,20 +201,7 @@ namespace KrakenLauncher.Modules
             _ = _mainWindow.ForceUpdateStatus();
         }
 
-        private void Theme_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border btn && btn.Tag is string hex)
-            {
-                _mainWindow.Session.AccentColor = hex;
-                _mainWindow.GuardarSesion();
-                _mainWindow.ActualizarColorTema();
-                
-                // Actualizar bordes de selección (UI simple feedback)
-                ThemeNebula.BorderThickness  = new Thickness(hex == "#00F2FF" ? 2 : 1);
-                ThemeCrimson.BorderThickness = new Thickness(hex == "#EF4444" ? 2 : 1);
-                ThemeEmerald.BorderThickness = new Thickness(hex == "#10B981" ? 2 : 1);
-            }
-        }
+        
 
         private void RamSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -359,15 +346,7 @@ namespace KrakenLauncher.Modules
             _mainWindow.GuardarSesion();
         }
 
-        private void Color_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border btn && btn.Tag is string hex)
-            {
-                _mainWindow.Session.AccentColor = hex;
-                _mainWindow.GuardarSesion();
-                _mainWindow.ActualizarColorTema();
-            }
-        }
+        
 
         private async void PapaModeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -519,19 +498,12 @@ namespace KrakenLauncher.Modules
         private ModSyncer? _syncerLocal;
 
         private ModSyncer GetSyncer() =>
-            _syncerLocal ??= new ModSyncer(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                             "KrakenLauncher", "minecraft"));
+            _syncerLocal ??= new ModSyncer(_mainWindow.GameFolder);
 
-        /// <summary>Muestra u oculta el panel admin según si el usuario es Pepita.</summary>
+        /// <summary>Inicializa el bloque de configs oficiales. El boton de subida pide clave al usarse.</summary>
         private async void InicializarPanelPepita()
         {
-            bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-            bool esPepita = (_mainWindow.Session.IsAdmin && esAdminPc)
-                         || (_mainWindow.Session.Username.Equals("Pepita",  StringComparison.OrdinalIgnoreCase) && esAdminPc)
-                         || (_mainWindow.Session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
-
-            PepitaAdminPanel.Visibility = esPepita ? Visibility.Visible : Visibility.Collapsed;
+            PepitaAdminPanel.Visibility = Visibility.Visible;
 
             // Verificar estado del hash en background
             await ActualizarEstadoHashAsync();
@@ -657,7 +629,7 @@ namespace KrakenLauncher.Modules
         private async void BtnPublicarConfigsAdmin_Click(object sender, RoutedEventArgs e)
         {
             var login = new AdminLoginWindow { Owner = _mainWindow };
-            if (login.ShowDialog() != true || login.Clave != "pepita2026")
+            if (login.ShowDialog() != true || login.Clave != "1530")
             {
                 if (!string.IsNullOrEmpty(login.Clave)) MessageBox.Show("Clave incorrecta.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -665,7 +637,8 @@ namespace KrakenLauncher.Modules
 
             var btn = (Button)sender;
             btn.IsEnabled = false;
-            btn.Content = "Publicando...";
+            btn.Content = "Subiendo...";
+            SetAdminPublishProgress(0, "Esperando confirmacion...", false);
             try
             {
                 var remoteInfo = await GetSyncer().ObtenerConfigOficialRemota();
@@ -686,7 +659,11 @@ namespace KrakenLauncher.Modules
 
                 var syncer = GetSyncer();
                 int ramActual = _mainWindow.CurrentProfile?.RamGB ?? 4;
-                bool ok = await syncer.PublicarConfigsAdmin(msg => _mainWindow.AgregarLog(msg), ramActual, _mainWindow.Session.Username);
+                bool ok = await syncer.PublicarConfigsAdmin(
+                    msg => _mainWindow.AgregarLog(msg),
+                    ramActual,
+                    _mainWindow.Session.Username,
+                    (percent, status, indeterminate) => Dispatcher.Invoke(() => SetAdminPublishProgress(percent, status, indeterminate)));
 
                 if (ok)
                 {
@@ -695,22 +672,34 @@ namespace KrakenLauncher.Modules
                     _mainWindow.Session.RejectedConfigVersions.Remove(profileId);
                     _mainWindow.GuardarSesion();
                     await ActualizarEstadoHashAsync();
+                    SetAdminPublishProgress(100, $"Revision oficial v{nextConfigV} publicada.", false);
                     NotificationService.Instance.ShowSuccess($"Revision oficial v{nextConfigV} publicada exitosamente.");
                 }
                 else
                 {
+                    SetAdminPublishProgress(0, "No se pudo publicar. Revisa los logs.", false);
                     NotificationService.Instance.ShowError("Error al publicar. Verifica logs.");
                 }
             }
             catch (Exception ex)
             {
+                SetAdminPublishProgress(0, "Error al publicar configs.", false);
                 NotificationService.Instance.ShowError($"Error: {ex.Message}");
             }
             finally
             {
                 btn.IsEnabled = true;
-                btn.Content = "Publicar Revision Oficial";
+                btn.Content = "Subir configs oficiales";
             }
+        }
+
+        private void SetAdminPublishProgress(int percent, string status, bool indeterminate)
+        {
+            AdminPublishStatusPanel.Visibility = Visibility.Visible;
+            AdminPublishStatusText.Text = status;
+            AdminPublishProgress.IsIndeterminate = indeterminate;
+            AdminPublishProgress.Value = indeterminate ? 50 : Math.Max(0, Math.Min(100, percent));
+            AdminPublishPercentText.Text = indeterminate ? "..." : $"{Math.Max(0, Math.Min(100, percent))}%";
         }
 
         private async void BtnForzarConfigsPropias_Click(object sender, RoutedEventArgs e)

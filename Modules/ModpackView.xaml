@@ -15,8 +15,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
-            <TextBlock Text="Central de Modpacks" Foreground="#E6F9FF" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
-            <TextBlock x:Name="ProfileContextLabel" Text="Sincronizado con el perfil activo" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+            <TextBlock Text="Central de Modpacks" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="ProfileContextLabel" Text="Sincronizado con el perfil activo" Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="0,0,0,16">
@@ -97,7 +97,7 @@
                                                 <Button Content="{Binding FavoriteGlyph}" Tag="{Binding ProjectId}" Click="BtnFavorite_Click" Width="28" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource SecondaryButton}" FontSize="13" Padding="0" Margin="0,0,0,6"/>
                                                 <Border Width="110" Height="110" CornerRadius="28" Background="#05080D" BorderBrush="#1E2C38" BorderThickness="1" HorizontalAlignment="Center">
                                                     <Grid>
-                                                        <TextBlock Text="📦" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.15"/>
+                                                        <TextBlock Text="" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.15"/>
                                                         <Image Source="{Binding IconUrl}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
                                                     </Grid>
                                                 </Border>
@@ -150,7 +150,7 @@
                     </ScrollViewer>
 
                     <StackPanel x:Name="EmptyState" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-                        <TextBlock Text="🌊" FontSize="42" HorizontalAlignment="Center" Opacity="0.35"/>
+                        <TextBlock Text="" FontSize="42" HorizontalAlignment="Center" Opacity="0.35"/>
                         <TextBlock Text="No hay expediciones para estos filtros" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,14,0,0" HorizontalAlignment="Center"/>
                         <TextBlock Text="Proba limpiando filtros o buscando otra version y loader." Foreground="#6D8A99" FontSize="11" Margin="0,6,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
@@ -162,7 +162,7 @@
             <StackPanel VerticalAlignment="Center">
                 <TextBlock x:Name="LoadingText" Text="Instalando Modpack..." Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,20"/>
                 <ProgressBar x:Name="InstallProgress" Width="300" Height="6" Style="{DynamicResource AppleProgress}"/>
-                <TextBlock x:Name="StatusLabel" Text="Iniciando motores galacticos..." Foreground="#6D8A99" FontSize="12" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock x:Name="StatusLabel" Text="Cargando catalogo..." Foreground="#6D8A99" FontSize="12" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KrakenLauncher
 {
@@ -48,6 +49,7 @@ namespace KrakenLauncher
     {
         private const string VersionsIndexUrl = "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions-index.json";
         private const string AssetsUrl        = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets.zip";
+        private const string LegacyPepitaAssetsUrl = "https://github.com/leaboga/nebula-modpack/releases/download/client-assets-1.0/client-assets-pepita.zip";
         private readonly HttpClient _http = new HttpClient();
         private readonly string _modsFolder;
         private readonly string _gameFolder;
@@ -56,11 +58,21 @@ namespace KrakenLauncher
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
+        private static readonly HashSet<string> ArchivosPersonalesConfig = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "options.txt",
+            "options.of.txt",
+            "servers.dat",
+            "servers.dat_old",
+            "hotbar.nbt",
+            "realms_persistence.json"
+        };
+
         public ModSyncer(string gameFolder) {
             _gameFolder = gameFolder;
             _modsFolder = Path.Combine(gameFolder, "mods");
             Directory.CreateDirectory(_modsFolder);
-            _http.Timeout = TimeSpan.FromSeconds(5);
+            _http.Timeout = TimeSpan.FromSeconds(30);
             _http.DefaultRequestHeaders.Add("User-Agent", "KrakenLauncher/" + Services.VersionManager.GetCurrentVersion());
         }
 
@@ -196,14 +208,32 @@ namespace KrakenLauncher
             try
             {
                 string json = await _http.GetStringAsync(ConfigHashUrl + "?t=" + DateTime.Now.Ticks);
-                var info = JsonConvert.DeserializeObject<OfficialConfigInfo>(json);
-                if (info == null) return null;
-                info.Hash ??= "";
-                info.ConfigVersion ??= "0";
-                if (string.IsNullOrWhiteSpace(info.PublishedBy)) info.PublishedBy = "Pepa";
-                return info;
+                return NormalizarConfigInfo(json);
             }
-            catch { return null; }
+            catch
+            {
+                try
+                {
+                    string apiJson = await _http.GetStringAsync("https://api.github.com/repos/leaboga/nebula-modpack/contents/config-hash.json?ref=main&t=" + DateTime.Now.Ticks);
+                    var apiObj = JObject.Parse(apiJson);
+                    string encoded = apiObj["content"]?.ToString() ?? "";
+                    if (string.IsNullOrWhiteSpace(encoded)) return null;
+
+                    string json = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(encoded.Replace("\n", "").Replace("\r", "")));
+                    return NormalizarConfigInfo(json);
+                }
+                catch { return null; }
+            }
+        }
+
+        private OfficialConfigInfo? NormalizarConfigInfo(string json)
+        {
+            var info = JsonConvert.DeserializeObject<OfficialConfigInfo>(json);
+            if (info == null) return null;
+            info.Hash ??= "";
+            info.ConfigVersion ??= "0";
+            if (string.IsNullOrWhiteSpace(info.PublishedBy)) info.PublishedBy = "Pepa";
+            return info;
         }
 
         /// <summary>
@@ -221,49 +251,187 @@ namespace KrakenLauncher
                     url = $"https://github.com/leaboga/nebula-modpack/releases/download/v{version}-assets/client-assets.zip";
                 }
 
-                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "nebula_assets_" + Guid.NewGuid().ToString("N") + ".zip");
+                string stagingDir = Path.Combine(Path.GetTempPath(), "nebula_assets_extract_" + Guid.NewGuid().ToString("N"));
                 if (!await DescargarConStream(url, tempZip)) {
                     if (!string.IsNullOrEmpty(version)) {
                         OnLog?.Invoke($"  ⚠️ No se encontró asset específico para v{version}. Reintentando con base...");
-                        if (!await DescargarConStream(AssetsUrl, tempZip)) return;
-                    } else return;
+                        if (!await DescargarConStream(AssetsUrl, tempZip) && !await DescargarConStream(LegacyPepitaAssetsUrl, tempZip)) return;
+                    } else if (!await DescargarConStream(LegacyPepitaAssetsUrl, tempZip)) return;
                 }
-
-                // Archivos que NO deben sobreescribirse nunca (preferencias personales de Minecraft)
-                var protegidos = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "options.txt",
-                    "options.of.txt",
-                    "servers.dat",
-                    "hotbar.nbt",
-                    "realms_persistence.json"
-                };
 
                 using (var zip = System.IO.Compression.ZipFile.OpenRead(tempZip))
                 {
+                    ValidarRutasZip(zip);
+                    Directory.CreateDirectory(stagingDir);
+                    zip.ExtractToDirectory(stagingDir, overwriteFiles: true);
+
                     foreach (var entry in zip.Entries)
                     {
                         if (string.IsNullOrEmpty(entry.Name)) continue; // es directorio
 
-                        string destPath = Path.Combine(_gameFolder, entry.FullName.Replace('/', Path.DirectorySeparatorChar));
+                        string relativePath = entry.FullName.Replace('/', Path.DirectorySeparatorChar);
+                        string sourcePath = Path.Combine(stagingDir, relativePath);
+                        string destPath = Path.Combine(_gameFolder, relativePath);
                         string fileName = Path.GetFileName(destPath);
 
                         // Proteger archivos personales si no se forzó sobrescritura
-                        if (!sobrescribirTodo && File.Exists(destPath) && protegidos.Contains(fileName))
+                        if (!sobrescribirTodo && File.Exists(destPath) && ArchivosPersonalesConfig.Contains(fileName))
                         {
                             OnLog?.Invoke($"  🛡 Protegido (no sobreescrito): {fileName}");
                             continue;
                         }
 
                         Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
-                        entry.ExtractToFile(destPath, overwrite: true);
+                        CopiarConfigEntry(sourcePath, destPath, fileName);
                     }
                 }
 
-                File.Delete(tempZip);
+                if (File.Exists(tempZip)) File.Delete(tempZip);
+                if (Directory.Exists(stagingDir)) Directory.Delete(stagingDir, recursive: true);
                 OnLog?.Invoke("✓ Ajustes visuales de Pepita aplicados.");
             }
             catch (Exception ex) { OnLog?.Invoke("⚠ Error sincronizando configs: " + ex.Message); }
+        }
+
+        private void CopiarConfigEntry(string sourcePath, string destPath, string fileName)
+        {
+            if (!fileName.Equals("options.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                File.Copy(sourcePath, destPath, overwrite: true);
+                return;
+            }
+
+            string text = File.ReadAllText(sourcePath);
+            string localFolder = _gameFolder.Replace("\\", "\\\\");
+            text = System.Text.RegularExpressions.Regex.Replace(
+                text,
+                @"[A-Z]:\\\\Users\\\\[^""]+?\\\\AppData\\\\Roaming\\\\KrakenLauncher\\\\instances\\\\[^""]+",
+                localFolder);
+            File.WriteAllText(destPath, text);
+        }
+
+        private void ValidarRutasZip(ZipArchive zip)
+        {
+            string root = Path.GetFullPath(_gameFolder).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) + Path.DirectorySeparatorChar;
+            foreach (var entry in zip.Entries)
+            {
+                if (string.IsNullOrEmpty(entry.Name)) continue;
+                string relativePath = entry.FullName.Replace('/', Path.DirectorySeparatorChar);
+                string fullPath = Path.GetFullPath(Path.Combine(_gameFolder, relativePath));
+                if (!fullPath.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException("El paquete de configs contiene una ruta invalida: " + entry.FullName);
+                }
+            }
+        }
+
+        private void LimpiarTargetsDelPaquete(ZipArchive zip)
+        {
+            var cleaned = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var entry in zip.Entries)
+            {
+                if (string.IsNullOrEmpty(entry.Name)) continue;
+                string normalized = entry.FullName.Replace('\\', '/').Trim('/');
+                if (string.IsNullOrWhiteSpace(normalized)) continue;
+
+                string target;
+                int slash = normalized.IndexOf('/');
+                if (slash > 0)
+                {
+                    string topLevel = normalized[..slash];
+                    if (!topLevel.Equals("config", StringComparison.OrdinalIgnoreCase)) continue;
+                    target = Path.Combine(_gameFolder, topLevel);
+                }
+                else
+                {
+                    target = Path.Combine(_gameFolder, normalized);
+                }
+
+                if (!cleaned.Add(target)) continue;
+                try
+                {
+                    if (Directory.Exists(target))
+                    {
+                        OnLog?.Invoke("  Limpiando configs anteriores: " + Path.GetFileName(target));
+                        Directory.Delete(target, recursive: true);
+                    }
+                    else if (File.Exists(target))
+                    {
+                        File.Delete(target);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new IOException("No se pudo limpiar config anterior: " + target + " (" + ex.Message + ")", ex);
+                }
+            }
+        }
+
+        private static bool DebeExcluirDeConfigsOficiales(string relativePath, long length)
+        {
+            string normalized = relativePath.Replace('\\', '/').TrimStart('/');
+            string extension = Path.GetExtension(normalized);
+
+            if (length > 25 * 1024 * 1024) return true;
+            if (normalized.StartsWith("config/fancymenu/assets/", StringComparison.OrdinalIgnoreCase)) return true;
+            if (extension.Equals(".fma", StringComparison.OrdinalIgnoreCase)) return true;
+
+            return false;
+        }
+
+        private static void EmpaquetarCarpetaOficial(ZipArchive archive, string gameFolder, string folderName, Action<string> log)
+        {
+            string folder = Path.Combine(gameFolder, folderName);
+            if (!Directory.Exists(folder)) return;
+
+            foreach (var file in Directory.GetFiles(folder, "*", SearchOption.AllDirectories))
+            {
+                string relative = Path.GetRelativePath(gameFolder, file);
+                archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
+            }
+
+            log("  Incluido: " + folderName + "/");
+        }
+
+        private static bool CarpetaConfigsValida(string folder)
+        {
+            string configDir = Path.Combine(folder, "config");
+            return File.Exists(Path.Combine(folder, "options.txt"))
+                && Directory.Exists(configDir)
+                && Directory.GetFiles(configDir, "*", SearchOption.AllDirectories).Length >= 25;
+        }
+
+        private static string ResolverCarpetaFuenteConfigs(string gameFolder, Action<string> log)
+        {
+            if (CarpetaConfigsValida(gameFolder)) return gameFolder;
+
+            string instances = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "instances");
+            if (!Directory.Exists(instances)) return gameFolder;
+
+            string best = gameFolder;
+            DateTime bestTime = DateTime.MinValue;
+            foreach (var dir in Directory.GetDirectories(instances))
+            {
+                string configDir = Path.Combine(dir, "config");
+                string optionsPath = Path.Combine(dir, "options.txt");
+                if (!File.Exists(optionsPath) || !Directory.Exists(configDir)) continue;
+                
+                DateTime writeTime = File.GetLastWriteTime(optionsPath);
+                if (writeTime > bestTime)
+                {
+                    best = dir;
+                    bestTime = writeTime;
+                }
+            }
+
+            if (!best.Equals(gameFolder, StringComparison.OrdinalIgnoreCase) && bestTime != DateTime.MinValue)
+            {
+                log("  Perfil actual incompleto. Publicando desde la última instancia utilizada: " + Path.GetFileName(best));
+                return best;
+            }
+
+            return gameFolder;
         }
 
         /// <summary>
@@ -271,47 +439,95 @@ namespace KrakenLauncher
         /// como el asset "client-assets.zip". También actualiza config-hash.json en el repo.
         /// Retorna true si todo OK.
         /// </summary>
-        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string publishedBy = "Pepa")
+        public async Task<bool> PublicarConfigsAdmin(Action<string> log, int recommendedRam = 4, string publishedBy = "Pepa", Action<int, string, bool>? progress = null)
         {
             try
             {
-                string configDir = Path.Combine(_gameFolder, "config");
+                string sourceFolder = ResolverCarpetaFuenteConfigs(_gameFolder, log);
+                string configDir = Path.Combine(sourceFolder, "config");
                 if (!Directory.Exists(configDir))
                 { log("❌ No existe la carpeta config/"); return false; }
 
                 // 1. Crear ZIP temporal con todo el contenido del gameFolder relevante
-                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets-pepita.zip");
+                string tempZip = Path.Combine(Path.GetTempPath(), "client-assets.zip");
                 if (File.Exists(tempZip)) File.Delete(tempZip);
 
                 log("📦 Empaquetando configs...");
 
+                progress?.Invoke(10, "Preparando paquete de configs...", false);
                 // Incluimos config/ y options.txt y options.of.txt si existen
                 using (var archive = System.IO.Compression.ZipFile.Open(tempZip, System.IO.Compression.ZipArchiveMode.Create))
                 {
                     // config/ completa
                     foreach (var file in Directory.GetFiles(configDir, "*", SearchOption.AllDirectories))
                     {
-                        string relative = Path.GetRelativePath(_gameFolder, file);
+                        string relative = Path.GetRelativePath(sourceFolder, file);
+                        if (DebeExcluirDeConfigsOficiales(relative, new FileInfo(file).Length))
+                        {
+                            log("  Omitido asset pesado/no-config: " + relative);
+                            continue;
+                        }
                         archive.CreateEntryFromFile(file, relative.Replace(Path.DirectorySeparatorChar, '/'));
                     }
 
                     // options.txt
-                    string optsPath = Path.Combine(_gameFolder, "options.txt");
+                    string optsPath = Path.Combine(sourceFolder, "options.txt");
                     if (File.Exists(optsPath))
                         archive.CreateEntryFromFile(optsPath, "options.txt");
 
                     // shaderpacks/shaders.txt si existe (shaderpack seleccionado)
-                    string shaderOpts = Path.Combine(_gameFolder, "optionsshaders.txt");
+                    string shaderOpts = Path.Combine(sourceFolder, "optionsshaders.txt");
                     if (File.Exists(shaderOpts))
                         archive.CreateEntryFromFile(shaderOpts, "optionsshaders.txt");
+
+                    EmpaquetarCarpetaOficial(archive, sourceFolder, "shaderpacks", log);
+                    EmpaquetarCarpetaOficial(archive, sourceFolder, "resourcepacks", log);
+                }
+
+                bool paqueteIncompleto = false;
+                using (var check = System.IO.Compression.ZipFile.OpenRead(tempZip))
+                {
+                    int totalEntries = 0;
+                    int configEntries = 0;
+                    int shaderPackEntries = 0;
+                    int resourcePackEntries = 0;
+                    bool hasOptions = false;
+                    foreach (var entry in check.Entries)
+                    {
+                        if (string.IsNullOrEmpty(entry.Name)) continue;
+                        totalEntries++;
+                        string normalized = entry.FullName.Replace('\\', '/');
+                        if (normalized.StartsWith("config/", StringComparison.OrdinalIgnoreCase)) configEntries++;
+                        if (normalized.StartsWith("shaderpacks/", StringComparison.OrdinalIgnoreCase)) shaderPackEntries++;
+                        if (normalized.StartsWith("resourcepacks/", StringComparison.OrdinalIgnoreCase)) resourcePackEntries++;
+                        if (normalized.Equals("options.txt", StringComparison.OrdinalIgnoreCase)) hasOptions = true;
+                    }
+
+                    if (!hasOptions || configEntries < 25 || totalEntries < 30)
+                    {
+                        log($"❌ Paquete oficial incompleto: {configEntries} configs, options.txt={(hasOptions ? "si" : "no")}.");
+                        log("Aborto la subida para no publicar configs parciales.");
+                        paqueteIncompleto = true;
+                    }
+
+                    if (!paqueteIncompleto)
+                        log($"  Paquete validado: {configEntries} configs, {shaderPackEntries} shaders, {resourcePackEntries} resource packs.");
+                }
+
+                if (paqueteIncompleto)
+                {
+                    if (File.Exists(tempZip)) File.Delete(tempZip);
+                    return false;
                 }
 
                 // 2. Calcular hash del ZIP para que los clientes detecten cambios
+                progress?.Invoke(35, "Calculando hash de la revision...", false);
                 string hash = CalcularMD5(tempZip);
                 log($"🔑 Hash de configs: {hash}");
 
                 // 3. Subir ZIP a GitHub Release (tag: client-assets-1.0 → overwrite asset)
                 log("☁ Subiendo ZIP a GitHub...");
+                progress?.Invoke(50, "Subiendo configs a GitHub...", true);
                 var psi = new System.Diagnostics.ProcessStartInfo("gh",
                     $"release upload client-assets-1.0 \"{tempZip}\" --repo leaboga/nebula-modpack --clobber")
                 {
@@ -331,6 +547,7 @@ namespace KrakenLauncher
 
                 // 4. Crear/actualizar config-hash.json en el repo (requiere gh + repo clonado o API)
                 //    Usamos un archivo temporal y lo subimos via gh api
+                progress?.Invoke(80, "Publicando aviso para los jugadores...", false);
                 var currentInfo = await ObtenerConfigOficialRemota();
                 int currentVersion = 0;
                 int.TryParse(currentInfo?.ConfigVersion ?? "0", out currentVersion);
@@ -376,9 +593,21 @@ namespace KrakenLauncher
                 catch { }
 
                 var proc2 = System.Diagnostics.Process.Start(psi2);
-                if (proc2 != null) await proc2.WaitForExitAsync();
+                if (proc2 == null)
+                {
+                    log("No se pudo actualizar config-hash.json.");
+                    return false;
+                }
+
+                await proc2.WaitForExitAsync();
+                if (proc2.ExitCode != 0)
+                {
+                    log("Error actualizando config-hash.json: " + await proc2.StandardError.ReadToEndAsync());
+                    return false;
+                }
 
                 File.Delete(tempZip);
+                progress?.Invoke(100, "Configs oficiales publicadas.", false);
                 log($"✅ Configs de Pepita publicadas (hash: {hash[..8]}...)");
                 return true;
             }

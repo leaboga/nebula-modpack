@@ -46,10 +46,10 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,28">
             <TextBlock Text="Interfase Social"
-                       Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                       Foreground="White" FontSize="26" FontWeight="Bold"
                        Margin="0,0,0,4"/>
             <TextBlock Text="NÚCLEO SOCIAL KRAKEN"
-                       Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                       Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -65,7 +65,7 @@
                 <!-- SERVER STATUS CARD -->
                 <Border Background="#0A0E14" CornerRadius="16" Padding="22,18" Margin="0,0,0,14" BorderBrush="#1E2C38" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="SERVIDOR" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,16"/>
+                        <TextBlock Text="SERVIDOR" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,16"/>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
                             <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#EF4444" VerticalAlignment="Center">
                                 <Ellipse.Effect><DropShadowEffect Color="#EF4444" Opacity="0.8" BlurRadius="8" ShadowDepth="0"/></Ellipse.Effect>
@@ -73,9 +73,9 @@
                             <TextBlock x:Name="StatusText" Text="DESCONECTADO" FontSize="20" FontWeight="Bold" Foreground="#E6F9FF" Margin="12,0,0,0"/>
                         </StackPanel>
                         <Border Height="1" Margin="0,0,0,16" Background="#0D151D"/>
-                        <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,4"/>
+                        <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,4"/>
                         <TextBlock x:Name="PlayerCountText" Text="0 Jugadores" FontSize="15" FontWeight="Bold" Foreground="#70F9FF" Margin="0,0,0,14"/>
-                        <TextBlock Text="VERSIÓN" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,4"/>
+                        <TextBlock Text="VERSIÓN" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,4"/>
                         <TextBlock x:Name="VersionText" Text="NeoForge 1.21.1" FontSize="12" Foreground="#6D8A99"/>
                     </StackPanel>
                 </Border>
@@ -83,7 +83,7 @@
                 <!-- HOST RESOURCES CARD -->
                 <Border Background="#0A0E14" CornerRadius="16" Padding="22,18" BorderBrush="#1E2C38" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="RECURSOS DEL HOST" FontSize="9" FontWeight="Bold" Foreground="#1C2D3A" Margin="0,0,0,16"/>
+                        <TextBlock Text="RECURSOS DEL HOST" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,16"/>
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="CPU" FontSize="11" FontWeight="SemiBold" Foreground="#C4B5FD"/>
                             <TextBlock x:Name="CpuText" Text="0%" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#70F9FF"/>
@@ -137,7 +137,7 @@
                                         <StackPanel Grid.Column="1" Margin="12,0,0,0">
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
                                                 <TextBlock Text="{Binding Sender}" Foreground="#70F9FF" FontSize="11" FontWeight="Bold"/>
-                                                <TextBlock Text="{Binding Time}" Foreground="#1C2D3A" FontSize="9" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Time}" Foreground="#8E8E93" FontSize="9" Margin="8,0,0,0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <Border Background="#0D151D" CornerRadius="10" Padding="12,8" HorizontalAlignment="Left" MaxWidth="400">
                                                 <TextBlock Text="{Binding Content}" Foreground="#E6F9FFDD" FontSize="12" TextWrapping="Wrap"/>

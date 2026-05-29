@@ -1,5 +1,17 @@
 [
   {
+    "version": "3.1.7",
+    "date": "15 de Mayo, 2026",
+    "title": "KRAKEN Engine: Versioning & UI Polish",
+    "type": "update",
+    "changes": [
+      "⚡ Profile Editor: Implementación de etiquetas dinámicas y selección de versiones mejorada para una navegación más fluida.",
+      "🎨 UI/UX: Limpieza masiva de paneles obsoletos en la vista de Configuración para simplificar la experiencia de usuario.",
+      "📦 Despliegue: Sincronización total de versiones en el manifiesto del sistema y el instalador oficial.",
+      "🛠️ Estabilidad: Corregidos errores de renderizado en HubView y normalización de estilos globales."
+    ]
+  },
+  {
     "version": "2.6.1",
     "date": "09 de Abril, 2026",
     "title": "KRAKEN Stabilization & Centralized Versioning",

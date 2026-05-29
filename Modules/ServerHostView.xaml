@@ -13,10 +13,10 @@
             <!-- Header -->
             <StackPanel Margin="0,0,0,28">
                 <TextBlock Text="Hostear Servidor"
-                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
                 <TextBlock Text="GESTIÓN DE NODOS Y GALAXIAS LOCALES"
-                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                           Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
             </StackPanel>
 
             <Grid>
@@ -121,7 +121,7 @@
                 <StackPanel Grid.Column="1">
                     <Border Background="#0A0E14" CornerRadius="16" Padding="20" BorderBrush="#0D151D" BorderThickness="1" Margin="0,0,0,16">
                         <StackPanel>
-                            <TextBlock Text="ESTADO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="0,0,0,12"/>
+                            <TextBlock Text="ESTADO" Foreground="#8E8E93" FontSize="9" FontWeight="Bold" Margin="0,0,0,12"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                 <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="#1C2D3A" VerticalAlignment="Center"/>
                                 <TextBlock x:Name="StatusText" Text="No instalado" Foreground="#E6F9FF" FontSize="14" FontWeight="Bold" Margin="10,0,0,0"/>
@@ -129,13 +129,13 @@
                             
                             <Border Height="1" Background="#0D151D" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="JUGADORES" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock Text="JUGADORES" Foreground="#8E8E93" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
                             <TextBlock x:Name="PlayersText" Text="0 / 20" Foreground="#70F9FF" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="USO DE CPU" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock Text="USO DE CPU" Foreground="#8E8E93" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
                             <ProgressBar x:Name="CpuBar" Height="4" Value="0" Style="{DynamicResource AppleProgress}" Margin="0,0,0,12"/>
                             
-                            <TextBlock Text="USO DE RAM" Foreground="#1C2D3A" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
+                            <TextBlock Text="USO DE RAM" Foreground="#8E8E93" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
                             <TextBlock x:Name="RamText" Text="0 MB / 4 GB" Foreground="#6D8A99" FontSize="10" Margin="0,0,0,4" HorizontalAlignment="Right"/>
                             <ProgressBar x:Name="RamBar" Height="4" Value="0" Style="{DynamicResource AppleProgress}"/>
                         </StackPanel>
@@ -147,7 +147,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="CONSOLA" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="CONSOLA" Foreground="#8E8E93" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
                             <ScrollViewer Grid.Row="1" x:Name="ConsoleScroll">
                                 <TextBlock x:Name="ConsoleText" Foreground="#10B981" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Text="Esperando inicio..."/>
                             </ScrollViewer>

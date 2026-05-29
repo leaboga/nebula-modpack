@@ -4,25 +4,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="KRAKEN Launcher"
         Height="660" Width="1020"
+        MinHeight="540" MinWidth="780"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
-        FontFamily="Segoe UI"
+        FontFamily="{StaticResource BodyFont}"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
-        <DropShadowEffect x:Key="CardGlow"   Color="#00F2FF" Opacity="0.12" BlurRadius="30" ShadowDepth="0"/>
-        <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.4"  BlurRadius="25" ShadowDepth="6"/>
+        <DropShadowEffect x:Key="CardGlow"   Color="#18E0D2" Opacity="0.10" BlurRadius="18" ShadowDepth="0"/>
+        <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.32" BlurRadius="16" ShadowDepth="4"/>
         
         <Storyboard x:Key="FadeIn">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.22">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,30,0,0" To="0,0,0,0" Duration="0:0:0.7">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,14,0,0" To="0,0,0,0" Duration="0:0:0.24">
                 <ThicknessAnimation.EasingFunction>
                     <PowerEase Power="5" EasingMode="EaseOut"/>
                 </ThicknessAnimation.EasingFunction>
@@ -30,12 +34,12 @@
         </Storyboard>
         
         <Storyboard x:Key="PulseEffect">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.4" To="1" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.55" To="1" Duration="0:0:1.8" AutoReverse="True" RepeatBehavior="Forever"/>
         </Storyboard>
         
         <Storyboard x:Key="TabChangeEffect">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.3" To="1" Duration="0:0:0.4"/>
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="20,0,0,0" To="0,0,0,0" Duration="0:0:0.3">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.55" To="1" Duration="0:0:0.14"/>
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="10,0,0,0" To="0,0,0,0" Duration="0:0:0.16">
                 <ThicknessAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
         </Storyboard>
@@ -43,16 +47,24 @@
 
     <Grid>
         <!-- MASTER BACKGROUND -->
-        <Border Background="#05080D"/>
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#000000" Offset="0"/>
+                    <GradientStop Color="#1C1C1E" Offset="0.48"/>
+                    <GradientStop Color="#000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         
         <!-- GLOW EFFECTS -->
-        <Ellipse Fill="#3000F2FF" Width="900" Height="900" Margin="-400,-400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
-            <Ellipse.Effect><BlurEffect Radius="200"/></Ellipse.Effect>
+        <Ellipse Fill="#150A84FF" Width="760" Height="760" Margin="-340,-360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+            <Ellipse.Effect><BlurEffect Radius="120"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="#1500F2FF" Width="600" Height="600" Margin="0,0,-200,-200" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
-            <Ellipse.Effect><BlurEffect Radius="150"/></Ellipse.Effect>
+        <Ellipse Fill="#100A84FF" Width="520" Height="520" Margin="0,0,-170,-170" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False">
+            <Ellipse.Effect><BlurEffect Radius="95"/></Ellipse.Effect>
         </Ellipse>
-        <Ellipse Fill="Black" Opacity="0.5" IsHitTestVisible="False"/>
+        <Rectangle Fill="#22000000" IsHitTestVisible="False"/>
 
         <!-- BACKGROUND IMAGE -->
         <Image x:Name="LauncherBackground" Stretch="UniformToFill" Opacity="0.12" IsHitTestVisible="False">
@@ -64,7 +76,7 @@
 
         <Grid x:Name="MainRoot">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="230"/>
+                <ColumnDefinition x:Name="SidebarColumn" Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -72,8 +84,8 @@
             <Border Grid.Column="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#081016" Offset="0"/>
-                        <GradientStop Color="#05080D" Offset="1"/>
+                        <GradientStop Color="#000000" Offset="0"/>
+                        <GradientStop Color="#1C1C1E" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border.Effect>
@@ -107,14 +119,14 @@
                                     <Image Source="/Assets/logo_premium.png" Width="44" Height="44" Stretch="Uniform"/>
                                 </Border>
                                 <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="22" FontWeight="Black"/>
-                                    <TextBlock Text="THE ABYSSAL TITAN" Foreground="#344A5B" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock Text="KRAKEN" Foreground="White" FontSize="24" FontWeight="Black" FontFamily="{StaticResource DisplayFont}"/>
+                                    <TextBlock Text="ABYSSAL ENGINE" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black"/>
                                 </StackPanel>
                             </StackPanel>
 
                             <!-- ACCOUNT -->
                             <TextBlock Text="PERSONAL" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="8,0,0,12"/>
-                            <Border Background="#0A0E14" CornerRadius="12" Padding="12,12" Margin="0,0,0,24" BorderBrush="#0D151D" BorderThickness="1">
+                            <Border Background="#1C1C1E" CornerRadius="12" Padding="12,12" Margin="0,0,0,24" BorderBrush="#38383A" BorderThickness="1">
                                 <StackPanel Orientation="Horizontal">
                                      <Border Width="42" Height="42" CornerRadius="12" ClipToBounds="True">
                                          <Border.Background>
@@ -132,7 +144,7 @@
                                          </Grid>
                                      </Border>
                                      <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                         <TextBlock x:Name="SidebarUsername" Text="Piloto del Abismo" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                                         <TextBlock x:Name="SidebarUsername" Text="Jugador" Foreground="White" FontSize="14" FontWeight="Bold"/>
                                          <TextBlock x:Name="SidebarAuthType" Text="Cuenta Conectada" Foreground="#344A5B" FontSize="10"/>
                                      </StackPanel>
                                  </StackPanel>
@@ -141,30 +153,30 @@
                             <!-- NAVIGATION -->
                             <TextBlock Text="OPERACIONES" Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black" Margin="14,0,0,12"/>
                             
-                            <RadioButton x:Name="NavHome" Content="Centro de Mando" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
+                            <RadioButton x:Name="NavHome" Content="Inicio" Style="{DynamicResource ToggleTab}" GroupName="Nav" IsChecked="True" Checked="Nav_Home_Checked"/>
                             
-                            <RadioButton x:Name="NavSistemas" Content="Sistemas Pepa" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
+                            <RadioButton x:Name="NavSistemas" Content="Sistema" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Sistemas_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Ajustes críticos, sincronización oficial, rendimiento y consola." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                    <ToolTip Content="Ajustes crticos, sincronizacin oficial, rendimiento y consola." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
                             <RadioButton Content="Biblioteca Mod" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Recursos_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                    <ToolTip Content="Descarga mods, gestiona tus archivos locales y explora modpacks." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
-                            <RadioButton Content="Red Abisal" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
+                            <RadioButton Content="Servidor" Style="{DynamicResource ToggleTab}" GroupName="Nav" Checked="Nav_Red_Checked">
                                 <RadioButton.ToolTip>
-                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#0D151D" Foreground="White" BorderBrush="#00F2FF"/>
+                                    <ToolTip Content="Social, Servidores, Mapa en Vivo y Capturas de pantalla." Background="#1C1C1E" Foreground="White" BorderBrush="#0A84FF"/>
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
                             <Border Height="1" Margin="4,24,4,24" Background="{DynamicResource BorderBrush}"/>
 
                             <!-- SERVER STATUS (Integrated) -->
-                            <Border Style="{DynamicResource GlassPanel}" Background="#0A0E14" Padding="14,12" Margin="4,0,4,16">
+                            <Border Style="{DynamicResource GlassPanel}" Background="#1C1C1E" Padding="14,12" Margin="4,0,4,16">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                         <Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="#EF4444" VerticalAlignment="Center"/>
@@ -179,7 +191,7 @@
                     </ScrollViewer>
 
                     <StackPanel Grid.Row="1" Margin="20,0,20,20">
-                        <Border Background="#0A0E14" CornerRadius="10" Padding="12,10" Margin="0,0,0,16" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                        <Border Background="#1C1C1E" CornerRadius="10" Padding="12,10" Margin="0,0,0,16" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                             <StackPanel>
                                 <TextBlock Text="MÉTRICAS" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black" Margin="0,0,0,8"/>
                                 <Grid>
@@ -194,10 +206,11 @@
 
                         <StackPanel x:Name="AdminPanel" Visibility="Collapsed" Margin="0,16,0,0">
                             <TextBlock Text="ADMINISTRACIÓN" Foreground="#FF4B4B" FontSize="8" FontWeight="Black" Margin="4,0,0,8"/>
+                            <Button Content="Subir Configs Oficiales" Style="{DynamicResource SecondaryButton}" Height="32" Click="OpenConfigAdmin_Click" Margin="0,0,0,6"/>
                             <Button Content="Publicar Motor Core" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarLauncher_Click" Margin="0,0,0,6"/>
                             <Button Content="Publicar Assets/Mods" Style="{DynamicResource SecondaryButton}" Height="32" Click="PublicarActualizacion_Click" Margin="0,0,0,6"/>
                         </StackPanel>
-                        <Button x:Name="MusicToggle" Content="🎵" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
+                        <Button x:Name="MusicToggle" Content="" FontSize="13" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-22,0,0" Opacity="0.4" Cursor="Hand" Click="MusicToggle_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -208,14 +221,14 @@
                     <RowDefinition Height="40"/> <!-- Titlebar -->
                     <RowDefinition Height="60"/> <!-- Context Header -->
                     <RowDefinition Height="*"/>  <!-- Content Area -->
-                    <RowDefinition Height="120"/> <!-- Bottom Action Bar -->
+                    <RowDefinition x:Name="ActionBarRow" Height="120"/> <!-- Bottom Action Bar -->
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center">
-                        <Button Content="—" Style="{DynamicResource TitleBarButton}" Click="MinimizeButton_Click"/>
-                        <Button Content="🗖" Style="{DynamicResource TitleBarButton}" Click="ToggleMaximize_Click" ToolTip="Maximizar/Restaurar"/>
-                        <Button Content="✕" Style="{DynamicResource TitleBarButton}" Click="CloseButton_Click" x:Name="MainCloseBtn"/>
+                        <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets" Style="{DynamicResource TitleBarButton}" Click="MinimizeButton_Click"/>
+                        <Button Content="&#xE922;" FontFamily="Segoe MDL2 Assets" Style="{DynamicResource TitleBarButton}" Click="ToggleMaximize_Click" ToolTip="Maximizar/Restaurar"/>
+                        <Button Content="&#xE106;" FontFamily="Segoe MDL2 Assets" Style="{DynamicResource TitleBarButton}" Click="CloseButton_Click" x:Name="MainCloseBtn"/>
                     </StackPanel>
                 </Grid>
 
@@ -229,14 +242,14 @@
                             <StackPanel Orientation="Horizontal" x:Name="ActiveProfileInfo">
                                 <TextBlock x:Name="ActiveProfileLabel" Text="Perfil Predeterminado" Foreground="White" FontSize="11" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,12,0"/>
                                 <Border Background="#1A00F2FF" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" VerticalAlignment="Center">
-                                    <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#00F2FF" FontSize="9" FontWeight="Black"/>
+                                    <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#0A84FF" FontSize="9" FontWeight="Black"/>
                                 </Border>
                                 <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
                                     <TextBlock x:Name="ActiveLoaderLabel" Text="---" Foreground="#10B981" FontSize="9" FontWeight="Black"/>
                                 </Border>
                             </StackPanel>
                         </StackPanel>
-                        <TextBlock x:Name="ViewTitleLabel" Text="Bienvenido al Abismo" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
+                        <TextBlock x:Name="ViewTitleLabel" Text="Panel principal" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,2,0,0"/>
                     </StackPanel>
                 </Grid>
 
@@ -247,8 +260,8 @@
                              <!-- HOME VIEW -->
                             <ScrollViewer x:Name="HomeView" VerticalScrollBarVisibility="Auto" Visibility="Visible">
                                 <StackPanel Margin="32,24">
-                                    <TextBlock Text="Sincronización de Sistemas en curso..." Foreground="#344A5B" FontSize="12" Margin="0,0,0,4"/>
-                                    <TextBlock x:Name="HomeGreetingLabel" Text="Comandante en el Deck" Foreground="White" FontSize="32" FontWeight="Black" Margin="0,0,0,24"/>
+                                    <TextBlock Text="Estado del ecosistema, perfiles y entrada al servidor." Foreground="{DynamicResource TextMutedBrush}" FontSize="12" Margin="0,0,0,4"/>
+                                    <TextBlock x:Name="HomeGreetingLabel" Text="Listo para jugar" Foreground="White" FontSize="34" FontWeight="Black" FontFamily="{StaticResource DisplayFont}" Margin="0,0,0,24"/>
 
                                     <!-- PROFILE SELECTOR -->
                                     <Grid Margin="0,0,0,24">
@@ -256,17 +269,20 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                                             <TextBlock Text="PERFIL ACTIVO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
                                             <ComboBox x:Name="ProfileComboBox" Height="38" Style="{DynamicResource ModernComboBox}" SelectionChanged="ProfileComboBox_SelectionChanged"/>
+                                            <TextBlock x:Name="ProfileModeLabel" Text="---" Foreground="{DynamicResource AccentBrush}" FontSize="9" FontWeight="Black" Margin="4,6,0,0"/>
                                             <StackPanel Orientation="Horizontal" Margin="4,6,0,0" Opacity="0.5">
                                                 <TextBlock Text="RUTA: " Foreground="{DynamicResource TextMutedBrush}" FontSize="9" FontWeight="Black"/>
                                                 <TextBlock x:Name="ProfilePathLabel" Text="---" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="9" FontWeight="Bold"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Button Grid.Column="1" Content="📋 Clonar" Width="90" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="CloneProfile_Click"/>
-                                        <Button Grid.Column="2" Content="➕ Nuevo Perfil" Width="100" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Click="NewProfile_Click"/>
+                                        <Button Grid.Column="1" Content=" Clonar" Width="90" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="CloneProfile_Click"/>
+                                        <Button Grid.Column="2" Content=" Nuevo Perfil" Width="100" Style="{DynamicResource SecondaryButton}" Height="38" VerticalAlignment="Bottom" Margin="0,0,10,0" Click="NewProfile_Click"/>
+                                        <Button Grid.Column="3" x:Name="DeleteProfileButton" Content="Eliminar" Width="88" Style="{DynamicResource SecondaryButton}" Foreground="#EF4444" Height="38" VerticalAlignment="Bottom" Click="DeleteProfile_Click"/>
                                     </Grid>
 
                                     <!-- NEWS CARD (Unified) -->
@@ -280,17 +296,17 @@
                                                 <Border Background="#10B981" CornerRadius="4" Padding="8,2" HorizontalAlignment="Left" Margin="0,0,0,12" x:Name="LiveNewsBadge">
                                                     <TextBlock Text="ESTADO: ESTABLE" Foreground="White" FontSize="9" FontWeight="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Motores Abisales Listos" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
-                                                <TextBlock Text="El ecosistema KRAKEN está optimizado para la versión actual. Todos los sistemas de red funcionan dentro de los parámetros esperados." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextWrapping="Wrap" MaxWidth="500"/>
+                                                <TextBlock Text="Instancia lista" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
+                                                <TextBlock Text="Perfil, mods y configuraciones listos para iniciar. Revisa actualizaciones antes de jugar." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextWrapping="Wrap" MaxWidth="500"/>
                                             </StackPanel>
                                             <Border Grid.Column="1" Width="50" Height="50" CornerRadius="10" Background="#1A00F2FF" VerticalAlignment="Center">
-                                                <TextBlock Text="⚓" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                         </Grid>
                                     </Border>
                                     
                                     <!-- MAP QUICK ACCESS -->
-                                    <Border Background="#0D151D99" CornerRadius="8" Padding="20,16" Margin="0,0,0,24" BorderBrush="#1E2C38" BorderThickness="1" Cursor="Hand" MouseDown="MapQuickCard_MouseDown">
+                                    <Border Background="#0D151D99" CornerRadius="8" Padding="20,16" Margin="0,0,0,24" BorderBrush="#38383A" BorderThickness="1" Cursor="Hand" MouseDown="MapQuickCard_MouseDown">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
@@ -298,13 +314,13 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <Border Width="44" Height="44" CornerRadius="12" Background="#207C3AED">
-                                                <TextBlock Text="🌍" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
                                                 <TextBlock Text="Detección de Flota (Live Map)" Foreground="White" FontSize="15" FontWeight="Bold"/>
-                                                <TextBlock Text="Rastrea la posición de otras unidades en el Abismo." Foreground="#6D8A99" FontSize="11"/>
+                                                <TextBlock Text="Abre el mapa del servidor y revisa la actividad." Foreground="#6D8A99" FontSize="11"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="➜" Foreground="#00F2FF" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Grid.Column="2" Text="" Foreground="#0A84FF" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         </Grid>
                                     </Border>
 
@@ -313,10 +329,11 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                                             <TextBlock Text="MODO DE SESIÓN" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
-                                            <Border Background="#05080D" CornerRadius="12" Padding="4" HorizontalAlignment="Left" BorderBrush="#0D151D" BorderThickness="1">
+                                            <Border Background="#05080D" CornerRadius="12" Padding="4" HorizontalAlignment="Left" BorderBrush="#38383A" BorderThickness="1">
                                                 <StackPanel Orientation="Horizontal">
                                                     <RadioButton x:Name="OfflineToggle" Content="Offline" Style="{DynamicResource ToggleTab}" IsChecked="True" GroupName="Mode" Checked="AuthToggle_Changed" Padding="16,6"/>
                                                     <RadioButton x:Name="PremiumToggle" Content="Premium" Style="{DynamicResource ToggleTab}" GroupName="Mode" Checked="AuthToggle_Changed" Padding="16,6"/>
@@ -324,13 +341,22 @@
                                             </Border>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                            <TextBlock Text="VERSIÓN DEL PACK" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
+                                            <TextBlock x:Name="VersionComboTitle" Text="VERSION" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
                                             <ComboBox x:Name="VersionComboBox" Height="36" Style="{DynamicResource ModernComboBox}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Margin="10,0,0,0">
+                                            <TextBlock Text="LOADER" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,10"/>
+                                            <ComboBox x:Name="ProfileLoaderCombo" Height="36" Style="{DynamicResource ModernComboBox}" SelectionChanged="ProfileLoaderCombo_SelectionChanged">
+                                                <ComboBoxItem Content="Vanilla" Tag="vanilla"/>
+                                                <ComboBoxItem Content="Fabric" Tag="fabric"/>
+                                                <ComboBoxItem Content="NeoForge" Tag="neoforge"/>
+                                                <ComboBoxItem Content="Forge" Tag="forge"/>
+                                            </ComboBox>
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel x:Name="OfflinePanel" Visibility="Visible">
-                                        <TextBlock Text="NOMBRE DE PILOTO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
+                                        <TextBlock Text="NOMBRE DE USUARIO" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" Margin="2,0,0,8"/>
                                         <TextBox x:Name="NickTextBox" Style="{DynamicResource AppleTextBox}" Height="40" VerticalContentAlignment="Center" TextChanged="NickTextBox_TextChanged"/>
                                     </StackPanel>
 
@@ -339,7 +365,7 @@
                                             <Button x:Name="MicrosoftLoginButton" Content="Conectar con Microsoft" Style="{DynamicResource SecondaryButton}" Height="44" Click="MicrosoftLoginButton_Click"/>
                                         </StackPanel>
                                         <StackPanel x:Name="LoggedPanel" Visibility="Collapsed">
-                                            <Border Background="#05080D" CornerRadius="12" Padding="16,10" BorderBrush="#1E2C38" BorderThickness="1">
+                                            <Border Background="#05080D" CornerRadius="12" Padding="16,10" BorderBrush="#38383A" BorderThickness="1">
                                                 <Grid>
                                                     <StackPanel>
                                                         <TextBlock Text="CUENTA PREMIUM" Foreground="#10B981" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
@@ -357,7 +383,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="ASIGNACIÓN DE RAM" Foreground="#1C2D3A" FontSize="9" FontWeight="Bold" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#00F2FF" FontSize="14" FontWeight="Black"/>
+                                        <TextBlock Grid.Column="1" x:Name="RamLabel" Text="8 GB" Foreground="#0A84FF" FontSize="14" FontWeight="Black"/>
                                     </Grid>
                                     <Slider x:Name="RamSlider" Minimum="2" Maximum="16" Value="8" Style="{DynamicResource AppleSlider}" ValueChanged="RamSlider_ValueChanged"/>
                                 </StackPanel>
@@ -386,7 +412,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <!-- Console/Diagnostic -->
-                    <Border Grid.Column="0" Background="#0A0E14" CornerRadius="12" BorderBrush="#1E2C38" BorderThickness="1" Margin="0,0,20,0" Padding="14">
+                    <Border Grid.Column="0" Background="#1C1C1E" CornerRadius="12" BorderBrush="#38383A" BorderThickness="1" Margin="0,0,20,0" Padding="14">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -395,12 +421,12 @@
                             </Grid.RowDefinitions>
                             
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                <TextBlock Text="TELEMETRÍA DE SISTEMAS" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
+                                <TextBlock Text="ESTADO DEL LAUNCHER" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
                                 <Ellipse Width="6" Height="6" Fill="#10B981" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
                             <ScrollViewer x:Name="LogScroll" Grid.Row="1">
-                                <TextBlock x:Name="LogText" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Opacity="0.8"/>
+                                <TextBlock x:Name="LogText" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10" FontFamily="{StaticResource MonoFont}" TextWrapping="Wrap" Opacity="0.8"/>
                             </ScrollViewer>
 
                             <Grid Grid.Row="2" Margin="0,10,0,0">
@@ -422,7 +448,7 @@
 
                     <!-- Play Section -->
                     <StackPanel Grid.Column="1">
-                        <Button x:Name="PlayButton" Content="INICIAR SECUENCIA" Style="{DynamicResource PlayButton}" Height="56" Click="PlayButton_Click" FontSize="15"/>
+                        <Button x:Name="PlayButton" Content="INICIAR SECUENCIA" Style="{DynamicResource PlayButton}" Height="58" Click="PlayButton_Click" FontSize="16"/>
                         <Grid Margin="4,12,4,0">
                             <CheckBox x:Name="TrayToggle" Content="Segundo Plano" Style="{DynamicResource TrayToggle}" Checked="TrayToggle_Changed" Unchecked="TrayToggle_Changed"/>
                             <CheckBox x:Name="TurboToggle" Content="Modo Turbo" Style="{DynamicResource TrayToggle}" HorizontalAlignment="Right" Checked="TurboToggle_Changed" Unchecked="TurboToggle_Changed"/>
@@ -438,10 +464,24 @@
         <StackPanel x:Name="NotificationArea" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,0,20,130"/>
 
         <!-- TUTORIAL / DISCOVERY OVERLAY -->
-        <Grid x:Name="TutorialOverlay" Visibility="Collapsed" Background="Transparent" IsHitTestVisible="True">
-            <!-- Focus Hole (Visual cue + Blocking background) -->
-            <Canvas x:Name="TutorialFocusCanvas" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Path Fill="#D905080D" IsHitTestVisible="True">
+        <Grid x:Name="TutorialOverlay" Visibility="Collapsed" Background="#D905080D">
+            <Border x:Name="TutorialCard" VerticalAlignment="Center" HorizontalAlignment="Center" Width="380" Background="#1C1C1E" CornerRadius="20" BorderBrush="#0A84FF" BorderThickness="1" Padding="28">
+                <Border.Effect><DropShadowEffect Color="#00F2FF" BlurRadius="40" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
+                <StackPanel>
+                    <TextBlock x:Name="TutorialTitle" Text="Bienvenido a KRAKEN" Foreground="White" FontSize="20" FontWeight="Black" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TutorialContent" Text="Estamos listos para sincronizar tus sistemas. Quieres un recorrido rápido por las nuevas funciones?" Foreground="#6D8A99" FontSize="13" TextWrapping="Wrap" LineHeight="20" Margin="0,0,0,24"/>
+                    <TextBlock x:Name="StepIndicator" Text="Paso 1 de 1" Foreground="#7ECFDF" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                    
+                    <Grid>
+                        <Button x:Name="BtnSkipTutorial" Content="Omitir" HorizontalAlignment="Left" Style="{DynamicResource SecondaryButton}" Padding="16,4" Click="BtnSkipTutorial_Click"/>
+                        <Button x:Name="BtnNextTutorial" Content="Siguiente" HorizontalAlignment="Right" Style="{DynamicResource PlayButton}" Width="120" Height="36" Click="BtnNextTutorial_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <!-- Focus Hole (Visual cue) -->
+            <Canvas x:Name="TutorialFocusCanvas" IsHitTestVisible="False">
+                <Path Fill="#A605080D">
                     <Path.Data>
                          <CombinedGeometry GeometryCombineMode="Exclude">
                             <CombinedGeometry.Geometry1>

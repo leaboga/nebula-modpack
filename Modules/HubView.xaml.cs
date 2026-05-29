@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace KrakenLauncher.Modules
@@ -18,6 +19,7 @@ namespace KrakenLauncher.Modules
         }
 
         private List<HubTab> _tabs = new List<HubTab>();
+        private readonly List<RadioButton> _tabButtons = new();
         private MainWindow _main;
         private UserControl? _currentView;
 
@@ -35,17 +37,25 @@ namespace KrakenLauncher.Modules
         private void InitializeTabs()
         {
             TabContainer.Children.Clear();
+            _tabButtons.Clear();
             foreach (var tab in _tabs)
             {
                 var rb = new RadioButton
                 {
-                    Content = tab.Label,
+                    Content = "  " + tab.Label.ToUpperInvariant(),
                     Style = (Style)_main.FindResource("ToggleTab"),
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xC8, 0xD0, 0xD8)),
+                    FontSize = 12,
+                    FontWeight = FontWeights.Bold,
+                    Cursor = System.Windows.Input.Cursors.Hand,
+                    Padding = new Thickness(12, 5, 12, 5),
+                    MinWidth = 128,
                     Margin = new Thickness(0, 0, 12, 0),
                     Tag = tab
                 };
                 rb.Checked += Tab_Checked;
                 TabContainer.Children.Add(rb);
+                _tabButtons.Add(rb);
 
                 if (TabContainer.Children.Count == 1) rb.IsChecked = true;
             }
@@ -55,6 +65,7 @@ namespace KrakenLauncher.Modules
         {
             if (sender is RadioButton rb && rb.Tag is HubTab tab)
             {
+                UpdateTabVisuals(rb);
                 StopView(_currentView);
                 _currentView = tab.View;
                 ActiveModuleContainer.Content = tab.View;
@@ -63,6 +74,17 @@ namespace KrakenLauncher.Modules
                 // Animation
                 var sb = (Storyboard)_main.FindResource("TabChangeEffect");
                 sb.Begin(ActiveModuleContainer);
+            }
+        }
+
+        private void UpdateTabVisuals(RadioButton active)
+        {
+            foreach (var rb in _tabButtons)
+            {
+                bool isActive = rb == active;
+                rb.Foreground = isActive
+                    ? Brushes.White
+                    : new SolidColorBrush(Color.FromRgb(0xC8, 0xD0, 0xD8));
             }
         }
 

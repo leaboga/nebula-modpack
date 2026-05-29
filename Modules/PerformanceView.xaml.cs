@@ -13,8 +13,9 @@ namespace KrakenLauncher.Modules
     {
         private readonly DispatcherTimer _timer;
         private readonly MainWindow _parent;
-        private readonly Random _rnd = new();
         private readonly List<double> _history = new();
+        private DateTime _lastSampleTime = DateTime.UtcNow;
+        private TimeSpan _lastCpuTime = Process.GetCurrentProcess().TotalProcessorTime;
 
         public PerformanceView(MainWindow parent)
         {
@@ -36,14 +37,20 @@ namespace KrakenLauncher.Modules
                 long mem = Process.GetCurrentProcess().PrivateMemorySize64 / 1024 / 1024;
                 RamValueText.Text = $"{mem} MB";
 
-                // CPU Dummy (Improvement: Real CPU usage)
-                double cpu = _rnd.Next(1, 5); 
-                CpuValueText.Text = $"{cpu}%";
+                var process = Process.GetCurrentProcess();
+                var now = DateTime.UtcNow;
+                var cpuTime = process.TotalProcessorTime;
+                double elapsedMs = Math.Max(1, (now - _lastSampleTime).TotalMilliseconds);
+                double cpuMs = Math.Max(0, (cpuTime - _lastCpuTime).TotalMilliseconds);
+                double cpu = Math.Clamp(cpuMs / elapsedMs / Environment.ProcessorCount * 100.0, 0, 100);
+                _lastSampleTime = now;
+                _lastCpuTime = cpuTime;
+                CpuValueText.Text = $"{cpu:0.0}%";
 
                 // Play Time from history
                 TotalPlayTimeText.Text = _parent.TotalTimeLabel.Text;
 
-                UpdateGraph(cpu + (mem / 20.0)); // Aggregate for visual feel
+                UpdateGraph(cpu + Math.Min(40, mem / 40.0));
             }
             catch { }
         }

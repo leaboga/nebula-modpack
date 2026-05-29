@@ -14,14 +14,14 @@
             <!-- Header -->
             <StackPanel Grid.Row="0" Margin="0,0,0,28">
                 <TextBlock Text="Panel de Ajustes"
-                           Foreground="#E6F9FF" FontSize="26" FontWeight="Bold"
+                           Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
                 <TextBlock Text="CONFIGURACIÓN DEL NÚCLEO KRAKEN"
-                           Foreground="#1C2D3A" FontSize="9" FontWeight="Bold"/>
+                           Foreground="#8E8E93" FontSize="9" FontWeight="Bold"/>
             </StackPanel>
 
             <!-- Instances Config Card -->
-            <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
+            <Border Visibility="Collapsed" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
@@ -249,31 +249,10 @@
                         <Border Width="32" Height="32" CornerRadius="9" Background="#EC4899">
                             <TextBlock Text="🎨" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Tema y Apariencia" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Fondo de Pantalla" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <TextBlock Text="COLOR DE ACENTO" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ColorPurple"  MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#00F2FF" Background="#00F2FF" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorBlue"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#3B82F6" Background="#3B82F6" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorEmerald" MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#10B981" Background="#10B981" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                        <Border x:Name="ColorRose"    MouseDown="Color_MouseDown" Width="36" Height="36" Tag="#F43F5E" Background="#F43F5E" CornerRadius="18" Margin="0,0,10,0" Cursor="Hand"/>
-                    </StackPanel>
-
-                    <TextBlock Text="ESTILO GLOBAL (PRESSET)" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border x:Name="ThemeNebula"  MouseDown="Theme_MouseDown" Tag="#00F2FF" Width="90" Height="34" Background="#0D151D" BorderBrush="#00F2FF" BorderThickness="2" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Abisal" Foreground="#E6F9FF" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border x:Name="ThemeCrimson" MouseDown="Theme_MouseDown" Tag="#EF4444" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Relikt" Foreground="#EF4444" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border x:Name="ThemeEmerald" MouseDown="Theme_MouseDown" Tag="#10B981" Width="90" Height="34" Background="#0D151D" BorderBrush="#1E2C38" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Cursor="Hand">
-                            <TextBlock Text="Bosque" Foreground="#10B981" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </StackPanel>
-
-                    <TextBlock Text="FONDO DE PANTALLA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
+                    <TextBlock Text="IMAGEN PERSONALIZADA" Foreground="#344A5B" FontSize="9" FontWeight="Bold" Margin="2,0,0,12"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -396,17 +375,17 @@
             </StackPanel>
         </Border>
 
-        <!-- Panel ADMIN (solo Pepita): Publicar configs -->
+        <!-- Publicar configs oficiales: visible siempre, protegido por clave admin al hacer click -->
         <Border x:Name="PepitaAdminPanel" Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16"
-                BorderBrush="#7C3AED40" BorderThickness="1" Visibility="Collapsed">
+                BorderBrush="#7C3AED40" BorderThickness="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                     <Border Width="32" Height="32" CornerRadius="9" Background="#7C3AED">
                         <TextBlock Text="🔒" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Panel Admin - Publicar Configs" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="SOLO VISIBLE PARA PEPITA" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
+                        <TextBlock Text="Publicar Configs Oficiales" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="PIDE CLAVE ADMIN AL SUBIR" Foreground="#7C3AED" FontSize="8" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -420,11 +399,48 @@
                 </Border>
 
                 <Button x:Name="BtnPublicarConfigsAdmin"
-                        Content="☁ Publicar Revision Oficial"
+                        Content="Subir configs oficiales"
                         Click="BtnPublicarConfigsAdmin_Click"
                         Style="{DynamicResource PlayButton}"
                         Height="44"
                         Background="#7C3AED"/>
+
+                <Border x:Name="AdminPublishStatusPanel"
+                        Background="#0C1320"
+                        CornerRadius="10"
+                        Padding="12"
+                        Margin="0,10,0,0"
+                        BorderBrush="#7C3AED30"
+                        BorderThickness="1"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,8">
+                            <TextBlock x:Name="AdminPublishStatusText"
+                                       Text="Listo para subir configs."
+                                       Foreground="#D8B4FE"
+                                       FontSize="11"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       DockPanel.Dock="Left"/>
+                            <TextBlock x:Name="AdminPublishPercentText"
+                                       Text="0%"
+                                       Foreground="#A78BFA"
+                                       FontSize="11"
+                                       FontFamily="Consolas"
+                                       HorizontalAlignment="Right"/>
+                        </DockPanel>
+                        <ProgressBar x:Name="AdminPublishProgress"
+                                     Minimum="0"
+                                     Maximum="100"
+                                     Value="0"
+                                     Height="8"/>
+                        <TextBlock Text="Mantene el launcher abierto hasta que termine la subida."
+                                   Foreground="#7B6FA0"
+                                   FontSize="9"
+                                   Margin="0,8,0,0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
 
                 <Separator Background="#1A1030" Margin="0,16,0,12"/>
 
@@ -442,3 +458,4 @@
     </StackPanel>
     </ScrollViewer>
 </UserControl>
+

@@ -32,6 +32,8 @@ namespace KrakenLauncher
         // â”€â”€ Paths â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public MinecraftProfile? CurrentProfile => _session.Profiles.Find(p => p.Id == _session.CurrentProfileId) ?? (_session.Profiles.Count > 0 ? _session.Profiles[0] : null);
         public string GameFolder => PathService.GetInstanceFolder(CurrentProfile?.Id ?? "default");
+        private static readonly string[] FreeMinecraftVersions = { "1.21.1", "1.20.1", "1.19.2", "1.18.2", "1.16.5", "1.8.9" };
+        private bool CurrentProfileSyncsWithServer => CurrentProfile?.SyncWithServer == true;
 
         // â”€â”€ Theme brushes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private static readonly SolidColorBrush BrushOnline  = new(Color.FromRgb(0x10, 0xB9, 0x81));
@@ -71,6 +73,7 @@ namespace KrakenLauncher
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            _cerrarDeVerdad = true;
             this.Close();
         }
 
@@ -107,7 +110,6 @@ namespace KrakenLauncher
 
             PathService.Initialize();
             CargarSesion();
-
             InitializeProfileServices();
             InitializeModernServices();
 
@@ -167,7 +169,7 @@ namespace KrakenLauncher
                 
                 Dispatcher.Invoke(() => {
                     VersionFooterLabel.Text = $"KRAKEN ENGINE v{liveVersion}";
-                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} â€” NÃºcleo estable.");
+                    AgregarLog($"ðŸ›¡ï¸ Sistema Operativo Kraken v{liveVersion} - Núcleo estable.");
                     
                     if (_session.AuthMode == "offline" && string.IsNullOrEmpty(_session.Username))
                         NickTextBox.Focus();
@@ -296,10 +298,10 @@ namespace KrakenLauncher
             {
                 if (!_lastOnlinePlayers.Contains(p))
                 {
-                    AgregarLog($"ðŸ‘‹ {p} se ha unido al servidor.");
-                    // Mejora: Toast feedback visual rÃ¡pido
+                    AgregarLog($" {p} se ha unido al servidor.");
+                    // Mejora: Toast feedback visual rápido
                     Dispatcher.Invoke(() => {
-                        StatusText.Text = $"âœ¨ {p} entrÃ³!";
+                        StatusText.Text = $"âœ¨ {p} entró!";
                         var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
                         timer.Tick += (s, e) => { StatusText.Text = "Online"; timer.Stop(); };
                         timer.Start();
@@ -356,7 +358,7 @@ namespace KrakenLauncher
                 string remoteTag = root.tag_name?.ToString() ?? "";
                 string remoteV   = VersionManager.CleanVersion(remoteTag);
                 
-                AgregarLog($"ðŸ” AuditorÃ­a de ActualizaciÃ³n: Local={localV} | Remota={remoteV}");
+                AgregarLog($"ðŸ” Auditoría de Actualización: Local={localV} | Remota={remoteV}");
 
                 // CRITICAL: Semantic comparison prevents loops
                 if (!VersionManager.IsNewer(localV, remoteV)) 
@@ -370,7 +372,7 @@ namespace KrakenLauncher
                     return;
                 }
 
-                string changelog = root.name?.ToString() ?? "Nueva versiÃ³n disponible";
+                string changelog = root.name?.ToString() ?? "Nueva versión disponible";
                 
                 _updateDownloadUrl = null;
                 string selectedAssetName = string.Empty;
@@ -418,7 +420,7 @@ namespace KrakenLauncher
                 if (string.IsNullOrEmpty(_updateDownloadUrl))
                 {
                     UpdateDiagnosticsService.MarkFailure("No se encontro un asset .exe valido en la release remota.");
-                    AgregarLog("âš  No se encontrÃ³ un binario (.exe) vÃ¡lido en la release remota. Abortando update.");
+                    AgregarLog("âš  No se encontró un binario (.exe) válido en la release remota. Abortando update.");
                     return;
                 }
 
@@ -431,7 +433,7 @@ namespace KrakenLauncher
                     UpdateBadge.Visibility = Visibility.Visible;
                     UpdateBadge.ToolTip    = $"Detectada v{remoteV}: " + changelog;
                     UpdateBadge.IsEnabled  = false;
-                    AgregarLog($"âœ¨ [ActualizaciÃ³n] Kraken v{remoteV} detectado. Se inicia la auto-actualizaciÃ³n.");
+                    AgregarLog($"âœ¨ [Actualización] Kraken v{remoteV} detectado. Se inicia la auto-actualización.");
                 });
 
                 if (!_isAutoUpdating && _autoUpdateAttemptedVersion != remoteV)
@@ -441,7 +443,7 @@ namespace KrakenLauncher
                     await AplicarUpdateAsync(_updateDownloadUrl, true);
                 }
             }
-            catch (Exception ex) { AgregarLog("âš  Error en auditorÃ­a de versiÃ³n: " + ex.Message); }
+            catch (Exception ex) { AgregarLog("âš  Error en auditoría de versión: " + ex.Message); }
         }
 
         private async void UpdateBadge_Click(object sender, MouseButtonEventArgs e)
@@ -451,8 +453,8 @@ namespace KrakenLauncher
             var result = MessageBox.Show(
                 "Nueva version disponible: v" + _updateVersion + "\n\n" +
                 UpdateBadge.ToolTip + "\n\n" +
-                "El launcher se descargarÃ¡ y reiniciarÃ¡. Â¿Continuar?",
-                "ActualizaciÃ³n",
+                "El launcher se descargará y reiniciará. Â¿Continuar?",
+                "Actualización",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Information);
 
@@ -488,7 +490,7 @@ namespace KrakenLauncher
                 string currentExe = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "";
                 if (string.IsNullOrEmpty(currentExe)) return;
                 string targetExe = currentExe;
-                string downloadedAssetName = System.IO.Path.GetFileName(targetExe);
+                string downloadedAssetName = GetUpdateAssetName(downloadUrl, targetExe);
                 
                 AgregarLog("📡 Iniciando descarga del núcleo v" + _updateVersion + "...");
                 
@@ -529,30 +531,70 @@ namespace KrakenLauncher
                 UpdateDiagnosticsService.MarkApplying(targetExe, isAutomatic);
 
                 int pid = Process.GetCurrentProcess().Id;
-                string batContent = "@echo off\n" +
-                                    "set count=0\n" +
-                                    ":loop\n" +
-                                    "set /a count+=1\n" +
-                                    "copy /Y \"" + tempExe + "\" \"" + targetExe + "\" > nul 2>&1\n" +
-                                    "if errorlevel 1 (\n" +
-                                    "    if %count% geq 25 goto failed\n" +
-                                    "    timeout /t 1 /nobreak > nul\n" +
-                                    "    goto loop\n" +
-                                    ")\n" +
-                                    "start \"\" \"" + targetExe + "\"\n" +
-                                    "rmdir /s /q \"" + updateDir + "\"\n" +
-                                    "exit\n" +
-                                    ":failed\n" +
-                                    "exit\n";
+                string updaterLog = PathService.UpdaterLogFile;
+                string scriptContent =
+$@"$ErrorActionPreference = 'Stop'
+$pidToWait = {pid}
+$sourceExe = '{EscapePowerShellLiteral(tempExe)}'
+$targetExe = '{EscapePowerShellLiteral(targetExe)}'
+$updateDir = '{EscapePowerShellLiteral(updateDir)}'
+$updaterLog = '{EscapePowerShellLiteral(updaterLog)}'
 
-                string updaterBat = System.IO.Path.Combine(updateDir, "kraken_updater.bat");
-                await File.WriteAllTextAsync(updaterBat, batContent);
+function Write-UpdateLog([string]$message) {{
+    $stamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    Add-Content -LiteralPath $updaterLog -Value ""[$stamp] $message""
+}}
+
+New-Item -ItemType Directory -Force -Path ([System.IO.Path]::GetDirectoryName($updaterLog)) | Out-Null
+Write-UpdateLog ""Updater iniciado. PID=$pidToWait""
+Write-UpdateLog ""Source=$sourceExe""
+Write-UpdateLog ""Target=$targetExe""
+
+for ($attempt = 0; $attempt -lt 120; $attempt++) {{
+    $proc = Get-Process -Id $pidToWait -ErrorAction SilentlyContinue
+    if (-not $proc) {{ break }}
+    Start-Sleep -Milliseconds 500
+}}
+
+if (Get-Process -Id $pidToWait -ErrorAction SilentlyContinue) {{
+    Write-UpdateLog 'ERROR: el proceso original no cerro a tiempo.'
+    exit 10
+}}
+
+$copied = $false
+for ($copyAttempt = 1; $copyAttempt -le 30; $copyAttempt++) {{
+    try {{
+        Copy-Item -LiteralPath $sourceExe -Destination $targetExe -Force
+        Write-UpdateLog ""EXITO: binario reemplazado en intento $copyAttempt.""
+        $copied = $true
+        break
+    }}
+    catch {{
+        Write-UpdateLog ""Intento $copyAttempt fallido: $($_.Exception.Message)""
+        Start-Sleep -Milliseconds 750
+    }}
+}}
+
+if (-not $copied) {{
+    Write-UpdateLog 'ERROR: no se pudo reemplazar el ejecutable.'
+    exit 11
+}}
+
+Start-Sleep -Milliseconds 300
+Start-Process -FilePath $targetExe | Out-Null
+Write-UpdateLog 'EXITO: launcher relanzado.'
+Start-Sleep -Seconds 2
+Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinue
+";
+
+                string updaterScript = System.IO.Path.Combine(updateDir, "kraken_updater.ps1");
+                await File.WriteAllTextAsync(updaterScript, scriptContent, Encoding.UTF8);
 
                 AgregarLog("🚀 Reiniciando para aplicar la actualización...");
 
-                Process.Start(new ProcessStartInfo("cmd.exe", "/C \"" + updaterBat + "\"")
+                Process.Start(new ProcessStartInfo("powershell.exe", $"-NoProfile -ExecutionPolicy Bypass -File \"{updaterScript}\"")
                 {
-                    UseShellExecute = false,
+                    UseShellExecute = true,
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden
                 });
@@ -599,6 +641,8 @@ namespace KrakenLauncher
 
             return System.IO.Path.GetFileName(currentExe);
         }
+
+        private static string EscapePowerShellLiteral(string value) => value.Replace("'", "''");
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         //  SKIN
@@ -801,15 +845,27 @@ namespace KrakenLauncher
             if (_session.Profiles == null) _session.Profiles = new List<MinecraftProfile>();
             if (_session.Profiles.Count == 0)
             {
-                var defaultProfile = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
+                var defaultProfile = new MinecraftProfile { Name = "Perfil sincronizado con server", Version = "1.21.1", LoaderType = "neoforge", SyncWithServer = true };
                 _session.Profiles.Add(defaultProfile);
                 _session.CurrentProfileId = defaultProfile.Id;
             }
             if (string.IsNullOrEmpty(_session.CurrentProfileId)) _session.CurrentProfileId = _session.Profiles[0].Id;
 
+            var serverProfiles = _session.Profiles.Where(p => p.SyncWithServer).ToList();
+            if (serverProfiles.Count == 0)
+            {
+                _session.Profiles[0].SyncWithServer = true;
+            }
+            else if (serverProfiles.Count > 1)
+            {
+                var primaryServerProfile = serverProfiles[0];
+                foreach (var profile in serverProfiles.Skip(1)) profile.SyncWithServer = false;
+                primaryServerProfile.SyncWithServer = true;
+            }
+
             // Migración de nombres
             _session.Profiles.ForEach(p => { 
-                if (p.Name.Contains("Nebula Default")) p.Name = "KRAKEN Default";
+                if (p.SyncWithServer && (p.Name.Contains("Nebula Default") || p.Name.Contains("KRAKEN Default"))) p.Name = "Perfil sincronizado con server";
                 if (p.RamGB < 2) p.RamGB = 4; 
             });
 
@@ -862,7 +918,7 @@ namespace KrakenLauncher
         {
             if (HomeGreetingLabel == null) return;
             int hour = DateTime.Now.Hour;
-            string greeting = hour < 12 ? "Buenos dÃ­as" : hour < 19 ? "Buenas tardes" : "Buenas noches";
+            string greeting = hour < 12 ? "Buenos días" : hour < 19 ? "Buenas tardes" : "Buenas noches";
             
             // News System (Imp 18)
             string[] news = {
@@ -875,7 +931,7 @@ namespace KrakenLauncher
             string currentNews = news[new Random().Next(news.Length)];
 
             HomeGreetingLabel.Text = !string.IsNullOrEmpty(_session.Username)
-                ? $"{greeting}, {_session.Username} ðŸ‘‹\nðŸ“¢ {currentNews}"
+                ? $"{greeting}, {_session.Username}\n>> {currentNews}"
                 : "Listo para jugar";
         }
 
@@ -940,9 +996,56 @@ namespace KrakenLauncher
         {
             ProfileComboBox.SelectionChanged -= ProfileComboBox_SelectionChanged;
             ProfileComboBox.Items.Clear();
-            foreach (var p in _session.Profiles) ProfileComboBox.Items.Add($"{p.Icon} {p.Name}");
+            foreach (var p in _session.Profiles)
+            {
+                string mode = p.SyncWithServer ? "SERVER" : "LIBRE";
+                ProfileComboBox.Items.Add($"{p.Icon} {p.Name} [{mode}]");
+            }
             ProfileComboBox.SelectedIndex = _session.Profiles.FindIndex(p => p.Id == _session.CurrentProfileId);
             ProfileComboBox.SelectionChanged += ProfileComboBox_SelectionChanged;
+            ActualizarControlesPerfil();
+        }
+
+        private void ActualizarControlesPerfil()
+        {
+            if (CurrentProfile == null) return;
+
+            if (ProfileModeLabel != null)
+                ProfileModeLabel.Text = CurrentProfile.SyncWithServer
+                    ? "PERFIL SINCRONIZADO CON SERVER: mods/configs desde GitHub"
+                    : "PERFIL LIBRE: no sincroniza mods/configs del server";
+
+            if (DeleteProfileButton != null)
+                DeleteProfileButton.IsEnabled = _session.Profiles.Count > 1 && !CurrentProfile.SyncWithServer;
+
+            if (ProfileLoaderCombo != null)
+            {
+                ProfileLoaderCombo.SelectionChanged -= ProfileLoaderCombo_SelectionChanged;
+                for (int i = 0; i < ProfileLoaderCombo.Items.Count; i++)
+                {
+                    if (ProfileLoaderCombo.Items[i] is ComboBoxItem item &&
+                        string.Equals(item.Tag?.ToString(), CurrentProfile.LoaderType, StringComparison.OrdinalIgnoreCase))
+                    {
+                        ProfileLoaderCombo.SelectedIndex = i;
+                        break;
+                    }
+                }
+                ProfileLoaderCombo.IsEnabled = !CurrentProfile.SyncWithServer;
+                ProfileLoaderCombo.SelectionChanged += ProfileLoaderCombo_SelectionChanged;
+            }
+
+            ActualizarVersionesEnHome();
+        }
+
+        private void ActualizarEtiquetasPerfilActivo()
+        {
+            if (CurrentProfile == null) return;
+            if (ActiveProfileLabel != null) ActiveProfileLabel.Text = CurrentProfile.Name;
+            if (ActiveVersionLabel != null) ActiveVersionLabel.Text = CurrentProfile.SyncWithServer
+                ? (CurrentProfile.LastVersion == "" ? "SERVER" : CurrentProfile.LastVersion)
+                : CurrentProfile.Version;
+            if (ActiveLoaderLabel != null) ActiveLoaderLabel.Text = CurrentProfile.LoaderType.ToUpperInvariant();
+            if (ProfilePathLabel != null) ProfilePathLabel.Text = GameFolder;
         }
 
         private void ProfileComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -957,14 +1060,10 @@ namespace KrakenLauncher
             AgregarLog($"[PROFILE] Perfil cambiado a: {_session.Profiles[idx].Name}");
 
             _manifestActual = null;
-            _ = CargarVersionesAsync();
+            if (CurrentProfileSyncsWithServer) _ = CargarVersionesAsync();
+            else ActualizarVersionesEnHome();
             ActualizarGreeting();
             ActualizarSidebar();
-
-            Dispatcher.Invoke(() =>
-            {
-                ActualizarVersionesEnHome();
-            });
 
             if (RamSlider != null)
             {
@@ -997,6 +1096,11 @@ namespace KrakenLauncher
         public void DeleteCurrentProfile()
         {
             if (CurrentProfile == null) return;
+            if (CurrentProfile.SyncWithServer)
+            {
+                AgregarLog("El perfil sincronizado con server esta protegido.");
+                return;
+            }
             
             var profileToDelete = CurrentProfile;
             _session.Profiles.Remove(profileToDelete);
@@ -1004,7 +1108,7 @@ namespace KrakenLauncher
             if (_session.Profiles.Count == 0)
             {
                 // Create a default profile if none left
-                var p = new MinecraftProfile { Name = "KRAKEN Default", Version = "1.21.1", LoaderType = "vanilla" };
+                var p = new MinecraftProfile { Name = "Perfil sincronizado con server", Version = "1.21.1", LoaderType = "neoforge", SyncWithServer = true };
                 _session.Profiles.Add(p);
                 _session.CurrentProfileId = p.Id;
             }
@@ -1032,9 +1136,11 @@ namespace KrakenLauncher
             if (dialog.ShowDialog() == true && dialog.ResultProfile != null)
             {
                 var p = dialog.ResultProfile;
+                p.SyncWithServer = false;
                 _session.Profiles.Add(p);
                 _session.CurrentProfileId = p.Id;
                 GuardarSesion();
+                InitializeProfileServices();
                 ActualizarComboPerfiles();
                 AgregarLog($"✅ Perfil '{p.Name}' ({p.Version} {p.LoaderType}) creado.");
             }
@@ -1051,18 +1157,33 @@ namespace KrakenLauncher
                 LoaderVersion = CurrentProfile.LoaderVersion,
                 RamGB = CurrentProfile.RamGB,
                 JavaPath = CurrentProfile.JavaPath,
-                Icon = CurrentProfile.Icon
+                Icon = CurrentProfile.Icon,
+                SyncWithServer = false
             };
             _session.Profiles.Add(clone);
             _session.CurrentProfileId = clone.Id;
             GuardarSesion();
+            InitializeProfileServices();
             ActualizarComboPerfiles();
-            AgregarLog($"âœ… Perfil '{newName}' clonado con Ã©xito.");
+            AgregarLog($"âœ… Perfil '{newName}' clonado con éxito.");
+        }
+
+        private void DeleteProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentProfile == null) return;
+            if (CurrentProfile.SyncWithServer)
+            {
+                MessageBox.Show("El perfil sincronizado con server no se puede eliminar.", "Perfil protegido", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var res = MessageBox.Show($"Eliminar el perfil '{CurrentProfile.Name}'?\n\nEl perfil se quita del launcher; tus archivos de instancia no se borran automaticamente.", "Eliminar perfil", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (res == MessageBoxResult.Yes) DeleteCurrentProfile();
         }
 
         private void VerLog_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(PathService.LogFile)) { AgregarLog("â„¹ï¸ No hay log guardado aÃºn."); return; }
+            if (!File.Exists(PathService.LogFile)) { AgregarLog("â„¹ï¸ No hay log guardado aún."); return; }
             try { Process.Start(new ProcessStartInfo { FileName = "notepad.exe", Arguments = $"\"{PathService.LogFile}\"", UseShellExecute = true }); }
             catch (Exception ex) { AgregarLog($"âš ï¸ Error abriendo log: {ex.Message}"); }
         }
@@ -1074,17 +1195,22 @@ namespace KrakenLauncher
             try
             {
                 await SincronizarTodoAsync();
-                AgregarLog("âœ… SincronizaciÃ³n completada.");
-                MessageBox.Show("SincronizaciÃ³n y reparaciÃ³n completada con Ã©xito.", "KRAKEN Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
+                AgregarLog("âœ… Sincronización completada.");
+                MessageBox.Show("Sincronización y reparación completada con éxito.", "KRAKEN Launcher", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error en reparaciÃ³n: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error en reparación: {ex.Message}"); }
             finally { if (btn != null) { btn.IsEnabled = true; btn.Content = "ðŸ› ï¸ Reparar Pack"; } }
         }
 
         public async Task SincronizarTodoAsync()
         {
             if (CurrentProfile == null) return;
-            AgregarLog("ðŸ› ï¸ Iniciando sincronizaciÃ³n total (GitHub)...");
+            if (!CurrentProfile.SyncWithServer)
+            {
+                AgregarLog($"Perfil libre '{CurrentProfile.Name}': no se sincronizan mods/configs de GitHub.");
+                return;
+            }
+            AgregarLog("ðŸ› ï¸ Iniciando sincronización total (GitHub)...");
             
             _manifestActual = null; // Force reload from server
             await CargarVersionesAsync();
@@ -1097,7 +1223,7 @@ namespace KrakenLauncher
                 
                 // 2. Sync CONFIGS/ASSETS
                 PlayButton.Content = "Actualizando configs...";
-                await _syncer.SincronizarConfigs(_manifestActual?.Version);
+                await _syncer.SincronizarConfigs(sobrescribirTodo: true);
                 
                 if (modsOk)
                 {
@@ -1113,92 +1239,6 @@ namespace KrakenLauncher
             }
             
             PlayButton.Content = "â–¶  JUGAR";
-        }
-
-        /// <summary>
-        /// Verifica si las configs de Pepita cambiaron (via hash remoto).
-        /// Si cambiaron y el usuario no es Pepita, muestra un dialogo para que ELIJA si aplicar.
-        /// Si se llama con forzar=true (desde admin), aplica sin preguntar.
-        /// </summary>
-        private async Task AplicarConfigsSiHayCambiosAsync(bool forzar)
-        {
-            try
-            {
-                bool esAdminPc = Environment.MachineName.Equals("LEANDRO-PC", StringComparison.OrdinalIgnoreCase);
-                bool esPepita = (_session.IsAdmin && esAdminPc)
-                             || (_session.Username.Equals("Pepita", StringComparison.OrdinalIgnoreCase) && esAdminPc)
-                             || (_session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase) && esAdminPc);
-
-                var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
-                if (remoteInfo == null || string.IsNullOrEmpty(remoteInfo.Hash))
-                {
-                    AgregarLog("Info: No se pudo verificar la config oficial remota.");
-                    return;
-                }
-
-                string profileId = CurrentProfile?.Id ?? "default";
-                string versionRemota = remoteInfo.ConfigVersion;
-                string versionAplicada = _session.AppliedConfigVersions.ContainsKey(profileId)
-                    ? _session.AppliedConfigVersions[profileId] : "0";
-
-                if (versionRemota == versionAplicada)
-                {
-                    AgregarLog("Config oficial al dia.");
-                    return;
-                }
-
-                if (!forzar && _session.RejectedConfigVersions.ContainsKey(profileId) && _session.RejectedConfigVersions[profileId] == versionRemota)
-                {
-                    AgregarLog("Hay una config oficial nueva, pero ya fue rechazada para esta revision.");
-                    return;
-                }
-
-                if (esPepita && !forzar)
-                {
-                    AgregarLog("Admin detectado: la revision oficial puede gestionarse desde Sistemas Pepa.");
-                    return;
-                }
-
-                bool aplicar = forzar;
-                if (!forzar)
-                {
-                    var resultado = Dispatcher.Invoke(() =>
-                        MessageBox.Show(
-                            $"Hay una nueva configuracion oficial v{versionRemota} disponible para este perfil.\n\n" +
-                            "Incluye optimizaciones, shaders y ajustes recomendados.\n" +
-                            "Si eliges que no, no volvera a aparecer hasta que Pepa publique otra revision.\n\n" +
-                            "Deseas aplicarla ahora?",
-                            "Configuracion Recomendada",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Question));
-                    aplicar = resultado == MessageBoxResult.Yes;
-                }
-
-                if (aplicar)
-                {
-                    AgregarLog($"Aplicando config oficial v{versionRemota}...");
-                    await _syncer.SincronizarConfigs(sobrescribirTodo: true);
-                    _session.LastAppliedConfigHash = remoteInfo.Hash;
-                    _session.AppliedConfigVersions[profileId] = versionRemota;
-
-                    if (CurrentProfile != null)
-                    {
-                        CurrentProfile.RamGB = remoteInfo.RecommendedRam;
-                        AgregarLog($"RAM ajustada a la recomendada: {remoteInfo.RecommendedRam}GB");
-                    }
-
-                    _session.RejectedConfigVersions.Remove(profileId);
-                    GuardarSesion();
-                    Services.NotificationService.Instance.ShowSuccess($"Config oficial v{versionRemota} aplicada.");
-                }
-                else
-                {
-                    _session.RejectedConfigVersions[profileId] = versionRemota;
-                    GuardarSesion();
-                    AgregarLog($"Config oficial v{versionRemota} rechazada por el usuario.");
-                }
-            }
-            catch (Exception ex) { AgregarLog($"Error al verificar configs: {ex.Message}"); }
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -1230,12 +1270,19 @@ namespace KrakenLauncher
         }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        //  VERSIONS
+        //  VERSIÓNS
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private async Task CargarVersionesAsync()
         {
             try
             {
+                if (!CurrentProfileSyncsWithServer)
+                {
+                    _manifestActual = null;
+                    Dispatcher.Invoke(ActualizarVersionesEnHome);
+                    return;
+                }
+
                 AgregarLog("\uD83D\uDD0D Verificando versiones disponibles...");
                 _versionsIndex = await _syncer.ObtenerVersionsIndex();
 
@@ -1266,8 +1313,9 @@ namespace KrakenLauncher
         {
             try
             {
+                if (!CurrentProfileSyncsWithServer) return;
                 var remoteInfo = await _syncer.ObtenerConfigOficialRemota();
-                if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion)) return;
+                if (remoteInfo == null || string.IsNullOrWhiteSpace(remoteInfo.ConfigVersion) || string.IsNullOrWhiteSpace(remoteInfo.Hash)) return;
 
                 string versionOficial = remoteInfo.ConfigVersion;
                 string profileId = CurrentProfile?.Id ?? "default";
@@ -1281,11 +1329,11 @@ namespace KrakenLauncher
                     Dispatcher.Invoke(() =>
                     {
                         var res = MessageBox.Show(
-                            $"Hay una nueva configuracion oficial v{versionOficial} disponible para este perfil.\n\n" +
-                            "Incluye optimizaciones de rendimiento, shaders y keybinds recomendados.\n" +
-                            "Deseas aplicarla ahora?\n\n" +
-                            "Tus controles personales se respetaran siempre que sea posible.",
-                            "Configuracion Recomendada",
+                            $"{remoteInfo.PublishedBy} actualizo sus configs para mayor rendimiento.\n\n" +
+                            $"Revision oficial v{versionOficial} disponible.\n" +
+                            "Quieres copiarlas ahora?\n\n" +
+                            "Se hara un backup automatico antes de sobrescribir tus configs actuales.",
+                            "Configs recomendadas",
                             MessageBoxButton.YesNo, MessageBoxImage.Information);
 
                         if (res == MessageBoxResult.Yes)
@@ -1319,7 +1367,7 @@ namespace KrakenLauncher
                     else if (Directory.Exists(src)) CopyDirectory(src, System.IO.Path.Combine(backupDir, target));
                 }
 
-                await _syncer.SincronizarConfigs(sobrescribirTodo: false);
+                await _syncer.SincronizarConfigs(sobrescribirTodo: true);
 
                 string profileId = CurrentProfile?.Id ?? "default";
                 _session.LastAppliedConfigHash = remoteInfo.Hash;
@@ -1341,12 +1389,44 @@ namespace KrakenLauncher
         {
             int idx = VersionComboBox.SelectedIndex;
             if (idx < 0) return;
+            if (!CurrentProfileSyncsWithServer)
+            {
+                if (CurrentProfile != null && VersionComboBox.SelectedItem != null)
+                {
+                    CurrentProfile.Version = VersionComboBox.SelectedItem.ToString() ?? CurrentProfile.Version;
+                    CurrentProfile.LastVersion = "";
+                    GuardarSesion();
+                    ActualizarSidebar();
+                }
+                return;
+            }
             PlayButton.IsEnabled = false;
             await CargarManifest(idx);
         }
 
+        private void ProfileLoaderCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CurrentProfile == null || CurrentProfile.SyncWithServer) return;
+            if (ProfileLoaderCombo.SelectedItem is ComboBoxItem item)
+            {
+                CurrentProfile.LoaderType = item.Tag?.ToString() ?? "vanilla";
+                CurrentProfile.LoaderVersion = "";
+                CurrentProfile.Icon = CurrentProfile.LoaderType switch
+                {
+                    "fabric" => "F",
+                    "neoforge" => "N",
+                    "forge" => "G",
+                    _ => "V"
+                };
+                GuardarSesion();
+                ActualizarComboPerfiles();
+                ActualizarSidebar();
+            }
+        }
+
         private async Task CargarManifest(int idx)
         {
+            if (!CurrentProfileSyncsWithServer) return;
             if (_versionsIndex?.AvailableVersions == null || idx >= _versionsIndex.AvailableVersions.Count) return;
             var entry = _versionsIndex.AvailableVersions[idx];
             try
@@ -1364,6 +1444,7 @@ namespace KrakenLauncher
                         }
                     }
                     GuardarSesion();
+                    ActualizarEtiquetasPerfilActivo();
                     // Version label removed from UI
                     PlayButton.IsEnabled      = manifest != null;
                     if (manifest == null) AgregarLog($"\u26A0 No se pudo cargar manifest para {entry.Label}.");
@@ -1393,7 +1474,7 @@ namespace KrakenLauncher
                     AgregarLog($"\u2705 Sesi\u00F3n iniciada como {session.Username}.");
                     await RefrescarSkin();
                 }
-                else AgregarLog("âš ï¸ La autenticaciÃ³n no devolviÃ³ sesiÃ³n vÃ¡lida.");
+                else AgregarLog("âš ï¸ La autenticación no devolvió sesión válida.");
             }
             catch (Exception ex)
             {
@@ -1433,7 +1514,15 @@ namespace KrakenLauncher
         private void AdminAccessButton_Click(object sender, RoutedEventArgs e)
         {
             bool isAdmin = _session.Username.ToLower() == "leandro" || _session.IsAdmin;
-            if (isAdmin) { AdminPanel.Visibility = AdminPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible; return; }
+            if (isAdmin)
+            {
+                _session.IsAdmin = true;
+                GuardarSesion();
+                ApplyAdminState();
+                NavigationService.Instance.InvalidateCache();
+                if (CurrentViewLabel?.Text == "SISTEMAS") CambiarVista("sistemas");
+                return;
+            }
 
             var dialog = new Window { Title = "Acceso Admin", Width = 340, Height = 160, WindowStartupLocation = WindowStartupLocation.CenterOwner, Owner = this, ResizeMode = ResizeMode.NoResize, Background = new SolidColorBrush(Color.FromRgb(0x0F, 0x0B, 0x1A)), FontFamily = FontFamily };
             var panel  = new StackPanel { Margin = new Thickness(24) };
@@ -1445,8 +1534,30 @@ namespace KrakenLauncher
             panel.Children.Add(lbl); panel.Children.Add(tb); panel.Children.Add(btn);
             dialog.Content = panel;
             dialog.Loaded += (_, _) => tb.Focus();
-            if (dialog.ShowDialog() == true && tb.Password == "1530") { _session.IsAdmin = true; GuardarSesion(); AdminPanel.Visibility = Visibility.Visible; AgregarLog("\u2705 Modo admin activado."); }
+            if (dialog.ShowDialog() == true && tb.Password == "1530")
+            {
+                _session.IsAdmin = true;
+                GuardarSesion();
+                ApplyAdminState();
+                NavigationService.Instance.InvalidateCache();
+                if (CurrentViewLabel?.Text == "SISTEMAS") CambiarVista("sistemas");
+                AgregarLog("\u2705 Modo admin activado.");
+            }
             else if (dialog.DialogResult == true) AgregarLog("\u26A0 Clave incorrecta.");
+        }
+
+        private void ApplyAdminState()
+        {
+            if (AdminPanel == null) return;
+
+            bool isAdmin = _session.IsAdmin || _session.Username.Equals("Leandro", StringComparison.OrdinalIgnoreCase);
+            AdminPanel.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void OpenConfigAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista("sistemas");
+            AgregarLog("Panel de configs oficiales abierto.");
         }
 
         public void ReiniciarInstancia()
@@ -1485,7 +1596,7 @@ namespace KrakenLauncher
                                     !Directory.Exists(System.IO.Path.Combine(GameFolder, "mods")) ||
                                     Directory.GetFiles(System.IO.Path.Combine(GameFolder, "mods"), "*.jar").Length == 0;
 
-                if (isNewInstall)
+                if (isNewInstall && CurrentProfile.SyncWithServer)
                 {
                     AgregarLog("📡 Perfil vacío detectado. Iniciando configuración inicial completa...");
                     turboMode = false;
@@ -1494,18 +1605,18 @@ namespace KrakenLauncher
                 // BACKUP AUTOMATICO (SEGURIDAD PRIMERO)
                 if (!turboMode)
                 {
-                    AgregarLog("ðŸ’¾ Creando backup de seguridad (rÃ¡pido)...");
+                    AgregarLog("ðŸ’¾ Creando backup de seguridad (rápido)...");
                     await _backupService.CreateQuickConfigBackupAsync();
                 }
 
-                if (turboMode) AgregarLog("âš¡ Modo Turbo activado â€” omitiendo sincronizaciÃ³n de archivos.");
+                if (turboMode) AgregarLog("âš¡ Modo Turbo activado - omitiendo sincronización de archivos.");
 
-                if (!turboMode && _manifestActual != null)
+                if (!turboMode && CurrentProfile.SyncWithServer && _manifestActual != null)
                 {
                     PlayButton.Content = "Sincronizando mods...";
                     _discord.SetActivity("Sincronizando mods...");
                     bool modsOk = await _syncer.SincronizarMods(_manifestActual);
-                    if (!modsOk) { AgregarLog("âŒ FallÃ³ la descarga de mods."); return; }
+                    if (!modsOk) { AgregarLog("âŒ Falló la descarga de mods."); return; }
 
                     // --- Config oficial del perfil ---
                     PlayButton.Content = "Verificando configs...";
@@ -1513,7 +1624,7 @@ namespace KrakenLauncher
                     if (isNewInstall)
                     {
                         AgregarLog("📥 Descargando activos y configuraciones base...");
-                        await _syncer.SincronizarConfigs(_manifestActual.Version, sobrescribirTodo: true);
+                        await _syncer.SincronizarConfigs(sobrescribirTodo: true);
                         var res = await _syncer.ObtenerConfigOficialRemota();
                         _session.LastAppliedConfigHash = res?.Hash ?? "";
                         string profileId = CurrentProfile?.Id ?? "default";
@@ -1526,7 +1637,7 @@ namespace KrakenLauncher
                     }
                     else
                     {
-                        await AplicarConfigsSiHayCambiosAsync(forzar: false);
+                        await VerificandoConfigOficialAlCargar();
                     }
                 }
                 PlayButton.Content = "Iniciando Minecraft...";
@@ -1545,7 +1656,7 @@ namespace KrakenLauncher
 
                 Show(); WindowState = WindowState.Normal; Activate();
                 MainProgressBar.Value = 0;
-                ProgressLabel.Text = exitCode == 0 ? "SesiÃ³n finalizada." : $"Minecraft cerrÃ³ con cÃ³digo {exitCode}.";
+                ProgressLabel.Text = exitCode == 0 ? "Sesión finalizada." : $"Minecraft cerró con código {exitCode}.";
 
                 // Record session
                 var duration = DateTime.Now - sessionStart;
@@ -1563,7 +1674,7 @@ namespace KrakenLauncher
                 var analysis = _crashReporter.AnalyzeLastCrash(sessionStart);
                 if (analysis != null)
                 {
-                    AgregarLog("ðŸ’¥ Crash detectado. Mostrando diagnÃ³stico Nebula...");
+                    AgregarLog("ðŸ’¥ Crash detectado. Mostrando diagnóstico Nebula...");
                     SwitchToModule(new CrashAnalysisView(analysis, GameFolder));
                     
                     // Auto-report to Discord if configured
@@ -1571,7 +1682,7 @@ namespace KrakenLauncher
                     {
                         string summary = _crashReporter.CheckForCrash(sessionStart) ?? "Error descriptivo no disponible.";
                         await _crashReporter.ReportToDiscordAsync(summary, _session.Username);
-                        AgregarLog("âœ… Crash reportado al servidor automÃ¡ticamente.");
+                        AgregarLog("âœ… Crash reportado al servidor automáticamente.");
                     }
                 }
 
@@ -1585,7 +1696,7 @@ namespace KrakenLauncher
 
         private async Task<int> LanzarMinecraft(MinecraftProfile profile)
         {
-            // VerificaciÃ³n de Conflictos (Imp 11)
+            // Verificación de Conflictos (Imp 11)
             VerificarConflictosDeMods();
 
             var mcLauncher = new McGameLauncher(GameFolder, profile.RamGB, _session.Username,
@@ -1616,27 +1727,27 @@ namespace KrakenLauncher
                     string name = System.IO.Path.GetFileNameWithoutExtension(f).ToLower();
                     if (name.Contains("rubidium") && name.Contains("embeddium")) {
                         AgregarLog("âš  Conflicto detectado: Rubidium y Embeddium juntos causan crash.");
-                        MessageBox.Show("Se detectÃ³ un conflicto entre Rubidium y Embeddium.\nEjecutÃ¡ 'Reparar Pack' para una instalaciÃ³n limpia.", "Conflicto", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Se detectó un conflicto entre Rubidium y Embeddium.\nEjecutá 'Reparar Pack' para una instalación limpia.", "Conflicto", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             } catch { }
         }
 
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        //  ADMIN â€” PUBLISH UPDATE
+        //  ADMIN - PUBLISH UPDATE
         // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         private async void PublicarLauncher_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("ðŸš€ Iniciando publicaciÃ³n de MOTOR CORE...");
+            AgregarLog("ðŸš€ Iniciando publicación de MOTOR CORE...");
             try
             {
                 // 1. Rebuild en modo Release
                 AgregarLog("ðŸ”¨ Compilando binario final (Release)...");
                 int buildResult = await RunCommand("dotnet", "publish KrakenLauncher.csproj -c Release -r win-x64 --self-contained true");
-                if (buildResult != 0) { AgregarLog("âŒ Error: FallÃ³ la compilaciÃ³n del motor."); return; }
+                if (buildResult != 0) { AgregarLog("âŒ Error: Falló la compilación del motor."); return; }
 
-                // 2. Extraer versiÃ³n REAL del binario generado
+                // 2. Extraer versión REAL del binario generado
                 string publishPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "bin", "Release", "net8.0-windows", "win-x64", "publish", "KrakenLauncher.exe");
                 
                 // Fallback attempt to find the publish folder
@@ -1645,7 +1756,7 @@ namespace KrakenLauncher
 
                 if (!File.Exists(publishPath))
                 {
-                    AgregarLog($"âŒ Error: No se encontrÃ³ el binario en '{publishPath}'");
+                    AgregarLog($"âŒ Error: No se encontró el binario en '{publishPath}'");
                     return;
                 }
 
@@ -1656,10 +1767,10 @@ namespace KrakenLauncher
                 string currentV = VersionManager.GetCurrentVersion();
                 if (realV != currentV)
                 {
-                    AgregarLog($"âŒ ABORTANDO: Se detectÃ³ una inconsistencia crÃ­tica.");
+                    AgregarLog($"âŒ ABORTANDO: Se detectó una inconsistencia crítica.");
                     AgregarLog($"Binario Destino: v{realV}");
                     AgregarLog($"Entorno Local:   v{currentV}");
-                    AgregarLog("AsegÃºrate de haber guardado cambios en el .csproj y recompilado.");
+                    AgregarLog("Asegúrate de haber guardado cambios en el .csproj y recompilado.");
                     return;
                 }
 
@@ -1672,26 +1783,26 @@ namespace KrakenLauncher
                 // Borrar release vieja si existe (opcional, pero ayuda a corregir errores de dedo)
                 await RunCommand("gh", $"release delete {tag} -y --repo leaboga/nebula-modpack");
                 
-                int code = await RunCommand("gh", $"release create {tag} \"{publishPath}\" --repo leaboga/nebula-modpack --title \"KRAKEN Launcher v{realV}\" --notes \"ActualizaciÃ³n obligatoria del motor core.\"");
+                int code = await RunCommand("gh", $"release create {tag} \"{publishPath}\" --repo leaboga/nebula-modpack --title \"KRAKEN Launcher v{realV}\" --notes \"Actualización obligatoria del motor core.\"");
                 
                 if (code == 0)
                 {
-                    AgregarLog($"âœ… PublicaciÃ³n de MOTOR v{realV} completada.");
+                    AgregarLog($"âœ… Publicación de MOTOR v{realV} completada.");
                     MessageBox.Show($"El Motor Core v{realV} ha sido desplegado.", "Kraken Update", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else AgregarLog($"âš  Fallo al subir a GitHub (CÃ³digo {code}).");
+                else AgregarLog($"âš  Fallo al subir a GitHub (Código {code}).");
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicaciÃ³n de motor: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicación de motor: {ex.Message}"); }
             finally { btn.IsEnabled = true; }
         }
 
         private async void PublicarActualizacion_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender; btn.IsEnabled = false;
-            AgregarLog("ðŸš€ Iniciando publicaciÃ³n de ASSETS (Mods/Configs)...");
+            AgregarLog("ðŸš€ Iniciando publicación de ASSETS (Mods/Configs)...");
             try
             {
-                // 1. Determinar Nueva VersiÃ³n (SemVer Patch default)
+                // 1. Determinar Nueva Versión (SemVer Patch default)
                 string currentV = _manifestActual?.Version ?? "1.0.0";
                 string nextV    = VersionManager.Increment(currentV, VersionSegment.Patch);
                 AgregarLog($"ðŸ“¦ Versionado de Assets: {currentV} âž” {nextV}");
@@ -1711,18 +1822,18 @@ namespace KrakenLauncher
                 if (File.Exists(zipPath)) File.Delete(zipPath);
                 ZipFile.CreateFromDirectory(tempDir, zipPath);
 
-                // 3. Crear Release en GitHub con Tag DinÃ¡mico
+                // 3. Crear Release en GitHub con Tag Dinámico
                 string tag = $"v{nextV}-assets";
                 AgregarLog($"â˜ Subiendo release '{tag}' a GitHub...");
-                int code = await RunCommand("gh", $"release create {tag} \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Assets v{nextV}\" --notes \"ActualizaciÃ³n automÃ¡tica de configuraciÃ³n y mods.\"");
-                if (code != 0) { AgregarLog($"âš  Fallo al crear release (cÃ³digo {code}). VerificÃ¡ credenciales de gh."); return; }
+                int code = await RunCommand("gh", $"release create {tag} \"{zipPath}\" --repo leaboga/nebula-modpack --title \"Assets v{nextV}\" --notes \"Actualización automática de configuración y mods.\"");
+                if (code != 0) { AgregarLog($"âš  Fallo al crear release (código {code}). Verificá credenciales de gh."); return; }
 
                 // 4. Sincronizar Repositorio de Manifiesto
                 string tempRepo = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "kraken-repo-sync");
                 if (Directory.Exists(tempRepo)) RobustDelete(tempRepo);
                 await RunCommand("gh", $"repo clone leaboga/nebula-modpack \"{tempRepo}\"");
 
-                // Crear nueva carpeta de versiÃ³n
+                // Crear nueva carpeta de versión
                 string newVersionDir = System.IO.Path.Combine(tempRepo, "versions", nextV);
                 Directory.CreateDirectory(newVersionDir);
                 string manifestPath = System.IO.Path.Combine(newVersionDir, "manifest.json");
@@ -1761,10 +1872,10 @@ namespace KrakenLauncher
                     Directory.SetCurrentDirectory(savedDir);
                 }
 
-                AgregarLog($"âœ… PublicaciÃ³n v{nextV} completada satisfactoriamente.");
-                MessageBox.Show($"La versiÃ³n {nextV} ha sido desplegada en el enjambre.", "Ã‰xito GalÃ¡ctico", MessageBoxButton.OK, MessageBoxImage.Information);
+                AgregarLog($"âœ… Publicación v{nextV} completada satisfactoriamente.");
+                MessageBox.Show($"La versión {nextV} ha sido desplegada en el enjambre.", "Ã‰xito Galáctico", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicaciÃ³n: {ex.Message}"); }
+            catch (Exception ex) { AgregarLog($"âŒ Error fatal en publicación: {ex.Message}"); }
             finally { btn.IsEnabled = true; }
         }
 
@@ -1799,13 +1910,13 @@ namespace KrakenLauncher
             }
             catch (Exception ex) 
             { 
-                AgregarLog($"âš  RobustDelete (Fase 1): {ex.Message}. Intentando desintegraciÃ³n forzada..."); 
+                AgregarLog($"âš  RobustDelete (Fase 1): {ex.Message}. Intentando desintegración forzada..."); 
                 try
                 {
                     // Fallback agresivo para locks de Windows (Memoria de Usuario)
                     var psi = new ProcessStartInfo("cmd.exe", $"/c rd /s /q \"{path}\"") { CreateNoWindow = true, UseShellExecute = false };
                     Process.Start(psi)?.WaitForExit();
-                    if (Directory.Exists(path)) AgregarLog("âŒ Error: La carpeta resiste la eliminaciÃ³n forzada.");
+                    if (Directory.Exists(path)) AgregarLog("âŒ Error: La carpeta resiste la eliminación forzada.");
                 }
                 catch (Exception ex2) { AgregarLog($"âš  RobustDelete (Fase 2): {ex2.Message}"); }
             }
@@ -1920,6 +2031,14 @@ namespace KrakenLauncher
             }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (TutorialOverlay.Visibility == Visibility.Visible && _tutorialStep >= 0 && _tutorialStep < _tutorialSteps.Count)
+            {
+                HighlightElement(_tutorialSteps[_tutorialStep].target);
+            }
+        }
+
         private void HighlightElement(string elementName)
         {
             try
@@ -1975,9 +2094,29 @@ namespace KrakenLauncher
         private void ActualizarVersionesEnHome()
         {
             if (CurrentProfile == null || VersionComboBox == null) return;
-            // Removed the hijacking of VersionComboBox with Vanilla versions.
-            // VersionComboBox is meant for the Modpack server versions via CargarVersionesAsync.
-            _ = CargarVersionesAsync();
+            VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
+            VersionComboBox.Items.Clear();
+            if (VersionComboTitle != null)
+                VersionComboTitle.Text = CurrentProfile.SyncWithServer ? "VERSION DEL PACK" : "VERSION DE MINECRAFT";
+
+            if (CurrentProfile.SyncWithServer)
+            {
+                if (_versionsIndex?.AvailableVersions != null && _versionsIndex.AvailableVersions.Count > 0)
+                {
+                    foreach (var v in _versionsIndex.AvailableVersions) VersionComboBox.Items.Add(v.Label);
+                    int savedIdx = _versionsIndex.AvailableVersions.FindIndex(v => v.Version == (CurrentProfile.LastVersion ?? ""));
+                    VersionComboBox.SelectedIndex = savedIdx >= 0 ? savedIdx : 0;
+                }
+            }
+            else
+            {
+                foreach (var version in FreeMinecraftVersions) VersionComboBox.Items.Add(version);
+                int idx = Array.IndexOf(FreeMinecraftVersions, CurrentProfile.Version);
+                VersionComboBox.SelectedIndex = idx >= 0 ? idx : 0;
+            }
+
+            VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
+            ActualizarEtiquetasPerfilActivo();
         }
 
         private void LimpiarCache_Click(object sender, RoutedEventArgs e)
@@ -1988,9 +2127,9 @@ namespace KrakenLauncher
                     string path = System.IO.Path.Combine(GameFolder, f);
                     if (Directory.Exists(path)) Directory.Delete(path, true);
                 }
-                AgregarLog("ðŸ§¹ CachÃ© y archivos temporales eliminados con Ã©xito.");
-                MessageBox.Show("CachÃ© y archivos temporales limpiados.", "Limpieza completada", MessageBoxButton.OK, MessageBoxImage.Information);
-            } catch (Exception ex) { AgregarLog($"âŒ Error limpiando cachÃ©: {ex.Message}"); }
+                AgregarLog("ðŸ§¹ Caché y archivos temporales eliminados con éxito.");
+                MessageBox.Show("Caché y archivos temporales limpiados.", "Limpieza completada", MessageBoxButton.OK, MessageBoxImage.Information);
+            } catch (Exception ex) { AgregarLog($"âŒ Error limpiando caché: {ex.Message}"); }
         }
 
         private bool _isMinimal = false;

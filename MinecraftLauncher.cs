@@ -29,12 +29,13 @@ namespace KrakenLauncher
         private readonly string? _manualJavaPath;
         private readonly string? _customSplash;
         private readonly bool _isOverlay;
+        private readonly string _jvmArgs;
 
         public event Action<string>? OnLog;
         public event Action<double>? OnProgress;
         public event Action<string>? OnProgressLabel;
 
-        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null, string? customSplash = null, bool isOverlay = false)
+        public McGameLauncher(string gameFolder, int ramGB, string username, bool isPremium, string minecraftVersion, string loaderType, string loaderVersion, MSession? session = null, string? manualJavaPath = null, string? customSplash = null, bool isOverlay = false, string? jvmArgs = null)
         {
             _gameFolder = gameFolder;
             _ramGB = ramGB;
@@ -47,6 +48,7 @@ namespace KrakenLauncher
             _manualJavaPath = manualJavaPath;
             _customSplash = customSplash;
             _isOverlay = isOverlay;
+            _jvmArgs = string.IsNullOrWhiteSpace(jvmArgs) ? DefaultJvmArgs : jvmArgs;
         }
 
         public async Task<int> LaunchAsync()
@@ -196,20 +198,19 @@ namespace KrakenLauncher
 
         private void SetOptimizedArgs(MLaunchOption opt)
         {
-            var jvmArgs = new List<MArgument>();
-            jvmArgs.AddRange(new[] {
-                new MArgument("-XX:+UseG1GC"),
-                new MArgument("-XX:+UnlockExperimentalVMOptions"),
-                new MArgument("-XX:MaxGCPauseMillis=40"),
-                new MArgument("-XX:G1NewSizePercent=20"),
-                new MArgument("-XX:G1ReservePercent=20"),
-                new MArgument("-XX:G1HeapRegionSize=32M"),
-                new MArgument("-XX:G1MixedGCCountTarget=8"),
-                new MArgument("-XX:+AlwaysPreTouch"),
-                new MArgument("-Dsun.java2d.noddraw=true"),
-                new MArgument("-Djna.nosys=true")
-            });
-            opt.ExtraJvmArguments = jvmArgs;
+            opt.ExtraJvmArguments = ParseJvmArgs(_jvmArgs).Select(arg => new MArgument(arg)).ToList();
+        }
+
+        public const string DefaultJvmArgs = "-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=40 -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:G1HeapRegionSize=32M -XX:G1MixedGCCountTarget=8 -XX:+AlwaysPreTouch -Dsun.java2d.noddraw=true -Djna.nosys=true";
+
+        public static IEnumerable<string> ParseJvmArgs(string args)
+        {
+            foreach (var raw in args.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            {
+                if (raw.StartsWith("-Xmx", StringComparison.OrdinalIgnoreCase)) continue;
+                if (raw.StartsWith("-Xms", StringComparison.OrdinalIgnoreCase)) continue;
+                yield return raw;
+            }
         }
 
         private async Task<string> InstalarFabric(MinecraftPath path)

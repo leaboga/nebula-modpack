@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.0.2`
-- Fecha de referencia: `2026-05-01`
+- Version publicada mas reciente: `3.1.7`
+- Fecha de referencia: `2026-05-15`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
@@ -25,6 +25,79 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.1.7 (Versioning & UI Polish)
+
+### Cambios principales
+
+- `KrakenLauncher.csproj`, `app.manifest`, `KrakenSetup.iss`
+  - Bump de versión a `3.1.7`.
+- `MainWindow.xaml.cs`
+  - Implementación de lógica dinámica para el selector de versiones del perfil.
+- `Modules/ConfigView.xaml`
+  - Se ocultó el panel de configuración de instancias por estar obsoleto.
+- `changelog.json`
+  - Actualizado con las novedades de la versión.
+
+### Validacion realizada
+
+- Build `Release` exitoso.
+- Verificación de consistencia de versiones en todos los archivos de manifiesto.
+- Creación de release en GitHub con el binario compilado.
+
+
+## Version 3.0.4 (Startup Resource Hotfix)
+
+### Cambios principales
+
+- `Themes/Styles.xaml`
+  - se restauraron recursos base que la UI ya estaba consumiendo pero no existian en el diccionario:
+    - `BodyFont`
+    - `DisplayFont`
+    - `MonoFont`
+    - `BoolToVis`
+    - `GlowColor`
+    - `AppleSlider`
+- esto corrige el `XamlParseException` de arranque relacionado con `StaticResourceExtension`
+- `KrakenLauncher.csproj`, `app.manifest`, `KrakenSetup.iss`
+  - bump a `3.0.4`
+
+### Validacion realizada
+
+- Build `Release` exitoso tras restaurar los recursos faltantes
+- Se verifico que las keys consumidas por la UI de arranque ahora existen en `Themes/Styles.xaml`
+
+## Version 3.0.3 (Updater Hardening)
+
+### Cambios principales
+
+- `MainWindow.xaml.cs`
+  - el updater deja de depender de un `.bat` fragil con `copy /Y`
+  - ahora genera un script de PowerShell temporal que:
+    - espera explicitamente el cierre del PID original
+    - intenta reemplazar el binario varias veces
+    - escribe evidencia en `updater.log`
+    - relanza `KrakenLauncher.exe` despues de copiar
+  - la descarga usa el nombre real del asset remoto, no solo el nombre del ejecutable actual
+- `KrakenLauncher.csproj`
+  - bump a `3.0.3`
+- `app.manifest`
+  - version alineada a `3.0.3.0`
+- `KrakenSetup.iss`
+  - version de instalador alineada a `3.0.3`
+
+### Validacion realizada
+
+- Build `Release` exitoso
+- Publish `win-x64` self-contained exitoso
+- Binario final verificado:
+  - `KrakenLauncher.exe`
+  - `FileVersion 3.0.3.0`
+  - `ProductVersion 3.0.3+<commit>`
+
+### Riesgo que corrige
+
+- Casos donde el launcher detectaba la nueva version, se cerraba, pero no lograba reemplazar el `.exe` correctamente y al abrir de nuevo seguia en la version anterior.
 
 ## Version 3.0.2 (Configs & Performance Hardening)
 
