@@ -39,6 +39,16 @@ namespace KrakenLauncher.Services
                     break;
                 case VersionSegment.Patch:
                     patch++;
+                    if (patch > 9)
+                    {
+                        patch = 0;
+                        minor++;
+                    }
+                    if (minor > 9)
+                    {
+                        minor = 0;
+                        major++;
+                    }
                     break;
             }
 
