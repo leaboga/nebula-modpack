@@ -498,9 +498,7 @@ namespace KrakenLauncher.Modules
         private ModSyncer? _syncerLocal;
 
         private ModSyncer GetSyncer() =>
-            _syncerLocal ??= new ModSyncer(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                             "KrakenLauncher", "minecraft"));
+            _syncerLocal ??= new ModSyncer(_mainWindow.GameFolder);
 
         /// <summary>Inicializa el bloque de configs oficiales. El boton de subida pide clave al usarse.</summary>
         private async void InicializarPanelPepita()

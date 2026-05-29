@@ -410,22 +410,24 @@ namespace KrakenLauncher
             if (!Directory.Exists(instances)) return gameFolder;
 
             string best = gameFolder;
-            int bestCount = 0;
+            DateTime bestTime = DateTime.MinValue;
             foreach (var dir in Directory.GetDirectories(instances))
             {
                 string configDir = Path.Combine(dir, "config");
-                if (!File.Exists(Path.Combine(dir, "options.txt")) || !Directory.Exists(configDir)) continue;
-                int count = Directory.GetFiles(configDir, "*", SearchOption.AllDirectories).Length;
-                if (count > bestCount)
+                string optionsPath = Path.Combine(dir, "options.txt");
+                if (!File.Exists(optionsPath) || !Directory.Exists(configDir)) continue;
+                
+                DateTime writeTime = File.GetLastWriteTime(optionsPath);
+                if (writeTime > bestTime)
                 {
                     best = dir;
-                    bestCount = count;
+                    bestTime = writeTime;
                 }
             }
 
-            if (!best.Equals(gameFolder, StringComparison.OrdinalIgnoreCase) && bestCount >= 25)
+            if (!best.Equals(gameFolder, StringComparison.OrdinalIgnoreCase) && bestTime != DateTime.MinValue)
             {
-                log("  Perfil actual incompleto. Publicando desde instancia valida: " + Path.GetFileName(best));
+                log("  Perfil actual incompleto. Publicando desde la última instancia utilizada: " + Path.GetFileName(best));
                 return best;
             }
 
