@@ -291,6 +291,8 @@ namespace KrakenLauncher
                 using (var zip = System.IO.Compression.ZipFile.OpenRead(tempZip))
                 {
                     ValidarRutasZip(zip);
+                    LimpiarTargetsDelPaquete(zip, sobrescribirTodo);
+                    
                     Directory.CreateDirectory(stagingDir);
                     zip.ExtractToDirectory(stagingDir, overwriteFiles: true);
 
@@ -354,7 +356,7 @@ namespace KrakenLauncher
             }
         }
 
-        private void LimpiarTargetsDelPaquete(ZipArchive zip)
+        private void LimpiarTargetsDelPaquete(ZipArchive zip, bool sobrescribirTodo)
         {
             var cleaned = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var entry in zip.Entries)
@@ -368,11 +370,14 @@ namespace KrakenLauncher
                 if (slash > 0)
                 {
                     string topLevel = normalized[..slash];
-                    if (!topLevel.Equals("config", StringComparison.OrdinalIgnoreCase)) continue;
+                    if (!topLevel.Equals("config", StringComparison.OrdinalIgnoreCase) &&
+                        !topLevel.Equals("shaderpacks", StringComparison.OrdinalIgnoreCase) &&
+                        !topLevel.Equals("resourcepacks", StringComparison.OrdinalIgnoreCase)) continue;
                     target = Path.Combine(_gameFolder, topLevel);
                 }
                 else
                 {
+                    if (!sobrescribirTodo && ArchivosPersonalesConfig.Contains(normalized)) continue;
                     target = Path.Combine(_gameFolder, normalized);
                 }
 
@@ -442,10 +447,21 @@ namespace KrakenLauncher
             foreach (var dir in Directory.GetDirectories(instances))
             {
                 string configDir = Path.Combine(dir, "config");
+                string logPath = Path.Combine(dir, "logs", "latest.log");
                 string optionsPath = Path.Combine(dir, "options.txt");
-                if (!File.Exists(optionsPath) || !Directory.Exists(configDir)) continue;
+
+                if (!Directory.Exists(configDir)) continue;
                 
-                DateTime writeTime = File.GetLastWriteTime(optionsPath);
+                DateTime writeTime = DateTime.MinValue;
+                if (File.Exists(logPath))
+                {
+                    writeTime = File.GetLastWriteTime(logPath);
+                }
+                else if (File.Exists(optionsPath))
+                {
+                    writeTime = File.GetLastWriteTime(optionsPath);
+                }
+
                 if (writeTime > bestTime)
                 {
                     best = dir;
