@@ -12,8 +12,8 @@ namespace KrakenLauncher.Modules
 {
     public partial class ConfigView : UserControl
     {
-        private readonly ConfigManager _configManager;
-        private readonly PresetService _presetService;
+//         private readonly ConfigManager _configManager;
+//         private readonly PresetService _presetService;
         private readonly MainWindow _mainWindow;
         private bool _initializing = true;
         private List<JavaRuntime> _runtimes = new();
@@ -23,14 +23,14 @@ namespace KrakenLauncher.Modules
             _mainWindow      = mainWindow;
             InitializeComponent();
             _initializing    = true;
-            _configManager = new ConfigManager(_mainWindow.GameFolder);
-            _presetService = new PresetService();
+//             _configManager = new ConfigManager(_mainWindow.GameFolder);
+//             _presetService = new PresetService();
 
             ServerIpBox.Text = _mainWindow.Session.ServerIp;
             BlueMapPortBox.Text = _mainWindow.Session.BlueMapPort;
             MapIdBox.Text = _mainWindow.Session.BlueMapId;
             WebhookBox.Text = _mainWindow.Session.CrashWebhookUrl;
-            BgPathBox.Text = _mainWindow.Session.BackgroundImagePath;
+//             BgPathBox.Text = _mainWindow.Session.BackgroundImagePath;
             
             if (_mainWindow.CurrentProfile != null)
             {
@@ -42,12 +42,12 @@ namespace KrakenLauncher.Modules
             
             InstanceNameBox.Text = _mainWindow.CurrentProfile?.Name ?? "default";
             _initializing    = false;
-            UpdatePreview(_mainWindow.Session.BackgroundImagePath);
-            SplashTextBox.Text = _mainWindow.Session.CustomSplashText;
-            CloudPathBox.Text = _mainWindow.Session.CloudPath;
-            OverlayToggle.IsChecked = _mainWindow.Session.IsOverlayEnabled;
+//             UpdatePreview(_mainWindow.Session.BackgroundImagePath);
+//             SplashTextBox.Text = _mainWindow.Session.CustomSplashText;
+//             CloudPathBox.Text = _mainWindow.Session.CloudPath;
+//             OverlayToggle.IsChecked = _mainWindow.Session.IsOverlayEnabled;
 
-            LoadPresets();
+//             LoadPresets();
 
             // Inicialización del panel de configs de Pepita (async, no bloqueante)
             _ = Dispatcher.InvokeAsync(InicializarPanelPepita, System.Windows.Threading.DispatcherPriority.Background);
@@ -60,136 +60,136 @@ namespace KrakenLauncher.Modules
             foreach (string d in Directory.GetDirectories(source)) CopyDirectory(d, Path.Combine(dest, Path.GetFileName(d)));
         }
 
-        private void LoadPresets()
-        {
-            try
-            {
-                PresetsListBox.ItemsSource = _presetService.GetPresets();
-                int nextVersion = _presetService.GetNextPresetVersion();
-                NextPresetVersionText.Text = $"La siguiente revision local sera REV {nextVersion:D3}.";
-            }
-            catch { }
-        }
-
-        private async void BtnSavePreset_Click(object sender, RoutedEventArgs e)
-        {
-            if (_mainWindow.CurrentProfile == null) return;
-
-            try
-            {
-                int nextVersion = _presetService.GetNextPresetVersion();
-                string name = _presetService.BuildPresetName(nextVersion);
-                _mainWindow.AgregarLog($"[PRESET] Guardando revision local: {name}...");
-                var metadata = await _presetService.SavePresetAsync(_mainWindow.GameFolder, name, _mainWindow.CurrentProfile.Version);
-                _mainWindow.AgregarLog("[PRESET] Revision guardada correctamente.");
-                LoadPresets();
-                NotificationService.Instance.ShowSuccess($"Revision local REV {metadata.VersionNumber:D3} guardada.");
-            }
-            catch (Exception ex)
-            {
-                _mainWindow.AgregarLog($"[PRESET] Error al guardar revision: {ex.Message}");
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private async void BtnApplyPreset_Click(object sender, RoutedEventArgs e)
-        {
-            var btn = sender as Button;
-            string presetName = btn?.Tag?.ToString() ?? "";
-            if (string.IsNullOrEmpty(presetName)) return;
-
-            if (_mainWindow.CurrentProfile == null) return;
-
-            var res = MessageBox.Show($"¿Deseas aplicar el preset '{presetName}' al perfil actual?\nSe realizará un backup automático de la configuración actual.", 
-                "Aplicar Preset", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            
-            if (res != MessageBoxResult.Yes) return;
-
-            try
-            {
-                _mainWindow.AgregarLog($"🔄 Aplicando preset '{presetName}'...");
-                bool controls = PresetControlsCheck.IsChecked ?? false;
-                bool graphics = PresetGraphicsCheck.IsChecked ?? false;
-                bool mods = PresetModsCheck.IsChecked ?? false;
-                bool others = PresetOthersCheck.IsChecked ?? false;
-
-                await _presetService.ApplyPresetAsync(_mainWindow.GameFolder, presetName, controls, graphics, mods, others);
-                
-                _mainWindow.AgregarLog("✅ Preset aplicado. Los cambios se verán al iniciar el juego.");
-                MessageBox.Show("Preset aplicado exitosamente.\nSe guardó un backup en la carpeta 'backups' de la instancia.", "KRAKEN");
-            }
-            catch (Exception ex)
-            {
-                _mainWindow.AgregarLog($"⚠ Error al aplicar preset: {ex.Message}");
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void BtnDeletePreset_Click(object sender, RoutedEventArgs e)
-        {
-            var btn = sender as Button;
-            string presetName = btn?.Tag?.ToString() ?? "";
-            if (string.IsNullOrEmpty(presetName)) return;
-
-            var res = MessageBox.Show($"¿Estás seguro de eliminar el preset '{presetName}'?\nEsta acción no se puede deshacer.", 
-                "Eliminar Preset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            
-            if (res == MessageBoxResult.Yes)
-            {
-                _presetService.DeletePreset(presetName);
-                LoadPresets();
-                _mainWindow.AgregarLog($"🗑️ Preset '{presetName}' eliminado.");
-            }
-        }
-
-        private void UpdatePreview(string path)
-        {
-            if (string.IsNullOrEmpty(path) || !File.Exists(path))
-            {
-                BgPreviewImage.Source = null;
-                PreviewPlaceholderText.Visibility = Visibility.Visible;
-                return;
-            }
-
-            try
-            {
-                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(path);
-                bitmap.DecodePixelHeight = 80; // Optimize for preview size
-                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                BgPreviewImage.Source = bitmap;
-                PreviewPlaceholderText.Visibility = Visibility.Collapsed;
-            }
-            catch 
-            {
-                BgPreviewImage.Source = null;
-                PreviewPlaceholderText.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void BtnBrowseBackground_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "Archivos de Imagen|*.jpg;*.jpeg;*.png;*.webp;*.bmp" };
-            if (dlg.ShowDialog() == true)
-            {
-                _mainWindow.Session.BackgroundImagePath = dlg.FileName;
-                _mainWindow.GuardarSesion();
-                BgPathBox.Text = dlg.FileName;
-                _mainWindow.ActualizarFondo();
-                UpdatePreview(dlg.FileName);
-            }
-        }
-
-        private void BtnResetBackground_Click(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.Session.BackgroundImagePath = "";
-            _mainWindow.GuardarSesion();
-            BgPathBox.Text = "";
-            _mainWindow.ActualizarFondo();
-            UpdatePreview("");
-        }
+//         private void LoadPresets()
+//         {
+//             try
+//             {
+//                 PresetsListBox.ItemsSource = _presetService.GetPresets();
+//                 int nextVersion = _presetService.GetNextPresetVersion();
+//                 NextPresetVersionText.Text = $"La siguiente revision local sera REV {nextVersion:D3}.";
+//             }
+//             catch { }
+//         }
+// 
+//         private async void BtnSavePreset_Click(object sender, RoutedEventArgs e)
+//         {
+//             if (_mainWindow.CurrentProfile == null) return;
+// 
+//             try
+//             {
+//                 int nextVersion = _presetService.GetNextPresetVersion();
+//                 string name = _presetService.BuildPresetName(nextVersion);
+//                 _mainWindow.AgregarLog($"[PRESET] Guardando revision local: {name}...");
+//                 var metadata = await _presetService.SavePresetAsync(_mainWindow.GameFolder, name, _mainWindow.CurrentProfile.Version);
+//                 _mainWindow.AgregarLog("[PRESET] Revision guardada correctamente.");
+//                 LoadPresets();
+//                 NotificationService.Instance.ShowSuccess($"Revision local REV {metadata.VersionNumber:D3} guardada.");
+//             }
+//             catch (Exception ex)
+//             {
+//                 _mainWindow.AgregarLog($"[PRESET] Error al guardar revision: {ex.Message}");
+//                 MessageBox.Show("Error: " + ex.Message);
+//             }
+//         }
+// 
+//         private async void BtnApplyPreset_Click(object sender, RoutedEventArgs e)
+//         {
+//             var btn = sender as Button;
+//             string presetName = btn?.Tag?.ToString() ?? "";
+//             if (string.IsNullOrEmpty(presetName)) return;
+// 
+//             if (_mainWindow.CurrentProfile == null) return;
+// 
+//             var res = MessageBox.Show($"¿Deseas aplicar el preset '{presetName}' al perfil actual?\nSe realizará un backup automático de la configuración actual.", 
+//                 "Aplicar Preset", MessageBoxButton.YesNo, MessageBoxImage.Question);
+//             
+//             if (res != MessageBoxResult.Yes) return;
+// 
+//             try
+//             {
+//                 _mainWindow.AgregarLog($"🔄 Aplicando preset '{presetName}'...");
+//                 bool controls = PresetControlsCheck.IsChecked ?? false;
+//                 bool graphics = PresetGraphicsCheck.IsChecked ?? false;
+//                 bool mods = PresetModsCheck.IsChecked ?? false;
+//                 bool others = PresetOthersCheck.IsChecked ?? false;
+// 
+//                 await _presetService.ApplyPresetAsync(_mainWindow.GameFolder, presetName, controls, graphics, mods, others);
+//                 
+//                 _mainWindow.AgregarLog("✅ Preset aplicado. Los cambios se verán al iniciar el juego.");
+//                 MessageBox.Show("Preset aplicado exitosamente.\nSe guardó un backup en la carpeta 'backups' de la instancia.", "KRAKEN");
+//             }
+//             catch (Exception ex)
+//             {
+//                 _mainWindow.AgregarLog($"⚠ Error al aplicar preset: {ex.Message}");
+//                 MessageBox.Show("Error: " + ex.Message);
+//             }
+//         }
+// 
+//         private void BtnDeletePreset_Click(object sender, RoutedEventArgs e)
+//         {
+//             var btn = sender as Button;
+//             string presetName = btn?.Tag?.ToString() ?? "";
+//             if (string.IsNullOrEmpty(presetName)) return;
+// 
+//             var res = MessageBox.Show($"¿Estás seguro de eliminar el preset '{presetName}'?\nEsta acción no se puede deshacer.", 
+//                 "Eliminar Preset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+//             
+//             if (res == MessageBoxResult.Yes)
+//             {
+//                 _presetService.DeletePreset(presetName);
+//                 LoadPresets();
+//                 _mainWindow.AgregarLog($"🗑️ Preset '{presetName}' eliminado.");
+//             }
+//         }
+// 
+//         private void UpdatePreview(string path)
+//         {
+//             if (string.IsNullOrEmpty(path) || !File.Exists(path))
+//             {
+//                 BgPreviewImage.Source = null;
+//                 PreviewPlaceholderText.Visibility = Visibility.Visible;
+//                 return;
+//             }
+// 
+//             try
+//             {
+//                 var bitmap = new System.Windows.Media.Imaging.BitmapImage();
+//                 bitmap.BeginInit();
+//                 bitmap.UriSource = new Uri(path);
+//                 bitmap.DecodePixelHeight = 80; // Optimize for preview size
+//                 bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+//                 bitmap.EndInit();
+//                 BgPreviewImage.Source = bitmap;
+//                 PreviewPlaceholderText.Visibility = Visibility.Collapsed;
+//             }
+//             catch 
+//             {
+//                 BgPreviewImage.Source = null;
+//                 PreviewPlaceholderText.Visibility = Visibility.Visible;
+//             }
+//         }
+// 
+//         private void BtnBrowseBackground_Click(object sender, RoutedEventArgs e)
+//         {
+//             var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "Archivos de Imagen|*.jpg;*.jpeg;*.png;*.webp;*.bmp" };
+//             if (dlg.ShowDialog() == true)
+//             {
+//                 _mainWindow.Session.BackgroundImagePath = dlg.FileName;
+//                 _mainWindow.GuardarSesion();
+//                 BgPathBox.Text = dlg.FileName;
+//                 _mainWindow.ActualizarFondo();
+//                 UpdatePreview(dlg.FileName);
+//             }
+//         }
+// 
+//         private void BtnResetBackground_Click(object sender, RoutedEventArgs e)
+//         {
+//             _mainWindow.Session.BackgroundImagePath = "";
+//             _mainWindow.GuardarSesion();
+//             BgPathBox.Text = "";
+//             _mainWindow.ActualizarFondo();
+//             UpdatePreview("");
+//         }
 
         private void ServerIpBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -233,11 +233,11 @@ namespace KrakenLauncher.Modules
             catch { NotificationService.Instance.ShowError("No se pudo detectar la memoria automáticamente."); }
         }
 
-        private void BtnOpenShaders_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("shaderpacks");
-        private void BtnOpenPacks_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("resourcepacks");
-        private void BtnOpenConfigs_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("config");
-        private void BtnOpenGame_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("");
-
+//         private void BtnOpenShaders_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("shaderpacks");
+//         private void BtnOpenPacks_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("resourcepacks");
+//         private void BtnOpenConfigs_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("config");
+//         private void BtnOpenGame_Click(object sender, RoutedEventArgs e) => OpenGameSubfolder("");
+// 
         #region JAVA RUNTIME
         private void CargarJavas()
         {
@@ -288,42 +288,42 @@ namespace KrakenLauncher.Modules
         }
         #endregion
 
-        private async void BtnDownloadShaders_Click(object sender, RoutedEventArgs e)
-        {
-            var btn = (Button)sender;
-            btn.IsEnabled = false;
-            btn.Content = "⏳ Descargando...";
-            try
-            {
-                string shaderDir = Path.Combine(_mainWindow.GameFolder, "shaderpacks");
-                Directory.CreateDirectory(shaderDir);
-                string zipPath = Path.Combine(shaderDir, "Nebula-Shaders.zip");
-                
-                using (var client = new System.Net.Http.HttpClient())
-                {
-                    var data = await client.GetByteArrayAsync("https://github.com/leaboga/nebula-modpack/releases/download/assets/shaders.zip");
-                    await File.WriteAllBytesAsync(zipPath, data);
-                }
-                
-                System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, shaderDir, true);
-                File.Delete(zipPath);
-                
-                NotificationService.Instance.ShowSuccess("'Nebula Shaders' instalados correctamente.");
-            }
-            catch (Exception ex) { NotificationService.Instance.ShowError($"Error al descargar shaders: {ex.Message}"); }
-            finally { btn.IsEnabled = true; btn.Content = "📦 Descargar Shaders"; }
-        }
-
-        private void OpenGameSubfolder(string sub)
-        {
-            try 
-            { 
-                string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "minecraft", sub);
-                Directory.CreateDirectory(appFolder);
-                Process.Start("explorer.exe", appFolder);
-            }
-            catch { }
-        }
+//         private async void BtnDownloadShaders_Click(object sender, RoutedEventArgs e)
+//         {
+//             var btn = (Button)sender;
+//             btn.IsEnabled = false;
+//             btn.Content = "⏳ Descargando...";
+//             try
+//             {
+//                 string shaderDir = Path.Combine(_mainWindow.GameFolder, "shaderpacks");
+//                 Directory.CreateDirectory(shaderDir);
+//                 string zipPath = Path.Combine(shaderDir, "Nebula-Shaders.zip");
+//                 
+//                 using (var client = new System.Net.Http.HttpClient())
+//                 {
+//                     var data = await client.GetByteArrayAsync("https://github.com/leaboga/nebula-modpack/releases/download/assets/shaders.zip");
+//                     await File.WriteAllBytesAsync(zipPath, data);
+//                 }
+//                 
+//                 System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, shaderDir, true);
+//                 File.Delete(zipPath);
+//                 
+//                 NotificationService.Instance.ShowSuccess("'Nebula Shaders' instalados correctamente.");
+//             }
+//             catch (Exception ex) { NotificationService.Instance.ShowError($"Error al descargar shaders: {ex.Message}"); }
+//             finally { btn.IsEnabled = true; btn.Content = "📦 Descargar Shaders"; }
+//         }
+// 
+//         private void OpenGameSubfolder(string sub)
+//         {
+//             try 
+//             { 
+//                 string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KrakenLauncher", "minecraft", sub);
+//                 Directory.CreateDirectory(appFolder);
+//                 Process.Start("explorer.exe", appFolder);
+//             }
+//             catch { }
+//         }
 
         private void BlueMapPortBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -348,43 +348,43 @@ namespace KrakenLauncher.Modules
 
         
 
-        private async void PapaModeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var btn       = (Button)sender;
-            btn.IsEnabled = false;
-            try
-            {
-                await _configManager.ApplyPerformancePreset("Papa");
-                NotificationService.Instance.ShowSuccess("Modo Papa aplicado. Gráficos optimizados.");
-            }
-            catch (Exception ex)
-            {
-                NotificationService.Instance.ShowError($"Error aplicando preset: {ex.Message}");
-            }
-            finally { btn.IsEnabled = true; }
-        }
-
-        private async void UltraModeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var btn       = (Button)sender;
-            btn.IsEnabled = false;
-            try
-            {
-                await _configManager.ApplyPerformancePreset("Ultra");
-                MessageBox.Show("✅ Modo Ultra aplicado.\nGráficos en calidad máxima con shaders.",
-                                "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error aplicando preset:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            finally { btn.IsEnabled = true; }
-        }
-
-        private async void BtnRepairPack_Click(object sender, RoutedEventArgs e)
-        {
-            await _mainWindow.SincronizarTodoAsync();
-        }
+//         private async void PapaModeBtn_Click(object sender, RoutedEventArgs e)
+//         {
+//             var btn       = (Button)sender;
+//             btn.IsEnabled = false;
+//             try
+//             {
+//                 await _configManager.ApplyPerformancePreset("Papa");
+//                 NotificationService.Instance.ShowSuccess("Modo Papa aplicado. Gráficos optimizados.");
+//             }
+//             catch (Exception ex)
+//             {
+//                 NotificationService.Instance.ShowError($"Error aplicando preset: {ex.Message}");
+//             }
+//             finally { btn.IsEnabled = true; }
+//         }
+// 
+//         private async void UltraModeBtn_Click(object sender, RoutedEventArgs e)
+//         {
+//             var btn       = (Button)sender;
+//             btn.IsEnabled = false;
+//             try
+//             {
+//                 await _configManager.ApplyPerformancePreset("Ultra");
+//                 MessageBox.Show("✅ Modo Ultra aplicado.\nGráficos en calidad máxima con shaders.",
+//                                 "Preset aplicado", MessageBoxButton.OK, MessageBoxImage.Information);
+//             }
+//             catch (Exception ex)
+//             {
+//                 MessageBox.Show($"Error aplicando preset:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+//             }
+//             finally { btn.IsEnabled = true; }
+//         }
+// 
+//         private async void BtnRepairPack_Click(object sender, RoutedEventArgs e)
+//         {
+//             await _mainWindow.SincronizarTodoAsync();
+//         }
 
         private void BtnChangeInstance_Click(object sender, RoutedEventArgs e)
         {
@@ -405,17 +405,17 @@ namespace KrakenLauncher.Modules
             }
         }
 
-        private void BtnViewCrashes_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string crashDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
-                                                "KrakenLauncher", "minecraft", "crash-reports");
-                Directory.CreateDirectory(crashDir);
-                Process.Start("explorer.exe", crashDir);
-            }
-            catch { }
-        }
+//         private void BtnViewCrashes_Click(object sender, RoutedEventArgs e)
+//         {
+//             try
+//             {
+//                 string crashDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+//                                                 "KrakenLauncher", "minecraft", "crash-reports");
+//                 Directory.CreateDirectory(crashDir);
+//                 Process.Start("explorer.exe", crashDir);
+//             }
+//             catch { }
+//         }
 
         private async void BtnDownloadJava_Click(object sender, RoutedEventArgs e)
         {
@@ -432,64 +432,64 @@ namespace KrakenLauncher.Modules
             finally { btn.IsEnabled = true; btn.Content = "📥 Descargar Javas (8, 17, 21)"; }
         }
 
-        private void BtnCleanLogs_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string logsDir = Path.Combine(_mainWindow.GameFolder, "logs");
-                if (Directory.Exists(logsDir))
-                {
-                    var files = Directory.GetFiles(logsDir);
-                    foreach (var f in files) try { File.Delete(f); } catch { }
-                    NotificationService.Instance.ShowSuccess($"Se han limpiado {files.Length} archivos de registro (logs).");
-                }
-                else NotificationService.Instance.ShowInfo("No se encontraron registros para limpiar.");
-            }
-            catch (Exception ex) { NotificationService.Instance.ShowError("Error en la limpieza: " + ex.Message); }
-        }
-
-        private async void BtnLinkCloud_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(CloudPathBox.Text))
-            {
-                var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "Seleccionar carpeta de Nube (Dropbox/OneDrive/etc)" };
-                if (dlg.ShowDialog() == true) 
-                {
-                    CloudPathBox.Text = dlg.FolderName;
-                    await CloudService.Instance.SyncToCloud(_mainWindow.Session, dlg.FolderName);
-                }
-            }
-            else
-            {
-                try {
-                    await CloudService.Instance.SyncToCloud(_mainWindow.Session, CloudPathBox.Text);
-                    NotificationService.Instance.ShowSuccess("Respaldo instantáneo completado en la nube.");
-                } catch (Exception ex) {
-                    NotificationService.Instance.ShowError(ex.Message);
-                }
-            }
-        }
-
-        private void SplashTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (_initializing) return;
-            _mainWindow.Session.CustomSplashText = SplashTextBox.Text;
-            _mainWindow.GuardarSesion();
-        }
-
-        private void CloudPathBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (_initializing) return;
-            _mainWindow.Session.CloudPath = CloudPathBox.Text;
-            _mainWindow.GuardarSesion();
-        }
-
-        private void OverlayToggle_Click(object sender, RoutedEventArgs e)
-        {
-            if (_initializing) return;
-            _mainWindow.Session.IsOverlayEnabled = OverlayToggle.IsChecked == true;
-            _mainWindow.GuardarSesion();
-        }
+//         private void BtnCleanLogs_Click(object sender, RoutedEventArgs e)
+//         {
+//             try
+//             {
+//                 string logsDir = Path.Combine(_mainWindow.GameFolder, "logs");
+//                 if (Directory.Exists(logsDir))
+//                 {
+//                     var files = Directory.GetFiles(logsDir);
+//                     foreach (var f in files) try { File.Delete(f); } catch { }
+//                     NotificationService.Instance.ShowSuccess($"Se han limpiado {files.Length} archivos de registro (logs).");
+//                 }
+//                 else NotificationService.Instance.ShowInfo("No se encontraron registros para limpiar.");
+//             }
+//             catch (Exception ex) { NotificationService.Instance.ShowError("Error en la limpieza: " + ex.Message); }
+//         }
+// 
+//         private async void BtnLinkCloud_Click(object sender, RoutedEventArgs e)
+//         {
+//             if (string.IsNullOrEmpty(CloudPathBox.Text))
+//             {
+//                 var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "Seleccionar carpeta de Nube (Dropbox/OneDrive/etc)" };
+//                 if (dlg.ShowDialog() == true) 
+//                 {
+//                     CloudPathBox.Text = dlg.FolderName;
+//                     await CloudService.Instance.SyncToCloud(_mainWindow.Session, dlg.FolderName);
+//                 }
+//             }
+//             else
+//             {
+//                 try {
+//                     await CloudService.Instance.SyncToCloud(_mainWindow.Session, CloudPathBox.Text);
+//                     NotificationService.Instance.ShowSuccess("Respaldo instantáneo completado en la nube.");
+//                 } catch (Exception ex) {
+//                     NotificationService.Instance.ShowError(ex.Message);
+//                 }
+//             }
+//         }
+// 
+//         private void SplashTextBox_TextChanged(object sender, TextChangedEventArgs e)
+//         {
+//             if (_initializing) return;
+//             _mainWindow.Session.CustomSplashText = SplashTextBox.Text;
+//             _mainWindow.GuardarSesion();
+//         }
+// 
+//         private void CloudPathBox_TextChanged(object sender, TextChangedEventArgs e)
+//         {
+//             if (_initializing) return;
+//             _mainWindow.Session.CloudPath = CloudPathBox.Text;
+//             _mainWindow.GuardarSesion();
+//         }
+// 
+//         private void OverlayToggle_Click(object sender, RoutedEventArgs e)
+//         {
+//             if (_initializing) return;
+//             _mainWindow.Session.IsOverlayEnabled = OverlayToggle.IsChecked == true;
+//             _mainWindow.GuardarSesion();
+//         }
 
         // ═══════════════════════════════════════════════════════════
         //  CONFIGS DE PEPITA
