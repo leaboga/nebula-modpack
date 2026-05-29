@@ -17,7 +17,7 @@
         SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
-        <DropShadowEffect x:Key="CardGlow"   Color="#18E0D2" Opacity="0.10" BlurRadius="18" ShadowDepth="0"/>
+        <DropShadowEffect x:Key="CardGlow"   Color="#FF9500" Opacity="0.10" BlurRadius="18" ShadowDepth="0"/>
         <DropShadowEffect x:Key="CardShadow" Color="#000000" Opacity="0.32" BlurRadius="16" ShadowDepth="4"/>
         
         <Storyboard x:Key="FadeIn">
@@ -138,7 +138,7 @@
                                          <Grid>
                                              <TextBlock x:Name="AvatarInitial" Text="?" FontSize="18" FontWeight="Bold" Foreground="#6D8A99" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                              <Image x:Name="SkinImage" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Collapsed"/>
-                                             <Ellipse Width="10" Height="10" Fill="#10B981" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,2,2" x:Name="ActiveUserDot">
+                                             <Ellipse Width="10" Height="10" Fill="#FF9500" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,2,2" x:Name="ActiveUserDot">
                                                  <Ellipse.Effect><BlurEffect Radius="2"/></Ellipse.Effect>
                                              </Ellipse>
                                          </Grid>
@@ -245,7 +245,7 @@
                                     <TextBlock x:Name="ActiveVersionLabel" Text="---" Foreground="#FF9500" FontSize="9" FontWeight="Black"/>
                                 </Border>
                                 <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
-                                    <TextBlock x:Name="ActiveLoaderLabel" Text="---" Foreground="#10B981" FontSize="9" FontWeight="Black"/>
+                                    <TextBlock x:Name="ActiveLoaderLabel" Text="---" Foreground="#FF9500" FontSize="9" FontWeight="Black"/>
                                 </Border>
                             </StackPanel>
                         </StackPanel>
@@ -293,7 +293,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel>
-                                                <Border Background="#10B981" CornerRadius="4" Padding="8,2" HorizontalAlignment="Left" Margin="0,0,0,12" x:Name="LiveNewsBadge">
+                                                <Border Background="#FF9500" CornerRadius="4" Padding="8,2" HorizontalAlignment="Left" Margin="0,0,0,12" x:Name="LiveNewsBadge">
                                                     <TextBlock Text="ESTADO: ESTABLE" Foreground="White" FontSize="9" FontWeight="Black"/>
                                                 </Border>
                                                 <TextBlock Text="Instancia lista" Foreground="White" FontSize="22" FontWeight="Black" Margin="0,0,0,4"/>
@@ -368,7 +368,7 @@
                                             <Border Background="#05080D" CornerRadius="12" Padding="16,10" BorderBrush="#38383A" BorderThickness="1">
                                                 <Grid>
                                                     <StackPanel>
-                                                        <TextBlock Text="CUENTA PREMIUM" Foreground="#10B981" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
+                                                        <TextBlock Text="CUENTA PREMIUM" Foreground="#FF9500" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
                                                         <TextBlock x:Name="LoggedUsernameText" Text="Usuario" Foreground="White" FontSize="16" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <Button Content="Cerrar" HorizontalAlignment="Right" Style="{DynamicResource SecondaryButton}" Height="30" Padding="12,0" Click="LogoutButton_Click"/>
@@ -422,7 +422,7 @@
                             
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                 <TextBlock Text="ESTADO DEL LAUNCHER" Foreground="{DynamicResource TextMutedBrush}" FontSize="8" FontWeight="Black"/>
-                                <Ellipse Width="6" Height="6" Fill="#10B981" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                <Ellipse Width="6" Height="6" Fill="#FF9500" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
                             <ScrollViewer x:Name="LogScroll" Grid.Row="1">

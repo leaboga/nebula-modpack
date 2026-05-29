@@ -14,7 +14,7 @@
 
         <Border Padding="20,15" Background="#1A1528" BorderBrush="#2E2648" BorderThickness="0,0,0,1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="TERMINAL DE SISTEMA" Foreground="#7B6FA0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock Text="TERMINAL DE SISTEMA" Foreground="#CC7700" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
                 <Border Width="8" Height="8" Background="#FF3B30" CornerRadius="4" Margin="15,0,5,0"/>
                 <TextBlock Text="LIVE FEED" Foreground="#FF3B30" FontSize="10" FontWeight="Bold" VerticalAlignment="Center"/>
             </StackPanel>

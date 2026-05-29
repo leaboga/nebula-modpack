@@ -105,24 +105,24 @@
 
                                             <StackPanel Grid.Row="1" Margin="0,18,0,0">
                                                 <TextBlock Text="{Binding Title}" Foreground="White" FontSize="18" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="52"/>
-                                                <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
+                                                <TextBlock Text="{Binding Author}" Foreground="#FF9500" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
 
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2">
                                                     <Border Background="#1A00F2FF" CornerRadius="4" Padding="6,2" Margin="0,0,6,0">
-                                                        <TextBlock Text="{Binding DisplayDownloads}" Foreground="#00F2FF" FontSize="9" FontWeight="Bold"/>
+                                                        <TextBlock Text="{Binding DisplayDownloads}" Foreground="#FF9500" FontSize="9" FontWeight="Bold"/>
                                                     </Border>
                                                     <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsFavorite, Converter={StaticResource BoolToVis}}">
                                                         <TextBlock Text="FAVORITO" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
                                                     </Border>
                                                     <Border Background="#1A10B981" CornerRadius="4" Padding="6,2" Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}">
-                                                        <TextBlock Text="INSTALADO" Foreground="#10B981" FontSize="8" FontWeight="Black"/>
+                                                        <TextBlock Text="INSTALADO" Foreground="#FF9500" FontSize="8" FontWeight="Black"/>
                                                     </Border>
                                                     <Border Background="#1A60A5FA" CornerRadius="4" Padding="6,2" Visibility="{Binding IsRecent, Converter={StaticResource BoolToVis}}">
-                                                        <TextBlock Text="RECIENTE" Foreground="#93C5FD" FontSize="8" FontWeight="Black"/>
+                                                        <TextBlock Text="RECIENTE" Foreground="#FF9500" FontSize="8" FontWeight="Black"/>
                                                     </Border>
                                                 </StackPanel>
 
-                                                <TextBlock Text="{Binding CategoryLabel}" Foreground="#93C5FD" FontSize="10" TextAlignment="Center" Margin="0,4,0,0"/>
+                                                <TextBlock Text="{Binding CategoryLabel}" Foreground="#FF9500" FontSize="10" TextAlignment="Center" Margin="0,4,0,0"/>
                                                 <TextBlock Text="{Binding LoaderSummary}" Foreground="#6EE7B7" FontSize="10" TextAlignment="Center" Margin="0,4,0,0"/>
                                                 <TextBlock Text="{Binding VersionSummary}" Foreground="#6D8A99" FontSize="10" TextAlignment="Center" Margin="0,2,0,0"/>
                                                 <Border CornerRadius="6" Padding="8,4" Margin="0,8,0,0">

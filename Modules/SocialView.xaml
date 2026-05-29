@@ -74,7 +74,7 @@
                         </StackPanel>
                         <Border Height="1" Margin="0,0,0,16" Background="#0D151D"/>
                         <TextBlock Text="EN LÍNEA" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,4"/>
-                        <TextBlock x:Name="PlayerCountText" Text="0 Jugadores" FontSize="15" FontWeight="Bold" Foreground="#70F9FF" Margin="0,0,0,14"/>
+                        <TextBlock x:Name="PlayerCountText" Text="0 Jugadores" FontSize="15" FontWeight="Bold" Foreground="#FF9500" Margin="0,0,0,14"/>
                         <TextBlock Text="VERSIÓN" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,4"/>
                         <TextBlock x:Name="VersionText" Text="NeoForge 1.21.1" FontSize="12" Foreground="#6D8A99"/>
                     </StackPanel>
@@ -86,12 +86,12 @@
                         <TextBlock Text="RECURSOS DEL HOST" FontSize="9" FontWeight="Bold" Foreground="#8E8E93" Margin="0,0,0,16"/>
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="CPU" FontSize="11" FontWeight="SemiBold" Foreground="#C4B5FD"/>
-                            <TextBlock x:Name="CpuText" Text="0%" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#70F9FF"/>
+                            <TextBlock x:Name="CpuText" Text="0%" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#FF9500"/>
                         </Grid>
                         <ProgressBar x:Name="CpuBar" Height="4" Value="0" Style="{StaticResource AppleProgress}" Margin="0,0,0,16"/>
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="RAM" FontSize="11" FontWeight="SemiBold" Foreground="#C4B5FD"/>
-                            <TextBlock x:Name="RamText" Text="0 GB" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#70F9FF"/>
+                            <TextBlock x:Name="RamText" Text="0 GB" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#FF9500"/>
                         </Grid>
                         <ProgressBar x:Name="RamBar" Height="4" Value="0" Style="{StaticResource AppleProgress}"/>
                     </StackPanel>
@@ -136,7 +136,7 @@
 
                                         <StackPanel Grid.Column="1" Margin="12,0,0,0">
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
-                                                <TextBlock Text="{Binding Sender}" Foreground="#70F9FF" FontSize="11" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding Sender}" Foreground="#FF9500" FontSize="11" FontWeight="Bold"/>
                                                 <TextBlock Text="{Binding Time}" Foreground="#8E8E93" FontSize="9" Margin="8,0,0,0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <Border Background="#0D151D" CornerRadius="10" Padding="12,8" HorizontalAlignment="Left" MaxWidth="400">

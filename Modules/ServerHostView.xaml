@@ -31,7 +31,7 @@
                     <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" Margin="0,0,0,16" BorderBrush="#0D151D" BorderThickness="1">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                <Border Width="32" Height="32" CornerRadius="9" Background="#00F2FF">
+                                <Border Width="32" Height="32" CornerRadius="9" Background="#FF9500">
                                     <TextBlock Text="🛠️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <TextBlock Text="Configuración del Servidor" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
@@ -76,7 +76,7 @@
                                     <ColumnDefinition Width="60"/>
                                 </Grid.ColumnDefinitions>
                                 <Slider x:Name="RamSlider" Minimum="1" Maximum="32" IsSnapToTickEnabled="True" TickFrequency="1" Value="4" ValueChanged="RamSlider_ValueChanged" Style="{DynamicResource AppleSlider}"/>
-                                <TextBlock Grid.Column="1" x:Name="RamValueText" Text="4 GB" Foreground="#00F2FF" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" x:Name="RamValueText" Text="4 GB" Foreground="#FF9500" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
 
                             <Button x:Name="BtnInstall" Content="⚡ INSTALAR SERVIDOR" Style="{DynamicResource PlayButton}" Height="48" Click="BtnInstall_Click"/>
@@ -87,7 +87,7 @@
                     <Border Background="#0A0E14" CornerRadius="16" Padding="24,20" BorderBrush="#0D151D" BorderThickness="1">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                <Border Width="32" Height="32" CornerRadius="9" Background="#10B981">
+                                <Border Width="32" Height="32" CornerRadius="9" Background="#FF9500">
                                     <TextBlock Text="🚀" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <TextBlock Text="Control de Ejecución" Foreground="#E6F9FF" FontSize="15" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/>
@@ -130,7 +130,7 @@
                             <Border Height="1" Background="#0D151D" Margin="0,0,0,12"/>
                             
                             <TextBlock Text="JUGADORES" Foreground="#8E8E93" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
-                            <TextBlock x:Name="PlayersText" Text="0 / 20" Foreground="#70F9FF" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,12"/>
+                            <TextBlock x:Name="PlayersText" Text="0 / 20" Foreground="#FF9500" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,12"/>
                             
                             <TextBlock Text="USO DE CPU" Foreground="#8E8E93" FontSize="8" FontWeight="Bold" Margin="0,0,0,4"/>
                             <ProgressBar x:Name="CpuBar" Height="4" Value="0" Style="{DynamicResource AppleProgress}" Margin="0,0,0,12"/>
@@ -149,7 +149,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="CONSOLA" Foreground="#8E8E93" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
                             <ScrollViewer Grid.Row="1" x:Name="ConsoleScroll">
-                                <TextBlock x:Name="ConsoleText" Foreground="#10B981" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Text="Esperando inicio..."/>
+                                <TextBlock x:Name="ConsoleText" Foreground="#FF9500" FontSize="10" FontFamily="Consolas" TextWrapping="Wrap" Text="Esperando inicio..."/>
                             </ScrollViewer>
                         </Grid>
                     </Border>

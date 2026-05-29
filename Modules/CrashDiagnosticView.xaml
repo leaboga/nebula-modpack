@@ -94,7 +94,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock x:Name="StatusLabel" Text="Sistema Saludable" Foreground="#10B981" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="StatusLabel" Text="Sistema Saludable" Foreground="#FF9500" FontSize="18" FontWeight="Bold"/>
                                 <TextBlock x:Name="DetailLabel" Text="No se detectaron fallos críticos recientemente." Foreground="#6D8A99" FontSize="12" Margin="0,4,0,0"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal">

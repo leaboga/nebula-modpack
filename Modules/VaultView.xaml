@@ -88,7 +88,7 @@
                                     <TextBlock x:Name="TxtTotalWeight" Text="0 MB" Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <ProgressBar x:Name="WeightProgress" Height="4" Value="0" Maximum="1000" Style="{DynamicResource AppleProgress}" Margin="0,4"/>
-                                <TextBlock x:Name="TxtWeightStatus" Text="Carga Óptima" Foreground="#10B981" FontSize="9" Margin="0,6,0,0"/>
+                                <TextBlock x:Name="TxtWeightStatus" Text="Carga Óptima" Foreground="#FF9500" FontSize="9" Margin="0,6,0,0"/>
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -128,7 +128,7 @@
 
                                                     <StackPanel Grid.Row="1" Margin="0,14,0,0">
                                                         <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="Black" TextAlignment="Center" TextWrapping="Wrap" MaxHeight="44"/>
-                                                        <TextBlock Text="{Binding Author}" Foreground="#70F9FF" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
+                                                        <TextBlock Text="{Binding Author}" Foreground="#FF9500" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,6"/>
                                                         <TextBlock Text="{Binding MetadataLine}" Foreground="#6D8A99" FontSize="10" HorizontalAlignment="Center" Margin="0,0,0,4"/>
                                                         
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4">
@@ -139,7 +139,7 @@
                                                                 <TextBlock Text="FAVORITO" Foreground="#C4B5FD" FontSize="8" FontWeight="Black"/>
                                                             </Border>
                                                             <Border Background="#1A60A5FA" CornerRadius="4" Padding="6,2" Margin="0,0,6,0" Visibility="{Binding IsRecent, Converter={StaticResource BoolToVis}}">
-                                                                <TextBlock Text="RECIENTE" Foreground="#93C5FD" FontSize="8" FontWeight="Black"/>
+                                                                <TextBlock Text="RECIENTE" Foreground="#FF9500" FontSize="8" FontWeight="Black"/>
                                                             </Border>
                                                             <Border Background="{Binding CompatibilityBrush}" CornerRadius="4" Padding="6,2">
                                                                 <TextBlock Text="{Binding CompatibilityLabel}" Foreground="{Binding CompatibilityTextBrush}" FontSize="8" FontWeight="Black"/>
@@ -204,7 +204,7 @@
                             </Border>
                             <StackPanel VerticalAlignment="Center" Margin="16,0,0,0">
                                 <TextBlock x:Name="DetailTitle" Foreground="White" FontSize="22" FontWeight="Black" TextWrapping="Wrap"/>
-                                <TextBlock x:Name="DetailAuthor" Foreground="#70F9FF" FontSize="13"/>
+                                <TextBlock x:Name="DetailAuthor" Foreground="#FF9500" FontSize="13"/>
                             </StackPanel>
                         </StackPanel>
                         <Border Background="#0D151D" CornerRadius="12" Padding="16" Margin="0,0,0,20">
@@ -212,7 +212,7 @@
                                 <TextBlock Text="ANÁLISIS DE IMPACTO" Foreground="#6D8A99" FontSize="9" FontWeight="Black"/>
                                 <StackPanel Orientation="Horizontal" Margin="0,4">
                                     <TextBlock x:Name="TxtImpactIcon" Text="🟢" Margin="0,0,8,0"/>
-                                    <TextBlock x:Name="TxtModImpact" Text="Bajo" Foreground="#10B981" FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock x:Name="TxtModImpact" Text="Bajo" Foreground="#FF9500" FontSize="14" FontWeight="Bold"/>
                                 </StackPanel>
                                 <TextBlock x:Name="TxtModWeightEstimate" Text="0 MB" Foreground="#344A5B" FontSize="10"/>
                             </StackPanel>

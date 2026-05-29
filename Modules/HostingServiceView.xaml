@@ -20,7 +20,7 @@
                 <TextBlock Text="Servicio de Hosting"
                            Foreground="White" FontSize="26" FontWeight="Bold"
                            Margin="0,0,0,4"/>
-                <Border Background="#00F2FF" CornerRadius="4" Padding="6,2" Margin="12,0,0,6" VerticalAlignment="Center">
+                <Border Background="#FF9500" CornerRadius="4" Padding="6,2" Margin="12,0,0,6" VerticalAlignment="Center">
                     <TextBlock Text="EXPERIMENTAL" Foreground="White" FontSize="10" FontWeight="Black"/>
                 </Border>
             </StackPanel>
@@ -38,22 +38,22 @@
                     
                     <Border Background="#0D151D" CornerRadius="12" Padding="24" Width="450">
                         <StackPanel>
-                            <TextBlock Text="¿Qué incluirá esta función?" Foreground="#70F9FF" FontSize="12" FontWeight="Bold" Margin="0,0,0,12"/>
+                            <TextBlock Text="¿Qué incluirá esta función?" Foreground="#FF9500" FontSize="12" FontWeight="Bold" Margin="0,0,0,12"/>
                             
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="✓ " Foreground="#FF9500" FontWeight="Bold"/>
                                 <TextBlock Text="Gestión de servidores remotos desde el launcher." Foreground="#E6F9FFCC" FontSize="12"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="✓ " Foreground="#FF9500" FontWeight="Bold"/>
                                 <TextBlock Text="Sincronización automática de archivos del servidor." Foreground="#E6F9FFCC" FontSize="12"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="✓ " Foreground="#FF9500" FontWeight="Bold"/>
                                 <TextBlock Text="Acceso a consola y logs en tiempo real." Foreground="#E6F9FFCC" FontSize="12"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="✓ " Foreground="#10B981" FontWeight="Bold"/>
+                                <TextBlock Text="✓ " Foreground="#FF9500" FontWeight="Bold"/>
                                 <TextBlock Text="Escalabilidad dinámica de recursos." Foreground="#E6F9FFCC" FontSize="12"/>
                             </StackPanel>
                         </StackPanel>
