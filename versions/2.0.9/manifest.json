@@ -1,6 +1,6 @@
 {
     "version":  "2.0.9",
-    "label":  "v2.0.9 (08/08 18:20)",
+    "label":  "v2.0.9 (08/08 18:23)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.235",
@@ -2982,7 +2982,7 @@
                      "filename":  "Terra-fabric-6.5.0-BETA_b7326c0ff.jar",
                      "md5":  "e250228e1d3846536c62ed9a7eed246b",
                      "side":  "server",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.0.9-1820/Terra-fabric-6.5.0-BETA_b7326c0ff.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.0.9-1823/Terra-fabric-6.5.0-BETA_b7326c0ff.jar"
                  }
              ]
 }
