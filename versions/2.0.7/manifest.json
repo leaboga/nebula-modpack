@@ -1,6 +1,6 @@
 {
     "version":  "2.0.7",
-    "label":  "v2.0.7 (08/08 14:56)",
+    "label":  "v2.0.7 (08/08 14:58)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.235",
@@ -2982,7 +2982,7 @@
                      "filename":  "super_resolution-neoforge-1.21.1.21.1-0.8.3-alpha.6_opengl.jar",
                      "md5":  "a44ca5dbd21f1f684749003d44b6f154",
                      "side":  "client",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.0.7-1456/super_resolution-neoforge-1.21.1.21.1-0.8.3-alpha.6_opengl.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.0.7-1458/super_resolution-neoforge-1.21.1.21.1-0.8.3-alpha.6_opengl.jar"
                  }
              ]
 }
