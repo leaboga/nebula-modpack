@@ -1,6 +1,6 @@
 {
     "version":  "2.1.8",
-    "label":  "v2.1.8 (09/08 12:57)",
+    "label":  "v2.1.8 (09/08 13:00)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.235",
@@ -2975,14 +2975,14 @@
                      "filename":  "entity_player_compat_neoforge-2.2.0.jar",
                      "md5":  "76db50808bdb69fac0a56f456c6e4251",
                      "side":  "server",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.1.8-1257/entity_player_compat_neoforge-2.2.0.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.1.8-1300/entity_player_compat_neoforge-2.2.0.jar"
                  },
                  {
                      "name":  "vss-0.2.9-neoforge-1.21.1",
                      "filename":  "vss-0.2.9-neoforge-1.21.1.jar",
                      "md5":  "776dfeb378f11f40f6ca8a052673754f",
                      "side":  "server",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.1.8-1257/vss-0.2.9-neoforge-1.21.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.1.8-1300/vss-0.2.9-neoforge-1.21.1.jar"
                  }
              ]
 }
