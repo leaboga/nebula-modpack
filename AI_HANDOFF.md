@@ -41,7 +41,8 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 
 - Compilación `Release` y publicación autocontenida `win-x64` completadas correctamente.
 - El ejecutable validado queda en `bin/Release/net8.0-windows/win-x64/publish/KrakenLauncher.exe`.
-- Queda pendiente distribuir esta versión mediante el canal de actualización del launcher.
+- Release publicada: `v3.2.1`, con asset `KrakenLauncher.exe`.
+- La comprobación automática usa la release más reciente y compara versiones semánticas; una instalación `3.2.0` detecta `3.2.1` y una `3.2.1` no vuelve a descargarla.
 
 ## Version 3.1.8 (System Optimizations & Performance)
 
