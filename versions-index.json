@@ -1,1215 +1,1220 @@
 {
-    "latestVersion":  "2.3.7",
-    "availableVersions":  [
-                              {
-                                  "version":  "2.3.7",
-                                  "label":  "v2.3.7 (23/08 00:17)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.7/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.6",
-                                  "label":  "v2.3.6 (23/08 00:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.6/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.5",
-                                  "label":  "v2.3.5 (22/08 23:47)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.5/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.4",
-                                  "label":  "v2.3.4 (22/08 23:28)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.4/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.3",
-                                  "label":  "v2.3.3 (22/08 23:24)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.3/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.2",
-                                  "label":  "v2.3.2 (22/08 23:03)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.2/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.1",
-                                  "label":  "v2.3.1 (22/08 22:57)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.1/manifest.json"
-                              },
-                              {
-                                  "version":  "2.3.0",
-                                  "label":  "v2.3.0 (22/08 22:32)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.0/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.9",
-                                  "label":  "v2.2.9 (12/08 15:21)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.9/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.8",
-                                  "label":  "v2.2.8 (10/08 01:45)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.8/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.7",
-                                  "label":  "v2.2.7 (10/08 00:33)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.7/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.6",
-                                  "label":  "v2.2.6 (09/08 22:39)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.6/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.5",
-                                  "label":  "v2.2.5 (09/08 20:47)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.5/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.4",
-                                  "label":  "v2.2.4 (09/08 20:33)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.4/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.3",
-                                  "label":  "v2.2.3 (09/08 20:23)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.3/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.2",
-                                  "label":  "v2.2.2 (09/08 16:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.2/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.1",
-                                  "label":  "v2.2.1 (09/08 14:25)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.1/manifest.json"
-                              },
-                              {
-                                  "version":  "2.2.0",
-                                  "label":  "v2.2.0 (09/08 13:36)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.0/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.9",
-                                  "label":  "v2.1.9 (09/08 13:26)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.9/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.8",
-                                  "label":  "v2.1.8 (09/08 13:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.8/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.7",
-                                  "label":  "v2.1.7 (09/08 01:27)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.7/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.6",
-                                  "label":  "v2.1.6 (08/08 21:28)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.6/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.5",
-                                  "label":  "v2.1.5 (08/08 20:18)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.5/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.4",
-                                  "label":  "v2.1.4 (08/08 20:05)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.4/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.3",
-                                  "label":  "v2.1.3 (08/08 19:45)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.3/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.2",
-                                  "label":  "v2.1.2 (08/08 19:13)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.2/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.1",
-                                  "label":  "v2.1.1 (08/08 18:40)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.1/manifest.json"
-                              },
-                              {
-                                  "version":  "2.1.0",
-                                  "label":  "v2.1.0 (08/08 18:27)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.0/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.9",
-                                  "label":  "v2.0.9 (08/08 18:23)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.9/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.8",
-                                  "label":  "v2.0.8 (08/08 17:48)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.8/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.7",
-                                  "label":  "v2.0.7 (08/08 14:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.7/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.6",
-                                  "label":  "v2.0.6 (08/08 14:35)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.6/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.5",
-                                  "label":  "v2.0.5 (02/08 17:51)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.5/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.4",
-                                  "label":  "v2.0.4 (02/08 17:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.4/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.3",
-                                  "label":  "v2.0.3 (02/08 17:34)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.3/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.2",
-                                  "label":  "v2.0.2 (02/08 15:52)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.2/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.1",
-                                  "label":  "v2.0.1 (02/08 14:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.1/manifest.json"
-                              },
-                              {
-                                  "version":  "2.0.0",
-                                  "label":  "v2.0.0 (02/08 13:28)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.9",
-                                  "label":  "v1.9.9 (02/08 12:37)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.8",
-                                  "label":  "v1.9.8 (31/07 14:35)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.7",
-                                  "label":  "v1.9.7 (31/07 11:54)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.6",
-                                  "label":  "v1.9.6 (31/07 11:39)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.5",
-                                  "label":  "v1.9.5 (31/07 11:21)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.4",
-                                  "label":  "v1.9.4 (17/07 22:20)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.3",
-                                  "label":  "v1.9.3 (28/05 15:53)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.2",
-                                  "label":  "v1.9.2 (28/05 15:01)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.1",
-                                  "label":  "v1.9.1 (28/05 13:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.9.0",
-                                  "label":  "v1.9.0 (28/05 13:12)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.9",
-                                  "label":  "v1.8.9 (28/05 12:51)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.8",
-                                  "label":  "v1.8.8 (28/05 12:24)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.7",
-                                  "label":  "v1.8.7 (28/05 12:15)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.6",
-                                  "label":  "v1.8.6 (28/05 11:52)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.5",
-                                  "label":  "v1.8.5 (28/05 11:43)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.4",
-                                  "label":  "v1.8.4 (28/05 11:32)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.3",
-                                  "label":  "v1.8.3 (26/05 19:20)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.2",
-                                  "label":  "v1.8.2 (26/05 16:37)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.1",
-                                  "label":  "v1.8.1 (25/05 20:34)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.8.0",
-                                  "label":  "v1.8.0 (24/05 12:18)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.9",
-                                  "label":  "v1.7.9 (24/05 03:48)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.8",
-                                  "label":  "v1.7.8 (24/05 03:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.7",
-                                  "label":  "v1.7.7 (24/05 02:48)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.6",
-                                  "label":  "v1.7.6 (22/05 12:44)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.5",
-                                  "label":  "v1.7.5 (22/05 12:23)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.4",
-                                  "label":  "v1.7.4 (22/05 12:05)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.3",
-                                  "label":  "v1.7.3 (20/05 14:56)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.2",
-                                  "label":  "v1.7.2 (20/05 14:34)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.1",
-                                  "label":  "v1.7.1 (20/05 12:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.7.0",
-                                  "label":  "v1.7.0 (20/05 12:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.9",
-                                  "label":  "v1.6.9 (20/05 12:12)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.8",
-                                  "label":  "v1.6.8 (20/05 11:44)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.7",
-                                  "label":  "v1.6.7 (20/05 11:20)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.6",
-                                  "label":  "v1.6.6 (20/05 03:13)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.5",
-                                  "label":  "v1.6.5 (20/05 02:30)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.4",
-                                  "label":  "v1.6.4 (20/05 01:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.3",
-                                  "label":  "v1.6.3 (20/05 01:18)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.2",
-                                  "label":  "v1.6.2 (20/05 00:04)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.1",
-                                  "label":  "v1.6.1 (19/05 23:17)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.6.0",
-                                  "label":  "v1.6.0 (19/05 23:13)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.9",
-                                  "label":  "v1.5.9 (19/05 22:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.8",
-                                  "label":  "v1.5.8 (19/05 22:31)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.7",
-                                  "label":  "v1.5.7 (19/05 22:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.6",
-                                  "label":  "v1.5.6 (19/05 21:46)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.5",
-                                  "label":  "v1.5.5 (19/05 20:24)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.4",
-                                  "label":  "v1.5.4 (19/05 20:09)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.3",
-                                  "label":  "v1.5.3 (19/05 19:36)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.2",
-                                  "label":  "v1.5.2 (19/05 19:15)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.1",
-                                  "label":  "v1.5.1 (19/05 18:57)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.5.0",
-                                  "label":  "v1.5.0 (19/05 18:50)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.9",
-                                  "label":  "v1.4.9 (19/05 18:34)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.8",
-                                  "label":  "v1.4.8 (19/05 18:09)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.7",
-                                  "label":  "v1.4.7 (19/05 17:55)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.6",
-                                  "label":  "v1.4.6 (19/05 17:47)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.5",
-                                  "label":  "v1.4.5 (19/05 17:04)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.4",
-                                  "label":  "v1.4.4 (19/05 16:43)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.3",
-                                  "label":  "v1.4.3 (19/05 16:25)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.2",
-                                  "label":  "v1.4.2 (19/05 16:14)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.1",
-                                  "label":  "v1.4.1 (19/05 16:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.4.0",
-                                  "label":  "v1.4.0 (19/05 15:37)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.9",
-                                  "label":  "v1.3.9 (19/05 14:33)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.8",
-                                  "label":  "v1.3.8 (19/05 12:24)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.7",
-                                  "label":  "v1.3.7 (19/05 12:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.6",
-                                  "label":  "v1.3.6 (19/05 11:45)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.5",
-                                  "label":  "v1.3.5 (19/05 11:30)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.4",
-                                  "label":  "v1.3.4 (19/05 11:16)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.3",
-                                  "label":  "v1.3.3 (19/05 10:59)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.2",
-                                  "label":  "v1.3.2 (18/05 23:30)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.1",
-                                  "label":  "v1.3.1 (18/05 23:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.3.0",
-                                  "label":  "v1.3.0 (18/05 22:48)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.9",
-                                  "label":  "v1.2.9 (18/05 22:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.8",
-                                  "label":  "v1.2.8 (18/05 22:16) - stable kubejs fix",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.7",
-                                  "label":  "v1.2.7 (18/05 22:05) - WAB only test",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.6",
-                                  "label":  "v1.2.6 (18/05 22:04)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.5",
-                                  "label":  "v1.2.5 (18/05 21:46) - fix visible",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.4",
-                                  "label":  "v1.2.4 (18/05 21:31)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.3",
-                                  "label":  "v1.2.3 (18/05 21:23)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.2",
-                                  "label":  "v1.2.2 (18/05 21:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.1",
-                                  "label":  "v1.2.1 (18/05 20:55)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.2.0",
-                                  "label":  "v1.2.0 (18/05 20:39)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.9",
-                                  "label":  "v1.1.9 (18/05 18:07)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.8",
-                                  "label":  "v1.1.8 (18/05 17:51)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.7",
-                                  "label":  "v1.1.7 (18/05 17:27)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.6",
-                                  "label":  "v1.1.6 (18/05 17:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.5",
-                                  "label":  "v1.1.5 (18/05 16:04)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.4",
-                                  "label":  "v1.1.4 (18/05 15:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.3",
-                                  "label":  "v1.1.3 (18/05 15:53)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.2",
-                                  "label":  "v1.1.2 (18/05 15:38)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.1",
-                                  "label":  "v1.1.1 (18/05 15:12)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.1.0",
-                                  "label":  "v1.1.0 (18/05 15:05)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.0/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.113",
-                                  "label":  "v1.0.113 (18/05 14:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.113/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.112",
-                                  "label":  "v1.0.112 (18/05 14:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.112/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.111",
-                                  "label":  "v1.0.111 (18/05 14:54)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.111/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.110",
-                                  "label":  "v1.0.110 (18/05 14:35)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.110/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.109",
-                                  "label":  "v1.0.109 (18/05 11:55)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.109/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.108",
-                                  "label":  "v1.0.108 (18/05 11:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.108/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.107",
-                                  "label":  "v1.0.107 (18/05 11:01)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.107/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.106",
-                                  "label":  "v1.0.106 (18/05 00:35)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.106/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.105",
-                                  "label":  "v1.0.105 (17/05 23:01)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.105/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.104",
-                                  "label":  "v1.0.104 (17/05 15:24)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.104/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.103",
-                                  "label":  "v1.0.103 (17/05 14:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.103/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.102",
-                                  "label":  "v1.0.102 (17/05 03:59)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.102/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.101",
-                                  "label":  "v1.0.101 (17/05 03:09)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.101/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.100",
-                                  "label":  "v1.0.100 (17/05 02:28)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.100/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.99",
-                                  "label":  "v1.0.99 (17/05 01:59)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.99/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.98",
-                                  "label":  "v1.0.98 (16/05 16:09)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.98/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.97",
-                                  "label":  "v1.0.97",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.97/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.96",
-                                  "label":  "v1.0.96 (15/05 17:18)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.96/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.95",
-                                  "label":  "v1.0.95",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.95/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.94",
-                                  "label":  "v1.0.94 (15/05 16:54)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.94/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.93",
-                                  "label":  "v1.0.93 (15/05 16:48)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.93/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.92",
-                                  "label":  "v1.0.92",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.92/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.91",
-                                  "label":  "v1.0.91",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.91/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.90",
-                                  "label":  "v1.0.90",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.90/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.89",
-                                  "label":  "v1.0.89",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.89/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.88",
-                                  "label":  "v1.0.88",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.88/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.87",
-                                  "label":  "v1.0.87",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.87/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.86",
-                                  "label":  "v1.0.86 (15/05 15:06)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.86/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.85",
-                                  "label":  "v1.0.85 (14/05 02:32)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.85/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.84",
-                                  "label":  "v1.0.84 (13/05 23:57)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.84/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.83",
-                                  "label":  "v1.0.83 (13/05 15:42)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.83/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.82",
-                                  "label":  "v1.0.82 (13/05 15:36)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.82/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.81",
-                                  "label":  "v1.0.81",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.81/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.80",
-                                  "label":  "v1.0.80 (13/05 15:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.80/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.79",
-                                  "label":  "v1.0.79 (13/05 15:12)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.79/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.78",
-                                  "label":  "v1.0.78",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.78/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.77",
-                                  "label":  "v1.0.77",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.77/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.76",
-                                  "label":  "v1.0.76",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.76/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.75",
-                                  "label":  "v1.0.75",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.75/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.74",
-                                  "label":  "v1.0.74 (12/05 23:38)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.74/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.73",
-                                  "label":  "v1.0.73 (12/05 16:23)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.73/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.72",
-                                  "label":  "v1.0.72",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.72/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.71",
-                                  "label":  "v1.0.71",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.71/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.70",
-                                  "label":  "v1.0.70 (12/05 14:03)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.70/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.69",
-                                  "label":  "v1.0.69 (10/05 19:38)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.69/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.68",
-                                  "label":  "v1.0.68 (10/05 11:42)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.68/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.67",
-                                  "label":  "v1.0.67 (09/05 21:55)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.67/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.66",
-                                  "label":  "v1.0.66",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.66/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.65",
-                                  "label":  "v1.0.65 (06/05 13:47)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.65/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.64",
-                                  "label":  "v1.0.64 (05/05 21:07)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.64/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.63",
-                                  "label":  "v1.0.63 (05/05 21:02)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.63/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.62",
-                                  "label":  "v1.0.62",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.62/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.61",
-                                  "label":  "v1.0.61 (05/05 20:25)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.61/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.60",
-                                  "label":  "v1.0.60 (05/05 20:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.60/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.59",
-                                  "label":  "v1.0.59 (05/05 14:08)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.59/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.58",
-                                  "label":  "v1.0.58 (05/05 13:09)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.58/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.57",
-                                  "label":  "v1.0.57",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.57/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.56",
-                                  "label":  "v1.0.56",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.56/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.55",
-                                  "label":  "v1.0.55",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.55/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.54",
-                                  "label":  "v1.0.54 (05/05 01:55)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.54/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.53",
-                                  "label":  "v1.0.53 (05/05 01:06)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.53/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.52",
-                                  "label":  "v1.0.52 (05/05 00:42)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.52/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.51",
-                                  "label":  "v1.0.51 (04/05 23:43)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.51/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.50",
-                                  "label":  "v1.0.50 (04/05 22:28)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.50/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.49",
-                                  "label":  "v1.0.49 (04/05 12:40)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.49/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.48",
-                                  "label":  "v1.0.48 (04/05 12:32)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.48/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.47",
-                                  "label":  "v1.0.47",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.47/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.46",
-                                  "label":  "v1.0.46 (03/05 12:33)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.46/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.45",
-                                  "label":  "v1.0.45",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.45/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.44",
-                                  "label":  "v1.0.44 (01/05 03:13)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.44/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.43",
-                                  "label":  "v1.0.43 (01/05 02:36)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.43/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.42",
-                                  "label":  "v1.0.42",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.42/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.41",
-                                  "label":  "v1.0.41 (26/04 15:49)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.41/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.40",
-                                  "label":  "v1.0.40",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.40/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.39",
-                                  "label":  "v1.0.39 (26/04 12:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.39/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.38",
-                                  "label":  "v1.0.38 (25/04 20:05)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.38/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.37",
-                                  "label":  "v1.0.37 (25/04 13:00)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.37/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.36",
-                                  "label":  "v1.0.36 (21/04 17:08)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.36/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.35",
-                                  "label":  "v1.0.35 (20/04 23:30)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.35/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.34",
-                                  "label":  "v1.0.34 (20/04 23:19)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.34/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.33",
-                                  "label":  "v1.0.33 (20/04 23:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.33/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.32",
-                                  "label":  "v1.0.32 (20/04 22:33)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.32/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.31",
-                                  "label":  "v1.0.31 (20/04 21:58)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.31/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.30",
-                                  "label":  "v1.0.30 (20/04 15:42)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.30/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.29",
-                                  "label":  "v1.0.29",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.29/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.28",
-                                  "label":  "v1.0.28",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.28/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.27",
-                                  "label":  "v1.0.27 (17/04 16:11)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.27/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.26",
-                                  "label":  "v1.0.26 (17/04 13:16)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.26/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.25",
-                                  "label":  "v1.0.25",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.25/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.24",
-                                  "label":  "v1.0.24 (17/04 12:31)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.24/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.23",
-                                  "label":  "v1.0.23 (17/04 12:10)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.23/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.22",
-                                  "label":  "v1.0.22 (16/04 01:41)",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.22/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.21",
-                                  "label":  "v1.0.21",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.21/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.20",
-                                  "label":  "v1.0.20",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.20/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.19",
-                                  "label":  "v1.0.19",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.19/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.18",
-                                  "label":  "v1.0.18",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.18/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.17",
-                                  "label":  "v1.0.17",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.17/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.16",
-                                  "label":  "v1.0.16",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.16/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.15",
-                                  "label":  "v1.0.15",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.15/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.14",
-                                  "label":  "v1.0.14",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.14/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.13",
-                                  "label":  "v1.0.13",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.13/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.12",
-                                  "label":  "v1.0.12",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.12/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.11",
-                                  "label":  "v1.0.11",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.11/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.10",
-                                  "label":  "v1.0.10",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.10/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.9",
-                                  "label":  "v1.0.9",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.9/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.8",
-                                  "label":  "v1.0.8",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.8/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.7",
-                                  "label":  "v1.0.7",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.7/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.6",
-                                  "label":  "v1.0.6",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.6/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.5",
-                                  "label":  "v1.0.5",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.5/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.4",
-                                  "label":  "v1.0.4",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.4/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.3",
-                                  "label":  "v1.0.3",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.3/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.2",
-                                  "label":  "v1.0.2",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.2/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.1",
-                                  "label":  "v1.0.1",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json"
-                              },
-                              {
-                                  "version":  "1.0.0",
-                                  "label":  "v1.0.0",
-                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.0/manifest.json"
-                              }
-                          ]
+  "latestVersion": "2.3.8",
+  "availableVersions": [
+    {
+      "version": "2.3.8",
+      "label": "v2.3.8 (23/08 00:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.8/manifest.json"
+    },
+    {
+      "version": "2.3.7",
+      "label": "v2.3.7 (23/08 00:17)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.7/manifest.json"
+    },
+    {
+      "version": "2.3.6",
+      "label": "v2.3.6 (23/08 00:10)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.6/manifest.json"
+    },
+    {
+      "version": "2.3.5",
+      "label": "v2.3.5 (22/08 23:47)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.5/manifest.json"
+    },
+    {
+      "version": "2.3.4",
+      "label": "v2.3.4 (22/08 23:28)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.4/manifest.json"
+    },
+    {
+      "version": "2.3.3",
+      "label": "v2.3.3 (22/08 23:24)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.3/manifest.json"
+    },
+    {
+      "version": "2.3.2",
+      "label": "v2.3.2 (22/08 23:03)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.2/manifest.json"
+    },
+    {
+      "version": "2.3.1",
+      "label": "v2.3.1 (22/08 22:57)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.1/manifest.json"
+    },
+    {
+      "version": "2.3.0",
+      "label": "v2.3.0 (22/08 22:32)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.0/manifest.json"
+    },
+    {
+      "version": "2.2.9",
+      "label": "v2.2.9 (12/08 15:21)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.9/manifest.json"
+    },
+    {
+      "version": "2.2.8",
+      "label": "v2.2.8 (10/08 01:45)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.8/manifest.json"
+    },
+    {
+      "version": "2.2.7",
+      "label": "v2.2.7 (10/08 00:33)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.7/manifest.json"
+    },
+    {
+      "version": "2.2.6",
+      "label": "v2.2.6 (09/08 22:39)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.6/manifest.json"
+    },
+    {
+      "version": "2.2.5",
+      "label": "v2.2.5 (09/08 20:47)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.5/manifest.json"
+    },
+    {
+      "version": "2.2.4",
+      "label": "v2.2.4 (09/08 20:33)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.4/manifest.json"
+    },
+    {
+      "version": "2.2.3",
+      "label": "v2.2.3 (09/08 20:23)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.3/manifest.json"
+    },
+    {
+      "version": "2.2.2",
+      "label": "v2.2.2 (09/08 16:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.2/manifest.json"
+    },
+    {
+      "version": "2.2.1",
+      "label": "v2.2.1 (09/08 14:25)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.1/manifest.json"
+    },
+    {
+      "version": "2.2.0",
+      "label": "v2.2.0 (09/08 13:36)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.2.0/manifest.json"
+    },
+    {
+      "version": "2.1.9",
+      "label": "v2.1.9 (09/08 13:26)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.9/manifest.json"
+    },
+    {
+      "version": "2.1.8",
+      "label": "v2.1.8 (09/08 13:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.8/manifest.json"
+    },
+    {
+      "version": "2.1.7",
+      "label": "v2.1.7 (09/08 01:27)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.7/manifest.json"
+    },
+    {
+      "version": "2.1.6",
+      "label": "v2.1.6 (08/08 21:28)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.6/manifest.json"
+    },
+    {
+      "version": "2.1.5",
+      "label": "v2.1.5 (08/08 20:18)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.5/manifest.json"
+    },
+    {
+      "version": "2.1.4",
+      "label": "v2.1.4 (08/08 20:05)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.4/manifest.json"
+    },
+    {
+      "version": "2.1.3",
+      "label": "v2.1.3 (08/08 19:45)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.3/manifest.json"
+    },
+    {
+      "version": "2.1.2",
+      "label": "v2.1.2 (08/08 19:13)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.2/manifest.json"
+    },
+    {
+      "version": "2.1.1",
+      "label": "v2.1.1 (08/08 18:40)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.1/manifest.json"
+    },
+    {
+      "version": "2.1.0",
+      "label": "v2.1.0 (08/08 18:27)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.1.0/manifest.json"
+    },
+    {
+      "version": "2.0.9",
+      "label": "v2.0.9 (08/08 18:23)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.9/manifest.json"
+    },
+    {
+      "version": "2.0.8",
+      "label": "v2.0.8 (08/08 17:48)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.8/manifest.json"
+    },
+    {
+      "version": "2.0.7",
+      "label": "v2.0.7 (08/08 14:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.7/manifest.json"
+    },
+    {
+      "version": "2.0.6",
+      "label": "v2.0.6 (08/08 14:35)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.6/manifest.json"
+    },
+    {
+      "version": "2.0.5",
+      "label": "v2.0.5 (02/08 17:51)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.5/manifest.json"
+    },
+    {
+      "version": "2.0.4",
+      "label": "v2.0.4 (02/08 17:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.4/manifest.json"
+    },
+    {
+      "version": "2.0.3",
+      "label": "v2.0.3 (02/08 17:34)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.3/manifest.json"
+    },
+    {
+      "version": "2.0.2",
+      "label": "v2.0.2 (02/08 15:52)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.2/manifest.json"
+    },
+    {
+      "version": "2.0.1",
+      "label": "v2.0.1 (02/08 14:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.1/manifest.json"
+    },
+    {
+      "version": "2.0.0",
+      "label": "v2.0.0 (02/08 13:28)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.0.0/manifest.json"
+    },
+    {
+      "version": "1.9.9",
+      "label": "v1.9.9 (02/08 12:37)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.9/manifest.json"
+    },
+    {
+      "version": "1.9.8",
+      "label": "v1.9.8 (31/07 14:35)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.8/manifest.json"
+    },
+    {
+      "version": "1.9.7",
+      "label": "v1.9.7 (31/07 11:54)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.7/manifest.json"
+    },
+    {
+      "version": "1.9.6",
+      "label": "v1.9.6 (31/07 11:39)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.6/manifest.json"
+    },
+    {
+      "version": "1.9.5",
+      "label": "v1.9.5 (31/07 11:21)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.5/manifest.json"
+    },
+    {
+      "version": "1.9.4",
+      "label": "v1.9.4 (17/07 22:20)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.4/manifest.json"
+    },
+    {
+      "version": "1.9.3",
+      "label": "v1.9.3 (28/05 15:53)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.3/manifest.json"
+    },
+    {
+      "version": "1.9.2",
+      "label": "v1.9.2 (28/05 15:01)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.2/manifest.json"
+    },
+    {
+      "version": "1.9.1",
+      "label": "v1.9.1 (28/05 13:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.1/manifest.json"
+    },
+    {
+      "version": "1.9.0",
+      "label": "v1.9.0 (28/05 13:12)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.9.0/manifest.json"
+    },
+    {
+      "version": "1.8.9",
+      "label": "v1.8.9 (28/05 12:51)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.9/manifest.json"
+    },
+    {
+      "version": "1.8.8",
+      "label": "v1.8.8 (28/05 12:24)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.8/manifest.json"
+    },
+    {
+      "version": "1.8.7",
+      "label": "v1.8.7 (28/05 12:15)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.7/manifest.json"
+    },
+    {
+      "version": "1.8.6",
+      "label": "v1.8.6 (28/05 11:52)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.6/manifest.json"
+    },
+    {
+      "version": "1.8.5",
+      "label": "v1.8.5 (28/05 11:43)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.5/manifest.json"
+    },
+    {
+      "version": "1.8.4",
+      "label": "v1.8.4 (28/05 11:32)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.4/manifest.json"
+    },
+    {
+      "version": "1.8.3",
+      "label": "v1.8.3 (26/05 19:20)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.3/manifest.json"
+    },
+    {
+      "version": "1.8.2",
+      "label": "v1.8.2 (26/05 16:37)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.2/manifest.json"
+    },
+    {
+      "version": "1.8.1",
+      "label": "v1.8.1 (25/05 20:34)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.1/manifest.json"
+    },
+    {
+      "version": "1.8.0",
+      "label": "v1.8.0 (24/05 12:18)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.8.0/manifest.json"
+    },
+    {
+      "version": "1.7.9",
+      "label": "v1.7.9 (24/05 03:48)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.9/manifest.json"
+    },
+    {
+      "version": "1.7.8",
+      "label": "v1.7.8 (24/05 03:10)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.8/manifest.json"
+    },
+    {
+      "version": "1.7.7",
+      "label": "v1.7.7 (24/05 02:48)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.7/manifest.json"
+    },
+    {
+      "version": "1.7.6",
+      "label": "v1.7.6 (22/05 12:44)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.6/manifest.json"
+    },
+    {
+      "version": "1.7.5",
+      "label": "v1.7.5 (22/05 12:23)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.5/manifest.json"
+    },
+    {
+      "version": "1.7.4",
+      "label": "v1.7.4 (22/05 12:05)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.4/manifest.json"
+    },
+    {
+      "version": "1.7.3",
+      "label": "v1.7.3 (20/05 14:56)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.3/manifest.json"
+    },
+    {
+      "version": "1.7.2",
+      "label": "v1.7.2 (20/05 14:34)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.2/manifest.json"
+    },
+    {
+      "version": "1.7.1",
+      "label": "v1.7.1 (20/05 12:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.1/manifest.json"
+    },
+    {
+      "version": "1.7.0",
+      "label": "v1.7.0 (20/05 12:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.7.0/manifest.json"
+    },
+    {
+      "version": "1.6.9",
+      "label": "v1.6.9 (20/05 12:12)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.9/manifest.json"
+    },
+    {
+      "version": "1.6.8",
+      "label": "v1.6.8 (20/05 11:44)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.8/manifest.json"
+    },
+    {
+      "version": "1.6.7",
+      "label": "v1.6.7 (20/05 11:20)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.7/manifest.json"
+    },
+    {
+      "version": "1.6.6",
+      "label": "v1.6.6 (20/05 03:13)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.6/manifest.json"
+    },
+    {
+      "version": "1.6.5",
+      "label": "v1.6.5 (20/05 02:30)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.5/manifest.json"
+    },
+    {
+      "version": "1.6.4",
+      "label": "v1.6.4 (20/05 01:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.4/manifest.json"
+    },
+    {
+      "version": "1.6.3",
+      "label": "v1.6.3 (20/05 01:18)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.3/manifest.json"
+    },
+    {
+      "version": "1.6.2",
+      "label": "v1.6.2 (20/05 00:04)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.2/manifest.json"
+    },
+    {
+      "version": "1.6.1",
+      "label": "v1.6.1 (19/05 23:17)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.1/manifest.json"
+    },
+    {
+      "version": "1.6.0",
+      "label": "v1.6.0 (19/05 23:13)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.6.0/manifest.json"
+    },
+    {
+      "version": "1.5.9",
+      "label": "v1.5.9 (19/05 22:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.9/manifest.json"
+    },
+    {
+      "version": "1.5.8",
+      "label": "v1.5.8 (19/05 22:31)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.8/manifest.json"
+    },
+    {
+      "version": "1.5.7",
+      "label": "v1.5.7 (19/05 22:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.7/manifest.json"
+    },
+    {
+      "version": "1.5.6",
+      "label": "v1.5.6 (19/05 21:46)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.6/manifest.json"
+    },
+    {
+      "version": "1.5.5",
+      "label": "v1.5.5 (19/05 20:24)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.5/manifest.json"
+    },
+    {
+      "version": "1.5.4",
+      "label": "v1.5.4 (19/05 20:09)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.4/manifest.json"
+    },
+    {
+      "version": "1.5.3",
+      "label": "v1.5.3 (19/05 19:36)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.3/manifest.json"
+    },
+    {
+      "version": "1.5.2",
+      "label": "v1.5.2 (19/05 19:15)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.2/manifest.json"
+    },
+    {
+      "version": "1.5.1",
+      "label": "v1.5.1 (19/05 18:57)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.1/manifest.json"
+    },
+    {
+      "version": "1.5.0",
+      "label": "v1.5.0 (19/05 18:50)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.5.0/manifest.json"
+    },
+    {
+      "version": "1.4.9",
+      "label": "v1.4.9 (19/05 18:34)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.9/manifest.json"
+    },
+    {
+      "version": "1.4.8",
+      "label": "v1.4.8 (19/05 18:09)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.8/manifest.json"
+    },
+    {
+      "version": "1.4.7",
+      "label": "v1.4.7 (19/05 17:55)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.7/manifest.json"
+    },
+    {
+      "version": "1.4.6",
+      "label": "v1.4.6 (19/05 17:47)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.6/manifest.json"
+    },
+    {
+      "version": "1.4.5",
+      "label": "v1.4.5 (19/05 17:04)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.5/manifest.json"
+    },
+    {
+      "version": "1.4.4",
+      "label": "v1.4.4 (19/05 16:43)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.4/manifest.json"
+    },
+    {
+      "version": "1.4.3",
+      "label": "v1.4.3 (19/05 16:25)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.3/manifest.json"
+    },
+    {
+      "version": "1.4.2",
+      "label": "v1.4.2 (19/05 16:14)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.2/manifest.json"
+    },
+    {
+      "version": "1.4.1",
+      "label": "v1.4.1 (19/05 16:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.1/manifest.json"
+    },
+    {
+      "version": "1.4.0",
+      "label": "v1.4.0 (19/05 15:37)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.4.0/manifest.json"
+    },
+    {
+      "version": "1.3.9",
+      "label": "v1.3.9 (19/05 14:33)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.9/manifest.json"
+    },
+    {
+      "version": "1.3.8",
+      "label": "v1.3.8 (19/05 12:24)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.8/manifest.json"
+    },
+    {
+      "version": "1.3.7",
+      "label": "v1.3.7 (19/05 12:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.7/manifest.json"
+    },
+    {
+      "version": "1.3.6",
+      "label": "v1.3.6 (19/05 11:45)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.6/manifest.json"
+    },
+    {
+      "version": "1.3.5",
+      "label": "v1.3.5 (19/05 11:30)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.5/manifest.json"
+    },
+    {
+      "version": "1.3.4",
+      "label": "v1.3.4 (19/05 11:16)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.4/manifest.json"
+    },
+    {
+      "version": "1.3.3",
+      "label": "v1.3.3 (19/05 10:59)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.3/manifest.json"
+    },
+    {
+      "version": "1.3.2",
+      "label": "v1.3.2 (18/05 23:30)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.2/manifest.json"
+    },
+    {
+      "version": "1.3.1",
+      "label": "v1.3.1 (18/05 23:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.1/manifest.json"
+    },
+    {
+      "version": "1.3.0",
+      "label": "v1.3.0 (18/05 22:48)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.3.0/manifest.json"
+    },
+    {
+      "version": "1.2.9",
+      "label": "v1.2.9 (18/05 22:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.9/manifest.json"
+    },
+    {
+      "version": "1.2.8",
+      "label": "v1.2.8 (18/05 22:16) - stable kubejs fix",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.8/manifest.json"
+    },
+    {
+      "version": "1.2.7",
+      "label": "v1.2.7 (18/05 22:05) - WAB only test",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.7/manifest.json"
+    },
+    {
+      "version": "1.2.6",
+      "label": "v1.2.6 (18/05 22:04)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.6/manifest.json"
+    },
+    {
+      "version": "1.2.5",
+      "label": "v1.2.5 (18/05 21:46) - fix visible",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.5/manifest.json"
+    },
+    {
+      "version": "1.2.4",
+      "label": "v1.2.4 (18/05 21:31)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.4/manifest.json"
+    },
+    {
+      "version": "1.2.3",
+      "label": "v1.2.3 (18/05 21:23)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.3/manifest.json"
+    },
+    {
+      "version": "1.2.2",
+      "label": "v1.2.2 (18/05 21:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.2/manifest.json"
+    },
+    {
+      "version": "1.2.1",
+      "label": "v1.2.1 (18/05 20:55)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.1/manifest.json"
+    },
+    {
+      "version": "1.2.0",
+      "label": "v1.2.0 (18/05 20:39)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.2.0/manifest.json"
+    },
+    {
+      "version": "1.1.9",
+      "label": "v1.1.9 (18/05 18:07)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.9/manifest.json"
+    },
+    {
+      "version": "1.1.8",
+      "label": "v1.1.8 (18/05 17:51)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.8/manifest.json"
+    },
+    {
+      "version": "1.1.7",
+      "label": "v1.1.7 (18/05 17:27)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.7/manifest.json"
+    },
+    {
+      "version": "1.1.6",
+      "label": "v1.1.6 (18/05 17:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.6/manifest.json"
+    },
+    {
+      "version": "1.1.5",
+      "label": "v1.1.5 (18/05 16:04)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.5/manifest.json"
+    },
+    {
+      "version": "1.1.4",
+      "label": "v1.1.4 (18/05 15:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.4/manifest.json"
+    },
+    {
+      "version": "1.1.3",
+      "label": "v1.1.3 (18/05 15:53)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.3/manifest.json"
+    },
+    {
+      "version": "1.1.2",
+      "label": "v1.1.2 (18/05 15:38)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.2/manifest.json"
+    },
+    {
+      "version": "1.1.1",
+      "label": "v1.1.1 (18/05 15:12)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.1/manifest.json"
+    },
+    {
+      "version": "1.1.0",
+      "label": "v1.1.0 (18/05 15:05)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.1.0/manifest.json"
+    },
+    {
+      "version": "1.0.113",
+      "label": "v1.0.113 (18/05 14:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.113/manifest.json"
+    },
+    {
+      "version": "1.0.112",
+      "label": "v1.0.112 (18/05 14:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.112/manifest.json"
+    },
+    {
+      "version": "1.0.111",
+      "label": "v1.0.111 (18/05 14:54)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.111/manifest.json"
+    },
+    {
+      "version": "1.0.110",
+      "label": "v1.0.110 (18/05 14:35)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.110/manifest.json"
+    },
+    {
+      "version": "1.0.109",
+      "label": "v1.0.109 (18/05 11:55)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.109/manifest.json"
+    },
+    {
+      "version": "1.0.108",
+      "label": "v1.0.108 (18/05 11:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.108/manifest.json"
+    },
+    {
+      "version": "1.0.107",
+      "label": "v1.0.107 (18/05 11:01)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.107/manifest.json"
+    },
+    {
+      "version": "1.0.106",
+      "label": "v1.0.106 (18/05 00:35)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.106/manifest.json"
+    },
+    {
+      "version": "1.0.105",
+      "label": "v1.0.105 (17/05 23:01)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.105/manifest.json"
+    },
+    {
+      "version": "1.0.104",
+      "label": "v1.0.104 (17/05 15:24)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.104/manifest.json"
+    },
+    {
+      "version": "1.0.103",
+      "label": "v1.0.103 (17/05 14:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.103/manifest.json"
+    },
+    {
+      "version": "1.0.102",
+      "label": "v1.0.102 (17/05 03:59)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.102/manifest.json"
+    },
+    {
+      "version": "1.0.101",
+      "label": "v1.0.101 (17/05 03:09)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.101/manifest.json"
+    },
+    {
+      "version": "1.0.100",
+      "label": "v1.0.100 (17/05 02:28)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.100/manifest.json"
+    },
+    {
+      "version": "1.0.99",
+      "label": "v1.0.99 (17/05 01:59)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.99/manifest.json"
+    },
+    {
+      "version": "1.0.98",
+      "label": "v1.0.98 (16/05 16:09)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.98/manifest.json"
+    },
+    {
+      "version": "1.0.97",
+      "label": "v1.0.97",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.97/manifest.json"
+    },
+    {
+      "version": "1.0.96",
+      "label": "v1.0.96 (15/05 17:18)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.96/manifest.json"
+    },
+    {
+      "version": "1.0.95",
+      "label": "v1.0.95",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.95/manifest.json"
+    },
+    {
+      "version": "1.0.94",
+      "label": "v1.0.94 (15/05 16:54)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.94/manifest.json"
+    },
+    {
+      "version": "1.0.93",
+      "label": "v1.0.93 (15/05 16:48)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.93/manifest.json"
+    },
+    {
+      "version": "1.0.92",
+      "label": "v1.0.92",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.92/manifest.json"
+    },
+    {
+      "version": "1.0.91",
+      "label": "v1.0.91",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.91/manifest.json"
+    },
+    {
+      "version": "1.0.90",
+      "label": "v1.0.90",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.90/manifest.json"
+    },
+    {
+      "version": "1.0.89",
+      "label": "v1.0.89",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.89/manifest.json"
+    },
+    {
+      "version": "1.0.88",
+      "label": "v1.0.88",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.88/manifest.json"
+    },
+    {
+      "version": "1.0.87",
+      "label": "v1.0.87",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.87/manifest.json"
+    },
+    {
+      "version": "1.0.86",
+      "label": "v1.0.86 (15/05 15:06)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.86/manifest.json"
+    },
+    {
+      "version": "1.0.85",
+      "label": "v1.0.85 (14/05 02:32)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.85/manifest.json"
+    },
+    {
+      "version": "1.0.84",
+      "label": "v1.0.84 (13/05 23:57)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.84/manifest.json"
+    },
+    {
+      "version": "1.0.83",
+      "label": "v1.0.83 (13/05 15:42)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.83/manifest.json"
+    },
+    {
+      "version": "1.0.82",
+      "label": "v1.0.82 (13/05 15:36)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.82/manifest.json"
+    },
+    {
+      "version": "1.0.81",
+      "label": "v1.0.81",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.81/manifest.json"
+    },
+    {
+      "version": "1.0.80",
+      "label": "v1.0.80 (13/05 15:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.80/manifest.json"
+    },
+    {
+      "version": "1.0.79",
+      "label": "v1.0.79 (13/05 15:12)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.79/manifest.json"
+    },
+    {
+      "version": "1.0.78",
+      "label": "v1.0.78",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.78/manifest.json"
+    },
+    {
+      "version": "1.0.77",
+      "label": "v1.0.77",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.77/manifest.json"
+    },
+    {
+      "version": "1.0.76",
+      "label": "v1.0.76",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.76/manifest.json"
+    },
+    {
+      "version": "1.0.75",
+      "label": "v1.0.75",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.75/manifest.json"
+    },
+    {
+      "version": "1.0.74",
+      "label": "v1.0.74 (12/05 23:38)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.74/manifest.json"
+    },
+    {
+      "version": "1.0.73",
+      "label": "v1.0.73 (12/05 16:23)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.73/manifest.json"
+    },
+    {
+      "version": "1.0.72",
+      "label": "v1.0.72",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.72/manifest.json"
+    },
+    {
+      "version": "1.0.71",
+      "label": "v1.0.71",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.71/manifest.json"
+    },
+    {
+      "version": "1.0.70",
+      "label": "v1.0.70 (12/05 14:03)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.70/manifest.json"
+    },
+    {
+      "version": "1.0.69",
+      "label": "v1.0.69 (10/05 19:38)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.69/manifest.json"
+    },
+    {
+      "version": "1.0.68",
+      "label": "v1.0.68 (10/05 11:42)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.68/manifest.json"
+    },
+    {
+      "version": "1.0.67",
+      "label": "v1.0.67 (09/05 21:55)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.67/manifest.json"
+    },
+    {
+      "version": "1.0.66",
+      "label": "v1.0.66",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.66/manifest.json"
+    },
+    {
+      "version": "1.0.65",
+      "label": "v1.0.65 (06/05 13:47)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.65/manifest.json"
+    },
+    {
+      "version": "1.0.64",
+      "label": "v1.0.64 (05/05 21:07)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.64/manifest.json"
+    },
+    {
+      "version": "1.0.63",
+      "label": "v1.0.63 (05/05 21:02)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.63/manifest.json"
+    },
+    {
+      "version": "1.0.62",
+      "label": "v1.0.62",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.62/manifest.json"
+    },
+    {
+      "version": "1.0.61",
+      "label": "v1.0.61 (05/05 20:25)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.61/manifest.json"
+    },
+    {
+      "version": "1.0.60",
+      "label": "v1.0.60 (05/05 20:10)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.60/manifest.json"
+    },
+    {
+      "version": "1.0.59",
+      "label": "v1.0.59 (05/05 14:08)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.59/manifest.json"
+    },
+    {
+      "version": "1.0.58",
+      "label": "v1.0.58 (05/05 13:09)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.58/manifest.json"
+    },
+    {
+      "version": "1.0.57",
+      "label": "v1.0.57",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.57/manifest.json"
+    },
+    {
+      "version": "1.0.56",
+      "label": "v1.0.56",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.56/manifest.json"
+    },
+    {
+      "version": "1.0.55",
+      "label": "v1.0.55",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.55/manifest.json"
+    },
+    {
+      "version": "1.0.54",
+      "label": "v1.0.54 (05/05 01:55)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.54/manifest.json"
+    },
+    {
+      "version": "1.0.53",
+      "label": "v1.0.53 (05/05 01:06)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.53/manifest.json"
+    },
+    {
+      "version": "1.0.52",
+      "label": "v1.0.52 (05/05 00:42)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.52/manifest.json"
+    },
+    {
+      "version": "1.0.51",
+      "label": "v1.0.51 (04/05 23:43)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.51/manifest.json"
+    },
+    {
+      "version": "1.0.50",
+      "label": "v1.0.50 (04/05 22:28)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.50/manifest.json"
+    },
+    {
+      "version": "1.0.49",
+      "label": "v1.0.49 (04/05 12:40)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.49/manifest.json"
+    },
+    {
+      "version": "1.0.48",
+      "label": "v1.0.48 (04/05 12:32)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.48/manifest.json"
+    },
+    {
+      "version": "1.0.47",
+      "label": "v1.0.47",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.47/manifest.json"
+    },
+    {
+      "version": "1.0.46",
+      "label": "v1.0.46 (03/05 12:33)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.46/manifest.json"
+    },
+    {
+      "version": "1.0.45",
+      "label": "v1.0.45",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.45/manifest.json"
+    },
+    {
+      "version": "1.0.44",
+      "label": "v1.0.44 (01/05 03:13)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.44/manifest.json"
+    },
+    {
+      "version": "1.0.43",
+      "label": "v1.0.43 (01/05 02:36)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.43/manifest.json"
+    },
+    {
+      "version": "1.0.42",
+      "label": "v1.0.42",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.42/manifest.json"
+    },
+    {
+      "version": "1.0.41",
+      "label": "v1.0.41 (26/04 15:49)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.41/manifest.json"
+    },
+    {
+      "version": "1.0.40",
+      "label": "v1.0.40",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.40/manifest.json"
+    },
+    {
+      "version": "1.0.39",
+      "label": "v1.0.39 (26/04 12:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.39/manifest.json"
+    },
+    {
+      "version": "1.0.38",
+      "label": "v1.0.38 (25/04 20:05)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.38/manifest.json"
+    },
+    {
+      "version": "1.0.37",
+      "label": "v1.0.37 (25/04 13:00)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.37/manifest.json"
+    },
+    {
+      "version": "1.0.36",
+      "label": "v1.0.36 (21/04 17:08)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.36/manifest.json"
+    },
+    {
+      "version": "1.0.35",
+      "label": "v1.0.35 (20/04 23:30)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.35/manifest.json"
+    },
+    {
+      "version": "1.0.34",
+      "label": "v1.0.34 (20/04 23:19)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.34/manifest.json"
+    },
+    {
+      "version": "1.0.33",
+      "label": "v1.0.33 (20/04 23:10)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.33/manifest.json"
+    },
+    {
+      "version": "1.0.32",
+      "label": "v1.0.32 (20/04 22:33)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.32/manifest.json"
+    },
+    {
+      "version": "1.0.31",
+      "label": "v1.0.31 (20/04 21:58)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.31/manifest.json"
+    },
+    {
+      "version": "1.0.30",
+      "label": "v1.0.30 (20/04 15:42)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.30/manifest.json"
+    },
+    {
+      "version": "1.0.29",
+      "label": "v1.0.29",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.29/manifest.json"
+    },
+    {
+      "version": "1.0.28",
+      "label": "v1.0.28",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.28/manifest.json"
+    },
+    {
+      "version": "1.0.27",
+      "label": "v1.0.27 (17/04 16:11)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.27/manifest.json"
+    },
+    {
+      "version": "1.0.26",
+      "label": "v1.0.26 (17/04 13:16)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.26/manifest.json"
+    },
+    {
+      "version": "1.0.25",
+      "label": "v1.0.25",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.25/manifest.json"
+    },
+    {
+      "version": "1.0.24",
+      "label": "v1.0.24 (17/04 12:31)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.24/manifest.json"
+    },
+    {
+      "version": "1.0.23",
+      "label": "v1.0.23 (17/04 12:10)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.23/manifest.json"
+    },
+    {
+      "version": "1.0.22",
+      "label": "v1.0.22 (16/04 01:41)",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.22/manifest.json"
+    },
+    {
+      "version": "1.0.21",
+      "label": "v1.0.21",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.21/manifest.json"
+    },
+    {
+      "version": "1.0.20",
+      "label": "v1.0.20",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.20/manifest.json"
+    },
+    {
+      "version": "1.0.19",
+      "label": "v1.0.19",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.19/manifest.json"
+    },
+    {
+      "version": "1.0.18",
+      "label": "v1.0.18",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.18/manifest.json"
+    },
+    {
+      "version": "1.0.17",
+      "label": "v1.0.17",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.17/manifest.json"
+    },
+    {
+      "version": "1.0.16",
+      "label": "v1.0.16",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.16/manifest.json"
+    },
+    {
+      "version": "1.0.15",
+      "label": "v1.0.15",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.15/manifest.json"
+    },
+    {
+      "version": "1.0.14",
+      "label": "v1.0.14",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.14/manifest.json"
+    },
+    {
+      "version": "1.0.13",
+      "label": "v1.0.13",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.13/manifest.json"
+    },
+    {
+      "version": "1.0.12",
+      "label": "v1.0.12",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.12/manifest.json"
+    },
+    {
+      "version": "1.0.11",
+      "label": "v1.0.11",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.11/manifest.json"
+    },
+    {
+      "version": "1.0.10",
+      "label": "v1.0.10",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.10/manifest.json"
+    },
+    {
+      "version": "1.0.9",
+      "label": "v1.0.9",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.9/manifest.json"
+    },
+    {
+      "version": "1.0.8",
+      "label": "v1.0.8",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.8/manifest.json"
+    },
+    {
+      "version": "1.0.7",
+      "label": "v1.0.7",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.7/manifest.json"
+    },
+    {
+      "version": "1.0.6",
+      "label": "v1.0.6",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.6/manifest.json"
+    },
+    {
+      "version": "1.0.5",
+      "label": "v1.0.5",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.5/manifest.json"
+    },
+    {
+      "version": "1.0.4",
+      "label": "v1.0.4",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.4/manifest.json"
+    },
+    {
+      "version": "1.0.3",
+      "label": "v1.0.3",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.3/manifest.json"
+    },
+    {
+      "version": "1.0.2",
+      "label": "v1.0.2",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.2/manifest.json"
+    },
+    {
+      "version": "1.0.1",
+      "label": "v1.0.1",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.1/manifest.json"
+    },
+    {
+      "version": "1.0.0",
+      "label": "v1.0.0",
+      "manifestUrl": "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/1.0.0/manifest.json"
+    }
+  ]
 }
