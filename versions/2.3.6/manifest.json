@@ -1,12 +1,12 @@
 {
   "version": "2.3.6",
-  "label": "v2.3.6 (23/08 00:09)",
+  "label": "v2.3.6 (23/08 00:10)",
   "minecraftVersion": "1.21.1",
   "modloader": "neoforge",
   "modloaderVersion": "21.1.248",
   "serverIP": "200.117.208.146",
   "serverPort": 25565,
-  "serverModsCount": 284,
+  "serverModsCount": 283,
   "clientModsCount": 67,
   "mods": [
     {
@@ -1821,13 +1821,6 @@
       "md5": "42bb1dbeeae4feadf6181dc2f5e0ce2e",
       "side": "server",
       "url": "https://github.com/leaboga/nebula-modpack/releases/download/v2.3.0-2232/toofast-1.21.0-0.4.3.6.jar"
-    },
-    {
-      "name": "toomanyrecipeviewers-0.8.1+mc.21.1",
-      "filename": "toomanyrecipeviewers-0.8.1_mc.21.1.jar",
-      "md5": "d0419aeb177c8737056179d6f72277a2",
-      "side": "server",
-      "url": "https://github.com/leaboga/nebula-modpack/releases/download/v2.3.0-2232/toomanyrecipeviewers-0.8.1_mc.21.1.jar"
     },
     {
       "name": "toucanlib-neoforge-1.21.1-0.5.0",
