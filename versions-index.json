@@ -1,6 +1,11 @@
 {
-    "latestVersion":  "2.3.4",
+    "latestVersion":  "2.3.5",
     "availableVersions":  [
+                              {
+                                  "version":  "2.3.5",
+                                  "label":  "v2.3.5 (22/08 23:47)",
+                                  "manifestUrl":  "https://raw.githubusercontent.com/leaboga/nebula-modpack/main/versions/2.3.5/manifest.json"
+                              },
                               {
                                   "version":  "2.3.4",
                                   "label":  "v2.3.4 (22/08 23:28)",
