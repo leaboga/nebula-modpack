@@ -1,0 +1,14 @@
+{
+    "version":  "2.4.4",
+    "label":  "v2.4.4 (23/08 13:35)",
+    "minecraftVersion":  "1.21.1",
+    "modloader":  "neoforge",
+    "modloaderVersion":  "21.1.248",
+    "serverIP":  "200.117.208.146",
+    "serverPort":  25565,
+    "serverModsCount":  0,
+    "clientModsCount":  0,
+    "mods":  [
+
+             ]
+}
