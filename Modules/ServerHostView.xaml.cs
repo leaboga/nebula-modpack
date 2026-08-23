@@ -22,6 +22,9 @@ namespace KrakenLauncher.Modules
         private string _serverFolderPath = "";
         private readonly DispatcherTimer _statsTimer;
         private readonly HttpClient _http = new();
+        private bool _stopInProgress;
+        private bool _stopWasRequested;
+        private bool _restartAfterStop;
 
         public ServerHostView()
         {
@@ -285,6 +288,17 @@ namespace KrakenLauncher.Modules
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
+            StartServer();
+        }
+
+        private void StartServer()
+        {
+            if (_stopInProgress)
+            {
+                LogToConsole("⏳ Esperando que finalice el apagado antes de iniciar.");
+                return;
+            }
+
             if (_serverProcess != null && !_serverProcess.HasExited) return;
 
             string ram = ((int)RamSlider.Value).ToString();
@@ -335,6 +349,7 @@ namespace KrakenLauncher.Modules
                     StatusDot.Fill = Brushes.LimeGreen;
                     BtnStart.IsEnabled = false;
                     BtnStop.IsEnabled = true;
+                    BtnRestart.IsEnabled = true;
                     _statsTimer.Start();
                     LogToConsole("🚀 Servidor iniciado.");
                 }
@@ -346,25 +361,50 @@ namespace KrakenLauncher.Modules
             }
         }
 
-        private void BtnStop_Click(object sender, RoutedEventArgs e)
+        private async void BtnStop_Click(object sender, RoutedEventArgs e)
         {
-            if (_serverProcess == null || _serverProcess.HasExited) return;
+            await StopServerAsync(false);
+        }
 
-            LogToConsole("🛑 Enviando comando de apagado...");
+        private async void BtnRestart_Click(object sender, RoutedEventArgs e)
+        {
+            await StopServerAsync(true);
+        }
+
+        private async Task StopServerAsync(bool restartAfterStop)
+        {
+            if (_stopInProgress) return;
+
+            var process = _serverProcess;
+            if (process == null || process.HasExited)
+            {
+                if (restartAfterStop) StartServer();
+                return;
+            }
+
+            _stopInProgress = true;
+            _stopWasRequested = true;
+            _restartAfterStop |= restartAfterStop;
+            BtnStart.IsEnabled = false;
+            BtnStop.IsEnabled = false;
+            BtnRestart.IsEnabled = false;
+            StatusText.Text = "Deteniendo";
+            StatusDot.Fill = Brushes.Orange;
+            LogToConsole(restartAfterStop ? "🔄 Reiniciando servidor: enviando comando de apagado..." : "🛑 Enviando comando de apagado...");
+
             try
             {
-                _serverProcess.StandardInput.WriteLine("stop");
-                
-                // Backup kill after 15 seconds if it doesn't close
-                Task.Delay(15000).ContinueWith(t => {
-                    if (_serverProcess != null && !_serverProcess.HasExited) {
-                        LogToConsole("⚠️ Forzando cierre del proceso...");
-                        try { _serverProcess.Kill(true); } catch { }
-                    }
-                });
+                process.StandardInput.WriteLine("stop");
             }
             catch {
-                try { _serverProcess.Kill(true); } catch { }
+                try { process.Kill(true); } catch { }
+            }
+
+            var exitTask = process.WaitForExitAsync();
+            if (await Task.WhenAny(exitTask, Task.Delay(TimeSpan.FromSeconds(15))) != exitTask && !process.HasExited)
+            {
+                LogToConsole("⚠️ Forzando cierre del proceso...");
+                try { process.Kill(true); } catch { }
             }
         }
 
@@ -460,14 +500,26 @@ namespace KrakenLauncher.Modules
 
         private void OnServerExited()
         {
+            bool restartAfterStop = _restartAfterStop;
+            bool stopWasRequested = _stopWasRequested;
+            _serverProcess = null;
+            _stopInProgress = false;
+            _stopWasRequested = false;
+            _restartAfterStop = false;
             _statsTimer.Stop();
             StatusText.Text = "Detenido";
             StatusDot.Fill = Brushes.Gray;
             BtnStart.IsEnabled = true;
             BtnStop.IsEnabled = false;
+            BtnRestart.IsEnabled = false;
             LogToConsole("🏁 El servidor se ha detenido.");
             
-            if (AutoRestartCheck.IsChecked == true && StatusText.Text != "No instalado")
+            if (restartAfterStop)
+            {
+                LogToConsole("🔄 Apagado completado. Iniciando servidor...");
+                StartServer();
+            }
+            else if (!stopWasRequested && AutoRestartCheck.IsChecked == true && StatusText.Text != "No instalado")
             {
                 LogToConsole("🔄 Auto-reiniciando en 5 segundos...");
                 var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };

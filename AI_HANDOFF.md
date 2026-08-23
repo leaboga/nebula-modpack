@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.1.8`
+- Version publicada mas reciente: `3.2.1`
 - Fecha de referencia: `2026-05-29`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
@@ -25,6 +25,23 @@ Tambien se hizo una ronda de limpieza de UX y rendimiento:
 - detencion correcta de modulos activos al cambiar de tab
 - fondo/particulas mas livianos
 - estilos globales mas suaves y ordenados
+
+## Version 3.2.1 (Server Restart Reliability)
+
+### Cambios principales
+
+- `Modules/ServerHostView.xaml`
+  - Se agregó el botón `↻` junto a `Control de Ejecución` para reiniciar el servidor.
+- `Modules/ServerHostView.xaml.cs`
+  - El reinicio espera la salida real del proceso antes de iniciar uno nuevo.
+  - El apagado conserva una referencia al proceso detenido, evitando que el timeout mate un proceso iniciado después.
+  - El auto-reinicio solo actúa ante caídas no solicitadas; una detención manual ya no dispara un reinicio inesperado.
+
+### Validación
+
+- Compilación `Release` y publicación autocontenida `win-x64` completadas correctamente.
+- El ejecutable validado queda en `bin/Release/net8.0-windows/win-x64/publish/KrakenLauncher.exe`.
+- Queda pendiente distribuir esta versión mediante el canal de actualización del launcher.
 
 ## Version 3.1.8 (System Optimizations & Performance)
 
