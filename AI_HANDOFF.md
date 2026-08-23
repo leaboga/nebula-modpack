@@ -2,11 +2,25 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.2.1`
+- Version publicada mas reciente: `3.2.2`
 - Fecha de referencia: `2026-05-29`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
+
+## Version 3.2.2 (Explorador de archivos)
+
+### Cambios principales
+
+- `Modules/ServerHostView.xaml`
+  - Se agregó un botón `📂` junto a la ruta del servidor para abrirla directamente.
+  - El botón `...` queda reservado exclusivamente para elegir otra carpeta del servidor.
+- `Modules/ServerHostView.xaml.cs`
+  - El nuevo acceso usa `explorer.exe` con `UseShellExecute`, abriendo el Explorador de archivos original de Windows y mostrando los archivos `.jar`.
+
+### Validación
+
+- La release `v3.2.2` debe incluir el asset `KrakenLauncher.exe` y la misma versión interna del binario.
 
 En esta pasada se cerro una mezcla peligrosa entre dos sistemas de sync de configs:
 

@@ -44,7 +44,10 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="ServerPathBox" Style="{DynamicResource AppleTextBox}" IsReadOnly="True" Margin="0,0,8,0"/>
-                                <Button Grid.Column="1" Content="..." Style="{DynamicResource SecondaryButton}" Width="40" Click="BtnBrowseServerPath_Click"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button Content="📂" Style="{DynamicResource SecondaryButton}" Width="40" ToolTip="Abrir la carpeta del servidor en el Explorador de Windows" Click="BtnOpenServerPathInExplorer_Click"/>
+                                    <Button Content="..." Style="{DynamicResource SecondaryButton}" Width="40" Margin="8,0,0,0" ToolTip="Elegir otra carpeta para el servidor" Click="BtnBrowseServerPath_Click"/>
+                                </StackPanel>
                             </Grid>
 
                             <Grid Margin="0,0,0,16">

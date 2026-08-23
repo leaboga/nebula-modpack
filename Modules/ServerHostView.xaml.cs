@@ -97,6 +97,17 @@ namespace KrakenLauncher.Modules
             }
         }
 
+        private void BtnOpenServerPathInExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Directory.Exists(_serverFolderPath))
+            {
+                MessageBox.Show("La carpeta del servidor no existe todavía. Debes instalarlo primero.", "Carpeta no encontrada", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo("explorer.exe", $"\"{_serverFolderPath}\"") { UseShellExecute = true });
+        }
+
         private async void BtnInstall_Click(object sender, RoutedEventArgs e)
         {
             string version = VersionComboBox.SelectedItem?.ToString() ?? "1.20.1";
