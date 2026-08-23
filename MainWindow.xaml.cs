@@ -1295,8 +1295,7 @@ Remove-Item -LiteralPath $updateDir -Recurse -Force -ErrorAction SilentlyContinu
                     VersionComboBox.SelectionChanged -= VersionComboBox_SelectionChanged;
                     VersionComboBox.Items.Clear();
                     foreach (var v in _versionsIndex.AvailableVersions) VersionComboBox.Items.Add(v.Label);
-                    int savedIdx = _versionsIndex.AvailableVersions.FindIndex(v => v.Version == (CurrentProfile?.LastVersion ?? ""));
-                    VersionComboBox.SelectedIndex = savedIdx >= 0 ? savedIdx : 0;
+                    VersionComboBox.SelectedIndex = 0;
                     currentIdx = VersionComboBox.SelectedIndex;
                     VersionComboBox.SelectionChanged += VersionComboBox_SelectionChanged;
                 });

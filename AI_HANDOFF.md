@@ -2,11 +2,23 @@
 
 ## Estado actual
 
-- Version publicada mas reciente: `3.2.2`
+- Version publicada mas reciente: `3.2.3`
 - Fecha de referencia: `2026-05-29`
 - Reglas obligatorias de publicacion: `docs/RELEASE_RULES.md`
 
 ## Resumen ejecutivo
+
+## Version 3.2.3 (Sincronización de servidor)
+
+### Cambios principales
+
+- `MainWindow.xaml.cs`
+  - Los perfiles con `SyncWithServer` ahora seleccionan siempre la versión más reciente del índice remoto al iniciar.
+  - Al cargar el manifiesto, se actualizan Minecraft, loader y versión de NeoForge con los valores del servidor antes de sincronizar mods.
+
+### Validación
+
+- La release `v3.2.3` debe incluir `KrakenLauncher.exe` con versión interna `3.2.3`.
 
 ## Version 3.2.2 (Explorador de archivos)
 
