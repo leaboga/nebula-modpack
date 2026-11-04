@@ -1,6 +1,6 @@
 {
     "version":  "2.6.8",
-    "label":  "v2.6.8 (03/11 22:11)",
+    "label":  "v2.6.8 (03/11 22:15)",
     "minecraftVersion":  "1.21.1",
     "modloader":  "neoforge",
     "modloaderVersion":  "21.1.262",
@@ -1988,7 +1988,7 @@
                      "filename":  "GrandTeleport-NeoForge-1.21.1-neoforge-1.0.1.jar",
                      "md5":  "ac56ba26b7e4356fd74cf380a8709b23",
                      "side":  "server",
-                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.6.8-2211/GrandTeleport-NeoForge-1.21.1-neoforge-1.0.1.jar"
+                     "url":  "https://github.com/leaboga/nebula-modpack/releases/download/v2.6.8-2215/GrandTeleport-NeoForge-1.21.1-neoforge-1.0.1.jar"
                  }
              ]
 }
